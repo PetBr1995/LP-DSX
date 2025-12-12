@@ -40,7 +40,8 @@ const TimerHeader = () => {
                 left-1/2 
                 -translate-x-1/2 
                 z-1000 
-                w-[700px] 
+                max-w-[700px] 
+                w-[90%]
                 m-2 
                 rounded-[50px]
                 bg-black 
@@ -63,7 +64,9 @@ const TimerHeader = () => {
                 items-center
                 gap-4
                 h-20
+            
             "
+            style={{boxShadow:"0 0 10px rgba(255,255,255,0.4)"}}
         >
             {/* Conteúdo acima do ::before */}
             <div className="relative z-10 flex flex-col items-center gap-2 py-3">
@@ -71,7 +74,7 @@ const TimerHeader = () => {
             </div>
 
             {/* Timer */}
-            <div className="bg-[url('./fundo-timer.png')] bg-cover bg-center h-full w-[40%] translate-x-[50px] flex items-center justify-center gap-1 px-2">
+            <div className=" bg-[url('./fundo-timer.png')] bg-cover bg-center h-full w-[40%] translate-x-[50px] flex items-center justify-center gap-1 px-2">
                 <TimeBlock value={formatNumber(timeLeft.days)} label="Dias" />
                 <Separator />
                 <TimeBlock value={formatNumber(timeLeft.hours)} label="Horas" />

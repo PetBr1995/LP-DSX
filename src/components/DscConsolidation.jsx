@@ -23,7 +23,7 @@ const DsxConsolidation = () => {
   return (
     <section
       className="
-        py-20
+        py-12 sm:py-16 lg:py-20
         bg-[url('/background-dsx-consolidation.png')]
         bg-cover
         bg-center
@@ -31,34 +31,59 @@ const DsxConsolidation = () => {
       "
     >
       <div className="mx-auto max-w-6xl px-4">
-        <div className="grid gap-6 place-items-center grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <div
+          className="
+            flex
+            flex-wrap
+            justify-center
+            gap-4 sm:gap-6
+          "
+        >
           {cardItens.map((iten) => (
             <div
               key={iten.title}
               className="
                 font-roboto bg-[#111111] rounded-2xl
-                w-full max-w-[320px]
-                min-h-[280px]
-                flex flex-col justify-start items-start sm:justify-center
-                px-6 pt-14 pb-6
+                w-full
+                sm:w-[calc(50%-12px)]
+                lg:w-[calc(33.333%-16px)]
+                max-w-[320px]
+                min-h-[260px] sm:min-h-[280px]
+                flex flex-col justify-start sm:justify-center
+                px-6
+                pt-12 sm:pt-14
+                pb-6
                 relative
               "
             >
-              <div className="bg-black rounded-full p-2 absolute -top-12 left-1/2 -translate-x-1/2">
+              {/* Ícone flutuante */}
+              <div
+                className="
+                  bg-black rounded-full p-2 
+                  absolute 
+                  -top-10 sm:-top-12
+                  left-1/2 
+                  -translate-x-1/2
+                "
+              >
                 <img
                   src={iten.icon}
                   alt="icone"
-                  className="w-[88px] h-[88px] sm:w-[96px] sm:h-[96px]"
+                  className="w-[72px] h-[72px] sm:w-24 sm:h-24"
                 />
               </div>
 
               <h2 className="text-[#F5A205] text-4xl sm:text-5xl font-bold">
                 {iten.number}
               </h2>
-              <h4 className="text-2xl sm:text-3xl my-3 font-bold text-white uppercase">
+
+              <h4 className="text-xl sm:text-3xl my-3 font-bold text-white uppercase">
                 {iten.title}
               </h4>
-              <p className="text-white text-sm sm:text-base">{iten.desc}</p>
+
+              <p className="text-white text-sm sm:text-base">
+                {iten.desc}
+              </p>
             </div>
           ))}
         </div>

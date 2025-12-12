@@ -43,8 +43,8 @@ const Agradecimento = () => {
           bg-no-repeat
           bg-bottom-right
           bg-[url('/Ellipse-background.png')]
-          bg-[length:240px]
-          md:bg-[length:320px]
+          bg-size-[240px]
+          md:bg-size-[320px]
         "
       >
         <div className="max-w-[1200px] mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">

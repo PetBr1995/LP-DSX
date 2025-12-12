@@ -33,7 +33,7 @@ const TimerHeaderPalestrantes = () => {
     const formatNumber = (num) => num.toString().padStart(2, '0');
 
     return (
-        <section className='px-4 pt-5 bg-black fixed top-0 left-0 right-0 flex justify-center'>
+        <section className='px-4 pt-5 bg-black fixed top-0 left-0 right-0 flex justify-center' >
             <a href="/">
                 <img src="/DSX-logo-palestrantes.png" alt="logo" />
             </a>
@@ -53,7 +53,9 @@ const TimerHeaderPalestrantes = () => {
             gap-4
             h-20
             "
+                style={{ boxShadow: "0 0 10px rgba(255,255,255,0.4)" }}
             >
+
                 {/* Conteúdo acima do ::before */}
                 <div className="relative z-10 flex flex-col items-center gap-2 py-3">
                     <img src={imgFundo} alt="img" className="w-80 translate-x-14" />
