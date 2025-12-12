@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+
+:root {
+  font-family: 'Roboto', sans-serif;
+  --font-roboto: "Roboto", sans-serif;
+  --largura: 1200px;
+  overflow-x: hidden;
+}
+
+.font-bebas{
+  font-family: 'Bebas Neue', sans-serif;
+}
+.font-roboto{
+  font-family: 'Roboto', sans-serif;
+}
+
+.faixa-wrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
+.faixa-track {
+  display: flex;
+  width: max-content;
+  animation: faixa-marquee 45s linear infinite;
+}
+
+@keyframes faixa-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+

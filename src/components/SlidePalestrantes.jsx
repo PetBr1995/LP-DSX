@@ -1,0 +1,77 @@
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { useNavigate } from "react-router-dom";
+
+import { InfoPalestrantes } from "../data/InfoPalestrantes";
+
+const SlidePalestrantes = () => {
+
+  const navigate = useNavigate()
+
+  const infoPalestrantes = [
+    { nome: "Alfredo Soares", desc: "Empreendedor e sócio do G4 Educação.", img: "/palestrantes/AlfredoSoares.png" },
+    { nome: "Teste 1", desc: "Teste Descrição", img: "/palestrantes/AlfredoSoares.png" },
+    { nome: "Teste 1", desc: "Teste Descrição", img: "/palestrantes/AlfredoSoares.png" },
+    { nome: "Teste 1", desc: "Teste Descrição", img: "/palestrantes/AlfredoSoares.png" },
+    { nome: "Teste 1", desc: "Teste Descrição", img: "/palestrantes/AlfredoSoares.png" },
+    { nome: "Teste 1", desc: "Teste Descrição", img: "/palestrantes/AlfredoSoares.png" },
+    { nome: "Teste 1", desc: "Teste Descrição", img: "/palestrantes/AlfredoSoares.png" },
+  ];
+
+
+  return (
+    <section className="bg-black text-white pb-10 pt-10">
+      <h3 className="font-bebas text-center uppercase text-5xl font-(--font-bebas)">
+        Confira todos os palestrantes
+      </h3>
+      <h5 className="font-roboto font-extralight text-center uppercase font text-3xl">
+        que marcaram presença na edição de 2025
+      </h5>
+
+      <div className="my-10 max-w-6xl mx-auto px-4">
+        <Swiper
+          spaceBetween={16}
+          slidesPerView={"auto"}
+          loop={false}
+          grabCursor={true}     // 👈 ativa a mãozinha!
+          className="cursor-grab active:cursor-grabbing"
+        >
+          {InfoPalestrantes.map((inf, index) => (
+            <SwiperSlide key={index} className="w-[230px]!">
+              <div
+                className="
+                  bg-[url('/palestrantes/AlfredoSoares.png')] 
+                  bg-[#111111]
+                  bg-cover
+                  p-4 
+                  rounded-xl 
+                  shadow-lg 
+                  h-80
+                  flex 
+                  flex-col 
+                  justify-between
+                "
+              >
+                <h4 className="font-bebas text-[#F5A205] text-xl text-center uppercase">
+                  // {inf.nome}
+                </h4>
+                <p className="font-roboto font-medium text-sm mt-2 normal-case! text-gray-300 text-center">
+                  {inf.desc}
+                </p>
+
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+
+      <div className="flex justify-center items-center py-4">
+        <button onClick={() => navigate('/palestrantes')} className="cursor-pointer text-black font-bold bg-[#F5A205] px-8 py-2 rounded-3xl uppercase">
+          Ver todos
+        </button>
+      </div>
+    </section>
+  );
+};
+
+export default SlidePalestrantes;
