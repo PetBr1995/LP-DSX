@@ -8,7 +8,10 @@
   --largura: 1200px;
   overflow-x: hidden;
   background-color: black;
+  scroll-behavior: smooth;
 }
+
+
 
 .font-bebas{
   font-family: 'Bebas Neue', sans-serif;

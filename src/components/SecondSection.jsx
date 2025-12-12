@@ -30,12 +30,12 @@ const SecondSection = () => {
 
         {/* Botão dentro do mesmo container */}
         <div className="flex justify-center mt-10">
-          <button
-            onClick={() => navigate("/palestrantes")}
+          <a
+            href="#form"
             className="cursor-pointer text-black font-bold bg-[#F5A205] px-8 py-3 rounded-3xl uppercase hover:brightness-110 transition"
           >
             faça parte da lista de espera
-          </button>
+          </a>
         </div>
       </div>
     </section>

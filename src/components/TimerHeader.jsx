@@ -35,46 +35,74 @@ const TimerHeader = () => {
     return (
         <div
             className="
-                fixed 
-                top-0 
-                left-1/2 
-                -translate-x-1/2 
-                z-1000 
-                max-w-[700px] 
-                w-[90%]
-                m-2 
-                rounded-[50px]
-                bg-black 
-                text-center
-                overflow-hidden
-                before:content-['']
-                before:absolute
-                before:inset-0
-                before:bg-[url('/elipse-1.png')]
-                before:bg-no-repeat
-                before:bg-center
-                before:bg-contain
-                before:opacity-80
-                before:h-[170px]
-                before:-top-15
-                before:right-120
-                before:z-0
-                flex
-                justify-center
-                items-center
-                gap-4
-                h-20
-            
-            "
-            style={{boxShadow:"0 0 10px rgba(255,255,255,0.4)"}}
+    fixed 
+    top-0 
+    left-1/2 
+    -translate-x-1/2 
+    z-1000
+    max-w-[700px] 
+    w-[90%]
+    m-2 
+    rounded-[50px]
+    bg-black 
+    text-center
+    overflow-hidden
+
+    before:content-['']
+    before:absolute
+    before:inset-0
+    before:bg-[url('/elipse-1.png')]
+    before:bg-no-repeat
+    before:bg-center
+    before:bg-contain
+    before:opacity-80
+    before:h-[170px]
+    before:-top-15
+    before:right-120
+    before:z-0
+
+    flex
+    flex-col            /* 👈 coluna no mobile */
+    sm:flex-row         /* 👈 volta pra linha no sm+ */
+    justify-center
+    items-center
+    gap-2 sm:gap-4
+    h-auto sm:h-20      /* 👈 no mobile deixa altura automática */
+    py-2 sm:py-0        /* 👈 dá respiro no mobile */
+  "
+            style={{ boxShadow: "0 0 10px rgba(255,255,255,0.4)" }}
         >
-            {/* Conteúdo acima do ::before */}
-            <div className="relative z-10 flex flex-col items-center gap-2 py-3">
-                <img src={imgFundo} alt="img" className="w-80 translate-x-14" />
+            {/* Logo */}
+            <div className="relative z-10 flex flex-col items-center gap-2 py-2 sm:py-3">
+                <img
+                    src={imgFundo}
+                    alt="img"
+                    className="w-56 sm:w-80 translate-x-0 sm:translate-x-14"
+                />
             </div>
 
             {/* Timer */}
-            <div className=" bg-[url('./fundo-timer.png')] bg-cover bg-center h-full w-[40%] translate-x-[50px] flex items-center justify-center gap-1 px-2">
+            <div
+                className="
+      bg-[url('/fundo-timer.png')]
+      bg-cover
+      bg-center
+
+      h-14 sm:h-full      /* 👈 altura menor no mobile */
+      w-[92%] sm:w-[55%] md:w-[40%]
+
+      translate-x-0
+      sm:translate-x-[30px]
+      md:translate-x-[50px]
+
+      flex
+      items-center
+      justify-center
+      gap-0.5 sm:gap-1
+      px-2 sm:px-2
+      rounded-[30px] sm:rounded-none   /* opcional: arredonda no mobile */
+    "
+            >
                 <TimeBlock value={formatNumber(timeLeft.days)} label="Dias" />
                 <Separator />
                 <TimeBlock value={formatNumber(timeLeft.hours)} label="Horas" />
@@ -84,6 +112,7 @@ const TimerHeader = () => {
                 <TimeBlock value={formatNumber(timeLeft.seconds)} label="Segundos" />
             </div>
         </div>
+
     );
 };
 

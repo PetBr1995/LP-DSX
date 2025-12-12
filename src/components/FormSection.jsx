@@ -29,7 +29,7 @@ const FormSection = () => {
   };
 
   return (
-    <section className="pt-10 text-center">
+    <section className="pt-10 text-center" id="form">
       <h2 className="font-bebas text-8xl text-white">Save the date</h2>
 
       <div
