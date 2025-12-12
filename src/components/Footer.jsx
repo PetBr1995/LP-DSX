@@ -7,6 +7,7 @@ const Footer = () => {
                 bg-no-repeat 
                 bg-bottom-right 
                 bg-[url('/Ellipse-background.png')]
+                bg-[#111111]
                 bg-size-[240px]    /* controla o tamanho da elipse */
                 md:bg-size-[320px]  /* maior no desktop */
             "
