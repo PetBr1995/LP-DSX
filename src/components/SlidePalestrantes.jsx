@@ -40,7 +40,6 @@ const SlidePalestrantes = () => {
             <SwiperSlide key={index} className="w-[230px]!">
               <div
                 className="
-                  bg-[url('/palestrantes/AlfredoSoares.png')] 
                   bg-[#111111]
                   bg-cover
                   p-4 
@@ -51,6 +50,7 @@ const SlidePalestrantes = () => {
                   flex-col 
                   justify-between
                 "
+                style={{ backgroundImage: `url(${inf.img})` }}
               >
                 <h4 className="font-bebas text-[#F5A205] text-xl text-center uppercase">
                   // {inf.nome}

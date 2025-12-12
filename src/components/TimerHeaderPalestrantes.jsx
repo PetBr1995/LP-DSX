@@ -33,8 +33,10 @@ const TimerHeaderPalestrantes = () => {
     const formatNumber = (num) => num.toString().padStart(2, '0');
 
     return (
-        <section className='pt-5 bg-black fixed top-0 left-0 right-0 flex justify-center'>
-            <img src="/DSX-logo-palestrantes.png" alt="logo" />
+        <section className='px-4 pt-5 bg-black fixed top-0 left-0 right-0 flex justify-center'>
+            <a href="/">
+                <img src="/DSX-logo-palestrantes.png" alt="logo" />
+            </a>
             <div
                 className="
              
@@ -42,17 +44,14 @@ const TimerHeaderPalestrantes = () => {
             w-[700px] 
             m-2 
             rounded-[50px]
-            bg-black 
+            bg-[#111111] 
             text-center
             overflow-hidden
-            
             flex
             justify-center
             items-center
             gap-4
             h-20
-            border
-            border-white
             "
             >
                 {/* Conteúdo acima do ::before */}
