@@ -14,7 +14,7 @@ const HeroSection = () => {
         h-full
         pointer-events-none
         "
-          allow="autoplay"
+          allow="autoplay;"
         />
 
 

@@ -87,7 +87,6 @@ const TimerHeader = () => {
             {/* Timer */}
             <div
                 className="
-      bg-[url('/fundo-timer.png')]
       bg-cover
       bg-center
 

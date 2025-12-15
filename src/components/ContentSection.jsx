@@ -19,17 +19,17 @@ const ContentSection = () => {
         {
             icon: '/icons/icone-money.svg',
             cartTitle: 'Ferramentas de Crescimento',
-            cardDesc: 'Como atrair, negociar e fechar contratos maiores, construindo um modelo de receita previsível.'
+            cardDesc: 'Aprenda com especialistas as estratégias e tecnologias que geram escala real.'
         },
         {
             icon: '/icons/icone-target.svg',
             cartTitle: 'Planejamento Estratégico',
-            cardDesc: 'Domine tráfego pago, funis de venda, criativos que convertem e estratégias de automação.'
+            cardDesc: 'Trace metas sólidas e transforme suas ideias em ações concretas.'
         },
         {
             icon: '/icons/icone-cavalo.svg',
             cartTitle: 'Gestão Comercial',
-            cardDesc: 'Construa autoridade, seja referência na sua área e destaque sua marca no mercado.'
+            cardDesc: 'Otimize seu processo de vendas, use bem seu CRM e escale sua operação.'
         },
     ]
 
