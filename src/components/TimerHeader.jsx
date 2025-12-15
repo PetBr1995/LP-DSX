@@ -36,14 +36,20 @@ const TimerHeader = () => {
         <div
             className="
     fixed 
-    top-0 
+    -top-2.5
+    sm:top-0 
     left-1/2 
-    -translate-x-1/2 
+    sm:left-1/2 
+    sm:-translate-x-1/2 
+    translate-x-[-260px]    
+
     z-1000
     max-w-[700px] 
-    w-[90%]
+    w-[105%]
+    sm:w-[90%]
     m-2 
-    rounded-[50px]
+    rounded-none
+    sm:rounded-[50px]
     bg-black 
     text-center
     overflow-hidden
@@ -69,7 +75,6 @@ const TimerHeader = () => {
     h-auto sm:h-20      /* 👈 no mobile deixa altura automática */
     py-2 sm:py-0        /* 👈 dá respiro no mobile */
   "
-            style={{ boxShadow: "0 0 10px rgba(255,255,255,0.4)" }}
         >
             {/* Logo */}
             <div className="relative z-10 flex flex-col items-center gap-2 py-2 sm:py-3">

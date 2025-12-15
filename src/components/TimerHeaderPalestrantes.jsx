@@ -80,7 +80,7 @@ const TimerHeaderPalestrantes = () => {
           {/* Timer */}
           <div
             className="
-              bg-[url('./fundo-timer.png')]
+              bg-[url('/fundo-timer.png')]
               bg-cover
               bg-center
               h-14 sm:h-full
