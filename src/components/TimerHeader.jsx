@@ -40,7 +40,7 @@ const TimerHeader = () => {
     sm:top-0 
     left-0 
     sm:left-1/2 
-    translate-x-[-20px]
+    -translate-x-5
     sm:-translate-x-1/2
     z-1000
     max-w-[700px] 
@@ -49,7 +49,7 @@ const TimerHeader = () => {
     m-2 
     rounded-none
     sm:rounded-[50px]
-    bg-black 
+    bg-[#111111] 
     text-center
     overflow-hidden
     before:content-['']

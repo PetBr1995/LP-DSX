@@ -66,7 +66,6 @@ const TimerHeaderPalestrantes = () => {
             h-auto sm:h-20
             py-2 sm:py-0
           "
-          style={{ boxShadow: "0 0 10px rgba(255,255,255,0.4)" }}
         >
           {/* Imagem VemAí */}
           <div className="flex justify-center items-center">
