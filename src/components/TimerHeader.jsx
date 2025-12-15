@@ -3,7 +3,7 @@ import imgFundo from '../assets/vemai-dsx.png';
 
 const TimerHeader = () => {
     // Mude essa data para a data real do evento DSX 2026
-    const targetDate = new Date('2026-01-01T00:00:00');
+    const targetDate = new Date('2026-02-01T00:00:00');
 
     const calculateTimeLeft = () => {
         const difference = targetDate.getTime() - new Date().getTime();
@@ -38,11 +38,10 @@ const TimerHeader = () => {
     fixed 
     -top-2.5
     sm:top-0 
-    left-1/2 
+    left-0 
     sm:left-1/2 
-    sm:-translate-x-1/2 
-    translate-x-[-260px]    
-
+    translate-x-[-20px]
+    sm:-translate-x-1/2
     z-1000
     max-w-[700px] 
     w-[105%]
