@@ -47,7 +47,6 @@ const TimerHeader = () => {
     bg-black 
     text-center
     overflow-hidden
-
     before:content-['']
     before:absolute
     before:inset-0
@@ -133,7 +132,7 @@ function TimeBlock({ value, label }) {
 // Separador compacto
 function Separator() {
     return (
-        <div className="flex flex-col justify-center mb-4 items-center gap-1.5 h-full">
+        <div className="flex flex-col  justify-center mb-4 items-center gap-1.5 h-full">
             <div className="w-1 h-1 bg-white rounded-full"></div>
             <div className="w-1 h-1 bg-white rounded-full"></div>
         </div>

@@ -12,7 +12,7 @@ const Palestrantes = () => {
             <section className="bg-black">
                 <div className="max-w-(--largura) mx-auto">
                     <TimerHeaderPalestrantes />
-                    <h3 className="mt-20 pt-20 pb-10 text-center font-bebas text-4xl text-white">Grandes mentes. Grandes ideias.<br /> Conheça nossos palestrantes.</h3>
+                    <h3 className="mt-30 md:mt-20 pt-20 pb-10 text-center font-bebas text-4xl text-white">Grandes mentes. Grandes ideias.<br /> Conheça nossos palestrantes.</h3>
                     <div className="flex gap-3 justify-center items-center flex-wrap">
 
                         {InfoPalestrantesNacionais.map((inf, index) => (
