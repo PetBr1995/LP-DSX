@@ -1,7 +1,5 @@
 import Footer from "../components/Footer"
 import TimerHeaderPalestrantes from "../components/TimerHeaderPalestrantes"
-
-import { InfoPalestrantes } from "../data/InfoPalestrantes"
 import { InfoPalestrantesNacionais } from "../data/InfoPalestrantesNacionais"
 import { InfoPalestrantesRegionais } from "../data/InfoPalestrantesRegionais"
 

@@ -43,9 +43,9 @@ const TimerHeaderPalestrantes = () => {
         {/* LOGO FORA DO CONTAINER */}
         <a href="/" className="shrink-0">
           <img
-            src="/DSX-logo-palestrantes.png"
+            src="/logo-home.png"
             alt="logo"
-            className="h-9 sm:h-10 w-auto"
+            className="h-8 sm:h-8 w-auto hover:-translate-y-0.5 transition-[.4s]"
           />
         </a>
 
