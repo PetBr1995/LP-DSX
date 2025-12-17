@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import TimerHeaderPalestrantes from "../components/TimerHeaderPalestrantes";
@@ -33,6 +34,35 @@ const titleVariants = {
 };
 
 const Palestrantes = () => {
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)"); // md
+    const update = () => setIsDesktop(mq.matches);
+
+    update();
+
+    if (mq.addEventListener) mq.addEventListener("change", update);
+    else mq.addListener(update);
+
+    return () => {
+      if (mq.removeEventListener) mq.removeEventListener("change", update);
+      else mq.removeListener(update);
+    };
+  }, []);
+
+  // ✅ Desktop: whileInView | Mobile: fade no mount
+  const motionProps = isDesktop
+    ? {
+        initial: "hidden",
+        whileInView: "show",
+        viewport: { once: true, amount: 0.2, margin: "0px 0px -20% 0px" },
+      }
+    : {
+        initial: "hidden",
+        animate: "show",
+      };
+
   return (
     <>
       <section className="bg-black font-bebas">
@@ -43,9 +73,7 @@ const Palestrantes = () => {
           <motion.h3
             className="mt-30 md:mt-20 pt-20 pb-10 text-center font-bebas text-4xl text-white"
             variants={titleVariants}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.35 }}
+            {...motionProps}
           >
             Grandes mentes. Grandes ideias.
             <br /> Conheça nossos palestrantes.
@@ -55,9 +83,7 @@ const Palestrantes = () => {
           <motion.div
             className="flex gap-3 justify-center items-center flex-wrap"
             variants={containerVariants}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
+            {...motionProps}
           >
             {InfoPalestrantesNacionais.map((inf, index) => (
               <motion.div
@@ -96,9 +122,7 @@ const Palestrantes = () => {
           <motion.h3
             className="pt-10 pb-10 text-center font-bebas text-4xl text-white"
             variants={titleVariants}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.35 }}
+            {...motionProps}
           >
             Regionais
           </motion.h3>
@@ -107,9 +131,7 @@ const Palestrantes = () => {
           <motion.div
             className="flex gap-3 justify-center items-center flex-wrap"
             variants={containerVariants}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
+            {...motionProps}
           >
             {InfoPalestrantesRegionais.map((inf, index) => (
               <motion.div
