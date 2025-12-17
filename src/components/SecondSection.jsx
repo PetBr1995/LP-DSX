@@ -22,7 +22,7 @@ const SecondSection = () => {
       <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 py-16">
         <div className="grid grid-cols-1 place-items-center gap-8 font-bebas">
           <div className="text-white text-center md:text-left">
-            <img src="/data-dsx.png" alt="data" className="w-[250px] mb-2" />
+            <img src="/data-dsx.svg" alt="data" className="w-[120px] mb-2" />
             <img
               src="/dsx2026main.png"
               alt="logo"

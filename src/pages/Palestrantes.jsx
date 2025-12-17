@@ -54,14 +54,14 @@ const Palestrantes = () => {
   // ✅ Desktop: whileInView | Mobile: fade no mount
   const motionProps = isDesktop
     ? {
-        initial: "hidden",
-        whileInView: "show",
-        viewport: { once: true, amount: 0.2, margin: "0px 0px -20% 0px" },
-      }
+      initial: "hidden",
+      whileInView: "show",
+      viewport: { once: true, amount: 0.2, margin: "0px 0px -20% 0px" },
+    }
     : {
-        initial: "hidden",
-        animate: "show",
-      };
+      initial: "hidden",
+      animate: "show",
+    };
 
   return (
     <>
@@ -70,14 +70,14 @@ const Palestrantes = () => {
           <Header />
 
           {/* Título */}
-          <motion.h3
-            className="mt-30 md:mt-20 pt-20 pb-10 text-center font-bebas text-4xl text-white"
-            variants={titleVariants}
-            {...motionProps}
-          >
-            Grandes mentes. Grandes ideias.
-            <br /> Conheça nossos palestrantes.
+        
+          <motion.h3 className="mt-30 md:mt-20 pt-20 text-white text-center uppercase text-4xl font-anton" variants={titleVariants}
+            {...motionProps}>
+            Confira todos os palestrantes
           </motion.h3>
+          <motion.h5 className="pb-20 text-white font-jamjuree font-normal text-center uppercase font text-3xl" >
+            que marcaram presença na edição de 2025
+          </motion.h5>
 
           {/* Nacionais */}
           <motion.div
