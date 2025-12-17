@@ -3,6 +3,7 @@ import "swiper/css";
 import { useNavigate } from "react-router-dom";
 
 import { InfoPalestrantes } from "../data/InfoPalestrantes";
+import CTAButton from "./Mascaras/CTAButton";
 
 const SlidePalestrantes = () => {
 
@@ -20,11 +21,11 @@ const SlidePalestrantes = () => {
 
 
   return (
-    <section className="bg-black text-white pb-10 pt-10">
-      <h3 className="font-bebas text-center uppercase text-5xl font-(--font-bebas)">
+    <section className="bg-white text-blackpb-10 pt-10">
+      <h3 className=" text-center uppercase text-4xl font-anton">
         Confira todos os palestrantes
       </h3>
-      <h5 className="font-roboto font-extralight text-center uppercase font text-3xl">
+      <h5 className="font-jamjuree font-normal text-center uppercase font text-3xl">
         que marcaram presença na edição de 2025
       </h5>
 
@@ -66,9 +67,7 @@ const SlidePalestrantes = () => {
       </div>
 
       <div className="flex justify-center items-center py-4">
-        <button onClick={() => navigate('/palestrantes')} className="cursor-pointer text-black font-bold bg-[#F5A205] px-8 py-2 rounded-3xl uppercase">
-          Ver todos
-        </button>
+        <CTAButton titulo="Ver todos" link="/palestrantes" />
       </div>
     </section>
   );

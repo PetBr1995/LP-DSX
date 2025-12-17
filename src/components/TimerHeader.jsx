@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import imgFundo from '../assets/vemai-dsx.png';
+import CTAButton from './Mascaras/MainMask';
+import MainMask from './Mascaras/MainMask';
 
 const TimerHeader = () => {
     // Mude essa data para a data real do evento DSX 2026
@@ -85,25 +87,26 @@ const TimerHeader = () => {
             </div>
 
             {/* Timer */}
+
             <div
                 className="
-      bg-cover
-      bg-center
-
-      h-14 sm:h-full      /* 👈 altura menor no mobile */
-      w-[92%] sm:w-[55%] md:w-[40%]
-
-      translate-x-0
-      sm:translate-x-[30px]
-      md:translate-x-[50px]
-
-      flex
-      items-center
-      justify-center
-      gap-0.5 sm:gap-1
-      px-2 sm:px-2
-      rounded-[30px] sm:rounded-none   /* opcional: arredonda no mobile */
-    "
+                bg-cover
+                bg-center
+                
+                h-14 sm:h-full      /* 👈 altura menor no mobile */
+                w-[92%] sm:w-[55%] md:w-[40%]
+                
+                translate-x-0
+                sm:translate-x-[30px]
+                md:translate-x-[50px]
+                
+                flex
+                items-center
+                justify-center
+                gap-0.5 sm:gap-1
+                px-2 sm:px-2
+                rounded-[30px] sm:rounded-none   /* opcional: arredonda no mobile */
+                "
             >
                 <TimeBlock value={formatNumber(timeLeft.days)} label="Dias" />
                 <Separator />
@@ -113,6 +116,7 @@ const TimerHeader = () => {
                 <Separator />
                 <TimeBlock value={formatNumber(timeLeft.seconds)} label="Segundos" />
             </div>
+            <MainMask titulo="As vendas começam em: " textColor="#000000" backgroundColor="#ffffff" />
         </div>
 
     );

@@ -2,8 +2,8 @@ const Footer = () => {
     return (
         <footer 
             className="
-                relative 
-                py-6
+                relative
+                py-2
                 bg-no-repeat 
                 bg-bottom-right 
                 bg-[url('/Ellipse-background.png')]
@@ -15,15 +15,19 @@ const Footer = () => {
             <div className="max-w-[1200px] mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
 
                 <img
-                    src="/vemai-dsx.png"
+                    src="/logo-dsx-horizontal.svg"
                     alt="Vem aí DSX"
-                    className="w-[50%] md:w-[40%]"
+                    className="w-[150px]"
                 />
-
+                <div className="font-jamjuree text-center">
+                    <p className="text-white">10.279.661/0001-51</p>
+                    <p className="text-white">© 2025 Digital Comunicação.</p>
+                    <p className="text-white">Todos os direitos reservados.</p>
+                </div>
                 <img
                     src="/powered-digital-hub.png"
                     alt="Powered by Digital Hub"
-                    className="w-[50%] md:w-[40%]"
+                    className="w-[270px]"
                 />
 
             </div>

@@ -1,60 +1,113 @@
-import imgFundo from "../assets/vemai-dsx.png";
+import { useEffect, useState } from "react";
+import CTAButton from "./Mascaras/CTAButton";
+import HeaderMask from "./Mascaras/HeaderMask";
 
-const Header = () => {
+const Header = ({ className = "" }) => {
+  const [open, setOpen] = useState(false);
+
+  // Fecha no ESC
+  useEffect(() => {
+    const onKeyDown = (e) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
+
+  const close = () => setOpen(false);
+  const toggle = () => setOpen((v) => !v);
+
   return (
-    <div
-      className="
-        fixed 
-        -top-2.5
-        sm:top-0 
-        left-1/2 
-        sm:left-1/2 
-        sm:-translate-x-1/2 
-        translate-x-[-260px]    
+    <>
+      <section
+        className={`
+          fixed top-0 left-0 right-0
+          z-50
+          bg-black
+          h-[75px] p-2
+          flex items-center justify-between
+          sm:justify-around
+          ${className}
+        `}
+      >
+        <a href="/#home">
+          {/* Logo (sempre visível) */}
+          <img
+            src="/dsx2026main.png"
+            alt="logo"
+            className="h-[32px] sm:h-[40px] w-auto"
+          />
+        </a>
 
-        z-1000
-        max-w-[700px] 
-        w-full
-        sm:w-[90%]
-        m-2 
-        rounded-none
-        sm:rounded-[50px]
-        bg-black 
-        text-center
-        overflow-hidden
+        {/* Desktop actions */}
+        <div className="hidden sm:flex justify-center items-center gap-1">
+          <HeaderMask
+            titulo="Seja patrocinador"
+            textColor="#ffffff"
+            backgroundColor="#000000"
+            link="#faleconosco"
+          />
+          <CTAButton titulo="Lista de espera 2026" link="/#form" />
+        </div>
 
-        before:content-['']
-        before:absolute
-        before:inset-0
-        before:bg-[url('/elipse-1.png')]
-        before:bg-no-repeat
-        before:bg-center
-        before:bg-contain
-        before:opacity-80
-        before:h-[170px]
-        before:-top-15
-        before:right-120
-        before:z-0
+        {/* Mobile hamburger */}
+        <button
+          type="button"
+          className="cursor-pointer sm:hidden inline-flex items-center justify-center p-2 rounded-md text-white"
+          aria-label="Abrir menu"
+          aria-expanded={open}
+          onClick={toggle}
+        >
+          {/* Ícone hambúrguer simples (SVG) */}
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M4 7h16M4 12h16M4 17h16"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+          </svg>
+        </button>
+      </section>
 
-        flex
-        flex-col
-        sm:flex-row
-        justify-center
-        items-center
-        gap-2 sm:gap-4
-        h-auto sm:h-20
-        py-2 sm:py-0
-      "
-    >
-      {/* Logo */}
-      <div className="relative z-10 flex flex-col items-center gap-2 py-2 sm:py-3">
-        <img
-          src={imgFundo}
-          alt="img"
-          className="w-56 sm:w-80 translate-x-0 sm:translate-x-14"
-        />
+      {/* Overlay */}
+      <div
+        className={`
+          fixed inset-0 z-40
+          bg-black/60
+          transition-opacity duration-200
+          ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}
+        `}
+        onClick={close}
+      />
+
+      {/* Drawer (top -> down) */}
+      <div
+        className={`
+          fixed top-0 left-0 right-0 z-50
+          bg-black
+          border-b border-white/10
+          pt-0  /* empurra pra baixo do header */
+          transition-transform duration-250 ease-out
+          ${open ? "translate-y-0" : "-translate-y-full"}
+        `}
+      >
+        <div className="p-4 flex flex-wrap gap-3 items-stretch justify-center">
+          <HeaderMask
+            titulo="Seja patrocinador"
+            textColor="#ffffff"
+            backgroundColor="#000000"
+            link="#faleconosco"
+          />
+          <CTAButton
+            titulo="Lista de espera 2026"
+            link="#form"
+          // se quiser fechar ao clicar:
+          // onClick={close}  (se seu CTAButton repassar props)
+          />
+
+
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

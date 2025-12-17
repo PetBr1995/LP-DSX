@@ -1,4 +1,40 @@
+import { motion } from "framer-motion";
 
+const titleVariants = {
+  hidden: { opacity: 0, y: 18 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.65, ease: "easeOut" },
+  },
+};
+
+const textVariants = {
+  hidden: { opacity: 0, y: 14 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut", delay: 0.1 },
+  },
+};
+
+const logoVariants = {
+  hidden: { opacity: 0, scale: 0.98 },
+  show: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
+
+const footerVariants = {
+  hidden: { opacity: 0, y: 10 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut", delay: 0.15 },
+  },
+};
 
 const Agradecimento = () => {
   return (
@@ -7,31 +43,103 @@ const Agradecimento = () => {
         relative
         min-h-screen
         bg-black
-        bg-[url('/background-agradecimento.png')]
+        pb-[120px]
+        flex
+        flex-col
+        bg-[url('/background-banner-2.png')]
         bg-cover
         bg-center
         bg-no-repeat
-        pb-[120px]   /* reserva espaço pro footer fixo */
+        overflow-hidden
       "
     >
-      <div className="max-w-[1200px] mx-auto px-6 pt-10">
-        <img
-          src="/DSX-logo-palestrantes.png"
-          alt="logo"
-          className="mx-auto"
-        />
+      {/* CONTEÚDO CENTRALIZADO */}
+      <div className="flex-1 flex items-center relative">
+        <div className="relative max-w-[1200px] mx-auto px-6 text-center">
 
-        <h2 className="mt-16 sm:mt-20 font-bebas text-4xl sm:text-6xl md:text-7xl text-white text-center leading-tight">
-          Obrigado! Recebemos seu interesse em participar do DSX 2026
-        </h2>
+          {/* DECORAÇÃO SUPERIOR (antes ::after) */}
+          <motion.div
+            className="
+              absolute
+              -top-10
+              right-10
+              w-[100px]
+              h-[100px]
+              bg-[url('/vector-8.svg')]
+              bg-cover
+              bg-center
+              bg-no-repeat
+              pointer-events-none
+              z-10
+            "
+            animate={{ rotate: 360 }}
+            transition={{
+              repeat: Infinity,
+              duration: 18,
+              ease: "linear",
+            }}
+          />
 
-        <p className="mt-6 sm:mt-8 text-center text-white font-roboto uppercase text-lg sm:text-2xl md:text-3xl font-extralight">
-          Em breve, nossa equipe vai entrar em contato&nbsp;com&nbsp;você.
-        </p>
+          {/* DECORAÇÃO INFERIOR (antes ::before) */}
+          <motion.div
+            className="
+              absolute
+              -bottom-40
+              left-0
+              w-[80px]
+              h-[80px]
+              bg-[url('/vector-5.svg')]
+              bg-cover
+              bg-center
+              bg-no-repeat
+              pointer-events-none
+              z-10
+            "
+            animate={{ rotate: -360 }}
+            transition={{
+              repeat: Infinity,
+              duration: 22,
+              ease: "linear",
+            }}
+          />
+
+          <a href="/#home">
+            <motion.img
+              src="/DSX-logo-palestrantes.png"
+              alt="logo"
+              className="mx-auto w-[80px] relative z-20"
+              variants={logoVariants}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.6 }}
+            />
+          </a>
+
+          <motion.h2
+            className="relative z-20 mt-12 sm:mt-16 font-bebas text-4xl sm:text-6xl md:text-7xl text-white leading-tight"
+            variants={titleVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.35 }}
+          >
+            <span className="text-[#F5A205]">Obrigado!</span>{" "}
+            Recebemos seu interesse em participar do DSX 2026
+          </motion.h2>
+
+          <motion.p
+            className="relative z-20 mt-4 sm:mt-6 text-white font-roboto uppercase text-lg sm:text-2xl md:text-3xl font-extralight"
+            variants={textVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.35 }}
+          >
+            Em breve, nossa equipe vai entrar em contato com você.
+          </motion.p>
+        </div>
       </div>
 
-      {/* Footer fixo somente nesta página */}
-      <footer
+      {/* FOOTER FIXO */}
+      <motion.footer
         className="
           fixed
           bottom-0
@@ -46,6 +154,9 @@ const Agradecimento = () => {
           bg-size-[240px]
           md:bg-size-[320px]
         "
+        variants={footerVariants}
+        initial="hidden"
+        animate="show"
       >
         <div className="max-w-[1200px] mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
           <img
@@ -60,7 +171,7 @@ const Agradecimento = () => {
             className="w-[60%] max-w-[260px] md:w-[40%]"
           />
         </div>
-      </footer>
+      </motion.footer>
     </section>
   );
 };

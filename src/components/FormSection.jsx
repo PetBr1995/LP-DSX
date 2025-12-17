@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 /**
  * ⚠️ CHAVES FAKE — APENAS EXEMPLO DIDÁTICO
@@ -29,6 +30,45 @@ function formatWhatsappE164(numero = "") {
   if (n.startsWith("55")) return `+${n}`;
   return `+55${n}`;
 }
+
+/** ✅ Botão reutilizável (submit) */
+export const FormButton = ({
+  titulo = "Enviar",
+  textColor = "#000",
+  disabled = false,
+}) => {
+  return (
+    <button type="submit" disabled={disabled} className="disabled:cursor-not-allowed">
+      <section className={`flex justify-center items-center ${disabled ? "opacity-60" : ""}`}>
+        {/* ESQUERDA */}
+        <div
+          className="
+            relative
+            rounded-2xl
+            bg-linear-to-r from-[#F3CB46] to-[#E7A040]
+            p-0.5
+          "
+        >
+          <div className="flex justify-center items-center rounded-[14px] w-[200px] h-10">
+            <p
+              className="uppercase text-[14px] font-bold"
+              style={{ color: textColor }}
+            >
+              {titulo}
+            </p>
+          </div>
+        </div>
+
+        {/* DIREITA */}
+        <div className="relative -ml-0.5 rounded-2xl bg-linear-to-r from-[#E7A040] to-[#E7A040] p-0.5">
+          <div className="flex justify-center items-center rounded-[14px] w-[50px] h-10">
+            <img src="/Arrow-2.svg" alt="arrow-down" className="w-[20px] h-auto" />
+          </div>
+        </div>
+      </section>
+    </button>
+  );
+};
 
 const FormSection = () => {
   const [sourceData, setSourceData] = useState({
@@ -73,16 +113,11 @@ const FormSection = () => {
 
     value = value.slice(0, 11);
 
-    if (value.length <= 2) {
-      value = `(${value}`;
-    } else if (value.length <= 6) {
-      value = value.replace(/^(\d{2})(\d{0,4})/, "($1) $2");
-    } else {
-      if (value.length <= 10) {
-        value = value.replace(/^(\d{2})(\d{4})(\d{0,4})/, "($1) $2-$3");
-      } else {
-        value = value.replace(/^(\d{2})(\d{5})(\d{0,4})/, "($1) $2-$3");
-      }
+    if (value.length <= 2) value = `(${value}`;
+    else if (value.length <= 6) value = value.replace(/^(\d{2})(\d{0,4})/, "($1) $2");
+    else {
+      if (value.length <= 10) value = value.replace(/^(\d{2})(\d{4})(\d{0,4})/, "($1) $2-$3");
+      else value = value.replace(/^(\d{2})(\d{5})(\d{0,4})/, "($1) $2-$3");
     }
 
     setForm((prev) => ({ ...prev, whatsapp: value }));
@@ -94,18 +129,14 @@ const FormSection = () => {
     if (!isValidEmail(form.email)) e.email = "Informe um e-mail válido.";
 
     const phone = onlyDigits(form.whatsapp);
-    if (!(phone.length === 10 || phone.length === 11)) {
-      e.whatsapp = "Informe um WhatsApp com DDD.";
-    }
+    if (!(phone.length === 10 || phone.length === 11)) e.whatsapp = "Informe um WhatsApp com DDD.";
 
     if (!form.company.trim()) e.company = "Informe a empresa.";
     return e;
   }, [form]);
 
   const canSubmit = Object.keys(errors).length === 0 && status !== "loading";
-
-
-   const navigate = useNavigate() 
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -119,28 +150,18 @@ const FormSection = () => {
 
     setStatus("loading");
 
-    /**
-     * Payload no formato do RD (CDP / CONVERSION)
-     * Mantendo cf_* exatamente como você enviou
-     */
     const payload = {
       event_type: "CONVERSION",
       event_family: "CDP",
       payload: {
         conversion_identifier: "LP - Dsx 2026",
-
-        // Dados principais
         name: form.name.trim(),
         email: form.email.trim().toLowerCase(),
         personal_phone: formatWhatsappE164(form.whatsapp),
         company_name: form.company.trim(),
-
-        // Campos customizados (cf_*)
         cf_nome_completo: form.name.trim(),
         cf_nome_da_empresa: form.company.trim(),
         cf_telefon: formatWhatsappE164(form.whatsapp),
-
-        // UTMs / tracking
         traffic_source: sourceData.utm_source,
         traffic_campaign: sourceData.utm_campaign,
         traffic_medium: sourceData.utm_medium,
@@ -152,21 +173,22 @@ const FormSection = () => {
         cf_utm_source: sourceData.utm_source,
         cf_url_de_conversao: sourceData.page_url,
       },
-
-      // extras opcionais
       tags: ["lista-antecipada", "dsx"],
       source: "landing-save-the-date",
     };
 
     try {
-      const res = await fetch("https://api.rd.services/platform/conversions?api_key=MHnWDjBYARQKdwUsfZRbjtVmPEyoHnSqtgFz", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+      const res = await fetch(
+        "https://api.rd.services/platform/conversions?api_key=MHnWDjBYARQKdwUsfZRbjtVmPEyoHnSqtgFz",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
 
       const data = await res.json().catch(() => ({}));
 
@@ -177,12 +199,9 @@ const FormSection = () => {
       }
 
       setStatus("success");
-      setMessage(
-        data.message || "Cadastro enviado! Em breve entraremos em contato."
-      );
-
+      setMessage(data.message || "Cadastro enviado! Em breve entraremos em contato.");
       setForm({ name: "", whatsapp: "", email: "", company: "" });
-      navigate('/agradecimento')
+      navigate("/agradecimento");
     } catch (err) {
       setStatus("error");
       setMessage("Falha de rede. Verifique sua conexão e tente novamente.");
@@ -190,36 +209,48 @@ const FormSection = () => {
   };
 
   return (
-    <section className="pt-10 text-center" id="form">
-      <h2 className="font-bebas text-8xl text-white">Save the date</h2>
+    <section
+      id="form"
+      className="
+        relative pt-10 text-center
+        bg-[url('/bg-form-section.png')] bg-cover bg-center bg-no-repeat
+        w-full overflow-hidden
+        after:absolute after:inset-0 after:content-[''] after:bg-black after:opacity-[0.70]
+      "
+    >
+      {/* decoração girando */}
+      <motion.div
+        className="
+          absolute top-20 left-[25px]
+          w-[70px] h-[70px]
+          bg-[url('/vector-5.svg')] bg-cover bg-center bg-no-repeat
+          z-10 pointer-events-none
+        "
+        animate={{ rotate: 360 }}
+        transition={{ repeat: Infinity, duration: 14, ease: "linear" }}
+      />
 
-      <div className="h-[250px] bg-cover bg-center bg-no-repeat flex items-center justify-center bg-[url('/background-form-section.png')]">
-        <img
-          className="w-[80%] max-w-[700px]"
-          src="/logo-dsx-form.svg"
-          alt="logo-dsx"
-        />
+      <img className="relative z-20 mx-auto w-[350px]" src="/save-the-date.svg" alt="savedate" />
+
+      <div className="relative z-20 flex items-center justify-center">
+        <img className="ml-24 w-[250px]" src="/dsx2026main.png" alt="logo-dsx" />
       </div>
 
-      <h4 className="mt-10 text-white text-4xl font-bebas">
+      <h4 className="relative z-20 mt-10 text-white text-4xl font-bebas">
         Entre na lista antecipada e saia na frente
       </h4>
 
       <form
         onSubmit={handleSubmit}
-        className="relative grid grid-cols-1 md:grid-cols-2 gap-4 py-10 w-[90%] max-w-[800px] mx-auto"
+        className="relative z-20 grid grid-cols-1 md:grid-cols-2 gap-4 py-10 w-[90%] max-w-[800px] mx-auto"
       >
-        <div className="pointer-events-none absolute -top-20 right-200 w-150 h-150 bg-[url('/Ellipse-form.png')] bg-no-repeat bg-contain opacity-100" />
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full col-span-1 md:col-span-2 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full md:col-span-2">
           <input
             className="p-3 text-white bg-transparent border border-white rounded-md placeholder-white/70 focus:outline-none focus:border-[#F5A205] transition w-full"
             type="text"
             placeholder="Nome completo:"
             value={form.name}
-            onChange={(e) =>
-              setForm((p) => ({ ...p, name: e.target.value }))
-            }
+            onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
             autoComplete="name"
           />
 
@@ -238,9 +269,7 @@ const FormSection = () => {
             type="email"
             placeholder="E-mail:"
             value={form.email}
-            onChange={(e) =>
-              setForm((p) => ({ ...p, email: e.target.value }))
-            }
+            onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
             autoComplete="email"
           />
 
@@ -249,38 +278,25 @@ const FormSection = () => {
             type="text"
             placeholder="Empresa:"
             value={form.company}
-            onChange={(e) =>
-              setForm((p) => ({ ...p, company: e.target.value }))
-            }
+            onChange={(e) => setForm((p) => ({ ...p, company: e.target.value }))}
             autoComplete="organization"
           />
 
           {(status === "success" || status === "error") && (
             <div className="md:col-span-2">
-              <p
-                className={`text-sm ${
-                  status === "success"
-                    ? "text-green-300"
-                    : "text-red-300"
-                }`}
-              >
+              <p className={`text-sm ${status === "success" ? "text-green-300" : "text-red-300"}`}>
                 {message}
               </p>
             </div>
           )}
 
+          {/* ✅ substitui o botão padrão pelo FormButton */}
           <div className="pt-8 flex justify-center items-center md:col-span-2">
-            <button
-              type="submit"
+            <FormButton
+              titulo={status === "loading" ? "Enviando..." : "Enviar"}
+              textColor="#000"
               disabled={!canSubmit}
-              className={`font-roboto text-black font-bold bg-[#F5A205] px-8 py-2 rounded-3xl uppercase transition ${
-                !canSubmit
-                  ? "opacity-60 cursor-not-allowed"
-                  : "hover:opacity-95"
-              }`}
-            >
-              {status === "loading" ? "Enviando..." : "Enviar"}
-            </button>
+            />
           </div>
         </div>
       </form>
