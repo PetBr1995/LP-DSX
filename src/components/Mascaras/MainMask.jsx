@@ -22,7 +22,7 @@ const MainMask = ({ titulo, textColor, backgroundColor }) => {
           style={{'--afterBackground':backgroundColor}}
       >
         <div className="flex justify-center items-center rounded-[14px] w-[200px] h-10" style={{backgroundColor:backgroundColor}}>
-          <p className="uppercase text-[14px] font-bold" style={{ color: textColor }}>{titulo}</p>
+          <p className="uppercase text-[13px] font-bold" style={{ color: textColor }}>{titulo}</p>
         </div>
       </div>
 

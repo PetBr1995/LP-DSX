@@ -29,7 +29,7 @@ const SlidePalestrantes = () => {
         que marcaram presença na edição de 2025
       </h5>
 
-      <div className="my-10 max-w-6xl mx-auto px-4">
+      <div className="my-10 max-w-7xl mx-auto px-4">
         <Swiper
           spaceBetween={16}
           slidesPerView={"auto"}
@@ -66,7 +66,7 @@ const SlidePalestrantes = () => {
         </Swiper>
       </div>
 
-      <div className="flex justify-center items-center py-4">
+      <div className="flex justify-center items-center pb-12">
         <CTAButton titulo="Ver todos" link="/palestrantes" />
       </div>
     </section>
