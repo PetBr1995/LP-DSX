@@ -13,7 +13,7 @@ import HeroSectionLoading from "../components/HeroSectionLoading";
 
 const Home = () => {
   const [showTimerHeader, setShowTimerHeader] = useState(false);
-
+  
   useEffect(() => {
     const onScroll = () => {
       setShowTimerHeader(window.scrollY > 50); // ajuste fino aqui
