@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import useScrollToHash from "../hooks/useScrollToHash";
 
 import ContentSection from "../components/ContentSection";
 import DsxConsolidation from "../components/DscConsolidation";
@@ -9,16 +10,15 @@ import HeroSection from "../components/HeroSection";
 import NewTimerHeader from "../components/NewTimerHeader";
 import SecondSection from "../components/SecondSection";
 import SlidePalestrantes from "../components/SlidePalestrantes";
-import HeroSectionLoading from "../components/HeroSectionLoading";
 
 const Home = () => {
   const [showTimerHeader, setShowTimerHeader] = useState(false);
-  
-  useEffect(() => {
-    const onScroll = () => {
-      setShowTimerHeader(window.scrollY > 50); // ajuste fino aqui
-    };
 
+  // ✅ garante scroll ao chegar com /#form, /#faleconosco etc.
+  useScrollToHash(90); // 90px = altura do header (ajuste)
+
+  useEffect(() => {
+    const onScroll = () => setShowTimerHeader(window.scrollY > 50);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -26,7 +26,7 @@ const Home = () => {
 
   return (
     <section id="home" className="bg-black pb-43 md:pb-18 overflow-x-hidden">
-      <HeroSection/>
+      <HeroSection />
 
       <NewTimerHeader isVisible={showTimerHeader} />
 
