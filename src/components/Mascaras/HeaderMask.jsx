@@ -1,7 +1,7 @@
-const HeaderMask = ({ titulo, textColor, backgroundColor, link }) => {
+const HeaderMask = ({ titulo, textColor, backgroundColor, link, target }) => {
     return (
         <>
-            <a href={link}>
+            <a href={link} target={target}>
                 <section className="font-jamjuree relative z-10 flex justify-center items-center">
                     {/* ESQUERDA */}
                     <div

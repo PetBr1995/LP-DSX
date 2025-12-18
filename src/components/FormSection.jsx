@@ -135,7 +135,8 @@ const FormSection = () => {
     return e;
   }, [form]);
 
-  const canSubmit = Object.keys(errors).length === 0 && status !== "loading";
+  const canSubmit = status !== "loading";
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {

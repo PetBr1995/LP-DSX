@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Player from "@vimeo/player";
 import Header from "./Header";
 
-const HeroSection = () => {
+const HeroSectionLoading = () => {
   const [showHeader, setShowHeader] = useState(false);
   const [videoStarted, setVideoStarted] = useState(false);
   const iframeRef = useRef(null);
@@ -21,11 +21,11 @@ const HeroSection = () => {
 
     const onPlay = () => setVideoStarted(true);
 
-    // libera só quando começou a tocar (primeiro frame)
+    // ✅ só libera quando o vídeo realmente iniciar
     player.on("play", onPlay);
 
-    // fallback: se der erro, mantém poster (não libera vídeo)
-    player.on("error", () => setVideoStarted(false));
+    // fallback: não deixa travado pra sempre
+    player.on("error", () => setVideoStarted(true));
 
     return () => {
       player.off("play", onPlay);
@@ -35,6 +35,30 @@ const HeroSection = () => {
 
   return (
     <>
+      {/* OVERLAY FULLSCREEN (loading) */}
+      <div
+        className={`
+          fixed inset-0 z-[9999] flex items-center justify-center
+          bg-[url('/background-banner-2.png')] bg-cover bg-center bg-no-repeat
+          transition-opacity duration-700
+          ${videoStarted ? "opacity-0 pointer-events-none" : "opacity-100"}
+        `}
+      >
+        <div className="relative z-10 flex flex-col items-center gap-4">
+          <div className="relative w-[180px] h-[180px]">
+            <img
+              src="/loading-vector.svg"
+              alt="loading"
+              className="absolute inset-0 w-full h-full animate-spin [animation-duration:7s]"
+            />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <img src="/logo-dsx-loading.svg" alt="logo-loading" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* HEADER (pode ficar por baixo do overlay até iniciar) */}
       <Header
         className={`
           transition-all duration-400 ease-out
@@ -46,6 +70,7 @@ const HeroSection = () => {
         `}
       />
 
+      {/* HERO com Poster + fade */}
       <section className="relative w-full pb-[56%] overflow-hidden bg-black">
         {/* VÍDEO (entra com fade) */}
         <iframe
@@ -61,7 +86,7 @@ const HeroSection = () => {
 
         {/* POSTER (some com fade quando o vídeo começar) */}
         <img
-          src="/hero-banner.png"
+          src="/hero-poster.jpg"
           alt=""
           className={`
             absolute inset-0 w-full h-full object-cover
@@ -70,7 +95,7 @@ const HeroSection = () => {
           `}
         />
 
-        {/* (Opcional) acabamento com gradiente */}
+        {/* acabamento opcional */}
         <div className="absolute inset-0 bg-black/10" />
 
         <div className="relative z-10" />
@@ -79,4 +104,4 @@ const HeroSection = () => {
   );
 };
 
-export default HeroSection;
+export default HeroSectionLoading;

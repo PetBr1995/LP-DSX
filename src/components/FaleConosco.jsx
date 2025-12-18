@@ -99,6 +99,7 @@ const FaleConosco = () => {
             titulo="seja patrocinador"
             textColor="#ffffff"
             link="https://wa.me/5592991112802"
+            target="_blank"
           />
         </div>
       </div>

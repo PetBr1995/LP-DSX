@@ -9,6 +9,7 @@ import HeroSection from "../components/HeroSection";
 import NewTimerHeader from "../components/NewTimerHeader";
 import SecondSection from "../components/SecondSection";
 import SlidePalestrantes from "../components/SlidePalestrantes";
+import HeroSectionLoading from "../components/HeroSectionLoading";
 
 const Home = () => {
   const [showTimerHeader, setShowTimerHeader] = useState(false);
@@ -25,7 +26,7 @@ const Home = () => {
 
   return (
     <section id="home" className="bg-black pb-43 md:pb-18 overflow-x-hidden">
-      <HeroSection />
+      <HeroSection/>
 
       <NewTimerHeader isVisible={showTimerHeader} />
 

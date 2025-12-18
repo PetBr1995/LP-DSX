@@ -10,26 +10,28 @@ const containerVariants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: { staggerChildren: 0.08, delayChildren: 0.12 },
+    transition: {
+      staggerChildren: 0.04, // mais rápido
+    },
   },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 18, scale: 0.98 },
+  hidden: { opacity: 0, y: 10, scale: 0.99 },
   show: {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { duration: 0.55, ease: "easeOut" },
+    transition: { duration: 0.35, ease: "easeOut" },
   },
 };
 
 const titleVariants = {
-  hidden: { opacity: 0, y: 18 },
+  hidden: { opacity: 0, y: 10 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
+    transition: { duration: 0.35, ease: "easeOut" },
   },
 };
 
@@ -51,17 +53,29 @@ const Palestrantes = () => {
     };
   }, []);
 
-  // ✅ Desktop: whileInView | Mobile: fade no mount
-  const motionProps = isDesktop
+  // Desktop: whileInView | Mobile: fade no mount
+  // ✅ removido margin negativo e amount menor (corrige o "não anima" entre 768–920px)
+  const titleMotionProps = isDesktop
     ? {
-      initial: "hidden",
-      whileInView: "show",
-      viewport: { once: true, amount: 0.2, margin: "0px 0px -20% 0px" },
-    }
+        initial: "hidden",
+        whileInView: "show",
+        viewport: { once: true, amount: 0.2 },
+      }
     : {
-      initial: "hidden",
-      animate: "show",
-    };
+        initial: "hidden",
+        animate: "show",
+      };
+
+  const gridMotionProps = isDesktop
+    ? {
+        initial: "hidden",
+        whileInView: "show",
+        viewport: { once: true, amount: 0.08 }, // dispara mais fácil
+      }
+    : {
+        initial: "hidden",
+        animate: "show",
+      };
 
   return (
     <>
@@ -69,13 +83,23 @@ const Palestrantes = () => {
         <div className="max-w-(--largura) mx-auto">
           <Header />
 
+          {/* Se você usa esse componente, pode manter aqui */}
+          {/* <TimerHeaderPalestrantes /> */}
+
           {/* Título */}
-        
-          <motion.h3 className="mt-30 md:mt-20 pt-20 text-white text-center uppercase text-4xl font-anton" variants={titleVariants}
-            {...motionProps}>
+          <motion.h3
+            className="mt-30 md:mt-20 pt-20 text-white text-center uppercase text-4xl font-anton"
+            variants={titleVariants}
+            {...titleMotionProps}
+          >
             Confira todos os palestrantes
           </motion.h3>
-          <motion.h5 className="pb-20 text-white font-jamjuree font-normal text-center uppercase font text-3xl" >
+
+          <motion.h5
+            className="pb-20 text-white font-jamjuree font-normal text-center uppercase text-3xl"
+            variants={titleVariants}
+            {...titleMotionProps}
+          >
             que marcaram presença na edição de 2025
           </motion.h5>
 
@@ -83,7 +107,7 @@ const Palestrantes = () => {
           <motion.div
             className="flex gap-3 justify-center items-center flex-wrap"
             variants={containerVariants}
-            {...motionProps}
+            {...gridMotionProps}
           >
             {InfoPalestrantesNacionais.map((inf, index) => (
               <motion.div
@@ -122,7 +146,7 @@ const Palestrantes = () => {
           <motion.h3
             className="pt-10 pb-10 text-center font-bebas text-4xl text-white"
             variants={titleVariants}
-            {...motionProps}
+            {...titleMotionProps}
           >
             Regionais
           </motion.h3>
@@ -131,7 +155,7 @@ const Palestrantes = () => {
           <motion.div
             className="flex gap-3 justify-center items-center flex-wrap"
             variants={containerVariants}
-            {...motionProps}
+            {...gridMotionProps}
           >
             {InfoPalestrantesRegionais.map((inf, index) => (
               <motion.div
