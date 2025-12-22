@@ -216,7 +216,7 @@ const FormSection = () => {
         relative pt-10 text-center
         bg-[url('/bg-form-section.png')] bg-cover bg-center bg-no-repeat
         w-full overflow-hidden
-        after:absolute after:inset-0 after:content-[''] after:bg-black after:opacity-[0.70]
+        after:absolute after:inset-0 after:content-[''] after:bg-black after:opacity-[0.80]
       "
     >
       {/* decoração girando */}
@@ -224,14 +224,15 @@ const FormSection = () => {
         className="
           absolute top-20 left-[25px]
           w-[70px] h-[70px]
-          bg-[url('/vector-5.svg')] bg-cover bg-center bg-no-repeat
+          bg-[url('/vector-12.svg')] bg-cover bg-center bg-no-repeat
           z-10 pointer-events-none
         "
         animate={{ rotate: 360 }}
         transition={{ repeat: Infinity, duration: 14, ease: "linear" }}
       />
-
+      {/*
       <img className="relative z-20 mx-auto w-[350px]" src="/save-the-date.svg" alt="savedate" />
+       */}
 
       <div className="relative z-20 flex items-center justify-center">
         <img className="ml-24 w-[250px]" src="/dsx2026main.png" alt="logo-dsx" />

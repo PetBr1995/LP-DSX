@@ -41,7 +41,7 @@
 .faixa-track {
   display: flex;
   width: max-content;
-  animation: faixa-marquee 45s linear infinite;
+  animation: faixa-marquee 40s linear infinite;
 }
 
 @keyframes faixa-marquee {
@@ -124,3 +124,6 @@
   scrollbar-width: thin;
   scrollbar-color: #f5a205 #0b0b0b;
 }
+
+
+

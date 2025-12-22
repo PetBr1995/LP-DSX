@@ -4,98 +4,65 @@ import { motion } from "framer-motion";
 const FaleConosco = () => {
 
 
-  
+  const cardInf = [
+    {
+      titulo: "Presença de marca",
+      img: "/thumb_card_1.png"
+    },
+    {
+      titulo: "Negócios gerados",
+      img: "/thumb_card_2.png"
+    },
+    {
+      titulo: "Conexões estratégicas",
+      img: "/thumb_card_3.png"
+    },
+    {
+      titulo: "Visibilidade integrada",
+      img: "/thumb_card_4.png"
+    },
+  ]
   return (
+
+
     <section
       id="faleconosco"
       className="
           relative
           bg-cover 
           bg-center 
-          bg-black 
+          bg-black
+          bg-[url('/banner-patrocinador.png')]
+          bg-cover
+          bg-no-repeat
+          bg-center 
           py-15
-
-          after:absolute
-          after:content-['']
-          after:top-0
-          after:right-0
-          after:w-[100px]
-          after:h-[100px]
-          after:bg-[url('/vector-6.svg')]
-          after:bg-cover
-          after:bg-center
-          after:bg-no-repeat
-
-          before:absolute
-          before:content-['']
-          before:bottom-0
-          before:left-0
-          before:w-[130px]
-          before:h-[120px]
-          before:bg-[url('/vector-7.svg')]
-          before:bg-cover
-          before:bg-center
-          before:bg-no-repeat
         "
     >
       {/* Overlay */}
-  
+
 
       {/* Conteúdo */}
       <div className="relative z-10">
-        {/* “after” (vector-8) girando para um lado */}
-        <motion.div
-          className="
-      absolute
-      -top-10
-      right-40
-      w-[80px]
-      h-[80px]
-      bg-[url('/vector-8.svg')]
-      bg-cover
-      bg-center
-      bg-no-repeat
-      pointer-events-none
-      z-10
-    "
-          animate={{ rotate: 360 }}
-          transition={{
-            repeat: Infinity,
-            duration: 14,
-            ease: "linear",
-          }}
-        />
-
-        {/* “before” (vector-9) girando para o outro lado */}
-        <motion.div
-          className="
-      absolute
-      bottom-10
-      left-40
-      w-[80px]
-      h-[80px]
-      bg-[url('/vector-9.svg')]
-      bg-cover
-      bg-center
-      bg-no-repeat
-      pointer-events-none
-      z-10
-    "
-          animate={{ rotate: -360 }}
-          transition={{
-            repeat: Infinity,
-            duration: 16,
-            ease: "linear",
-          }}
-        />
 
         <h3 className="relative z-20 font-anton uppercase pb-6 text-white font-bebas text-5xl text-center">
-          Coloque sua marca em<br /> evidência no DSX 2026
+          Seja um patrocinador ou expositor <br /> no DSX 2026
         </h3>
 
         <p className="relative z-20 font-jamjuree text-center text-[#F5D247] text-xl uppercase">
-          o maior evento de Negócios, Marketing,<br /> Vendas e Inovação do norte
+          Como as empresas que escolheram estar na 1ª edição.
         </p>
+        <div className="py-4 px-4 max-w-7xl mx-auto grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {cardInf.map((item) => (
+            <div key={item.titulo} className="mx-auto">
+              <img src={item.img} alt="image" />
+              <h4 className="text-center text-white font-jamjuree uppercase">
+                {item.titulo}
+              </h4>
+            </div>
+          ))}
+        </div>
+
 
         <div className="relative z-20 py-10 flex justify-center items-center">
           <HeaderMask

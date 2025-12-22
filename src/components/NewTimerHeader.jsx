@@ -43,7 +43,6 @@ const NewTimerHeader = ({ isVisible }) => {
 
           sm:flex-row
           sm:gap-4
-          sm:justify-between
         "
       >
         {/* Esquerda: texto */}
@@ -62,11 +61,13 @@ const NewTimerHeader = ({ isVisible }) => {
             className="scale-90 sm:scale-100"
           />
         </div>
-
         {/* Direita: CTA */}
+        {/*
+         
         <div className="relative z-50 w-full sm:w-auto flex justify-center sm:justify-end">
           <CTAButton titulo="Lista de espera 2026" link="/#form" />
         </div>
+          */}
       </div>
     </motion.section>
   );
