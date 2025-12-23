@@ -36,7 +36,9 @@ const FaleConosco = () => {
           bg-cover
           bg-no-repeat
           bg-center 
-          py-15
+          py-5
+          sm:py-10
+          md:py-15
         "
     >
       {/* Overlay */}
@@ -45,7 +47,7 @@ const FaleConosco = () => {
       {/* Conteúdo */}
       <div className="relative z-10">
 
-        <h3 className="relative z-20 font-anton uppercase pb-6 text-white font-bebas text-5xl text-center">
+        <h3 className="relative z-20 font-anton uppercase pb-6 text-white font-bebas text-3xl md:text-5xl text-center">
           Seja um patrocinador ou expositor <br /> no DSX 2026
         </h3>
 
@@ -56,7 +58,7 @@ const FaleConosco = () => {
           {cardInf.map((item) => (
             <div key={item.titulo} className="mx-auto">
               <img src={item.img} alt="image" />
-              <h4 className="text-center text-white font-jamjuree uppercase">
+              <h4 className="text-center mt-5 text-white font-jamjuree uppercase">
                 {item.titulo}
               </h4>
             </div>

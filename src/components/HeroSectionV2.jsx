@@ -40,7 +40,7 @@ const HeroSectionV2 = () => {
                         alt="logo"
                         className="
               object-contain
-              h-24 sm:h-32 md:h-48 lg:h-56
+              h-30 sm:h-34 md:h-50 lg:h-56
               w-auto
             "
                     />
@@ -54,7 +54,7 @@ const HeroSectionV2 = () => {
                             className="
                 mb-3 font-jamjuree text-white uppercase font-extralight
                 tracking-[0.22em]
-                text-xs sm:text-sm md:text-lg lg:text-xl
+                text-xl
               "
                         >
                             o maior evento de
@@ -63,7 +63,7 @@ const HeroSectionV2 = () => {
                         <h4
                             className="
                 font-anton text-white uppercase font-normal tracking-wide
-                text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl
+                text-3xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl
                 leading-tight
               "
                         >
@@ -81,7 +81,7 @@ const HeroSectionV2 = () => {
                                     <h2
                                         className="
                             font-jamjuree text-[#12DB98] font-medium leading-none
-                            text-7xl sm:text-7xl md:text-5xl
+                            text-4xl sm:text-5xl md:text-5xl
                             whitespace-nowrap
                         "
                                     >

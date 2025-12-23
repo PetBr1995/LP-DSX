@@ -16,21 +16,22 @@ const NewTimerHeader = ({ isVisible }) => {
       shadow-[0_-8px_30px_rgba(0,0,0,0.2)]
       px-3 py-3
       pb-[calc(env(safe-area-inset-bottom)+12px)]
-      
       overflow-hidden
-  
+    
       after:absolute
       after:content-['']
+      after:hidden
+      sm:after:block
       after:-bottom-7
       after:right-0
       after:w-[100px]
-      after:sm:h-[100px]
       after:h-[100px]
       after:bg-[url('/vector-1.svg')]
       after:bg-no-repeat
       after:bg-contain
       after:z-[1]
     "
+
     >
 
       <div

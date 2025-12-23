@@ -235,7 +235,7 @@ const FormSection = () => {
        */}
 
       <div className="relative z-20 flex items-center justify-center">
-        <img className="ml-24 w-[250px]" src="/dsx2026main.png" alt="logo-dsx" />
+        <img className="ml-0 w-[250px]" src="/dsx2026main.png" alt="logo-dsx" />
       </div>
 
       <h4 className="relative z-20 mt-10 text-white text-4xl font-bebas">

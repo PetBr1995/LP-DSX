@@ -72,7 +72,7 @@ const Depoimentos = () => {
   }, [open])
 
   return (
-    <section className="bg-black text-center py-10 px-5">
+    <section className="bg-black text-center pb-10 px-5">
       <h2 className="font-anton text-white text-3xl sm:text-4xl uppercase">
         O DSX mudou o jogo para quem participou
       </h2>

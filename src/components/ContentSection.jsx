@@ -40,7 +40,7 @@ const ContentSection = () => {
   ]
 
   return (
-    <section className="relative py-12 overflow-hidden">
+    <section className="relative py-0 md:py-20 overflow-hidden">
       {/* Background decorativo */}
       <div className="pointer-events-none absolute top-0 left-0 h-40 w-60 bg-[url('/vector-3.svg')] bg-cover bg-no-repeat bg-center" />
 
