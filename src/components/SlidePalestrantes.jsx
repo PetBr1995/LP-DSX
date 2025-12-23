@@ -11,9 +11,29 @@ const SlidePalestrantes = () => {
       <div
         className="absolute inset-0 bg-white"
         style={{
-          clipPath: "polygon(100% 93%, 30% 93%, 23% 100%, 0% 100%, 0 0, 100% 0)",
+          // Quanto o efeito entra para dentro da tela (horizontal)
+          "--shift": "clamp(60px, 14vw, 260px)",
+
+          // Altura do recorte inferior
+          "--bottom": "clamp(18px, 3.5vw, 56px)",
+
+          // “quina” da ponta
+          "--kink": "clamp(16px, 2.5vw, 48px)",
+
+          clipPath:
+            `
+            polygon(
+              100% calc(100% - var(--bottom)),
+              calc(40% - var(--shift)) calc(100% - var(--bottom)),
+              calc(39% - (var(--shift) + var(--kink))) 100%,
+              0 100%,
+              0 0,
+              100% 0
+            )
+            `,
         }}
       />
+
 
       {/* Conteúdo por cima */}
       <div className="relative z-10 text-black pt-10 pb-20">

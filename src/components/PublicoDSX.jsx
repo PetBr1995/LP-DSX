@@ -31,9 +31,21 @@ const PublicoDSX = () => {
             <div
                 className="absolute inset-0 bg-white"
                 style={{
-                    clipPath: "polygon(81% 0, 100% 0, 100% 100%, 0 100%, 0 8%, 74% 8%)",
+                    // Largura da ponta (controla o 80% e o 69%)
+                    "--cut": "clamp(70px, 12vw, 220px)",
+
+                    // Altura do recorte do topo (controla o 4%)
+                    "--top": "clamp(18px, 3.5vw, 56px)",
+
+                    // “deltinha” entre 80% e 69% (no seu caso era 11% do width)
+                    "--kink": "clamp(18px, 3vw, 60px)",
+
+                    clipPath:
+                        "polygon(calc(80% - var(--cut)) 0, 100% 0, 100% 100%, 0 100%, 0 var(--top), calc(80% - (var(--cut) + var(--kink))) var(--top))",
                 }}
             />
+
+
 
             {/* Conteúdo da seção (fica por cima) */}
             <div className=" relative z-10 max-w-[1600px] mx-auto px-4 text-center py-10">
