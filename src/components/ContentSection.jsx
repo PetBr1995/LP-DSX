@@ -55,7 +55,7 @@ const ContentSection = () => {
       </div>
 
       {/* Cards com zig-zag irregular */}
-      <div className="mx-auto my-10 w-full max-w-[1100px] pt-8 px-4">
+      <div className="mx-auto my-0 md:my-12 w-full max-w-[1100px] px-4">
         <div className="relative min-h-[800px] md:min-h-[600px] flex flex-col justify-center items-center">
           {cardInfo.map((inf, index) => {
             // Posicionamento absoluto irregular inspirado na imagem
