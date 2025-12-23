@@ -46,7 +46,7 @@ const ContentSection = () => {
 
       {/* Título */}
       <div className="relative z-10 text-center uppercase text-white px-4">
-        <h3 className="font-bebas text-4xl sm:text-5xl">
+        <h3 className="pt-5 font-bebas text-4xl sm:text-5xl">
           Os conteúdos que marcaram o DSX 2025
         </h3>
         <h5 className="font-extralight text-2xl sm:text-3xl">
