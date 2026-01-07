@@ -29,8 +29,8 @@ const ContentSection = () => {
     },
     {
       icon: '/vector-5.svg',
-      cartTitle: 'Planejamento Estratégico',
-      cardDesc: 'Trace metas sólidas e transforme suas ideias em ações concretas.',
+      cartTitle: 'Inteligência Artificial',
+      cardDesc: 'Como vantagem estratégica para otimizar criativos em escala, elevar a produtividade, conectar funis e automações com decisões orientadas por dados.',
     },
     {
       icon: '/vector-17.svg',

@@ -1,5 +1,5 @@
 import CTAButton from './Mascaras/CTAButton'
-
+import { motion } from "framer-motion"
 const HeroSectionV2 = () => {
     const cardItens = [
         {
@@ -34,7 +34,7 @@ const HeroSectionV2 = () => {
         "
             >
                 {/* Logo: ao lado em telas maiores, acima em mobile */}
-                <div className="flex-shrink-0">
+                <div className="flex-shrink-0" initial={{ scale: 0 }} animate={{ scale: 1 }} >
                     <img
                         src="/dsx-2026-logo.png"
                         alt="logo"
