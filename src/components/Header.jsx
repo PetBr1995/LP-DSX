@@ -43,7 +43,7 @@ const Header = ({ className = "" }) => {
             titulo="Seja patrocinador"
             textColor="#ffffff"
             backgroundColor="#000000"
-            link="/#faleconosco"
+            link="/patrocinador"
           />
           <CTAButton titulo="Lista de espera 2026" link="/#form" />
         </div>
@@ -95,7 +95,7 @@ const Header = ({ className = "" }) => {
             titulo="Seja patrocinador"
             textColor="#ffffff"
             backgroundColor="#000000"
-            link="#faleconosco"
+            link="/patrocinador"
           />
           <CTAButton
             titulo="Lista de espera 2026"
