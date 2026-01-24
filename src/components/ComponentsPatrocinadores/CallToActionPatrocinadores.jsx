@@ -55,7 +55,7 @@ const CallToActionPatrocinadores = () => {
              E GARANTA PRESENÇA E NETWORK
           </h2>
   
-          <p className="mt-4 text-white max-w-xl">
+          <p className="mt-4 text-white max-w-xl text-2xl">
             Escolha agora os espaços mais estratégicos para posicionar sua marca no
             evento.
           </p>
