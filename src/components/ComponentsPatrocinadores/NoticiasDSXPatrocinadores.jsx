@@ -159,7 +159,6 @@ const NoticiasDSXPatrocinadores = () => {
                               bg-[#044994]
                               shadow-lg shadow-black/30
                               transition-transform duration-300
-                              
                               focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30
                             "
                           >
@@ -185,7 +184,11 @@ const NoticiasDSXPatrocinadores = () => {
                                   <span>{formatDate(noticia.date)}</span>
                                 )}
                                 <span>•</span>
-                                <span>{readTime(noticia?.content?.rendered || excerpt)}</span>
+                                <span>
+                                  {readTime(
+                                    noticia?.content?.rendered || excerpt
+                                  )}
+                                </span>
                               </div>
 
                               <div className="mt-3 overflow-hidden rounded-xl">
@@ -214,11 +217,14 @@ const NoticiasDSXPatrocinadores = () => {
                                 Crédito: João Bregmoli
                               </p>
 
+                              {/* 🔥 DESCRIÇÃO AJUSTADA */}
                               <div
-                                className="mt-3 text-[11.5px] leading-relaxed text-slate-700 line-clamp-5 flex-1"
+                                className="
+                                  mt-3 text-[13px] leading-relaxed
+                                  text-slate-700 line-clamp-3
+                                "
                                 dangerouslySetInnerHTML={{ __html: excerpt }}
                               />
-
                             </div>
                           </a>
                         </SwiperSlide>
