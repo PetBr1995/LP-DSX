@@ -45,7 +45,7 @@ const CallToActionPatrocinadores = () => {
   
         {/* Conteúdo */}
         <div className="relative z-10 max-w-7xl mx-auto px-4">
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-6 flex-wrap">
             <img src="/logo-dsx-horizontal.svg" alt="logo DSX" />
             <img src="/data-dsx.svg" alt="data DSX" />
           </div>
