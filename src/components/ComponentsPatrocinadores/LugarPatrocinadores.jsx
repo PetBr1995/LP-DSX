@@ -1,5 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 
+// ✅ ajuste o caminho conforme sua estrutura
+import FormPatrocinadores from "./FormPatrocinadores";
+
 const LugarPatrocinadores = () => {
   const cardInfo = [
     {
@@ -22,8 +25,12 @@ const LugarPatrocinadores = () => {
     },
   ];
 
+  // Modal vídeos
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(null);
+
+  // Modal patrocínio
+  const [isSponsorModalOpen, setIsSponsorModalOpen] = useState(false);
 
   // Converte vimeo.com/ID -> player.vimeo.com/video/ID (mantendo querystring)
   const toVimeoEmbed = (url) => {
@@ -49,17 +56,23 @@ const LugarPatrocinadores = () => {
     return toVimeoEmbed(active.video);
   }, [active]);
 
-  const closeModal = () => {
+  const closeVideoModal = () => {
     setOpen(false);
     setTimeout(() => setActive(null), 150);
   };
 
+  // ✅ ESC: fecha o modal que estiver aberto (prioriza vídeo)
   useEffect(() => {
     const onKeyDown = (e) => {
-      if (e.key === "Escape") closeModal();
+      if (e.key === "Escape") {
+        if (open) closeVideoModal();
+        else if (isSponsorModalOpen) setIsSponsorModalOpen(false);
+      }
     };
 
-    if (open) {
+    const anyModalOpen = open || isSponsorModalOpen;
+
+    if (anyModalOpen) {
       document.body.style.overflow = "hidden";
       window.addEventListener("keydown", onKeyDown);
     }
@@ -69,7 +82,7 @@ const LugarPatrocinadores = () => {
       window.removeEventListener("keydown", onKeyDown);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open]);
+  }, [open, isSponsorModalOpen]);
 
   return (
     <section
@@ -155,20 +168,14 @@ const LugarPatrocinadores = () => {
                   </div>
                 </div>
               </div>
-
-              {/* (Opcional) Texto do card - você tinha desc no array, se quiser exibir */}
-              {/* <div className="mt-4">
-                <h3 className="font-anton uppercase text-xl">{item.titulo}</h3>
-                <p className="mt-2 text-white/70 text-sm">{item.desc}</p>
-              </div> */}
             </button>
           ))}
         </div>
 
-        {/* MODAL */}
+        {/* MODAL VÍDEO */}
         {open && (
           <div className="fixed inset-0 z-50" aria-modal="true" role="dialog">
-            <div className="absolute inset-0 bg-black/70" onClick={closeModal} />
+            <div className="absolute inset-0 bg-black/70" onClick={closeVideoModal} />
 
             <div className="relative mx-auto flex min-h-screen max-w-5xl items-center justify-center p-4">
               <div className="relative w-full rounded-xl bg-[#0b0f14] border border-white/10 shadow-xl overflow-hidden">
@@ -179,7 +186,7 @@ const LugarPatrocinadores = () => {
 
                   <button
                     type="button"
-                    onClick={closeModal}
+                    onClick={closeVideoModal}
                     className="
                       text-white/80 hover:text-white transition p-2
                       focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 rounded-md
@@ -211,6 +218,7 @@ const LugarPatrocinadores = () => {
         {/* CTA */}
         <button
           type="button"
+          onClick={() => setIsSponsorModalOpen(true)}
           className="
             h-11 px-6 rounded-xl
             bg-gradient-to-r from-[#913DE3] via-[#A83EAA] to-[#C34484]
@@ -225,6 +233,55 @@ const LugarPatrocinadores = () => {
           Quero patrocinar
         </button>
       </div>
+
+      {/* ✅ MODAL PATROCÍNIO */}
+      {isSponsorModalOpen && (
+        <div
+          className="fixed inset-0 z-[999] bg-black/70 backdrop-blur-[2px] flex items-center justify-center px-4"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Formulário de Patrocínio"
+          onMouseDown={(e) => {
+            // fecha clicando fora
+            if (e.target === e.currentTarget) setIsSponsorModalOpen(false);
+          }}
+        >
+          <div className="relative w-full max-w-xl">
+            {/* botão fechar */}
+            <button
+              type="button"
+              onClick={() => setIsSponsorModalOpen(false)}
+              className="
+                absolute -top-3 -right-3
+                w-10 h-10 rounded-full
+                bg-white text-black
+                shadow-lg
+                grid place-items-center
+                hover:scale-105 transition
+              "
+              aria-label="Fechar"
+            >
+              ✕
+            </button>
+
+            {/* conteúdo */}
+            <div className="rounded-2xl overflow-hidden">
+              <div className="bg-white px-6 pt-6">
+                <h3 className="text-xl font-bold text-slate-900">
+                  Quero patrocinar o DSX 2026
+                </h3>
+                <p className="text-sm text-slate-600 mt-1">
+                  Preencha os dados e nossa equipe entra em contato.
+                </p>
+              </div>
+
+              <div className="bg-white px-6 pb-6 pt-4">
+                <FormPatrocinadores />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

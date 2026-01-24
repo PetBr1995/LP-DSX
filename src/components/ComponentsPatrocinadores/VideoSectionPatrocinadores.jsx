@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import Player from "@vimeo/player";
-import { img } from "framer-motion/client";
 
+// ✅ ajuste o path conforme sua estrutura
+import FormPatrocinadores from "./FormPatrocinadores";
 
 const VideoSectionPatrocinadores = () => {
   const iframeRef = useRef(null);
@@ -9,6 +10,9 @@ const VideoSectionPatrocinadores = () => {
 
   const [isReady, setIsReady] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+
+  // ✅ modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     if (!iframeRef.current) return;
@@ -37,18 +41,35 @@ const VideoSectionPatrocinadores = () => {
     };
   }, []);
 
+  // ✅ trava scroll e fecha com ESC
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") setIsModalOpen(false);
+    };
+
+    if (isModalOpen) {
+      document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", onKeyDown);
+    } else {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKeyDown);
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [isModalOpen]);
+
   const handleStart = async () => {
     try {
       const player = playerRef.current;
       if (!player) return;
 
-      // Se você quiser COM SOM, precisa ser por clique (ok)
       await player.setMuted(false).catch(() => {});
       await player.setVolume(1).catch(() => {});
-
       await player.play();
     } catch (e) {
-      // se o navegador barrar, tenta mutado (quase sempre vai)
       try {
         const player = playerRef.current;
         if (!player) return;
@@ -96,10 +117,11 @@ const VideoSectionPatrocinadores = () => {
           )}
         </div>
 
-        {/* Botão de patrocínio (se quiser manter separado do play) */}
+        {/* Botão de patrocínio */}
         <div className="flex justify-center">
           <button
             type="button"
+            onClick={() => setIsModalOpen(true)}
             className="
               cursor-pointer
               h-11 px-6 rounded-xl
@@ -115,6 +137,57 @@ const VideoSectionPatrocinadores = () => {
           </button>
         </div>
       </div>
+
+      {/* ✅ MODAL */}
+      {isModalOpen && (
+        <div
+          className="fixed inset-0 z-[999] bg-black/70 backdrop-blur-[2px] flex items-center justify-center px-4"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Formulário de Patrocínio"
+          onMouseDown={(e) => {
+            // fecha clicando fora
+            if (e.target === e.currentTarget) setIsModalOpen(false);
+          }}
+        >
+          <div className="relative w-full max-w-xl">
+            {/* botão fechar */}
+            <button
+              type="button"
+              onClick={() => setIsModalOpen(false)}
+              className="
+                absolute -top-3 -right-3
+                w-10 h-10 rounded-full
+                bg-white text-black
+                shadow-lg
+                grid place-items-center
+                hover:scale-105 transition
+              "
+              aria-label="Fechar"
+            >
+              ✕
+            </button>
+
+            {/* conteúdo */}
+            <div className="rounded-2xl overflow-hidden">
+              {/* Opcional: header */}
+              <div className="bg-white px-6 pt-6">
+                <h3 className="text-xl font-bold text-slate-900">
+                  Quero patrocinar o DSX 2026
+                </h3>
+                <p className="text-sm text-slate-600 mt-1">
+                  Preencha os dados e nossa equipe entra em contato.
+                </p>
+              </div>
+
+              {/* Form */}
+              <div className="bg-white px-6 pb-6 pt-4">
+                <FormPatrocinadores />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
