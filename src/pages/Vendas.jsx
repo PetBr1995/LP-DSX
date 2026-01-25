@@ -1,6 +1,8 @@
 import HeroVendas from "../components/ComponentsVendas/HeroVendas";
 import SecondSectionVendas from "../components/ComponentsVendas/SecondSectionVendas";
 import CallToActionPatrocinadores from "../components/ComponentsPatrocinadores/CallToActionPatrocinadores";
+import Footer from "../components/Footer";
+import FormVendas from "../components/ComponentsVendas/FormVendas";
 const Vendas = () => {
   return (
     <>
@@ -8,6 +10,8 @@ const Vendas = () => {
         <HeroVendas />
         <SecondSectionVendas />
         <CallToActionPatrocinadores />
+        <FormVendas />
+        <Footer />
       </section>
     </>
   );
