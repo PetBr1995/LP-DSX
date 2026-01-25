@@ -31,8 +31,8 @@ const HeroVendas = () => {
             after:bg-[url('/vector-29.svg')]
             after:bg-no-repeat
             after:bg-contain
-            after:w-full
-            after:h-[300px]
+            after:w-200
+            after:h-200
             after:z-1
             "
     >
