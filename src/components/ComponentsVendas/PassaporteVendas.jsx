@@ -6,6 +6,7 @@ const PassaporteVendas = () => {
           Esteja onde os grandes nomes decidem o futuro dos negócios.
         </h2>
         <p>Sua experiência começa aqui</p>
+        <div></div>
       </section>
     </>
   );
