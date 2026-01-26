@@ -73,7 +73,9 @@ const Vendas = () => {
         <HeroVendas />
         <SecondSectionVendas />
         <ImpactoVendas />
+        {/* 
         <PassaporteVendas />
+        */}
         <CallToActionPatrocinadores />
         <FormVendas />
         <Footer />
