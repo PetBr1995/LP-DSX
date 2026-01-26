@@ -3,12 +3,14 @@ import SecondSectionVendas from "../components/ComponentsVendas/SecondSectionVen
 import CallToActionPatrocinadores from "../components/ComponentsPatrocinadores/CallToActionPatrocinadores";
 import Footer from "../components/Footer";
 import FormVendas from "../components/ComponentsVendas/FormVendas";
+import ImpactoVendas from "../components/ComponentsVendas/ImpactoVendas";
 const Vendas = () => {
   return (
     <>
       <section className="overflow-x-hidden">
         <HeroVendas />
         <SecondSectionVendas />
+        <ImpactoVendas />
         <CallToActionPatrocinadores />
         <FormVendas />
         <Footer />
