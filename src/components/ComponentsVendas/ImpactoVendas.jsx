@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 
 const ImpactoVendas = () => {
   const videos = [
@@ -18,6 +18,19 @@ const ImpactoVendas = () => {
 
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(null);
+
+  // 🔒 BLOQUEIA SCROLL QUANDO MODAL ABRE
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   // converter link vimeo normal em embed
   const toVimeoEmbed = (url) => {
@@ -43,12 +56,12 @@ const ImpactoVendas = () => {
   }, [active]);
 
   return (
-    <section className="py-12 bg-black relative before:absolute before:content-[''] before:bg-bottom-right before:bg-cover before:bg-[url(/fundo-impacto-section.png)] before:w-full before:h-full z-0 after:absolute after:content-[''] after:left-0 after:bottom-0 after:w-50 after:h-50 after:bg-cover after:bg-no-repeat after:bg-center after:bg-[url(/vector-30.svg)] z-0">
+    <section className="py-12 bg-black relative before:absolute before:content-[''] before:bg-bottom-right before:bg-cover before:bg-[url(/fundo-impacto-section.png)] before:w-full before:h-full after:absolute after:content-[''] after:left-0 after:bottom-0 after:w-50 after:h-50 after:bg-cover after:bg-no-repeat after:bg-center after:bg-[url(/vector-30.svg)] overflow-hidden">
       <h2 className="relative z-10 font-anton uppercase text-4xl sm:text-6xl text-white text-center">
         O jogo muda quando você entra no ambiente certo
       </h2>
 
-      <p className="text-white text-center uppercase text-xl mt-3 opacity-80">
+      <p className="relative z-10 text-white text-center uppercase text-xl mt-3 opacity-80">
         Confira como a 1ª edição impactou no mercado da Região Norte.
       </p>
 
@@ -65,7 +78,6 @@ const ImpactoVendas = () => {
           >
             {/* CARD VERTICAL */}
             <div className="aspect-[9/16] bg-gradient-to-b from-[#b08a00] to-[#3a2c00] relative">
-              {/* overlay */}
               <div className="absolute inset-0 bg-black/40 group-hover:bg-black/25 transition" />
 
               {/* PLAY */}
@@ -90,39 +102,39 @@ const ImpactoVendas = () => {
 
       {/* MODAL */}
       {open && (
-        <div className="fixed inset-0 z-50">
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center">
+          {/* BACKDROP */}
           <div
             className="absolute inset-0 bg-black/70"
             onClick={() => setOpen(false)}
           />
 
-          <div className="relative flex min-h-screen items-center justify-center p-4">
-            <div className="w-full max-w-4xl bg-black rounded-xl overflow-hidden">
-              <div className="flex justify-between items-center p-3 border-b border-white/10">
-                <span className="text-white uppercase font-anton">
-                  {active?.titulo}
-                </span>
+          {/* CONTAINER */}
+          <div className="relative z-10 w-full max-w-4xl mx-4 bg-black rounded-xl overflow-hidden">
+            <div className="flex justify-between items-center p-3 border-b border-white/10">
+              <span className="text-white uppercase font-anton">
+                {active?.titulo}
+              </span>
 
-                <button
-                  onClick={() => setOpen(false)}
-                  className="text-white text-xl"
-                >
-                  ✕
-                </button>
-              </div>
+              <button
+                onClick={() => setOpen(false)}
+                className="text-white text-xl hover:opacity-70 transition"
+              >
+                ✕
+              </button>
+            </div>
 
-              <div className="aspect-video">
-                {embedUrl && (
-                  <iframe
-                    src={embedUrl}
-                    className="w-full h-full"
-                    allow="autoplay; fullscreen"
-                    allowFullScreen
-                    frameBorder="0"
-                    title="Vídeo"
-                  />
-                )}
-              </div>
+            <div className="aspect-video bg-black">
+              {embedUrl && (
+                <iframe
+                  src={embedUrl}
+                  className="w-full h-full"
+                  allow="autoplay; fullscreen"
+                  allowFullScreen
+                  frameBorder="0"
+                  title="Vídeo"
+                />
+              )}
             </div>
           </div>
         </div>

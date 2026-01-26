@@ -4,6 +4,7 @@ import CallToActionPatrocinadores from "../components/ComponentsPatrocinadores/C
 import Footer from "../components/Footer";
 import FormVendas from "../components/ComponentsVendas/FormVendas";
 import ImpactoVendas from "../components/ComponentsVendas/ImpactoVendas";
+import PassaporteVendas from "../components/ComponentsVendas/PassaporteVendas";
 const Vendas = () => {
   return (
     <>
@@ -11,6 +12,7 @@ const Vendas = () => {
         <HeroVendas />
         <SecondSectionVendas />
         <ImpactoVendas />
+        <PassaporteVendas />
         <CallToActionPatrocinadores />
         <FormVendas />
         <Footer />
