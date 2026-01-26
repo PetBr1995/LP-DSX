@@ -19,7 +19,7 @@ const HeroVendas = () => {
   return (
     <section
       className="
-            relative h-screen
+            relative pt-10 sm:pt-20 md:pt-30
             bg-[url('/Banner-vendas-hero.png')]
             bg-center bg-cover bg-no-repeat
 
