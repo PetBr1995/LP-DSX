@@ -11,7 +11,7 @@ const ImpactoVendas = () => {
   const [active, setActive] = useState(null);
   const [thumbs, setThumbs] = useState({});
 
-  // 🔒 BLOQUEIA SCROLL QUANDO MODAL ABRE
+  // 🔒 Bloqueia scroll quando modal abre
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => {
@@ -62,9 +62,7 @@ const ImpactoVendas = () => {
         const results = await Promise.all(
           missing.map(async (v) => {
             const res = await fetch(
-              `https://vimeo.com/api/oembed.json?url=${encodeURIComponent(
-                v.video
-              )}`
+              `https://vimeo.com/api/oembed.json?url=${encodeURIComponent(v.video)}`
             );
             if (!res.ok) throw new Error("oEmbed error");
             const data = await res.json();
@@ -93,15 +91,17 @@ const ImpactoVendas = () => {
   }, [videos, thumbs]);
 
   return (
-    <section className="py-12 bg-black relative overflow-hidden
+    <section
+      className="py-12 bg-black relative overflow-hidden
       before:absolute before:inset-0 before:bg-bottom-right before:bg-cover before:bg-[url(/fundo-impacto-section.png)]
       after:absolute after:left-0 after:bottom-0 after:w-50 after:h-50 after:bg-no-repeat after:bg-center after:bg-cover after:bg-[url(/vector-30.svg)]
-    ">
+    "
+    >
       <h2 className="relative z-10 font-anton uppercase text-4xl sm:text-6xl text-white text-center">
         O jogo muda quando você entra no ambiente certo
       </h2>
 
-      <p className="relative z-10 text-white text-center uppercase text-xl mt-3 opacity-80">
+      <p className="relative z-10 text-white text-center uppercase mt-3 opacity-80 font-extralight">
         Confira como a 1ª edição impactou no mercado da Região Norte.
       </p>
 
@@ -119,8 +119,8 @@ const ImpactoVendas = () => {
               }}
               className="group relative rounded-2xl overflow-hidden focus:outline-none"
             >
-              {/* CARD */}
-              <div className="aspect-[9/16] relative bg-black">
+              {/* CARD (quadrado no mobile) */}
+              <div className="relative bg-black aspect-square sm:aspect-[9/16]">
                 {thumb && (
                   <img
                     src={thumb}
@@ -155,7 +155,7 @@ const ImpactoVendas = () => {
         })}
       </div>
 
-      {/* MODAL */}
+      {/* MODAL (volta ao player 16:9 como antes) */}
       {open && (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center">
           <div

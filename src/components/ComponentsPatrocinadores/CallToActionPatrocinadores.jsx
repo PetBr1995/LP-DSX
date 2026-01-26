@@ -77,11 +77,11 @@ const CallToActionPatrocinadores = () => {
           <img src="/data-dsx.svg" alt="data DSX" />
         </div>
 
-        <h2 className="mt-8 font-anton text-white text-5xl max-w-3xl">
+        <h2 className="mt-8 font-anton text-white text-3xl sm:text-4xl md:text-5xl max-w-3xl">
           PATROCINE O DSX 2026 E GARANTA PRESENÇA E NETWORK
         </h2>
 
-        <p className="mt-4 text-white max-w-xl text-xl">
+        <p className="mt-4 text-white max-w-xl">
           Escolha agora os espaços mais estratégicos para posicionar sua marca no
           evento.
         </p>
