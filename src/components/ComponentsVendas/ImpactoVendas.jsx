@@ -2,37 +2,24 @@ import { useMemo, useState, useEffect } from "react";
 
 const ImpactoVendas = () => {
   const videos = [
-    {
-      titulo: "Participante",
-      video: "https://vimeo.com/1148163374?fl=ip&fe=ec",
-    },
-    {
-      titulo: "Participante",
-      video: "https://vimeo.com/1148163345?fl=ip&fe=ec",
-    },
-    {
-      titulo: "Participante",
-      video: "https://vimeo.com/1148163408?fl=ip&fe=ec",
-    },
+    { titulo: "Participante", video: "https://vimeo.com/1148163374?fl=ip&fe=ec" },
+    { titulo: "Participante", video: "https://vimeo.com/1148163345?fl=ip&fe=ec" },
+    { titulo: "Participante", video: "https://vimeo.com/1148163408?fl=ip&fe=ec" },
   ];
 
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(null);
+  const [thumbs, setThumbs] = useState({});
 
   // 🔒 BLOQUEIA SCROLL QUANDO MODAL ABRE
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-
+    document.body.style.overflow = open ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
   }, [open]);
 
-  // converter link vimeo normal em embed
+  // 🔗 Converte link do Vimeo em embed
   const toVimeoEmbed = (url) => {
     try {
       const u = new URL(url);
@@ -55,8 +42,61 @@ const ImpactoVendas = () => {
     return toVimeoEmbed(active.video);
   }, [active]);
 
+  // 🎯 Melhora qualidade da thumbnail do Vimeo
+  const improveVimeoThumb = (url) => {
+    if (!url) return url;
+    return url
+      .replace(/_\d+x\d+(?=\.)/g, "_1280x720")
+      .replace(/(?:\d{2,4}x\d{2,4})/g, "1280x720");
+  };
+
+  // 📸 Busca thumbnails via oEmbed
+  useEffect(() => {
+    let cancelled = false;
+
+    const loadThumbs = async () => {
+      const missing = videos.filter((v) => !thumbs[v.video]);
+      if (!missing.length) return;
+
+      try {
+        const results = await Promise.all(
+          missing.map(async (v) => {
+            const res = await fetch(
+              `https://vimeo.com/api/oembed.json?url=${encodeURIComponent(
+                v.video
+              )}`
+            );
+            if (!res.ok) throw new Error("oEmbed error");
+            const data = await res.json();
+            return [v.video, improveVimeoThumb(data.thumbnail_url)];
+          })
+        );
+
+        if (!cancelled) {
+          setThumbs((prev) => {
+            const next = { ...prev };
+            results.forEach(([url, thumb]) => {
+              next[url] = thumb;
+            });
+            return next;
+          });
+        }
+      } catch (err) {
+        console.error("Erro ao carregar thumbs do Vimeo", err);
+      }
+    };
+
+    loadThumbs();
+    return () => {
+      cancelled = true;
+    };
+  }, [videos, thumbs]);
+
   return (
-    <section className="py-12 bg-black relative before:absolute before:content-[''] before:bg-bottom-right before:bg-cover before:bg-[url(/fundo-impacto-section.png)] before:w-full before:h-full after:absolute after:content-[''] after:left-0 after:bottom-0 after:w-50 after:h-50 after:bg-cover after:bg-no-repeat after:bg-center after:bg-[url(/vector-30.svg)] overflow-hidden">
+    <section className="py-12 bg-black relative overflow-hidden
+      before:absolute before:inset-0 before:bg-bottom-right before:bg-cover before:bg-[url(/fundo-impacto-section.png)]
+      after:absolute after:left-0 after:bottom-0 after:w-50 after:h-50 after:bg-no-repeat after:bg-center after:bg-cover after:bg-[url(/vector-30.svg)]
+    ">
       <h2 className="relative z-10 font-anton uppercase text-4xl sm:text-6xl text-white text-center">
         O jogo muda quando você entra no ambiente certo
       </h2>
@@ -67,49 +107,62 @@ const ImpactoVendas = () => {
 
       {/* GRID */}
       <div className="relative z-10 mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-7xl mx-auto px-4">
-        {videos.map((item, index) => (
-          <button
-            key={index}
-            onClick={() => {
-              setActive(item);
-              setOpen(true);
-            }}
-            className="group relative rounded-2xl overflow-hidden focus:outline-none"
-          >
-            {/* CARD VERTICAL */}
-            <div className="aspect-[9/16] bg-gradient-to-b from-[#b08a00] to-[#3a2c00] relative">
-              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/25 transition" />
+        {videos.map((item, index) => {
+          const thumb = thumbs[item.video];
 
-              {/* PLAY */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur flex items-center justify-center group-hover:scale-110 transition">
-                  <svg width="34" height="34" viewBox="0 0 24 24" fill="white">
-                    <path d="M9 18V6L19 12L9 18Z" />
-                  </svg>
+          return (
+            <button
+              key={index}
+              onClick={() => {
+                setActive(item);
+                setOpen(true);
+              }}
+              className="group relative rounded-2xl overflow-hidden focus:outline-none"
+            >
+              {/* CARD */}
+              <div className="aspect-[9/16] relative bg-black">
+                {thumb && (
+                  <img
+                    src={thumb}
+                    alt={item.titulo}
+                    className="absolute inset-0 w-full h-full object-cover object-center"
+                    loading="lazy"
+                    draggable="false"
+                  />
+                )}
+
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/25 transition" />
+
+                {/* Play */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur flex items-center justify-center group-hover:scale-110 transition">
+                    <svg width="34" height="34" viewBox="0 0 24 24" fill="white">
+                      <path d="M9 18V6L19 12L9 18Z" />
+                    </svg>
+                  </div>
+                </div>
+
+                {/* Texto */}
+                <div className="absolute bottom-4 left-4">
+                  <p className="text-white uppercase font-bold tracking-wider">
+                    {item.titulo}
+                  </p>
                 </div>
               </div>
-
-              {/* TEXTO */}
-              <div className="absolute bottom-4 left-4">
-                <p className="text-white uppercase font-bold tracking-wider">
-                  {item.titulo}
-                </p>
-              </div>
-            </div>
-          </button>
-        ))}
+            </button>
+          );
+        })}
       </div>
 
       {/* MODAL */}
       {open && (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center">
-          {/* BACKDROP */}
           <div
             className="absolute inset-0 bg-black/70"
             onClick={() => setOpen(false)}
           />
 
-          {/* CONTAINER */}
           <div className="relative z-10 w-full max-w-4xl mx-4 bg-black rounded-xl overflow-hidden">
             <div className="flex justify-between items-center p-3 border-b border-white/10">
               <span className="text-white uppercase font-anton">

@@ -97,7 +97,9 @@ const SecondSectionVendas = () => {
           text-center mb-6
         "
         >
-          Dois dias para alinhar visão, performance e tecnologia
+          Dois dias para alinhar visão,
+          <br />
+           performance e tecnologia
         </h2>
 
         <p

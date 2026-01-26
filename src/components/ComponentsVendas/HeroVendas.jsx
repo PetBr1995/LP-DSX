@@ -43,7 +43,7 @@ const HeroVendas = () => {
       <div className="relative z-10 flex flex-col items-center justify-center h-full px-4">
         <img src="/logo-dsx-horizontal.svg" className="mb-10" alt="logo-dsx" />
 
-        <h2 className="text-center font-anton uppercase text-white text-6xl mb-10">
+        <h2 className="leading-18 text-center font-anton uppercase text-white text-6xl mb-10">
           O MAIOR EVENTO DE NEGÓCIOS, MARKETING,
           <br />
           VENDAS E INOVAÇÃO DO NORTE
