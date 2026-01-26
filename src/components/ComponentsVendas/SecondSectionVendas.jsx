@@ -95,6 +95,7 @@ const SecondSectionVendas = () => {
           font-anton uppercase text-white
           text-3xl sm:text-4xl md:text-5xl lg:text-6xl
           text-center mb-6
+          leading-17
         "
         >
           Dois dias para alinhar visão,
