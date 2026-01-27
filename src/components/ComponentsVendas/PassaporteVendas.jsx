@@ -191,7 +191,7 @@ const PassaporteVendas = () => {
             </div>
           ))}
         </div>
-        <div className="absolute top-130  md:top-125 left-5 right-4">
+        <div className="absolute top-130  md:top-130 left-5 right-4">
           {info.map((item, index) => (
             <div
               key={index}
