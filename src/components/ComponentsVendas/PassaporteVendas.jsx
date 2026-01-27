@@ -104,8 +104,10 @@ const PassaporteVendas = () => {
   return (
     <section className="py-8">
       <div className="max-w-7xl mx-auto px-4 relative">
-        <h2 className="font-anton uppercase text-white text-center text-3xl sm:text-4xl md:text-5xl">
-          Esteja onde os grandes nomes decidem o futuro dos negócios.
+        <h2 className="md:leading-15 font-anton uppercase text-white text-center text-3xl sm:text-4xl md:text-5xl">
+          Esteja onde os grandes nomes decidem 
+          <br />
+          o futuro dos negócios.
         </h2>
 
         <p className="text-white uppercase font-extralight text-center text-xl sm:text-2xl mt-4">
