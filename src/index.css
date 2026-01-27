@@ -11,6 +11,8 @@
   overflow-x: hidden;
   background-color: black;
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 

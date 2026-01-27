@@ -9,6 +9,7 @@ import ImpactoVendas from "../components/ComponentsVendas/ImpactoVendas";
 
 import PassaporteVendas from "../components/ComponentsVendas/PassaporteVendas";
 import PassaporteVendasMobile from "../components/ComponentsVendas/PassaporteVendasMobile";
+import PassaporteGrupo from "./PassaporteGrupo";
 
 const Vendas = () => {
   useEffect(() => {
@@ -90,7 +91,7 @@ const Vendas = () => {
         <ImpactoVendas />
 
         {isMobile ? <PassaporteVendasMobile /> : <PassaporteVendas />}
-
+        <PassaporteGrupo/>
         <CallToActionPatrocinadores />
         <FormVendas />
         <Footer />

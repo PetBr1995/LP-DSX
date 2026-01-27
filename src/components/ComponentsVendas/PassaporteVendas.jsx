@@ -44,22 +44,22 @@ const PassaporteVendas = () => {
       desc: "LOREN IPSUN  LOREN IPSUN"
     },
     {
-      title: "Oportunidade de networking",
+      title: "Acesso exclusivo ao Lounge VIP",
       icon: "/checkPassport.svg",
       desc: "LOREN IPSUN  LOREN IPSUN"
     },
     {
-      title: "Oportunidade de networking",
+      title: "Acesso ao food station",
       icon: "/checkPassport.svg",
       desc: "LOREN IPSUN  LOREN IPSUN"
     },
     {
-      title: "Oportunidade de networking",
+      title: "Certificado de participação",
       icon: "/checkPassport.svg",
       desc: "LOREN IPSUN  LOREN IPSUN"
     },
     {
-      title: "Oportunidade de networking",
+      title: "Acesso AS primeiras fileiras ",
       icon: "/checkPassport.svg",
       desc: "LOREN IPSUN  LOREN IPSUN"
     },
@@ -184,7 +184,7 @@ const PassaporteVendas = () => {
                       </div>
                     );
                   })}
-                </div>
+                </div>  
 
               </div>
 
