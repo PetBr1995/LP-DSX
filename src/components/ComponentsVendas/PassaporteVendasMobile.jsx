@@ -114,16 +114,16 @@ const PassaporteVendasMobile = () => {
                                                     even:to-[#222222]
                                                     even:opacity-60 flex items-center p-2 text-center justify-center bg-slate-600 mb-[1px]
                                                     odd:bg-gradient-to-r
-                odd:from-[#090909]
-                odd:via-[#525151]
-                odd:to-[#464646]
-                odd:opacity-60
+                                                    odd:from-[#090909]
+                                                    odd:via-[#525151]
+                                                    odd:to-[#464646]
+                                                    odd:opacity-60
                                                     "
                                                     
                                             >
                                                 <div className="flex flex-col justify-center items-center gap-2">
                                                     <h2 className="text-white uppercase">{vantagem.titulo}</h2>
-                                                    <p className="text-white font-extralight">{vantagem.desc}</p>
+                                                    <p className="text-white font-extralight uppercase">{vantagem.desc}</p>
                                                     <img
                                                         src={hasAccess ? "/checkPassaport.svg" : "/xPassaport.svg"}
                                                         alt={hasAccess ? "Disponível" : "Indisponível"}
