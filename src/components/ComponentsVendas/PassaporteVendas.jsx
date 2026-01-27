@@ -24,37 +24,81 @@ const PassaporteVendas = () => {
 
   const info = [
     {
-      title: "teste",
-      icon: "V"
+      title: "ACESSO AOS 2 DIAS",
+      icon: "/checkPassport.svg",
+      desc: "VIVA A EXPERIêNCIA COMPLETA"
     },
     {
-      title: "teste",
-      icon: "V"
+      title: "+50 PALESTRAS",
+      icon: "/checkPassport.svg",
+      desc: "ACESSO INTEGRAL AO CONTEÚDO DOS 3 PALCOS"
     },
     {
-      title: "teste",
-      icon: "V"
+      title: "ACESSO A FEIRA DE NEGÓCIOS",
+      icon: "/checkPassport.svg",
+      desc: "LOREN IPSUN  LOREN IPSUN"
     },
     {
-      title: "teste",
-      icon: "V"
+      title: "Oportunidade de networking",
+      icon: "/checkPassport.svg",
+      desc: "LOREN IPSUN  LOREN IPSUN"
     },
     {
-      title: "teste",
-      icon: "V"
+      title: "Oportunidade de networking",
+      icon: "/checkPassport.svg",
+      desc: "LOREN IPSUN  LOREN IPSUN"
     },
     {
-      title: "teste",
-      icon: "V"
+      title: "Oportunidade de networking",
+      icon: "/checkPassport.svg",
+      desc: "LOREN IPSUN  LOREN IPSUN"
     },
     {
-      title: "teste",
-      icon: "V"
+      title: "Oportunidade de networking",
+      icon: "/checkPassport.svg",
+      desc: "LOREN IPSUN  LOREN IPSUN"
     },
     {
-      title: "teste",
-      icon: "V"
+      title: "Oportunidade de networking",
+      icon: "/checkPassport.svg",
+      desc: "LOREN IPSUN  LOREN IPSUN"
     },
+  ]
+
+  const vantagens = [
+    {
+      vip: true,
+      standard: true
+    },
+    {
+      vip: true,
+      standard: true
+    },
+    {
+      vip: true,
+      standard: true
+    },
+    {
+      vip: true,
+      standard: true
+    },
+    {
+      vip: true,
+      standard: false
+    },
+    {
+      vip: true,
+      standard: false
+    },
+    {
+      vip: true,
+      standard: false
+    },
+    {
+      vip: true,
+      standard: false
+    },
+
   ]
 
   return (
@@ -79,10 +123,10 @@ const PassaporteVendas = () => {
                 // IMPORTANTÍSSIMO: a variável precisa guardar o url(...)
                 "--icon": `url(${item.iconCard})`,
               }}
-              className="w-70 h-[702px] rounded-2xl bg-gradient-to-b from-[var(--bgColor)] to-[var(--gradientColor)]"
+              className="w-80 h-[862px] rounded-2xl bg-gradient-to-b from-[var(--bgColor)] to-[var(--gradientColor)]"
             >
               <div
-                className={`relative bg-black h-[700px] rounded-2xl m-px overflow-hidden
+                className={`relative bg-black h-[860px] rounded-2xl m-px overflow-hidden
                   after:content-['']
                   after:absolute
                   after:top-0
@@ -100,7 +144,6 @@ const PassaporteVendas = () => {
                 <h2 className="relative z-10 text-white text-6xl text-center uppercase pt-6 font-anton">
                   {item.nome}
                 </h2>
-
                 <p className="relative z-10 uppercase border text-white text-center text-[12px] font-normal p-1 border-white mx-12 rounded-xl mt-5">
                   garanta seu passaporte
                 </p>
@@ -121,29 +164,61 @@ const PassaporteVendas = () => {
                     Comprar agora
                   </button>
                 </div>
-                <div className="mt-7">
-                  <h1 className="text-white text-center py-2">teste</h1>
-                  <h1 className="text-white text-center py-2">teste</h1>
-                  <h1 className="text-white text-center py-2">teste</h1>
-                  <h1 className="text-white text-center py-2">teste</h1>
-                  <h1 className="text-white text-center py-2">teste</h1>
-                  <h1 className="text-white text-center py-2">teste</h1>
-                  <h1 className="text-white text-center py-2">teste</h1>
-                  <h1 className="text-white text-center py-2">teste</h1>
+                <div className="mt-10 relative">
+                  {vantagens.map((vantagem, index) => {
+                    const hasAccess =
+                      item.nome === "VIP" ? vantagem.vip : vantagem.standard;
+
+                    return (
+                      <div
+                        key={index}
+                        className="flex items-center justify-center py-2"
+                      >
+                        <img
+                          src={hasAccess ? "/checkPassaport.svg" : "/xPassaport.svg"}
+                          alt={hasAccess ? "Disponível" : "Indisponível"}
+                          className="w-8 h-8 my-[6px] -translate-y-3"
+                        />
+                      </div>
+                    );
+                  })}
                 </div>
+
               </div>
+
             </div>
           ))}
         </div>
-        <div className="absolute top-125 left-5 right-4">
-          {
-            info.map((item) => (
-              <div className="bg-slate-300/40 p-2 relative border-b-1">
-                <h2 className="text-black">teste</h2>
-              </div>
-            ))
-          }
+        <div className="absolute top-130  md:top-125 left-5 right-4">
+          {info.map((item, index) => (
+            <div
+              key={index}
+              className="
+                py-2 pl-3 mb-[1px] relative
+                odd:bg-gradient-to-r
+                odd:from-[#090909]
+                odd:via-[#525151]
+                odd:to-[#464646]
+                odd:opacity-60
+                even:bg-gradient-to-r
+                even:from-[#090909]
+                even:via-[#1C1C1C]
+                even:to-[#222222]
+                even:opacity-60
+                relative
+              "
+            >
+              <h2 className="relative z-20 text-white uppercase font-extrabold">
+                {item.title}
+              </h2>
+              <p className="text-sm uppercase font-extralight text-white">
+                {item.desc}
+              </p>
+            </div>
+          ))}
         </div>
+
+
       </div>
     </section>
   );

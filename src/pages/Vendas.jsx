@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import HeroVendas from "../components/ComponentsVendas/HeroVendas";
 import SecondSectionVendas from "../components/ComponentsVendas/SecondSectionVendas";
@@ -6,7 +6,9 @@ import CallToActionPatrocinadores from "../components/ComponentsPatrocinadores/C
 import Footer from "../components/Footer";
 import FormVendas from "../components/ComponentsVendas/FormVendas";
 import ImpactoVendas from "../components/ComponentsVendas/ImpactoVendas";
+
 import PassaporteVendas from "../components/ComponentsVendas/PassaporteVendas";
+import PassaporteVendasMobile from "../components/ComponentsVendas/PassaporteVendasMobile";
 
 const Vendas = () => {
   useEffect(() => {
@@ -67,15 +69,28 @@ const Vendas = () => {
     setTwitter("twitter:image", "https://seudominio.com/og-vendas.png");
   }, []);
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth <= 1015);
+    };
+
+    checkIsMobile(); // checa no primeiro render
+
+    window.addEventListener("resize", checkIsMobile);
+    return () => window.removeEventListener("resize", checkIsMobile);
+  }, []);
+
   return (
     <>
       <section className="overflow-x-hidden">
         <HeroVendas />
         <SecondSectionVendas />
         <ImpactoVendas />
-        {/* 
-        <PassaporteVendas />
-        */}
+
+        {isMobile ? <PassaporteVendasMobile /> : <PassaporteVendas />}
+
         <CallToActionPatrocinadores />
         <FormVendas />
         <Footer />
