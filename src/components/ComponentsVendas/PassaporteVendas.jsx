@@ -174,7 +174,7 @@ const PassaporteVendas = () => {
                     return (
                       <div
                         key={index}
-                        className="flex items-center justify-center py-2"
+                        className="relative z-30 flex items-center justify-center py-2"
                       >
                         <img
                           src={hasAccess ? "/checkPassaport.svg" : "/xPassaport.svg"}
