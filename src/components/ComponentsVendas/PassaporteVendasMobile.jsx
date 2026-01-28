@@ -109,8 +109,8 @@ const PassaporteVendasMobile = () => {
                           key={`${card.nome}-vant-${index}`}
                           className="
                             mb-[1px] p-3
-                            odd:bg-gradient-to-r odd:from-[#090909] odd:via-[#525151] odd:to-[#464646] odd:opacity-60
-                            even:bg-gradient-to-r even:from-[#090909] even:via-[#1C1C1C] even:to-[#222222] even:opacity-60
+                            odd:bg-gradient-to-r odd:from-[#090909]/60 odd:via-[#525151]/60 odd:to-[#464646]/60
+                            even:bg-gradient-to-r even:from-[#090909]/60 even:via-[#1C1C1C]/60 even:to-[#222222]/60
                             flex items-center justify-between gap-3
                           "
                         >

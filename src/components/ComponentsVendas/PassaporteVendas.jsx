@@ -105,7 +105,7 @@ const PassaporteVendas = () => {
     <section className="py-8 relative after:content-[''] after:absolute after:-top-85 after:right-0 after:bg-cover after:bg-no-repeat after:bg-center after:w-80 after:h-140 after:bg-[url(/banner-passaporte.png)] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 relative">
         <h2 className="md:leading-15 font-anton uppercase text-white text-center text-3xl sm:text-4xl md:text-5xl">
-          Esteja onde os grandes nomes decidem 
+          Esteja onde os grandes nomes decidem
           <br />
           o futuro dos negócios.
         </h2>
@@ -184,7 +184,7 @@ const PassaporteVendas = () => {
                       </div>
                     );
                   })}
-                </div>  
+                </div>
 
               </div>
 
@@ -196,19 +196,18 @@ const PassaporteVendas = () => {
             <div
               key={index}
               className="
-                py-2 pl-3 mb-[1px] relative
-                odd:bg-gradient-to-r
-                odd:from-[#090909]
-                odd:via-[#525151]
-                odd:to-[#464646]
-                odd:opacity-60
-                even:bg-gradient-to-r
-                even:from-[#090909]
-                even:via-[#1C1C1C]
-                even:to-[#222222]
-                even:opacity-60
-                relative
-              "
+              py-2 pl-3 mb-[1px] relative
+          
+              odd:bg-gradient-to-r
+              odd:from-[#090909]/60
+              odd:via-[#525151]/60
+              odd:to-[#464646]/60
+          
+              even:bg-gradient-to-r
+              even:from-[#090909]/60
+              even:via-[#1C1C1C]/60
+              even:to-[#222222]/60
+            "
             >
               <h2 className="relative z-20 text-white uppercase font-extrabold">
                 {item.title}
@@ -217,6 +216,7 @@ const PassaporteVendas = () => {
                 {item.desc}
               </p>
             </div>
+
           ))}
         </div>
 
