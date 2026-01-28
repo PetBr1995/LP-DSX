@@ -47,7 +47,7 @@ const SecondSectionVendas = () => {
       player.off("loaded", onLoaded);
       player.off("play", onPlay);
       player.off("pause", onPause);
-      player.unload?.().catch(() => {});
+      player.unload?.().catch(() => { });
     };
   }, []);
 
@@ -56,8 +56,8 @@ const SecondSectionVendas = () => {
       const player = playerRef.current;
       if (!player) return;
 
-      await player.setMuted(false).catch(() => {});
-      await player.setVolume(1).catch(() => {});
+      await player.setMuted(false).catch(() => { });
+      await player.setVolume(1).catch(() => { });
       await player.play();
     } catch {
       try {
@@ -65,7 +65,7 @@ const SecondSectionVendas = () => {
         if (!player) return;
         await player.setMuted(true);
         await player.play();
-      } catch {}
+      } catch { }
     }
   };
 
@@ -101,7 +101,7 @@ const SecondSectionVendas = () => {
         >
           Dois dias para alinhar visão,
           <br />
-           performance e tecnologia
+          performance e tecnologia
         </h2>
 
         <p
@@ -191,6 +191,6 @@ const SecondSectionVendas = () => {
       </div>
     </section>
   );
-};
+}
 
 export default SecondSectionVendas;

@@ -20,7 +20,7 @@ const PassaporteGrupo = () => {
           <div
             key={index}
             className="
-              relative p-px w-[350px] h-[340px] rounded-3xl
+              relative p-px w-[350px] rounded-3xl
               bg-linear-to-b from-[#F5D247] to-[#797979]
               overflow-hidden
             "
@@ -68,7 +68,7 @@ const PassaporteGrupo = () => {
   
                 <p className="text-white">12 x de {item.valorParcela}</p>
   
-                <button className="w-full p-2 rounded-xl mt-8 cursor-pointer font-bold uppercase bg-linear-to-r from-[#F3CB46] to-[#E7A240]">
+                <button className="w-full p-2 rounded-xl my-8 cursor-pointer font-bold uppercase bg-linear-to-r from-[#F3CB46] to-[#E7A240]">
                   Comprar agora
                 </button>
               </div>
