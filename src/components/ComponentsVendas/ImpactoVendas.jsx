@@ -2,14 +2,25 @@ import { useMemo, useState, useEffect } from "react";
 
 const ImpactoVendas = () => {
   const videos = [
-    { titulo: "Participante", video: "https://vimeo.com/1148163374?fl=ip&fe=ec" },
-    { titulo: "Participante", video: "https://vimeo.com/1148163345?fl=ip&fe=ec" },
-    { titulo: "Participante", video: "https://vimeo.com/1148163408?fl=ip&fe=ec" },
+    {
+      titulo: "Participante",
+      video: "https://vimeo.com/1148163374?fl=ip&fe=ec",
+      thumb: "/card-image/expositor-card-img.png", // <- coloque no /public/thumbs/
+    },
+    {
+      titulo: "Participante",
+      video: "https://vimeo.com/1148163345?fl=ip&fe=ec",
+      thumb: "/card-image/kepler-card-img.png",
+    },
+    {
+      titulo: "Participante",
+      video: "https://vimeo.com/1148163408?fl=ip&fe=ec",
+      thumb: "/card-image/participante-card-img.png",
+    },
   ];
 
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(null);
-  const [thumbs, setThumbs] = useState({});
 
   // 🔒 Bloqueia scroll quando modal abre
   useEffect(() => {
@@ -42,54 +53,6 @@ const ImpactoVendas = () => {
     return toVimeoEmbed(active.video);
   }, [active]);
 
-  // 🎯 Melhora qualidade da thumbnail do Vimeo
-  const improveVimeoThumb = (url) => {
-    if (!url) return url;
-    return url
-      .replace(/_\d+x\d+(?=\.)/g, "_1280x720")
-      .replace(/(?:\d{2,4}x\d{2,4})/g, "1280x720");
-  };
-
-  // 📸 Busca thumbnails via oEmbed
-  useEffect(() => {
-    let cancelled = false;
-
-    const loadThumbs = async () => {
-      const missing = videos.filter((v) => !thumbs[v.video]);
-      if (!missing.length) return;
-
-      try {
-        const results = await Promise.all(
-          missing.map(async (v) => {
-            const res = await fetch(
-              `https://vimeo.com/api/oembed.json?url=${encodeURIComponent(v.video)}`
-            );
-            if (!res.ok) throw new Error("oEmbed error");
-            const data = await res.json();
-            return [v.video, improveVimeoThumb(data.thumbnail_url)];
-          })
-        );
-
-        if (!cancelled) {
-          setThumbs((prev) => {
-            const next = { ...prev };
-            results.forEach(([url, thumb]) => {
-              next[url] = thumb;
-            });
-            return next;
-          });
-        }
-      } catch (err) {
-        console.error("Erro ao carregar thumbs do Vimeo", err);
-      }
-    };
-
-    loadThumbs();
-    return () => {
-      cancelled = true;
-    };
-  }, [videos, thumbs]);
-
   return (
     <section
       className="py-12 bg-black relative overflow-hidden
@@ -107,55 +70,51 @@ const ImpactoVendas = () => {
 
       {/* GRID */}
       <div className="relative z-10 mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-7xl mx-auto px-4">
-        {videos.map((item, index) => {
-          const thumb = thumbs[item.video];
+        {videos.map((item, index) => (
+          <button
+            key={index}
+            onClick={() => {
+              setActive(item);
+              setOpen(true);
+            }}
+            className="group relative rounded-2xl overflow-hidden focus:outline-none"
+          >
+            {/* CARD (quadrado no mobile) */}
+            <div className="relative bg-black aspect-square sm:aspect-[9/16]">
+              {item.thumb && (
+                <img
+                  src={item.thumb}
+                  alt={item.titulo}
+                  className="absolute inset-0 w-full h-full object-cover object-center"
+                  loading="lazy"
+                  draggable="false"
+                />
+              )}
 
-          return (
-            <button
-              key={index}
-              onClick={() => {
-                setActive(item);
-                setOpen(true);
-              }}
-              className="group relative rounded-2xl overflow-hidden focus:outline-none"
-            >
-              {/* CARD (quadrado no mobile) */}
-              <div className="relative bg-black aspect-square sm:aspect-[9/16]">
-                {thumb && (
-                  <img
-                    src={thumb}
-                    alt={item.titulo}
-                    className="absolute inset-0 w-full h-full object-cover object-center"
-                    loading="lazy"
-                    draggable="false"
-                  />
-                )}
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/25 transition" />
 
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/25 transition" />
-
-                {/* Play */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur flex items-center justify-center group-hover:scale-110 transition">
-                    <svg width="34" height="34" viewBox="0 0 24 24" fill="white">
-                      <path d="M9 18V6L19 12L9 18Z" />
-                    </svg>
-                  </div>
-                </div>
-
-                {/* Texto */}
-                <div className="absolute bottom-4 left-4">
-                  <p className="text-white uppercase font-bold tracking-wider">
-                    {item.titulo}
-                  </p>
+              {/* Play */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur flex items-center justify-center group-hover:scale-110 transition">
+                  <svg width="34" height="34" viewBox="0 0 24 24" fill="white">
+                    <path d="M9 18V6L19 12L9 18Z" />
+                  </svg>
                 </div>
               </div>
-            </button>
-          );
-        })}
+
+              {/* Texto */}
+              <div className="absolute bottom-4 left-4">
+                <p className="text-white uppercase font-bold tracking-wider">
+                  {item.titulo}
+                </p>
+              </div>
+            </div>
+          </button>
+        ))}
       </div>
 
-      {/* MODAL (volta ao player 16:9 como antes) */}
+      {/* MODAL */}
       {open && (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center">
           <div
