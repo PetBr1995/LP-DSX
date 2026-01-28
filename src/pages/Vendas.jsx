@@ -10,6 +10,7 @@ import ImpactoVendas from "../components/ComponentsVendas/ImpactoVendas";
 import PassaporteVendas from "../components/ComponentsVendas/PassaporteVendas";
 import PassaporteVendasMobile from "../components/ComponentsVendas/PassaporteVendasMobile";
 import PassaporteGrupo from "./PassaporteGrupo";
+import BigNumber from "../components/ComponentsVendas/BigNumber";
 
 const Vendas = () => {
   useEffect(() => {
@@ -88,6 +89,7 @@ const Vendas = () => {
       <section className="overflow-x-hidden">
         <HeroVendas />
         <SecondSectionVendas />
+        <BigNumber/>
         <ImpactoVendas />
 
         {isMobile ? <PassaporteVendasMobile /> : <PassaporteVendas />}
