@@ -66,7 +66,7 @@ const HeroVendas = () => {
           ))}
         </div>
         <div className="py-8">
-          <CTAButton titulo="Quero meu passaporte" link="/" />
+          <CTAButton titulo="Quero meu passaporte" link="#" />
         </div>
       </div>
     </section>

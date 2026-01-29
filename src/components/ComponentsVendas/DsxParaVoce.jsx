@@ -87,7 +87,7 @@ const DsxParaVoce = () => {
           ))}
         </div>
         <div className="py-8">
-          <CTAButton titulo="Quero meu passaporte" />
+          <CTAButton titulo="Quero meu passaporte" link="#"/>
         </div>
       </div>
     </section>

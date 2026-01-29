@@ -1,4 +1,4 @@
-const PassaporteVendasMobile = () => {
+const PassaporteVendasStandard = () => {
     const infPrice = [
       {
         nome: "VIP",
@@ -33,6 +33,12 @@ const PassaporteVendasMobile = () => {
       { vip: true, standard: false, titulo: "PRIMEIRAS FILEIRAS", desc: "LOREN IPSUN LOREN IPSUN" },
     ];
   
+    // ✅ 1) Só o card STANDARD
+    const standardCards = infPrice.filter((card) => card.nome === "STANDARD");
+  
+    // ✅ 2) Só vantagens que o STANDARD tem (remove as VIP-only)
+    const standardVantagens = vantagens.filter((v) => v.standard);
+  
     return (
       <section className="py-8 relative after:content-[''] after:absolute after:-top-85 overflow-hidden after:right-0 after:bg-cover after:bg-center after:bg-no-repeat after:w-80 after:h-140 after:bg-[url(/banner-passaporte.png)]">
         <div className="mx-auto px-4 relative z-20">
@@ -46,7 +52,7 @@ const PassaporteVendasMobile = () => {
   
           {/* Grid simples */}
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-7xl mx-auto">
-            {infPrice.map((card) => (
+            {standardCards.map((card) => (
               <div
                 key={card.nome}
                 style={{
@@ -55,7 +61,10 @@ const PassaporteVendasMobile = () => {
                   "--textColor": card.textColor,
                   "--icon": `url(${card.iconCard})`,
                 }}
-                className="w-full rounded-2xl bg-gradient-to-b from-[var(--bgColor)] to-[var(--gradientColor)]"
+                className="
+                  w-full rounded-2xl bg-gradient-to-b from-[var(--bgColor)] to-[var(--gradientColor)]
+                  sm:col-span-2 sm:max-w-[520px] sm:mx-auto
+                "
               >
                 <div
                   className={`relative bg-black rounded-2xl m-px overflow-hidden
@@ -88,7 +97,7 @@ const PassaporteVendasMobile = () => {
                     >
                       R$ {card.price}
                     </p>
-                    
+  
                     <p className="text-white text-sm uppercase">
                       12x de {card.parcelas}
                     </p>
@@ -98,39 +107,34 @@ const PassaporteVendasMobile = () => {
                     </button>
                   </div>
   
-                  {/* Vantagens */}
+                  {/* ✅ Vantagens: só STANDARD (sem itens VIP e sem "X") */}
                   <div className="mt-10 relative">
-                    {vantagens.map((vantagem, index) => {
-                      const hasAccess =
-                        card.nome === "VIP" ? vantagem.vip : vantagem.standard;
-  
-                      return (
-                        <div
-                          key={`${card.nome}-vant-${index}`}
-                          className="
-                            mb-[1px] p-3
-                            odd:bg-gradient-to-r odd:from-[#090909]/60 odd:via-[#525151]/60 odd:to-[#464646]/60
-                            even:bg-gradient-to-r even:from-[#090909]/60 even:via-[#1C1C1C]/60 even:to-[#222222]/60
-                            flex items-center justify-between gap-3
-                          "
-                        >
-                          <div className="text-left">
-                            <h3 className="text-white uppercase font-extrabold text-sm">
-                              {vantagem.titulo}
-                            </h3>
-                            <p className="text-white/90 uppercase font-extralight text-xs">
-                              {vantagem.desc}
-                            </p>
-                          </div>
-  
-                          <img
-                            src={hasAccess ? "/checkPassaport.svg" : "/xPassaport.svg"}
-                            alt={hasAccess ? "Disponível" : "Indisponível"}
-                            className="w-7 h-7 shrink-0"
-                          />
+                    {standardVantagens.map((vantagem, index) => (
+                      <div
+                        key={`standard-vant-${index}`}
+                        className="
+                          mb-[1px] p-3
+                          odd:bg-gradient-to-r odd:from-[#090909]/60 odd:via-[#525151]/60 odd:to-[#464646]/60
+                          even:bg-gradient-to-r even:from-[#090909]/60 even:via-[#1C1C1C]/60 even:to-[#222222]/60
+                          flex items-center justify-between gap-3
+                        "
+                      >
+                        <div className="text-left">
+                          <h3 className="text-white uppercase font-extrabold text-sm">
+                            {vantagem.titulo}
+                          </h3>
+                          <p className="text-white/90 uppercase font-extralight text-xs">
+                            {vantagem.desc}
+                          </p>
                         </div>
-                      );
-                    })}
+  
+                        <img
+                          src="/checkPassaport.svg"
+                          alt="Disponível"
+                          className="w-7 h-7 shrink-0"
+                        />
+                      </div>
+                    ))}
                   </div>
   
                   <div className="h-4" />
@@ -143,5 +147,5 @@ const PassaporteVendasMobile = () => {
     );
   };
   
-  export default PassaporteVendasMobile;
+  export default PassaporteVendasStandard;
   

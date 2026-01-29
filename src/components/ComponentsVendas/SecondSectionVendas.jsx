@@ -95,7 +95,7 @@ const SecondSectionVendas = () => {
             font-anton uppercase text-white
             text-3xl sm:text-4xl md:text-5xl lg:text-6xl
             leading-tight
-            text-center mb-6
+            text-center mb-2
           "
         >
           Dois dias para alinhar visão, estratégia e execução
@@ -103,7 +103,7 @@ const SecondSectionVendas = () => {
           em um mercado que não aceita mais improviso.
         </h2>
 
-        <p className="uppercase text-white text-sm sm:text-base md:text-xl text-center mb-10">
+        <p className="uppercase text-white text-sm sm:text-base md:text-xl text-center mb-4">
           Você vai sair com:
         </p>
 
@@ -163,7 +163,7 @@ const SecondSectionVendas = () => {
 
         {/* CTA */}
         <div className="mt-8 flex justify-center">
-          <CTAButton titulo="Quero meu passaporte" link="/" />
+          <CTAButton titulo="Quero meu passaporte" link="#" />
         </div>
       </div>
     </section>
