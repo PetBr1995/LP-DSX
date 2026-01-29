@@ -103,8 +103,10 @@ const Vendas = () => {
         <DsxParaVoce />
         {/**
         <Temas />
-         */}
         <Palcos />
+
+         */}
+
         {isMobile ? <PassaporteVendasStandard /> : <PassaporteVendasStandardDesktop />}
         {
           /*
