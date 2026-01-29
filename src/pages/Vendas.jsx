@@ -97,13 +97,15 @@ const Vendas = () => {
         <HeroVendas />
         <SecondSectionVendas />
         <ImpactoVendas />
+        {/*
         <BigNumber />
+         */}
         <DsxParaVoce />
         {/**
         <Temas />
          */}
         <Palcos />
-        {isMobile ? <PassaporteVendasStandard/> : <PassaporteVendasStandardDesktop />}
+        {isMobile ? <PassaporteVendasStandard /> : <PassaporteVendasStandardDesktop />}
         {
           /*
           <PassaporteGrupo />
