@@ -10,20 +10,29 @@ const SecondSectionVendas = () => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const inf = [
-    { icon: "/vector-16.svg", text: "Clareza do que priorizar" },
-    { icon: "/vector-9.svg", text: "Networking com líderes e empresários" },
-    { icon: "/vector-35.svg", text: "Métodos aplicáveis no seu negócio" },
+    {
+      icon: "/vector-16.svg",
+      text: "Clareza estratégica para priorizar o que realmente gera crescimento, margem e eficiência",
+    },
+    {
+      icon: "/vector-9.svg",
+      text: "Métodos aplicáveis em marketing, vendas, gestão, cultura e inovação",
+    },
+    {
+      icon: "/vector-35.svg",
+      text: "Insights para vender melhor, estruturar processos e escalar resultados",
+    },
     {
       icon: "/vector-36.svg",
-      text: "Insights para vender melhor e operar com mais eficiência",
+      text: "Networking qualificado com empresários, líderes e profissionais que estão no mesmo nível de decisão",
     },
     {
       icon: "/vector-15.svg",
-      text: "Insights para vender melhor e operar com mais eficiência",
+      text: "Visão de mercado para antecipar movimentos e não apenas reagir a eles",
     },
     {
       icon: "/vector-5.svg",
-      text: "Insights para vender melhor e operar com mais eficiência",
+      text: "Referências práticas de quem já está executando em alto nível, encurtando caminhos e evitando erros caros",
     },
   ];
 
@@ -49,12 +58,22 @@ const SecondSectionVendas = () => {
     };
   }, []);
 
-  const handleStart = async () => {
+  const handlePlay = async () => {
     try {
       const player = playerRef.current;
       if (!player) return;
+
+      await player.setMuted(false).catch(() => {});
+      await player.setVolume(1).catch(() => {});
       await player.play();
-    } catch {}
+    } catch {
+      try {
+        const player = playerRef.current;
+        if (!player) return;
+        await player.setMuted(true);
+        await player.play();
+      } catch {}
+    }
   };
 
   return (
@@ -70,20 +89,14 @@ const SecondSectionVendas = () => {
       <div className="absolute inset-0 bg-black/50 z-[2]" />
 
       <div className="relative z-[3] max-w-7xl mx-auto px-4">
-        {/* Título */}
+        {/* TÍTULO */}
         <h2
           className="
-    font-anton
-    uppercase
-    text-white
-    text-3xl sm:text-4xl md:text-5xl lg:text-6xl
-    leading-[1.3]
-    sm:leading-[1.3]
-    md:leading-[1.3]
-    lg:leading-[1.3]
-    text-center
-    mb-6
-  "
+            font-anton uppercase text-white
+            text-3xl sm:text-4xl md:text-5xl lg:text-6xl
+            leading-tight
+            text-center mb-6
+          "
         >
           Dois dias para alinhar visão, estratégia e execução
           <br />
@@ -94,61 +107,62 @@ const SecondSectionVendas = () => {
           Você vai sair com:
         </p>
 
-        {/* 🔲 CARDS */}
-        <div className="w-full">
-          <div
-            className="
-              grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3
-              gap-4 sm:gap-6
-            "
-          >
-            {inf.map((item, index) => (
-              <div
-                key={index}
-                className="
-                  bg-linear-to-r from-[#FFFFFF] to-[#F5D247]
-                  p-px rounded-md
-                  w-full
-                "
-              >
-                <div
-                  className="
-                    bg-black rounded-md
-                    h-40 sm:h-45
-                    flex items-center
-                    gap-4
-                    px-6
-                  "
-                >
-                  <img
-                    src={item.icon}
-                    alt="item"
-                    className="w-10 sm:w-12 shrink-0"
-                  />
-
-                  <h3 className="text-white uppercase text-sm sm:text-base leading-snug">
-                    {item.text}
-                  </h3>
-                </div>
+        {/* CARDS */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          {inf.map((item, index) => (
+            <div
+              key={index}
+              className="bg-linear-to-r from-[#FFFFFF] to-[#F5D247] p-px rounded-md"
+            >
+              <div className="bg-black rounded-md h-40 flex items-center gap-4 px-6">
+                <img
+                  src={item.icon}
+                  alt="item"
+                  className="w-10 sm:w-12 shrink-0"
+                />
+                <h3 className="text-white text-sm sm:text-base">{item.text}</h3>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
 
-        {/* 🎥 VIDEO */}
-        <div className="mb-12 mt-12">
-          <div className="relative w-full mx-auto aspect-video overflow-hidden rounded-2xl bg-black shadow-xl">
+        {/* VIDEO */}
+        <div className="mt-14 mb-12">
+          <div className="relative w-full aspect-video overflow-hidden rounded-2xl bg-black shadow-xl">
+            {/* IFRAME */}
             <iframe
               ref={iframeRef}
               title="Video Evento Vendas"
-              src="https://player.vimeo.com/video/1146735494?autoplay=0&muted=0&loop=1&controls=0&title=0&byline=0&portrait=0&autopause=0&playsinline=1"
+              src="https://player.vimeo.com/video/1146735494?autoplay=0&muted=0&loop=1&controls=0&title=0&byline=0&portrait=0&playsinline=1"
               className="absolute inset-0 w-full h-full"
               allow="autoplay; fullscreen; picture-in-picture"
             />
+
+            {/* OVERLAY PLAY */}
+            {!isPlaying && (
+              <div className="absolute inset-0 grid place-items-center bg-black/45 backdrop-blur-[2px]">
+                <button
+                  onClick={handlePlay}
+                  disabled={!isReady}
+                  className="
+                    cursor-pointer
+                    h-14 w-14
+                    rounded-full
+                    flex items-center justify-center
+                    hover:scale-105
+                    transition
+                    disabled:opacity-60
+                  "
+                >
+                  <img src="/play.svg" alt="play" className="w-20" />
+                </button>
+              </div>
+            )}
           </div>
         </div>
 
-        <div className="mt-8">
+        {/* CTA */}
+        <div className="mt-8 flex justify-center">
           <CTAButton titulo="Quero meu passaporte" link="/" />
         </div>
       </div>

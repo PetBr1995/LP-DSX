@@ -7,24 +7,24 @@ const Temas = () => {
       desc: "Estratégia, visão e decisões para construir empresas mais sólidas, escaláveis e preparadas para crescer com consistência.",
     },
     {
-      titulo: "Empreendedorismo e Negócios",
-      desc: "Estratégia, visão e decisões para construir empresas mais sólidas, escaláveis e preparadas para crescer com consistência.",
+      titulo: "Marketing orientado a resultado",
+      desc: "Posicionamento, marca, aquisição e comunicação com foco em resultado, dados e eficiência.",
     },
     {
-      titulo: "Empreendedorismo e Negócios",
-      desc: "Estratégia, visão e decisões para construir empresas mais sólidas, escaláveis e preparadas para crescer com consistência.",
+      titulo: "Vendas e crescimento previsível",
+      desc: "Processos, estratégias e mentalidade comercial para vender melhor, com mais margem e consistência.",
     },
     {
-      titulo: "Empreendedorismo e Negócios",
-      desc: "Estratégia, visão e decisões para construir empresas mais sólidas, escaláveis e preparadas para crescer com consistência.",
+      titulo: "Inovação, tecnologia e Inteligência Artificial",
+      desc: "Aplicações práticas de inovação e IA para aumentar produtividade, eficiência e vantagem competitiva.",
     },
     {
-      titulo: "Empreendedorismo e Negócios",
-      desc: "Estratégia, visão e decisões para construir empresas mais sólidas, escaláveis e preparadas para crescer com consistência.",
+      titulo: "Gestão e liderança",
+      desc: "Tomada de decisão, estruturação de times e liderança em ambientes de crescimento e mudança.",
     },
     {
-      titulo: "Empreendedorismo e Negócios",
-      desc: "Estratégia, visão e decisões para construir empresas mais sólidas, escaláveis e preparadas para crescer com consistência.",
+      titulo: "Cultura, pessoas e futuro do trabalho",
+      desc: "Como alinhar pessoas, propósito e performance para sustentar resultados no longo prazo. ",
     },
   ];
 
