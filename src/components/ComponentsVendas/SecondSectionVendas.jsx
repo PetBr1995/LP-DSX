@@ -13,9 +13,18 @@ const SecondSectionVendas = () => {
     { icon: "/vector-16.svg", text: "Clareza do que priorizar" },
     { icon: "/vector-9.svg", text: "Networking com líderes e empresários" },
     { icon: "/vector-14.svg", text: "Métodos aplicáveis no seu negócio" },
-    { icon: "/vector-15.svg", text: "Insights para vender melhor e operar com mais eficiência" },
-    { icon: "/vector-15.svg", text: "Insights para vender melhor e operar com mais eficiência" },
-    { icon: "/vector-15.svg", text: "Insights para vender melhor e operar com mais eficiência" },
+    {
+      icon: "/vector-15.svg",
+      text: "Insights para vender melhor e operar com mais eficiência",
+    },
+    {
+      icon: "/vector-15.svg",
+      text: "Insights para vender melhor e operar com mais eficiência",
+    },
+    {
+      icon: "/vector-15.svg",
+      text: "Insights para vender melhor e operar com mais eficiência",
+    },
   ];
 
   useEffect(() => {
@@ -84,14 +93,14 @@ const SecondSectionVendas = () => {
               <div
                 key={index}
                 className="
-                  bg-linear-to-l from-[#FFFFFF] to-[#F5D247]
-                  p-px rounded-xl
+                  bg-linear-to-r from-[#FFFFFF] to-[#F5D247]
+                  p-px rounded-md
                   w-full
                 "
               >
                 <div
                   className="
-                    bg-black rounded-xl
+                    bg-black rounded-md
                     h-40 sm:h-45
                     flex items-center
                     gap-4

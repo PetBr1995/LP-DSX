@@ -183,7 +183,7 @@ const FormVendas = () => {
             Accept: "application/json",
           },
           body: JSON.stringify(payload),
-        }
+        },
       );
 
       if (!res.ok) {
@@ -225,27 +225,6 @@ const FormVendas = () => {
         after:bg-center
         after:bg-no-repeat
         after:z-[1]
-
-        before:absolute
-        before:content-['']
-        before:-bottom-15
-        before:left-1/2
-        before:-translate-x-1/2
-
-        before:w-[420px]
-        before:h-[140px]
-
-        before:bg-[url('/vector-26.svg')]
-        before:bg-contain
-        before:bg-no-repeat
-        before:bg-center
-
-        before:z-[2]
-        before:pointer-events-none
-
-        sm:before:w-[480px]
-        md:before:w-[540px]
-        lg:before:w-[620px]
 
       "
     >

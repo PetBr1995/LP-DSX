@@ -36,7 +36,7 @@ const BigNumber = () => {
             after:bg-[url(/vector-big-numbers.svg)] after:bg-no-repeat after:bg-contain after:bg-right-bottom
 
 
-            after:w-120 after:h-90 after:opacity-50
+            after:w-120 after:h-90 after:opacity-45
           "
       >
         {/* Conteúdo acima do after */}
@@ -51,15 +51,17 @@ const BigNumber = () => {
         >
           {inf.map((item, idx) => (
             <div key={idx} className="text-center">
-              <h2 className="font-roboto font-extrabold text-5xl sm:text-6xl md:text-7xl leading-none">
+              <h2 className="font-roboto font-extrabold uppercase text-5xl sm:text-6xl md:text-7xl leading-none">
                 {item.number}
               </h2>
 
-              <h4 className="mt-2 font-bold uppercase tracking-wide text-2xl">
+              <h4 className="mt-2 font-medium  uppercase tracking-widest text-2xl">
                 {item.titulo}
               </h4>
 
-              <p className="mt-2 text-xl max-w-xs mx-auto">{item.desc}</p>
+              <p className="font-roboto mt-2 text-md max-w-xs mx-auto">
+                {item.desc}
+              </p>
             </div>
           ))}
         </div>
