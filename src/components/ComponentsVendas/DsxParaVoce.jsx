@@ -61,7 +61,7 @@ const DsxParaVoce = () => {
             >
               <img src={inf.icon} alt="icon" className="w-15 h-15" />
 
-              <p className="text-white text-md leading-relaxed">{inf.desc}</p>
+              <p className="text-white text-xl leading-relaxed">{inf.desc}</p>
             </div>
           ))}
         </div>
@@ -82,7 +82,7 @@ const DsxParaVoce = () => {
             >
               <img src={inf.icon} alt="icon" className="w-15 h-15" />
 
-              <p className="text-white text-md leading-relaxed">{inf.desc}</p>
+              <p className="text-white text-xl leading-relaxed">{inf.desc}</p>
             </div>
           ))}
         </div>
