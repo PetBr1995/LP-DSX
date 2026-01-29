@@ -3,12 +3,12 @@ import { useMemo, useState, useEffect } from "react";
 const ImpactoVendas = () => {
   const videos = [
     {
-      titulo: "Participante",
+      titulo: "Expositor",
       video: "https://vimeo.com/1148163374?fl=ip&fe=ec",
       thumb: "/card-image/expositor-card-img.png", // <- coloque no /public/thumbs/
     },
     {
-      titulo: "Participante",
+      titulo: "Palestrante",
       video: "https://vimeo.com/1148163345?fl=ip&fe=ec",
       thumb: "/card-image/kepler-card-img.png",
     },
