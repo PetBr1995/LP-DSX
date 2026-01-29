@@ -13,6 +13,9 @@ import PassaporteGrupo from "./PassaporteGrupo";
 import BigNumber from "../components/ComponentsVendas/BigNumber";
 import DsxParaVoce from "../components/ComponentsVendas/DsxParaVoce";
 import Temas from "../components/ComponentsVendas/Temas";
+import Palcos from "../components/ComponentsVendas/Palcos";
+import FAQVendas from "../components/ComponentsVendas/FAQVendas";
+import RedesSociais from "../components/ComponentsVendas/RedesSociais";
 
 const Vendas = () => {
   useEffect(() => {
@@ -95,10 +98,13 @@ const Vendas = () => {
         <BigNumber />
         <DsxParaVoce />
         <Temas />
+        <Palcos />
         {isMobile ? <PassaporteVendasMobile /> : <PassaporteVendas />}
         <PassaporteGrupo />
         <CallToActionPatrocinadores />
         <FormVendas />
+        <FAQVendas />
+        <RedesSociais />
         <Footer />
       </section>
     </>

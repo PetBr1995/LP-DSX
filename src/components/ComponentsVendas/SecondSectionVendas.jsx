@@ -71,14 +71,27 @@ const SecondSectionVendas = () => {
 
       <div className="relative z-[3] max-w-7xl mx-auto px-4">
         {/* Título */}
-        <h2 className="font-anton uppercase text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center mb-6">
-          Dois dias para alinhar visão,
+        <h2
+          className="
+    font-anton
+    uppercase
+    text-white
+    text-3xl sm:text-4xl md:text-5xl lg:text-6xl
+    leading-[1.3]
+    sm:leading-[1.3]
+    md:leading-[1.3]
+    lg:leading-[1.3]
+    text-center
+    mb-6
+  "
+        >
+          Dois dias para alinhar visão, estratégia e execução
           <br />
-          performance e tecnologia
+          em um mercado que não aceita mais improviso.
         </h2>
 
         <p className="uppercase font-extralight text-white text-sm sm:text-base md:text-xl text-center mb-10">
-          para você avançar para o próximo passo com:
+          Você vai sair com:
         </p>
 
         {/* 🔲 CARDS */}
