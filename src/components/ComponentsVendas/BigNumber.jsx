@@ -33,7 +33,7 @@ const BigNumber = () => {
         className="
             overflow-hidden bg-white relative mt-6
             after:absolute after:content-[''] after:bottom-0 after:right-0
-            after:bg-[url(/vector-big-numbers.svg)] after:bg-no-repeat after:bg-contain after:bg-right-bottom
+            after:object-none md:after:bg-[url(/vector-big-numbers.svg)] after:bg-no-repeat after:bg-contain after:bg-right-bottom
 
 
             after:w-120 after:h-90 after:opacity-45
@@ -59,7 +59,7 @@ const BigNumber = () => {
                 {item.titulo}
               </h4>
 
-              <p className="font-roboto mt-2 text-md max-w-xs mx-auto">
+              <p className="text-slate-700 font-roboto font-extrabold mt-2 text-md max-w-xs mx-auto">
                 {item.desc}
               </p>
             </div>

@@ -14,7 +14,7 @@ const Palcos = () => {
         {/* Título */}
         <h2 className="text-white text-center font-anton uppercase text-4xl sm:text-5xl md:text-6xl leading-tight">
           Múltiplos palcos, grandes nomes
-          <br className="hidden sm:block" />e programação simultânea
+          <br className="hidden sm:block" /> e programação simultânea
         </h2>
 
         {/* Descrição */}

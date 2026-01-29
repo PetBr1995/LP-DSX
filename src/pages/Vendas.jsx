@@ -97,7 +97,9 @@ const Vendas = () => {
         <ImpactoVendas />
         <BigNumber />
         <DsxParaVoce />
+        {/**
         <Temas />
+         */}
         <Palcos />
         {isMobile ? <PassaporteVendasMobile /> : <PassaporteVendas />}
         <PassaporteGrupo />

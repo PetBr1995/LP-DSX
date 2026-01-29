@@ -32,7 +32,7 @@ const Footer = () => {
   
           <div className="font-jamjuree text-center text-sm leading-relaxed">
             <p className="text-white">10.279.661/0001-51</p>
-            <p className="text-white">© 2025 Digital Comunicação.</p>
+            <p className="text-white">© 2026 Digital Comunicação.</p>
             <p className="text-white">Todos os direitos reservados.</p>
           </div>
   
