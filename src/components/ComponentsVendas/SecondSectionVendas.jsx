@@ -12,9 +12,9 @@ const SecondSectionVendas = () => {
   const inf = [
     { icon: "/vector-16.svg", text: "Clareza do que priorizar" },
     { icon: "/vector-9.svg", text: "Networking com líderes e empresários" },
-    { icon: "/vector-14.svg", text: "Métodos aplicáveis no seu negócio" },
+    { icon: "/vector-35.svg", text: "Métodos aplicáveis no seu negócio" },
     {
-      icon: "/vector-15.svg",
+      icon: "/vector-36.svg",
       text: "Insights para vender melhor e operar com mais eficiência",
     },
     {
@@ -22,7 +22,7 @@ const SecondSectionVendas = () => {
       text: "Insights para vender melhor e operar com mais eficiência",
     },
     {
-      icon: "/vector-15.svg",
+      icon: "/vector-5.svg",
       text: "Insights para vender melhor e operar com mais eficiência",
     },
   ];

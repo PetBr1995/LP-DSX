@@ -43,8 +43,10 @@ const Temas = () => {
       {/* Conteúdo */}
       <div className="relative z-10 max-w-7xl mx-auto px-4">
         {/* Título */}
-        <h2 className=" leading-17 text-white text-center font-anton uppercase text-4xl sm:text-5xl md:text-6xl">
-          Os temas que movem decisões, crescimento e resultados
+        <h2 className=" leading-1.3 sm:1.6 md:1.6 lg:1.7 text-white text-center font-anton uppercase text-4xl sm:text-5xl md:text-6xl">
+          Os temas que movem decisões,
+          <br />
+          crescimento e resultados
         </h2>
 
         <p className="tracking-widest text-white text-center mt-4 uppercase text-xl sm:text-2xl font-extralight font-jamjuree">

@@ -1,4 +1,5 @@
-import { Instagram, Twitter, Youtube } from "lucide-react";
+import { Instagram, Youtube } from "lucide-react";
+import { FaTiktok } from "react-icons/fa";
 
 const RedesSociais = () => {
   return (
@@ -23,18 +24,17 @@ const RedesSociais = () => {
       "
     >
       <div className="max-w-6xl mx-auto px-4 relative z-10">
-        {/* Título */}
         <h3 className="font-anton uppercase text-3xl sm:text-4xl text-center">
           Siga-nos e acompanhe os nossos conteúdos nas redes sociais
         </h3>
 
-        {/* Redes */}
         <div className="flex flex-wrap justify-center items-center gap-4 my-8">
           {/* Instagram DSX */}
           <a
             href="/"
             target="_blank"
-            className="flex items-center gap-2 bg-black px-4 py-2 rounded-md text-white hover:bg-zinc-800 transition"
+            rel="noreferrer"
+            className="flex items-center gap-2 bg-black px-4 py-2 rounded-md text-white hover:bg-zinc-800 transition hover:scale-[1.03]"
           >
             <Instagram size={18} />
             @dsx.summit
@@ -44,19 +44,21 @@ const RedesSociais = () => {
           <a
             href="/"
             target="_blank"
-            className="flex items-center gap-2 bg-black px-4 py-2 rounded-md text-white hover:bg-zinc-800 transition"
+            rel="noreferrer"
+            className="flex items-center gap-2 bg-black px-4 py-2 rounded-md text-white hover:bg-zinc-800 transition hover:scale-[1.03]"
           >
             <Instagram size={18} />
             @digitalhub.experience
           </a>
 
-          {/* Twitter/X */}
+          {/* TikTok */}
           <a
             href="/"
             target="_blank"
-            className="flex items-center gap-2 bg-black px-4 py-2 rounded-md text-white hover:bg-zinc-800 transition"
+            rel="noreferrer"
+            className="flex items-center gap-2 bg-black px-4 py-2 rounded-md text-white hover:bg-zinc-800 transition hover:scale-[1.03]"
           >
-            <Twitter size={18} />
+            <FaTiktok size={18} />
             @dsx.summit
           </a>
 
@@ -64,7 +66,8 @@ const RedesSociais = () => {
           <a
             href="/"
             target="_blank"
-            className="flex items-center gap-2 bg-black px-4 py-2 rounded-md text-white hover:bg-zinc-800 transition"
+            rel="noreferrer"
+            className="flex items-center gap-2 bg-black px-4 py-2 rounded-md text-white hover:bg-zinc-800 transition hover:scale-[1.03]"
           >
             <Youtube size={18} />
             @dsx.summit
