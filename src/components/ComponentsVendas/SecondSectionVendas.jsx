@@ -120,7 +120,7 @@ const SecondSectionVendas = () => {
                   alt="item"
                   className="w-10 sm:w-12 shrink-0"
                 />
-                <h3 className="text-white text-sm sm:text-base">{item.text}</h3>
+                <h3 className="text-white text-md sm:text-base">{item.text}</h3>
               </div>
             </div>
           ))}

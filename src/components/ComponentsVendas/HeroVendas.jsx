@@ -55,7 +55,7 @@ const HeroVendas = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
           {info.map((item, index) => (
             <div key={index} className="flex flex-col items-center">
-              <h2 className="font-anton text-4xl sm:text-5xl md:text-6xl bg-gradient-to-r from-[#F5D247] to-[#E9A741] bg-clip-text text-transparent">
+              <h2 className="font-anton text-7xl sm:text-7xl md:text-7xl bg-gradient-to-r from-[#F5D247] to-[#E9A741] bg-clip-text text-transparent">
                 {item.number}
               </h2>
 
