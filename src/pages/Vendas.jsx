@@ -26,7 +26,7 @@ const Vendas = () => {
     }
     description.setAttribute(
       "content",
-      "Compre seu ingresso para o DSX 2026, o maior evento de negócios, marketing, vendas e inovação do Norte do Brasil. Garanta seu passaporte."
+      "Compre seu ingresso para o DSX 2026, o maior evento de negócios, marketing, vendas e inovação do Norte do Brasil. Garanta seu passaporte.",
     );
 
     /** OPEN GRAPH */
@@ -44,7 +44,7 @@ const Vendas = () => {
     setOg("og:title", "Ingressos DSX 2026 | Garanta seu passaporte");
     setOg(
       "og:description",
-      "Garanta seu ingresso para o DSX 2026 e participe do maior evento de negócios do Norte do Brasil."
+      "Garanta seu ingresso para o DSX 2026 e participe do maior evento de negócios do Norte do Brasil.",
     );
     // troque para a imagem real de vendas
     setOg("og:image", "https://seudominio.com/og-vendas.png");
@@ -65,7 +65,7 @@ const Vendas = () => {
     setTwitter("twitter:title", "Ingressos DSX 2026 | Garanta seu passaporte");
     setTwitter(
       "twitter:description",
-      "Compre seu ingresso para o DSX 2026, o maior evento de negócios do Norte do Brasil."
+      "Compre seu ingresso para o DSX 2026, o maior evento de negócios do Norte do Brasil.",
     );
     // troque para a imagem real de vendas
     setTwitter("twitter:image", "https://seudominio.com/og-vendas.png");
@@ -89,11 +89,11 @@ const Vendas = () => {
       <section className="overflow-x-hidden">
         <HeroVendas />
         <SecondSectionVendas />
-        <BigNumber/>
         <ImpactoVendas />
+        <BigNumber />
 
         {isMobile ? <PassaporteVendasMobile /> : <PassaporteVendas />}
-        <PassaporteGrupo/>
+        <PassaporteGrupo />
         <CallToActionPatrocinadores />
         <FormVendas />
         <Footer />

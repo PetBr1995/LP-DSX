@@ -1,11 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 
 :root {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   --font-roboto: "Roboto", sans-serif;
   --largura: 1200px;
   overflow-x: hidden;
@@ -15,25 +16,25 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-
-
 .font-bebas {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: "Bebas Neue", sans-serif;
+}
+
+.font-mont {
+  font-family: "Viga", sans-serif;
 }
 
 .font-roboto {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .font-anton {
-  font-family: 'Anton', sans-serif;
+  font-family: "Anton", sans-serif;
 }
 
-.font-jamjuree{
-  font-family: 'Bai Jamjuree', sans-serif;
+.font-jamjuree {
+  font-family: "Bai Jamjuree", sans-serif;
 }
-
-
 
 .faixa-wrapper {
   overflow: hidden;
@@ -55,7 +56,6 @@
     transform: translateX(-50%);
   }
 }
-
 
 @layer components {
   .cut-border-left {
@@ -99,9 +99,6 @@
   }
 }
 
-
-
-
 /* Chrome, Edge, Safari */
 ::-webkit-scrollbar {
   width: 10px;
@@ -126,6 +123,3 @@
   scrollbar-width: thin;
   scrollbar-color: #f5a205 #0b0b0b;
 }
-
-
-
