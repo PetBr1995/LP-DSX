@@ -64,7 +64,7 @@ const ImpactoVendas = () => {
         O jogo muda quando você entra no ambiente certo
       </h2>
 
-      <p className="relative z-10 text-white text-center uppercase mt-3 opacity-80 font-extralight">
+      <p className="relative z-10 text-white text-center uppercase mt-3 opacity-80">
         Confira como a 1ª edição impactou no mercado da Região Norte.
       </p>
 

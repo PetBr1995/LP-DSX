@@ -103,7 +103,7 @@ const SecondSectionVendas = () => {
           em um mercado que não aceita mais improviso.
         </h2>
 
-        <p className="uppercase font-extralight text-white text-sm sm:text-base md:text-xl text-center mb-10">
+        <p className="uppercase text-white text-sm sm:text-base md:text-xl text-center mb-10">
           Você vai sair com:
         </p>
 
