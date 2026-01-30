@@ -183,7 +183,7 @@ const ReferenciasPatrocinadores = () => {
               </div>
 
               <div className="bg-white px-6 pb-6 pt-4">
-                <FormPatrocinadores />
+                <FormPatrocinadores/>
               </div>
             </div>
           </div>

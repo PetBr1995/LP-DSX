@@ -180,7 +180,7 @@ const FormPatrocinadores = () => {
       "
     >
       <input
-        className="h-11 rounded-xl border-2 border-black/40 px-4 outline-none focus:ring-2 focus:ring-black/20"
+        className="text-black h-11 rounded-xl border-2 border-black/40 px-4 outline-none focus:ring-2 focus:ring-black/20"
         type="text"
         placeholder="Nome Completo"
         value={form.fullName}
@@ -189,7 +189,7 @@ const FormPatrocinadores = () => {
       />
 
       <input
-        className="h-11 rounded-xl border-2 border-black/40 px-4 outline-none focus:ring-2 focus:ring-black/20"
+        className=" text-black h-11 rounded-xl border-2 border-black/40 px-4 outline-none focus:ring-2 focus:ring-black/20"
         type="email"
         placeholder="Email corporativo"
         value={form.email}
@@ -198,7 +198,7 @@ const FormPatrocinadores = () => {
       />
 
       <input
-        className="h-11 rounded-xl border-2 border-black/40 px-4 outline-none focus:ring-2 focus:ring-black/20"
+        className="h-11 text-black rounded-xl border-2 border-black/40 px-4 outline-none focus:ring-2 focus:ring-black/20"
         type="tel"
         placeholder="WhatsApp"
         value={form.whatsapp}
@@ -208,7 +208,7 @@ const FormPatrocinadores = () => {
       />
 
       <input
-        className="h-11 rounded-xl border-2 border-black/40 px-4 outline-none focus:ring-2 focus:ring-black/20"
+        className="text-black h-11 rounded-xl border-2 border-black/40 px-4 outline-none focus:ring-2 focus:ring-black/20"
         type="text"
         placeholder="Cargo"
         value={form.role}
@@ -217,7 +217,7 @@ const FormPatrocinadores = () => {
       />
 
       <input
-        className="h-11 rounded-xl border-2 border-black/40 px-4 outline-none focus:ring-2 focus:ring-black/20"
+        className=" text-black h-11 rounded-xl border-2 border-black/40 px-4 outline-none focus:ring-2 focus:ring-black/20"
         type="text"
         placeholder="Empresa"
         value={form.company}
