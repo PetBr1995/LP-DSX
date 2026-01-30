@@ -9,7 +9,7 @@ const WhatsAppButton = ({ titulo, textColor, backgroundColor, link }) => {
                     className="
                         relative
                         rounded-[16px]
-                        bg-linear-to-r from-[#075E54] via-[#075E54] to-[#128C7E]
+                        bg-linear-to-r from-[#F3CB46] via-[#F3CB46] to-[#E7A040]
                         p-0.5
                         
                         after:content-['']
@@ -30,9 +30,9 @@ const WhatsAppButton = ({ titulo, textColor, backgroundColor, link }) => {
                 </div>
 
                 {/* DIREITA */}
-                <div className="relative -ml-0.5 rounded-[16px] bg-linear-to-r from-[#128C7E] to-[#128C7E] p-0.5">
+                <div className="relative -ml-0.5 rounded-[16px] bg-linear-to-r from-[#E7A040] to-[#E7A040] p-0.5">
                     <div className="flex justify-center items-center rounded-[14px] w-[50px] h-10" style={{ backgroundColor: backgroundColor }}>
-                        <ArrowRight color="#128C7E"/>
+                        <ArrowRight color="#000000"/>
                     </div>
                 </div>
             </section>

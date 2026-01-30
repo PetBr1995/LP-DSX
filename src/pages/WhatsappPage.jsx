@@ -1,4 +1,5 @@
 import HeroWhatsAppPage from "../components/ComponentsWhatsAppPage/HeroWhatsAppPage"
+import SecondSectionWhatsAppPage from "../components/ComponentsWhatsAppPage/SeconcSectionWhatsAppPage"
 import { FormButton } from "../components/FormSection"
 import HeroSection from "../components/HeroSection"
 import HeroSectionV2 from "../components/HeroSectionV2"
@@ -12,9 +13,10 @@ const WhatsappPage = () => {
         <>
             <section>
                 <HeroWhatsAppPage />
-                <HeroSection />
-                <div className="py-10 flex justify-center">
-                    <WhatsAppButton link="https://chat.whatsapp.com/GXEsJXjFNBi1a3LLAiG90R" backgroundColor="#000000" titulo="Entre para o grupo vip" textColor="#ffffff" />
+                <SecondSectionWhatsAppPage />
+                <div className="py-10 flex flex-col justify-center items-center">
+                    <h2 className=" text-white font-jamjuree text-2xl mb-5">GRUPO VIP LIBERADO!</h2>    
+                   <WhatsAppButton titulo="Entre para o grupo VIP" link="https://chat.whatsapp.com/GXEsJXjFNBi1a3LLAiG90R"/>
                 </div>
             </section>
         </>
