@@ -23,10 +23,10 @@ const PassaporteVendasStandard = () => {
   ];
 
   const vantagens = [
-    { vip: true, standard: true, titulo: "ACESSO AOS 2 DIAS", desc: "VIVA A EXPERIÊNCIA COMPLETA" },
-    { vip: true, standard: true, titulo: "+50 PALESTRAS", desc: "ACESSO INTEGRAL AO CONTEÚDO DOS 3 PALCOS" },
-    { vip: true, standard: true, titulo: "ACESSO A FEIRA DE NEGÓCIOS", desc: "LOREN IPSUN LOREN IPSUN" },
-    { vip: true, standard: true, titulo: "OPORTUNIDADE DE NETWORKING", desc: "LOREN IPSUN LOREN IPSUN" },
+    { vip: true, standard: true, titulo: "ACESSO AOS 2 DIAS", desc: "Viva a experiência completa" },
+    { vip: true, standard: true, titulo: "+50 PALESTRAS", desc: "Acesso integral ao conteúdo dos palcos" },
+    { vip: true, standard: true, titulo: "ACESSO A FEIRA DE NEGÓCIOS", desc: "Ambiente estratégico de networking focado em gerar novas oportunidades de negócio." },
+    { vip: true, standard: true, titulo: "OPORTUNIDADE DE NETWORKING", desc: "Conecte-se com profissionais e parceiros estratégicos para criar novas oportunidades de negócio." },
     { vip: true, standard: false, titulo: "ACESSO AO LOUNGE VIP", desc: "LOREN IPSUN LOREN IPSUN" },
     { vip: true, standard: false, titulo: "ACESSO AO FOOD STATION", desc: "LOREN IPSUN LOREN IPSUN" },
     { vip: true, standard: false, titulo: "CERTIFICADO DE PARTICIPAÇÃO", desc: "LOREN IPSUN LOREN IPSUN" },
@@ -124,7 +124,7 @@ const PassaporteVendasStandard = () => {
                         <h3 className="text-white uppercase font-extrabold text-sm">
                           {vantagem.titulo}
                         </h3>
-                        <p className="text-white/90 uppercase font-extralight text-xs">
+                        <p className="text-white/90 tex font-normal text-sm mt-2">
                           {vantagem.desc}
                         </p>
                       </div>
