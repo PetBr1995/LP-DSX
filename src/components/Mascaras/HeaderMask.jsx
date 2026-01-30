@@ -1,4 +1,4 @@
-const HeaderMask = ({ titulo, textColor, backgroundColor, link, target }) => {
+const HeaderMask = ({ titulo, textColor, backgroundColor, link, target, font }) => {
     return (
         <>
             <a href={link} target={target}>
@@ -14,7 +14,7 @@ const HeaderMask = ({ titulo, textColor, backgroundColor, link, target }) => {
                         style={{ '--afterBackground': backgroundColor }}
                     >
                         <div className="flex justify-center items-center rounded-[14px] w-[200px] h-10" style={{ backgroundColor: backgroundColor }}>
-                            <p className="uppercase text-[14px] font-normal" style={{ color: textColor }}>{titulo}</p>
+                            <p className="uppercase text-[14px]" style={{fontWeight:font , color: textColor }}>{titulo}</p>
                         </div>
                     </div>
 

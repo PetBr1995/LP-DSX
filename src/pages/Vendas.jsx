@@ -18,6 +18,7 @@ import FAQVendas from "../components/ComponentsVendas/FAQVendas";
 import RedesSociais from "../components/ComponentsVendas/RedesSociais";
 import PassaporteVendasStandard from "../components/ComponentsVendas/PassaporteVendasStandard";
 import PassaporteVendasStandardDesktop from "../components/ComponentsVendas/PassaporteVendasStandardDesktop";
+import CallToActionVendas from "../components/ComponentsVendas/CallToActionVendas";
 
 const Vendas = () => {
   useEffect(() => {
@@ -113,7 +114,7 @@ const Vendas = () => {
           <PassaporteGrupo />
           */
         }
-        <CallToActionPatrocinadores />
+        <CallToActionVendas/>
         <FormVendas />
         <FAQVendas />
         <RedesSociais />
