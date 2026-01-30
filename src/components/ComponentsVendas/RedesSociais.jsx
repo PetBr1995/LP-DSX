@@ -31,7 +31,7 @@ const RedesSociais = () => {
         <div className="flex flex-wrap justify-center items-center gap-4 my-8">
           {/* Instagram DSX */}
           <a
-            href="/"
+            href="https://www.instagram.com/dsx.summit/"
             target="_blank"
             rel="noreferrer"
             className="flex items-center gap-2 bg-black px-4 py-2 rounded-md text-white hover:bg-zinc-800 transition hover:scale-[1.03]"
@@ -42,7 +42,7 @@ const RedesSociais = () => {
 
           {/* Instagram Digital Hub */}
           <a
-            href="/"
+            href="https://www.instagram.com/digitalhub.experience/"
             target="_blank"
             rel="noreferrer"
             className="flex items-center gap-2 bg-black px-4 py-2 rounded-md text-white hover:bg-zinc-800 transition hover:scale-[1.03]"
@@ -53,7 +53,7 @@ const RedesSociais = () => {
 
           {/* TikTok */}
           <a
-            href="/"
+            href="https://www.tiktok.com/@dsx.summit"
             target="_blank"
             rel="noreferrer"
             className="flex items-center gap-2 bg-black px-4 py-2 rounded-md text-white hover:bg-zinc-800 transition hover:scale-[1.03]"
@@ -64,7 +64,7 @@ const RedesSociais = () => {
 
           {/* YouTube */}
           <a
-            href="/"
+            href="https://www.youtube.com/@dsx.summit"
             target="_blank"
             rel="noreferrer"
             className="flex items-center gap-2 bg-black px-4 py-2 rounded-md text-white hover:bg-zinc-800 transition hover:scale-[1.03]"
