@@ -7,13 +7,13 @@ import MainMask from "../components/Mascaras/MainMask"
 import WhatsAppButton from "../components/Mascaras/WhatsAppButton"
 
 const WhatsappPage = () => {
-    return(
+    return (
         <>
             <section>
-                <HeroSection/>
-                <HeroSectionV2/>
+                <HeroSectionV2 />
+                <HeroSection />
                 <div className="py-8 flex justify-center">
-                    <WhatsAppButton link="https://chat.whatsapp.com/B9hsyLb6Ksp979K4W8eh5S" backgroundColor="#000000" titulo="Entre para o grupo vip" textColor="#ffffff"/>
+                    <WhatsAppButton link="https://chat.whatsapp.com/B9hsyLb6Ksp979K4W8eh5S" backgroundColor="#000000" titulo="Entre para o grupo vip" textColor="#ffffff" />
                 </div>
             </section>
         </>
