@@ -25,6 +25,8 @@ const Palcos = () => {
         </p>
 
         {/* Cards */}
+
+        {/* 
         <div className="py-6 flex flex-wrap justify-center items-center gap-3">
           {palcos.map((palco, index) => (
             <div
@@ -57,6 +59,7 @@ const Palcos = () => {
             </div>
           ))}
         </div>
+                */}
       </div>
     </section>
   );

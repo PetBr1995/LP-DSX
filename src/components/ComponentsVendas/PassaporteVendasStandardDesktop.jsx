@@ -56,7 +56,7 @@ const PassaporteVendasStandardDesktop = () => {
   const standardCards = infPrice.filter((item) => item.nome === "STANDARD");
 
   return (
-    <section className="py-8 relative after:content-[''] after:absolute after:-top-85 after:right-0 after:bg-cover after:bg-no-repeat after:bg-center after:w-80 after:h-140 after:bg-[url(/banner-passaporte.png)] overflow-hidden">
+    <section className="py-8 relative  overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 relative">
         <h2 className="md:leading-15 font-anton uppercase text-white text-center text-3xl sm:text-4xl md:text-5xl">
           Esteja onde os grandes nomes decidem

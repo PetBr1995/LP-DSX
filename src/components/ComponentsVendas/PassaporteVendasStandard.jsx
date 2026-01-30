@@ -40,7 +40,7 @@ const PassaporteVendasStandard = () => {
     const standardVantagens = vantagens.filter((v) => v.standard);
   
     return (
-      <section className="py-8 relative after:content-[''] after:absolute after:-top-85 overflow-hidden after:right-0 after:bg-cover after:bg-center after:bg-no-repeat after:w-80 after:h-140 after:bg-[url(/banner-passaporte.png)]">
+      <section className="py-8 relative overflow-hidden ">
         <div className="mx-auto px-4 relative z-20">
           <h2 className="font-anton uppercase text-white text-center text-3xl">
             Esteja onde os grandes nomes decidem o futuro dos negócios.
