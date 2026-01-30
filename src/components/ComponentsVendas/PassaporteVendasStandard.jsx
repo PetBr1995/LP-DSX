@@ -25,8 +25,8 @@ const PassaporteVendasStandard = () => {
   const vantagens = [
     { vip: true, standard: true, titulo: "ACESSO AOS 2 DIAS", desc: "Viva a experiência completa" },
     { vip: true, standard: true, titulo: "+50 PALESTRAS", desc: "Acesso integral ao conteúdo dos palcos" },
-    { vip: true, standard: true, titulo: "ACESSO A FEIRA DE NEGÓCIOS", desc: "Ambiente estratégico de networking focado em gerar novas oportunidades de negócio." },
-    { vip: true, standard: true, titulo: "OPORTUNIDADE DE NETWORKING", desc: "Conecte-se com profissionais e parceiros estratégicos para criar novas oportunidades de negócio." },
+    { vip: true, standard: true, titulo: "ACESSO A FEIRA DE NEGÓCIOS", desc: "Foco em gerar novas oportunidades de negócio." },
+    { vip: true, standard: true, titulo: "OPORTUNIDADE DE NETWORKING", desc: "Ambiente estratégico de networking." },
     { vip: true, standard: false, titulo: "ACESSO AO LOUNGE VIP", desc: "LOREN IPSUN LOREN IPSUN" },
     { vip: true, standard: false, titulo: "ACESSO AO FOOD STATION", desc: "LOREN IPSUN LOREN IPSUN" },
     { vip: true, standard: false, titulo: "CERTIFICADO DE PARTICIPAÇÃO", desc: "LOREN IPSUN LOREN IPSUN" },

@@ -26,22 +26,22 @@ const PassaporteVendasStandardDesktop = () => {
     {
       title: "ACESSO AOS 2 DIAS",
       icon: "/checkPassport.svg",
-      desc: "VIVA A EXPERIêNCIA COMPLETA",
+      desc: "Viva a experiência completa",
     },
     {
       title: "+50 PALESTRAS",
       icon: "/checkPassport.svg",
-      desc: "ACESSO INTEGRAL AO CONTEÚDO DOS 3 PALCOS",
+      desc: "Acesso integral so conteúdo dos palcos",
     },
     {
       title: "ACESSO A FEIRA DE NEGÓCIOS",
       icon: "/checkPassport.svg",
-      desc: "LOREN IPSUN  LOREN IPSUN",
+      desc: "Foco em gerar novas oportunidades de negócio.",
     },
     {
       title: "Oportunidade de networking",
       icon: "/checkPassport.svg",
-      desc: "LOREN IPSUN  LOREN IPSUN",
+      desc: "Ambiente estratégico de networking.",
     },
   ];
 
@@ -124,11 +124,11 @@ const PassaporteVendasStandardDesktop = () => {
                   </button>
                 </div>
 
-                <div className="mt-10 relative">
+                <div className="mt-12 relative">
                   {vantagens.map((_, index) => (
                     <div
                       key={index}
-                      className="relative z-30 flex items-center justify-center py-2"
+                      className="relative z-30 flex items-center justify-center py-3"
                     >
                       <img
                         src="/checkPassaport.svg"
@@ -157,7 +157,7 @@ const PassaporteVendasStandardDesktop = () => {
               <h2 className="relative z-20 text-white uppercase font-extrabold">
                 {item.title}
               </h2>
-              <p className="text-sm uppercase font-extralight text-white">
+              <p className="max-w-[325px] text-sm font-normal mt-2 text-white/90">
                 {item.desc}
               </p>
             </div>
