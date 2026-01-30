@@ -113,9 +113,11 @@ const PassaporteVendasStandardDesktop = () => {
                     R$ {item.price}
                   </p>
 
+                  {/* 
                   <p className="text-white text-sm uppercase">
                     12x de {item.parcelas}
                   </p>
+                    */}
 
                   <button className="uppercase bg-gradient-to-r from-[#F3CB46] to-[#E7A240] p-3 w-full mt-6 rounded-2xl font-bold">
                     Comprar agora
