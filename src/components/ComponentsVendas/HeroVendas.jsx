@@ -33,7 +33,7 @@ const HeroVendas = () => {
       player.off("loaded", onLoaded);
       player.off("play", onPlay);
       player.off("pause", onPause);
-      player.unload?.().catch(() => {});
+      player.unload?.().catch(() => { });
     };
   }, []);
 
@@ -42,8 +42,8 @@ const HeroVendas = () => {
       const player = playerRef.current;
       if (!player) return;
 
-      await player.setMuted(false).catch(() => {});
-      await player.setVolume(1).catch(() => {});
+      await player.setMuted(false).catch(() => { });
+      await player.setVolume(1).catch(() => { });
       await player.play();
     } catch {
       try {
@@ -51,24 +51,32 @@ const HeroVendas = () => {
         if (!player) return;
         await player.setMuted(true);
         await player.play();
-      } catch {}
+      } catch { }
     }
   };
 
   return (
     <section
       className="
-        relative pt-10 sm:pt-20 md:pt-30
-        bg-[url('/Banner-vendas-hero.png')]
-        bg-center bg-cover bg-no-repeat
-        after:absolute after:content-['']
-        after:top-0 after:left-1/2 after:-translate-x-1/2
-        after:bg-[url('/vector-29.svg')]
-        after:bg-no-repeat after:bg-contain
-        after:w-200 after:h-200 after:z-[1]
-        after:opacity-40 after:sm:opacity-60 after:md:opacity-85
-      "
+      relative pt-10 sm:pt-20 md:pt-30
+      bg-[url('/Banner-vendas-hero.png')]
+      bg-center bg-cover bg-no-repeat
+  
+      after:content-['']
+      after:absolute
+      after:inset-auto
+      after:-bottom-32
+      after:right-0
+      after:bg-[url('/vector-33.svg')]
+      after:bg-no-repeat
+      after:bg-contain
+      after:w-150
+      after:h-150
+      after:z-[1]
+      after:opacity-40 sm:after:opacity-60 md:after:opacity-85
+    "
     >
+
       <div className="absolute inset-0 bg-black/55" />
 
       <div className="relative z-10 flex flex-col items-center px-4">
