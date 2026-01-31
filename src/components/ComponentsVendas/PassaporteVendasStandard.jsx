@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 const PassaporteVendasStandard = () => {
   const infPrice = [
     {
@@ -23,14 +25,54 @@ const PassaporteVendasStandard = () => {
   ];
 
   const vantagens = [
-    { vip: true, standard: true, titulo: "ACESSO AOS 2 DIAS", desc: "Viva a experiência completa" },
-    { vip: true, standard: true, titulo: "+50 PALESTRAS", desc: "Acesso integral ao conteúdo dos palcos" },
-    { vip: true, standard: true, titulo: "ACESSO A FEIRA DE NEGÓCIOS", desc: "Foco em gerar novas oportunidades de negócio." },
-    { vip: true, standard: true, titulo: "OPORTUNIDADE DE NETWORKING", desc: "Ambiente estratégico de networking." },
-    { vip: true, standard: false, titulo: "ACESSO AO LOUNGE VIP", desc: "LOREN IPSUN LOREN IPSUN" },
-    { vip: true, standard: false, titulo: "ACESSO AO FOOD STATION", desc: "LOREN IPSUN LOREN IPSUN" },
-    { vip: true, standard: false, titulo: "CERTIFICADO DE PARTICIPAÇÃO", desc: "LOREN IPSUN LOREN IPSUN" },
-    { vip: true, standard: false, titulo: "PRIMEIRAS FILEIRAS", desc: "LOREN IPSUN LOREN IPSUN" },
+    {
+      vip: true,
+      standard: true,
+      titulo: "ACESSO AOS 2 DIAS",
+      desc: "Viva a experiência completa",
+    },
+    {
+      vip: true,
+      standard: true,
+      titulo: "+50 PALESTRAS",
+      desc: "Acesso integral ao conteúdo dos palcos",
+    },
+    {
+      vip: true,
+      standard: true,
+      titulo: "ACESSO A FEIRA DE NEGÓCIOS",
+      desc: "Foco em gerar novas oportunidades de negócio.",
+    },
+    {
+      vip: true,
+      standard: true,
+      titulo: "OPORTUNIDADE DE NETWORKING",
+      desc: "Ambiente estratégico de networking.",
+    },
+    {
+      vip: true,
+      standard: false,
+      titulo: "ACESSO AO LOUNGE VIP",
+      desc: "LOREN IPSUN LOREN IPSUN",
+    },
+    {
+      vip: true,
+      standard: false,
+      titulo: "ACESSO AO FOOD STATION",
+      desc: "LOREN IPSUN LOREN IPSUN",
+    },
+    {
+      vip: true,
+      standard: false,
+      titulo: "CERTIFICADO DE PARTICIPAÇÃO",
+      desc: "LOREN IPSUN LOREN IPSUN",
+    },
+    {
+      vip: true,
+      standard: false,
+      titulo: "PRIMEIRAS FILEIRAS",
+      desc: "LOREN IPSUN LOREN IPSUN",
+    },
   ];
 
   // ✅ 1) Só o card STANDARD
@@ -38,6 +80,8 @@ const PassaporteVendasStandard = () => {
 
   // ✅ 2) Só vantagens que o STANDARD tem (remove as VIP-only)
   const standardVantagens = vantagens.filter((v) => v.standard);
+
+  const navigate = useNavigate();
 
   return (
     <section className="py-8 relative overflow-hidden ">
@@ -86,9 +130,11 @@ const PassaporteVendasStandard = () => {
                   {card.nome}
                 </h2>
 
-                <p className="relative z-10 uppercase border text-white text-center text-[12px] p-1 border-white mx-6 sm:mx-10 rounded-xl mt-5">
-                  garanta seu passaporte
-                </p>
+                <div className="flex justify-center mt-5">
+                  <span className="bg-gradient-to-r from-[#F3CB46] to-[#E7A240] py-4 text-black text-sm font-bold uppercase px-4 py-1 rounded-2xl">
+                    🔥 Primeiro lote disponível
+                  </span>
+                </div>
 
                 <div className="relative z-10 mx-6 sm:mx-10">
                   <p
@@ -103,7 +149,15 @@ const PassaporteVendasStandard = () => {
                     </p>
                       */}
 
-                  <button className="uppercase bg-gradient-to-r from-[#F3CB46] to-[#E7A240] p-3 w-full mt-6 rounded-2xl font-bold">
+                  <button
+                    onClick={() =>
+                      window.open(
+                        "https://hub.la/r/EREq9bO1fsVKl6sG7Axo",
+                        "_blank",
+                      )
+                    }
+                    className="cursor-pointer uppercase bg-gradient-to-r from-[#F3CB46] to-[#E7A240] p-3 w-full mt-6 rounded-2xl font-bold"
+                  >
                     Comprar agora
                   </button>
                 </div>
@@ -124,9 +178,11 @@ const PassaporteVendasStandard = () => {
                         <h3 className="text-white uppercase font-extrabold text-sm">
                           {vantagem.titulo}
                         </h3>
+                        {/* 
                         <p className="text-white/90 tex font-normal text-sm mt-2">
                           {vantagem.desc}
                         </p>
+                        */}
                       </div>
 
                       <img

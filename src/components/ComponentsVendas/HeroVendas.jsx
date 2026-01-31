@@ -33,7 +33,7 @@ const HeroVendas = () => {
       player.off("loaded", onLoaded);
       player.off("play", onPlay);
       player.off("pause", onPause);
-      player.unload?.().catch(() => { });
+      player.unload?.().catch(() => {});
     };
   }, []);
 
@@ -42,8 +42,8 @@ const HeroVendas = () => {
       const player = playerRef.current;
       if (!player) return;
 
-      await player.setMuted(false).catch(() => { });
-      await player.setVolume(1).catch(() => { });
+      await player.setMuted(false).catch(() => {});
+      await player.setVolume(1).catch(() => {});
       await player.play();
     } catch {
       try {
@@ -51,7 +51,7 @@ const HeroVendas = () => {
         if (!player) return;
         await player.setMuted(true);
         await player.play();
-      } catch { }
+      } catch {}
     }
   };
 
@@ -76,7 +76,6 @@ const HeroVendas = () => {
       after:opacity-40 sm:after:opacity-60 md:after:opacity-85
     "
     >
-
       <div className="absolute inset-0 bg-black/55" />
 
       <div className="relative z-10 flex flex-col items-center px-4">
@@ -140,7 +139,10 @@ const HeroVendas = () => {
 
         {/* CTA */}
         <div className="py-8">
-          <CTAButton titulo="Quero meu passaporte" link="#" />
+          <CTAButton
+            titulo="Quero meu passaporte"
+            link=" https://hub.la/r/EREq9bO1fsVKl6sG7Axo"
+          />
         </div>
       </div>
     </section>

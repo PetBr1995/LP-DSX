@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 const PassaporteVendasStandardDesktop = () => {
   const infPrice = [
     {
@@ -55,13 +57,14 @@ const PassaporteVendasStandardDesktop = () => {
   // ✅ Só o card STANDARD
   const standardCards = infPrice.filter((item) => item.nome === "STANDARD");
 
+  const navigate = useNavigate();
+
   return (
     <section className="py-8 relative  overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 relative">
         <h2 className="md:leading-15 font-anton uppercase text-white text-center text-3xl sm:text-4xl md:text-5xl">
           Esteja onde os grandes nomes decidem
-          <br />
-          o futuro dos negócios.
+          <br />o futuro dos negócios.
         </h2>
 
         <p className="text-white uppercase font-extralight text-center text-xl sm:text-2xl mt-4">
@@ -101,13 +104,15 @@ const PassaporteVendasStandardDesktop = () => {
                   {item.nome}
                 </h2>
 
-                <p className="relative z-10 uppercase border text-white text-center text-[12px] font-normal p-1 border-white mx-12 rounded-xl mt-5">
-                  garanta seu passaporte
-                </p>
+                <div className="flex justify-center mt-5">
+                  <span className="bg-gradient-to-r from-[#F3CB46] to-[#E7A240] py-4 text-black text-sm font-bold uppercase px-4 py-1 rounded-2xl">
+                    🔥 Primeiro lote disponível
+                  </span>
+                </div>
 
                 <div className="relative z-10 mx-12">
                   <p
-                    className="font-extrabold uppercase my-4 text-5xl"
+                    className="font-extrabold uppercase mt-4 text-5xl"
                     style={{ color: item.textColor }}
                   >
                     R$ {item.price}
@@ -119,16 +124,23 @@ const PassaporteVendasStandardDesktop = () => {
                   </p>
                     */}
 
-                  <button className="uppercase bg-gradient-to-r from-[#F3CB46] to-[#E7A240] p-3 w-full mt-6 rounded-2xl font-bold">
+                  <button
+                    onClick={() =>
+                      window.open(
+                        "https://hub.la/r/EREq9bO1fsVKl6sG7Axo",
+                        "_blank",
+                      )
+                    }
+                    className="cursor-pointer uppercase bg-gradient-to-r from-[#F3CB46] to-[#E7A240] p-3 w-full mt-6 rounded-2xl font-bold"
+                  >
                     Comprar agora
                   </button>
                 </div>
-
-                <div className="mt-12 relative">
+                <div className="mt-10 relative">
                   {vantagens.map((_, index) => (
                     <div
                       key={index}
-                      className="relative z-30 flex items-center justify-center py-3"
+                      className="relative z-30 flex items-center justify-center py-2"
                     >
                       <img
                         src="/checkPassaport.svg"
@@ -144,12 +156,12 @@ const PassaporteVendasStandardDesktop = () => {
         </div>
 
         {/* ✅ MESMO MODELO: lista de texto com linear-gradient (mantida absoluta) */}
-        <div className="absolute top-130 md:top-130 left-5 right-4">
+        <div className="absolute top-130 md:top-132 left-5 right-4">
           {info.map((item, index) => (
             <div
               key={index}
               className="
-                py-2 pl-3 mb-[1px] relative
+                py-4 pl-3 mb-[1px] relative
                 odd:bg-gradient-to-r odd:from-[#090909]/60 odd:via-[#525151]/60 odd:to-[#464646]/60
                 even:bg-gradient-to-r even:from-[#090909]/60 even:via-[#1C1C1C]/60 even:to-[#222222]/60
               "
@@ -157,9 +169,11 @@ const PassaporteVendasStandardDesktop = () => {
               <h2 className="relative z-20 text-white uppercase font-extrabold">
                 {item.title}
               </h2>
+              {/*
               <p className="max-w-[325px] text-sm font-normal mt-2 text-white/90">
                 {item.desc}
               </p>
+               */}
             </div>
           ))}
         </div>

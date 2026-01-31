@@ -1,6 +1,14 @@
+import { useEffect, useRef, useState } from "react";
+import Player from "@vimeo/player";
 import CTAButton from "../Mascaras/CTAButton";
 
 const SecondSectionVendas = () => {
+  const iframeRef = useRef(null);
+  const playerRef = useRef(null);
+
+  const [isReady, setIsReady] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+
   const inf = [
     {
       icon: "/vector-16.svg",
@@ -28,6 +36,46 @@ const SecondSectionVendas = () => {
     },
   ];
 
+  useEffect(() => {
+    if (!iframeRef.current) return;
+
+    const player = new Player(iframeRef.current);
+    playerRef.current = player;
+
+    const onLoaded = () => setIsReady(true);
+    const onPlay = () => setIsPlaying(true);
+    const onPause = () => setIsPlaying(false);
+
+    player.on("loaded", onLoaded);
+    player.on("play", onPlay);
+    player.on("pause", onPause);
+
+    return () => {
+      player.off("loaded", onLoaded);
+      player.off("play", onPlay);
+      player.off("pause", onPause);
+      player.unload?.().catch(() => {});
+    };
+  }, []);
+
+  const handlePlay = async () => {
+    try {
+      const player = playerRef.current;
+      if (!player) return;
+
+      await player.setMuted(false).catch(() => {});
+      await player.setVolume(1).catch(() => {});
+      await player.play();
+    } catch {
+      try {
+        const player = playerRef.current;
+        if (!player) return;
+        await player.setMuted(true);
+        await player.play();
+      } catch {}
+    }
+  };
+
   return (
     <section
       className="
@@ -47,7 +95,7 @@ const SecondSectionVendas = () => {
             font-anton uppercase text-white
             text-3xl sm:text-4xl md:text-5xl lg:text-6xl
             leading-tight
-            text-center mb-2
+            text-center mb-6
           "
         >
           Dois dias para alinhar visão, estratégia e execução
@@ -55,7 +103,7 @@ const SecondSectionVendas = () => {
           em um mercado que não aceita mais improviso.
         </h2>
 
-        <p className="uppercase text-white text-sm sm:text-base md:text-xl text-center mb-6">
+        <p className="uppercase font-extralight text-white text-sm sm:text-base md:text-xl text-center mb-10">
           Você vai sair com:
         </p>
 
@@ -72,18 +120,53 @@ const SecondSectionVendas = () => {
                   alt="item"
                   className="w-10 sm:w-12 shrink-0"
                 />
-
-                <h3 className="text-white text-xl">
-                  {item.text}
-                </h3>
+                <h3 className="text-white text-sm sm:text-base">{item.text}</h3>
               </div>
             </div>
           ))}
         </div>
 
+        {/* VIDEO */}
+        <div className="mt-14 mb-12">
+          <div className="relative w-full aspect-video overflow-hidden rounded-2xl bg-black shadow-xl">
+            {/* IFRAME */}
+            <iframe
+              ref={iframeRef}
+              title="Video Evento Vendas"
+              src="https://player.vimeo.com/video/1146735494?autoplay=0&muted=0&loop=1&controls=0&title=0&byline=0&portrait=0&playsinline=1"
+              className="absolute inset-0 w-full h-full"
+              allow="autoplay; fullscreen; picture-in-picture"
+            />
+
+            {/* OVERLAY PLAY */}
+            {!isPlaying && (
+              <div className="absolute inset-0 grid place-items-center bg-black/45 backdrop-blur-[2px]">
+                <button
+                  onClick={handlePlay}
+                  disabled={!isReady}
+                  className="npm run de 
+                    cursor-pointer
+                    h-14 w-14
+                    rounded-full
+                    flex items-center justify-center
+                    hover:scale-105
+                    transition
+                    disabled:opacity-60
+                  "
+                >
+                  <img src="/play.svg" alt="play" className="wgit " />
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+
         {/* CTA */}
-        <div className="mt-10 flex justify-center">
-          <CTAButton titulo="Quero meu passaporte" link="#" />
+        <div className="mt-8 flex justify-center">
+          <CTAButton
+            titulo="Quero meu passaporte"
+            link=" https://hub.la/r/EREq9bO1fsVKl6sG7Axo"
+          />
         </div>
       </div>
     </section>

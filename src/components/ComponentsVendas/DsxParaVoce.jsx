@@ -61,9 +61,7 @@ const DsxParaVoce = () => {
               "
             >
               <img src={inf.icon} alt="icon" className="w-14 h-14" />
-              <p className="text-white text-xl leading-relaxed">
-                {inf.desc}
-              </p>
+              <p className="text-white text-xl leading-relaxed">{inf.desc}</p>
             </div>
           ))}
         </div>
@@ -85,15 +83,16 @@ const DsxParaVoce = () => {
               "
             >
               <img src={inf.icon} alt="icon" className="w-14 h-14" />
-              <p className="text-white text-xl leading-relaxed">
-                {inf.desc}
-              </p>
+              <p className="text-white text-xl leading-relaxed">{inf.desc}</p>
             </div>
           ))}
         </div>
 
         <div className="py-8 flex justify-center">
-          <CTAButton titulo="Quero meu passaporte" link="#" />
+          <CTAButton
+            titulo="Quero meu passaporte"
+            link=" https://hub.la/r/EREq9bO1fsVKl6sG7Axo"
+          />
         </div>
       </div>
     </section>
