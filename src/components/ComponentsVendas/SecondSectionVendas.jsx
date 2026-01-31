@@ -126,41 +126,6 @@ const SecondSectionVendas = () => {
           ))}
         </div>
 
-        {/* VIDEO */}
-        <div className="mt-14 mb-12">
-          <div className="relative w-full aspect-video overflow-hidden rounded-2xl bg-black shadow-xl">
-            {/* IFRAME */}
-            <iframe
-              ref={iframeRef}
-              title="Video Evento Vendas"
-              src="https://player.vimeo.com/video/1146735494?autoplay=0&muted=0&loop=1&controls=0&title=0&byline=0&portrait=0&playsinline=1"
-              className="absolute inset-0 w-full h-full"
-              allow="autoplay; fullscreen; picture-in-picture"
-            />
-
-            {/* OVERLAY PLAY */}
-            {!isPlaying && (
-              <div className="absolute inset-0 grid place-items-center bg-black/45 backdrop-blur-[2px]">
-                <button
-                  onClick={handlePlay}
-                  disabled={!isReady}
-                  className="npm run de 
-                    cursor-pointer
-                    h-14 w-14
-                    rounded-full
-                    flex items-center justify-center
-                    hover:scale-105
-                    transition
-                    disabled:opacity-60
-                  "
-                >
-                  <img src="/play.svg" alt="play" className="wgit " />
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
-
         {/* CTA */}
         <div className="mt-8 flex justify-center">
           <CTAButton
