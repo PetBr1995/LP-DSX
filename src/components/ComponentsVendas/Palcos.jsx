@@ -1,3 +1,5 @@
+import CTAButton from "../Mascaras/CTAButton";
+
 const Palcos = () => {
   const palcos = [
     { nome: "Palco Plenária" },
@@ -60,6 +62,12 @@ const Palcos = () => {
           ))}
         </div>
                 */}
+        <div className="mt-8">
+          <CTAButton
+            titulo="quero meu passaporte"
+            link="https://hub.la/r/EREq9bO1fsVKl6sG7Axo"
+          />
+        </div>
       </div>
     </section>
   );

@@ -108,12 +108,14 @@ const Vendas = () => {
         */}
         <Palcos />
 
-        {isMobile ? <PassaporteVendasStandard /> : <PassaporteVendasStandardDesktop />}
-        {
-          /*
-          <PassaporteGrupo />
-          */
-        }
+        {isMobile ? (
+          <PassaporteVendasStandard />
+        ) : (
+          <PassaporteVendasStandardDesktop />
+        )}
+        {/*
+         */}
+        <PassaporteGrupo />
         <CallToActionVendas />
         <FormVendas />
         <FAQVendas />
