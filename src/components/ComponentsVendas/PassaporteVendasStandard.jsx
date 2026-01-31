@@ -34,7 +34,7 @@ const PassaporteVendasStandard = () => {
     {
       vip: true,
       standard: true,
-      titulo: "+50 PALESTRAS",
+      titulo: "+30 PALESTRAS",
       desc: "Acesso integral ao conteúdo dos palcos",
     },
     {
@@ -131,8 +131,8 @@ const PassaporteVendasStandard = () => {
                 </h2>
 
                 <div className="flex justify-center mt-5">
-                  <span className="bg-gradient-to-r from-[#F3CB46] to-[#E7A240] py-4 text-black text-sm font-bold uppercase px-4 py-1 rounded-2xl">
-                    🔥 Primeiro lote disponível
+                  <span className="bg-black/25 border border-white text-white text-sm font-bold uppercase px-4 py-1 rounded-xl">
+                    1° lote
                   </span>
                 </div>
 

@@ -31,7 +31,7 @@ const PassaporteVendasStandardDesktop = () => {
       desc: "Viva a experiência completa",
     },
     {
-      title: "+50 PALESTRAS",
+      title: "+30 PALESTRAS",
       icon: "/checkPassport.svg",
       desc: "Acesso integral so conteúdo dos palcos",
     },
@@ -61,18 +61,17 @@ const PassaporteVendasStandardDesktop = () => {
 
   return (
     <section className="py-8 relative  overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 relative">
-        <h2 className="md:leading-15 font-anton uppercase text-white text-center text-3xl sm:text-4xl md:text-5xl">
-          Esteja onde os grandes nomes decidem
-          <br />o futuro dos negócios.
-        </h2>
+      <h2 className="md:leading-15 font-anton uppercase text-white text-center text-3xl sm:text-4xl md:text-5xl">
+        Esteja onde os grandes nomes decidem
+        <br />o futuro dos negócios.
+      </h2>
 
-        <p className="text-white uppercase font-extralight text-center text-xl sm:text-2xl mt-4">
-          Sua experiência começa aqui
-        </p>
-
+      <p className="text-white uppercase font-extralight text-center text-xl sm:text-2xl mt-4">
+        Sua experiência começa aqui
+      </p>
+      <div className="max-w-2xl mx-auto px-4 relative">
         {/* ✅ MESMA DISPOSIÇÃO: só centraliza o card */}
-        <div className="mt-8 flex flex-col sm:flex-row justify-center gap-2">
+        <div className="mt-8 flex flex-col sm:flex-row justify-end gap-2">
           {standardCards.map((item) => (
             <div
               key={item.nome}
@@ -105,8 +104,8 @@ const PassaporteVendasStandardDesktop = () => {
                 </h2>
 
                 <div className="flex justify-center mt-5">
-                  <span className="bg-gradient-to-r from-[#F3CB46] to-[#E7A240] py-4 text-black text-sm font-bold uppercase px-4 py-1 rounded-2xl">
-                    🔥 Primeiro lote disponível
+                  <span className="bg-black/25 border border-white text-white text-sm font-bold uppercase px-4 py-1 rounded-xl">
+                    1° lote
                   </span>
                 </div>
 
@@ -136,7 +135,7 @@ const PassaporteVendasStandardDesktop = () => {
                     Comprar agora
                   </button>
                 </div>
-                <div className="mt-10 relative">
+                <div className="mt-16 relative">
                   {vantagens.map((_, index) => (
                     <div
                       key={index}
@@ -156,7 +155,7 @@ const PassaporteVendasStandardDesktop = () => {
         </div>
 
         {/* ✅ MESMO MODELO: lista de texto com linear-gradient (mantida absoluta) */}
-        <div className="absolute top-130 md:top-132 left-5 right-4">
+        <div className="absolute top-130 md:top-83 left-5 right-4">
           {info.map((item, index) => (
             <div
               key={index}
