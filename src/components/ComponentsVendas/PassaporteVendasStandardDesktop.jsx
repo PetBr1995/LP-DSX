@@ -111,7 +111,7 @@ const PassaporteVendasStandardDesktop = () => {
 
                 <div className="relative z-10 mx-12">
                   <p
-                    className="font-extrabold uppercase mt-4 text-5xl"
+                    className="font-extrabold uppercase mt-4 text-5xl text-center"
                     style={{ color: item.textColor }}
                   >
                     R$ {item.price}
