@@ -127,7 +127,7 @@ const HeroVendas = () => {
                   <button
                     onClick={handlePlay}
                     disabled={!isReady}
-                    className="h-14 w-14 flex items-center justify-center disabled:opacity-60"
+                    className="h-14 w-14 flex items-center justify-start disabled:opacity-60"
                   >
                     <img src="/play.svg" alt="play" className="w-20" />
                   </button>
