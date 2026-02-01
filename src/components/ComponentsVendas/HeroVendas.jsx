@@ -139,10 +139,7 @@ const HeroVendas = () => {
 
         {/* CTA */}
         <div className="py-8">
-          <CTAButton
-            titulo="Quero meu passaporte"
-            link=" https://hub.la/r/EREq9bO1fsVKl6sG7Axo"
-          />
+          <CTAButton titulo="Quero meu passaporte" link="#passaportes" />
         </div>
       </div>
     </section>
