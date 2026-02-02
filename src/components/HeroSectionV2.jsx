@@ -39,10 +39,10 @@ const HeroSectionV2 = () => {
                         src="/dsx-2026-logo.png"
                         alt="logo"
                         className="
-              object-contain
-              h-30 sm:h-34 md:h-50 lg:h-56
-              w-auto
-            "
+                        object-contain
+                        h-30 sm:h-34 md:h-50 lg:h-56
+                        w-auto
+                        "
                     />
                 </div>
 

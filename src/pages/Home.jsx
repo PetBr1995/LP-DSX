@@ -35,10 +35,9 @@ const Home = () => {
       <HeroSection/>
       <HeroSectionV2/>
       <SlideFaixa/>
-      {/**
-       * 
+       
       <NewTimerHeader isVisible={showTimerHeader} />
-       */}
+       
 
       <SlidePalestrantes />
       <ContentSection />
