@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { withHublaUtm } from "../../utils/hublaUtm";
 
 const PassaporteVendasStandardDesktop = () => {
   const infPrice = [
@@ -126,8 +127,8 @@ const PassaporteVendasStandardDesktop = () => {
                   <button
                     onClick={() =>
                       window.open(
-                        "https://hub.la/r/EREq9bO1fsVKl6sG7Axo",
-                        "_blank",
+                        withHublaUtm("https://hub.la/r/EREq9bO1fsVKl6sG7Axo"),
+                        "_blank"
                       )
                     }
                     className="cursor-pointer uppercase bg-gradient-to-r from-[#F3CB46] to-[#E7A240] p-3 w-full mt-6 rounded-2xl font-bold"

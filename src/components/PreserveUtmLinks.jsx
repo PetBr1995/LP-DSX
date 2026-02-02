@@ -8,14 +8,14 @@ const PREFIX_DOMAINS = [
   "https://hub.la",
 ];
 
-function getUtmParamsExtra(urlString) {
-  const url = new URL(urlString);
+const STORAGE_KEY = "hubla_utms";
 
-  const utm_source = url.searchParams.get("utm_source") ?? "";
-  const utm_medium = url.searchParams.get("utm_medium") ?? "";
-  const utm_campaign = url.searchParams.get("utm_campaign") ?? "";
-  const utm_term = url.searchParams.get("utm_term") ?? "";
-  const utm_content = url.searchParams.get("utm_content") ?? "";
+function getUtmParamsExtraFromSearchParams(sp) {
+  const utm_source = sp.get("utm_source") ?? "";
+  const utm_medium = sp.get("utm_medium") ?? "";
+  const utm_campaign = sp.get("utm_campaign") ?? "";
+  const utm_term = sp.get("utm_term") ?? "";
+  const utm_content = sp.get("utm_content") ?? "";
 
   const hasAny =
     utm_source || utm_medium || utm_campaign || utm_term || utm_content;
@@ -31,12 +31,24 @@ function shouldRewriteLink(href) {
   return PREFIX_DOMAINS.some((d) => href.startsWith(d));
 }
 
-function rewriteLinks(searchParams) {
-  if (!searchParams || !searchParams.toString()) return;
+function getPersistedParams(locationSearch) {
+  // 1) se a URL atual tem query, salva e usa ela
+  const current = new URLSearchParams(locationSearch);
+  if (current.toString()) {
+    sessionStorage.setItem(STORAGE_KEY, current.toString());
+    return current;
+  }
 
-  const currentUrl = window.location.href;
-  const qs = searchParams.toString();
-  const sck = getUtmParamsExtra(currentUrl);
+  // 2) senão, tenta usar o que foi salvo na primeira entrada (landing)
+  const saved = sessionStorage.getItem(STORAGE_KEY) || "";
+  return new URLSearchParams(saved);
+}
+
+function rewriteLinks(params) {
+  if (!params || !params.toString()) return;
+
+  const qs = params.toString();
+  const sck = getUtmParamsExtraFromSearchParams(params);
 
   document.querySelectorAll("a[href]").forEach((a) => {
     const href = a.getAttribute("href");
@@ -51,8 +63,10 @@ function rewriteLinks(searchParams) {
 
     if (!shouldRewriteLink(href)) return;
 
-    // Evita duplicar (check simples)
-    if (href.includes(qs)) return;
+    // Evita duplicar grosseiramente
+    if (href.includes("utm_source=") || href.includes("utm_medium=") || href.includes("utm_campaign=")) {
+      return;
+    }
 
     const separator = href.includes("?") ? "&" : "?";
     a.setAttribute("href", `${href}${separator}${qs}${sck}`);
@@ -63,7 +77,7 @@ export default function PreserveUtmLinks() {
   const location = useLocation();
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
+    const params = getPersistedParams(location.search);
 
     rewriteLinks(params);
 
