@@ -130,7 +130,7 @@ const SecondSectionVendas = () => {
         <div className="mt-8 flex justify-center">
           <CTAButton
             titulo="Quero meu passaporte"
-            link=" https://hub.la/r/EREq9bO1fsVKl6sG7Axo"
+            link="#passaportes"
           />
         </div>
       </div>

@@ -65,7 +65,7 @@ const Palcos = () => {
         <div className="mt-8">
           <CTAButton
             titulo="quero meu passaporte"
-            link="https://hub.la/r/EREq9bO1fsVKl6sG7Axo"
+            link="#passaportes"
           />
         </div>
       </div>
