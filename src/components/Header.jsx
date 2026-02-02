@@ -46,7 +46,7 @@ const Header = ({ className = "" }) => {
             link="/patrocinador"
             font="bold"
           />
-          <CTAButton titulo="Lista de espera 2026" link="/#form" />
+          <CTAButton titulo="Compre agora" link="/vendas" />
         </div>
 
         {/* Mobile hamburger */}
@@ -100,8 +100,9 @@ const Header = ({ className = "" }) => {
             font="bold"
           />
           <CTAButton
-            titulo="Lista de espera 2026"
-            link="#form"
+            titulo="Compre agora"
+            link="/vendas"
+            
           // se quiser fechar ao clicar:
           // onClick={close}  (se seu CTAButton repassar props)
           />

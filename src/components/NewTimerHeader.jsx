@@ -55,12 +55,12 @@ const NewTimerHeader = ({ isVisible }) => {
           />
         </div>
 
-        {/* Meio: timer */}
+          {/* Meio: timer */}
         <div className="w-full sm:w-auto flex justify-center">
           <Timer
             targetDate="2026-02-01T00:00:00"
             className="scale-90 sm:scale-100"
-          />
+            />
         </div>
         {/* Direita: CTA */}
         {/*

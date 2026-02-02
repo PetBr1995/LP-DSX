@@ -35,13 +35,18 @@ const Home = () => {
       <HeroSection/>
       <HeroSectionV2/>
       <SlideFaixa/>
+      {/**
+       * 
       <NewTimerHeader isVisible={showTimerHeader} />
+       */}
 
       <SlidePalestrantes />
       <ContentSection />
       <Depoimentos/>
       <PublicoDSX/>
+      {/* 
       <FormSection />
+      */}
       <FaleConosco />
       <FAQ/>
       <Footer />

@@ -198,7 +198,7 @@ const Depoimentos = () => {
 
       {/* CTA */}
       <div className="py-10">
-        <CTAButton titulo="Lista de espera 2026" link="/#form" />
+        <CTAButton titulo="Compre agora" link="/vendas" />
       </div>
     </section>
   )
