@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 // ===================
 // Utils
@@ -69,8 +68,6 @@ export const FormButton = ({
 // ===================
 
 const FormVendas = () => {
-  const navigate = useNavigate();
-
   // 🔎 UTMs
   const [sourceData, setSourceData] = useState({
     page_url: "",
@@ -183,7 +180,7 @@ const FormVendas = () => {
             Accept: "application/json",
           },
           body: JSON.stringify(payload),
-        },
+        }
       );
 
       if (!res.ok) {
@@ -198,7 +195,12 @@ const FormVendas = () => {
         company: "",
       });
 
-      navigate("/agradecimento");
+      // 👉 Redirect para o grupo VIP do WhatsApp
+      window.open(
+        "https://chat.whatsapp.com/GXEsJXjFNBi1a3LLAiG90R",
+        "_blank",
+        "noopener,noreferrer"
+      );
     } catch (err) {
       setStatus("error");
       setMessage("Erro ao enviar formulário. Tente novamente.");
@@ -225,14 +227,15 @@ const FormVendas = () => {
         after:bg-center
         after:bg-no-repeat
         after:z-[1]
-
       "
     >
       <div className="relative z-10 max-w-5xl mx-auto px-4">
         <img src="/dsx2026.png" alt="logo" className="mx-auto mb-6" />
+
         <p className="uppercase text-xl font-extralight mb-2 text-white text-center">
           Preencha seu dados e receba as
         </p>
+
         <h2 className="text-center text-white font-anton uppercase text-3xl sm:text-4xl mb-8">
           informações em primeira mão através do Grupo VIP
         </h2>
