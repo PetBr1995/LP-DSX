@@ -4,12 +4,12 @@ const ImpactoVendas = () => {
   const videos = [
     {
       titulo: "Expositor",
-      video: "https://vimeo.com/1148163374?fl=ip&fe=ec",
+      video: "https://vimeo.com/1148163345?fl=ip&fe=ec",
       thumb: "/card-image/expositor-card-img.png", // <- coloque no /public/thumbs/
     },
     {
       titulo: "Palestrante",
-      video: "https://vimeo.com/1148163345?fl=ip&fe=ec",
+      video: "https://vimeo.com/1148163374?fl=ip&fe=ec",
       thumb: "/card-image/kepler-card-img.png",
     },
     {
