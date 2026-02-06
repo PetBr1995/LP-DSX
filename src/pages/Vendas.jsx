@@ -115,10 +115,7 @@ const Vendas = () => {
             <PassaporteVendasStandardDesktop />
           )}
         </div>
-        {/*
         <PassaporteGrupo />
-         */}
-
         <CallToActionVendas />
         {/*
         <FormVendas />

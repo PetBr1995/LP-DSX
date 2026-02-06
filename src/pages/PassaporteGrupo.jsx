@@ -8,6 +8,7 @@ const PassaporteGrupo = () => {
       valorParcela: "xx,xx",
       icon: "/vector-5.svg",
       porCentoOff: "5% OFF",
+      link: "https://hub.la/r/ArwmMqmV9aBZkI33UYfF",
     },
     {
       qtdPessoas: "10",
@@ -15,6 +16,7 @@ const PassaporteGrupo = () => {
       valorParcela: "xx,xx",
       icon: "/vector-9.svg",
       porCentoOff: "10% OFF",
+      link: "https://hub.la/r/MrAx1UDpvEnhGdAfYESX",
     },
   ];
 
@@ -77,9 +79,7 @@ const PassaporteGrupo = () => {
               <p className="text-white uppercase">Por pessoa</p>
 
               <button
-                onClick={() =>
-                  window.open("https://hub.la/r/EREq9bO1fsVKl6sG7Axo", "_blank")
-                }
+                onClick={() => window.open(item.link, "_blank")}
                 className="w-full p-2 rounded-xl my-8 cursor-pointer font-bold uppercase bg-linear-to-r from-[#F3CB46] to-[#E7A240]"
               >
                 Comprar agora
