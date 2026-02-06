@@ -21,18 +21,32 @@ const HeroVendas = () => {
     const player = new Player(iframeRef.current);
     playerRef.current = player;
 
+    const END_TIME = 97; // 1:37 = 97 segundos
+
     const onLoaded = () => setIsReady(true);
     const onPlay = () => setIsPlaying(true);
     const onPause = () => setIsPlaying(false);
 
+    // corta o vídeo em 1:37 e volta pro início (loop "cortado")
+    const onTimeUpdate = (data) => {
+      if (data?.seconds >= END_TIME) {
+        player
+          .setCurrentTime(0)
+          .then(() => player.play())
+          .catch(() => {});
+      }
+    };
+
     player.on("loaded", onLoaded);
     player.on("play", onPlay);
     player.on("pause", onPause);
+    player.on("timeupdate", onTimeUpdate);
 
     return () => {
       player.off("loaded", onLoaded);
       player.off("play", onPlay);
       player.off("pause", onPause);
+      player.off("timeupdate", onTimeUpdate);
       player.unload?.().catch(() => {});
     };
   }, []);
@@ -89,28 +103,16 @@ const HeroVendas = () => {
           O MAIOR EVENTO DE NEGÓCIOS, MARKETING, VENDAS E INOVAÇÃO DO NORTE
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
-          {info.map((item, index) => (
-            <div key={index} className="flex flex-col items-center">
-              <h2 className="font-anton text-7xl bg-gradient-to-r from-[#F5D247] to-[#E9A741] bg-clip-text text-transparent">
-                {item.number}
-              </h2>
-              <p className="uppercase text-xl font-extralight text-[#F5D247]">
-                {item.title}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        {/* 🔥 VIDEO (mais nítido) */}
+        {/* 🔥 VIDEO */}
         <div className="mt-12 w-full flex justify-center">
           <div className="w-full max-w-5xl">
             <div className="relative w-full aspect-video overflow-hidden rounded-2xl bg-black shadow-xl">
               <iframe
                 ref={iframeRef}
                 title="Video Evento Vendas"
-                // ✅ força qualidade alta (quando disponível) e evita tracking
-                src="https://player.vimeo.com/video/1146735494?autoplay=0&muted=0&loop=1&controls=0&title=0&byline=0&portrait=0&playsinline=1&quality=1080p&dnt=1"
+                // OBS: autoplay com som (muted=0) costuma ser bloqueado por navegadores
+                // Se precisar garantir autoplay, troque muted=1
+                src="https://player.vimeo.com/video/1146735494?autoplay=1&muted=0&loop=0&controls=0&title=0&byline=0&portrait=0&playsinline=1&quality=1080p&dnt=1"
                 className="
                   absolute inset-0 w-full h-full
                   [transform:translateZ(0)]
@@ -122,6 +124,8 @@ const HeroVendas = () => {
                 referrerPolicy="strict-origin-when-cross-origin"
               />
 
+              {/*
+              Se quiser voltar com o overlay de play, é só descomentar.
               {!isPlaying && (
                 <div className="absolute inset-0 grid place-items-center bg-black/45 backdrop-blur-[2px]">
                   <button
@@ -133,8 +137,22 @@ const HeroVendas = () => {
                   </button>
                 </div>
               )}
+              */}
             </div>
           </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center mt-6">
+          {info.map((item, index) => (
+            <div key={index} className="flex flex-col items-center">
+              <h2 className="font-anton text-7xl bg-gradient-to-r from-[#F5D247] to-[#E9A741] bg-clip-text text-transparent">
+                {item.number}
+              </h2>
+              <p className="uppercase text-xl font-extralight text-[#F5D247]">
+                {item.title}
+              </p>
+            </div>
+          ))}
         </div>
 
         {/* CTA */}

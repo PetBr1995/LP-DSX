@@ -120,7 +120,9 @@ const Vendas = () => {
          */}
 
         <CallToActionVendas />
+        {/*
         <FormVendas />
+         */}
         <FAQVendas />
         <RedesSociais />
         <Footer />
