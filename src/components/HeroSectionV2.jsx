@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const HeroSectionV2 = () => {
     const cardItens = [
-        { icon: "/icon-foguete.svg", number: "+50", title: "Palestras", desc: "Grandes nomes do mercado de IA, gestão, vendas e inovação." },
+        { icon: "/icon-foguete.svg", number: "+30", title: "Palestras", desc: "Grandes nomes do mercado de IA, gestão, vendas e inovação." },
         { icon: "/icone-pessoas.svg", number: "+2.000", title: "Participantes", desc: "Empresários, decisores, gestores e profissionais de alto nível." },
         { icon: "/icone-target.svg", number: "+30", title: "Expositores regionais", desc: "Marcas que representam a força e diversidade dos negócios no Norte." },
     ];

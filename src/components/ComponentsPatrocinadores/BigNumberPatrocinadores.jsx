@@ -12,8 +12,8 @@ const BigNumberPatrocinadores = () => {
             desc: "Reunindo marcas, soluções e conexões"
         },
         {
-            number: "+ 50",
-            title: "Plestrantes",
+            number: "+ 30",
+            title: "Palestrantes",
             desc: "Levaram aos palcos visão de mercado"
         }
     ]

@@ -112,7 +112,7 @@ const HeroVendas = () => {
                 title="Video Evento Vendas"
                 // OBS: autoplay com som (muted=0) costuma ser bloqueado por navegadores
                 // Se precisar garantir autoplay, troque muted=1
-                src="https://player.vimeo.com/video/1146735494?autoplay=1&muted=0&loop=0&controls=0&title=0&byline=0&portrait=0&playsinline=1&quality=1080p&dnt=1"
+                src="https://player.vimeo.com/video/1146735494?autoplay=1&muted=1&loop=0&controls=0&title=0&byline=0&portrait=0&playsinline=1&quality=1080p&dnt=1"
                 className="
                   absolute inset-0 w-full h-full
                   [transform:translateZ(0)]

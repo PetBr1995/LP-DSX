@@ -95,6 +95,14 @@ const Vendas = () => {
   return (
     <>
       <section className="overflow-x-hidden">
+        <div id="passaportes">
+          {isMobile ? (
+            <PassaporteVendasStandard />
+          ) : (
+            <PassaporteVendasStandardDesktop />
+          )}
+        </div>
+        <PassaporteGrupo />
         <HeroVendas />
         <SecondSectionVendas />
         <ImpactoVendas />
@@ -108,14 +116,7 @@ const Vendas = () => {
         */}
         <Palcos />
 
-        <div id="passaportes">
-          {isMobile ? (
-            <PassaporteVendasStandard />
-          ) : (
-            <PassaporteVendasStandardDesktop />
-          )}
-        </div>
-        <PassaporteGrupo />
+
         <CallToActionVendas />
         {/*
         <FormVendas />
