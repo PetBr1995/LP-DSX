@@ -58,7 +58,7 @@ const PassaporteGrupo = () => {
                 before:z-10
               "
           >
-            <p className="text-white font-extralight uppercase">In group</p>
+            <p className="text-white font-extralight uppercase">Em grupo</p>
 
             {/* Agora esse texto fica por cima do ícone SEM falhar */}
             <h2 className="relative z-20 text-6xl text-white uppercase font-anton">
