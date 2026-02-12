@@ -15,6 +15,7 @@ import SlideFaixa from "../components/SlideFaixa";
 import Depoimentos from "../components/Depoimentos";
 import PublicoDSX from "../components/PublicoDSX";
 import FAQ from "../components/FAQ";
+import BannerSection from "../components/BannerSection";
 
 
 const Home = () => {
@@ -43,6 +44,7 @@ const Home = () => {
       <ContentSection />
       <Depoimentos/>
       <PublicoDSX/>
+      <BannerSection/>
       {/* 
       <FormSection />
       */}
