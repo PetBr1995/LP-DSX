@@ -31,7 +31,7 @@ const Header = ({ className = "" }) => {
         <a href="/#home">
           {/* Logo (sempre visível) */}
           <img
-            src="/dsx2026main.png"
+            src="/DSX-2026-icon-1.png"
             alt="logo"
             className="h-[32px] sm:h-[40px] w-auto"
           />
