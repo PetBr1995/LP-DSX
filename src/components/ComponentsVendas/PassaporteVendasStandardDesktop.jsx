@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { withHublaUtm } from "../../utils/hublaUtm";
+import FaixaLote from "./FaixaLote";
 
 const PassaporteVendasStandardDesktop = () => {
   const infPrice = [
@@ -70,7 +71,10 @@ const PassaporteVendasStandardDesktop = () => {
       <p className="text-white uppercase font-extralight text-center text-xl sm:text-2xl mt-4">
         Sua experiência começa aqui
       </p>
-      <div className="max-w-2xl mx-auto px-4 relative">
+      
+      <FaixaLote />
+
+      <div className="max-w-2xl mx-auto px-4 relative ">
         {/* ✅ MESMA DISPOSIÇÃO: só centraliza o card */}
         <div className="mt-8 flex flex-col sm:flex-row justify-end gap-2">
           {standardCards.map((item) => (

@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { withHublaUtm } from "../../utils/hublaUtm";
+import FaixaLote from "./FaixaLote";
 
 const PassaporteVendasStandard = () => {
   const infPrice = [
@@ -94,7 +95,7 @@ const PassaporteVendasStandard = () => {
         <p className="text-white uppercase font-extralight text-center text-xl mt-4">
           Sua experiência começa aqui
         </p>
-
+        <FaixaLote/>
         {/* Grid simples */}
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-7xl mx-auto">
           {standardCards.map((card) => (
