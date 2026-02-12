@@ -5,6 +5,7 @@ import TimerHeaderPalestrantes from "../components/TimerHeaderPalestrantes";
 import { InfoPalestrantesNacionais } from "../data/InfoPalestrantesNacionais";
 import { InfoPalestrantesRegionais } from "../data/InfoPalestrantesRegionais";
 import { motion } from "framer-motion";
+import BotaoWP from "../components/BotaoWP";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -190,7 +191,6 @@ const Palestrantes = () => {
             ))}
           </motion.div>
         </div>
-
         <Footer />
       </section>
     </>

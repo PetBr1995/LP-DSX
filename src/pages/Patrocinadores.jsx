@@ -11,6 +11,7 @@ import NoticiasDSXPatrocinadores from "../components/ComponentsPatrocinadores/No
 import ReferenciasPatrocinadores from "../components/ComponentsPatrocinadores/ReferenciasPatrocinadores";
 import VideoSectionPatrocinadores from "../components/ComponentsPatrocinadores/VideoSectionPatrocinadores";
 import Footer from "../components/Footer";
+import BotaoWP from "../components/BotaoWP";
 
 const Patrocinadores = () => {
     useEffect(() => {

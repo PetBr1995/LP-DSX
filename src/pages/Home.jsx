@@ -16,6 +16,7 @@ import Depoimentos from "../components/Depoimentos";
 import PublicoDSX from "../components/PublicoDSX";
 import FAQ from "../components/FAQ";
 import BannerSection from "../components/BannerSection";
+import BotaoWP from "../components/BotaoWP";
 
 
 const Home = () => {
@@ -51,6 +52,7 @@ const Home = () => {
       <FaleConosco />
       <FAQ/>
       <Footer />
+      <BotaoWP/>
     </section>
   );
 };

@@ -19,6 +19,7 @@ import RedesSociais from "../components/ComponentsVendas/RedesSociais";
 import PassaporteVendasStandard from "../components/ComponentsVendas/PassaporteVendasStandard";
 import PassaporteVendasStandardDesktop from "../components/ComponentsVendas/PassaporteVendasStandardDesktop";
 import CallToActionVendas from "../components/ComponentsVendas/CallToActionVendas";
+import BotaoWP from "../components/BotaoWP";
 
 const Vendas = () => {
   useEffect(() => {
