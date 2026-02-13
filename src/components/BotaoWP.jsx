@@ -10,7 +10,7 @@ export default function BotaoWP() {
       style={{
         position: "fixed",
         bottom: "20px",
-        right: "20px",
+        left: "20px",
         zIndex: 50,
       }}
       initial={{ opacity: 0, scale: 0.8, y: 10 }}

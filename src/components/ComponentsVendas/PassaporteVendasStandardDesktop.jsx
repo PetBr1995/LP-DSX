@@ -33,7 +33,7 @@ const PassaporteVendasStandardDesktop = () => {
       desc: "Viva a experiência completa",
     },
     {
-      title: "+30 PALESTRAS",
+      title: "+40 PALESTRAS",
       icon: "/checkPassport.svg",
       desc: "Acesso integral so conteúdo dos palcos",
     },

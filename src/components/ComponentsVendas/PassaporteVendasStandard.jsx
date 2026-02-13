@@ -36,7 +36,7 @@ const PassaporteVendasStandard = () => {
     {
       vip: true,
       standard: true,
-      titulo: "+30 PALESTRAS",
+      titulo: "+40 PALESTRAS",
       desc: "Acesso integral ao conteúdo dos palcos",
     },
     {

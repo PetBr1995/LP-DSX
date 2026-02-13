@@ -94,7 +94,7 @@ const HeroVendas = () => {
 
       <div className="relative z-10 flex flex-col items-center px-4">
         <img
-          src="/logo-dsx-horizontal.svg"
+          src="/DSX-2026-icon-1.png"
           className="mb-10 w-40 md:w-70"
           alt="logo-dsx"
         />
