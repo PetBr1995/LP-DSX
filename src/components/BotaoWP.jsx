@@ -9,7 +9,7 @@ export default function BotaoWP() {
       rel="noopener noreferrer"
       style={{
         position: "fixed",
-        bottom: "20px",
+        bottom: "50px",
         left: "20px",
         zIndex: 50,
       }}
