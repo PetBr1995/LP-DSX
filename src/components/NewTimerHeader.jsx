@@ -48,22 +48,27 @@ const NewTimerHeader = ({ isVisible }) => {
       >
         {/* Esquerda: texto */}
         <div className="w-full sm:w-auto flex justify-center sm:justify-start">
+          {/*
           <MainMask
-            titulo="Garanta seu passaporte"
+            titulo="O evento começa em: "
             backgroundColor="#F2F2F2"
             textColor="#000000"
             link="/vendas"
             target="_blank"
-            
           />
+           */}
+          <h2 className="uppercase font-black font-jamjuree  px-3 ">O evento começa em: </h2>
         </div>
 
-          {/* Meio: timer */}
+        {/* Meio: timer */}
         <div className="w-full sm:w-auto flex justify-center">
           <Timer
             targetDate="2026-07-23T00:00:00"
             className="scale-90 sm:scale-100"
-            />
+          />
+        </div>
+        <div className="relative z-20">
+          <CTAButton titulo="Primeiro lote disponível" link="/vendas" />
         </div>
         {/* Direita: CTA */}
         {/*
