@@ -103,7 +103,7 @@ const HeroSectionV2 = () => {
 
                     {/* Cards */}
                     <motion.div
-                        className="mt-8  flex gap-6 flex-wrap"
+                        className="mt-8  flex gap-6 flex-wrap justify-center sm:justify-start"
                         variants={containerStagger}
                         initial="hidden"
                         whileInView="show"

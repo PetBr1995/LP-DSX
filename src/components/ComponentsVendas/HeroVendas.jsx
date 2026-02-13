@@ -12,7 +12,7 @@ const HeroVendas = () => {
   const info = [
     { number: "+2.000", title: "Participantes" },
     { number: "+30", title: "Expositores" },
-    { number: "+30", title: "Palestrantes" },
+    { number: "+40", title: "Palestrantes" },
   ];
 
   useEffect(() => {
