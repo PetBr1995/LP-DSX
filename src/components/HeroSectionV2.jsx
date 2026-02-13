@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const HeroSectionV2 = () => {
     const cardItens = [
-        { icon: "/icon-foguete.svg", number: "+30", title: "Palestras", desc: "Grandes nomes do mercado de IA, gestão, vendas e inovação." },
+        { icon: "/icon-foguete.svg", number: "+40", title: "Palestras", desc: "Grandes nomes do mercado de IA, gestão, vendas e inovação." },
         { icon: "/icone-pessoas.svg", number: "+2.000", title: "Participantes", desc: "Empresários, decisores, gestores e profissionais de alto nível." },
         { icon: "/icone-target.svg", number: "+30", title: "Expositores regionais", desc: "Marcas que representam a força e diversidade dos negócios no Norte." },
     ];
@@ -103,7 +103,7 @@ const HeroSectionV2 = () => {
 
                     {/* Cards */}
                     <motion.div
-                        className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+                        className="mt-8  flex gap-6 flex-wrap"
                         variants={containerStagger}
                         initial="hidden"
                         whileInView="show"
@@ -113,7 +113,7 @@ const HeroSectionV2 = () => {
                             <motion.div
                                 key={item.title}
                                 variants={cardAnim}
-                                className="w-full flex flex-col items-center md:items-start"
+                                className="w-fit flex flex-col items-center md:items-start"
                             >
                                 <div className="flex items-start gap-3">
                                     <h2 className="font-jamjuree text-[#12DB98] font-medium leading-none text-4xl sm:text-5xl md:text-5xl whitespace-nowrap">
