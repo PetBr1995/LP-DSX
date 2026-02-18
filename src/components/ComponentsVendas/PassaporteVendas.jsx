@@ -54,15 +54,16 @@ const PassaporteVendas = () => {
       desc: "LOREN IPSUN  LOREN IPSUN"
     },
     {
-      title: "Acesso exclusivo ao Lounge VIP",
-      icon: "/checkPassport.svg",
-      desc: "LOREN IPSUN  LOREN IPSUN"
-    },
-    {
       title: "Acesso ao food station",
       icon: "/checkPassport.svg",
       desc: "LOREN IPSUN  LOREN IPSUN"
     },
+    {
+      title: "Acesso exclusivo ao Lounge VIP",
+      icon: "/checkPassport.svg",
+      desc: "LOREN IPSUN  LOREN IPSUN"
+    },
+    
     
     {
       title: "Acesso AS primeiras fileiras ",
@@ -94,7 +95,7 @@ const PassaporteVendas = () => {
     },
     {
       vip: true,
-      standard: false
+      standard: true
     },
     {
       vip: true,

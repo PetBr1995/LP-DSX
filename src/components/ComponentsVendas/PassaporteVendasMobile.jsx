@@ -30,11 +30,11 @@ const PassaporteVendasMobile = () => {
   const vantagens = [
     { vip: true, standard: true, titulo: "ACESSO AOS 2 DIAS", desc: "VIVA A EXPERIÊNCIA COMPLETA" },
     { vip: true, standard: true, titulo: "+40 PALESTRAS", desc: "ACESSO INTEGRAL AO CONTEÚDO DOS 3 PALCOS" },
+    { vip: true, standard: true, titulo: "CERTIFICADO DE PARTICIPAÇÃO", desc: "LOREN IPSUN LOREN IPSUN" },
     { vip: true, standard: true, titulo: "ACESSO A FEIRA DE NEGÓCIOS", desc: "LOREN IPSUN LOREN IPSUN" },
     { vip: true, standard: true, titulo: "OPORTUNIDADE DE NETWORKING", desc: "LOREN IPSUN LOREN IPSUN" },
+    { vip: true, standard: true, titulo: "ACESSO AO FOOD STATION", desc: "LOREN IPSUN LOREN IPSUN" },
     { vip: true, standard: false, titulo: "ACESSO AO LOUNGE VIP", desc: "LOREN IPSUN LOREN IPSUN" },
-    { vip: true, standard: false, titulo: "ACESSO AO FOOD STATION", desc: "LOREN IPSUN LOREN IPSUN" },
-    { vip: true, standard: false, titulo: "CERTIFICADO DE PARTICIPAÇÃO", desc: "LOREN IPSUN LOREN IPSUN" },
     { vip: true, standard: false, titulo: "PRIMEIRAS FILEIRAS", desc: "LOREN IPSUN LOREN IPSUN" },
   ];
 
