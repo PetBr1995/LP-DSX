@@ -98,9 +98,9 @@ const Vendas = () => {
       <section className="overflow-x-hidden">
         <div id="passaportes">
           {isMobile ? (
-            <PassaporteVendasStandard />
+            <PassaporteVendasMobile />
           ) : (
-            <PassaporteVendasStandardDesktop />
+            <PassaporteVendas />
           )}
         </div>
         <PassaporteGrupo />

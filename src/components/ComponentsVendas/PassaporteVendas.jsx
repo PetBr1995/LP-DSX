@@ -1,14 +1,18 @@
+import FaixaLote from "./FaixaLote";
+import { withHublaUtm } from "../../utils/hublaUtm";
+
 const PassaporteVendas = () => {
   const infPrice = [
     {
       nome: "VIP",
-      price: "xxxx",
+      price: "997,00",
       parcelas: "xx,xx",
       borderColor: "#79E3A3",
       gradientColor: "#242424",
       textColor: "#6DCC96",
       iconSide: "left",
       iconCard: "/vector-31.svg",
+      link: "https://pay.hub.la/jheGgipTScsnmNqGZElQ"
     },
     {
       nome: "STANDARD",
@@ -19,6 +23,7 @@ const PassaporteVendas = () => {
       textColor: "#DA4068",
       iconSide: "right",
       iconCard: "/vector-32.svg",
+      link: "https://hub.la/r/EREq9bO1fsVKl6sG7Axo"
     },
   ];
 
@@ -29,7 +34,7 @@ const PassaporteVendas = () => {
       desc: "VIVA A EXPERIêNCIA COMPLETA"
     },
     {
-      title: "+50 PALESTRAS",
+      title: "+40 PALESTRAS",
       icon: "/checkPassport.svg",
       desc: "ACESSO INTEGRAL AO CONTEÚDO DOS 3 PALCOS"
     },
@@ -114,6 +119,8 @@ const PassaporteVendas = () => {
           Sua experiência começa aqui
         </p>
 
+        <FaixaLote />
+
         <div className="mt-8 flex flex-col sm:flex-row justify-end gap-2">
           {infPrice.map((item) => (
             <div
@@ -146,11 +153,11 @@ const PassaporteVendas = () => {
                 <h2 className="relative z-10 text-white text-6xl text-center uppercase pt-6 font-anton">
                   {item.nome}
                 </h2>
-                <p className="relative z-10 uppercase border text-white text-center text-[12px] font-normal p-1 border-white mx-12 rounded-xl mt-5">
-                  garanta seu passaporte
+                <p className="w-fit mx-auto px-2.5 text-1xl relative z-10 uppercase border text-white text-center font-black p-1 border-white mx-12 rounded-3xl mt-5 px-5">
+                  1° lote
                 </p>
 
-                <div className="relative z-10 mx-12">
+                <div className="relative z-10 mx-12 text-center">
                   <p
                     className="font-bold uppercase my-4 text-4xl"
                     style={{ color: item.textColor }}
@@ -158,15 +165,19 @@ const PassaporteVendas = () => {
                     R$ {item.price}
                   </p>
 
-                  <p className="text-white text-sm uppercase">
-                    12x de {item.parcelas}
-                  </p>
-
-                  <button className="uppercase bg-gradient-to-r from-[#F3CB46] to-[#E7A240] p-3 w-full mt-6 rounded-2xl font-bold">
+                  <button
+                    onClick={() =>
+                      window.open(
+                        withHublaUtm(item.link),
+                        "_blank"
+                      )
+                    }
+                    className="relative z-50 cursor-pointer uppercase bg-gradient-to-r from-[#F3CB46] to-[#E7A240] p-3 w-full mt-6 rounded-2xl font-bold"
+                  >
                     Comprar agora
                   </button>
                 </div>
-                <div className="mt-10 relative">
+                <div className="mt-12 relative">
                   {vantagens.map((vantagem, index) => {
                     const hasAccess =
                       item.nome === "VIP" ? vantagem.vip : vantagem.standard;
@@ -174,7 +185,7 @@ const PassaporteVendas = () => {
                     return (
                       <div
                         key={index}
-                        className="relative z-30 flex items-center justify-center py-2"
+                        className="relative z-30 flex items-center justify-center py-[11px]"
                       >
                         <img
                           src={hasAccess ? "/checkPassaport.svg" : "/xPassaport.svg"}
@@ -191,7 +202,7 @@ const PassaporteVendas = () => {
             </div>
           ))}
         </div>
-        <div className="absolute top-130  md:top-130 left-5 right-4">
+        <div className="absolute top-130  md:top-150 left-5 right-4">
           {info.map((item, index) => (
             <div
               key={index}
@@ -209,12 +220,9 @@ const PassaporteVendas = () => {
               even:to-[#222222]/60
             "
             >
-              <h2 className="relative z-20 text-white uppercase font-extrabold">
+              <h2 className="relative z-20 text-white uppercase font-extrabold py-3">
                 {item.title}
               </h2>
-              <p className="text-sm uppercase font-extralight text-white">
-                {item.desc}
-              </p>
             </div>
 
           ))}
