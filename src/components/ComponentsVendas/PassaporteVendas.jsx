@@ -39,6 +39,11 @@ const PassaporteVendas = () => {
       desc: "ACESSO INTEGRAL AO CONTEÚDO DOS 3 PALCOS"
     },
     {
+      title: "Certificado de participação",
+      icon: "/checkPassport.svg",
+      desc: "LOREN IPSUN  LOREN IPSUN"
+    },
+    {
       title: "ACESSO A FEIRA DE NEGÓCIOS",
       icon: "/checkPassport.svg",
       desc: "LOREN IPSUN  LOREN IPSUN"
@@ -58,11 +63,7 @@ const PassaporteVendas = () => {
       icon: "/checkPassport.svg",
       desc: "LOREN IPSUN  LOREN IPSUN"
     },
-    {
-      title: "Certificado de participação",
-      icon: "/checkPassport.svg",
-      desc: "LOREN IPSUN  LOREN IPSUN"
-    },
+    
     {
       title: "Acesso AS primeiras fileiras ",
       icon: "/checkPassport.svg",
@@ -89,7 +90,7 @@ const PassaporteVendas = () => {
     },
     {
       vip: true,
-      standard: false
+      standard: true
     },
     {
       vip: true,
