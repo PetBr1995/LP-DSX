@@ -64,12 +64,22 @@ const PassaporteVendas = () => {
       desc: "LOREN IPSUN  LOREN IPSUN"
     },
     
-    
     {
       title: "Acesso AS primeiras fileiras ",
       icon: "/checkPassport.svg",
       desc: "LOREN IPSUN  LOREN IPSUN"
     },
+    {
+      title: "Kit Premium de boas-vindas",
+      icon: "/checkPassport.svg",
+      desc: "LOREN IPSUN  LOREN IPSUN"
+    },
+    {
+      title: "Open de finger food liberado no lounge a partir das 13h",
+      icon: "/checkPassport.svg",
+      desc: "LOREN IPSUN  LOREN IPSUN"
+    },
+  
   ]
 
   const vantagens = [
@@ -105,6 +115,15 @@ const PassaporteVendas = () => {
       vip: true,
       standard: false
     },
+    {
+      vip: true,
+      standard: false
+    },
+    {
+      vip: true,
+      standard: false
+    },
+   
 
   ]
 
@@ -134,10 +153,10 @@ const PassaporteVendas = () => {
                 // IMPORTANTÍSSIMO: a variável precisa guardar o url(...)
                 "--icon": `url(${item.iconCard})`,
               }}
-              className="w-80 h-[862px] rounded-2xl bg-gradient-to-b from-[var(--bgColor)] to-[var(--gradientColor)]"
+              className="w-80 h-[1002px] rounded-2xl bg-gradient-to-b from-[var(--bgColor)] to-[var(--gradientColor)]"
             >
               <div
-                className={`relative bg-black h-[860px] rounded-2xl m-px overflow-hidden
+                className={`relative bg-black h-[1000px] rounded-2xl m-px overflow-hidden
                   after:content-['']
                   after:absolute
                   after:top-0
@@ -222,7 +241,7 @@ const PassaporteVendas = () => {
               even:to-[#222222]/60
             "
             >
-              <h2 className="relative z-20 text-white uppercase font-extrabold py-3">
+              <h2 className="max-w-[350px] relative z-20 text-white uppercase font-extrabold py-3">
                 {item.title}
               </h2>
             </div>

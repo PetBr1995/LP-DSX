@@ -34,8 +34,10 @@ const PassaporteVendasMobile = () => {
     { vip: true, standard: true, titulo: "ACESSO A FEIRA DE NEGÓCIOS", desc: "LOREN IPSUN LOREN IPSUN" },
     { vip: true, standard: true, titulo: "OPORTUNIDADE DE NETWORKING", desc: "LOREN IPSUN LOREN IPSUN" },
     { vip: true, standard: true, titulo: "ACESSO AO FOOD STATION", desc: "LOREN IPSUN LOREN IPSUN" },
-    { vip: true, standard: false, titulo: "ACESSO AO LOUNGE VIP", desc: "LOREN IPSUN LOREN IPSUN" },
+    { vip: true, standard: false, titulo: "Acesso exclusivo ao Lounge VIP: conforto e network", desc: "LOREN IPSUN LOREN IPSUN" },
     { vip: true, standard: false, titulo: "PRIMEIRAS FILEIRAS", desc: "LOREN IPSUN LOREN IPSUN" },
+    { vip: true, standard: false, titulo: "Kit Premium de boas-vindas", desc: "LOREN IPSUN LOREN IPSUN" },
+    { vip: true, standard: false, titulo: "Open de finger food liberado no lounge a partir das 13h", desc: "LOREN IPSUN LOREN IPSUN" },
   ];
 
   return (
