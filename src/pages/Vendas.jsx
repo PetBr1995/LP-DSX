@@ -96,7 +96,7 @@ const Vendas = () => {
   return (
     <>
       <section className="overflow-x-hidden">
-        <div id="passaportes">
+        <div id="passaportes" className="bg-[url(/ELEMENTOS-BANNER-2.png)] bg-cover bg-no-repeat bg-cnter">
           {isMobile ? (
             <PassaporteVendasMobile />
           ) : (
