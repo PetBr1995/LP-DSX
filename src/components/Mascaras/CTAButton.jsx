@@ -10,9 +10,7 @@ const CTAButton = ({ titulo, textColor,link }) => {
                     rounded-2xl
                     bg-linear-to-r from-[#F3CB46] to-[#E7A040]
                     p-0.5
-                    
                     "
-
                     >
                         <div className="flex justify-center items-center rounded-[14px] w-[200px] h-10">
                             <p className="uppercase text-[14px] font-bold" style={{ color: textColor }}>{titulo}</p>
@@ -21,7 +19,7 @@ const CTAButton = ({ titulo, textColor,link }) => {
 
                     {/* DIREITA */}
                     <div className="relative -ml-0.5 rounded-2xl bg-linear-to-r from-[#E7A040] to-[#E7A040] p-0.5">
-                        <div className="flex justify-center items-center rounded-[14px] w-[50px] h-10">
+                        <div className="relative flex justify-center items-center rounded-[14px] w-[50px] h-10">
                             <img src="/Arrow-2.svg" alt="arrow-down" className="w-[20px] h-auto rotate-90" />
                         </div>
                     </div>

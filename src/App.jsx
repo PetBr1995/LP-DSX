@@ -7,6 +7,7 @@ import Patrocinadores from "./pages/Patrocinadores";
 import Vendas from "./pages/Vendas";
 import WhatsappPage from "./pages/WhatsappPage";
 import PreserveUtmLinks from "./components/PreserveUtmLinks";
+import TesteAnimation from "./pages/testeAnimation";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/patrocinador" element={<Patrocinadores />} />
         <Route path="/vendas" element={<Vendas />} />
         <Route path="/whatsapp" element={<WhatsappPage />} />
+        <Route path="/testeanimation" element={<TesteAnimation/>}/>
       </Routes>
     </>
   );
