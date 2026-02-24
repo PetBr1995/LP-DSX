@@ -15,60 +15,81 @@ import BotaoWP from "../components/BotaoWP";
 
 const Patrocinadores = () => {
     useEffect(() => {
-        /** TITLE */
-        document.title =
-            "Patrocine o DSX 2026 | Maior evento de negócios do Norte do Brasil";
+        const pageTitle = "Patrocine o DSX 2026 | Maior evento de negócios do Norte do Brasil";
+        const pageDescription =
+            "Associe sua marca ao maior evento de negócios, marketing, vendas e inovação do Norte do Brasil. Conheça as cotas de patrocínio do DSX 2026.";
+        const pageUrl = "https://dsx.com.vc/patrocinador";
+        const ogImage = "https://dsx.com.vc/banner-patrocinador.png";
 
-        /** DESCRIPTION */
-        let description = document.querySelector('meta[name="description"]');
-        if (!description) {
-            description = document.createElement("meta");
-            description.setAttribute("name", "description");
-            document.head.appendChild(description);
+        document.title = pageTitle;
+
+        const updates = [
+            { type: "name", key: "description", value: pageDescription },
+            { type: "property", key: "og:type", value: "website" },
+            { type: "property", key: "og:title", value: pageTitle },
+            { type: "property", key: "og:description", value: pageDescription },
+            { type: "property", key: "og:url", value: pageUrl },
+            { type: "property", key: "og:image", value: ogImage },
+            { type: "name", key: "twitter:card", value: "summary_large_image" },
+            { type: "name", key: "twitter:title", value: pageTitle },
+            { type: "name", key: "twitter:description", value: pageDescription },
+            { type: "name", key: "twitter:image", value: ogImage },
+        ];
+
+        const previousTags = updates.map((item) => {
+            const selector =
+                item.type === "name"
+                    ? `meta[name="${item.key}"]`
+                    : `meta[property="${item.key}"]`;
+            let tag = document.head.querySelector(selector);
+            const existed = Boolean(tag);
+            const previousContent = tag?.getAttribute("content");
+
+            if (!tag) {
+                tag = document.createElement("meta");
+                tag.setAttribute(item.type, item.key);
+                document.head.appendChild(tag);
+            }
+
+            tag.setAttribute("content", item.value);
+            return { tag, existed, previousContent };
+        });
+
+        const canonicalSelector = 'link[rel="canonical"]';
+        let canonicalTag = document.head.querySelector(canonicalSelector);
+        const canonicalExisted = Boolean(canonicalTag);
+        const previousCanonical = canonicalTag?.getAttribute("href");
+
+        if (!canonicalTag) {
+            canonicalTag = document.createElement("link");
+            canonicalTag.setAttribute("rel", "canonical");
+            document.head.appendChild(canonicalTag);
         }
-        description.setAttribute(
-            "content",
-            "Associe sua marca ao maior evento de negócios, marketing, vendas e inovação do Norte do Brasil. Conheça as cotas de patrocínio do DSX 2026."
-        );
 
-        /** OPEN GRAPH */
-        const setOg = (property, content) => {
-            let tag = document.querySelector(`meta[property="${property}"]`);
-            if (!tag) {
-                tag = document.createElement("meta");
-                tag.setAttribute("property", property);
-                document.head.appendChild(tag);
+        canonicalTag.setAttribute("href", pageUrl);
+
+        return () => {
+            previousTags.forEach(({ tag, existed, previousContent }) => {
+                if (!existed) {
+                    tag.remove();
+                    return;
+                }
+
+                if (previousContent === null) {
+                    tag.removeAttribute("content");
+                } else {
+                    tag.setAttribute("content", previousContent);
+                }
+            });
+
+            if (!canonicalExisted) {
+                canonicalTag?.remove();
+            } else if (previousCanonical === null) {
+                canonicalTag?.removeAttribute("href");
+            } else {
+                canonicalTag?.setAttribute("href", previousCanonical);
             }
-            tag.setAttribute("content", content);
         };
-
-        setOg("og:type", "website");
-        setOg("og:title", "Patrocine o DSX 2026");
-        setOg(
-            "og:description",
-            "Presença estratégica, networking e ativações que conectam sua marca aos líderes do mercado."
-        );
-        setOg("og:image", "https://seudominio.com/og-patrocinadores.png");
-        setOg("og:url", window.location.href);
-
-        /** TWITTER */
-        const setTwitter = (name, content) => {
-            let tag = document.querySelector(`meta[name="${name}"]`);
-            if (!tag) {
-                tag = document.createElement("meta");
-                tag.setAttribute("name", name);
-                document.head.appendChild(tag);
-            }
-            tag.setAttribute("content", content);
-        };
-
-        setTwitter("twitter:card", "summary_large_image");
-        setTwitter("twitter:title", "Patrocine o DSX 2026");
-        setTwitter(
-            "twitter:description",
-            "O maior evento de negócios, marketing, vendas e inovação do Norte do Brasil."
-        );
-        setTwitter("twitter:image", "https://seudominio.com/og-patrocinadores.png");
     }, []);
 
     return (

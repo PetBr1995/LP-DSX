@@ -83,7 +83,83 @@ const Checkout = () => {
   });
 
   useEffect(() => {
-    document.title = "Checkout DSX 2026 | Finalizar pagamento";
+    const pageTitle = "Finalizar Compra | Passaporte DSX 2026";
+    const pageDescription =
+      "Finalize seu pedido do Passaporte DSX 2026 com pagamento em até 3x sem juros.";
+    const pageUrl = `${window.location.origin}/checkout`;
+    const ogImage = `${window.location.origin}/dsx2026.png`;
+
+    document.title = pageTitle;
+
+    const updates = [
+      { type: "name", key: "description", value: pageDescription },
+      { type: "name", key: "robots", value: "noindex, nofollow" },
+      { type: "name", key: "googlebot", value: "noindex, nofollow" },
+      { type: "property", key: "og:type", value: "website" },
+      { type: "property", key: "og:title", value: pageTitle },
+      { type: "property", key: "og:description", value: pageDescription },
+      { type: "property", key: "og:url", value: pageUrl },
+      { type: "property", key: "og:image", value: ogImage },
+      { type: "name", key: "twitter:card", value: "summary_large_image" },
+      { type: "name", key: "twitter:title", value: pageTitle },
+      { type: "name", key: "twitter:description", value: pageDescription },
+      { type: "name", key: "twitter:image", value: ogImage },
+    ];
+
+    const previousTags = updates.map((item) => {
+      const selector =
+        item.type === "name"
+          ? `meta[name="${item.key}"]`
+          : `meta[property="${item.key}"]`;
+      let tag = document.head.querySelector(selector);
+      const existed = Boolean(tag);
+      const previousContent = tag?.getAttribute("content");
+
+      if (!tag) {
+        tag = document.createElement("meta");
+        tag.setAttribute(item.type, item.key);
+        document.head.appendChild(tag);
+      }
+
+      tag.setAttribute("content", item.value);
+      return { tag, existed, previousContent };
+    });
+
+    const canonicalSelector = 'link[rel="canonical"]';
+    let canonicalTag = document.head.querySelector(canonicalSelector);
+    const canonicalExisted = Boolean(canonicalTag);
+    const previousCanonical = canonicalTag?.getAttribute("href");
+
+    if (!canonicalTag) {
+      canonicalTag = document.createElement("link");
+      canonicalTag.setAttribute("rel", "canonical");
+      document.head.appendChild(canonicalTag);
+    }
+
+    canonicalTag.setAttribute("href", pageUrl);
+
+    return () => {
+      previousTags.forEach(({ tag, existed, previousContent }) => {
+        if (!existed) {
+          tag.remove();
+          return;
+        }
+
+        if (previousContent === null) {
+          tag.removeAttribute("content");
+        } else {
+          tag.setAttribute("content", previousContent);
+        }
+      });
+
+      if (!canonicalExisted) {
+        canonicalTag?.remove();
+      } else if (previousCanonical === null) {
+        canonicalTag?.removeAttribute("href");
+      } else {
+        canonicalTag?.setAttribute("href", previousCanonical);
+      }
+    };
   }, []);
 
   const valorTotal = useMemo(

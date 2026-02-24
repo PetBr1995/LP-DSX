@@ -23,61 +23,81 @@ import BotaoWP from "../components/BotaoWP";
 
 const Vendas = () => {
   useEffect(() => {
-    /** TITLE */
-    document.title = "Ingressos DSX 2026 | Garanta seu passaporte";
+    const pageTitle = "Ingressos DSX 2026 | Garanta seu passaporte";
+    const pageDescription =
+      "Compre seu ingresso para o DSX 2026, o maior evento de negócios, marketing, vendas e inovação do Norte do Brasil. Garanta seu passaporte.";
+    const pageUrl = "https://dsx.com.vc/vendas";
+    const ogImage = "https://dsx.com.vc/Banner-vendas-hero.png";
 
-    /** DESCRIPTION */
-    let description = document.querySelector('meta[name="description"]');
-    if (!description) {
-      description = document.createElement("meta");
-      description.setAttribute("name", "description");
-      document.head.appendChild(description);
+    document.title = pageTitle;
+
+    const updates = [
+      { type: "name", key: "description", value: pageDescription },
+      { type: "property", key: "og:type", value: "website" },
+      { type: "property", key: "og:title", value: pageTitle },
+      { type: "property", key: "og:description", value: pageDescription },
+      { type: "property", key: "og:url", value: pageUrl },
+      { type: "property", key: "og:image", value: ogImage },
+      { type: "name", key: "twitter:card", value: "summary_large_image" },
+      { type: "name", key: "twitter:title", value: pageTitle },
+      { type: "name", key: "twitter:description", value: pageDescription },
+      { type: "name", key: "twitter:image", value: ogImage },
+    ];
+
+    const previousTags = updates.map((item) => {
+      const selector =
+        item.type === "name"
+          ? `meta[name="${item.key}"]`
+          : `meta[property="${item.key}"]`;
+      let tag = document.head.querySelector(selector);
+      const existed = Boolean(tag);
+      const previousContent = tag?.getAttribute("content");
+
+      if (!tag) {
+        tag = document.createElement("meta");
+        tag.setAttribute(item.type, item.key);
+        document.head.appendChild(tag);
+      }
+
+      tag.setAttribute("content", item.value);
+      return { tag, existed, previousContent };
+    });
+
+    const canonicalSelector = 'link[rel="canonical"]';
+    let canonicalTag = document.head.querySelector(canonicalSelector);
+    const canonicalExisted = Boolean(canonicalTag);
+    const previousCanonical = canonicalTag?.getAttribute("href");
+
+    if (!canonicalTag) {
+      canonicalTag = document.createElement("link");
+      canonicalTag.setAttribute("rel", "canonical");
+      document.head.appendChild(canonicalTag);
     }
-    description.setAttribute(
-      "content",
-      "Compre seu ingresso para o DSX 2026, o maior evento de negócios, marketing, vendas e inovação do Norte do Brasil. Garanta seu passaporte.",
-    );
 
-    /** OPEN GRAPH */
-    const setOg = (property, content) => {
-      let tag = document.querySelector(`meta[property="${property}"]`);
-      if (!tag) {
-        tag = document.createElement("meta");
-        tag.setAttribute("property", property);
-        document.head.appendChild(tag);
+    canonicalTag.setAttribute("href", pageUrl);
+
+    return () => {
+      previousTags.forEach(({ tag, existed, previousContent }) => {
+        if (!existed) {
+          tag.remove();
+          return;
+        }
+
+        if (previousContent === null) {
+          tag.removeAttribute("content");
+        } else {
+          tag.setAttribute("content", previousContent);
+        }
+      });
+
+      if (!canonicalExisted) {
+        canonicalTag?.remove();
+      } else if (previousCanonical === null) {
+        canonicalTag?.removeAttribute("href");
+      } else {
+        canonicalTag?.setAttribute("href", previousCanonical);
       }
-      tag.setAttribute("content", content);
     };
-
-    setOg("og:type", "website");
-    setOg("og:title", "Ingressos DSX 2026 | Garanta seu passaporte");
-    setOg(
-      "og:description",
-      "Garanta seu ingresso para o DSX 2026 e participe do maior evento de negócios do Norte do Brasil.",
-    );
-    // troque para a imagem real de vendas
-    setOg("og:image", "https://seudominio.com/og-vendas.png");
-    setOg("og:url", window.location.href);
-
-    /** TWITTER */
-    const setTwitter = (name, content) => {
-      let tag = document.querySelector(`meta[name="${name}"]`);
-      if (!tag) {
-        tag = document.createElement("meta");
-        tag.setAttribute("name", name);
-        document.head.appendChild(tag);
-      }
-      tag.setAttribute("content", content);
-    };
-
-    setTwitter("twitter:card", "summary_large_image");
-    setTwitter("twitter:title", "Ingressos DSX 2026 | Garanta seu passaporte");
-    setTwitter(
-      "twitter:description",
-      "Compre seu ingresso para o DSX 2026, o maior evento de negócios do Norte do Brasil.",
-    );
-    // troque para a imagem real de vendas
-    setTwitter("twitter:image", "https://seudominio.com/og-vendas.png");
   }, []);
 
   const [isMobile, setIsMobile] = useState(false);
