@@ -8,6 +8,7 @@ import Vendas from "./pages/Vendas";
 import WhatsappPage from "./pages/WhatsappPage";
 import PreserveUtmLinks from "./components/PreserveUtmLinks";
 import TesteAnimation from "./pages/testeAnimation";
+import Checkout from "./pages/Checkout";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/vendas" element={<Vendas />} />
         <Route path="/whatsapp" element={<WhatsappPage />} />
         <Route path="/testeanimation" element={<TesteAnimation/>}/>
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
     </>
   );
