@@ -267,24 +267,25 @@ const Checkout = () => {
               <div className="mt-6">
                 <p className="font-jamjuree uppercase text-sm text-white/70 mb-3">Parcelamento</p>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  {[1, 2, 3].map((parcela) => (
-                    <button
-                      key={parcela}
-                      type="button"
-                      onClick={() => setParcelas(parcela)}
-                      className={`rounded-xl border p-3 text-left transition cursor-pointer ${
-                        parcelas === parcela
-                          ? "border-[#F5A205] bg-[#F5A205]/10"
-                          : "border-white/20 bg-black/30"
-                      }`}
-                    >
-                      <p className="font-anton text-2xl">{parcela}x</p>
-                      <p className="font-jamjuree text-sm text-white/80">
-                        {formatCurrency(valorTotal / parcela)} sem juros
-                      </p>
-                    </button>
-                  ))}
+                <div className="relative max-w-md">
+                  <select
+                    value={parcelas}
+                    onChange={(e) => setParcelas(Number(e.target.value))}
+                    className="w-full appearance-none rounded-xl border border-[#F5A205]/40 bg-black/35 p-3 pr-10 text-white font-jamjuree focus:outline-none focus:border-[#F5A205]"
+                  >
+                    {Array.from({ length: checkoutMock.maxParcelas }, (_, index) => index + 1).map(
+                      (parcela) => (
+                        <option key={parcela} value={parcela} className="bg-[#111111]">
+                          {parcela}x de {formatCurrency(valorTotal / parcela)} sem juros
+                        </option>
+                      ),
+                    )}
+                  </select>
+                  <img
+                    src="/arrow-down.svg"
+                    alt="Abrir opções"
+                    className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-4 opacity-80"
+                  />
                 </div>
               </div>
 
