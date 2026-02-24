@@ -48,9 +48,9 @@ function formatCpf(value = "") {
 
 function detectCardBrand(value = "") {
   const digits = onlyDigits(value);
-  if (!digits) return "Indefinido";
+  if (!digits) return null;
 
-  if (digits.startsWith("4")) return "Visa";
+  if (digits.startsWith("4")) return "visa";
 
   const firstTwo = Number(digits.slice(0, 2));
   const firstFour = Number(digits.slice(0, 4));
@@ -58,10 +58,15 @@ function detectCardBrand(value = "") {
     (firstTwo >= 51 && firstTwo <= 55) ||
     (firstFour >= 2221 && firstFour <= 2720)
   ) {
-    return "Mastercard";
+    return "mastercard";
   }
 
-  return "Indefinido";
+  return null;
+}
+
+function getCardBrandIcon(brand) {
+  if (!brand) return null;
+  return `/icons-card/${brand}.svg`;
 }
 
 const Checkout = () => {
@@ -112,6 +117,7 @@ const Checkout = () => {
   }, [form.cvv]);
 
   const cardBrand = useMemo(() => detectCardBrand(form.cartao), [form.cartao]);
+  const cardBrandIcon = useMemo(() => getCardBrandIcon(cardBrand), [cardBrand]);
 
   const podePagar = useMemo(() => {
     return Object.values(form).every((value) => value.trim().length > 0);
@@ -151,9 +157,13 @@ const Checkout = () => {
                   <div className="absolute inset-0 rounded-2xl border border-[#F3CB46]/60 bg-gradient-to-br from-[#1e1e1e] via-[#0a0a0a] to-[#332510] p-5 [backface-visibility:hidden]">
                     <div className="flex justify-between items-center">
                       <p className="font-jamjuree text-xs uppercase text-white/70">Cartão de crédito</p>
-                      <span className="font-jamjuree text-xs uppercase text-[#F3CB46] rounded-full border border-[#F3CB46]/60 px-2 py-0.5">
-                        {cardBrand}
-                      </span>
+                      {cardBrandIcon && (
+                        <img
+                          src={cardBrandIcon}
+                          alt={cardBrand === "visa" ? "Visa" : "Mastercard"}
+                          className="h-7 w-auto"
+                        />
+                      )}
                     </div>
                     <p className="font-jamjuree text-2xl md:text-3xl tracking-[0.16em] mt-10">
                       {cardNumberPreview}
@@ -223,15 +233,13 @@ const Checkout = () => {
                     }
                     onFocus={() => setIsCardBack(false)}
                   />
-                  <span
-                    className={`absolute right-3 top-1/2 -translate-y-1/2 font-jamjuree text-[11px] uppercase rounded-full px-2 py-1 border ${
-                      cardBrand === "Indefinido"
-                        ? "border-white/30 text-white/60"
-                        : "border-[#F3CB46]/60 text-[#F3CB46]"
-                    }`}
-                  >
-                    {cardBrand}
-                  </span>
+                  {cardBrandIcon && (
+                    <img
+                      src={cardBrandIcon}
+                      alt={cardBrand === "visa" ? "Visa" : "Mastercard"}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 h-6 w-auto"
+                    />
+                  )}
                 </div>
                 <input
                   type="text"
