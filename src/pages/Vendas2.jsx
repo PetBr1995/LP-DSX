@@ -45,9 +45,10 @@ const Vendas2 = () => {
       <section>
         <div className="relative z-10 ">
           <img src="/logo-dsx-horizontal.svg" className="mx-auto mt-5" alt="logo-dsx" />
-          <div className="bg-white/10 mx-auto flex my-5 justify-center items-center gap-2 border-1 border-white/20 w-fit px-2 py-1 rounded-2xl">
-            <p className="text-white">23 e 24 de Julho de 2026</p>
-            <p className="text-white">Vasco vasques - Manaus</p>
+          <div className="mx-auto my-5 flex w-fit self-center flex-col items-center justify-center gap-1 rounded-2xl border border-white/20 bg-white/10 px-3 py-2 text-center sm:flex-row sm:gap-3 sm:px-4 sm:py-2">
+            <p className="text-sm text-white sm:text-base">23 e 24 de Julho de 2026</p>
+            <span className="hidden text-white/60 sm:inline">•</span>
+            <p className="text-sm text-white sm:text-base">Vasco Vasques - Manaus</p>
           </div>
           <h1 className="text-center text-white uppercase font-bebas text-7xl font-black">
             O <span className="text-[#F5A205]">Norte</span> nao assiste mais de longe.
@@ -67,15 +68,62 @@ const Vendas2 = () => {
             </div>
           </div>
           <div
-            className="py-4 relative z-0 -mt-24 min-h-[50vh] bg-white pt-32"
+            className="relative z-0 -mt-24 min-h-[50vh] bg-white pt-24 sm:pt-28 md:pt-32 pb-10"
             style={{ clipPath: "polygon(0 20%, 100% 0, 100% 100%, 0% 100%)" }}
           >
-            <FaixaLote />
-            <p className="text-red-500 font-black text-3xl mt-10 text-center">De R$ 697,00</p>
-            <p className="text-4xl font-light uppercase text-center">Por apenas</p>
-            <h3 className="text-green-700 font-black text-8xl font-bebas text-center">R$ 297,00</h3>
-            <div className="flex justify-center items-center">
-              <a href="#" className="text-xl font-jamjuree uppercase font-extrabold px-6 py-2 rounded-md bg-linear-to-r from-[#F3CB46] to-[#E7A040]">Garanta seu passaporte agora</a>
+            <img
+              src="/badge-promocional.png"
+              className="
+      absolute
+      w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44
+      top-30 sm:top-30 md:top-20
+      left-4 sm:left-10 md:left-16
+      animate-badge
+      pointer-events-none
+      select-none
+    "
+              alt="badge"
+            />
+
+            <p
+              className="
+      text-red-500 relative font-black text-center
+      text-2xl sm:text-3xl md:text-4xl
+      mt-10 sm:mt-12 md:mt-14
+      inline-block left-1/2 -translate-x-1/2
+      after:content-['']
+      after:absolute after:left-1/2 after:top-1/2 after:-translate-x-1/2 after:-translate-y-1/2
+      after:w-full after:max-w-[220px] sm:after:max-w-[260px] md:after:max-w-[320px]
+      after:h-[3px] after:bg-red-500 after:rounded-full
+    "
+            >
+              De R$ 697,00
+            </p>
+
+            <p className="text-center uppercase font-light text-2xl sm:text-3xl md:text-4xl mt-2">
+              Por apenas
+            </p>
+
+            <h3 className="text-green-700 font-black font-bebas text-center leading-none mt-2 text-6xl sm:text-7xl md:text-8xl">
+              R$ 297,00
+            </h3>
+
+            <div className="flex justify-center items-center mt-6 px-4">
+              <a
+                href="#"
+                className="
+        text-center
+        text-base sm:text-lg md:text-xl
+        font-jamjuree uppercase font-extrabold
+        px-5 sm:px-6 md:px-8
+        py-3
+        rounded-md
+        bg-linear-to-r from-[#F3CB46] to-[#E7A040]
+        w-full sm:w-auto
+      "
+              >
+                Garanta seu passaporte agora
+              </a>
             </div>
           </div>
         </div>
