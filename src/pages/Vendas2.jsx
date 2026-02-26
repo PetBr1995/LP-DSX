@@ -12,18 +12,18 @@ const Vendas2 = () => {
     },
     {
       number: 2,
-      titulo: "Acesso aos 2 dias de evento",
-      desc: "Conteudo estrategico em 23 e 24 de julho de 2026."
+      titulo: "Acesso a trilhas e palcos",
+      desc: "Programacao com foco em negocios, vendas e performance."
     },
     {
       number: 3,
-      titulo: "Acesso aos 2 dias de evento",
-      desc: "Conteudo estrategico em 23 e 24 de julho de 2026."
+      titulo: "Feira de negocios e networking",
+      desc: "Conexoes e solucoes em um unico ambiente."
     },
     {
       number: 4,
-      titulo: "Acesso aos 2 dias de evento",
-      desc: "Conteudo estrategico em 23 e 24 de julho de 2026."
+      titulo: "Direcao pratica para execucao",
+      desc: "Voce sai com prioridades claras para aplicar no negocio."
     },
   ]
 
