@@ -1,4 +1,6 @@
-import FaixaLote from "../components/ComponentsVendas/FaixaLote"
+import { useEffect, useState } from "react";
+import PassaporteVendas from "../components/ComponentsVendas/PassaporteVendas"
+import PassaporteVendasMobile from "../components/ComponentsVendas/PassaporteVendasMobile"
 import { CheckSquare } from "lucide-react"
 const Vendas2 = () => {
 
@@ -40,6 +42,45 @@ const Vendas2 = () => {
     },
   ]
 
+  const infProvaSocial = [
+    {
+      nome: "Aline Costa",
+      profissao: "Empresaria",
+      desc: "Sai com um plano claro para os proximos 90 dias. So isso ja pagou o ingresso.",
+      img: ""
+    },
+    {
+      nome: "Aline Costa",
+      profissao: "Empresaria",
+      desc: "Sai com um plano claro para os proximos 90 dias. So isso ja pagou o ingresso.",
+      img: ""
+    },
+    {
+      nome: "Aline Costa",
+      profissao: "Empresaria",
+      desc: "Sai com um plano claro para os proximos 90 dias. So isso ja pagou o ingresso.",
+      img: ""
+    },
+    {
+      nome: "Aline Costa",
+      profissao: "Empresaria",
+      desc: "Sai com um plano claro para os proximos 90 dias. So isso ja pagou o ingresso.",
+      img: ""
+    },
+  ]
+
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth <= 1015);
+    };
+
+    checkIsMobile();
+    window.addEventListener("resize", checkIsMobile);
+    return () => window.removeEventListener("resize", checkIsMobile);
+  }, []);
+
   return (
     <>
       <section>
@@ -77,7 +118,7 @@ const Vendas2 = () => {
       absolute
       w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44
       top-30 sm:top-30 md:top-20
-      left-4 sm:left-10 md:left-16
+      left-4 sm:left-10 md:left-40 lg:w-35 lg:h-35 lg:left-120
       animate-badge
       pointer-events-none
       select-none
@@ -88,7 +129,7 @@ const Vendas2 = () => {
             <p
               className="
       text-red-500 relative font-black text-center
-      text-2xl sm:text-3xl md:text-4xl
+      text-xl sm:text-2xl md:text-3xl
       mt-10 sm:mt-12 md:mt-14
       inline-block left-1/2 -translate-x-1/2
       after:content-['']
@@ -104,7 +145,7 @@ const Vendas2 = () => {
               Por apenas
             </p>
 
-            <h3 className="text-green-700 font-black font-bebas text-center leading-none mt-2 text-6xl sm:text-7xl md:text-8xl">
+            <h3 className="text-green-700 font-black font-bebas text-center leading-none mt-2 text-[9rem] sm:text-[10rem] md:text-[11rem]">
               R$ 297,00
             </h3>
 
@@ -163,6 +204,45 @@ const Vendas2 = () => {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+
+        <div id="passaportes" className="bg-[url(/ELEMENTOS-BANNER-2.png)] bg-cover bg-no-repeat bg-center">
+          {isMobile ? <PassaporteVendasMobile /> : <PassaporteVendas />}
+        </div>
+
+        <div className="mx-auto max-w-7xl px-4 py-12 sm:py-16">
+          <p className="text-center text-xs font-black uppercase tracking-[0.14em] text-[#D6AEFF] sm:text-sm">
+            Prova social
+          </p>
+          <h2 className="mt-2 text-center font-bebas text-4xl font-black uppercase text-white sm:text-6xl lg:text-7xl">
+            Depoimentos de quem viveu o DSX 2025
+          </h2>
+          <p className="mx-auto mt-2 max-w-3xl text-center text-sm text-white/75 sm:text-base">
+            Nao e promessa vazia. E experiencia real de quem participou e aplicou.
+          </p>
+          <div className="mt-6 grid grid-cols-1 items-stretch gap-3 sm:mt-8 md:grid-cols-2 md:gap-4">
+            {infProvaSocial.map((info, index) => (
+              <div
+                key={`${info.nome}-${index}`}
+                className="grid h-full grid-cols-[86px_1fr] items-end gap-3 rounded-2xl border border-white/20 bg-linear-to-r from-black to-[#8e3eeb]/20 p-3 sm:grid-cols-[120px_1fr] sm:gap-4 sm:p-4"
+              >
+                <div className="aspect-[3/4] w-full overflow-hidden rounded-lg border border-white/35">
+                  <img
+                    src="/Card-kepler.png"
+                    alt={info.nome}
+                    className="h-full w-full object-contain"
+                  />
+                </div>
+                <div className="flex h-full flex-col justify-center px-1 py-1 sm:px-0 sm:py-0">
+                  <h3 className="text-lg font-black text-white">{info.nome}</h3>
+                  <h5 className="mb-2 text-sm text-white/80">{info.profissao}</h5>
+                  <div className="rounded-xl border border-[#F3CB46]/35 p-3">
+                    <p className="text-sm text-white/95">{info.desc}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
         <footer className="px-4 pb-10 pt-4">
