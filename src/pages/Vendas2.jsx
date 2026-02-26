@@ -1,5 +1,5 @@
 import FaixaLote from "../components/ComponentsVendas/FaixaLote"
-import { Check, CheckSquare, } from "lucide-react"
+import { CheckSquare } from "lucide-react"
 const Vendas2 = () => {
 
   const infoCardReceber = [
@@ -83,7 +83,7 @@ const Vendas2 = () => {
           <h2 className="text-center font-bebas text-4xl font-black text-white sm:text-6xl md:text-7xl">
             O que você vai receber
           </h2>
-          <div className="mt-6 grid grid-cols-1 gap-3 sm:mt-8 sm:grid-cols-2 sm:gap-4">
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-3 sm:mt-8 sm:gap-4">
             {infoCardReceber.map((info) => (
               <div
                 key={info.number}
@@ -103,9 +103,9 @@ const Vendas2 = () => {
           </div>
         </div>
         <div className="px-6 py-6">
-          <div className=" px-2 py-6 bg-linear-to-r from-[#F3CB46] to-[#E7A040] rounded-2xl">
+          <div className="max-w-7xl mx-auto px-2 py-6 bg-linear-to-r from-[#F3CB46] to-[#E7A040] rounded-2xl">
             <h2 className="text-center uppercase font-black text-7xl font-bebas mb-4">Para quem é: </h2>
-            <div className="grid grid-cols-2 gap-2 px-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 px-4">
               {infParaQuemE.map((info) => (
                 <div className="flex bg-white p-2 gap-2 rounded-md">
                   <div>
@@ -117,6 +117,22 @@ const Vendas2 = () => {
             </div>
           </div>
         </div>
+        <footer className="px-4 pb-10 pt-4">
+          <div className="mx-auto max-w-7xl rounded-2xl border border-[#F3CB46]/35 bg-white/[0.04] px-4 py-8 text-center text-white sm:px-6">
+            <img
+              src="/logo-dsx-horizontal.svg"
+              className="mx-auto h-auto w-44 sm:w-52"
+              alt="logo-dsx"
+            />
+            <div className="mx-auto mt-5 h-px w-full max-w-md bg-[#F3CB46]/25" />
+            <p className="mt-5 text-sm text-white/90 sm:text-base">CNPJ 10.279.661/0001-51</p>
+            <p className="text-sm text-white/90 sm:text-base">Digital Comunicacao</p>
+            <p className="mt-2 text-sm text-white/80 sm:text-base">Todos os direitos reservados.</p>
+            <p className="mt-3 text-sm font-bold uppercase tracking-wide text-[#F3CB46] sm:text-base">
+              por Digital Hub Experience
+            </p>
+          </div>
+        </footer>
       </section>
     </>
   )
