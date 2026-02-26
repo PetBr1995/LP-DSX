@@ -50,21 +50,21 @@ const Vendas2 = () => {
       img: ""
     },
     {
-      nome: "Aline Costa",
-      profissao: "Empresaria",
-      desc: "Sai com um plano claro para os proximos 90 dias. So isso ja pagou o ingresso.",
+      nome: "Bruno Almeida",
+      profissao: "Gestor comercial",
+      desc: "O networking foi surreal. Fiz conexoes que eu nao faria em meses.",
       img: ""
     },
     {
-      nome: "Aline Costa",
-      profissao: "Empresaria",
-      desc: "Sai com um plano claro para os proximos 90 dias. So isso ja pagou o ingresso.",
+      nome: "Carla Menezes",
+      profissao: "Lider de marketing",
+      desc: "Nao foi so palestra. Voltei com direcao pratica para executar no dia seguinte.",
       img: ""
     },
     {
-      nome: "Aline Costa",
-      profissao: "Empresaria",
-      desc: "Sai com um plano claro para os proximos 90 dias. So isso ja pagou o ingresso.",
+      nome: "Diego Rocha",
+      profissao: "Empreendedor",
+      desc: "Trouxe meu time e voltamos alinhados em marketing, vendas e meta.",
       img: ""
     },
   ]
