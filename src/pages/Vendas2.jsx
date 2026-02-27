@@ -337,9 +337,6 @@ const Vendas2 = () => {
             <p className="mt-5 text-sm text-white/90 sm:text-base">
               CNPJ 10.279.661/0001-51
             </p>
-            <p className="text-sm text-white/90 sm:text-base">
-              Digital Comunicacao
-            </p>
             <p className="mt-2 text-sm text-white/80 sm:text-base">
               Todos os direitos reservados.
             </p>
