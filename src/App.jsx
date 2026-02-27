@@ -21,9 +21,9 @@ const App = () => {
         <Route path="/agradecimento" element={<Agradecimento />} />
         <Route path="/patrocinador" element={<Patrocinadores />} />
         <Route path="/vendas" element={<Vendas />} />
-        <Route path="/vendas2" element={<Vendas2 />} />
+        <Route path="/passaportes" element={<Vendas2 />} />
         <Route path="/whatsapp" element={<WhatsappPage />} />
-        <Route path="/testeanimation" element={<TesteAnimation/>}/>
+        <Route path="/testeanimation" element={<TesteAnimation />} />
         <Route path="/checkout" element={<Checkout />} />
       </Routes>
     </>
