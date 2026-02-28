@@ -296,7 +296,7 @@ const Vendas2 = () => {
             </div>
           </div>
         </div>
-
+        {/*
         <div className="mx-auto max-w-7xl px-4 py-10 sm:py-14">
           <h2 className="text-center font-bebas text-3xl font-black text-white sm:text-5xl md:text-6xl lg:text-7xl">
             CONFIRA NOSSOS CONTEÚDOS
@@ -335,6 +335,9 @@ const Vendas2 = () => {
             </div>
           </div>
         </div>
+
+                  */}
+
         <div
           id="passaportes"
           className="bg-[url(/ELEMENTOS-BANNER-2.png)] bg-cover bg-no-repeat bg-center"
