@@ -55,7 +55,7 @@ const HeroVendas2 = () => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: false, amount: 0.2 }}
-            className="mt-4 flex flex-wrap gap-6"
+            className="mt-4 flex flex-wrap justify-center gap-6"
           >
             {cardItens.map((item) => (
               <motion.div
@@ -66,25 +66,25 @@ const HeroVendas2 = () => {
                 <div className="flex items-center gap-3">
                   <h2
                     className="font-jamjuree text-[#12DB98] font-medium leading-none 
-                               text-6xl sm:text-5xl md:text-5xl lg:text-5xl whitespace-nowrap"
+                               text-3xl sm:text-4xl md:text-5xl whitespace-nowrap"
                   >
                     {item.number}
                   </h2>
 
                   {item.iconType === "calendar" ? (
-                    <CalendarDays className="h-14 w-14 sm:h-10 sm:w-10 md:h-12 md:w-12 text-white/90" />
+                    <CalendarDays className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 text-white/90" />
                   ) : (
                     <img
                       src={item.icon}
                       alt=""
-                      className="h-14 w-14 sm:h-10 sm:w-10 md:h-12 md:w-12 object-contain opacity-90"
+                      className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 object-contain opacity-90"
                     />
                   )}
                 </div>
 
                 <h3
                   className="mt-3 font-roboto text-white uppercase 
-                             text-base sm:text-lg md:text-xl leading-snug"
+                             text-sm sm:text-base md:text-lg leading-snug"
                 >
                   {item.title}
                 </h3>
