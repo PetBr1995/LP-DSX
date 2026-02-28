@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+﻿import { motion } from "framer-motion";
 import { CalendarDays } from "lucide-react";
 
 const HeroVendas2 = () => {
@@ -59,7 +59,7 @@ const HeroVendas2 = () => {
     <section className="relative overflow-hidden bg-center bg-cover">
       <div className="pb-12 mx-auto flex max-w-7xl flex-col items-center gap-10 px-4 sm:px-6 md:gap-12 md:px-10 lg:gap-16 lg:px-16">
         <div className="flex-1 w-full">
-          <motion.div className="mt-4 grid grid-cols-1 gap-6 md:mt-6 md:grid-cols-2 lg:grid-cols-4">
+          <motion.div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-6 md:mt-6 md:grid-cols-2 lg:grid-cols-4">
             {cardItens.map((item) => (
               <motion.div
                 key={item.title}

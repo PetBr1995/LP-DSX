@@ -4,7 +4,7 @@ const SlidaData = () => {
       key={idx}
       className="relative px-4 whitespace-nowrap after:absolute after:content-[''] after:top-2 after:left-0 after:rounded-full after:bg-[#D63278] after:w-2 after:h-2 font-jamjuree text-black uppercase font-medium"
     >
-      23 e 24 &bull; JUL &bull; 2026 X
+      23 e 24 &bull; JUL &bull; 2026
     </h3>
   ));
 
