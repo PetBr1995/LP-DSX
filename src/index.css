@@ -47,6 +47,13 @@
   animation: faixa-marquee 40s linear infinite;
 }
 
+.faixa-track-fast {
+  display: flex;
+  width: max-content;
+  animation: faixa-marquee 24s linear infinite;
+  will-change: transform;
+}
+
 @keyframes faixa-marquee {
   0% {
     transform: translateX(0);

@@ -2,6 +2,11 @@ import { useEffect, useState } from "react";
 import PassaporteVendas from "../components/ComponentsVendas/PassaporteVendas";
 import PassaporteVendasMobile from "../components/ComponentsVendas/PassaporteVendasMobile";
 import { CheckSquare } from "lucide-react";
+import PassaporteGrupo from "./PassaporteGrupo";
+import FaixaLote from "../components/ComponentsVendas/FaixaLote";
+import SlideFaixa from "../components/SlideFaixa";
+import SlidaData from "../components/SlidaData";
+import HeroVendas2 from "../components/HeroVendas2";
 
 const Vendas2 = () => {
   const infoCardReceber = [
@@ -126,24 +131,24 @@ const Vendas2 = () => {
         <div className="relative z-10 ">
           <img
             src="/logo-dsx-horizontal.svg"
-            className="mx-auto mt-5"
+            className="mx-auto my-10"
             alt="logo-dsx"
           />
-          <div className="mx-auto my-5 flex w-fit self-center flex-col items-center justify-center gap-1 rounded-2xl border border-white/20 bg-white/10 px-3 py-2 text-center sm:flex-row sm:gap-3 sm:px-4 sm:py-2">
-            <p className="text-sm text-white sm:text-base">
-              23 e 24 de Julho de 2026
-            </p>
-            <span className="hidden text-white/60 sm:inline">•</span>
-            <p className="text-sm text-white sm:text-base">
-              Vasco Vasques - Manaus
-            </p>
-          </div>
+
           <h1 className="text-center text-white uppercase font-bebas text-7xl font-black">
-            O <span className="text-[#F5A205]">Norte</span> nao assiste mais de
-            longe.
+            O <span className="text-[#F5A205]">MAIOR EVENTO</span> DE NEGÓCIOS,
+            MARKETING, VENDAS E INOVAÇÃO DO NORTE DO BRASIL{" "}
+            <span className="text-[#F5A205]">ESTÁ DE VOLTA</span>
           </h1>
+          <div className="py-4">
+            <SlidaData />
+          </div>
+          <h1 className="py-6 text-center text-[#F5A205] uppercase font-bebas text-7xl font-black">
+            PREPARE-SE PARA A SEGUNDA EDIÇÃO
+          </h1>
+          <HeroVendas2 />
           <p className="text-center text-white">
-            O evento que todo mundo comentou em 2025 esta de volta.
+            O DSX é um evento consolidado com padrão nacional e impacto real.
           </p>
 
           {/* HERO VIDEO (mantive como você mandou) */}
@@ -271,6 +276,13 @@ const Vendas2 = () => {
           className="bg-[url(/ELEMENTOS-BANNER-2.png)] bg-cover bg-no-repeat bg-center"
         >
           {isMobile ? <PassaporteVendasMobile /> : <PassaporteVendas />}
+        </div>
+        <div className="py-3">
+          <h1 className="text-center text-white uppercase font-bebas text-7xl font-black">
+            {" "}
+            DESCONTO PROGRESSIVO
+          </h1>
+          <PassaporteGrupo />
         </div>
 
         {/* PROVA SOCIAL */}
