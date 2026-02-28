@@ -48,50 +48,48 @@ const HeroVendas2 = () => {
 
   return (
     <section className="relative overflow-hidden bg-center bg-cover">
-      <div className="pb-12 mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 sm:px-6 md:px-10 lg:px-16">
-        <div className="flex-1 w-full">
-          <motion.div
-            variants={containerStagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: false, amount: 0.2 }}
-            className="mt-4 flex flex-wrap justify-center gap-6"
-          >
-            {cardItens.map((item) => (
-              <motion.div
-                key={item.title}
-                variants={cardAnim}
-                className="w-fit mx-auto rounded-xl px-4 py-4 flex flex-col justify-center items-center text-center"
-              >
-                <div className="flex items-center gap-3">
-                  <h2
-                    className="font-jamjuree text-[#12DB98] font-medium leading-none 
-                               text-3xl sm:text-4xl md:text-5xl whitespace-nowrap"
-                  >
-                    {item.number}
-                  </h2>
-
-                  {item.iconType === "calendar" ? (
-                    <CalendarDays className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 text-white/90" />
-                  ) : (
-                    <img
-                      src={item.icon}
-                      alt=""
-                      className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 object-contain opacity-90"
-                    />
-                  )}
-                </div>
-
-                <h3
-                  className="mt-3 font-roboto text-white uppercase 
-                             text-sm sm:text-base md:text-lg leading-snug"
+      <div className="pb-12 mx-auto max-w-7xl px-4 sm:px-6 md:px-10 lg:px-16">
+        <motion.div
+          variants={containerStagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, amount: 0.2 }}
+          className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-6"
+        >
+          {cardItens.map((item) => (
+            <motion.div
+              key={item.title}
+              variants={cardAnim}
+              className="rounded-xl px-4 py-4 flex flex-col justify-center items-center text-center"
+            >
+              <div className="flex items-center gap-3">
+                <h2
+                  className="font-jamjuree text-[#12DB98] font-medium leading-none 
+                             text-3xl sm:text-4xl md:text-5xl whitespace-nowrap"
                 >
-                  {item.title}
-                </h3>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
+                  {item.number}
+                </h2>
+
+                {item.iconType === "calendar" ? (
+                  <CalendarDays className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 text-white/90" />
+                ) : (
+                  <img
+                    src={item.icon}
+                    alt=""
+                    className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 object-contain opacity-90"
+                  />
+                )}
+              </div>
+
+              <h3
+                className="mt-3 font-roboto text-white uppercase 
+                           text-sm sm:text-base md:text-lg leading-snug"
+              >
+                {item.title}
+              </h3>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );
