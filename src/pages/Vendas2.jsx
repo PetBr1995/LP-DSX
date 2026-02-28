@@ -318,6 +318,22 @@ const Vendas2 = () => {
               </div>
             ))}
           </div>
+          <div className="mt-4 grid grid-cols-1">
+            <div className=" flex items-start gap-3 rounded-lg border border-white/20 bg-white/10 p-4 sm:p-5">
+              <p className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-linear-to-r from-[#F3CB46] to-[#E7A040] text-base font-black text-black sm:h-10 sm:w-10">
+                <Check />
+              </p>
+              <div>
+                <h3 className="font-jamjuree text-lg font-extrabold uppercase tracking-wide text-white sm:text-2xl">
+                  Vendas
+                </h3>
+                <p className="mt-1 text-sm text-white/90 sm:text-base">
+                  Estratégias e processos para atrair, negociar e fechar
+                  contratos com previsibilidade e aumento de faturamento.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
         <div
           id="passaportes"
