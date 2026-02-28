@@ -195,7 +195,7 @@ const Vendas2 = () => {
               className="
       absolute
       left-1/2 -translate-x-1/2
-      top-8 sm:top-10 md:top-12
+      top-15 sm:top-20 md:top-25
       z-50
       w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40
       animate-badge
@@ -226,7 +226,7 @@ const Vendas2 = () => {
                 className="
         text-red-500 relative font-black text-center
         text-xl sm:text-2xl md:text-3xl
-        mt-10 sm:mt-12 md:mt-14
+        mt-15 sm:mt-25 md:mt-35
         inline-block left-1/2 -translate-x-1/2
         after:content-['']
         after:absolute after:left-1/2 after:top-1/2 
@@ -234,6 +234,7 @@ const Vendas2 = () => {
         after:w-full 
         after:max-w-[220px] sm:after:max-w-[260px] md:after:max-w-[320px]
         after:h-[3px] after:bg-red-500 after:rounded-full
+        
       "
               >
                 De R$ 697,00
