@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 import PassaporteVendas from "../components/ComponentsVendas/PassaporteVendas";
-import PassaporteVendasMobile from "../components/ComponentsVendas/PassaporteVendasMobile";
 import { CheckSquare } from "lucide-react";
 import PassaporteGrupo from "./PassaporteGrupo";
-import FaixaLote from "../components/ComponentsVendas/FaixaLote";
-import SlideFaixa from "../components/SlideFaixa";
 import SlidaData from "../components/SlidaData";
 import HeroVendas2 from "../components/HeroVendas2";
 import PassaportesMobileVendas2 from "../components/ComponentsVendas/PassaportesMobileVendas2";
@@ -128,15 +125,15 @@ const Vendas2 = () => {
 
   return (
     <>
-      <section>
+      <section className="overflow-x-hidden">
         <div className="relative z-10 ">
           <img
             src="/logo-dsx-horizontal.svg"
-            className="mx-auto my-10"
+            className="mx-auto my-8 w-44 sm:my-10 sm:w-56"
             alt="logo-dsx"
           />
 
-          <h1 className="text-center text-white uppercase font-bebas text-7xl font-black">
+          <h1 className="px-4 text-center font-bebas text-4xl font-black uppercase leading-[0.95] text-white sm:text-5xl md:text-6xl lg:text-7xl">
             O <span className="text-[#F5A205]">MAIOR EVENTO</span> DE NEGÓCIOS,
             MARKETING, VENDAS E INOVAÇÃO DO NORTE DO BRASIL{" "}
             <span className="text-[#F5A205]">ESTÁ DE VOLTA</span>
@@ -144,11 +141,11 @@ const Vendas2 = () => {
           <div className="py-4">
             <SlidaData />
           </div>
-          <h1 className="py-6 text-center text-[#F5A205] uppercase font-bebas text-7xl font-black">
+          <h1 className="px-4 py-6 text-center font-bebas text-4xl font-black uppercase leading-[0.95] text-[#F5A205] sm:text-5xl md:text-6xl lg:text-7xl">
             PREPARE-SE PARA A SEGUNDA EDIÇÃO
           </h1>
           <HeroVendas2 />
-          <p className="text-center text-white">
+          <p className="mx-auto max-w-3xl px-4 text-center text-sm text-white sm:text-base">
             O DSX é um evento consolidado com padrão nacional e impacto real.
           </p>
 
@@ -167,23 +164,25 @@ const Vendas2 = () => {
             </div>
           </div>
 
-          <div
-            className="relative z-0 -mt-24 min-h-[50vh] bg-white pt-24 sm:pt-28 md:pt-32 pb-10"
-            style={{ clipPath: "polygon(0 20%, 100% 0, 100% 100%, 0% 100%)" }}
-          >
+          <div className="relative -mt-12 sm:-mt-20 md:-mt-24">
             <img
               src="/badge-promocional.png"
               className="
                 absolute
-                w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44
-                top-30 sm:top-30 md:top-20
-                left-4 sm:left-10 md:left-40 lg:w-35 lg:h-35 lg:left-120
+                z-50
+                w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40
+                top-14 sm:top-12 md:top-10
+                left-2 sm:left-8 md:left-16 lg:left-24
                 animate-badge
                 pointer-events-none
                 select-none
               "
               alt="badge"
             />
+            <div
+              className="relative z-10 bg-white pb-10 pt-20 sm:pt-24 md:pt-28 lg:pb-12"
+              style={{ clipPath: "polygon(0 20%, 100% 0, 100% 100%, 0% 100%)" }}
+            >
 
             <p
               className="
@@ -204,32 +203,33 @@ const Vendas2 = () => {
               Por apenas
             </p>
 
-            <h3 className="text-green-700 font-black font-bebas text-center leading-none mt-2 text-[9rem] sm:text-[10rem] md:text-[11rem]">
+            <h3 className="mt-2 text-center font-bebas text-[4.5rem] leading-none font-black text-green-700 sm:text-[7rem] md:text-[9rem] lg:text-[10rem]">
               R$ 297,00
             </h3>
 
-            <div className="flex justify-center items-center mt-6 px-4">
-              <a
-                href="#passaportes"
-                className="
-                  text-center
-                  text-base sm:text-lg md:text-xl
-                  font-jamjuree uppercase font-extrabold
-                  px-5 sm:px-6 md:px-8
-                  py-3
-                  rounded-md
-                  bg-linear-to-r from-[#F3CB46] to-[#E7A040]
-                  w-full sm:w-auto
-                "
-              >
-                Garanta seu passaporte agora
-              </a>
+              <div className="flex justify-center items-center mt-6 px-4">
+                <a
+                  href="#passaportes"
+                  className="
+                    text-center
+                    text-sm sm:text-base md:text-xl
+                    font-jamjuree uppercase font-extrabold
+                    px-4 sm:px-6 md:px-8
+                    py-3
+                    rounded-md
+                    bg-linear-to-r from-[#F3CB46] to-[#E7A040]
+                    w-full max-w-sm sm:w-auto
+                  "
+                >
+                  Garanta seu passaporte agora
+                </a>
+              </div>
             </div>
           </div>
         </div>
 
         <div className="mx-auto max-w-7xl px-4 py-10 sm:py-14">
-          <h2 className="text-center font-bebas text-4xl font-black text-white sm:text-6xl md:text-7xl">
+          <h2 className="text-center font-bebas text-3xl font-black text-white sm:text-5xl md:text-6xl lg:text-7xl">
             O que você vai receber
           </h2>
           <div className="mt-6 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-3 sm:mt-8 sm:gap-4">
@@ -254,18 +254,18 @@ const Vendas2 = () => {
           </div>
         </div>
 
-        <div className="px-6 py-6">
-          <div className="max-w-7xl mx-auto px-2 py-6 bg-linear-to-r from-[#F3CB46] to-[#E7A040] rounded-2xl">
-            <h2 className="text-center uppercase font-black text-7xl font-bebas mb-4">
+        <div className="px-4 py-6 sm:px-6">
+          <div className="mx-auto max-w-7xl rounded-2xl bg-linear-to-r from-[#F3CB46] to-[#E7A040] px-2 py-6">
+            <h2 className="mb-4 px-2 text-center font-bebas text-4xl font-black uppercase sm:text-5xl md:text-6xl lg:text-7xl">
               Para quem é:{" "}
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 px-4">
+            <div className="grid grid-cols-1 gap-2 px-3 sm:grid-cols-2 sm:px-4 lg:grid-cols-4">
               {infParaQuemE.map((info, idx) => (
-                <div key={idx} className="flex bg-white p-2 gap-2 rounded-md">
+                <div key={idx} className="flex gap-2 rounded-md bg-white p-3">
                   <div>
                     <CheckSquare />
                   </div>
-                  <h2 className="font-bold">{info.conteudo}</h2>
+                  <h2 className="text-sm font-bold sm:text-base">{info.conteudo}</h2>
                 </div>
               ))}
             </div>
@@ -279,7 +279,7 @@ const Vendas2 = () => {
           {isMobile ? <PassaportesMobileVendas2 /> : <PassaporteVendas />}
         </div>
         <div className="py-3">
-          <h1 className="text-center text-white uppercase font-bebas text-7xl font-black">
+          <h1 className="px-4 text-center font-bebas text-4xl font-black uppercase leading-[0.95] text-white sm:text-5xl md:text-6xl lg:text-7xl">
             {" "}
             DESCONTO PROGRESSIVO
           </h1>
@@ -364,3 +364,5 @@ const Vendas2 = () => {
 };
 
 export default Vendas2;
+
+

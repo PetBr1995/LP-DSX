@@ -60,11 +60,11 @@ const HeroVendas2 = () => {
     <section className="relative overflow-hidden bg-center bg-cover">
       <div className="pb-12 mx-auto flex max-w-7xl flex-col items-center gap-10 px-4 sm:px-6 md:gap-12 md:px-10 lg:gap-16 lg:px-16">
         <div className="flex-1 w-full">
-          <motion.div className="mt-4 flex flex-wrap justify-center gap-x-8 gap-y-7 md:mt-6">
+          <motion.div className="mt-4 grid grid-cols-1 gap-6 md:mt-6 md:grid-cols-2 lg:grid-cols-4">
             {cardItens.map((item) => (
               <motion.div
                 key={item.title}
-                className="w-fit rounded-lg px-1 py-2 flex flex-col items-center"
+                className="w-full rounded-lg px-1 py-2 flex flex-col items-center"
               >
                 <div className="flex items-start gap-3">
                   <h2 className="font-jamjuree text-[#12DB98] font-medium leading-none text-4xl sm:text-5xl md:text-5xl whitespace-nowrap">

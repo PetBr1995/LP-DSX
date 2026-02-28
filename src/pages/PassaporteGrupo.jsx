@@ -1,5 +1,3 @@
-import { useNavigate } from "react-router-dom";
-
 const PassaporteGrupo = () => {
   const inf = [
     {
@@ -19,16 +17,13 @@ const PassaporteGrupo = () => {
       link: "https://hub.la/r/MrAx1UDpvEnhGdAfYESX",
     },
   ];
-
-  const navigate = useNavigate();
-
   return (
-    <section className="py-8 px-4 max-w-7xl mx-auto flex justify-center gap-2 flex-wrap">
+    <section className="mx-auto flex max-w-7xl flex-wrap justify-center gap-3 px-4 py-8 sm:gap-4">
       {inf.map((item, index) => (
         <div
           key={index}
           className="
-              relative p-px w-[350px] rounded-3xl
+              relative w-full max-w-[350px] rounded-3xl p-px
               bg-linear-to-b from-[#F5D247] to-[#797979]
               overflow-hidden
             "
@@ -48,7 +43,7 @@ const PassaporteGrupo = () => {
           <div
             style={{ "--icon": `url('${item.icon}')` }}
             className="
-                relative z-10 py-2 px-10 bg-[#111111] rounded-3xl w-full h-full
+                relative z-10 h-full w-full rounded-3xl bg-[#111111] px-6 py-3 sm:px-10
   
                 before:absolute before:content-['']
                 before:-top-10 before:-right-10
@@ -61,18 +56,18 @@ const PassaporteGrupo = () => {
             <p className="text-white font-extralight uppercase">Em grupo</p>
 
             {/* Agora esse texto fica por cima do ícone SEM falhar */}
-            <h2 className="relative z-20 text-6xl text-white uppercase font-anton">
+            <h2 className="relative z-20 font-anton text-4xl uppercase text-white sm:text-5xl md:text-6xl">
               {item.qtdPessoas} pessoas
             </h2>
 
             <div className="mt-6 relative z-20">
               <div className="flex justify-center items-center">
-                <p className="font-medium text-white text-sm w-[50%] text-center uppercase font-extralight p-1 border border-white rounded-xl">
+                <p className="w-[60%] rounded-xl border border-white p-1 text-center text-xs font-extralight uppercase text-white sm:w-[50%] sm:text-sm">
                   {item.porCentoOff}
                 </p>
               </div>
 
-              <h2 className="uppercase font-extrabold text-5xl mt-4 bg-gradient-to-r from-[#F2C845] to-[#E7A440] bg-clip-text text-transparent">
+              <h2 className="mt-4 bg-gradient-to-r from-[#F2C845] to-[#E7A440] bg-clip-text text-4xl font-extrabold uppercase text-transparent sm:text-5xl">
                 R$ {item.valor}
               </h2>
 
@@ -93,3 +88,4 @@ const PassaporteGrupo = () => {
 };
 
 export default PassaporteGrupo;
+
