@@ -7,6 +7,7 @@ import FaixaLote from "../components/ComponentsVendas/FaixaLote";
 import SlideFaixa from "../components/SlideFaixa";
 import SlidaData from "../components/SlidaData";
 import HeroVendas2 from "../components/HeroVendas2";
+import PassaportesMobileVendas2 from "../components/ComponentsVendas/PassaportesMobileVendas2";
 
 const Vendas2 = () => {
   const infoCardReceber = [
@@ -275,7 +276,7 @@ const Vendas2 = () => {
           id="passaportes"
           className="bg-[url(/ELEMENTOS-BANNER-2.png)] bg-cover bg-no-repeat bg-center"
         >
-          {isMobile ? <PassaporteVendasMobile /> : <PassaporteVendas />}
+          {isMobile ? <PassaportesMobileVendas2 /> : <PassaporteVendas />}
         </div>
         <div className="py-3">
           <h1 className="text-center text-white uppercase font-bebas text-7xl font-black">
