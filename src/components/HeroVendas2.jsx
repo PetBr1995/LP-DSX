@@ -55,13 +55,13 @@ const HeroVendas2 = () => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: false, amount: 0.2 }}
-            className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
+            className="mt-4 flex flex-wrap gap-6"
           >
             {cardItens.map((item) => (
               <motion.div
                 key={item.title}
                 variants={cardAnim}
-                className="w-full rounded-xl px-4 py-4 flex flex-col items-center text-center"
+                className="w-fit mx-auto rounded-xl px-4 py-4 flex flex-col justify-center items-center text-center"
               >
                 <div className="flex items-center gap-3">
                   <h2
