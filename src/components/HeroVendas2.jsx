@@ -1,4 +1,3 @@
-import CTAButton from "./Mascaras/CTAButton";
 import { motion } from "framer-motion";
 import { CalendarDays } from "lucide-react";
 
@@ -7,26 +6,26 @@ const HeroVendas2 = () => {
     {
       iconType: "calendar",
       number: "2",
-      title: "Dias de imersao",
-      desc: "Dois dias intensivos de conteudo pratico e networking.",
+      title: "Dias de imersão",
+      desc: "Dois dias intensivos de conteúdo prático e networking.",
     },
     {
       icon: "/icon-foguete.svg",
       number: "+40",
       title: "Palestras",
-      desc: "Grandes nomes do mercado de IA, gestao, vendas e inovacao.",
+      desc: "Grandes nomes do mercado de IA, gestão, vendas e inovação.",
     },
     {
       icon: "/icone-pessoas.svg",
       number: "+2.000",
       title: "Participantes",
-      desc: "Empresarios, decisores, gestores e profissionais de alto nivel.",
+      desc: "Empresários, decisores, gestores e profissionais de alto nível.",
     },
     {
       icon: "/icone-target.svg",
       number: "+30",
       title: "Expositores regionais",
-      desc: "Marcas que representam a forca e diversidade dos negocios no Norte.",
+      desc: "Marcas que representam a força e diversidade dos negócios no Norte.",
     },
   ];
 

@@ -39,7 +39,7 @@ const PassaporteGrupo = () => {
               "
           />
 
-          {/* conteúdo */}
+          {/* Conteúdo */}
           <div
             style={{ "--icon": `url('${item.icon}')` }}
             className="
@@ -55,7 +55,7 @@ const PassaporteGrupo = () => {
           >
             <p className="text-white font-extralight uppercase">Em grupo</p>
 
-            {/* Agora esse texto fica por cima do ícone SEM falhar */}
+            {/* Agora esse texto fica por cima do ícone sem falhar. */}
             <h2 className="relative z-20 font-anton text-4xl uppercase text-white sm:text-5xl md:text-6xl">
               {item.qtdPessoas} pessoas
             </h2>

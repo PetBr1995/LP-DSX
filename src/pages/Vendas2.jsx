@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import PassaporteVendas from "../components/ComponentsVendas/PassaporteVendas";
-import { CheckSquare } from "lucide-react";
+import { Check, CheckSquare } from "lucide-react";
 import PassaporteGrupo from "./PassaporteGrupo";
 import SlidaData from "../components/SlidaData";
 import HeroVendas2 from "../components/HeroVendas2";
@@ -11,32 +11,32 @@ const Vendas2 = () => {
     {
       number: 1,
       titulo: "Acesso aos 2 dias de evento",
-      desc: "Conteudo estrategico em 23 e 24 de julho de 2026.",
+      desc: "Conteúdo estratégico em 23 e 24 de julho de 2026.",
     },
     {
       number: 2,
       titulo: "Acesso a trilhas e palcos",
-      desc: "Programacao com foco em negocios, vendas e performance.",
+      desc: "Programação com foco em negócios, vendas e performance.",
     },
     {
       number: 3,
-      titulo: "Feira de negocios e networking",
-      desc: "Conexoes e solucoes em um unico ambiente.",
+      titulo: "Feira de negócios e networking",
+      desc: "Conexões e soluções em um único ambiente.",
     },
     {
       number: 4,
-      titulo: "Direcao pratica para execucao",
-      desc: "Voce sai com prioridades claras para aplicar no negocio.",
+      titulo: "Direção prática para execução",
+      desc: "Você sai com prioridades claras para aplicar no negócio.",
     },
   ];
 
   const infParaQuemE = [
     {
-      conteudo: "Empresario que quer destravar crescimento com previsibilidade",
+      conteudo: "Empresário que quer destravar crescimento com previsibilidade",
     },
     {
       conteudo:
-        "Gestor que precisa tomar decisao com mais clareza e menos achismo",
+        "Gestor que precisa tomar decisão com mais clareza e menos achismo",
     },
     {
       conteudo: "Profissional de marketing e vendas focado em performance",
@@ -50,19 +50,19 @@ const Vendas2 = () => {
     {
       nome: "ADRIENNE ROCHA",
       profissao: "MKT-REDES SOCIAIS-REDAT",
-      desc: "Sai com um plano claro para os proximos 90 dias. So isso ja pagou o ingresso.",
+      desc: "Sai com um plano claro para os próximos 90 dias. Só isso já pagou o ingresso.",
       link_video: "https://player.vimeo.com/video/1168873838",
     },
     {
       nome: "JESSICA RAMOS",
       profissao: "SETOR COLETA DE DADOS",
-      desc: "O networking foi surreal. Fiz conexoes que eu nao faria em meses.",
+      desc: "O networking foi surreal. Fiz conexões que eu não faria em meses.",
       link_video: "https://player.vimeo.com/video/1168874280",
     },
     {
       nome: "ESTER LIMA",
       profissao: "ESTETICISTA - MIXER",
-      desc: "Nao foi so palestra. Voltei com direcao pratica para executar no dia seguinte.",
+      desc: "Não foi só palestra. Voltei com direção prática para executar no dia seguinte.",
       link_video: "https://player.vimeo.com/video/1168874343",
     },
     {
@@ -70,6 +70,33 @@ const Vendas2 = () => {
       profissao: "SUPERVISOR COMERCIAL",
       desc: "Trouxe meu time e voltamos alinhados em marketing, vendas e meta.",
       link_video: "https://player.vimeo.com/video/1168874384",
+    },
+  ];
+
+  const cardConteudos = [
+    {
+      titulo: "CULTURA EMPRESARIAL",
+      desc: "Construção de mentalidade organizacional forte, alinhada a resultados, inovação, colaboração e crescimento sustentável.",
+    },
+    {
+      titulo: "GESTÃO",
+      desc: "Estruturação de processos, pessoas e indicadores para garantir eficiência operacional e execução estratégica.",
+    },
+    {
+      titulo: "INTELIGÊNCIA ARTIFICIAL",
+      desc: "Aplicação de tecnologia para automatizar processos, otimizar decisões, aumentar produtividade e gerar vantagem competitiva.",
+    },
+    {
+      titulo: "MARKETING",
+      desc: "Estratégias para posicionar marcas, gerar demanda, atrair clientes qualificados e fortalecer autoridade no mercado.",
+    },
+    {
+      titulo: "NEGÓCIOS",
+      desc: "Modelos de crescimento, geração de receita previsível, expansão de mercado e construção de empresas escaláveis.",
+    },
+    {
+      titulo: "PERFORMANCE",
+      desc: "Otimização de resultados por meio de dados, métricas, melhoria contínua e foco em alta performance comercial.",
     },
   ];
 
@@ -86,7 +113,7 @@ const Vendas2 = () => {
   }, []);
 
   /**
-   * ✅ Vimeo embed "limpo" e SEM autoplay (usuário dá play)
+   * Vimeo embed limpo e sem autoplay (usuário dá play)
    * - Remove infos: title/byline/portrait/badge
    * - Mantém autopause=1 (quando um toca, o outro pausa)
    * - Aceita links: vimeo.com/ID ou player.vimeo.com/video/ID
@@ -97,23 +124,20 @@ const Vendas2 = () => {
     try {
       const u = new URL(rawUrl);
 
-      // pega o primeiro número do path (robusto)
+      // Pega o primeiro número do path (robusto).
       const idMatch = u.pathname.match(/\d+/);
       const id = idMatch?.[0];
       if (!id) return rawUrl;
 
       const params = new URLSearchParams();
 
-      // limpa infos
+      // Limpa infos.
       params.set("title", "0");
       params.set("byline", "0");
       params.set("portrait", "0");
       params.set("badge", "0");
 
-      // SEM autoplay (usuário dá play)
-      // (não setamos autoplay)
-
-      // comportamento melhor em listas
+      // Sem autoplay (usuário dá play).
       params.set("autopause", "1");
       params.set("player_id", String(index));
 
@@ -149,7 +173,7 @@ const Vendas2 = () => {
             O DSX é um evento consolidado com padrão nacional e impacto real.
           </p>
 
-          {/* HERO VIDEO (mantive como você mandou) */}
+          {/* HERO VIDEO */}
           <div className="relative z-20 mx-auto mt-8 w-full max-w-5xl px-4">
             <div className="relative overflow-hidden rounded-2xl border border-white/20 bg-black/60 pt-[56.25%]">
               <iframe
@@ -183,9 +207,8 @@ const Vendas2 = () => {
               className="relative z-10 bg-white pb-10 pt-20 sm:pt-24 md:pt-28 lg:pb-12"
               style={{ clipPath: "polygon(0 20%, 100% 0, 100% 100%, 0% 100%)" }}
             >
-
-            <p
-              className="
+              <p
+                className="
                 text-red-500 relative font-black text-center
                 text-xl sm:text-2xl md:text-3xl
                 mt-10 sm:mt-12 md:mt-14
@@ -195,17 +218,17 @@ const Vendas2 = () => {
                 after:w-full after:max-w-[220px] sm:after:max-w-[260px] md:after:max-w-[320px]
                 after:h-[3px] after:bg-red-500 after:rounded-full
               "
-            >
-              De R$ 697,00
-            </p>
+              >
+                De R$ 697,00
+              </p>
 
-            <p className="text-center uppercase font-light text-2xl sm:text-3xl md:text-4xl mt-2">
-              Por apenas
-            </p>
+              <p className="text-center uppercase font-light text-2xl sm:text-3xl md:text-4xl mt-2">
+                Por apenas
+              </p>
 
-            <h3 className="mt-2 text-center font-bebas text-[4.5rem] leading-none font-black text-green-700 sm:text-[7rem] md:text-[9rem] lg:text-[10rem]">
-              R$ 297,00
-            </h3>
+              <h3 className="mt-2 text-center font-bebas text-[4.5rem] leading-none font-black text-green-700 sm:text-[7rem] md:text-[9rem] lg:text-[10rem]">
+                R$ 297,00
+              </h3>
 
               <div className="flex justify-center items-center mt-6 px-4">
                 <a
@@ -265,13 +288,37 @@ const Vendas2 = () => {
                   <div>
                     <CheckSquare />
                   </div>
-                  <h2 className="text-sm font-bold sm:text-base">{info.conteudo}</h2>
+                  <h2 className="text-sm font-bold sm:text-base">
+                    {info.conteudo}
+                  </h2>
                 </div>
               ))}
             </div>
           </div>
         </div>
 
+        <div className="mx-auto max-w-7xl px-4 py-10 sm:py-14">
+          <h2 className="text-center font-bebas text-3xl font-black text-white sm:text-5xl md:text-6xl lg:text-7xl">
+            CONFIRA NOSSOS CONTEÚDOS
+          </h2>
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-3 sm:mt-8 sm:gap-4">
+            {cardConteudos.map((info) => (
+              <div className="flex items-start gap-3 rounded-lg border border-white/20 bg-white/10 p-4 sm:p-5">
+                <p className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-linear-to-r from-[#F3CB46] to-[#E7A040] text-base font-black text-black sm:h-10 sm:w-10">
+                  <Check />
+                </p>
+                <div>
+                  <h3 className="font-jamjuree text-lg font-extrabold uppercase tracking-wide text-white sm:text-2xl">
+                    {info.titulo}
+                  </h3>
+                  <p className="mt-1 text-sm text-white/90 sm:text-base">
+                    {info.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
         <div
           id="passaportes"
           className="bg-[url(/ELEMENTOS-BANNER-2.png)] bg-cover bg-no-repeat bg-center"
@@ -280,22 +327,17 @@ const Vendas2 = () => {
         </div>
         <div className="py-3">
           <h1 className="px-4 text-center font-bebas text-4xl font-black uppercase leading-[0.95] text-white sm:text-5xl md:text-6xl lg:text-7xl">
-            {" "}
             DESCONTO PROGRESSIVO
           </h1>
           <PassaporteGrupo />
         </div>
 
-        {/* PROVA SOCIAL */}
         <div className="mx-auto max-w-7xl px-4 py-12 sm:py-16">
-          <p className="text-center text-xs font-black uppercase tracking-[0.14em] text-[#D6AEFF] sm:text-sm">
-            Prova social
-          </p>
           <h2 className="mt-2 text-center font-bebas text-4xl font-black uppercase text-white sm:text-6xl lg:text-7xl">
             Depoimentos de quem viveu o DSX 2025
           </h2>
           <p className="mx-auto mt-2 max-w-3xl text-center text-sm text-white/75 sm:text-base">
-            Nao e promessa vazia. E experiencia real de quem participou e
+            Não é promessa vazia. É experiência real de quem participou e
             aplicou.
           </p>
 
@@ -316,7 +358,6 @@ const Vendas2 = () => {
                   hover:shadow-[0_0_20px_rgba(142,62,235,0.3)]
                 "
               >
-                {/* ✅ PLAYER LIMPO / SEM AUTOPLAY / USUÁRIO DÁ PLAY */}
                 <div className="relative w-full aspect-[9/16] overflow-hidden">
                   <iframe
                     src={getVimeoEmbedUrl(info.link_video, index)}
@@ -326,7 +367,7 @@ const Vendas2 = () => {
                     loading="lazy"
                     referrerPolicy="strict-origin-when-cross-origin"
                     frameBorder="0"
-                    title={`Video-${info.nome}`}
+                    title={`Vídeo-${info.nome}`}
                   />
                 </div>
 
@@ -364,5 +405,3 @@ const Vendas2 = () => {
 };
 
 export default Vendas2;
-
-

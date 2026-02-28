@@ -36,61 +36,61 @@ const PassaportesMobileVendas2 = () => {
       vip: true,
       standard: true,
       titulo: "ACESSO AOS 2 DIAS",
-      desc: "VIVA A EXPERIENCIA COMPLETA",
+      desc: "VIVA A EXPERIÊNCIA COMPLETA",
     },
     {
       vip: true,
       standard: true,
       titulo: "+40 PALESTRAS",
-      desc: "ACESSO INTEGRAL AO CONTEUDO DOS 3 PALCOS",
+      desc: "ACESSO INTEGRAL AO CONTEÚDO DOS 3 PALCOS",
     },
     {
       vip: true,
       standard: true,
-      titulo: "CERTIFICADO DE PARTICIPACAO",
-      desc: "LOREN IPSUN LOREN IPSUN",
+      titulo: "CERTIFICADO DE PARTICIPAÇÃO",
+      desc: "LOREM IPSUM LOREM IPSUM",
     },
     {
       vip: true,
       standard: true,
-      titulo: "ACESSO A FEIRA DE NEGOCIOS",
-      desc: "LOREN IPSUN LOREN IPSUN",
+      titulo: "ACESSO À FEIRA DE NEGÓCIOS",
+      desc: "LOREM IPSUM LOREM IPSUM",
     },
     {
       vip: true,
       standard: true,
       titulo: "OPORTUNIDADE DE NETWORKING",
-      desc: "LOREN IPSUN LOREN IPSUN",
+      desc: "LOREM IPSUM LOREM IPSUM",
     },
     {
       vip: true,
       standard: true,
       titulo: "ACESSO AO FOOD STATION",
-      desc: "LOREN IPSUN LOREN IPSUN",
+      desc: "LOREM IPSUM LOREM IPSUM",
     },
     {
       vip: true,
       standard: false,
       titulo: "Acesso exclusivo ao Lounge VIP: conforto e network",
-      desc: "LOREN IPSUN LOREN IPSUN",
+      desc: "LOREM IPSUM LOREM IPSUM",
     },
     {
       vip: true,
       standard: false,
       titulo: "PRIMEIRAS FILEIRAS",
-      desc: "LOREN IPSUN LOREN IPSUN",
+      desc: "LOREM IPSUM LOREM IPSUM",
     },
     {
       vip: true,
       standard: false,
       titulo: "Kit Premium de boas-vindas",
-      desc: "LOREN IPSUN LOREN IPSUN",
+      desc: "LOREM IPSUM LOREM IPSUM",
     },
     {
       vip: true,
       standard: false,
       titulo: "Open de finger food liberado no lounge a partir das 13h",
-      desc: "LOREN IPSUN LOREN IPSUN",
+      desc: "LOREM IPSUM LOREM IPSUM",
     },
   ];
 
@@ -105,11 +105,11 @@ const PassaportesMobileVendas2 = () => {
     <section className="py-8 relative after:content-[''] after:absolute after:-top-85 overflow-hidden after:right-0 after:bg-cover after:bg-center after:bg-no-repeat after:w-80 after:h-140 after:bg-[url(/banner-passaporte.png)]">
       <div className="mx-auto px-4 relative z-20">
         <h2 className="font-anton uppercase text-white text-center text-3xl">
-          Esteja onde os grandes nomes decidem o futuro dos negocios.
+          Esteja onde os grandes nomes decidem o futuro dos negócios.
         </h2>
 
         <p className="text-white uppercase font-extralight text-center text-xl mt-4">
-          Sua experiencia comeca aqui
+          Sua experiência começa aqui
         </p>
         <FaixaLote />
         <div className="mt-8 grid grid-cols-1 items-start sm:grid-cols-2 gap-4 max-w-7xl mx-auto">
@@ -148,7 +148,7 @@ const PassaportesMobileVendas2 = () => {
                   </h2>
 
                   <p className="relative font-black z-10 uppercase border text-white text-center text-md w-fit p-1 border-white mx-auto rounded-3xl mt-5 px-5">
-                    1 lote
+                    1º lote
                   </p>
 
                   <div className="relative z-10 mx-6 sm:mx-10 text-center">
@@ -171,7 +171,7 @@ const PassaportesMobileVendas2 = () => {
                     <button
                       onClick={() => toggleBenefits(card.nome)}
                       aria-label={
-                        isOpen ? "Ocultar beneficios" : "Mostrar beneficios"
+                        isOpen ? "Ocultar benefícios" : "Mostrar benefícios"
                       }
                       className=" mt-4 mx-auto flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-white/30 bg-white/10 text-white"
                     >
@@ -219,7 +219,7 @@ const PassaportesMobileVendas2 = () => {
                                   ? "/checkPassaport.svg"
                                   : "/xPassaport.svg"
                               }
-                              alt={hasAccess ? "Disponivel" : "Indisponivel"}
+                              alt={hasAccess ? "Disponível" : "Indisponível"}
                               className="w-7 h-7 shrink-0"
                             />
                           </div>

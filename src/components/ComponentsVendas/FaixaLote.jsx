@@ -14,7 +14,7 @@ export default function FaixaLote() {
           tracking-wide sm:tracking-widest
           shadow-lg
         "
-                // fundo mais “premium” sem perder o vermelho
+                // Fundo mais premium sem perder o vermelho.
                 style={{
                     background:
                         "linear-gradient(90deg, #ef4444 0%, #dc2626 50%, #ef4444 100%)",
@@ -37,7 +37,7 @@ export default function FaixaLote() {
                 whileHover={{ scale: 1.06 }}
                 whileTap={{ scale: 0.98 }}
             >
-                {/* shimmer sutil passando */}
+                {/* Shimmer sutil passando. */}
                 <motion.span
                     className="absolute inset-y-0 -left-1/2 w-1/3 bg-white/20"
                     style={{ transform: "skewX(-25deg)" }}
@@ -50,9 +50,9 @@ export default function FaixaLote() {
                     }}
                 />
 
-                {/* conteúdo */}
+                {/* Conteúdo */}
                 <span className="relative z-10 drop-shadow-[0_1px_1px_rgba(0,0,0,0.35)]">
-                    1° lote promocional
+                    1º lote promocional
                 </span>
             </motion.div>
         </div>

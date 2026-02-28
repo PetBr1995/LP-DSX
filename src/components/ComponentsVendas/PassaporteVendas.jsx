@@ -31,7 +31,7 @@ const PassaporteVendas = () => {
     {
       title: "ACESSO AOS 2 DIAS",
       icon: "/checkPassport.svg",
-      desc: "VIVA A EXPERIêNCIA COMPLETA"
+      desc: "VIVA A EXPERIÊNCIA COMPLETA"
     },
     {
       title: "+40 PALESTRAS",
@@ -41,43 +41,43 @@ const PassaporteVendas = () => {
     {
       title: "Certificado de participação",
       icon: "/checkPassport.svg",
-      desc: "LOREN IPSUN  LOREN IPSUN"
+      desc: "LOREM IPSUM LOREM IPSUM"
     },
     {
-      title: "ACESSO A FEIRA DE NEGÓCIOS",
+      title: "ACESSO À FEIRA DE NEGÓCIOS",
       icon: "/checkPassport.svg",
-      desc: "LOREN IPSUN  LOREN IPSUN"
+      desc: "LOREM IPSUM LOREM IPSUM"
     },
     {
       title: "Oportunidade de networking",
       icon: "/checkPassport.svg",
-      desc: "LOREN IPSUN  LOREN IPSUN"
+      desc: "LOREM IPSUM LOREM IPSUM"
     },
     {
       title: "Acesso ao food station",
       icon: "/checkPassport.svg",
-      desc: "LOREN IPSUN  LOREN IPSUN"
+      desc: "LOREM IPSUM LOREM IPSUM"
     },
     {
       title: "Acesso exclusivo ao Lounge VIP",
       icon: "/checkPassport.svg",
-      desc: "LOREN IPSUN  LOREN IPSUN"
+      desc: "LOREM IPSUM LOREM IPSUM"
     },
     
     {
-      title: "Acesso AS primeiras fileiras ",
+      title: "Acesso às primeiras fileiras",
       icon: "/checkPassport.svg",
-      desc: "LOREN IPSUN  LOREN IPSUN"
+      desc: "LOREM IPSUM LOREM IPSUM"
     },
     {
       title: "Kit Premium de boas-vindas",
       icon: "/checkPassport.svg",
-      desc: "LOREN IPSUN  LOREN IPSUN"
+      desc: "LOREM IPSUM LOREM IPSUM"
     },
     {
       title: "Open de finger food liberado no lounge a partir das 13h",
       icon: "/checkPassport.svg",
-      desc: "LOREN IPSUN  LOREN IPSUN"
+      desc: "LOREM IPSUM LOREM IPSUM"
     },
   
   ]
@@ -175,7 +175,7 @@ const PassaporteVendas = () => {
                   {item.nome}
                 </h2>
                 <p className="w-fit mx-auto px-2.5 text-1xl relative z-10 uppercase border text-white text-center font-black p-1 border-white mx-12 rounded-3xl mt-5 px-5">
-                  1° lote
+                  1º lote
                 </p>
 
                 <div className="relative z-10 mx-12 text-center">
