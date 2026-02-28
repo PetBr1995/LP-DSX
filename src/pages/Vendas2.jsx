@@ -189,35 +189,52 @@ const Vendas2 = () => {
           </div>
 
           <div className="relative -mt-12 sm:-mt-20 md:-mt-24">
+            {/* BADGE CENTRALIZADO */}
             <img
               src="/badge-promocional.png"
               className="
-                absolute
-                z-50
-                w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40
-                top-14 sm:top-12 md:top-10
-                left-2 sm:left-8 md:left-16 lg:left-24
-                animate-badge
-                pointer-events-none
-                select-none
-              "
+      absolute
+      left-1/2 -translate-x-1/2
+      top-8 sm:top-10 md:top-12
+      z-50
+      w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40
+      animate-badge
+      pointer-events-none
+      select-none
+    "
               alt="badge"
             />
+
             <div
-              className="relative z-10 bg-white pb-10 pt-20 sm:pt-24 md:pt-28 lg:pb-12"
+              className="
+      relative z-10 bg-white 
+      pb-10 pt-20 sm:pt-24 md:pt-28 lg:pb-12
+      before:content-['']
+      before:absolute
+      before:top-0
+      before:left-1/2
+      before:-translate-x-1/2
+      before:w-28 sm:before:w-36 md:before:w-44
+      before:h-28 sm:before:h-36 md:before:h-44
+      before:rounded-full
+      before:bg-white
+      before:z-[-1]
+    "
               style={{ clipPath: "polygon(0 20%, 100% 0, 100% 100%, 0% 100%)" }}
             >
               <p
                 className="
-                text-red-500 relative font-black text-center
-                text-xl sm:text-2xl md:text-3xl
-                mt-10 sm:mt-12 md:mt-14
-                inline-block left-1/2 -translate-x-1/2
-                after:content-['']
-                after:absolute after:left-1/2 after:top-1/2 after:-translate-x-1/2 after:-translate-y-1/2
-                after:w-full after:max-w-[220px] sm:after:max-w-[260px] md:after:max-w-[320px]
-                after:h-[3px] after:bg-red-500 after:rounded-full
-              "
+        text-red-500 relative font-black text-center
+        text-xl sm:text-2xl md:text-3xl
+        mt-10 sm:mt-12 md:mt-14
+        inline-block left-1/2 -translate-x-1/2
+        after:content-['']
+        after:absolute after:left-1/2 after:top-1/2 
+        after:-translate-x-1/2 after:-translate-y-1/2
+        after:w-full 
+        after:max-w-[220px] sm:after:max-w-[260px] md:after:max-w-[320px]
+        after:h-[3px] after:bg-red-500 after:rounded-full
+      "
               >
                 De R$ 697,00
               </p>
@@ -234,15 +251,15 @@ const Vendas2 = () => {
                 <a
                   href="#passaportes"
                   className="
-                    text-center
-                    text-sm sm:text-base md:text-xl
-                    font-jamjuree uppercase font-extrabold
-                    px-4 sm:px-6 md:px-8
-                    py-3
-                    rounded-md
-                    bg-linear-to-r from-[#F3CB46] to-[#E7A040]
-                    w-full max-w-sm sm:w-auto
-                  "
+          text-center
+          text-sm sm:text-base md:text-xl
+          font-jamjuree uppercase font-extrabold
+          px-4 sm:px-6 md:px-8
+          py-3
+          rounded-md
+          bg-linear-to-r from-[#F3CB46] to-[#E7A040]
+          w-full max-w-sm sm:w-auto
+        "
                 >
                   Garanta seu passaporte agora
                 </a>
