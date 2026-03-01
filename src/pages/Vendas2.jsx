@@ -180,7 +180,7 @@ const Vendas2 = () => {
           <div className="relative z-20 mx-auto mt-8 w-full max-w-5xl px-4">
             <div className="relative overflow-hidden rounded-2xl border border-white/20 bg-black/60 pt-[56.25%]">
               <iframe
-                src="https://player.vimeo.com/video/1148163345?autoplay=1&loop=1&muted=1&title=0&byline=0&portrait=0&controls=0&badge=0"
+                src="https://player.vimeo.com/video/1148163345?autoplay=1&loop=1&muted=1&controls=1&title=0&byline=0&portrait=0&badge=0"
                 title="DSX 2026"
                 className="absolute inset-0 h-full w-full"
                 allow="autoplay; fullscreen; picture-in-picture"
