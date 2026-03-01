@@ -49,25 +49,28 @@ const Vendas2 = () => {
   const infProvaSocial = [
     {
       nome: "ADRIENNE ROCHA",
-      profissao: "MKT-REDES SOCIAIS-REDAT",
+      profissao:
+        "A gente veio com intuito de captar o máximo de conhecimento, fazer esse brainstorm sobre o que a gente pode aplicar no nosso trabalho",
       desc: "Sai com um plano claro para os próximos 90 dias. Só isso já pagou o ingresso.",
       link_video: "https://player.vimeo.com/video/1168873838",
     },
     {
       nome: "JESSICA RAMOS",
-      profissao: "SETOR COLETA DE DADOS",
+      profissao: "Acredito que o DSX é um porta-voz para novas empresas",
       desc: "O networking foi surreal. Fiz conexões que eu não faria em meses.",
       link_video: "https://player.vimeo.com/video/1168874280",
     },
     {
       nome: "ESTER LIMA",
-      profissao: "ESTETICISTA - MIXER",
+      profissao:
+        "Às vezes a gente tem todo um gasto com viagem, agora ter um evento desse na sua região é maravilhoso",
       desc: "Não foi só palestra. Voltei com direção prática para executar no dia seguinte.",
       link_video: "https://player.vimeo.com/video/1168874343",
     },
     {
       nome: "ALEXANDRE FARIAS",
-      profissao: "SUPERVISOR COMERCIAL",
+      profissao:
+        "Poder fazer esse evento aqui é de suma importância pro desenvolvimento do marketing e vendas aqui na região",
       desc: "Trouxe meu time e voltamos alinhados em marketing, vendas e meta.",
       link_video: "https://player.vimeo.com/video/1168874384",
     },
@@ -409,8 +412,10 @@ const Vendas2 = () => {
                 </div>
 
                 <div className="flex flex-col gap-2 p-4">
+                  <h5 className="text-sm text-white/70">
+                    " {info.profissao} "
+                  </h5>
                   <h3 className="text-lg font-black text-white">{info.nome}</h3>
-                  <h5 className="text-sm text-white/70">{info.profissao}</h5>
                 </div>
               </div>
             ))}
