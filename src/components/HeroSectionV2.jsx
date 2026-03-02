@@ -63,7 +63,7 @@ const HeroSectionV2 = () => {
                     viewport={inViewOptions}
                 >
                     <img
-                        src="/dsx-2026-logo.png"
+                        src="/dsx-2026.jpeg"
                         alt="logo"
                         className="object-contain h-30 sm:h-34 md:h-50 lg:h-56 w-auto"
                     />
