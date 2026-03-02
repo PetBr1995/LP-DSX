@@ -25,7 +25,7 @@ const FAQ = () => {
       numero: 4,
       pergunta: "Quais tipos de passaporte estarão disponíveis?",
       resposta:
-        "Teremos diferentes opções para perfis e objetivos, incluindo Standard, VIP, ingressos em grupo (10 e 5 pessoas), além de condições específicas para estudantes e PCD. Todos os detalhes de benefícios e valores serão divulgados na abertura oficial.",
+        "Contamos com diferentes opções para perfis e objetivos, incluindo Standard, VIP,  passaportes em grupo (10 e 5 pessoas), além de condições específicas para estudantes e PCD.",
     },
     {
       numero: 5,
