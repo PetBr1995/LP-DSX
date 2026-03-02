@@ -190,7 +190,7 @@ export const InfoPalestrantes = [
     {
         nome: "Gisele Oshiro",
         desc: "CEO da Targo Consultoria",
-        img: "/palestrantes/GlauberGomes.png"
+        img: "/palestrantes/GiselleOshiro.png"
     },
     {
         nome: "Suelen Scop",
