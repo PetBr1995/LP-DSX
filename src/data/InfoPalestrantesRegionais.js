@@ -43,7 +43,7 @@ export const InfoPalestrantesRegionais = [
     {
         nome: "Rafael Amorin",
         desc: "Fundador da Targo Consultoria Empresarial",
-        img: "/palestrantes/CarlosOshiro.png"
+        img: "/palestrantes/RafaelAmorin.png"
     },
     {
         nome: "Gerson Toller",
@@ -53,7 +53,7 @@ export const InfoPalestrantesRegionais = [
     {
         nome: "Diego Cestaro",
         desc: "Fundador da Targo Consultoria Empresarial",
-        img: "/palestrantes/CarlosOshiro.png"
+        img: "/palestrantes/DiegoCestaro.png"
     },
     {
         nome: "Fabrício Alva",
