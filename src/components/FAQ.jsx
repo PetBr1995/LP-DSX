@@ -6,7 +6,7 @@ const FAQ = () => {
       numero: 1,
       pergunta: "Quando acontece o DSX 2026?",
       resposta:
-        "O DSX 2026 acontece em julho. A data oficial será anunciada em breve.",
+        "O DSX 2026 acontece nos dias 23 e 23 julho, no Centro de Convenções Vasco Vasques em Manaus.",
     },
     {
       numero: 2,
@@ -18,8 +18,8 @@ const FAQ = () => {
       numero: 3,
       pergunta: "Já existe programação e palestrantes confirmados?",
       resposta:
-        "A curadoria está em construção. Para acompanhar os anúncios oficiais, entre no grupo de WhatsApp DSX Conexões. Acesse o link para entrar:",
-      link: "https://chat.whatsapp.com/B9hsyLb6Ksp979K4W8eh5S",
+        "A curadoria ainda está em construção, porém, você pode conferir as atuais presenças confirmadas em nosso perfil oficial @dsx.summit. Para acompanhar os anúncios oficiais, entre em nosso Grupo VIP no Whatsapp. Acesse o link para entrar:",
+      link: "https://chat.whatsapp.com/GXEsJXjFNBi1a3LLAiG90R",
     },
     {
       numero: 4,

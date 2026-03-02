@@ -133,6 +133,9 @@ const HeroSectionV2 = () => {
                             </motion.div>
                         ))}
                     </motion.div>
+                    <div className="flex justify-start items-center pt-8">
+                        <img src="/local-dsx-2026.png" alt="logo" className="h-15" />
+                    </div>
                 </div>
             </div>
         </section>
