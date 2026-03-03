@@ -70,7 +70,7 @@ const FaleConosco = () => {
           <HeaderMask
             titulo="seja patrocinador"
             textColor="#ffffff"
-            link="https://wa.me/5592991112802"
+            link="https://wa.me/5592936180463"
             target="_blank"
           />
         </div>
