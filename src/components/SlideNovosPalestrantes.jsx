@@ -57,14 +57,14 @@ const SlideNovosPalestrantes = () => {
       >
         <motion.h3
           variants={fadeUp}
-          className="text-center uppercase text-2xl sm:text-3xl md:text-4xl font-anton px-4"
+          className="text-center uppercase text-4xl font-anton"
         >
           Os principais nomes do mercado nos palcos do DSX 2026
         </motion.h3>
 
         <motion.h5
           variants={fadeUp}
-          className="font-jamjuree font-normal text-center uppercase text-lg sm:text-2xl md:text-3xl px-4"
+          className="font-jamjuree font-normal text-center uppercase text-3xl"
         >
           Aprenda com quem transforma decisões em resultados
         </motion.h5>
@@ -72,19 +72,15 @@ const SlideNovosPalestrantes = () => {
         <motion.div variants={fadeUp} className="my-10 max-w-7xl mx-auto px-4">
           <Swiper
             spaceBetween={16}
-            slidesPerView={1.1}
-            breakpoints={{
-              640: { slidesPerView: 2 },
-              1024: { slidesPerView: 4 },
-            }}
+            slidesPerView={4}
             loop={false}
             grabCursor={true}
             className="cursor-grab active:cursor-grabbing"
           >
             {InfoNovosPalestrantes.map((inf, index) => (
-              <SwiperSlide key={index}>
+              <SwiperSlide key={index} className="!w-[230px]">
                 <div
-                  className="bg-[#111111] bg-cover bg-center p-4 rounded-xl shadow-lg h-80 w-full max-w-[230px] mx-auto flex flex-col justify-between"
+                  className="bg-[#111111] bg-cover bg-center p-4 rounded-xl shadow-lg h-80 flex flex-col justify-between"
                   style={{ backgroundImage: `url(${inf.img})` }}
                 >
                   <h4 className="font-bebas text-[#F5A205] text-xl text-center uppercase">
