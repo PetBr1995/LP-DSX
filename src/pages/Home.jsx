@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useScrollToHash from "../hooks/useScrollToHash";
 
+import SlideNovosPalestrantes from "../components/SlideNovosPalestrantes"
 import ContentSection from "../components/ContentSection";
 import DsxConsolidation from "../components/DscConsolidation";
 import FaleConosco from "../components/FaleConosco";
@@ -37,12 +38,12 @@ const Home = () => {
       <HeroSection/>
       <HeroSectionV2/>
       <SlideFaixa/>
-       
+      <SlideNovosPalestrantes/>
       <NewTimerHeader isVisible={showTimerHeader} />
        
 
-      <SlidePalestrantes />
       <ContentSection />
+      <SlidePalestrantes />
       <Depoimentos/>
       <PublicoDSX/>
       <BannerSection/>

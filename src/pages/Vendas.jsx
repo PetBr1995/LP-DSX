@@ -6,7 +6,7 @@ import CallToActionPatrocinadores from "../components/ComponentsPatrocinadores/C
 import Footer from "../components/Footer";
 import FormVendas from "../components/ComponentsVendas/FormVendas";
 import ImpactoVendas from "../components/ComponentsVendas/ImpactoVendas";
-
+import FAQ from "../components/FAQ"
 import PassaporteVendas from "../components/ComponentsVendas/PassaporteVendas";
 import PassaporteVendasMobile from "../components/ComponentsVendas/PassaporteVendasMobile";
 import PassaporteGrupo from "./PassaporteGrupo";
@@ -142,7 +142,7 @@ const Vendas = () => {
         {/*
         <FormVendas />
          */}
-        <FAQVendas />
+        <FAQ />
         <RedesSociais />
         <Footer />
       </section>
