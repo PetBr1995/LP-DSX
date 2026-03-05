@@ -80,7 +80,7 @@ const SlideNovosPalestrantes = () => {
             {InfoNovosPalestrantes.map((inf, index) => (
               <SwiperSlide key={index} className="!w-[230px]">
                 <div
-                  className="bg-[#111111] bg-cover bg-center p-4 rounded-xl shadow-lg h-80 flex flex-col justify-between"
+                  className="bg-[#111111] bg-cover bg-center pb-4 px-4 rounded-xl shadow-lg h-80 flex flex-col justify-between"
                   style={{ backgroundImage: `url(${inf.img})` }}
                 >
                   <h4 className="font-bebas text-[#F5A205] text-xl text-center uppercase">
