@@ -2,7 +2,7 @@ export const InfoNovosPalestrantes = [
   {
     nome: "Fernando Miranda",
     desc: "CEO da Staage",
-    img: "/01-Fernando-Miranda.png"
+    img: "/FERNANDO-MIRANDA-FOTO.png"
   },
   {
     nome: "",
