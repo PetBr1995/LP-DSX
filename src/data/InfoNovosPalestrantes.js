@@ -4,6 +4,7 @@ export const InfoNovosPalestrantes = [
     desc: "CEO da Staage",
     img: "/FERNANDO-MIRANDA-FOTO.png"
   },
+  /* 
   {
     nome: "Nicolas Charão",
     desc: "Referencia nacional em performance comercial.",
@@ -14,10 +15,11 @@ export const InfoNovosPalestrantes = [
     desc: "Lorem ipsum",
     img: "/foto-roberto-reis-3.png",
   },
+  */
   {
     nome: "",
     desc: "",
-    img: "/SILHUETA-1.png",
+    img: "/SILHUETA-NICOLAS-CHARAO.png",
   },
   {
     nome: "",
