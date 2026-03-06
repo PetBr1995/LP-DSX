@@ -5,9 +5,19 @@ export const InfoNovosPalestrantes = [
     img: "/FERNANDO-MIRANDA-FOTO.png"
   },
   {
+    nome: "Nicolas Charão",
+    desc: "Referencia nacional em performance comercial.",
+    img: "/foto-nicolas-charao.jpg",
+  },
+  {
+    nome: "Roberto Reis",
+    desc: "Lorem ipsum",
+    img: "/foto-roberto-reis-3.png",
+  },
+  {
     nome: "",
     desc: "",
-    img: "/SILHUETA-NICOLAS-CHARAO.png",
+    img: "/SILHUETA-1.png",
   },
   {
     nome: "",

@@ -80,15 +80,18 @@ const SlideNovosPalestrantes = () => {
             {InfoNovosPalestrantes.map((inf, index) => (
               <SwiperSlide key={index} className="!w-[230px]">
                 <div
-                  className="bg-[#111111] relative after:bg-linear-to-t after:via-[transparent] after:from-[black] after:to-[transparent] after:absolute after:content-[''] after:top-0 after:bottom-0 after:left-0 after:right-0 after:rounded-xl  bg-cover bg-top pb-4 px-4 rounded-xl shadow-lg h-80 flex flex-col justify-between"
+                  className="bg-[#111111] relative after:bg-linear-to-t after:via-[transparent] after:from-[black] after:to-[transparent] after:absolute after:content-[''] after:top-0 after:bottom-0 after:left-0 after:right-0 after:rounded-xl  bg-cover bg-top pb-4 px-4 rounded-xl shadow-lg h-80 flex flex-col justify-end"
                   style={{ backgroundImage: `url(${inf.img})` }}
                 >
-                  <h4 className="font-bebas text-[#F5A205] text-xl text-center uppercase">
-                    {inf.nome}
-                  </h4>
-                  <p className="relative z-40 font-roboto font-medium text-sm text-white text-center">
-                    {inf.desc}
-                  </p>
+                  <div className="flex flex-col justify-start items-center h-18">
+                    <h4 className="relative z-50 font-bebas text-[#F5A205] text-3xl text-center uppercase">
+                      {inf.nome}
+                    </h4>
+                    <p className="relative z-40 font-roboto font-medium text-sm text-white text-center">
+                      {inf.desc}
+                    </p>
+                  </div>
+
                 </div>
               </SwiperSlide>
             ))}
