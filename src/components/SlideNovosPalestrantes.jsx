@@ -72,13 +72,14 @@ const SlideNovosPalestrantes = () => {
         <motion.div variants={fadeUp} className="my-10 max-w-7xl mx-auto px-4">
           <Swiper
             spaceBetween={16}
-            slidesPerView={4}
+            slidesPerView="auto"
             loop={false}
             grabCursor={true}
+            touchStartPreventDefault={false}
             className="cursor-grab active:cursor-grabbing"
           >
             {InfoNovosPalestrantes.map((inf, index) => (
-              <SwiperSlide key={index} className="!w-[230px]">
+              <SwiperSlide key={index} className="!w-[78vw] max-w-[260px] sm:!w-[230px]">
                 <div
                   className="bg-[#111111] relative after:bg-linear-to-t after:via-[transparent] after:from-[black] after:to-[transparent] after:absolute after:content-[''] after:top-0 after:bottom-0 after:left-0 after:right-0 after:rounded-xl  bg-cover bg-top pb-4 px-4 rounded-xl shadow-lg h-80 flex flex-col justify-end"
                   style={{ backgroundImage: `url(${inf.img})` }}

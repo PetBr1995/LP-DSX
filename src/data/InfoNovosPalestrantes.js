@@ -2,14 +2,14 @@ export const InfoNovosPalestrantes = [
   {
     nome: "Fernando Miranda",
     desc: "CEO da Staage",
-    img: "/FERNANDO-MIRANDA-FOTO.png"
+    img: "/FERNANDO-MIRANDA-FOTO.png",
   },
-  /* 
   {
     nome: "Nicolas Charão",
-    desc: "Referencia nacional em performance comercial.",
+    desc: " Founder Grupo VTX",
     img: "/foto-nicolas-charao.jpg",
   },
+  /* 
   {
     nome: "Roberto Reis",
     desc: "Lorem ipsum",
@@ -19,7 +19,7 @@ export const InfoNovosPalestrantes = [
   {
     nome: "",
     desc: "",
-    img: "/SILHUETA-NICOLAS-CHARAO.png",
+    img: "/SILHUETA-3.png",
   },
   {
     nome: "",
@@ -35,6 +35,5 @@ export const InfoNovosPalestrantes = [
     nome: "",
     desc: "",
     img: "/SILHUETA-3.png",
-  }
-
+  },
 ];
