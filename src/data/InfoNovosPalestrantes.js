@@ -12,7 +12,7 @@ export const InfoNovosPalestrantes = [
   /* 
   {
     nome: "Roberto Reis",
-    desc: "Lorem ipsum",
+    desc: "Estrategista eleitoral e analista político",
     img: "/foto-roberto-reis-3.png",
   },
   */
