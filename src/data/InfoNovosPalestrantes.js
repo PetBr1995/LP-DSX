@@ -9,13 +9,13 @@ export const InfoNovosPalestrantes = [
     desc: " Founder Grupo VTX",
     img: "/foto-nicolas-charao.jpg",
   },
-  /* 
   {
     nome: "Roberto Reis",
     desc: "Estrategista eleitoral e analista político",
     img: "/foto-roberto-reis-3.png",
   },
-  */
+  /*
+   */
   {
     nome: "",
     desc: "",
