@@ -14,19 +14,19 @@ export default function FaixaLote() {
           tracking-wide sm:tracking-widest
           shadow-lg
         "
-                // Fundo mais premium sem perder o vermelho.
+                // Fundo mais premium em verde.
                 style={{
                     background:
-                        "linear-gradient(90deg, #ef4444 0%, #dc2626 50%, #ef4444 100%)",
+                        "linear-gradient(90deg, #22c55e 0%, #16a34a 50%, #22c55e 100%)",
                 }}
                 initial={{ opacity: 0, scale: 0.95, y: 10 }}
                 animate={{
                     opacity: 1,
                     scale: [1, 1.045, 1],
                     boxShadow: [
-                        "0 10px 25px rgba(0,0,0,0.22), 0 0 0 rgba(239,68,68,0)",
-                        "0 14px 35px rgba(0,0,0,0.28), 0 0 18px rgba(239,68,68,0.35)",
-                        "0 10px 25px rgba(0,0,0,0.22), 0 0 0 rgba(239,68,68,0)",
+                        "0 10px 25px rgba(0,0,0,0.22), 0 0 0 rgba(34,197,94,0)",
+                        "0 14px 35px rgba(0,0,0,0.28), 0 0 18px rgba(34,197,94,0.35)",
+                        "0 10px 25px rgba(0,0,0,0.22), 0 0 0 rgba(34,197,94,0)",
                     ],
                 }}
                 transition={{
