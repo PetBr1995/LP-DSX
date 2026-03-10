@@ -168,13 +168,6 @@ const Vendas2 = () => {
           <div className="py-4">
             <SlidaData />
           </div>
-          <h1 className="px-4 py-6 text-center font-bebas text-4xl font-black uppercase leading-[0.95] text-[#F5A205] sm:text-5xl md:text-6xl lg:text-7xl">
-            PREPARE-SE PARA A SEGUNDA EDIÇÃO
-          </h1>
-          <HeroVendas2 />
-          <p className="mx-auto max-w-3xl px-4 text-center text-sm text-white sm:text-base">
-            O DSX é um evento consolidado com padrão nacional e impacto real.
-          </p>
 
           {/* HERO VIDEO */}
           <div className="relative z-20 mx-auto mt-8 w-full max-w-5xl px-4">
@@ -270,6 +263,15 @@ const Vendas2 = () => {
               </div>
             </div>
           </div>
+
+          <h1 className="px-4 py-6 text-center font-bebas text-4xl font-black uppercase leading-[0.95] text-[#F5A205] sm:text-5xl md:text-6xl lg:text-7xl">
+            PREPARE-SE PARA A SEGUNDA EDIÇÃO
+          </h1>
+          <HeroVendas2 />
+          <p className="mx-auto max-w-3xl px-4 text-center text-sm text-white sm:text-base">
+            O DSX é um evento consolidado com padrão nacional e impacto real.
+          </p>
+
         </div>
 
         <div className="mx-auto max-w-7xl px-4 py-10 sm:py-14">
