@@ -263,14 +263,17 @@ const Vendas2 = () => {
               </div>
             </div>
           </div>
-
-          <h1 className="px-4 py-6 text-center font-bebas text-4xl font-black uppercase leading-[0.95] text-[#F5A205] sm:text-5xl md:text-6xl lg:text-7xl">
-            PREPARE-SE PARA A SEGUNDA EDIÇÃO
-          </h1>
-          <HeroVendas2 />
-          <p className="mx-auto max-w-3xl px-4 text-center text-sm text-white sm:text-base">
-            O DSX é um evento consolidado com padrão nacional e impacto real.
-          </p>
+          <div className="px-4 py-4">
+            <div className="bg-linear-to-r max-w-7xl mx-auto from-[#F3CB46] to-[#E7A040] rounded-2xl">
+              <h1 className="px-4 py-6 text-center font-bebas text-4xl font-black uppercase leading-[0.95] text-black sm:text-5xl md:text-6xl lg:text-7xl">
+                PREPARE-SE PARA A SEGUNDA EDIÇÃO
+              </h1>
+              <HeroVendas2 />
+              <p className="mx-auto max-w-3xl px-4 pb-6 text-center text-sm text-black sm:text-base">
+                O DSX é um evento consolidado com padrão nacional e impacto real.
+              </p>
+            </div>
+          </div>
 
         </div>
 

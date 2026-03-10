@@ -71,18 +71,18 @@ const HeroVendas2 = () => {
                 </h2>
 
                 {item.iconType === "calendar" ? (
-                  <CalendarDays className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 text-white/90" />
+                  <CalendarDays className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 text-black" />
                 ) : (
                   <img
                     src={item.icon}
                     alt=""
-                    className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 object-contain opacity-90"
+                    className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 object-contain brightness-0"
                   />
                 )}
               </div>
 
               <h3
-                className="mt-3 font-roboto text-white uppercase 
+                className="mt-3 font-roboto text-black uppercase font-bold 
                            text-sm sm:text-base md:text-lg leading-snug"
               >
                 {item.title}
