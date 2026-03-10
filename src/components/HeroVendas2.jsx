@@ -64,7 +64,7 @@ const HeroVendas2 = () => {
             >
               <div className="flex items-center gap-3">
                 <h2
-                  className="font-jamjuree text-[#15803D] font-medium leading-none 
+                  className="font-jamjuree text-[#15803D] font-black leading-none 
                              text-3xl sm:text-4xl md:text-5xl whitespace-nowrap"
                 >
                   {item.number}
