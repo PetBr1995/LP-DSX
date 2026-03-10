@@ -16,7 +16,7 @@ const PassaportesMobileVendas2 = () => {
       textColor: "#6DCC96",
       iconSide: "left",
       iconCard: "/vector-31.svg",
-      link: "https://pay.hub.la/jheGgipTScsnmNqGZElQ",
+      link: "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721",
     },
     {
       nome: "STANDARD",
@@ -27,7 +27,7 @@ const PassaportesMobileVendas2 = () => {
       textColor: "#DA4068",
       iconSide: "right",
       iconCard: "/vector-32.svg",
-      link: "https://hub.la/r/EREq9bO1fsVKl6sG7Axo",
+      link: "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721",
     },
   ];
 

@@ -12,7 +12,7 @@ const PassaporteVendasMobile = () => {
       textColor: "#6DCC96",
       iconSide: "left",
       iconCard: "/vector-31.svg",
-      link: "https://pay.hub.la/jheGgipTScsnmNqGZElQ"
+      link: "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721",
     },
     {
       nome: "STANDARD",
@@ -23,21 +23,71 @@ const PassaporteVendasMobile = () => {
       textColor: "#DA4068",
       iconSide: "right",
       iconCard: "/vector-32.svg",
-      link: "https://hub.la/r/EREq9bO1fsVKl6sG7Axo"
+      link: "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721",
     },
   ];
 
   const vantagens = [
-    { vip: true, standard: true, titulo: "ACESSO AOS 2 DIAS", desc: "VIVA A EXPERIÊNCIA COMPLETA" },
-    { vip: true, standard: true, titulo: "+40 PALESTRAS", desc: "ACESSO INTEGRAL AO CONTEÚDO DOS 3 PALCOS" },
-    { vip: true, standard: true, titulo: "CERTIFICADO DE PARTICIPAÇÃO", desc: "LOREN IPSUN LOREN IPSUN" },
-    { vip: true, standard: true, titulo: "ACESSO A FEIRA DE NEGÓCIOS", desc: "LOREN IPSUN LOREN IPSUN" },
-    { vip: true, standard: true, titulo: "OPORTUNIDADE DE NETWORKING", desc: "LOREN IPSUN LOREN IPSUN" },
-    { vip: true, standard: true, titulo: "ACESSO AO FOOD STATION", desc: "LOREN IPSUN LOREN IPSUN" },
-    { vip: true, standard: false, titulo: "Acesso exclusivo ao Lounge VIP: conforto e network", desc: "LOREN IPSUN LOREN IPSUN" },
-    { vip: true, standard: false, titulo: "PRIMEIRAS FILEIRAS", desc: "LOREN IPSUN LOREN IPSUN" },
-    { vip: true, standard: false, titulo: "Kit Premium de boas-vindas", desc: "LOREN IPSUN LOREN IPSUN" },
-    { vip: true, standard: false, titulo: "Open de finger food liberado no lounge a partir das 13h", desc: "LOREN IPSUN LOREN IPSUN" },
+    {
+      vip: true,
+      standard: true,
+      titulo: "ACESSO AOS 2 DIAS",
+      desc: "VIVA A EXPERIÊNCIA COMPLETA",
+    },
+    {
+      vip: true,
+      standard: true,
+      titulo: "+40 PALESTRAS",
+      desc: "ACESSO INTEGRAL AO CONTEÚDO DOS 3 PALCOS",
+    },
+    {
+      vip: true,
+      standard: true,
+      titulo: "CERTIFICADO DE PARTICIPAÇÃO",
+      desc: "LOREN IPSUN LOREN IPSUN",
+    },
+    {
+      vip: true,
+      standard: true,
+      titulo: "ACESSO A FEIRA DE NEGÓCIOS",
+      desc: "LOREN IPSUN LOREN IPSUN",
+    },
+    {
+      vip: true,
+      standard: true,
+      titulo: "OPORTUNIDADE DE NETWORKING",
+      desc: "LOREN IPSUN LOREN IPSUN",
+    },
+    {
+      vip: true,
+      standard: true,
+      titulo: "ACESSO AO FOOD STATION",
+      desc: "LOREN IPSUN LOREN IPSUN",
+    },
+    {
+      vip: true,
+      standard: false,
+      titulo: "Acesso exclusivo ao Lounge VIP: conforto e network",
+      desc: "LOREN IPSUN LOREN IPSUN",
+    },
+    {
+      vip: true,
+      standard: false,
+      titulo: "PRIMEIRAS FILEIRAS",
+      desc: "LOREN IPSUN LOREN IPSUN",
+    },
+    {
+      vip: true,
+      standard: false,
+      titulo: "Kit Premium de boas-vindas",
+      desc: "LOREN IPSUN LOREN IPSUN",
+    },
+    {
+      vip: true,
+      standard: false,
+      titulo: "Open de finger food liberado no lounge a partir das 13h",
+      desc: "LOREN IPSUN LOREN IPSUN",
+    },
   ];
 
   return (
@@ -98,10 +148,7 @@ const PassaporteVendasMobile = () => {
 
                   <button
                     onClick={() =>
-                      window.open(
-                        withHublaUtm(card.link),
-                        "_blank"
-                      )
+                      window.open(withHublaUtm(card.link), "_blank")
                     }
                     className="cursor-pointer uppercase bg-gradient-to-r from-[#F3CB46] to-[#E7A240] p-3 w-full mt-6 rounded-2xl font-bold"
                   >
@@ -132,7 +179,11 @@ const PassaporteVendasMobile = () => {
                         </div>
 
                         <img
-                          src={hasAccess ? "/checkPassaport.svg" : "/xPassaport.svg"}
+                          src={
+                            hasAccess
+                              ? "/checkPassaport.svg"
+                              : "/xPassaport.svg"
+                          }
                           alt={hasAccess ? "Disponível" : "Indisponível"}
                           className="w-7 h-7 shrink-0"
                         />

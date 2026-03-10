@@ -6,7 +6,7 @@ const PassaporteGrupo = () => {
       valorParcela: "xx,xx",
       icon: "/vector-5.svg",
       porCentoOff: "5% OFF",
-      link: "https://hub.la/r/ArwmMqmV9aBZkI33UYfF",
+      link: "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721",
     },
     {
       qtdPessoas: "10",
@@ -14,7 +14,7 @@ const PassaporteGrupo = () => {
       valorParcela: "xx,xx",
       icon: "/vector-9.svg",
       porCentoOff: "10% OFF",
-      link: "https://hub.la/r/MrAx1UDpvEnhGdAfYESX",
+      link: "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721",
     },
   ];
   return (
@@ -88,4 +88,3 @@ const PassaporteGrupo = () => {
 };
 
 export default PassaporteGrupo;
-
