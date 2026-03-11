@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 
 export default function BotaoWP() {
+  const whatsappNumbers = ["5592984358915", "5592936180461"];
+  const [currentNumberIndex, setCurrentNumberIndex] = useState(0);
+
+  const whatsappHref = `https://wa.me/${whatsappNumbers[currentNumberIndex]}`;
+
+  const handleClick = () => {
+    setCurrentNumberIndex((prevIndex) => (prevIndex + 1) % whatsappNumbers.length);
+  };
+
   return (
     <motion.a
-      href="https://chat.whatsapp.com/GXEsJXjFNBi1a3LLAiG90R?mode=gi_t"
+      href={whatsappHref}
+      onClick={handleClick}
       target="_blank"
       rel="noopener noreferrer"
       style={{
