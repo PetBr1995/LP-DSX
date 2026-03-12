@@ -118,6 +118,8 @@ const Palestrantes = () => {
               >
                 <div
                   className="
+                    relative
+                    overflow-hidden
                     bg-[#111111]
                     bg-cover
                     bg-center
@@ -131,11 +133,13 @@ const Palestrantes = () => {
                   "
                   style={{ backgroundImage: `url(${inf.img})` }}
                 >
-                  <h4 className="font-bebas text-[#F5A205] text-xl text-center uppercase">
+                  <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/90 via-black/50 to-transparent pointer-events-none" />
+
+                  <h4 className="relative z-10 font-bebas text-[#F5A205] text-xl text-center uppercase">
                     // {inf.nome}
                   </h4>
 
-                  <p className="font-roboto font-medium text-sm mt-2 text-gray-300 text-center normal-case">
+                  <p className="relative z-10 font-roboto font-medium text-sm mt-2 text-gray-300 text-center normal-case">
                     {inf.desc}
                   </p>
                 </div>
@@ -166,6 +170,8 @@ const Palestrantes = () => {
               >
                 <div
                   className="
+                    relative
+                    overflow-hidden
                     bg-[#111111]
                     bg-cover
                     bg-center
@@ -179,11 +185,13 @@ const Palestrantes = () => {
                   "
                   style={{ backgroundImage: `url(${inf.img})` }}
                 >
-                  <h4 className="font-bebas text-[#F5A205] text-xl text-center uppercase">
+                  <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/90 via-black/50 to-transparent pointer-events-none" />
+
+                  <h4 className="relative z-10 font-bebas text-[#F5A205] text-xl text-center uppercase">
                     // {inf.nome}
                   </h4>
 
-                  <p className="font-roboto font-medium text-sm mt-2 text-gray-300 text-center normal-case">
+                  <p className="relative z-10 font-roboto font-medium text-sm mt-2 text-gray-300 text-center normal-case">
                     {inf.desc}
                   </p>
                 </div>

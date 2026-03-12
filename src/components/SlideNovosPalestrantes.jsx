@@ -81,9 +81,10 @@ const SlideNovosPalestrantes = () => {
             {InfoNovosPalestrantes.map((inf, index) => (
               <SwiperSlide key={index} className="!w-[78vw] max-w-[260px] sm:!w-[230px]">
                 <div
-                  className="bg-[#111111] relative after:bg-linear-to-t after:via-[transparent] after:from-[black] after:to-[transparent] after:absolute after:content-[''] after:top-0 after:bottom-0 after:left-0 after:right-0 after:rounded-xl  bg-cover bg-top pb-4 px-4 rounded-xl shadow-lg h-80 flex flex-col justify-end"
+                  className="relative overflow-hidden bg-[#111111] bg-cover bg-top pb-4 px-4 rounded-xl shadow-lg h-80 flex flex-col justify-end"
                   style={{ backgroundImage: `url(${inf.img})` }}
                 >
+                  <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/90 via-black/60 to-transparent pointer-events-none" />
                   <div className="flex flex-col justify-start items-center h-18">
                     <h4 className="relative z-50 font-bebas text-[#F5A205] text-3xl text-center uppercase">
                       {inf.nome}

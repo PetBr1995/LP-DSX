@@ -34,6 +34,7 @@ export const InfoPalestrantesNacionais = [
         desc: "CEO da Staage",
         img: "/palestrantes/FernandoMiranda.png"
     },
+    
     {
         nome: "André Siqueira",
         desc: "Cofundador da RD Station",

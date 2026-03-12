@@ -143,6 +143,11 @@ export const InfoPalestrantes = [
         img: "/palestrantes/FabricioAlva.png"
     },
     {
+        nome: "Flavia Soares",
+        desc: "Referência em pesquisa qualitativa e comportamento do consumidor.",
+        img: "/palestrantes/FlaviaSausmikat.png"
+    },
+    {
         nome: "Aimée Gomes",
         desc: "Especialista em tráfego pago, analista de dados e estrategista digital.",
         img: "/palestrantes/AimeeGomes.png"
