@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 import useScrollToHash from "../hooks/useScrollToHash";
 
 import SlideNovosPalestrantes from "../components/SlideNovosPalestrantes"
@@ -17,6 +17,7 @@ import Depoimentos from "../components/Depoimentos";
 import PublicoDSX from "../components/PublicoDSX";
 import FAQ from "../components/FAQ";
 import BannerSection from "../components/BannerSection";
+import CondicoesGrupos from "../components/CondicoesGrupos";
 import BotaoWP from "../components/BotaoWP";
 
 
@@ -47,6 +48,7 @@ const Home = () => {
       <Depoimentos/>
       <PublicoDSX/>
       <BannerSection/>
+      <CondicoesGrupos/>
       {/* 
       <FormSection />
       */}
