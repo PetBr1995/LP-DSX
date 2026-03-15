@@ -17,9 +17,9 @@ export const InfoNovosPalestrantes = [
   /*
    */
   {
-    nome: "",
-    desc: "",
-    img: "/SILHUETA-3.png",
+    nome: "João Kepler",
+    desc: "Investidor anjo, empreendedor e autor best-seller.",
+    img: "/foto-kepler.jpg",
   },
   {
     nome: "",
