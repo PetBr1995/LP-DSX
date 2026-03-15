@@ -27,9 +27,9 @@ export const InfoNovosPalestrantes = [
     img: "/foto-flavia.jpg",
   },
   {
-    nome: "",
-    desc: "",
-    img: "/SILHUETA-2.png",
+    nome: "Afrânio Soares",
+    desc: "Referência regional em inteligência de mercado.",
+    img: "/foto-afranio.jpg",
   },
   {
     nome: "",
