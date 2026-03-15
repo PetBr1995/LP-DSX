@@ -22,9 +22,9 @@ export const InfoNovosPalestrantes = [
     img: "/foto-kepler.jpg",
   },
   {
-    nome: "",
-    desc: "",
-    img: "/SILHUETA-1.png",
+    nome: "Flávia Soares  ",
+    desc: "Referência em pesquisa qualitativa.",
+    img: "/foto-flavia.jpg",
   },
   {
     nome: "",
