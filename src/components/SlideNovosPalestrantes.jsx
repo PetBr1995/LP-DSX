@@ -82,7 +82,11 @@ const SlideNovosPalestrantes = () => {
               <SwiperSlide key={index} className="!w-[78vw] max-w-[260px] sm:!w-[230px]">
                 <div
                   className="relative overflow-hidden bg-[#111111] bg-cover bg-top pb-4 px-4 rounded-xl shadow-lg h-80 flex flex-col justify-end"
-                  style={{ backgroundImage: `url(${inf.img})` }}
+                  style={{
+                    backgroundImage: `url(${inf.img})`,
+                    backgroundSize: inf.bgSize,
+                    backgroundPosition: inf.bgPosition,
+                  }}
                 >
                   <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/90 via-black/60 to-transparent pointer-events-none" />
                   <div className="flex flex-col justify-start items-center h-18">

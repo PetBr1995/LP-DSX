@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Palestrantes from "./pages/Palestrantes";
 import Agradecimento from "./pages/Agradecimento";
@@ -25,6 +25,7 @@ const App = () => {
         <Route path="/whatsapp" element={<WhatsappPage />} />
         <Route path="/testeanimation" element={<TesteAnimation />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/sobre" element={<Navigate to="/" replace />} />
       </Routes>
     </>
   );

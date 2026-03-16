@@ -20,6 +20,8 @@ export const InfoNovosPalestrantes = [
     nome: "João Kepler",
     desc: "Investidor anjo, empreendedor e autor best-seller.",
     img: "/foto-kepler.jpg",
+    bgSize: "155%",
+    bgPosition: "center -70px",
   },
   {
     nome: "Flávia Soares  ",
