@@ -2,19 +2,19 @@ export const InfoNovosPalestrantes = [
   {
     nome: "Fernando Miranda",
     desc: "CEO da Staage",
-    img: "/FERNANDO-MIRANDA-FOTO.png",
+    img: "/novas-palestrantes/Fernando-Miranda.png",
     badge: "Nacional",
   },
   {
     nome: "Nicolas Charão",
     desc: " Founder Grupo VTX",
-    img: "/foto-nicolas-charao.jpg",
+    img: "/novas-palestrantes/Nicolas-Charao.png",
     badge: "Nacional",
   },
   {
     nome: "Roberto Reis",
     desc: "Estrategista eleitoral e analista político",
-    img: "/foto-roberto-reis-3.png",
+    img: "/novas-palestrantes/Roberto-Reis.png",
     badge: "Nacional",
   },
   /*
@@ -22,21 +22,19 @@ export const InfoNovosPalestrantes = [
   {
     nome: "João Kepler",
     desc: "Investidor anjo, empreendedor e autor best-seller.",
-    img: "/foto-kepler.jpg",
-    bgSize: "155%",
-    bgPosition: "center -60px",
+    img: "/novas-palestrantes/Joao-Kepler.png",
     badge: "Nacional",
   },
   {
     nome: "Flávia Soares  ",
     desc: "Referência em pesquisa qualitativa.",
-    img: "/foto-flavia.jpg",
+    img: "/novas-palestrantes/Flavia-Sausmikat.png",
     badge: "Local",
   },
   {
     nome: "Afrânio Soares",
     desc: "Referência regional em inteligência de mercado.",
-    img: "/foto-afranio.jpg",
+    img: "/novas-palestrantes/Afranio-Soares.png",
     badge: "Local",
   },
   {
