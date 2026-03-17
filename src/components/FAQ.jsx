@@ -6,7 +6,7 @@ const FAQ = () => {
       numero: 1,
       pergunta: "Quando acontece o DSX 2026?",
       resposta:
-        "O DSX 2026 acontece nos dias 23 e 23 julho, no Centro de Convenções Vasco Vasques em Manaus.",
+        "O DSX 2026 acontece nos dias 23 e 24 julho, no Centro de Convenções Vasco Vasques em Manaus.",
     },
     {
       numero: 2,
