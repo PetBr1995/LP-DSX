@@ -52,7 +52,7 @@ export default function FaixaLote() {
 
         {/* Conteúdo */}
         <span className="relative z-10 drop-shadow-[0_1px_1px_rgba(0,0,0,0.35)]">
-          2º lote promocional
+          2º lote disponível
         </span>
       </motion.div>
     </div>
