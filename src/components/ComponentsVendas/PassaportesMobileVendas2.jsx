@@ -9,7 +9,7 @@ const PassaportesMobileVendas2 = () => {
   const infPrice = [
     {
       nome: "VIP",
-      price: "997,00",
+      price: "1297,00",
       parcelas: "xx,xx",
       borderColor: "#79E3A3",
       gradientColor: "#242424",
@@ -20,7 +20,7 @@ const PassaportesMobileVendas2 = () => {
     },
     {
       nome: "STANDARD",
-      price: "297,00",
+      price: "397,00",
       parcelas: "xx,xx",
       borderColor: "#E46142",
       gradientColor: "#797979",

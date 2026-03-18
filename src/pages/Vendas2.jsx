@@ -187,7 +187,7 @@ const Vendas2 = () => {
           <div className="relative -mt-12 sm:-mt-20 md:-mt-24">
             {/* BADGE CENTRALIZADO */}
             <img
-              src="/badge-promocional.png"
+              src="/badge-segundolote.png"
               className="
       absolute
       left-1/2 -translate-x-1/2
@@ -241,7 +241,7 @@ const Vendas2 = () => {
               </p>
 
               <h3 className="mt-2 text-center font-bebas text-[4.5rem] leading-none font-black text-green-700 sm:text-[7rem] md:text-[9rem] lg:text-[10rem]">
-                R$ 297,00
+                R$ 397,00
               </h3>
 
               <div className="flex justify-center items-center mt-6 px-4">

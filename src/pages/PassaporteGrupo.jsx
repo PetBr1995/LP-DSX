@@ -2,7 +2,7 @@
   const inf = [
     {
       qtdPessoas: "5",
-      valor: "282,15",
+      valor: "377,15",
       valorParcela: "xx,xx",
       icon: "/vector-5.svg",
       porCentoOff: "5% OFF",
@@ -10,7 +10,7 @@
     },
     {
       qtdPessoas: "10",
-      valor: "267,30",
+      valor: "357,30",
       valorParcela: "xx,xx",
       icon: "/vector-9.svg",
       porCentoOff: "10% OFF",

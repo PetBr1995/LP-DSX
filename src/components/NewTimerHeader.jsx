@@ -31,9 +31,7 @@ const NewTimerHeader = ({ isVisible }) => {
       after:bg-contain
       after:z-[1]
     "
-
     >
-
       <div
         className="
           mx-auto
@@ -57,7 +55,9 @@ const NewTimerHeader = ({ isVisible }) => {
             target="_blank"
           />
            */}
-          <h2 className="uppercase font-black font-jamjuree  px-3 ">O evento começa em: </h2>
+          <h2 className="uppercase font-black font-jamjuree  px-3 ">
+            O evento começa em:{" "}
+          </h2>
         </div>
 
         {/* Meio: timer */}
@@ -68,7 +68,7 @@ const NewTimerHeader = ({ isVisible }) => {
           />
         </div>
         <div className="relative z-20">
-          <CTAButton titulo="Primeiro lote disponível" link="/vendas" />
+          <CTAButton titulo="Segundo lote disponível" link="/vendas" />
         </div>
         {/* Direita: CTA */}
         {/*
