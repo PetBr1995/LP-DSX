@@ -171,7 +171,7 @@ const PassaporteVendas = () => {
                   {item.nome}
                 </h2>
                 <p className="w-fit mx-auto px-2.5 text-1xl relative z-10 uppercase border text-white text-center font-black p-1 border-white mx-12 rounded-3xl mt-5 px-5">
-                  1º lote
+                  2º lote
                 </p>
 
                 <div className="relative z-10 mx-12 text-center">

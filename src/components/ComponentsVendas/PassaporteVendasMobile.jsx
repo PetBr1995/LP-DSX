@@ -135,7 +135,7 @@ const PassaporteVendasMobile = () => {
                 </h2>
 
                 <p className="relative font-black z-10 uppercase border text-white text-center text-md w-fit p-1 border-white mx-auto rounded-3xl mt-5 px-5">
-                  1° lote
+                  2° lote
                 </p>
 
                 <div className="relative z-10 mx-6 sm:mx-10 text-center">
