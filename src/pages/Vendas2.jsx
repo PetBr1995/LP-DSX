@@ -187,7 +187,7 @@ const Vendas2 = () => {
           <div className="relative -mt-12 sm:-mt-20 md:-mt-24">
             {/* BADGE CENTRALIZADO */}
             <img
-              src="/badge-segundolote.png"
+              src="/badeg-2-lote.png"
               className="
       absolute
       left-1/2 -translate-x-1/2
