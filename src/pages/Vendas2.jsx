@@ -441,7 +441,7 @@ const Vendas2 = () => {
             <p className="mt-2 text-sm text-white/80 sm:text-base">
               Todos os direitos reservados.
             </p>
-            <img src="/logo-digitalhub.svg" className="w-[180px] m-auto pt-3" />
+            <img src="/logo-digitalhub-branca.svg" className="w-[180px] m-auto pt-3" />
           </div>
         </footer>
       </section>

@@ -21,7 +21,7 @@ const Footer = () => {
         </div>
 
         <img
-          src="/logo-digitalhub.svg"
+          src="/logo-digitalhub-branca.svg"
           alt="Powered by Digital Hub"
           className="w-[180px]"
         />
