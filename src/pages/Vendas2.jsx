@@ -270,11 +270,11 @@ const Vendas2 = () => {
               </h1>
               <HeroVendas2 />
               <p className="mx-auto max-w-3xl px-4 pb-6 text-center text-sm text-black sm:text-base">
-                O DSX é um evento consolidado com padrão nacional e impacto real.
+                O DSX é um evento consolidado com padrão nacional e impacto
+                real.
               </p>
             </div>
           </div>
-
         </div>
 
         <div className="mx-auto max-w-7xl px-4 py-10 sm:py-14">
@@ -441,9 +441,7 @@ const Vendas2 = () => {
             <p className="mt-2 text-sm text-white/80 sm:text-base">
               Todos os direitos reservados.
             </p>
-            <p className="mt-3 text-sm font-bold uppercase tracking-wide text-[#F3CB46] sm:text-base">
-              por Digital Hub Experience
-            </p>
+            <img src="/logo-digitalhub.svg" className="w-[180px] m-auto pt-3" />
           </div>
         </footer>
       </section>
