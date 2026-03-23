@@ -44,8 +44,29 @@ export const InfoNovosPalestrantes = [
     badge: "Nacional",
   },
   {
+    nome: "Carlos Oshiro",
+    desc: "Fundador da Targo Consultoria Empresarial",
+    img: "/foto-carlos-oshiro.png",
+    badge: "Local",
+  },
+  {
+    nome: "",
+    desc: "",
+    img: "/SILHUETA-1.png",
+  },
+  {
+    nome: "",
+    desc: "",
+    img: "/SILHUETA-2.png",
+  },
+  {
     nome: "",
     desc: "",
     img: "/SILHUETA-3.png",
+  },
+  {
+    nome: "",
+    desc: "",
+    img: "/SILHUETA-1.png",
   },
 ];
