@@ -49,14 +49,13 @@ export const InfoNovosPalestrantes = [
     img: "/foto-carlos-oshiro.png",
     badge: "Local",
   },
-  /* 
+  
   {
     nome: "Breno Maciel",
     desc: "CEO da Vanguarda Martech",
     img: "/foto-breno-maciel.png",
     badge: "Local",
   },
-  */
   {
     nome: "",
     desc: "",
