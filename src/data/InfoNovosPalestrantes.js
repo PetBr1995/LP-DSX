@@ -58,7 +58,7 @@ export const InfoNovosPalestrantes = [
   },
   {
     nome: "Clayton Pascarelli",
-    desc: "CEO da Vanguarda Martech",
+    desc: "Especialista em oratória e PNL aplicada à comunicação",
     img: "/foto-claytonpascarelli.png",
     badge: "Local",
   },
