@@ -57,6 +57,12 @@ export const InfoNovosPalestrantes = [
     badge: "Local",
   },
   {
+    nome: "Clayton Pascarelli",
+    desc: "CEO da Vanguarda Martech",
+    img: "/foto-claytonpascarelli.png",
+    badge: "Local",
+  },
+  {
     nome: "",
     desc: "",
     img: "/SILHUETA-1.png",
