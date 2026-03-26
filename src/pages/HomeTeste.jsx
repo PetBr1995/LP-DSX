@@ -18,7 +18,7 @@ import PublicoDSX from "../components/PublicoDSX";
 import FAQ from "../components/FAQ";
 import BannerSection from "../components/BannerSection";
 import CondicoesGrupos from "../components/CondicoesGrupos";
-import BotaoWP from "../components/BotaoWP";
+import BotaoWPFooter from "../components/BotaoWPFooter";
 
 function onlyDigits(value = "") {
   return value.replace(/\D/g, "");
@@ -41,7 +41,7 @@ const HomeTeste = () => {
   const [showLeadModal, setShowLeadModal] = useState(false);
   const [hasOpenedLeadModal, setHasOpenedLeadModal] = useState(false);
   const [leadModalDismissCount, setLeadModalDismissCount] = useState(0);
-  const firstSpeakersSectionRef = useRef(null);
+  const firstSpeakersSectionEndRef = useRef(null);
   const reopenModalTimeoutRef = useRef(null);
 
   const [sourceData, setSourceData] = useState({
@@ -86,11 +86,17 @@ const HomeTeste = () => {
   useEffect(() => {
     if (!showLeadModal) return undefined;
 
-    const previousOverflow = document.body.style.overflow;
+    const previousBodyOverflow = document.body.style.overflow;
+    const previousHtmlOverflow = document.documentElement.style.overflow;
+    const previousBodyTouchAction = document.body.style.touchAction;
     document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.touchAction = "none";
 
     return () => {
-      document.body.style.overflow = previousOverflow;
+      document.body.style.overflow = previousBodyOverflow;
+      document.documentElement.style.overflow = previousHtmlOverflow;
+      document.body.style.touchAction = previousBodyTouchAction;
     };
   }, [showLeadModal]);
 
@@ -103,7 +109,7 @@ const HomeTeste = () => {
   }, []);
 
   useEffect(() => {
-    if (hasOpenedLeadModal || !firstSpeakersSectionRef.current) return undefined;
+    if (hasOpenedLeadModal || !firstSpeakersSectionEndRef.current) return undefined;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -114,12 +120,10 @@ const HomeTeste = () => {
         setHasOpenedLeadModal(true);
         observer.disconnect();
       },
-      {
-        threshold: 0.35,
-      }
+      { threshold: 0 }
     );
 
-    observer.observe(firstSpeakersSectionRef.current);
+    observer.observe(firstSpeakersSectionEndRef.current);
 
     return () => observer.disconnect();
   }, [hasOpenedLeadModal]);
@@ -140,9 +144,7 @@ const HomeTeste = () => {
 
   const isLeadFormValid = Object.keys(errors).length === 0;
   const canSubmitLead = leadStatus !== "loading";
-  const isLeadModalMandatory = leadModalDismissCount >= maxGraceDismissals;
-  const canCloseLeadModal =
-    leadStatus !== "loading" && (!isLeadModalMandatory || leadStatus === "success");
+  const canCloseLeadModal = leadStatus !== "loading";
   const isSecondOpenOrMore = leadModalDismissCount >= 1 && leadStatus !== "success";
 
   const handleWhatsappMask = (e) => {
@@ -164,12 +166,6 @@ const HomeTeste = () => {
 
   const closeLeadModal = () => {
     if (leadStatus === "loading") return;
-
-    if (!canCloseLeadModal) {
-      setLeadStatus("error");
-      setLeadMessage("Agora o formulário é obrigatório para continuar.");
-      return;
-    }
 
     setShowLeadModal(false);
 
@@ -193,7 +189,7 @@ const HomeTeste = () => {
         setLeadStatus("idle");
         setLeadMessage("");
         setShowLeadModal(true);
-      }, 5000);
+      }, 10000);
 
       return nextCount;
     });
@@ -273,8 +269,9 @@ const HomeTeste = () => {
       <HeroSection />
       <HeroSectionV2 />
       <SlideFaixa />
-      <div ref={firstSpeakersSectionRef}>
+      <div>
         <SlideNovosPalestrantes />
+        <div ref={firstSpeakersSectionEndRef} className="h-px w-full" />
       </div>
       <NewTimerHeader
         isVisible={showTimerHeader}
@@ -294,8 +291,8 @@ const HomeTeste = () => {
       */}
       <FaleConosco />
       <FAQ />
+      <BotaoWPFooter />
       <Footer />
-      <BotaoWP />
 
       <AnimatePresence>
         {showLeadModal && (
