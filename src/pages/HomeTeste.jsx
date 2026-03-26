@@ -36,12 +36,18 @@ function formatWhatsappE164(number = "") {
 }
 
 const HomeTeste = () => {
-  const maxGraceDismissals = 3;
   const [showTimerHeader, setShowTimerHeader] = useState(false);
   const [showLeadModal, setShowLeadModal] = useState(false);
-  const [hasOpenedLeadModal, setHasOpenedLeadModal] = useState(false);
-  const [leadModalDismissCount, setLeadModalDismissCount] = useState(0);
+  const [popupStep, setPopupStep] = useState(0); // 1: apos slide | 2: +10s | 3: footer (obrigatorio)
+  const [hasClosedFirstPopup, setHasClosedFirstPopup] = useState(false);
+  const [hasShownSecondPopup, setHasShownSecondPopup] = useState(false);
+  const [hasClosedSecondPopup, setHasClosedSecondPopup] = useState(false);
+  const [isFooterInView, setIsFooterInView] = useState(false);
+  const [waitForFooterAfterSecondClose, setWaitForFooterAfterSecondClose] = useState(false);
+  const [mustExitFooterBeforeThird, setMustExitFooterBeforeThird] = useState(false);
+  const [hasLeadConverted, setHasLeadConverted] = useState(false);
   const firstSpeakersSectionEndRef = useRef(null);
+  const footerTriggerRef = useRef(null);
   const reopenModalTimeoutRef = useRef(null);
 
   const [sourceData, setSourceData] = useState({
@@ -109,15 +115,15 @@ const HomeTeste = () => {
   }, []);
 
   useEffect(() => {
-    if (hasOpenedLeadModal || !firstSpeakersSectionEndRef.current) return undefined;
+    if (hasLeadConverted || popupStep > 0 || !firstSpeakersSectionEndRef.current) return undefined;
 
     const observer = new IntersectionObserver(
       (entries) => {
         const [entry] = entries;
         if (!entry?.isIntersecting) return;
 
+        setPopupStep(1);
         setShowLeadModal(true);
-        setHasOpenedLeadModal(true);
         observer.disconnect();
       },
       { threshold: 0 }
@@ -126,7 +132,77 @@ const HomeTeste = () => {
     observer.observe(firstSpeakersSectionEndRef.current);
 
     return () => observer.disconnect();
-  }, [hasOpenedLeadModal]);
+  }, [hasLeadConverted, popupStep]);
+
+  useEffect(() => {
+    if (!hasClosedFirstPopup || hasLeadConverted || popupStep >= 2) return undefined;
+
+    reopenModalTimeoutRef.current = setTimeout(() => {
+      if (hasLeadConverted) return;
+      setPopupStep(2);
+      setHasShownSecondPopup(true);
+      setLeadStatus("idle");
+      setLeadMessage("");
+      setShowLeadModal(true);
+    }, 10000);
+
+    return () => {
+      if (reopenModalTimeoutRef.current) {
+        clearTimeout(reopenModalTimeoutRef.current);
+      }
+    };
+  }, [hasClosedFirstPopup, hasLeadConverted, popupStep]);
+
+  useEffect(() => {
+    if (!footerTriggerRef.current) return undefined;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        setIsFooterInView(Boolean(entry?.isIntersecting));
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(footerTriggerRef.current);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (
+      !waitForFooterAfterSecondClose ||
+      hasLeadConverted ||
+      popupStep >= 3 ||
+      !hasShownSecondPopup ||
+      !hasClosedSecondPopup ||
+      showLeadModal
+    ) {
+      return;
+    }
+
+    if (mustExitFooterBeforeThird) {
+      if (!isFooterInView) setMustExitFooterBeforeThird(false);
+      return;
+    }
+
+    if (!isFooterInView) return;
+
+    setPopupStep(3);
+    setLeadStatus("idle");
+    setLeadMessage("");
+    setShowLeadModal(true);
+    setWaitForFooterAfterSecondClose(false);
+  }, [
+    hasClosedSecondPopup,
+    hasLeadConverted,
+    hasShownSecondPopup,
+    isFooterInView,
+    mustExitFooterBeforeThird,
+    popupStep,
+    showLeadModal,
+    waitForFooterAfterSecondClose,
+  ]);
 
   const errors = useMemo(() => {
     const currentErrors = {};
@@ -144,8 +220,9 @@ const HomeTeste = () => {
 
   const isLeadFormValid = Object.keys(errors).length === 0;
   const canSubmitLead = leadStatus !== "loading";
-  const canCloseLeadModal = leadStatus !== "loading";
-  const isSecondOpenOrMore = leadModalDismissCount >= 1 && leadStatus !== "success";
+  const isFinalMandatoryPopup = popupStep === 3 && leadStatus !== "success";
+  const canCloseLeadModal = leadStatus !== "loading" && !isFinalMandatoryPopup;
+  const isSecondOpenOrMore = popupStep >= 2 && leadStatus !== "success";
 
   const handleWhatsappMask = (e) => {
     let value = e.target.value;
@@ -166,6 +243,11 @@ const HomeTeste = () => {
 
   const closeLeadModal = () => {
     if (leadStatus === "loading") return;
+    if (isFinalMandatoryPopup) {
+      setLeadStatus("error");
+      setLeadMessage("Para continuar, preencha e envie o formulário.");
+      return;
+    }
 
     setShowLeadModal(false);
 
@@ -176,23 +258,12 @@ const HomeTeste = () => {
       return;
     }
 
-    setLeadModalDismissCount((prevCount) => {
-      if (prevCount >= maxGraceDismissals) return prevCount;
-
-      const nextCount = prevCount + 1;
-
-      if (reopenModalTimeoutRef.current) {
-        clearTimeout(reopenModalTimeoutRef.current);
-      }
-
-      reopenModalTimeoutRef.current = setTimeout(() => {
-        setLeadStatus("idle");
-        setLeadMessage("");
-        setShowLeadModal(true);
-      }, 10000);
-
-      return nextCount;
-    });
+    if (popupStep === 1) setHasClosedFirstPopup(true);
+    if (popupStep === 2) {
+      setHasClosedSecondPopup(true);
+      setWaitForFooterAfterSecondClose(true);
+      setMustExitFooterBeforeThird(isFooterInView);
+    }
   };
 
   const handleLeadSubmit = async (e) => {
@@ -256,8 +327,16 @@ const HomeTeste = () => {
       }
 
       setLeadStatus("success");
-      setLeadMessage("Cadastro enviado! Em breve entraremos em contato.");
+      setHasLeadConverted(true);
+      const successText = "Cadastro enviado! Em breve entraremos em contato.";
+      setLeadMessage(successText);
       setLeadForm({ name: "", whatsapp: "", email: "" });
+      if (reopenModalTimeoutRef.current) {
+        clearTimeout(reopenModalTimeoutRef.current);
+      }
+      setTimeout(() => {
+        setShowLeadModal(false);
+      }, 1200);
     } catch (error) {
       setLeadStatus("error");
       setLeadMessage("Falha de rede. Verifique sua conexão e tente novamente.");
@@ -292,6 +371,7 @@ const HomeTeste = () => {
       <FaleConosco />
       <FAQ />
       <BotaoWPFooter />
+      <div ref={footerTriggerRef} className="h-px w-full" />
       <Footer />
 
       <AnimatePresence>
