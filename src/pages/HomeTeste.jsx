@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import useScrollToHash from "../hooks/useScrollToHash";
 import { FormButton } from "../components/FormSection";
 import { smoothEase } from "../utils/motion";
-import { supabase } from "../lib/supabaseClient";
+import { isSupabaseConfigured, supabase } from "../lib/supabaseClient";
 
 import SlideNovosPalestrantes from "../components/SlideNovosPalestrantes";
 import ContentSection from "../components/ContentSection";
@@ -261,6 +261,12 @@ const HomeTeste = () => {
     setLeadStatus("loading");
 
     try {
+      if (!isSupabaseConfigured || !supabase) {
+        setLeadStatus("error");
+        setMensagem("Integração temporariamente indisponível. Tente novamente em instantes.");
+        return;
+      }
+
       const formData = new FormData(e.target);
       const payload = {
         name: formData.get("name")?.toString().trim() || "",
