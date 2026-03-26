@@ -22,7 +22,7 @@ export default function BotaoWP() {
         position: "fixed",
         bottom: "50px",
         left: "20px",
-        zIndex: 50,
+        zIndex: 220,
       }}
       initial={{ opacity: 0, scale: 0.8, y: 10 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
