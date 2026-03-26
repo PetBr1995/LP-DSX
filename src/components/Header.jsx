@@ -21,7 +21,9 @@ const Header = ({ className = "" }) => {
         className={`
           fixed top-0 left-0 right-0
           z-50
-          bg-black
+          bg-black/20
+          backdrop-blur-sm
+          border-b border-white/10
           h-[75px] p-2
           flex items-center justify-between
           sm:justify-around
