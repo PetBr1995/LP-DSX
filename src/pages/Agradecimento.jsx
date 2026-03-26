@@ -1,11 +1,12 @@
 import { motion } from "framer-motion";
+import { smoothEase } from "../utils/motion";
 
 const titleVariants = {
   hidden: { opacity: 0, y: 18 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.65, ease: "easeOut" },
+    transition: { duration: 0.78, ease: smoothEase },
   },
 };
 
@@ -14,7 +15,7 @@ const textVariants = {
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut", delay: 0.1 },
+    transition: { duration: 0.72, ease: smoothEase, delay: 0.12 },
   },
 };
 
@@ -23,7 +24,7 @@ const logoVariants = {
   show: {
     opacity: 1,
     scale: 1,
-    transition: { duration: 0.6, ease: "easeOut" },
+    transition: { duration: 0.72, ease: smoothEase },
   },
 };
 
@@ -32,7 +33,7 @@ const footerVariants = {
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut", delay: 0.15 },
+    transition: { duration: 0.7, ease: smoothEase, delay: 0.15 },
   },
 };
 

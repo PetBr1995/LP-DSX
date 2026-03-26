@@ -26,7 +26,7 @@ const cardInf = [
 
 const PublicoDSX = () => {
     return (
-        <section className="relative bg-black py-20 overflow-hidden">
+        <section className="relative bg-black py-20 overflow-hidden no-section-transition">
             {/* Fundo branco com clip-path criando a ponta preta à direita */}
             <div
                 className="absolute inset-0 bg-white"

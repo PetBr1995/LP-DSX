@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { smoothEase, softEase } from "../utils/motion";
 
 export default function BotaoWP() {
   const whatsappNumbers = ["5592984358915", "5592936180461"];
@@ -25,9 +26,9 @@ export default function BotaoWP() {
       }}
       initial={{ opacity: 0, scale: 0.8, y: 10 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
-      transition={{ duration: 0.35, ease: "easeOut" }}
-      whileHover={{ scale: 1.08 }}
-      whileTap={{ scale: 0.95 }}
+      transition={{ duration: 0.5, ease: smoothEase }}
+      whileHover={{ scale: 1.04 }}
+      whileTap={{ scale: 0.97 }}
       aria-label="Falar no WhatsApp"
     >
       {/* Anel pulsando atrás */}
@@ -39,8 +40,8 @@ export default function BotaoWP() {
           background: "rgba(102,178,102,0.4)",
           filter: "blur(1px)",
         }}
-        animate={{ scale: [1, 1.6, 1], opacity: [0.55, 0, 0.55] }}
-        transition={{ duration: 1.6, repeat: Infinity, ease: "easeOut" }}
+        animate={{ scale: [1, 1.45, 1], opacity: [0.42, 0, 0.42] }}
+        transition={{ duration: 2.1, repeat: Infinity, ease: softEase }}
       />
 
       {/* Segundo anel */}
@@ -51,12 +52,12 @@ export default function BotaoWP() {
           borderRadius: "50%",
           background: "rgba(102,178,102,0.25)",
         }}
-        animate={{ scale: [1, 1.9, 1], opacity: [0.35, 0, 0.35] }}
+        animate={{ scale: [1, 1.7, 1], opacity: [0.25, 0, 0.25] }}
         transition={{
-          duration: 2.2,
+          duration: 2.8,
           repeat: Infinity,
-          ease: "easeOut",
-          delay: 0.35,
+          ease: softEase,
+          delay: 0.45,
         }}
       />
 
@@ -72,17 +73,17 @@ export default function BotaoWP() {
           background: "#66b266",
           boxShadow: "0 8px 20px rgba(0,0,0,0.2)",
         }}
-        animate={{ scale: [1, 1.06, 1] }}
-        transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
+        animate={{ scale: [1, 1.03, 1] }}
+        transition={{ duration: 2.2, repeat: Infinity, ease: softEase }}
       >
         {/* Wiggle no ícone */}
         <motion.span
-          animate={{ rotate: [0, -8, 8, -6, 6, 0] }}
+          animate={{ rotate: [0, -4, 4, -3, 3, 0] }}
           transition={{
-            duration: 2.6,
+            duration: 3.2,
             repeat: Infinity,
-            ease: "easeInOut",
-            repeatDelay: 2.2,
+            ease: softEase,
+            repeatDelay: 3.1,
           }}
         >
           <img

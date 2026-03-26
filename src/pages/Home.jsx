@@ -40,7 +40,12 @@ const Home = () => {
       <HeroSectionV2/>
       <SlideFaixa/>
       <SlideNovosPalestrantes/>
-      <NewTimerHeader isVisible={showTimerHeader} />
+      <NewTimerHeader
+        isVisible={showTimerHeader}
+        headerText="O evento começa em:"
+        ctaTitle="Segundo lote disponível"
+        targetDate="2026-07-23T00:00:00"
+      />
        
 
       <ContentSection />

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import CTAButton from './Mascaras/CTAButton'
+import { smoothEase } from "../utils/motion";
 
 const ContentSection = () => {
   const cardInfo = [
@@ -73,8 +74,8 @@ const ContentSection = () => {
                 key={inf.cartTitle}
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.35, ease: 'easeOut' }}
+                viewport={{ once: true, amount: 0.24, margin: "0px 0px -10% 0px" }}
+                transition={{ duration: 0.62, ease: smoothEase }}
                 className={`
                   flex items-center gap-4
                   py-6 px-6 sm:px-8

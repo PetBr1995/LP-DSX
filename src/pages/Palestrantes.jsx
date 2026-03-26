@@ -6,13 +6,15 @@ import { InfoPalestrantesNacionais } from "../data/InfoPalestrantesNacionais";
 import { InfoPalestrantesRegionais } from "../data/InfoPalestrantesRegionais";
 import { motion } from "framer-motion";
 import BotaoWP from "../components/BotaoWP";
+import { smoothEase } from "../utils/motion";
 
 const containerVariants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.04, // mais rápido
+      staggerChildren: 0.055,
+      delayChildren: 0.04,
     },
   },
 };
@@ -23,7 +25,7 @@ const itemVariants = {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { duration: 0.35, ease: "easeOut" },
+    transition: { duration: 0.56, ease: smoothEase },
   },
 };
 
@@ -32,7 +34,7 @@ const titleVariants = {
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.35, ease: "easeOut" },
+    transition: { duration: 0.58, ease: smoothEase },
   },
 };
 
@@ -60,7 +62,7 @@ const Palestrantes = () => {
     ? {
         initial: "hidden",
         whileInView: "show",
-        viewport: { once: true, amount: 0.2 },
+        viewport: { once: true, amount: 0.24, margin: "0px 0px -12% 0px" },
       }
     : {
         initial: "hidden",
@@ -71,7 +73,7 @@ const Palestrantes = () => {
     ? {
         initial: "hidden",
         whileInView: "show",
-        viewport: { once: true, amount: 0.08 }, // dispara mais fácil
+        viewport: { once: true, amount: 0.16, margin: "0px 0px -8% 0px" },
       }
     : {
         initial: "hidden",

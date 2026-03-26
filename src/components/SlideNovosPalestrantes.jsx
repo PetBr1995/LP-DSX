@@ -4,17 +4,18 @@ import { motion } from "framer-motion";
 
 import { InfoNovosPalestrantes } from "../data/InfoNovosPalestrantes";
 import CTAButton from "./Mascaras/CTAButton";
+import { smoothEase } from "../utils/motion";
 
 const SlideNovosPalestrantes = () => {
   const inViewOptions = {
-    once: false,
-    amount: 0.2,
-    margin: "0px 0px -30% 0px",
+    once: true,
+    amount: 0.24,
+    margin: "0px 0px -18% 0px",
   };
 
   const fadeUp = {
-    hidden: { opacity: 0, y: 22 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.72, ease: smoothEase } },
   };
 
   const container = {
@@ -22,7 +23,7 @@ const SlideNovosPalestrantes = () => {
     show: {
       transition: {
         staggerChildren: 0.12,
-        delayChildren: 0.05,
+        delayChildren: 0.08,
       },
     },
   };

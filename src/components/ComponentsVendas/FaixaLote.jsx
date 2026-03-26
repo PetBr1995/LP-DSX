@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { smoothEase, softEase } from "../../utils/motion";
 
 export default function FaixaLote() {
   return (
@@ -22,19 +23,19 @@ export default function FaixaLote() {
         initial={{ opacity: 0, scale: 0.95, y: 10 }}
         animate={{
           opacity: 1,
-          scale: [1, 1.045, 1],
+          scale: [1, 1.02, 1],
           boxShadow: [
             "0 10px 25px rgba(0,0,0,0.22), 0 0 0 rgba(34,197,94,0)",
-            "0 14px 35px rgba(0,0,0,0.28), 0 0 18px rgba(34,197,94,0.35)",
+            "0 13px 32px rgba(0,0,0,0.26), 0 0 14px rgba(34,197,94,0.2)",
             "0 10px 25px rgba(0,0,0,0.22), 0 0 0 rgba(34,197,94,0)",
           ],
         }}
         transition={{
-          opacity: { duration: 0.4 },
-          scale: { duration: 1.6, repeat: Infinity, ease: "easeInOut" },
-          boxShadow: { duration: 1.6, repeat: Infinity, ease: "easeInOut" },
+          opacity: { duration: 0.52, ease: smoothEase },
+          scale: { duration: 2.4, repeat: Infinity, ease: softEase },
+          boxShadow: { duration: 2.4, repeat: Infinity, ease: softEase },
         }}
-        whileHover={{ scale: 1.06 }}
+        whileHover={{ scale: 1.03 }}
         whileTap={{ scale: 0.98 }}
       >
         {/* Shimmer sutil passando. */}
@@ -43,10 +44,10 @@ export default function FaixaLote() {
           style={{ transform: "skewX(-25deg)" }}
           animate={{ left: ["-50%", "120%"] }}
           transition={{
-            duration: 2.2,
+            duration: 2.8,
             repeat: Infinity,
-            repeatDelay: 2.8,
-            ease: "easeInOut",
+            repeatDelay: 3.4,
+            ease: softEase,
           }}
         />
 

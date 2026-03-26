@@ -10,6 +10,7 @@ import PreserveUtmLinks from "./components/PreserveUtmLinks";
 import TesteAnimation from "./pages/testeAnimation";
 import Checkout from "./pages/Checkout";
 import Vendas2 from "./pages/Vendas2";
+import HomeTeste from "./pages/HomeTeste";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
       <PreserveUtmLinks />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/teste" element={<HomeTeste />} />
         <Route path="/palestrantes" element={<Palestrantes />} />
         <Route path="/agradecimento" element={<Agradecimento />} />
         <Route path="/patrocinador" element={<Patrocinadores />} />

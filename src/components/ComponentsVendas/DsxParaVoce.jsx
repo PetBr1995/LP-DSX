@@ -30,7 +30,7 @@ const DsxParaVoce = () => {
   return (
     <section
       className="
-        py-10 relative overflow-hidden
+        py-10 relative overflow-hidden no-section-transition
         after:absolute after:inset-0
         after:content-['']
         after:bg-[url(/banner-dsx-para-voce.png)]

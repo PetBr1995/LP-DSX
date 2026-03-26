@@ -1,5 +1,6 @@
 import CTAButton from "./Mascaras/CTAButton";
 import { motion } from "framer-motion";
+import { smoothEase } from "../utils/motion";
 
 const HeroSectionV2 = () => {
     const cardItens = [
@@ -11,24 +12,24 @@ const HeroSectionV2 = () => {
     // 👇 Trigger único pra padronizar a seção inteira
     // Ajuste o -35%: quanto mais negativo, mais "tarde" dispara.
     const inViewOptions = {
-        once: false,               // ✅ repete ao voltar
-        amount: 0.2,               // % do elemento visível pra considerar "in view"
-        margin: "0px 0px -35% 0px" // ✅ ponto específico do scroll (gatilho)
+        once: true,
+        amount: 0.24,
+        margin: "0px 0px -18% 0px"
     };
 
     const fadeUp = {
         hidden: { opacity: 0, y: 24 },
-        show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+        show: { opacity: 1, y: 0, transition: { duration: 0.76, ease: smoothEase } },
     };
 
     const containerStagger = {
         hidden: {},
-        show: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
+        show: { transition: { staggerChildren: 0.14, delayChildren: 0.1 } },
     };
 
     const cardAnim = {
         hidden: { opacity: 0, y: 18, scale: 0.98 },
-        show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
+        show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.66, ease: smoothEase } },
     };
 
     return (
@@ -47,7 +48,7 @@ const HeroSectionV2 = () => {
                 animate={{ rotate: 360 }}
                 transition={{
                     repeat: Infinity,
-                    duration: 16,
+                    duration: 24,
                     ease: "linear",
                 }}
             />

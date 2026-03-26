@@ -4,19 +4,20 @@ import { motion } from "framer-motion";
 
 import { InfoPalestrantes } from "../data/InfoPalestrantes";
 import CTAButton from "./Mascaras/CTAButton";
+import { smoothEase } from "../utils/motion";
 
 const SlidePalestrantes = () => {
   // Trigger: controla o “ponto” do scroll em que a seção anima
   const inViewOptions = {
-    once: false,                 // ✅ anima de novo ao voltar
-    amount: 0.2,
-    margin: "0px 0px -30% 0px",  // ajuste aqui: mais negativo = dispara mais tarde
+    once: true,
+    amount: 0.24,
+    margin: "0px 0px -18% 0px",
   };
 
   // Animação simples de entrada
   const fadeUp = {
-    hidden: { opacity: 0, y: 22 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.72, ease: smoothEase } },
   };
 
   // Stagger apenas para os blocos (título, subtítulo, slider, botão)
@@ -25,7 +26,7 @@ const SlidePalestrantes = () => {
     show: {
       transition: {
         staggerChildren: 0.12,
-        delayChildren: 0.05,
+        delayChildren: 0.08,
       },
     },
   };

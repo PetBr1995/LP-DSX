@@ -146,3 +146,39 @@
 .animate-badge {
   animation: pulseScale 1.8s ease-in-out infinite;
 }
+
+a,
+button:not(:disabled),
+[role="button"],
+[onclick],
+summary,
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+label[for] {
+  cursor: pointer;
+}
+
+button:disabled,
+input:disabled {
+  cursor: not-allowed;
+}
+
+/* Transicao global entre secoes */
+section + section {
+  position: relative;
+  isolation: isolate;
+}
+
+section + section::before {
+  display: none;
+}
+
+section + section::after {
+  display: none;
+}
+
+section.no-section-transition::before,
+section.no-section-transition::after {
+  display: none;
+}

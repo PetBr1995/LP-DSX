@@ -48,16 +48,12 @@ const FAQ = () => {
         bg-cover
         bg-center
         bg-no-repeat
-
-        before:content-['']
-        before:absolute
-        before:inset-0
-        before:bg-[#01080E]/[0.82]
-        before:z-0
       "
     >
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-black/80" />
+
       {/* CONTEÚDO */}
-      <div className="relative z-10 max-w-[1000px] mx-auto">
+      <div className="relative z-10 mx-auto max-w-[1000px]">
         <h4 className="text-3xl text-center font-jamjuree tracking-widest text-[#F5D247] uppercase">
           FAQ
         </h4>

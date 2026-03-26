@@ -26,7 +26,7 @@ const CondicoesGrupos = () => {
 
   return (
     <section
-      className="relative overflow-hidden bg-cover bg-center"
+      className="relative overflow-hidden bg-cover bg-center no-section-transition"
       style={{ backgroundImage: "url('/[DSX]-Banner-Site-BG.png')" }}
     >
       <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 text-center sm:py-20">

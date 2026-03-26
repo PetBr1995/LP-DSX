@@ -1,5 +1,6 @@
 import CTAButton from '../Mascaras/CTAButton'
 import { motion } from "framer-motion"
+import { smoothEase } from "../../utils/motion";
 
 const HeroWhatsAppPage = () => {
   const cardItens = [
@@ -42,9 +43,10 @@ const HeroWhatsAppPage = () => {
         {/* Logo */}
         <motion.div
           className="flex-shrink-0"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          initial={{ opacity: 0, y: 22, scale: 0.98 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, amount: 0.28 }}
+          transition={{ duration: 0.76, ease: smoothEase }}
         >
           <img
             src="/dsx-2026-logo.png"
@@ -55,7 +57,13 @@ const HeroWhatsAppPage = () => {
 
         {/* Conteúdo */}
         <div className="flex-1 w-full">
-          <div className="text-center md:text-left">
+          <motion.div
+            className="text-center md:text-left"
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.28 }}
+            transition={{ duration: 0.74, ease: smoothEase, delay: 0.08 }}
+          >
             <h4
               className="
                 font-anton text-white uppercase font-normal tracking-wide
@@ -68,7 +76,7 @@ const HeroWhatsAppPage = () => {
               <br />
               Vendas e Inovação do norte esta de volta
             </h4>
-          </div>
+          </motion.div>
 
           {/* Cards (se quiser, te ajudo a animar com Framer também 😏) */}
         </div>

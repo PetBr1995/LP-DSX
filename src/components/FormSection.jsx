@@ -36,6 +36,7 @@ export const FormButton = ({
   titulo = "Enviar",
   textColor = "#000",
   disabled = false,
+  leftWidthClass = "w-[200px]",
 }) => {
   return (
     <button type="submit" disabled={disabled} className="disabled:cursor-not-allowed">
@@ -49,7 +50,7 @@ export const FormButton = ({
             p-0.5
           "
         >
-          <div className="flex justify-center items-center rounded-[14px] w-[200px] h-10">
+          <div className={`flex justify-center items-center rounded-[14px] ${leftWidthClass} h-10`}>
             <p
               className="uppercase text-[14px] font-bold"
               style={{ color: textColor }}
@@ -228,7 +229,7 @@ const FormSection = () => {
           z-10 pointer-events-none
         "
         animate={{ rotate: 360 }}
-        transition={{ repeat: Infinity, duration: 14, ease: "linear" }}
+        transition={{ repeat: Infinity, duration: 22, ease: "linear" }}
       />
       {/*
       <img className="relative z-20 mx-auto w-[350px]" src="/save-the-date.svg" alt="savedate" />

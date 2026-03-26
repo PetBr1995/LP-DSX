@@ -1,5 +1,6 @@
 ﻿import { motion } from "framer-motion";
 import { CalendarDays } from "lucide-react";
+import { smoothEase } from "../utils/motion";
 
 const HeroVendas2 = () => {
   const cardItens = [
@@ -32,7 +33,7 @@ const HeroVendas2 = () => {
   const containerStagger = {
     hidden: {},
     show: {
-      transition: { staggerChildren: 0.12, delayChildren: 0.1 },
+      transition: { staggerChildren: 0.12, delayChildren: 0.08 },
     },
   };
 
@@ -42,7 +43,7 @@ const HeroVendas2 = () => {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { duration: 0.5, ease: "easeOut" },
+      transition: { duration: 0.64, ease: smoothEase },
     },
   };
 
@@ -53,7 +54,7 @@ const HeroVendas2 = () => {
           variants={containerStagger}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.24, margin: "0px 0px -10% 0px" }}
           className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-6"
         >
           {cardItens.map((item) => (
