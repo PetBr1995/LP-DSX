@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import useScrollToHash from "../hooks/useScrollToHash";
 import { FormButton } from "../components/FormSection";
 import { smoothEase } from "../utils/motion";
+import { supabase } from "../lib/supabaseClient";
 
 import SlideNovosPalestrantes from "../components/SlideNovosPalestrantes";
 import ContentSection from "../components/ContentSection";
@@ -28,13 +29,6 @@ function isValidEmail(email = "") {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
 }
 
-function formatWhatsappE164(number = "") {
-  const digits = onlyDigits(number);
-  if (!digits) return "";
-  if (digits.startsWith("55")) return `+${digits}`;
-  return `+55${digits}`;
-}
-
 const HomeTeste = () => {
   const [showTimerHeader, setShowTimerHeader] = useState(false);
   const [showLeadModal, setShowLeadModal] = useState(false);
@@ -50,43 +44,30 @@ const HomeTeste = () => {
   const footerTriggerRef = useRef(null);
   const reopenModalTimeoutRef = useRef(null);
 
-  const [sourceData, setSourceData] = useState({
-    page_url: "",
-    utm_source: "",
-    utm_medium: "",
-    utm_campaign: "",
-    utm_term: "",
-    utm_content: "",
-  });
-
   const [leadForm, setLeadForm] = useState({
     name: "",
-    whatsapp: "",
+    phone: "",
     email: "",
   });
+  const [loading, setLoading] = useState(false);
+  const [mensagem, setMensagem] = useState("");
   const [leadStatus, setLeadStatus] = useState("idle");
-  const [leadMessage, setLeadMessage] = useState("");
 
   // ✅ garante scroll ao chegar com /#form, /#faleconosco etc.
   useScrollToHash(90); // 90px = altura do header (ajuste)
+
+  useEffect(() => {
+    const leadAlreadyCaptured = window.localStorage.getItem("lead_home_teste_done");
+    if (leadAlreadyCaptured === "1") {
+      setHasLeadConverted(true);
+    }
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setShowTimerHeader(window.scrollY > 50);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    setSourceData({
-      page_url: window.location.href,
-      utm_source: urlParams.get("utm_source") || "",
-      utm_medium: urlParams.get("utm_medium") || "",
-      utm_campaign: urlParams.get("utm_campaign") || "",
-      utm_term: urlParams.get("utm_term") || "",
-      utm_content: urlParams.get("utm_content") || "",
-    });
   }, []);
 
   useEffect(() => {
@@ -142,7 +123,7 @@ const HomeTeste = () => {
       setPopupStep(2);
       setHasShownSecondPopup(true);
       setLeadStatus("idle");
-      setLeadMessage("");
+      setMensagem("");
       setShowLeadModal(true);
     }, 10000);
 
@@ -190,7 +171,7 @@ const HomeTeste = () => {
 
     setPopupStep(3);
     setLeadStatus("idle");
-    setLeadMessage("");
+    setMensagem("");
     setShowLeadModal(true);
     setWaitForFooterAfterSecondClose(false);
   }, [
@@ -210,18 +191,18 @@ const HomeTeste = () => {
     if (!leadForm.name.trim()) currentErrors.name = "Informe seu nome completo.";
     if (!isValidEmail(leadForm.email)) currentErrors.email = "Informe um e-mail válido.";
 
-    const phone = onlyDigits(leadForm.whatsapp);
+    const phone = onlyDigits(leadForm.phone);
     if (!(phone.length === 10 || phone.length === 11)) {
-      currentErrors.whatsapp = "Informe um WhatsApp com DDD.";
+      currentErrors.phone = "Informe um WhatsApp com DDD.";
     }
 
     return currentErrors;
   }, [leadForm]);
 
   const isLeadFormValid = Object.keys(errors).length === 0;
-  const canSubmitLead = leadStatus !== "loading";
+  const canSubmitLead = !loading;
   const isFinalMandatoryPopup = popupStep === 3 && leadStatus !== "success";
-  const canCloseLeadModal = leadStatus !== "loading" && !isFinalMandatoryPopup;
+  const canCloseLeadModal = !loading && !isFinalMandatoryPopup;
   const isSecondOpenOrMore = popupStep >= 2 && leadStatus !== "success";
 
   const handleWhatsappMask = (e) => {
@@ -229,7 +210,7 @@ const HomeTeste = () => {
     value = onlyDigits(value).slice(0, 11);
 
     if (!value.length) {
-      setLeadForm((prev) => ({ ...prev, whatsapp: "" }));
+      setLeadForm((prev) => ({ ...prev, phone: "" }));
       return;
     }
 
@@ -238,14 +219,14 @@ const HomeTeste = () => {
     else if (value.length <= 10) value = value.replace(/^(\d{2})(\d{4})(\d{0,4})/, "($1) $2-$3");
     else value = value.replace(/^(\d{2})(\d{5})(\d{0,4})/, "($1) $2-$3");
 
-    setLeadForm((prev) => ({ ...prev, whatsapp: value }));
+    setLeadForm((prev) => ({ ...prev, phone: value }));
   };
 
   const closeLeadModal = () => {
-    if (leadStatus === "loading") return;
+    if (loading) return;
     if (isFinalMandatoryPopup) {
       setLeadStatus("error");
-      setLeadMessage("Para continuar, preencha e envie o formulário.");
+      setMensagem("Para continuar, preencha e envie o formulário.");
       return;
     }
 
@@ -268,69 +249,63 @@ const HomeTeste = () => {
 
   const handleLeadSubmit = async (e) => {
     e.preventDefault();
-    setLeadMessage("");
+    setMensagem("");
 
     if (!isLeadFormValid || !canSubmitLead) {
       setLeadStatus("error");
-      setLeadMessage("Revise os campos e tente novamente.");
+      setMensagem("Revise os campos e tente novamente.");
       return;
     }
 
+    setLoading(true);
     setLeadStatus("loading");
 
-    const payload = {
-      event_type: "CONVERSION",
-      event_family: "CDP",
-      payload: {
-        conversion_identifier: "LP - Dsx 2026",
-        name: leadForm.name.trim(),
-        email: leadForm.email.trim().toLowerCase(),
-        personal_phone: formatWhatsappE164(leadForm.whatsapp),
-        company_name: "",
-        cf_nome_completo: leadForm.name.trim(),
-        cf_nome_da_empresa: "",
-        cf_telefon: formatWhatsappE164(leadForm.whatsapp),
-        traffic_source: sourceData.utm_source,
-        traffic_campaign: sourceData.utm_campaign,
-        traffic_medium: sourceData.utm_medium,
-        traffic_value: sourceData.utm_term,
-        cf_utm_campaign: sourceData.utm_campaign,
-        cf_utm_medium: sourceData.utm_medium,
-        cf_utm_term: sourceData.utm_term,
-        cf_utm_content: sourceData.utm_content,
-        cf_utm_source: sourceData.utm_source,
-        cf_url_de_conversao: sourceData.page_url,
-      },
-      tags: ["popup-home-teste", "dsx"],
-      source: "landing-save-the-date",
-    };
-
     try {
-      const response = await fetch(
-        "https://api.rd.services/platform/conversions?api_key=MHnWDjBYARQKdwUsfZRbjtVmPEyoHnSqtgFz",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify(payload),
-        }
-      );
+      const formData = new FormData(e.target);
+      const payload = {
+        name: formData.get("name")?.toString().trim() || "",
+        email: formData.get("email")?.toString().trim().toLowerCase() || "",
+        phone:
+          formData.get("phone")?.toString().trim() || "",
+      };
 
-      const data = await response.json().catch(() => ({}));
+      const { error } = await supabase
+        .from("leads")
+        .insert([payload]);
 
-      if (!response.ok || data.ok === false) {
+      if (error) {
         setLeadStatus("error");
-        setLeadMessage(data.message || "Não foi possível enviar. Tente novamente.");
+        const isDuplicateEmail =
+          error.code === "23505" ||
+          (error.message && error.message.toLowerCase().includes("leads_email_key")) ||
+          (error.message && error.message.toLowerCase().includes("duplicate key"));
+
+        if (isDuplicateEmail) {
+          const duplicateText = "Este e-mail já está cadastrado. Vamos seguir com seu acesso.";
+          setMensagem(duplicateText);
+          setLeadStatus("success");
+          setHasLeadConverted(true);
+          window.localStorage.setItem("lead_home_teste_done", "1");
+          if (reopenModalTimeoutRef.current) {
+            clearTimeout(reopenModalTimeoutRef.current);
+          }
+          setTimeout(() => {
+            setShowLeadModal(false);
+          }, 900);
+          return;
+        }
+
+        setMensagem(error.message || "Não foi possível enviar. Tente novamente.");
         return;
       }
 
       setLeadStatus("success");
       setHasLeadConverted(true);
+      window.localStorage.setItem("lead_home_teste_done", "1");
       const successText = "Cadastro enviado! Em breve entraremos em contato.";
-      setLeadMessage(successText);
-      setLeadForm({ name: "", whatsapp: "", email: "" });
+      setMensagem(successText);
+      setLeadForm({ name: "", phone: "", email: "" });
+      e.target.reset();
       if (reopenModalTimeoutRef.current) {
         clearTimeout(reopenModalTimeoutRef.current);
       }
@@ -339,7 +314,9 @@ const HomeTeste = () => {
       }, 1200);
     } catch (error) {
       setLeadStatus("error");
-      setLeadMessage("Falha de rede. Verifique sua conexão e tente novamente.");
+      setMensagem("Falha de rede. Verifique sua conexão e tente novamente.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -431,6 +408,7 @@ const HomeTeste = () => {
                   <input
                     className="w-full rounded-lg border border-white/20 bg-white/5 p-3 text-sm text-white placeholder-white/40 outline-none transition focus:border-[#F5A205] focus:bg-white/10 sm:text-base"
                     type="text"
+                    name="name"
                     placeholder="Digite seu nome completo"
                     value={leadForm.name}
                     onChange={(e) => setLeadForm((prev) => ({ ...prev, name: e.target.value }))}
@@ -446,8 +424,9 @@ const HomeTeste = () => {
                   <input
                     className="w-full rounded-lg border border-white/20 bg-white/5 p-3 text-sm text-white placeholder-white/40 outline-none transition focus:border-[#F5A205] focus:bg-white/10 sm:text-base"
                     type="text"
+                    name="phone"
                     placeholder="(92) 99999-9999"
-                    value={leadForm.whatsapp}
+                    value={leadForm.phone}
                     onChange={handleWhatsappMask}
                     autoComplete="tel"
                     inputMode="tel"
@@ -462,6 +441,7 @@ const HomeTeste = () => {
                   <input
                     className="w-full rounded-lg border border-white/20 bg-white/5 p-3 text-sm text-white placeholder-white/40 outline-none transition focus:border-[#F5A205] focus:bg-white/10 sm:text-base"
                     type="email"
+                    name="email"
                     placeholder="voce@empresa.com"
                     value={leadForm.email}
                     onChange={(e) => setLeadForm((prev) => ({ ...prev, email: e.target.value }))}
@@ -472,7 +452,7 @@ const HomeTeste = () => {
 
                 {(leadStatus === "success" || leadStatus === "error") && (
                   <p className={`md:col-span-2 rounded-md px-3 py-2 text-sm ${leadStatus === "success" ? "bg-green-500/12 text-green-300" : "bg-red-500/12 text-red-300"}`}>
-                    {leadMessage}
+                    {mensagem}
                   </p>
                 )}
 
@@ -483,7 +463,7 @@ const HomeTeste = () => {
                   <div className="self-center sm:self-auto">
                     <FormButton
                       titulo={
-                        leadStatus === "loading"
+                        loading
                           ? "Enviando..."
                           : isSecondOpenOrMore
                             ? "Não quero ficar de fora"
