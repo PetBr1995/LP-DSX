@@ -66,7 +66,7 @@ export const InfoNovosPalestrantes = [
     nome: "João Branco",
     desc: "Conselheiro e Professor de Marketing",
     img: "/foto-joao-branco.png",
-    badge: "Local",
+    badge: "Nacional",
   },
   {
     nome: "",
