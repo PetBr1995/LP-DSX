@@ -49,7 +49,7 @@ export const InfoNovosPalestrantes = [
     img: "/foto-carlos-oshiro.png",
     badge: "Local",
   },
-  
+
   {
     nome: "Breno Maciel",
     desc: "CEO da Vanguarda Martech",
@@ -60,6 +60,12 @@ export const InfoNovosPalestrantes = [
     nome: "Clayton Pascarelli",
     desc: "Especialista em oratória e PNL aplicada à comunicação",
     img: "/foto-claytonpascarelli.png",
+    badge: "Local",
+  },
+  {
+    nome: "João Branco",
+    desc: "Conselheiro e Professor de Marketing",
+    img: "/foto-joao-branco.png",
     badge: "Local",
   },
   {
