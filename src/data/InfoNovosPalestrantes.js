@@ -69,6 +69,12 @@ export const InfoNovosPalestrantes = [
     badge: "Nacional",
   },
   {
+    nome: "Chay Santos",
+    desc: "CEO da Mangarataia agência criativa",
+    img: "/foto-chay-santos.png",
+    badge: "Local",
+  },
+  {
     nome: "",
     desc: "",
     img: "/SILHUETA-1.png",
