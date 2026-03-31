@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react"
 import CTAButton from "./Mascaras/CTAButton"
 
-const Depoimentos = () => {
+const Depoimentos = ({ ctaLink = "/vendas" }) => {
   const cardInfo = [
     {
       titulo: "Palestrantes",
@@ -198,7 +198,7 @@ const Depoimentos = () => {
 
       {/* CTA */}
       <div className="py-10">
-        <CTAButton titulo="Compre agora" link="/vendas" />
+        <CTAButton titulo="Compre agora" link={ctaLink} />
       </div>
     </section>
   )

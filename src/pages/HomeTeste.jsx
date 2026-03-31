@@ -18,8 +18,10 @@ import Depoimentos from "../components/Depoimentos";
 import PublicoDSX from "../components/PublicoDSX";
 import FAQ from "../components/FAQ";
 import BannerSection from "../components/BannerSection";
-import CondicoesGrupos from "../components/CondicoesGrupos";
 import BotaoWPFooter from "../components/BotaoWPFooter";
+import PassaporteVendasHomeTeste from "../components/HomeTesteComponentes/PassaporteVendasHomeTeste";
+import PassaportesMobileHomeTeste from "../components/HomeTesteComponentes/PassaportesMobileHomeTeste";
+import PassaporteGrupoHomeTeste from "../components/HomeTesteComponentes/PassaporteGrupoHomeTeste";
 
 function onlyDigits(value = "") {
   return value.replace(/\D/g, "");
@@ -48,10 +50,13 @@ const HomeTeste = () => {
     name: "",
     phone: "",
     email: "",
+    profile: "",
   });
   const [loading, setLoading] = useState(false);
   const [mensagem, setMensagem] = useState("");
   const [leadStatus, setLeadStatus] = useState("idle");
+  const [isMobile, setIsMobile] = useState(false);
+  const [pendingPurchaseLink, setPendingPurchaseLink] = useState("");
 
   // ✅ garante scroll ao chegar com /#form, /#faleconosco etc.
   useScrollToHash(90); // 90px = altura do header (ajuste)
@@ -68,6 +73,16 @@ const HomeTeste = () => {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth <= 1015);
+    };
+
+    checkIsMobile();
+    window.addEventListener("resize", checkIsMobile);
+    return () => window.removeEventListener("resize", checkIsMobile);
   }, []);
 
   useEffect(() => {
@@ -195,14 +210,16 @@ const HomeTeste = () => {
     if (!(phone.length === 10 || phone.length === 11)) {
       currentErrors.phone = "Informe um WhatsApp com DDD.";
     }
+    if (!leadForm.profile) {
+      currentErrors.profile = "Selecione seu perfil.";
+    }
 
     return currentErrors;
   }, [leadForm]);
 
   const isLeadFormValid = Object.keys(errors).length === 0;
   const canSubmitLead = !loading;
-  const isFinalMandatoryPopup = popupStep === 3 && leadStatus !== "success";
-  const canCloseLeadModal = !loading && !isFinalMandatoryPopup;
+  const canCloseLeadModal = !loading;
   const isSecondOpenOrMore = popupStep >= 2 && leadStatus !== "success";
 
   const handleWhatsappMask = (e) => {
@@ -224,11 +241,6 @@ const HomeTeste = () => {
 
   const closeLeadModal = () => {
     if (loading) return;
-    if (isFinalMandatoryPopup) {
-      setLeadStatus("error");
-      setMensagem("Para continuar, preencha e envie o formulário.");
-      return;
-    }
 
     setShowLeadModal(false);
 
@@ -245,6 +257,28 @@ const HomeTeste = () => {
       setWaitForFooterAfterSecondClose(true);
       setMustExitFooterBeforeThird(isFooterInView);
     }
+  };
+
+  const handleBuyPassaporte = (targetLink) => {
+    if (!targetLink) return;
+
+    if (hasLeadConverted) {
+      window.open(targetLink, "_blank");
+      return;
+    }
+
+    setPendingPurchaseLink(targetLink);
+    setLeadStatus("idle");
+    setMensagem("Para continuar com a compra, preencha e envie o formulário.");
+    if (popupStep === 0) setPopupStep(1);
+    setShowLeadModal(true);
+  };
+
+  const redirectToPendingPurchase = () => {
+    if (!pendingPurchaseLink) return;
+    const targetLink = pendingPurchaseLink;
+    setPendingPurchaseLink("");
+    window.location.href = targetLink;
   };
 
   const handleLeadSubmit = async (e) => {
@@ -297,6 +331,7 @@ const HomeTeste = () => {
           }
           setTimeout(() => {
             setShowLeadModal(false);
+            redirectToPendingPurchase();
           }, 900);
           return;
         }
@@ -310,13 +345,14 @@ const HomeTeste = () => {
       window.localStorage.setItem("lead_home_teste_done", "1");
       const successText = "Cadastro enviado! Em breve entraremos em contato.";
       setMensagem(successText);
-      setLeadForm({ name: "", phone: "", email: "" });
+      setLeadForm({ name: "", phone: "", email: "", profile: "" });
       e.target.reset();
       if (reopenModalTimeoutRef.current) {
         clearTimeout(reopenModalTimeoutRef.current);
       }
       setTimeout(() => {
         setShowLeadModal(false);
+        redirectToPendingPurchase();
       }, 1200);
     } catch (error) {
       setLeadStatus("error");
@@ -328,26 +364,34 @@ const HomeTeste = () => {
 
   return (
     <section id="home" className="bg-black pb-43 md:pb-18 overflow-x-hidden">
-      <HeroSection />
+      <HeroSection ctaLink="#passaportes" />
       <HeroSectionV2 />
       <SlideFaixa />
       <div>
-        <SlideNovosPalestrantes />
+        <SlideNovosPalestrantes ctaLink="#passaportes" />
         <div ref={firstSpeakersSectionEndRef} className="h-px w-full" />
       </div>
       <NewTimerHeader
         isVisible={showTimerHeader}
         headerText="O lote vira em:"
         ctaTitle="Compre agora"
+        ctaLink="#passaportes"
         targetDate="2026-03-31T00:00:00"
       />
 
       <ContentSection />
       <SlidePalestrantes />
-      <Depoimentos />
+      <Depoimentos ctaLink="#passaportes" />
       <PublicoDSX />
       <BannerSection />
-      <CondicoesGrupos />
+      <div id="passaportes" className="bg-[url(/ELEMENTOS-BANNER-2.png)] bg-cover bg-no-repeat bg-center">
+        {isMobile ? (
+          <PassaportesMobileHomeTeste onBuyPassaporte={handleBuyPassaporte} />
+        ) : (
+          <PassaporteVendasHomeTeste onBuyPassaporte={handleBuyPassaporte} />
+        )}
+      </div>
+      <PassaporteGrupoHomeTeste onBuyPassaporte={handleBuyPassaporte} />
       {/*
       <FormSection />
       */}
@@ -396,14 +440,10 @@ const HomeTeste = () => {
               </button>
 
               <p className="pr-12 font-bebas text-[2rem] leading-[0.95] text-[#F5A205] sm:text-4xl md:text-5xl">
-                {isSecondOpenOrMore
-                  ? "Tem certeza que vai ficar de fora?"
-                  : "Esse evento pode mudar seu nivel"}
+                CADASTRE-SE E COMPRE SEU PASSAPORTE
               </p>
               <h3 className="mt-2 max-w-[560px] font-jamjuree text-sm leading-relaxed text-white/85 sm:mt-3 md:text-base">
-                {isSecondOpenOrMore
-                  ? "As vagas estão sendo preenchidas e você pode perder essa oportunidade"
-                  : "Alguns detalhes do evento são exclusivos. Preencha para desbloquear agora"}
+                Garanta a sua vaga para 2 dias de imersão
               </h3>
 
               <form onSubmit={handleLeadSubmit} className="mt-5 grid grid-cols-1 gap-3.5 sm:gap-4 md:mt-6 md:grid-cols-2">
@@ -456,6 +496,26 @@ const HomeTeste = () => {
                   />
                 </div>
 
+                <div className="md:col-span-2">
+                  <label className="mb-1.5 block text-xs font-jamjuree uppercase tracking-[0.08em] text-white/70">
+                    Você é:
+                  </label>
+                  <select
+                    className="w-full rounded-lg border border-white/20 bg-[#1a1a1a] p-3 text-sm text-white outline-none transition focus:border-[#F5A205] focus:bg-[#222] sm:text-base"
+                    name="profile"
+                    value={leadForm.profile}
+                    onChange={(e) => setLeadForm((prev) => ({ ...prev, profile: e.target.value }))}
+                    required
+                  >
+                    <option value="">Selecione</option>
+                    <option value="Empresário">Empresário</option>
+                    <option value="Diretor ou Gestor">Diretor ou Gestor</option>
+                    <option value="Profissional de marketing, vendas e operações">Profissional de marketing, vendas e operações</option>
+                    <option value="Estudante">Estudante</option>
+                    <option value="Outros">Outros</option>
+                  </select>
+                </div>
+
                 {(leadStatus === "success" || leadStatus === "error") && (
                   <p className={`md:col-span-2 rounded-md px-3 py-2 text-sm ${leadStatus === "success" ? "bg-green-500/12 text-green-300" : "bg-red-500/12 text-red-300"}`}>
                     {mensagem}
@@ -471,13 +531,11 @@ const HomeTeste = () => {
                       titulo={
                         loading
                           ? "Enviando..."
-                          : isSecondOpenOrMore
-                            ? "Não quero ficar de fora"
-                            : "Liberar acesso"
+                          : "COMPRAR PASSAPORTE"
                       }
                       textColor="#000"
                       disabled={!canSubmitLead}
-                      leftWidthClass={isSecondOpenOrMore ? "w-[190px] sm:w-[230px]" : "w-[120px] sm:w-[140px]"}
+                      leftWidthClass="w-[220px] sm:w-[260px]"
                     />
                   </div>
                 </div>

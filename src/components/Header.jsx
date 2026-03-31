@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import CTAButton from "./Mascaras/CTAButton";
 import HeaderMask from "./Mascaras/HeaderMask";
 
-const Header = ({ className = "" }) => {
+const Header = ({ className = "", ctaLink = "/vendas" }) => {
   const [open, setOpen] = useState(false);
 
   // Fecha no ESC
@@ -48,7 +48,7 @@ const Header = ({ className = "" }) => {
             link="/patrocinador"
             font="bold"
           />
-          <CTAButton titulo="Compre agora" link="/vendas" />
+          <CTAButton titulo="Compre agora" link={ctaLink} />
         </div>
 
         {/* Mobile hamburger */}
@@ -103,7 +103,7 @@ const Header = ({ className = "" }) => {
           />
           <CTAButton
             titulo="Compre agora"
-            link="/vendas"
+            link={ctaLink}
             
           // se quiser fechar ao clicar:
           // onClick={close}  (se seu CTAButton repassar props)

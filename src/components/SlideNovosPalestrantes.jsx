@@ -6,7 +6,7 @@ import { InfoNovosPalestrantes } from "../data/InfoNovosPalestrantes";
 import CTAButton from "./Mascaras/CTAButton";
 import { smoothEase } from "../utils/motion";
 
-const SlideNovosPalestrantes = () => {
+const SlideNovosPalestrantes = ({ ctaLink = "/vendas" }) => {
   const inViewOptions = {
     once: true,
     amount: 0.24,
@@ -117,7 +117,7 @@ const SlideNovosPalestrantes = () => {
         </motion.div>
 
         <motion.div variants={fadeUp} className="flex justify-center items-center">
-          <CTAButton titulo="Compre agora" link="/vendas" />
+          <CTAButton titulo="Compre agora" link={ctaLink} />
         </motion.div>
       </motion.div>
     </section>

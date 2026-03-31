@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Player from "@vimeo/player";
 import Header from "./Header";
 
-const HeroSection = () => {
+const HeroSection = ({ ctaLink = "/vendas" }) => {
   const [showHeader, setShowHeader] = useState(false);
   const [videoStarted, setVideoStarted] = useState(false);
   const iframeRef = useRef(null);
@@ -36,6 +36,7 @@ const HeroSection = () => {
   return (
     <>
       <Header
+        ctaLink={ctaLink}
         className={`
           transition-all duration-400 ease-out
           ${

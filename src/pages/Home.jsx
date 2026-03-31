@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from "react";
+﻿import { useEffect, useMemo, useState } from "react";
 import useScrollToHash from "../hooks/useScrollToHash";
 
 import SlideNovosPalestrantes from "../components/SlideNovosPalestrantes"
@@ -23,6 +23,11 @@ import BotaoWP from "../components/BotaoWP";
 
 const Home = () => {
   const [showTimerHeader, setShowTimerHeader] = useState(false);
+  const midnightToday = useMemo(() => {
+    const date = new Date();
+    date.setHours(24, 0, 0, 0);
+    return date;
+  }, []);
 
   // ✅ garante scroll ao chegar com /#form, /#faleconosco etc.
   useScrollToHash(90); // 90px = altura do header (ajuste)
@@ -42,9 +47,9 @@ const Home = () => {
       <SlideNovosPalestrantes/>
       <NewTimerHeader
         isVisible={showTimerHeader}
-        headerText="O evento começa em:"
+        headerText="O terceiro lote começa em:"
         ctaTitle="Segundo lote disponível"
-        targetDate="2026-07-23T00:00:00"
+        targetDate={midnightToday}
       />
        
 

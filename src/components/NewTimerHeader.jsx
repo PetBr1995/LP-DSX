@@ -7,6 +7,7 @@ const NewTimerHeader = ({
   isVisible,
   headerText = "O evento começa em:",
   ctaTitle = "Segundo lote disponível",
+  ctaLink = "/vendas",
   targetDate = "2026-07-23T00:00:00",
 }) => {
   return (
@@ -83,7 +84,7 @@ const NewTimerHeader = ({
           />
         </div>
         <div className="relative z-20">
-          <CTAButton titulo={ctaTitle} link="/vendas" />
+          <CTAButton titulo={ctaTitle} link={ctaLink} />
         </div>
         {/* Direita: CTA */}
         {/*
