@@ -33,6 +33,11 @@ function isValidEmail(email = "") {
 
 const HomeTeste = () => {
   const [showTimerHeader, setShowTimerHeader] = useState(false);
+  const midnightToday = useMemo(() => {
+    const date = new Date();
+    date.setHours(24, 0, 0, 0);
+    return date;
+  }, []);
   const [showLeadModal, setShowLeadModal] = useState(false);
   const [popupStep, setPopupStep] = useState(0); // 1: apos slide | 2: +10s | 3: footer (obrigatorio)
   const [hasClosedFirstPopup, setHasClosedFirstPopup] = useState(false);
@@ -42,7 +47,7 @@ const HomeTeste = () => {
   const [waitForFooterAfterSecondClose, setWaitForFooterAfterSecondClose] = useState(false);
   const [mustExitFooterBeforeThird, setMustExitFooterBeforeThird] = useState(false);
   const [hasLeadConverted, setHasLeadConverted] = useState(false);
-  const firstSpeakersSectionEndRef = useRef(null);
+  const contentSectionRef = useRef(null);
   const footerTriggerRef = useRef(null);
   const reopenModalTimeoutRef = useRef(null);
 
@@ -50,7 +55,7 @@ const HomeTeste = () => {
     name: "",
     phone: "",
     email: "",
-    profile: "",
+    cargo: "",
   });
   const [loading, setLoading] = useState(false);
   const [mensagem, setMensagem] = useState("");
@@ -111,23 +116,27 @@ const HomeTeste = () => {
   }, []);
 
   useEffect(() => {
-    if (hasLeadConverted || popupStep > 0 || !firstSpeakersSectionEndRef.current) return undefined;
+    if (hasLeadConverted || popupStep > 0 || !contentSectionRef.current) return undefined;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const [entry] = entries;
-        if (!entry?.isIntersecting) return;
+    const onScroll = () => {
+      if (!contentSectionRef.current || hasLeadConverted || popupStep > 0) return;
 
-        setPopupStep(1);
-        setShowLeadModal(true);
-        observer.disconnect();
-      },
-      { threshold: 0 }
-    );
+      const sectionTop = contentSectionRef.current.offsetTop;
+      const sectionHeight = contentSectionRef.current.offsetHeight;
+      const triggerPoint = sectionTop + sectionHeight / 2;
+      const viewportBottom = window.scrollY + window.innerHeight;
 
-    observer.observe(firstSpeakersSectionEndRef.current);
+      if (viewportBottom < triggerPoint) return;
 
-    return () => observer.disconnect();
+      setPopupStep(1);
+      setShowLeadModal(true);
+      window.removeEventListener("scroll", onScroll);
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", onScroll);
   }, [hasLeadConverted, popupStep]);
 
   useEffect(() => {
@@ -210,8 +219,8 @@ const HomeTeste = () => {
     if (!(phone.length === 10 || phone.length === 11)) {
       currentErrors.phone = "Informe um WhatsApp com DDD.";
     }
-    if (!leadForm.profile) {
-      currentErrors.profile = "Selecione seu perfil.";
+    if (!leadForm.cargo) {
+      currentErrors.cargo = "Selecione seu perfil.";
     }
 
     return currentErrors;
@@ -307,6 +316,7 @@ const HomeTeste = () => {
         email: formData.get("email")?.toString().trim().toLowerCase() || "",
         phone:
           formData.get("phone")?.toString().trim() || "",
+        cargo: [formData.get("cargo")?.toString().trim() || ""],
       };
 
       const { error } = await supabase
@@ -345,7 +355,7 @@ const HomeTeste = () => {
       window.localStorage.setItem("lead_home_teste_done", "1");
       const successText = "Cadastro enviado! Em breve entraremos em contato.";
       setMensagem(successText);
-      setLeadForm({ name: "", phone: "", email: "", profile: "" });
+      setLeadForm({ name: "", phone: "", email: "", cargo: "" });
       e.target.reset();
       if (reopenModalTimeoutRef.current) {
         clearTimeout(reopenModalTimeoutRef.current);
@@ -369,17 +379,17 @@ const HomeTeste = () => {
       <SlideFaixa />
       <div>
         <SlideNovosPalestrantes ctaLink="#passaportes" />
-        <div ref={firstSpeakersSectionEndRef} className="h-px w-full" />
       </div>
       <NewTimerHeader
         isVisible={showTimerHeader}
-        headerText="O lote vira em:"
-        ctaTitle="Compre agora"
-        ctaLink="#passaportes"
-        targetDate="2026-03-31T00:00:00"
+        headerText="O terceiro lote começa em:"
+        ctaTitle="Segundo lote disponível"
+        targetDate={midnightToday}
       />
 
-      <ContentSection />
+      <div ref={contentSectionRef}>
+        <ContentSection />
+      </div>
       <SlidePalestrantes />
       <Depoimentos ctaLink="#passaportes" />
       <PublicoDSX />
@@ -440,10 +450,14 @@ const HomeTeste = () => {
               </button>
 
               <p className="pr-12 font-bebas text-[2rem] leading-[0.95] text-[#F5A205] sm:text-4xl md:text-5xl">
-                CADASTRE-SE E COMPRE SEU PASSAPORTE
+                {popupStep === 2
+                  ? "Tem certeza que vai ficar de fora?"
+                  : "Alguns detalhes do evento são exclusivos."}
               </p>
               <h3 className="mt-2 max-w-[560px] font-jamjuree text-sm leading-relaxed text-white/85 sm:mt-3 md:text-base">
-                Garanta a sua vaga para 2 dias de imersão
+                {popupStep === 2
+                  ? "As vagas estão sendo preenchidas e você pode perder essa oportunidade"
+                  : "Preencha para desbloquear agora"}
               </h3>
 
               <form onSubmit={handleLeadSubmit} className="mt-5 grid grid-cols-1 gap-3.5 sm:gap-4 md:mt-6 md:grid-cols-2">
@@ -502,9 +516,9 @@ const HomeTeste = () => {
                   </label>
                   <select
                     className="w-full rounded-lg border border-white/20 bg-[#1a1a1a] p-3 text-sm text-white outline-none transition focus:border-[#F5A205] focus:bg-[#222] sm:text-base"
-                    name="profile"
-                    value={leadForm.profile}
-                    onChange={(e) => setLeadForm((prev) => ({ ...prev, profile: e.target.value }))}
+                    name="cargo"
+                    value={leadForm.cargo}
+                    onChange={(e) => setLeadForm((prev) => ({ ...prev, cargo: e.target.value }))}
                     required
                   >
                     <option value="">Selecione</option>

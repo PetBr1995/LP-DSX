@@ -17,8 +17,9 @@ const App = () => {
     <>
       <PreserveUtmLinks />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/teste" element={<HomeTeste />} />
+        <Route path="/" element={<HomeTeste />} />
+        <Route path="/teste" element={<Home />} />
+        <Route path="/home-backup" element={<Home />} />
         <Route path="/palestrantes" element={<Palestrantes />} />
         <Route path="/agradecimento" element={<Agradecimento />} />
         <Route path="/patrocinador" element={<Patrocinadores />} />

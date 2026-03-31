@@ -126,10 +126,10 @@ const PassaporteVendasHomeTeste = ({ onBuyPassaporte }) => {
     <section className="relative overflow-hidden py-10 md:py-14">
       <div className="mx-auto max-w-6xl px-4">
         <h2 className="text-center font-anton text-2xl uppercase leading-tight text-white sm:text-3xl md:text-4xl">
-          Escolha seu passaporte DSX 2026
+          Esteja onde os grandes nomes decidem o futuro dos negócios.
         </h2>
-        <p className="mx-auto mt-3 max-w-2xl text-center text-sm text-white/80 sm:text-base">
-          Visual novo, mesma missão: colocar você dentro do evento que acelera negócios no Norte.
+        <p className="mx-auto mt-3 max-w-2xl text-center text-base text-white/80 sm:text-lg">
+          Sua experiência começa aqui
         </p>
 
         <FaixaSegundoLoteHomeTeste />

@@ -49,10 +49,10 @@ const PassaportesMobileHomeTeste = ({ onBuyPassaporte }) => {
     <section className="py-10">
       <div className="mx-auto max-w-6xl px-4">
         <h2 className="text-center font-anton text-2xl uppercase leading-tight text-white sm:text-3xl">
-          Escolha seu passaporte DSX 2026
+          Esteja onde os grandes nomes decidem o futuro dos negócios.
         </h2>
-        <p className="mt-3 text-center text-sm text-white/80 sm:text-base">
-          Versão mobile com o novo visual de cards.
+        <p className="mt-3 text-center text-base text-white/80 sm:text-lg">
+          Sua experiência começa aqui
         </p>
 
         <FaixaSegundoLoteHomeTeste />
