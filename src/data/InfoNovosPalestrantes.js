@@ -75,6 +75,12 @@ export const InfoNovosPalestrantes = [
     badge: "Local",
   },
   {
+    nome: "Magno Rodrigues",
+    desc: "Especialista de Gestão Financeira",
+    img: "/foto-magno-rodrigues.png",
+    badge: "Local",
+  },
+  {
     nome: "",
     desc: "",
     img: "/SILHUETA-1.png",
