@@ -25,7 +25,7 @@ const cards = [
   {
     nome: "STANDARD",
     badge: "Essencial",
-    price: "397,00",
+    price: "497,00",
     desc: "Para quem quer acesso aos 2 dias de conteúdo, conexões e feira de negócios.",
     bgClass: "from-[#111111] via-[#1A1A1A] to-[#2E2212]",
     blobClass: "bg-[#F3CB46]/14",

@@ -26,7 +26,7 @@ const cards = [
   {
     nome: "STANDARD",
     badge: "Essencial",
-    price: "397,00",
+    price: "497,00",
     desc: "Ingresso ideal para viver os dois dias do DSX com conteúdo prático e conexões estratégicas.",
     bgClass: "from-[#111111] via-[#1A1A1A] to-[#2E2212]",
     blobClass: "bg-[#F3CB46]/14",
@@ -68,7 +68,9 @@ const PassaportesMobileHomeTeste = ({ onBuyPassaporte }) => {
               >
                 <div
                   className={`absolute h-52 w-48 ${card.blobClass} transform-gpu ${
-                    card.nome === "VIP" ? "-top-14 right-4 rounded-[34%]" : "-top-12 left-4 rounded-[24px]"
+                    card.nome === "VIP"
+                      ? "-top-14 right-4 rounded-[34%]"
+                      : "-top-12 left-4 rounded-[24px]"
                   } will-change-transform transition-all duration-900 ease-[cubic-bezier(0.22,1,0.36,1)] ${
                     card.nome === "VIP"
                       ? "group-hover:translate-y-7 group-hover:-translate-x-4 group-hover:scale-110"
@@ -77,7 +79,9 @@ const PassaportesMobileHomeTeste = ({ onBuyPassaporte }) => {
                 />
                 <div
                   className={`absolute h-20 w-52 bg-black/35 transform-gpu ${
-                    card.nome === "VIP" ? "-bottom-7 left-4 rounded-[22px]" : "-bottom-7 right-4 rounded-[22px]"
+                    card.nome === "VIP"
+                      ? "-bottom-7 left-4 rounded-[22px]"
+                      : "-bottom-7 right-4 rounded-[22px]"
                   } will-change-transform transition-all duration-900 ease-[cubic-bezier(0.22,1,0.36,1)] ${
                     card.nome === "VIP"
                       ? "group-hover:translate-x-7 group-hover:-translate-y-2 group-hover:scale-105"
@@ -107,9 +111,13 @@ const PassaportesMobileHomeTeste = ({ onBuyPassaporte }) => {
                   <p className="mt-2 origin-left bg-gradient-to-r from-[#F5D247] to-[#E7A040] bg-clip-text text-4xl font-black leading-[0.9] text-transparent transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-4px,46px)_scale(1.08)] sm:text-5xl">
                     R$ {card.price}
                   </p>
-                  <p className="text-sm font-semibold uppercase text-white/90">Passaporte</p>
+                  <p className="text-sm font-semibold uppercase text-white/90">
+                    Passaporte
+                  </p>
 
-                  <p className="mt-4 text-base leading-relaxed text-white/92">{card.desc}</p>
+                  <p className="mt-4 text-base leading-relaxed text-white/92">
+                    {card.desc}
+                  </p>
 
                   <button
                     onClick={() => {
@@ -128,20 +136,29 @@ const PassaportesMobileHomeTeste = ({ onBuyPassaporte }) => {
                   <button
                     onClick={() => setOpenCard(isOpen ? "" : card.nome)}
                     className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl border border-white/30 bg-black/20 px-3 py-2 text-sm font-semibold uppercase text-white"
-                    aria-label={isOpen ? "Ocultar benefícios" : "Mostrar benefícios"}
+                    aria-label={
+                      isOpen ? "Ocultar benefícios" : "Mostrar benefícios"
+                    }
                   >
                     Benefícios
-                    <ChevronDown className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`} />
+                    <ChevronDown
+                      className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+                    />
                   </button>
 
                   <div
                     className={`overflow-hidden transition-all duration-300 ${
-                      isOpen ? "mt-3 max-h-[480px] opacity-100" : "max-h-0 opacity-0"
+                      isOpen
+                        ? "mt-3 max-h-[480px] opacity-100"
+                        : "max-h-0 opacity-0"
                     } group-hover:[transform:translate3d(0,-1px,24px)]`}
                   >
                     <ul className="space-y-2 rounded-xl bg-black/25 p-3">
                       {card.benefits.map((benefit) => (
-                        <li key={benefit} className="flex items-center gap-2 text-sm text-white">
+                        <li
+                          key={benefit}
+                          className="flex items-center gap-2 text-sm text-white"
+                        >
                           <span className="text-[#F5D247]">✓</span>
                           <span>{benefit}</span>
                         </li>
