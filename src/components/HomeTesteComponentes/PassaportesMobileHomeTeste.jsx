@@ -101,10 +101,6 @@ const PassaportesMobileHomeTeste = ({ onBuyPassaporte }) => {
                 />
 
                 <div className="relative z-10 transform-gpu [transform-style:preserve-3d] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-2px,24px)]">
-                  <span className="inline-block rounded-full border border-[#F5D247]/35 bg-black/25 px-3 py-1 text-xs font-semibold text-[#F5D247] transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-2px,30px)]">
-                    {card.badge}
-                  </span>
-
                   <h3 className="mt-4 origin-left text-3xl font-black uppercase leading-[0.9] text-white transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-3px,38px)_scale(1.05)] sm:text-4xl">
                     {card.nome}
                   </h3>

@@ -47,7 +47,9 @@ const SquishyPlanCard = ({ card, onBuyPassaporte }) => (
   >
     <div
       className={`absolute h-60 w-56 ${card.blobClass} transform-gpu ${
-        card.nome === "VIP" ? "-top-16 right-6 rounded-[34%]" : "-top-14 left-5 rounded-[26px]"
+        card.nome === "VIP"
+          ? "-top-16 right-6 rounded-[34%]"
+          : "-top-14 left-5 rounded-[26px]"
       } will-change-transform transition-all duration-900 ease-[cubic-bezier(0.22,1,0.36,1)] ${
         card.nome === "VIP"
           ? "group-hover:translate-y-8 group-hover:-translate-x-6 group-hover:scale-110"
@@ -56,7 +58,9 @@ const SquishyPlanCard = ({ card, onBuyPassaporte }) => (
     />
     <div
       className={`absolute h-24 w-64 bg-black/35 transform-gpu ${
-        card.nome === "VIP" ? "-bottom-9 left-5 rounded-[24px]" : "-bottom-9 right-5 rounded-[24px]"
+        card.nome === "VIP"
+          ? "-bottom-9 left-5 rounded-[24px]"
+          : "-bottom-9 right-5 rounded-[24px]"
       } will-change-transform transition-all duration-900 ease-[cubic-bezier(0.22,1,0.36,1)] ${
         card.nome === "VIP"
           ? "group-hover:translate-x-8 group-hover:-translate-y-3 group-hover:scale-105"
@@ -76,10 +80,6 @@ const SquishyPlanCard = ({ card, onBuyPassaporte }) => (
     />
 
     <div className="relative z-10 transform-gpu [transform-style:preserve-3d] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-2px,28px)]">
-      <span className="inline-block rounded-full border border-[#F5D247]/35 bg-black/25 px-3 py-1 text-sm font-semibold text-[#F5D247] transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-2px,36px)]">
-        {card.badge}
-      </span>
-
       <h3 className="mt-4 origin-left text-4xl font-black uppercase leading-[0.95] text-white transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-3px,46px)_scale(1.05)] lg:text-5xl">
         {card.nome}
       </h3>
@@ -87,7 +87,9 @@ const SquishyPlanCard = ({ card, onBuyPassaporte }) => (
       <p className="mt-3 origin-left bg-gradient-to-r from-[#F5D247] to-[#E7A040] bg-clip-text text-4xl font-black leading-[0.9] text-transparent transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-4px,58px)_scale(1.08)] lg:text-5xl">
         R$ {card.price}
       </p>
-      <p className="text-base font-semibold uppercase text-white/90">Passaporte</p>
+      <p className="text-base font-semibold uppercase text-white/90">
+        Passaporte
+      </p>
 
       <p className="mt-4 max-w-[36ch] text-base leading-relaxed text-white/92 lg:text-lg">
         {card.desc}
@@ -110,7 +112,10 @@ const SquishyPlanCard = ({ card, onBuyPassaporte }) => (
       <div className="mt-4 transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-1px,32px)]">
         <ul className="space-y-2 rounded-xl bg-black/25 p-3">
           {card.benefits.map((benefit) => (
-            <li key={benefit} className="flex items-center gap-2 text-xs text-white sm:text-sm">
+            <li
+              key={benefit}
+              className="flex items-center gap-2 text-xs text-white sm:text-sm"
+            >
               <span className="text-[#F5D247]">✓</span>
               <span>{benefit}</span>
             </li>
@@ -136,7 +141,11 @@ const PassaporteVendasHomeTeste = ({ onBuyPassaporte }) => {
 
         <div className="mt-8 flex flex-wrap justify-center gap-3 lg:gap-4">
           {cards.map((card) => (
-            <SquishyPlanCard key={card.nome} card={card} onBuyPassaporte={onBuyPassaporte} />
+            <SquishyPlanCard
+              key={card.nome}
+              card={card}
+              onBuyPassaporte={onBuyPassaporte}
+            />
           ))}
         </div>
       </div>
