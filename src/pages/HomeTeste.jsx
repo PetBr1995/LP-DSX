@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+﻿import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import useScrollToHash from "../hooks/useScrollToHash";
 import { FormButton } from "../components/FormSection";
@@ -10,7 +10,7 @@ import ContentSection from "../components/ContentSection";
 import FaleConosco from "../components/FaleConosco";
 import Footer from "../components/Footer";
 import HeroSection from "../components/HeroSection";
-import NewTimerHeader from "../components/NewTimerHeader";
+import NewTimerHeaderHomeTeste from "../components/HomeTesteComponentes/NewTimerHeaderHomeTeste";
 import SlidePalestrantes from "../components/SlidePalestrantes";
 import HeroSectionV2 from "../components/HeroSectionV2";
 import SlideFaixa from "../components/SlideFaixa";
@@ -44,8 +44,10 @@ const HomeTeste = () => {
   const [hasShownSecondPopup, setHasShownSecondPopup] = useState(false);
   const [hasClosedSecondPopup, setHasClosedSecondPopup] = useState(false);
   const [isFooterInView, setIsFooterInView] = useState(false);
-  const [waitForFooterAfterSecondClose, setWaitForFooterAfterSecondClose] = useState(false);
-  const [mustExitFooterBeforeThird, setMustExitFooterBeforeThird] = useState(false);
+  const [waitForFooterAfterSecondClose, setWaitForFooterAfterSecondClose] =
+    useState(false);
+  const [mustExitFooterBeforeThird, setMustExitFooterBeforeThird] =
+    useState(false);
   const [hasLeadConverted, setHasLeadConverted] = useState(false);
   const contentSectionRef = useRef(null);
   const footerTriggerRef = useRef(null);
@@ -63,11 +65,13 @@ const HomeTeste = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [pendingPurchaseLink, setPendingPurchaseLink] = useState("");
 
-  // ✅ garante scroll ao chegar com /#form, /#faleconosco etc.
+  // Garante scroll ao chegar com /#form, /#faleconosco etc.
   useScrollToHash(90); // 90px = altura do header (ajuste)
 
   useEffect(() => {
-    const leadAlreadyCaptured = window.localStorage.getItem("lead_home_teste_done");
+    const leadAlreadyCaptured = window.localStorage.getItem(
+      "lead_home_teste_done",
+    );
     if (leadAlreadyCaptured === "1") {
       setHasLeadConverted(true);
     }
@@ -116,10 +120,12 @@ const HomeTeste = () => {
   }, []);
 
   useEffect(() => {
-    if (hasLeadConverted || popupStep > 0 || !contentSectionRef.current) return undefined;
+    if (hasLeadConverted || popupStep > 0 || !contentSectionRef.current)
+      return undefined;
 
     const onScroll = () => {
-      if (!contentSectionRef.current || hasLeadConverted || popupStep > 0) return;
+      if (!contentSectionRef.current || hasLeadConverted || popupStep > 0)
+        return;
 
       const sectionTop = contentSectionRef.current.offsetTop;
       const sectionHeight = contentSectionRef.current.offsetHeight;
@@ -140,7 +146,8 @@ const HomeTeste = () => {
   }, [hasLeadConverted, popupStep]);
 
   useEffect(() => {
-    if (!hasClosedFirstPopup || hasLeadConverted || popupStep >= 2) return undefined;
+    if (!hasClosedFirstPopup || hasLeadConverted || popupStep >= 2)
+      return undefined;
 
     reopenModalTimeoutRef.current = setTimeout(() => {
       if (hasLeadConverted) return;
@@ -166,7 +173,7 @@ const HomeTeste = () => {
         const [entry] = entries;
         setIsFooterInView(Boolean(entry?.isIntersecting));
       },
-      { threshold: 0.05 }
+      { threshold: 0.05 },
     );
 
     observer.observe(footerTriggerRef.current);
@@ -212,8 +219,10 @@ const HomeTeste = () => {
   const errors = useMemo(() => {
     const currentErrors = {};
 
-    if (!leadForm.name.trim()) currentErrors.name = "Informe seu nome completo.";
-    if (!isValidEmail(leadForm.email)) currentErrors.email = "Informe um e-mail válido.";
+    if (!leadForm.name.trim())
+      currentErrors.name = "Informe seu nome completo.";
+    if (!isValidEmail(leadForm.email))
+      currentErrors.email = "Informe um e-mail válido.";
 
     const phone = onlyDigits(leadForm.phone);
     if (!(phone.length === 10 || phone.length === 11)) {
@@ -241,8 +250,10 @@ const HomeTeste = () => {
     }
 
     if (value.length <= 2) value = `(${value}`;
-    else if (value.length <= 6) value = value.replace(/^(\d{2})(\d{0,4})/, "($1) $2");
-    else if (value.length <= 10) value = value.replace(/^(\d{2})(\d{4})(\d{0,4})/, "($1) $2-$3");
+    else if (value.length <= 6)
+      value = value.replace(/^(\d{2})(\d{0,4})/, "($1) $2");
+    else if (value.length <= 10)
+      value = value.replace(/^(\d{2})(\d{4})(\d{0,4})/, "($1) $2-$3");
     else value = value.replace(/^(\d{2})(\d{5})(\d{0,4})/, "($1) $2-$3");
 
     setLeadForm((prev) => ({ ...prev, phone: value }));
@@ -306,7 +317,9 @@ const HomeTeste = () => {
     try {
       if (!isSupabaseConfigured || !supabase) {
         setLeadStatus("error");
-        setMensagem("Integração temporariamente indisponível. Tente novamente em instantes.");
+        setMensagem(
+          "Integração temporariamente indisponível. Tente novamente em instantes.",
+        );
         return;
       }
 
@@ -314,24 +327,24 @@ const HomeTeste = () => {
       const payload = {
         name: formData.get("name")?.toString().trim() || "",
         email: formData.get("email")?.toString().trim().toLowerCase() || "",
-        phone:
-          formData.get("phone")?.toString().trim() || "",
+        phone: formData.get("phone")?.toString().trim() || "",
         cargo: [formData.get("cargo")?.toString().trim() || ""],
       };
 
-      const { error } = await supabase
-        .from("leads")
-        .insert([payload]);
+      const { error } = await supabase.from("leads").insert([payload]);
 
       if (error) {
         setLeadStatus("error");
         const isDuplicateEmail =
           error.code === "23505" ||
-          (error.message && error.message.toLowerCase().includes("leads_email_key")) ||
-          (error.message && error.message.toLowerCase().includes("duplicate key"));
+          (error.message &&
+            error.message.toLowerCase().includes("leads_email_key")) ||
+          (error.message &&
+            error.message.toLowerCase().includes("duplicate key"));
 
         if (isDuplicateEmail) {
-          const duplicateText = "Este e-mail já está cadastrado. Vamos seguir com seu acesso.";
+          const duplicateText =
+            "Este e-mail já está cadastrado. Vamos seguir com seu acesso.";
           setMensagem(duplicateText);
           setLeadStatus("success");
           setHasLeadConverted(true);
@@ -346,7 +359,9 @@ const HomeTeste = () => {
           return;
         }
 
-        setMensagem(error.message || "Não foi possível enviar. Tente novamente.");
+        setMensagem(
+          error.message || "Não foi possível enviar. Tente novamente.",
+        );
         return;
       }
 
@@ -380,10 +395,10 @@ const HomeTeste = () => {
       <div>
         <SlideNovosPalestrantes ctaLink="#passaportes" />
       </div>
-      <NewTimerHeader
+      <NewTimerHeaderHomeTeste
         isVisible={showTimerHeader}
-        headerText="O terceiro lote começa em:"
-        ctaTitle="Segundo lote disponível"
+        headerText="3º lote disponível:"
+        ctaTitle="Garanta seu passaporte"
         targetDate={midnightToday}
       />
 
@@ -394,7 +409,10 @@ const HomeTeste = () => {
       <Depoimentos ctaLink="#passaportes" />
       <PublicoDSX />
       <BannerSection />
-      <div id="passaportes" className="bg-[url(/ELEMENTOS-BANNER-2.png)] bg-cover bg-no-repeat bg-center">
+      <div
+        id="passaportes"
+        className="bg-[url(/ELEMENTOS-BANNER-2.png)] bg-cover bg-no-repeat bg-center"
+      >
         {isMobile ? (
           <PassaportesMobileHomeTeste onBuyPassaporte={handleBuyPassaporte} />
         ) : (
@@ -460,7 +478,10 @@ const HomeTeste = () => {
                   : "Preencha para desbloquear agora"}
               </h3>
 
-              <form onSubmit={handleLeadSubmit} className="mt-5 grid grid-cols-1 gap-3.5 sm:gap-4 md:mt-6 md:grid-cols-2">
+              <form
+                onSubmit={handleLeadSubmit}
+                className="mt-5 grid grid-cols-1 gap-3.5 sm:gap-4 md:mt-6 md:grid-cols-2"
+              >
                 <div className="md:col-span-2">
                   <label className="mb-1.5 block text-xs font-jamjuree uppercase tracking-[0.08em] text-white/70">
                     Nome completo
@@ -471,7 +492,9 @@ const HomeTeste = () => {
                     name="name"
                     placeholder="Digite seu nome completo"
                     value={leadForm.name}
-                    onChange={(e) => setLeadForm((prev) => ({ ...prev, name: e.target.value }))}
+                    onChange={(e) =>
+                      setLeadForm((prev) => ({ ...prev, name: e.target.value }))
+                    }
                     autoComplete="name"
                     required
                   />
@@ -504,7 +527,12 @@ const HomeTeste = () => {
                     name="email"
                     placeholder="voce@empresa.com"
                     value={leadForm.email}
-                    onChange={(e) => setLeadForm((prev) => ({ ...prev, email: e.target.value }))}
+                    onChange={(e) =>
+                      setLeadForm((prev) => ({
+                        ...prev,
+                        email: e.target.value,
+                      }))
+                    }
                     autoComplete="email"
                     required
                   />
@@ -518,20 +546,29 @@ const HomeTeste = () => {
                     className="w-full rounded-lg border border-white/20 bg-[#1a1a1a] p-3 text-sm text-white outline-none transition focus:border-[#F5A205] focus:bg-[#222] sm:text-base"
                     name="cargo"
                     value={leadForm.cargo}
-                    onChange={(e) => setLeadForm((prev) => ({ ...prev, cargo: e.target.value }))}
+                    onChange={(e) =>
+                      setLeadForm((prev) => ({
+                        ...prev,
+                        cargo: e.target.value,
+                      }))
+                    }
                     required
                   >
                     <option value="">Selecione</option>
                     <option value="Empresário">Empresário</option>
                     <option value="Diretor ou Gestor">Diretor ou Gestor</option>
-                    <option value="Profissional de marketing, vendas e operações">Profissional de marketing, vendas e operações</option>
+                    <option value="Profissional de marketing, vendas e operações">
+                      Profissional de marketing, vendas e operações
+                    </option>
                     <option value="Estudante">Estudante</option>
                     <option value="Outros">Outros</option>
                   </select>
                 </div>
 
                 {(leadStatus === "success" || leadStatus === "error") && (
-                  <p className={`md:col-span-2 rounded-md px-3 py-2 text-sm ${leadStatus === "success" ? "bg-green-500/12 text-green-300" : "bg-red-500/12 text-red-300"}`}>
+                  <p
+                    className={`md:col-span-2 rounded-md px-3 py-2 text-sm ${leadStatus === "success" ? "bg-green-500/12 text-green-300" : "bg-red-500/12 text-red-300"}`}
+                  >
                     {mensagem}
                   </p>
                 )}
@@ -542,11 +579,7 @@ const HomeTeste = () => {
                   </p>
                   <div className="self-center sm:self-auto">
                     <FormButton
-                      titulo={
-                        loading
-                          ? "Enviando..."
-                          : "COMPRAR PASSAPORTE"
-                      }
+                      titulo={loading ? "Enviando..." : "COMPRAR PASSAPORTE"}
                       textColor="#000"
                       disabled={!canSubmitLead}
                       leftWidthClass="w-[220px] sm:w-[260px]"

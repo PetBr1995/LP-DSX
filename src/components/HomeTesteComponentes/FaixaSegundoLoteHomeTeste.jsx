@@ -1,11 +1,11 @@
-export default function FaixaSegundoLoteHomeTeste() {
+﻿export default function FaixaSegundoLoteHomeTeste() {
   return (
     <div className="mt-6 px-4 sm:px-6 flex justify-center">
       <div className="relative w-full max-w-2xl overflow-hidden rounded-md px-4 py-6 sm:py-7">
         <div className="relative z-10">
           <div className="flex flex-col items-center gap-1 text-[11px] sm:text-xs uppercase tracking-wider text-center">
             <span className="text-2xl sm:text-3xl font-black text-white">
-              <span className="text-white">2º</span> lote vendido
+              <span className="text-white">3º</span> lote vendido
             </span>
           </div>
 
@@ -42,3 +42,4 @@ export default function FaixaSegundoLoteHomeTeste() {
     </div>
   );
 }
+

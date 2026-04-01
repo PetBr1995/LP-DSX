@@ -3,3 +3,4 @@ export { default as FaixaSegundoLoteHomeTeste } from "./FaixaSegundoLoteHomeTest
 export { default as PassaporteVendasHomeTeste } from "./PassaporteVendasHomeTeste";
 export { default as PassaportesMobileHomeTeste } from "./PassaportesMobileHomeTeste";
 export { default as PassaporteGrupoHomeTeste } from "./PassaporteGrupoHomeTeste";
+export { default as NewTimerHeaderHomeTeste } from "./NewTimerHeaderHomeTeste";
