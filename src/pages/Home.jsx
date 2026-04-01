@@ -59,9 +59,7 @@ const Home = () => {
       <PublicoDSX/>
       <BannerSection/>
       <CondicoesGrupos/>
-      {/* 
       <FormSection />
-      */}
       <FaleConosco />
       <FAQ/>
       <Footer />
