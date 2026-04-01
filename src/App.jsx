@@ -18,13 +18,17 @@ const App = () => {
       <PreserveUtmLinks />
       <Routes>
         <Route path="/" element={<HomeTeste />} />
+        {/*
         <Route path="/teste" element={<Home />} />
         <Route path="/home-backup" element={<Home />} />
+         */}
         <Route path="/palestrantes" element={<Palestrantes />} />
         <Route path="/agradecimento" element={<Agradecimento />} />
         <Route path="/patrocinador" element={<Patrocinadores />} />
+        {/*
         <Route path="/vendas" element={<Vendas />} />
         <Route path="/passaportes" element={<Vendas2 />} />
+        */}
         <Route path="/whatsapp" element={<WhatsappPage />} />
         <Route path="/testeanimation" element={<TesteAnimation />} />
         <Route path="/checkout" element={<Checkout />} />
