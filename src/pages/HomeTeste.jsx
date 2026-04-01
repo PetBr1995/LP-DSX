@@ -1,8 +1,5 @@
 ﻿import { useEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import useScrollToHash from "../hooks/useScrollToHash";
-import { FormButton } from "../components/FormSection";
-import { smoothEase } from "../utils/motion";
 import { isSupabaseConfigured, supabase } from "../lib/supabaseClient";
 
 import SlideNovosPalestrantes from "../components/SlideNovosPalestrantes";
@@ -22,6 +19,7 @@ import BotaoWPFooter from "../components/BotaoWPFooter";
 import PassaporteVendasHomeTeste from "../components/HomeTesteComponentes/PassaporteVendasHomeTeste";
 import PassaportesMobileHomeTeste from "../components/HomeTesteComponentes/PassaportesMobileHomeTeste";
 import PassaporteGrupoHomeTeste from "../components/HomeTesteComponentes/PassaporteGrupoHomeTeste";
+import LeadPopupFormHomeTeste from "../components/HomeTesteComponentes/LeadPopupFormHomeTeste";
 
 function onlyDigits(value = "") {
   return value.replace(/\D/g, "");
@@ -52,6 +50,14 @@ const HomeTeste = () => {
     email: "",
     cargo: "",
   });
+  const [sourceData, setSourceData] = useState({
+    page_url: "",
+    utm_source: "",
+    utm_medium: "",
+    utm_campaign: "",
+    utm_term: "",
+    utm_content: "",
+  });
   const [loading, setLoading] = useState(false);
   const [mensagem, setMensagem] = useState("");
   const [leadStatus, setLeadStatus] = useState("idle");
@@ -72,6 +78,18 @@ const HomeTeste = () => {
     if (leadAlreadyCaptured === "1") {
       setHasLeadConverted(true);
     }
+  }, []);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    setSourceData({
+      page_url: window.location.href,
+      utm_source: urlParams.get("utm_source") || "",
+      utm_medium: urlParams.get("utm_medium") || "",
+      utm_campaign: urlParams.get("utm_campaign") || "",
+      utm_term: urlParams.get("utm_term") || "",
+      utm_content: urlParams.get("utm_content") || "",
+    });
   }, []);
 
   useEffect(() => {
@@ -304,47 +322,70 @@ const HomeTeste = () => {
     setLeadStatus("loading");
 
     try {
-      if (!isSupabaseConfigured || !supabase) {
-        setLeadStatus("error");
-        setMensagem("Integração temporariamente indisponível. Tente novamente em instantes.");
-        return;
-      }
-
       const formData = new FormData(e.target);
+      const name = formData.get("name")?.toString().trim() || "";
+      const email = formData.get("email")?.toString().trim().toLowerCase() || "";
+      const phone = formData.get("phone")?.toString().trim() || "";
+      const cargo = formData.get("cargo")?.toString().trim() || "";
+
       const payload = {
-        name: formData.get("name")?.toString().trim() || "",
-        email: formData.get("email")?.toString().trim().toLowerCase() || "",
-        phone: formData.get("phone")?.toString().trim() || "",
-        cargo: [formData.get("cargo")?.toString().trim() || ""],
+        event_type: "CONVERSION",
+        event_family: "CDP",
+        payload: {
+          conversion_identifier: "LP - DSX 2026",
+          name,
+          email,
+          personal_phone: phone,
+          voce_e: cargo,
+          cf_voce_e: cargo,
+          cf_cargo: cargo,
+          traffic_source: sourceData.utm_source,
+          traffic_campaign: sourceData.utm_campaign,
+          traffic_medium: sourceData.utm_medium,
+          traffic_value: sourceData.utm_term,
+          cf_utm_campaign: sourceData.utm_campaign,
+          cf_utm_medium: sourceData.utm_medium,
+          cf_utm_term: sourceData.utm_term,
+          cf_utm_content: sourceData.utm_content,
+          cf_utm_source: sourceData.utm_source,
+          cf_url_de_conversao: sourceData.page_url,
+        },
+        tags: ["dsx-hometeste", "popup"],
+        source: "landing-home-teste",
       };
 
-      const { error } = await supabase.from("leads").insert([payload]);
+      if (!isSupabaseConfigured || !supabase) {
+        throw new Error("Supabase não configurado");
+      }
 
-      if (error) {
-        setLeadStatus("error");
-        const isDuplicateEmail =
-          error.code === "23505" ||
-          (error.message && error.message.toLowerCase().includes("leads_email_key")) ||
-          (error.message && error.message.toLowerCase().includes("duplicate key"));
+      const [rdResult, supabaseResult] = await Promise.allSettled([
+        fetch("https://api.rd.services/platform/conversions?api_key=MHnWDjBYARQKdwUsfZRbjtVmPEyoHnSqtgFz", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(payload),
+        }),
+        supabase.from("leads").insert([
+          {
+            name,
+            email,
+            phone,
+            cargo: [cargo],
+          },
+        ]),
+      ]);
 
-        if (isDuplicateEmail) {
-          const duplicateText = "Este e-mail já está cadastrado. Vamos seguir com seu acesso.";
-          setMensagem(duplicateText);
-          setLeadStatus("success");
-          setHasLeadConverted(true);
-          window.localStorage.setItem("lead_home_teste_done", "1");
-          if (reopenModalTimeoutRef.current) {
-            clearTimeout(reopenModalTimeoutRef.current);
-          }
-          setTimeout(() => {
-            setShowLeadModal(false);
-            redirectToPendingPurchase();
-          }, 900);
-          return;
-        }
+      if (rdResult.status !== "fulfilled" || !rdResult.value.ok) {
+        throw new Error("Erro ao enviar para RD Station");
+      }
 
-        setMensagem(error.message || "Não foi possível enviar. Tente novamente.");
-        return;
+      if (
+        supabaseResult.status !== "fulfilled" ||
+        supabaseResult.value.error
+      ) {
+        throw new Error("Erro ao salvar no Supabase");
       }
 
       setLeadStatus("success");
@@ -363,7 +404,7 @@ const HomeTeste = () => {
       }, 1200);
     } catch (_error) {
       setLeadStatus("error");
-      setMensagem("Falha de rede. Verifique sua conexão e tente novamente.");
+      setMensagem("Erro ao enviar formulário. Tente novamente.");
     } finally {
       setLoading(false);
     }
@@ -409,156 +450,20 @@ const HomeTeste = () => {
       <BotaoWPFooter />
       <div ref={footerTriggerRef} className="h-px w-full" />
       <Footer />
-
-      <AnimatePresence>
-        {showLeadModal && (
-          <motion.div
-            className="fixed inset-0 z-[999] flex items-center justify-center p-3 sm:p-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.32, ease: smoothEase }}
-          >
-            <button
-              type="button"
-              className={`absolute inset-0 bg-black/80 backdrop-blur-[2px] ${canCloseLeadModal ? "cursor-pointer" : "cursor-not-allowed"}`}
-              onClick={closeLeadModal}
-              aria-label="Fechar popup"
-            />
-
-            <motion.div
-              className="relative z-10 w-full max-w-[760px] rounded-2xl border border-white/10 bg-[#101010] p-5 shadow-[0_20px_80px_rgba(0,0,0,0.45)] sm:p-6 md:rounded-[28px] md:p-9"
-              initial={{ opacity: 0, y: 24, scale: 0.985 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 14, scale: 0.99 }}
-              transition={{ duration: 0.36, ease: smoothEase }}
-            >
-              <div className="mb-5 h-[3px] w-24 rounded-full bg-gradient-to-r from-[#F5A205] to-[#FFD26A]" />
-
-              <button
-                type="button"
-                onClick={closeLeadModal}
-                className={`absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-2xl leading-none ${
-                  canCloseLeadModal
-                    ? "text-white/80 transition hover:border-white/35 hover:text-white"
-                    : "text-white/40 cursor-not-allowed"
-                }`}
-                aria-label="Fechar formulário"
-              >
-                ×
-              </button>
-
-              <p className="pr-12 font-bebas text-[2rem] leading-[0.95] text-[#F5A205] sm:text-4xl md:text-5xl">
-                {popupStep === 2
-                  ? "Tem certeza que vai ficar de fora?"
-                  : "Alguns detalhes do evento são exclusivos."}
-              </p>
-              <h3 className="mt-2 max-w-[560px] font-jamjuree text-sm leading-relaxed text-white/85 sm:mt-3 md:text-base">
-                {popupStep === 2
-                  ? "As vagas estão sendo preenchidas e você pode perder essa oportunidade"
-                  : "Preencha para desbloquear agora"}
-              </h3>
-
-              <form onSubmit={handleLeadSubmit} className="mt-5 grid grid-cols-1 gap-3.5 sm:gap-4 md:mt-6 md:grid-cols-2">
-                <div className="md:col-span-2">
-                  <label className="mb-1.5 block text-xs font-jamjuree uppercase tracking-[0.08em] text-white/70">
-                    Nome completo
-                  </label>
-                  <input
-                    className="w-full rounded-lg border border-white/20 bg-white/5 p-3 text-sm text-white placeholder-white/40 outline-none transition focus:border-[#F5A205] focus:bg-white/10 sm:text-base"
-                    type="text"
-                    name="name"
-                    placeholder="Digite seu nome completo"
-                    value={leadForm.name}
-                    onChange={(e) => setLeadForm((prev) => ({ ...prev, name: e.target.value }))}
-                    autoComplete="name"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="mb-1.5 block text-xs font-jamjuree uppercase tracking-[0.08em] text-white/70">
-                    Contato (Whatsapp)
-                  </label>
-                  <input
-                    className="w-full rounded-lg border border-white/20 bg-white/5 p-3 text-sm text-white placeholder-white/40 outline-none transition focus:border-[#F5A205] focus:bg-white/10 sm:text-base"
-                    type="text"
-                    name="phone"
-                    placeholder="(92) 99999-9999"
-                    value={leadForm.phone}
-                    onChange={handleWhatsappMask}
-                    autoComplete="tel"
-                    inputMode="tel"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="mb-1.5 block text-xs font-jamjuree uppercase tracking-[0.08em] text-white/70">
-                    E-mail
-                  </label>
-                  <input
-                    className="w-full rounded-lg border border-white/20 bg-white/5 p-3 text-sm text-white placeholder-white/40 outline-none transition focus:border-[#F5A205] focus:bg-white/10 sm:text-base"
-                    type="email"
-                    name="email"
-                    placeholder="voce@empresa.com"
-                    value={leadForm.email}
-                    onChange={(e) => setLeadForm((prev) => ({ ...prev, email: e.target.value }))}
-                    autoComplete="email"
-                    required
-                  />
-                </div>
-
-                <div className="md:col-span-2">
-                  <label className="mb-1.5 block text-xs font-jamjuree uppercase tracking-[0.08em] text-white/70">
-                    Você é:
-                  </label>
-                  <select
-                    className="w-full rounded-lg border border-white/20 bg-[#1a1a1a] p-3 text-sm text-white outline-none transition focus:border-[#F5A205] focus:bg-[#222] sm:text-base"
-                    name="cargo"
-                    value={leadForm.cargo}
-                    onChange={(e) => setLeadForm((prev) => ({ ...prev, cargo: e.target.value }))}
-                    required
-                  >
-                    <option value="">Selecione</option>
-                    <option value="Empresário">Empresário</option>
-                    <option value="Diretor ou Gestor">Diretor ou Gestor</option>
-                    <option value="Profissional de marketing, vendas e operações">
-                      Profissional de marketing, vendas e operações
-                    </option>
-                    <option value="Estudante">Estudante</option>
-                    <option value="Outros">Outros</option>
-                  </select>
-                </div>
-
-                {(leadStatus === "success" || leadStatus === "error") && (
-                  <p
-                    className={`md:col-span-2 rounded-md px-3 py-2 text-sm ${
-                      leadStatus === "success" ? "bg-green-500/12 text-green-300" : "bg-red-500/12 text-red-300"
-                    }`}
-                  >
-                    {mensagem}
-                  </p>
-                )}
-
-                <div className="mt-1 flex flex-col items-center gap-3 sm:flex-row sm:justify-between md:col-span-2">
-                  <p className="text-center text-[11px] font-jamjuree uppercase tracking-[0.08em] text-white/45 sm:text-left">
-                    Preenchimento rapido e seguro
-                  </p>
-                  <div className="self-center sm:self-auto">
-                    <FormButton
-                      titulo={loading ? "Enviando..." : "COMPRAR PASSAPORTE"}
-                      textColor="#000"
-                      disabled={!canSubmitLead}
-                      leftWidthClass="w-[220px] sm:w-[260px]"
-                    />
-                  </div>
-                </div>
-              </form>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <LeadPopupFormHomeTeste
+        isOpen={showLeadModal}
+        popupStep={popupStep}
+        canClose={canCloseLeadModal}
+        onClose={closeLeadModal}
+        onSubmit={handleLeadSubmit}
+        leadForm={leadForm}
+        setLeadForm={setLeadForm}
+        onWhatsappChange={handleWhatsappMask}
+        leadStatus={leadStatus}
+        message={mensagem}
+        loading={loading}
+        canSubmit={canSubmitLead}
+      />
     </section>
   );
 };
