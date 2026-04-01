@@ -12,7 +12,7 @@ const cards = [
     bgClass: "from-[#0B0B0B] via-[#1B1409] to-[#3A280D]",
     blobClass: "bg-[#F5D247]/18",
     stripClass: "bg-[#E7A040]/20",
-    link: "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721",
+    link: "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721?_gl=1*2h3vo2*_gcl_au*MTEwOTMyNDE4MC4xNzczNzg0OTQ3*_ga*MTA3ODc3NDQ3NS4xNzczNzg0OTQ4*_ga_KXH10SQTZF*czE3NzUwMjA3ODckbzgkZzEkdDE3NzUwMjE0MjYkajYwJGwwJGgxMjMxOTk1NDE3",
     benefits: [
       "Acesso aos 2 dias",
       "+40 palestras",
@@ -31,7 +31,7 @@ const cards = [
     bgClass: "from-[#111111] via-[#1A1A1A] to-[#2E2212]",
     blobClass: "bg-[#F3CB46]/14",
     stripClass: "bg-[#E7A040]/18",
-    link: "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721",
+    link: "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721?_gl=1*2h3vo2*_gcl_au*MTEwOTMyNDE4MC4xNzczNzg0OTQ3*_ga*MTA3ODc3NDQ3NS4xNzczNzg0OTQ4*_ga_KXH10SQTZF*czE3NzUwMjA3ODckbzgkZzEkdDE3NzUwMjE0MjYkajYwJGwwJGgxMjMxOTk1NDE3",
     benefits: [
       "Acesso aos 2 dias",
       "+40 palestras",

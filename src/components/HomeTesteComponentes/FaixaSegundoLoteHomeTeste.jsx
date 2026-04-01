@@ -5,10 +5,10 @@
         <div className="relative z-10">
           <div className="flex flex-col items-center gap-1 text-[11px] sm:text-xs uppercase tracking-wider text-center">
             <span className="text-2xl sm:text-3xl font-black text-white">
-              <span className="text-white">3º</span> lote vendido
+              <span className="text-white">3º</span> lote disponível
             </span>
           </div>
-
+          {/* 
           <div className="mt-3 h-4 w-full overflow-hidden rounded-full bg-white/15">
             <div
               className="relative h-full overflow-hidden rounded-full bg-gradient-to-r from-[#1F8A4C] via-[#5CCB63] to-[#D61C1C] transition-[width] duration-700 ease-linear"
@@ -27,8 +27,9 @@
             </div>
           </div>
 
+          */}
           <p className="mt-2 text-center text-[10px] sm:text-xs font-semibold uppercase tracking-wide text-[#FFD0D0]">
-            95% dos ingressos vendidos
+            Garanta antes da próxima virada de lote
           </p>
         </div>
       </div>
@@ -42,4 +43,3 @@
     </div>
   );
 }
-
