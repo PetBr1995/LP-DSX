@@ -39,10 +39,10 @@ const PassaporteGrupoHomeTeste = ({ onBuyPassaporte }) => {
           {groupPassports.map((item) => (
             <article
               key={item.qtdPessoas}
-              className={`group relative w-full max-w-[460px] overflow-hidden rounded-[22px] bg-gradient-to-br p-5 transform-gpu [transform-style:preserve-3d] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:[transform:perspective(1100px)_rotateX(4deg)_rotateY(-4deg)_scale(1.03)] ${item.bgClass}`}
+              className={`group aquarium-card relative w-full max-w-[460px] overflow-hidden rounded-[22px] bg-gradient-to-br p-5 transform-gpu [transform-style:preserve-3d] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:[transform:perspective(1100px)_rotateX(4deg)_rotateY(-4deg)_scale(1.03)] ${item.bgClass}`}
             >
               <div
-                className={`absolute h-52 w-48 ${item.blobClass} transform-gpu ${
+                className={`absolute aquarium-blob-a h-52 w-48 ${item.blobClass} transform-gpu ${
                   item.qtdPessoas === "5 pessoas"
                     ? "-top-14 right-6 rounded-[34%]"
                     : "-top-12 left-5 rounded-[24px]"
@@ -53,7 +53,7 @@ const PassaporteGrupoHomeTeste = ({ onBuyPassaporte }) => {
                 }`}
               />
               <div
-                className={`absolute h-20 w-52 bg-black/35 transform-gpu ${
+                className={`absolute aquarium-blob-b h-20 w-52 bg-black/35 transform-gpu ${
                   item.qtdPessoas === "5 pessoas"
                     ? "-bottom-8 left-5 rounded-[22px]"
                     : "-bottom-8 right-5 rounded-[22px]"
@@ -64,7 +64,7 @@ const PassaporteGrupoHomeTeste = ({ onBuyPassaporte }) => {
                 }`}
               />
               <div
-                className={`absolute h-14 w-44 ${item.stripClass} transform-gpu ${
+                className={`absolute aquarium-blob-c h-14 w-44 ${item.stripClass} transform-gpu ${
                   item.qtdPessoas === "5 pessoas"
                     ? "left-6 top-1/2 -translate-y-1/2 -rotate-12 rounded-lg"
                     : "right-6 top-1/2 -translate-y-1/2 rotate-12 rounded-lg"
@@ -75,7 +75,7 @@ const PassaporteGrupoHomeTeste = ({ onBuyPassaporte }) => {
                 }`}
               />
 
-              <div className="relative z-10 transform-gpu [transform-style:preserve-3d] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-2px,28px)]">
+              <div className="relative z-10 aquarium-content transform-gpu [transform-style:preserve-3d] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-2px,28px)]">
                 <span className="inline-block rounded-full border border-[#F5D247]/35 bg-black/25 px-3 py-1 text-xs font-semibold text-[#F5D247] transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-2px,36px)]">
                   Em grupo
                 </span>

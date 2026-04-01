@@ -64,10 +64,10 @@ const PassaportesMobileHomeTeste = ({ onBuyPassaporte }) => {
             return (
               <article
                 key={card.nome}
-                className={`group relative mx-auto w-full max-w-[420px] overflow-hidden rounded-[22px] bg-gradient-to-br p-4 transform-gpu [transform-style:preserve-3d] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:[transform:perspective(1000px)_rotateX(3deg)_rotateY(-3deg)_scale(1.03)] ${card.bgClass}`}
+                className={`group aquarium-card relative mx-auto w-full max-w-[420px] overflow-hidden rounded-[22px] bg-gradient-to-br p-4 transform-gpu [transform-style:preserve-3d] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:[transform:perspective(1000px)_rotateX(3deg)_rotateY(-3deg)_scale(1.03)] ${card.bgClass}`}
               >
                 <div
-                  className={`absolute h-52 w-48 ${card.blobClass} transform-gpu ${
+                  className={`absolute aquarium-blob-a h-52 w-48 ${card.blobClass} transform-gpu ${
                     card.nome === "VIP"
                       ? "-top-14 right-4 rounded-[34%]"
                       : "-top-12 left-4 rounded-[24px]"
@@ -78,7 +78,7 @@ const PassaportesMobileHomeTeste = ({ onBuyPassaporte }) => {
                   }`}
                 />
                 <div
-                  className={`absolute h-20 w-52 bg-black/35 transform-gpu ${
+                  className={`absolute aquarium-blob-b h-20 w-52 bg-black/35 transform-gpu ${
                     card.nome === "VIP"
                       ? "-bottom-7 left-4 rounded-[22px]"
                       : "-bottom-7 right-4 rounded-[22px]"
@@ -89,7 +89,7 @@ const PassaportesMobileHomeTeste = ({ onBuyPassaporte }) => {
                   }`}
                 />
                 <div
-                  className={`absolute h-14 w-42 ${card.stripClass} transform-gpu ${
+                  className={`absolute aquarium-blob-c h-14 w-42 ${card.stripClass} transform-gpu ${
                     card.nome === "VIP"
                       ? "left-5 top-1/2 -translate-y-1/2 -rotate-12 rounded-lg"
                       : "right-5 top-1/2 -translate-y-1/2 rotate-12 rounded-lg"
@@ -100,7 +100,7 @@ const PassaportesMobileHomeTeste = ({ onBuyPassaporte }) => {
                   }`}
                 />
 
-                <div className="relative z-10 transform-gpu [transform-style:preserve-3d] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-2px,24px)]">
+                <div className="relative z-10 aquarium-content transform-gpu [transform-style:preserve-3d] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-2px,24px)]">
                   <h3 className="mt-4 origin-left text-3xl font-black uppercase leading-[0.9] text-white transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-3px,38px)_scale(1.05)] sm:text-4xl">
                     {card.nome}
                   </h3>
