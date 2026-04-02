@@ -16,6 +16,7 @@ import PublicoDSX from "../components/PublicoDSX";
 import FAQ from "../components/FAQ";
 import BannerSection from "../components/BannerSection";
 import BotaoWPFooter from "../components/BotaoWPFooter";
+import ParceirosSection from "../components/ParceirosSection";
 import PassaporteVendasHomeTeste from "../components/HomeTesteComponentes/PassaporteVendasHomeTeste";
 import PassaportesMobileHomeTeste from "../components/HomeTesteComponentes/PassaportesMobileHomeTeste";
 import PassaporteGrupoHomeTeste from "../components/HomeTesteComponentes/PassaporteGrupoHomeTeste";
@@ -454,6 +455,9 @@ const HomeTeste = () => {
       </div>
       <div data-section="banner">
         <BannerSection />
+      </div>
+      <div data-section="parceiros">
+        <ParceirosSection />
       </div>
       <div
         id="passaportes"
