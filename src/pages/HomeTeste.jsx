@@ -327,6 +327,7 @@ const HomeTeste = () => {
       const email = formData.get("email")?.toString().trim().toLowerCase() || "";
       const phone = formData.get("phone")?.toString().trim() || "";
       const cargo = formData.get("cargo")?.toString().trim() || "";
+      const nowIso = new Date().toISOString();
 
       const payload = {
         event_type: "CONVERSION",
@@ -367,14 +368,20 @@ const HomeTeste = () => {
           },
           body: JSON.stringify(payload),
         }),
-        supabase.from("leads").insert([
-          {
-            name,
-            email,
-            phone,
-            cargo: [cargo],
-          },
-        ]),
+        supabase.from("leads").upsert(
+          [
+            {
+              name,
+              email,
+              phone,
+              cargo: [cargo],
+              stage: "cadastro",
+              status: "novo",
+              last_seen: nowIso,
+            },
+          ],
+          { onConflict: "email" }
+        ),
       ]);
 
       if (rdResult.status !== "fulfilled" || !rdResult.value.ok) {
@@ -404,7 +411,9 @@ const HomeTeste = () => {
       }, 1200);
     } catch (_error) {
       setLeadStatus("error");
-      setMensagem("Erro ao enviar formulário. Tente novamente.");
+      const errorText = _error?.message || "Erro ao enviar formulário. Tente novamente.";
+      console.error("[HomeTeste] erro no envio", _error);
+      setMensagem(errorText);
     } finally {
       setLoading(false);
     }
@@ -412,10 +421,16 @@ const HomeTeste = () => {
 
   return (
     <section id="home" className="bg-black pb-43 md:pb-18 overflow-x-hidden">
-      <HeroSection ctaLink="#passaportes" />
-      <HeroSectionV2 />
-      <SlideFaixa />
-      <div>
+      <div data-section="hero">
+        <HeroSection ctaLink="#passaportes" />
+      </div>
+      <div data-section="destaques">
+        <HeroSectionV2 />
+      </div>
+      <div data-section="faixa">
+        <SlideFaixa />
+      </div>
+      <div data-section="novos-palestrantes">
         <SlideNovosPalestrantes ctaLink="#passaportes" />
       </div>
       <NewTimerHeaderHomeTeste
@@ -425,17 +440,24 @@ const HomeTeste = () => {
         targetDate={midnightToday}
       />
 
-      <div>
+      <div data-section="conteudo">
         <ContentSection />
       </div>
-      <SlidePalestrantes />
-      <div ref={postSpeakersSectionRef}>
+      <div data-section="palestrantes">
+        <SlidePalestrantes />
+      </div>
+      <div ref={postSpeakersSectionRef} data-section="depoimentos">
         <Depoimentos ctaLink="#passaportes" />
       </div>
-      <PublicoDSX />
-      <BannerSection />
+      <div data-section="publico">
+        <PublicoDSX />
+      </div>
+      <div data-section="banner">
+        <BannerSection />
+      </div>
       <div
         id="passaportes"
+        data-section="passaportes"
         className="bg-[url(/ELEMENTOS-BANNER-2.png)] bg-cover bg-no-repeat bg-center"
       >
         {isMobile ? (
@@ -444,12 +466,20 @@ const HomeTeste = () => {
           <PassaporteVendasHomeTeste onBuyPassaporte={handleBuyPassaporte} />
         )}
       </div>
-      <PassaporteGrupoHomeTeste onBuyPassaporte={handleBuyPassaporte} />
-      <FaleConosco />
-      <FAQ />
+      <div data-section="grupo">
+        <PassaporteGrupoHomeTeste onBuyPassaporte={handleBuyPassaporte} />
+      </div>
+      <div data-section="fale-conosco">
+        <FaleConosco />
+      </div>
+      <div data-section="faq">
+        <FAQ />
+      </div>
       <BotaoWPFooter />
-      <div ref={footerTriggerRef} className="h-px w-full" />
-      <Footer />
+      <div ref={footerTriggerRef} className="h-px w-full" data-section="footer-trigger" />
+      <div data-section="footer">
+        <Footer />
+      </div>
       <LeadPopupFormHomeTeste
         isOpen={showLeadModal}
         popupStep={popupStep}

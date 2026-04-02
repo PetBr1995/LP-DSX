@@ -66,7 +66,12 @@ const LeadPopupFormHomeTeste = ({
                 : "Preencha para desbloquear agora"}
             </h3>
 
-            <form onSubmit={onSubmit} className="mt-5 grid grid-cols-1 gap-3.5 sm:gap-4 md:mt-6 md:grid-cols-2">
+            <form
+              id="lead-form"
+              data-lead-form
+              onSubmit={onSubmit}
+              className="mt-5 grid grid-cols-1 gap-3.5 sm:gap-4 md:mt-6 md:grid-cols-2"
+            >
               <div className="md:col-span-2">
                 <label className="mb-1.5 block text-xs font-jamjuree uppercase tracking-[0.08em] text-white/70">
                   Nome completo

@@ -96,6 +96,7 @@ const SquishyPlanCard = ({ card, onBuyPassaporte }) => (
       </p>
 
       <button
+        data-cta="sympla"
         onClick={() => {
           const targetLink = withHublaUtm(card.link);
           if (onBuyPassaporte) {

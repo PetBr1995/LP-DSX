@@ -99,6 +99,7 @@ const PassaporteGrupoHomeTeste = ({ onBuyPassaporte }) => {
                 </p>
 
                 <button
+                  data-cta="sympla"
                   onClick={() => {
                     const targetLink = withHublaUtm(item.link);
                     if (onBuyPassaporte) {

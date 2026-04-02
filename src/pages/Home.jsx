@@ -41,29 +41,74 @@ const Home = () => {
 
   return (
     <section id="home" className="bg-black pb-43 md:pb-18 overflow-x-hidden">
-      <HeroSection/>
-      <HeroSectionV2/>
-      <SlideFaixa/>
-      <SlideNovosPalestrantes/>
-      <NewTimerHeader
-        isVisible={showTimerHeader}
-        headerText="O terceiro lote começa em:"
-        ctaTitle="Segundo lote disponível"
-        targetDate={midnightToday}
-      />
-       
+      <section id="home-hero" data-section="home-hero">
+        <HeroSection />
+      </section>
 
-      <ContentSection />
-      <SlidePalestrantes />
-      <Depoimentos/>
-      <PublicoDSX/>
-      <BannerSection/>
-      <CondicoesGrupos/>
-      <FormSection />
-      <FaleConosco />
-      <FAQ/>
-      <Footer />
-      <BotaoWP/>
+      <section id="home-destaques" data-section="home-destaques">
+        <HeroSectionV2 />
+      </section>
+
+      <section id="home-faixa" data-section="home-faixa">
+        <SlideFaixa />
+      </section>
+
+      <section id="home-novos-palestrantes" data-section="home-novos-palestrantes">
+        <SlideNovosPalestrantes />
+      </section>
+
+      <section id="home-timer-header" data-section="home-timer-header">
+        <NewTimerHeader
+          isVisible={showTimerHeader}
+          headerText="O terceiro lote começa em:"
+          ctaTitle="Segundo lote disponível"
+          targetDate={midnightToday}
+        />
+      </section>
+
+      <section id="home-content" data-section="home-content">
+        <ContentSection />
+      </section>
+
+      <section id="home-palestrantes" data-section="home-palestrantes">
+        <SlidePalestrantes />
+      </section>
+
+      <section id="home-depoimentos" data-section="home-depoimentos">
+        <Depoimentos />
+      </section>
+
+      <section id="home-publico" data-section="home-publico">
+        <PublicoDSX />
+      </section>
+
+      <section id="home-banner" data-section="home-banner">
+        <BannerSection />
+      </section>
+
+      <section id="home-condicoes-grupos" data-section="home-condicoes-grupos">
+        <CondicoesGrupos />
+      </section>
+
+      <section id="home-form" data-section="home-form">
+        <FormSection />
+      </section>
+
+      <section id="home-fale-conosco" data-section="home-fale-conosco">
+        <FaleConosco />
+      </section>
+
+      <section id="home-faq" data-section="home-faq">
+        <FAQ />
+      </section>
+
+      <section id="home-footer" data-section="home-footer">
+        <Footer />
+      </section>
+
+      <section id="home-whatsapp-button" data-section="home-whatsapp-button">
+        <BotaoWP />
+      </section>
     </section>
   );
 };
