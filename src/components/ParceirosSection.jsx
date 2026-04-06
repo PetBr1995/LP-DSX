@@ -28,6 +28,11 @@ const apoioLogos = [
     src: "/logo-parceiros/logo-tore-dsx-2026.png",
     alt: "Tore",
   },
+  {
+    src: "/logo-parceiros/MARCA%20PURAKA%20BRANCA-04.png",
+    alt: "Puraka",
+    sizeClass: "max-h-14 sm:max-h-16",
+  },
 ];
 
 const ParceirosSection = () => {
