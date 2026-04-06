@@ -9,29 +9,46 @@
   // Reset v0: base minima e segura
   // =============================
   var VERSION = "reset-v2";
+  var SESSION_STORAGE_KEY = "__DSX_TRACKER_SESSION_ID__";
+  var TRACKING_ENDPOINT = "/api/tracking/session";
   var FORM_SELECTOR = "#lead-form, [data-lead-form]";
   var CTA_SELECTOR = '[data-cta="sympla"], a[href*="sympla.com"]';
   var SECTION_SELECTOR = "[data-section]";
   var SECTION_BOOTSTRAP_TIMEOUT_MS = 12000;
 
   var state = {
+    sessionId: getOrCreateSessionId(),
     startedAt: new Date().toISOString(),
     page: window.location.pathname + window.location.search,
     referrer: document.referrer || null,
+    utm: readUtmParams(),
+    lead: {
+      name: null,
+      email: null,
+      phone: null,
+      cargo: null,
+    },
     events: [],
     lastScrollY: window.scrollY || window.pageYOffset || 0,
     sections: {},
     sectionObserverStarted: false,
+    lastCompletedSection: null,
+    exitTracked: false,
+    sessionPayloadSentReason: null,
+    allSectionsEventSent: false,
   };
 
   function init() {
     trackPageView();
     trackSectionCompletion();
+    trackBottomCompletion();
     trackCtaClick();
     trackFormSubmit();
+    setupExitTracking();
     exposeDebugApi();
     log("initialized", {
       version: VERSION,
+      session_id: state.sessionId,
       form_selector: FORM_SELECTOR,
       cta_selector: CTA_SELECTOR,
       section_selector: SECTION_SELECTOR,
@@ -76,6 +93,13 @@
         if (!form.matches(FORM_SELECTOR)) return;
 
         var fields = readFormFields(form);
+        state.lead = {
+          name: fields.name || null,
+          email: fields.email || null,
+          phone: fields.phone || null,
+          cargo: fields.cargo || null,
+        };
+
         pushEvent("lead_form_submit", {
           form_id: form.id || null,
           field_names: Object.keys(fields),
@@ -197,11 +221,14 @@
           if (!passedThroughSection) return;
 
           progress.completed = true;
+          state.lastCompletedSection = sectionKey;
           pushEvent("section_completed", {
             section: sectionKey,
             section_id: entry.target.id || null,
             message: "Usuario percorreu a secao especifica",
           });
+
+          maybeSendSessionPayloadOnAllSectionsCompleted();
         });
 
         state.lastScrollY = currentScrollY;
@@ -238,6 +265,7 @@
   function pushEvent(name, data) {
     var item = {
       name: name,
+      session_id: state.sessionId,
       at: new Date().toISOString(),
       page: state.page,
       data: data || {},
@@ -245,6 +273,7 @@
 
     state.events.push(item);
     log("event", item);
+    emitTrackEvent(item);
   }
 
   function exposeDebugApi() {
@@ -252,9 +281,13 @@
       version: VERSION,
       getState: function () {
         return {
+          sessionId: state.sessionId,
           startedAt: state.startedAt,
           page: state.page,
           referrer: state.referrer,
+          lead: state.lead,
+          lastCompletedSection: state.lastCompletedSection,
+          sessionPayloadSentReason: state.sessionPayloadSentReason,
           totalEvents: state.events.length,
           events: state.events.slice(),
         };
@@ -268,6 +301,175 @@
         pushEvent(String(name), data || {});
       },
     };
+  }
+
+  function setupExitTracking() {
+    document.addEventListener("visibilitychange", function () {
+      if (document.visibilityState !== "hidden") return;
+      trackExit("visibility_hidden");
+    });
+
+    window.addEventListener("beforeunload", function () {
+      trackExit("beforeunload");
+    });
+  }
+
+  function trackExit(reason) {
+    if (state.exitTracked) return;
+    state.exitTracked = true;
+
+    pushEvent("page_exit", {
+      reason: reason,
+      last_completed_section: state.lastCompletedSection || null,
+      total_events_recorded: state.events.length,
+    });
+
+    // Se nao concluiu tudo, envia como abandono.
+    sendSessionPayload("page_abandon");
+  }
+
+  function maybeSendSessionPayloadOnAllSectionsCompleted() {
+    if (!state.sectionObserverStarted) return;
+
+    var keys = Object.keys(state.sections || {});
+    if (!keys.length) return;
+
+    var completedCount = 0;
+    for (var i = 0; i < keys.length; i++) {
+      if (state.sections[keys[i]] && state.sections[keys[i]].completed) {
+        completedCount += 1;
+      }
+    }
+
+    if (completedCount === keys.length) {
+      if (!state.allSectionsEventSent) {
+        state.allSectionsEventSent = true;
+        pushEvent("all_sections_completed", {
+          total_sections: keys.length,
+          completed_sections: completedCount,
+          completed_keys: keys,
+        });
+      }
+
+      log("all_sections_completed_detected", {
+        total_sections: keys.length,
+        completed_sections: completedCount,
+        completed_keys: keys,
+      });
+      sendSessionPayload("all_sections_completed");
+    }
+  }
+
+  function trackBottomCompletion() {
+    window.addEventListener(
+      "scroll",
+      function () {
+        maybeSendSessionPayloadOnBottomReached();
+      },
+      { passive: true }
+    );
+
+    // Tenta tambem no load inicial.
+    maybeSendSessionPayloadOnBottomReached();
+  }
+
+  function maybeSendSessionPayloadOnBottomReached() {
+    if (!state.sectionObserverStarted) return;
+    if (state.sessionPayloadSentReason) return;
+
+    var scrollTop = window.scrollY || window.pageYOffset || 0;
+    var viewportHeight =
+      window.innerHeight || document.documentElement.clientHeight || 0;
+    var docHeight = document.documentElement.scrollHeight || 0;
+    if (!docHeight) return;
+
+    var scrolledRatio = (scrollTop + viewportHeight) / docHeight;
+    if (scrolledRatio < 0.97) return;
+
+    var keys = Object.keys(state.sections || {});
+    if (!keys.length) return;
+
+    var seenCount = 0;
+    for (var i = 0; i < keys.length; i++) {
+      if (state.sections[keys[i]] && state.sections[keys[i]].seen) {
+        seenCount += 1;
+      }
+    }
+
+    if (seenCount !== keys.length) return;
+
+    if (!state.allSectionsEventSent) {
+      state.allSectionsEventSent = true;
+      pushEvent("all_sections_completed", {
+        total_sections: keys.length,
+        completed_sections: seenCount,
+        completed_keys: keys,
+      });
+    }
+
+    log("all_sections_completed_by_bottom_detected", {
+      total_sections: keys.length,
+      seen_sections: seenCount,
+      ratio: scrolledRatio,
+    });
+
+    sendSessionPayload("all_sections_completed");
+  }
+
+  function buildSessionPayload(reason) {
+    var sectionKeys = Object.keys(state.sections || {});
+    var completedSections = [];
+
+    for (var i = 0; i < sectionKeys.length; i++) {
+      var key = sectionKeys[i];
+      if (state.sections[key] && state.sections[key].completed) {
+        completedSections.push(key);
+      }
+    }
+
+    return {
+      reason: reason,
+      session_id: state.sessionId,
+      started_at: state.startedAt,
+      sent_at: new Date().toISOString(),
+      page: state.page,
+      referrer: state.referrer,
+      utm: state.utm,
+      lead: state.lead,
+      sections: {
+        total: sectionKeys.length,
+        completed: completedSections.length,
+        completed_keys: completedSections,
+        last_completed_section: state.lastCompletedSection || null,
+      },
+      total_events: state.events.length,
+      events: state.events.slice(),
+    };
+  }
+
+  function sendSessionPayload(reason) {
+    // Envio unico: ou concluiu tudo, ou abandonou.
+    if (state.sessionPayloadSentReason) return;
+    state.sessionPayloadSentReason = reason;
+
+    var payload = buildSessionPayload(reason);
+    var serialized = JSON.stringify(payload);
+    log("session_payload_dispatch", {
+      endpoint: TRACKING_ENDPOINT,
+      reason: reason,
+      payload: payload,
+    });
+    void serialized;
+    // Endpoint desativado: persistencia sera feita no frontend via listener + supabase.
+  }
+
+  function emitTrackEvent(item) {
+    try {
+      var event = new CustomEvent("dsx:track", { detail: item });
+      window.dispatchEvent(event);
+    } catch {
+      // no-op
+    }
   }
 
   function pickFirst(obj, keys) {
@@ -290,6 +492,30 @@
   function normalizeText(value) {
     var text = String(value == null ? "" : value).replace(/\s+/g, " ").trim();
     return text || null;
+  }
+
+  function readUtmParams() {
+    var params = new URLSearchParams(window.location.search);
+    return {
+      utm_source: normalizeText(params.get("utm_source")),
+      utm_medium: normalizeText(params.get("utm_medium")),
+      utm_campaign: normalizeText(params.get("utm_campaign")),
+      utm_content: normalizeText(params.get("utm_content")),
+      utm_term: normalizeText(params.get("utm_term")),
+    };
+  }
+
+  function getOrCreateSessionId() {
+    try {
+      var existing = window.sessionStorage.getItem(SESSION_STORAGE_KEY);
+      if (existing) return existing;
+      var generated =
+        Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 10);
+      window.sessionStorage.setItem(SESSION_STORAGE_KEY, generated);
+      return generated;
+    } catch {
+      return Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 10);
+    }
   }
 
   function log(name, data) {
