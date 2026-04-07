@@ -193,6 +193,7 @@ const HomeTeste = () => {
     };
 
     let scriptTag = document.getElementById(jsonLdId);
+    const scriptExisted = Boolean(scriptTag);
     if (!scriptTag) {
       scriptTag = document.createElement("script");
       scriptTag.setAttribute("id", jsonLdId);
@@ -203,7 +204,9 @@ const HomeTeste = () => {
     scriptTag.textContent = JSON.stringify(structuredData);
 
     return () => {
-      scriptTag?.remove();
+      if (!scriptExisted) {
+        scriptTag?.remove();
+      }
     };
   }, []);
 

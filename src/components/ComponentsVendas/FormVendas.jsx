@@ -55,7 +55,7 @@ export const FormButton = ({
         {/* Direita */}
         <div className="relative -ml-0.5 rounded-2xl bg-linear-to-r from-[#E7A040] to-[#E7A040] p-0.5">
           <div className="flex justify-center items-center rounded-[14px] w-[50px] h-10">
-            <img src="/Arrow-2.svg" alt="arrow" className="w-[18px]" />
+            <img src="/Arrow-2.svg" alt="" aria-hidden="true" className="w-[18px]" />
           </div>
         </div>
       </section>

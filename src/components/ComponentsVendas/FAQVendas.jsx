@@ -78,13 +78,14 @@ const FAQVendas = () => {
 
                     {/* Arrow */}
                     <span
+                      aria-hidden="true"
                       className={`grid h-8 w-8 place-items-center text-[#F5D247] transition-transform duration-300 ${
                         isOpen ? "rotate-180" : ""
                       }`}
                     >
                       <img
                         src="/arrow-down.svg"
-                        alt="arrow"
+                        alt=""
                         className="w-[20px] h-[20px]"
                       />
                     </span>

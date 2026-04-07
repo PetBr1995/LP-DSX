@@ -31,7 +31,7 @@ const MainMask = ({link, target , titulo, textColor, backgroundColor }) => {
         {/* DIREITA */}
         <div className="relative -ml-0.5 rounded-[16px] bg-linear-to-r from-[#E0474A] to-[#E0474A] p-0.5">
           <div className="flex justify-center items-center rounded-[14px] w-[50px] h-10" style={{ backgroundColor: backgroundColor }}>
-            <img src="/Arrow-1.svg" alt="arrow-right" className="w-[20px] h-auto " />
+            <img src="/Arrow-1.svg" alt="" aria-hidden="true" className="w-[20px] h-auto " />
           </div>
         </div>
       </section>

@@ -91,13 +91,14 @@ const FAQ = () => {
                     </div>
 
                     <span
+                      aria-hidden="true"
                       className={`cursor-pointer grid h-8 w-8 place-items-center text-[#F5D247] transition ${
                         isOpen ? "rotate-180" : ""
                       }`}
                     >
                       <img
                         src="/arrow-down.svg"
-                        alt="arrow"
+                        alt=""
                         className="w-[20px] h-[20px]"
                       />
                     </span>
