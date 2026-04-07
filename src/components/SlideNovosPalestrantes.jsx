@@ -89,17 +89,6 @@ const SlideNovosPalestrantes = ({ ctaLink = "/vendas" }) => {
                     backgroundPosition: inf.bgPosition,
                   }}
                 >
-                  {inf.badge && (
-                    <span
-                      className={`absolute top-3 left-3 z-50 rounded-full px-3 py-1 text-xs font-jamjuree font-bold uppercase tracking-wide ${
-                        inf.badge === "Local"
-                          ? "bg-[#0B8F3E] text-white"
-                          : "bg-[#F5A205] text-black"
-                      }`}
-                    >
-                      {inf.badge}
-                    </span>
-                  )}
                   <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/90 via-black/60 to-transparent pointer-events-none" />
                   <div className="flex flex-col justify-start items-center h-18">
                     <h4 className="relative z-50 font-bebas text-[#F5A205] text-3xl text-center uppercase">
