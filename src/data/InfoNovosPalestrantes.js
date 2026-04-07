@@ -88,7 +88,7 @@ export const InfoNovosPalestrantes = [
   },
   {
     nome: "Suelen Scop",
-    desc: "COO da Singulari Consultoria",
+    desc: "CEO da Singulari Consultoria",
     img: "/novas-palestrantes/foto-suelen-scop.png",
     badge: "Nacional",
   },
