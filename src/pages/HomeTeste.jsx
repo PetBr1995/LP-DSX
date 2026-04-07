@@ -152,6 +152,62 @@ const HomeTeste = () => {
   useScrollToHash(90);
 
   useEffect(() => {
+    const jsonLdId = "jsonld-dsx-home";
+    const structuredData = {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://dsx.com.vc/#organization",
+          name: "DSX | Digital Summit Experience",
+          url: "https://dsx.com.vc/",
+          logo: "https://dsx.com.vc/dsx-2026-logo.png",
+        },
+        {
+          "@type": "Event",
+          "@id": "https://dsx.com.vc/#event",
+          name: "DSX 2026 | Digital Summit Experience",
+          description:
+            "Evento de negócios, marketing, vendas e inovação do Norte do Brasil.",
+          startDate: "2026-03-13T09:00:00-04:00",
+          endDate: "2026-03-14T22:00:00-04:00",
+          eventStatus: "https://schema.org/EventScheduled",
+          eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+          image: ["https://dsx.com.vc/dsx2026.png"],
+          url: "https://dsx.com.vc/",
+          location: {
+            "@type": "Place",
+            name: "Studio 5 Centro de Convenções",
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Manaus",
+              addressRegion: "AM",
+              addressCountry: "BR",
+            },
+          },
+          organizer: {
+            "@id": "https://dsx.com.vc/#organization",
+          },
+        },
+      ],
+    };
+
+    let scriptTag = document.getElementById(jsonLdId);
+    if (!scriptTag) {
+      scriptTag = document.createElement("script");
+      scriptTag.setAttribute("id", jsonLdId);
+      scriptTag.setAttribute("type", "application/ld+json");
+      document.head.appendChild(scriptTag);
+    }
+
+    scriptTag.textContent = JSON.stringify(structuredData);
+
+    return () => {
+      scriptTag?.remove();
+    };
+  }, []);
+
+  useEffect(() => {
     try {
       const leadAlreadyCaptured = window.localStorage.getItem(LEAD_DONE_KEY);
       const leadIdentityRaw = window.localStorage.getItem(LEAD_IDENTITY_KEY);
