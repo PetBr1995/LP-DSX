@@ -87,6 +87,18 @@ export const InfoNovosPalestrantes = [
     badge: "Nacional",
   },
   {
+    nome: "Suelen Scop",
+    desc: "COO da Singulari Consultoria",
+    img: "/novas-palestrantes/foto-suelen-scop.png",
+    badge: "Nacional",
+  },
+  {
+    nome: "Gisele Oshiro",
+    desc: "CEO da Targo Consultoria",
+    img: "/novas-palestrantes/foto-giselle-oshiro.png",
+    badge: "Nacional",
+  },
+  {
     nome: "",
     desc: "",
     img: "/SILHUETA-1.png",
