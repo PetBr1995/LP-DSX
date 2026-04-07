@@ -20,6 +20,11 @@ const apoioLogos = [
     alt: "Antena 1",
   },
   {
+    src: "/logo-parceiros/logo-manaus-play.png",
+    alt: "Manaus Play",
+    sizeClass: "max-h-14 sm:max-h-16",
+  },
+  {
     src: "/logo-parceiros/logo-xpress-dsx-2026.png",
     alt: "Xpress",
     sizeClass: "max-h-16 sm:max-h-20",

@@ -657,9 +657,6 @@ const HomeTeste = () => {
       <div data-section="banner">
         <BannerSection />
       </div>
-      <div data-section="parceiros">
-        <ParceirosSection />
-      </div>
       <div
         id="passaportes"
         data-section="passaportes"
@@ -676,6 +673,9 @@ const HomeTeste = () => {
       </div>
       <div data-section="fale-conosco">
         <FaleConosco />
+      </div>
+      <div data-section="parceiros">
+        <ParceirosSection />
       </div>
       <div data-section="faq">
         <FAQ />
