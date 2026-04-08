@@ -3,15 +3,9 @@ import { motion } from "framer-motion";
 import { smoothEase, softEase } from "../utils/motion";
 
 export default function BotaoWPFooter() {
-  const whatsappNumbers = ["5592984358915", "5592936180461"];
-  const [currentNumberIndex, setCurrentNumberIndex] = useState(0);
   const [isNearBottom, setIsNearBottom] = useState(false);
 
-  const whatsappHref = `https://wa.me/${whatsappNumbers[currentNumberIndex]}`;
-
-  const handleClick = () => {
-    setCurrentNumberIndex((prevIndex) => (prevIndex + 1) % whatsappNumbers.length);
-  };
+  const whatsappHref = "https://wa.me/559294116928";
 
   useEffect(() => {
     const checkNearBottom = () => {
@@ -35,7 +29,6 @@ export default function BotaoWPFooter() {
     <div className="pointer-events-none fixed bottom-[50px] left-[20px] z-[220]">
       <motion.a
         href={whatsappHref}
-        onClick={handleClick}
         target="_blank"
         rel="noopener noreferrer"
         initial={false}

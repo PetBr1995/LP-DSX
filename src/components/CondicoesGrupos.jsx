@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+﻿
 
 const CondicoesGrupos = () => {
   const cards = [
@@ -14,15 +14,7 @@ const CondicoesGrupos = () => {
     },
   ];
 
-  const whatsappNumbers = ["5592984358915", "5592936180461"];
-  const [currentNumberIndex, setCurrentNumberIndex] = useState(0);
-  const whatsappHref = `https://wa.me/${whatsappNumbers[currentNumberIndex]}`;
-
-  const handleClick = () => {
-    setCurrentNumberIndex(
-      (prevIndex) => (prevIndex + 1) % whatsappNumbers.length
-    );
-  };
+  const whatsappHref = "https://wa.me/559294116928";
 
   return (
     <section
@@ -51,7 +43,6 @@ const CondicoesGrupos = () => {
 
         <a
           href={whatsappHref}
-          onClick={handleClick}
           target="_blank"
           rel="noopener noreferrer"
           className="mt-10 inline-block rounded-xl bg-linear-to-r from-[#FF4B7D] to-[#F7B447] px-8 py-3 text-sm font-bold uppercase text-white shadow-[0_10px_30px_rgba(255,90,120,0.25)] sm:text-base"

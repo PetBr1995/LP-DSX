@@ -1,21 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { smoothEase, softEase } from "../utils/motion";
 
 export default function BotaoWP() {
-  const whatsappNumbers = ["5592984358915", "5592936180461"];
-  const [currentNumberIndex, setCurrentNumberIndex] = useState(0);
-
-  const whatsappHref = `https://wa.me/${whatsappNumbers[currentNumberIndex]}`;
-
-  const handleClick = () => {
-    setCurrentNumberIndex((prevIndex) => (prevIndex + 1) % whatsappNumbers.length);
-  };
+  const whatsappHref = "https://wa.me/559294116928";
 
   return (
-    <motion.a
+      <motion.a
       href={whatsappHref}
-      onClick={handleClick}
       target="_blank"
       rel="noopener noreferrer"
       style={{
