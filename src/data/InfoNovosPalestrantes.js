@@ -38,7 +38,7 @@ export const InfoNovosPalestrantes = [
     badge: "Local",
   },
   {
-    nome: "Carol Lima",
+    nome: "Carolina Lima",
     desc: "Diretora de Social Media na 8D Hubify e autora best-seller",
     img: "/foto-carolina-lima.png",
     badge: "Nacional",
