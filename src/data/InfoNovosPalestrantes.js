@@ -26,7 +26,7 @@ export const InfoNovosPalestrantes = [
     badge: "Nacional",
   },
   {
-    nome: "Flávia Soares  ",
+    nome: "Flávia Sausmikat",
     desc: "Referência em pesquisa qualitativa.",
     img: "/novas-palestrantes/Flavia-Sausmikat.png",
     badge: "Local",
