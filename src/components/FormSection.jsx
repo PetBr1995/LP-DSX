@@ -215,7 +215,7 @@ const FormSection = () => {
       id="form"
       className="
         relative pt-10 text-center
-        bg-[url('/bg-form-section.png')] bg-cover bg-center bg-no-repeat
+        bg-[url('/optimized/bg-form-section.jpg')] bg-cover bg-center bg-no-repeat
         w-full overflow-hidden
         after:absolute after:inset-0 after:content-[''] after:bg-black after:opacity-[0.80]
       "

@@ -7,6 +7,7 @@ import { InfoPalestrantesRegionais } from "../data/InfoPalestrantesRegionais";
 import { motion } from "framer-motion";
 import BotaoWP from "../components/BotaoWP";
 import { smoothEase } from "../utils/motion";
+import { buildBackgroundImageVars } from "../utils/imageSet";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -122,7 +123,8 @@ const Palestrantes = () => {
                   className="
                     relative
                     overflow-hidden
-                    bg-[#111111]
+                    bg-modern-image
+                    bg-black
                     bg-cover
                     bg-center
                     p-4
@@ -133,7 +135,7 @@ const Palestrantes = () => {
                     flex-col
                     justify-between
                   "
-                  style={{ backgroundImage: `url(${inf.img})` }}
+                  style={buildBackgroundImageVars(inf.img)}
                 >
                   <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/90 via-black/50 to-transparent pointer-events-none" />
 
@@ -174,7 +176,8 @@ const Palestrantes = () => {
                   className="
                     relative
                     overflow-hidden
-                    bg-[#111111]
+                    bg-modern-image
+                    bg-black
                     bg-cover
                     bg-center
                     p-4
@@ -185,7 +188,7 @@ const Palestrantes = () => {
                     flex-col
                     justify-between
                   "
-                  style={{ backgroundImage: `url(${inf.img})` }}
+                  style={buildBackgroundImageVars(inf.img)}
                 >
                   <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/90 via-black/50 to-transparent pointer-events-none" />
 

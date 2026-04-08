@@ -20,6 +20,8 @@
     sessionId: getOrCreateSessionId(),
     startedAt: new Date().toISOString(),
     page: window.location.pathname + window.location.search,
+    pageUrl: window.location.href,
+    siteOrigin: detectSiteOrigin(window.location.hostname),
     referrer: document.referrer || null,
     utm: readUtmParams(),
     lead: {
@@ -59,6 +61,7 @@
     pushEvent("page_view", {
       title: document.title || null,
       url: window.location.href,
+      site_origin: state.siteOrigin,
       referrer: state.referrer,
     });
   }
@@ -284,6 +287,8 @@
           sessionId: state.sessionId,
           startedAt: state.startedAt,
           page: state.page,
+          pageUrl: state.pageUrl,
+          siteOrigin: state.siteOrigin,
           referrer: state.referrer,
           lead: state.lead,
           lastCompletedSection: state.lastCompletedSection,
@@ -433,6 +438,8 @@
       started_at: state.startedAt,
       sent_at: new Date().toISOString(),
       page: state.page,
+      page_url: state.pageUrl,
+      site_origin: state.siteOrigin,
       referrer: state.referrer,
       utm: state.utm,
       lead: state.lead,
@@ -492,6 +499,22 @@
   function normalizeText(value) {
     var text = String(value == null ? "" : value).replace(/\s+/g, " ").trim();
     return text || null;
+  }
+
+  function normalizeHostname(value) {
+    return String(value == null ? "" : value)
+      .toLowerCase()
+      .replace(/^www\./, "")
+      .trim();
+  }
+
+  function detectSiteOrigin(hostname) {
+    var normalized = normalizeHostname(hostname);
+    if (!normalized) return null;
+    if (normalized.indexOf("dsx.com.vc") !== -1) return "dsx";
+    if (normalized.indexOf("digitalhub.com.vc") !== -1) return "digitalhub";
+    if (normalized.indexOf("digitaleduca.com.vc") !== -1) return "digitaleduca";
+    return normalized;
   }
 
   function readUtmParams() {

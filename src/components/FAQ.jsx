@@ -44,7 +44,7 @@ const FAQ = () => {
         mx-auto
         px-4
         py-16
-        bg-[url(/banner-faq.png)]
+        bg-[url(/optimized/banner-faq.jpg)]
         bg-cover
         bg-center
         bg-no-repeat

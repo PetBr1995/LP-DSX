@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import Player from "@vimeo/player";
 
 const SeconcSectionWhatsAppPage = () => {
  
@@ -8,21 +7,17 @@ const SeconcSectionWhatsAppPage = () => {
 
 
   useEffect(() => {
-    if (!iframeRef.current) return;
+    const iframe = iframeRef.current;
+    if (!iframe) return;
 
-    const player = new Player(iframeRef.current);
-
-    const onPlay = () => setVideoStarted(true);
-
-    // libera só quando começou a tocar (primeiro frame)
-    player.on("play", onPlay);
-
-    // fallback: se der erro, mantém poster (não libera vídeo)
-    player.on("error", () => setVideoStarted(false));
+    const onLoad = () => setVideoStarted(true);
+    const onError = () => setVideoStarted(false);
+    iframe.addEventListener("load", onLoad);
+    iframe.addEventListener("error", onError);
 
     return () => {
-      player.off("play", onPlay);
-      player.unload?.().catch(() => {});
+      iframe.removeEventListener("load", onLoad);
+      iframe.removeEventListener("error", onError);
     };
   }, []);
 
@@ -40,12 +35,15 @@ const SeconcSectionWhatsAppPage = () => {
             ${videoStarted ? "opacity-100" : "opacity-0"}
           `}
           allow="autoplay; fullscreen; picture-in-picture"
+          title="DSX WhatsApp Video"
         />
 
         {/* POSTER (some com fade quando o vídeo começar) */}
         <img
-          src="/hero-banner.png"
+          src="/optimized/hero-banner.jpg"
           alt=""
+          loading="lazy"
+          decoding="async"
           className={`
             absolute inset-0 w-full h-full object-cover
             transition-opacity duration-700

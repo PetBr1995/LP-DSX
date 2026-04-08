@@ -54,7 +54,13 @@ const PublicoDSX = () => {
                 </h2>
                 {/* Adicione mais conteúdo aqui se quiser */}
                 <div className="py-6 after:absolute after:content-[''] after:top-20 after:right-2 after:bg-[url(/vector-18.svg)] after:bg-cover after:bg-no-repeat   after:w-[45px] after:h-[45px] ">
-                    <img src="/banner-public-component.png" className="relative " alt="" />
+                    <img
+                        src="/optimized/banner-public-component.jpg"
+                        className="relative"
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                    />
                 </div>
                 <div
                     className="

@@ -109,6 +109,8 @@ const Depoimentos = ({ ctaLink = "/vendas" }) => {
               <img
                 src={item.thumb}
                 alt={`Thumbnail ${item.titulo}`}
+                loading="lazy"
+                decoding="async"
                 className="
                   absolute inset-0 h-full w-full object-cover
                   transition-transform duration-300

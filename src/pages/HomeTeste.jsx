@@ -1,26 +1,33 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, lazy, useEffect, useMemo, useRef, useState } from "react";
 import useScrollToHash from "../hooks/useScrollToHash";
 import { isSupabaseConfigured, supabase } from "../lib/supabaseClient";
 
 import SlideNovosPalestrantes from "../components/SlideNovosPalestrantes";
-import ContentSection from "../components/ContentSection";
-import FaleConosco from "../components/FaleConosco";
-import Footer from "../components/Footer";
 import HeroSection from "../components/HeroSection";
 import NewTimerHeaderHomeTeste from "../components/HomeTesteComponentes/NewTimerHeaderHomeTeste";
-import SlidePalestrantes from "../components/SlidePalestrantes";
 import HeroSectionV2 from "../components/HeroSectionV2";
 import SlideFaixa from "../components/SlideFaixa";
-import Depoimentos from "../components/Depoimentos";
-import PublicoDSX from "../components/PublicoDSX";
-import FAQ from "../components/FAQ";
-import BannerSection from "../components/BannerSection";
-import BotaoWPFooter from "../components/BotaoWPFooter";
-import ParceirosSection from "../components/ParceirosSection";
-import PassaporteVendasHomeTeste from "../components/HomeTesteComponentes/PassaporteVendasHomeTeste";
-import PassaportesMobileHomeTeste from "../components/HomeTesteComponentes/PassaportesMobileHomeTeste";
-import PassaporteGrupoHomeTeste from "../components/HomeTesteComponentes/PassaporteGrupoHomeTeste";
 import LeadPopupFormHomeTeste from "../components/HomeTesteComponentes/LeadPopupFormHomeTeste";
+
+const ContentSection = lazy(() => import("../components/ContentSection"));
+const FaleConosco = lazy(() => import("../components/FaleConosco"));
+const Footer = lazy(() => import("../components/Footer"));
+const SlidePalestrantes = lazy(() => import("../components/SlidePalestrantes"));
+const Depoimentos = lazy(() => import("../components/Depoimentos"));
+const PublicoDSX = lazy(() => import("../components/PublicoDSX"));
+const FAQ = lazy(() => import("../components/FAQ"));
+const BannerSection = lazy(() => import("../components/BannerSection"));
+const BotaoWPFooter = lazy(() => import("../components/BotaoWPFooter"));
+const ParceirosSection = lazy(() => import("../components/ParceirosSection"));
+const PassaporteVendasHomeTeste = lazy(
+  () => import("../components/HomeTesteComponentes/PassaporteVendasHomeTeste")
+);
+const PassaportesMobileHomeTeste = lazy(
+  () => import("../components/HomeTesteComponentes/PassaportesMobileHomeTeste")
+);
+const PassaporteGrupoHomeTeste = lazy(
+  () => import("../components/HomeTesteComponentes/PassaporteGrupoHomeTeste")
+);
 
 function onlyDigits(value = "") {
   return value.replace(/\D/g, "");
@@ -30,9 +37,82 @@ function isValidEmail(email = "") {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
 }
 
+function normalizeHostname(value = "") {
+  return String(value || "")
+    .trim()
+    .toLowerCase()
+    .replace(/^www\./, "");
+}
+
+function detectSiteOriginFromUrl(value = "") {
+  if (!value) return "";
+
+  try {
+    const hostname = normalizeHostname(new URL(value).hostname);
+    if (!hostname) return "";
+    if (hostname.includes("dsx.com.vc")) return "dsx";
+    if (hostname.includes("digitalhub.com.vc")) return "digitalhub";
+    if (hostname.includes("digitaleduca.com.vc")) return "digitaleduca";
+    return hostname;
+  } catch {
+    return "";
+  }
+}
+
+function isMissingColumnError(error) {
+  const code = String(error?.code || "").toUpperCase();
+  const message = String(error?.message || "").toLowerCase();
+  return code === "PGRST204" || message.includes("column") || message.includes("schema cache");
+}
+
 const LEAD_DONE_KEY = "lead_home_teste_done";
 const LEAD_IDENTITY_KEY = "lead_home_teste_identity";
 const PENDING_EVENTS_KEY = "lead_home_teste_pending_events";
+
+function LazyMountSection({
+  children,
+  minHeightClass = "min-h-[280px]",
+  fallbackClassName = "bg-black",
+  rootMargin = "380px 0px",
+}) {
+  const rootRef = useRef(null);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    if (isMounted) return;
+
+    const node = rootRef.current;
+    if (!node || !("IntersectionObserver" in window)) {
+      setIsMounted(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setIsMounted(true);
+          observer.disconnect();
+        }
+      },
+      { root: null, rootMargin, threshold: 0.01 }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [isMounted, rootMargin]);
+
+  if (!isMounted) {
+    return <div ref={rootRef} className={`${minHeightClass} ${fallbackClassName}`} />;
+  }
+
+  return (
+    <div ref={rootRef}>
+      <Suspense fallback={<div className={`${minHeightClass} ${fallbackClassName}`} />}>
+        {children}
+      </Suspense>
+    </div>
+  );
+}
 
 const HomeTeste = () => {
   const [showTimerHeader, setShowTimerHeader] = useState(false);
@@ -50,6 +130,8 @@ const HomeTeste = () => {
   });
   const [sourceData, setSourceData] = useState({
     page_url: "",
+    site_origin: "",
+    site_hostname: "",
     utm_source: "",
     utm_medium: "",
     utm_campaign: "",
@@ -73,22 +155,31 @@ const HomeTeste = () => {
     const sessionId = trackerState.sessionId || null;
     const nowIso = new Date().toISOString();
 
-    const { error: profileError } = await supabase
+    const profilePayload = {
+      lead_email: leadIdentity.email,
+      lead_name: leadIdentity.name || null,
+      lead_phone: leadIdentity.phone || null,
+      lead_cargo: leadIdentity.cargo || null,
+      site_origin: sourceData.site_origin || null,
+      site_hostname: sourceData.site_hostname || window.location.hostname || null,
+      last_seen_at: nowIso,
+      has_sympla_redirected: true,
+      last_sympla_redirected_at: nowIso,
+    };
+
+    let { error: profileError } = await supabase
       .from("tracking_lead_profiles")
-      .upsert(
-        [
-          {
-            lead_email: leadIdentity.email,
-            lead_name: leadIdentity.name || null,
-            lead_phone: leadIdentity.phone || null,
-            lead_cargo: leadIdentity.cargo || null,
-            last_seen_at: nowIso,
-            has_sympla_redirected: true,
-            last_sympla_redirected_at: nowIso,
-          },
-        ],
-        { onConflict: "lead_email" }
-      );
+      .upsert([profilePayload], { onConflict: "lead_email" });
+
+    if (profileError && isMissingColumnError(profileError)) {
+      const fallbackProfilePayload = { ...profilePayload };
+      delete fallbackProfilePayload.site_origin;
+      delete fallbackProfilePayload.site_hostname;
+      const retry = await supabase
+        .from("tracking_lead_profiles")
+        .upsert([fallbackProfilePayload], { onConflict: "lead_email" });
+      profileError = retry.error;
+    }
 
     if (profileError) {
       console.error("[HomeTeste] erro ao marcar profile sympla=true", profileError);
@@ -96,31 +187,40 @@ const HomeTeste = () => {
 
     if (!sessionId) return;
 
-    const { error: sessionError } = await supabase
+    const sessionPayload = {
+      session_id: sessionId,
+      lead_email: leadIdentity.email,
+      lead_name: leadIdentity.name || null,
+      lead_phone: leadIdentity.phone || null,
+      lead_cargo: leadIdentity.cargo || null,
+      site_origin: sourceData.site_origin || null,
+      site_hostname: sourceData.site_hostname || window.location.hostname || null,
+      page:
+        sourceData.page_url ||
+        window.location.pathname + window.location.search,
+      referrer: document.referrer || null,
+      utm_source: sourceData.utm_source || sourceData.site_origin || null,
+      utm_medium: sourceData.utm_medium || null,
+      utm_campaign: sourceData.utm_campaign || null,
+      utm_content: sourceData.utm_content || null,
+      utm_term: sourceData.utm_term || null,
+      has_sympla_redirected: true,
+      sympla_redirected_at: nowIso,
+    };
+
+    let { error: sessionError } = await supabase
       .from("tracking_lead_sessions")
-      .upsert(
-        [
-          {
-            session_id: sessionId,
-            lead_email: leadIdentity.email,
-            lead_name: leadIdentity.name || null,
-            lead_phone: leadIdentity.phone || null,
-            lead_cargo: leadIdentity.cargo || null,
-            page:
-              sourceData.page_url ||
-              window.location.pathname + window.location.search,
-            referrer: document.referrer || null,
-            utm_source: sourceData.utm_source || null,
-            utm_medium: sourceData.utm_medium || null,
-            utm_campaign: sourceData.utm_campaign || null,
-            utm_content: sourceData.utm_content || null,
-            utm_term: sourceData.utm_term || null,
-            has_sympla_redirected: true,
-            sympla_redirected_at: nowIso,
-          },
-        ],
-        { onConflict: "session_id" }
-      );
+      .upsert([sessionPayload], { onConflict: "session_id" });
+
+    if (sessionError && isMissingColumnError(sessionError)) {
+      const fallbackSessionPayload = { ...sessionPayload };
+      delete fallbackSessionPayload.site_origin;
+      delete fallbackSessionPayload.site_hostname;
+      const retry = await supabase
+        .from("tracking_lead_sessions")
+        .upsert([fallbackSessionPayload], { onConflict: "session_id" });
+      sessionError = retry.error;
+    }
 
     if (sessionError) {
       console.error("[HomeTeste] erro ao marcar session sympla=true", sessionError);
@@ -262,7 +362,12 @@ const HomeTeste = () => {
       section,
       occurred_at: eventDetail?.at || new Date().toISOString(),
       page: eventDetail?.page || window.location.pathname + window.location.search,
-      payload: eventDetail?.data || {},
+      payload: {
+        ...(eventDetail?.data || {}),
+        site_origin: sourceData.site_origin || null,
+        site_hostname: sourceData.site_hostname || window.location.hostname || null,
+        page_url: sourceData.page_url || window.location.href,
+      },
     };
   };
 
@@ -286,9 +391,11 @@ const HomeTeste = () => {
       lead_email: leadIdentity.email || null,
       lead_phone: leadIdentity.phone || null,
       lead_cargo: leadIdentity.cargo || null,
+      site_origin: sourceData.site_origin || null,
+      site_hostname: sourceData.site_hostname || window.location.hostname || null,
       page: sourceData.page_url || window.location.pathname + window.location.search,
       referrer: document.referrer || null,
-      utm_source: sourceData.utm_source || null,
+      utm_source: sourceData.utm_source || sourceData.site_origin || null,
       utm_medium: sourceData.utm_medium || null,
       utm_campaign: sourceData.utm_campaign || null,
       utm_content: sourceData.utm_content || null,
@@ -303,6 +410,8 @@ const HomeTeste = () => {
       lead_name: leadIdentity.name || null,
       lead_phone: leadIdentity.phone || null,
       lead_cargo: leadIdentity.cargo || null,
+      site_origin: sourceData.site_origin || null,
+      site_hostname: sourceData.site_hostname || window.location.hostname || null,
       first_converted_at: nowIso,
       last_seen_at: nowIso,
       has_sympla_redirected: hasSymplaRedirected,
@@ -322,18 +431,38 @@ const HomeTeste = () => {
 
     if (!rows.length) return;
 
-    const { error: profileError } = await supabase
+    let { error: profileError } = await supabase
       .from("tracking_lead_profiles")
       .upsert([profilePayload], { onConflict: "lead_email" });
+
+    if (profileError && isMissingColumnError(profileError)) {
+      const fallbackProfilePayload = { ...profilePayload };
+      delete fallbackProfilePayload.site_origin;
+      delete fallbackProfilePayload.site_hostname;
+      const retry = await supabase
+        .from("tracking_lead_profiles")
+        .upsert([fallbackProfilePayload], { onConflict: "lead_email" });
+      profileError = retry.error;
+    }
 
     if (profileError) {
       console.error("[HomeTeste] erro ao salvar tracking_lead_profiles", profileError);
       return;
     }
 
-    const { error: sessionError } = await supabase
+    let { error: sessionError } = await supabase
       .from("tracking_lead_sessions")
       .upsert([sessionPayload], { onConflict: "session_id" });
+
+    if (sessionError && isMissingColumnError(sessionError)) {
+      const fallbackSessionPayload = { ...sessionPayload };
+      delete fallbackSessionPayload.site_origin;
+      delete fallbackSessionPayload.site_hostname;
+      const retry = await supabase
+        .from("tracking_lead_sessions")
+        .upsert([fallbackSessionPayload], { onConflict: "session_id" });
+      sessionError = retry.error;
+    }
 
     if (sessionError) {
       console.error("[HomeTeste] erro ao salvar tracking_lead_sessions", sessionError);
@@ -423,8 +552,13 @@ const HomeTeste = () => {
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
+    const pageUrl = window.location.href;
+    const siteHostname = normalizeHostname(window.location.hostname);
+    const siteOrigin = detectSiteOriginFromUrl(pageUrl) || siteHostname;
     setSourceData({
-      page_url: window.location.href,
+      page_url: pageUrl,
+      site_origin: siteOrigin,
+      site_hostname: siteHostname,
       utm_source: urlParams.get("utm_source") || "",
       utm_medium: urlParams.get("utm_medium") || "",
       utm_campaign: urlParams.get("utm_campaign") || "",
@@ -702,47 +836,71 @@ const HomeTeste = () => {
       />
 
       <div data-section="conteudo">
-        <ContentSection />
+        <LazyMountSection minHeightClass="min-h-[700px] md:min-h-[620px]">
+          <ContentSection />
+        </LazyMountSection>
       </div>
       <div data-section="palestrantes">
-        <SlidePalestrantes />
+        <LazyMountSection minHeightClass="min-h-[680px] md:min-h-[620px]">
+          <SlidePalestrantes />
+        </LazyMountSection>
       </div>
       <div data-section="depoimentos">
-        <Depoimentos ctaLink="#passaportes" />
+        <LazyMountSection minHeightClass="min-h-[620px] md:min-h-[560px]">
+          <Depoimentos ctaLink="#passaportes" />
+        </LazyMountSection>
       </div>
       <div data-section="publico">
-        <PublicoDSX />
+        <LazyMountSection minHeightClass="min-h-[520px]">
+          <PublicoDSX />
+        </LazyMountSection>
       </div>
       <div data-section="banner">
-        <BannerSection />
+        <LazyMountSection minHeightClass="min-h-[380px]">
+          <BannerSection />
+        </LazyMountSection>
       </div>
       <div
         id="passaportes"
         data-section="passaportes"
         className="bg-[url(/ELEMENTOS-BANNER-2.png)] bg-cover bg-no-repeat bg-center"
       >
-        {isMobile ? (
-          <PassaportesMobileHomeTeste onBuyPassaporte={handleBuyPassaporte} />
-        ) : (
-          <PassaporteVendasHomeTeste onBuyPassaporte={handleBuyPassaporte} />
-        )}
+        <LazyMountSection minHeightClass="min-h-[880px] md:min-h-[760px]">
+          {isMobile ? (
+            <PassaportesMobileHomeTeste onBuyPassaporte={handleBuyPassaporte} />
+          ) : (
+            <PassaporteVendasHomeTeste onBuyPassaporte={handleBuyPassaporte} />
+          )}
+        </LazyMountSection>
       </div>
       <div data-section="grupo">
-        <PassaporteGrupoHomeTeste onBuyPassaporte={handleBuyPassaporte} />
+        <LazyMountSection minHeightClass="min-h-[540px] md:min-h-[460px]">
+          <PassaporteGrupoHomeTeste onBuyPassaporte={handleBuyPassaporte} />
+        </LazyMountSection>
       </div>
       <div data-section="fale-conosco">
-        <FaleConosco />
+        <LazyMountSection minHeightClass="min-h-[460px]">
+          <FaleConosco />
+        </LazyMountSection>
       </div>
       <div data-section="parceiros">
-        <ParceirosSection />
+        <LazyMountSection minHeightClass="min-h-[320px]">
+          <ParceirosSection />
+        </LazyMountSection>
       </div>
       <div data-section="faq">
-        <FAQ />
+        <LazyMountSection minHeightClass="min-h-[520px]">
+          <FAQ />
+        </LazyMountSection>
       </div>
-      <BotaoWPFooter />
+      <LazyMountSection minHeightClass="min-h-[1px]">
+        <BotaoWPFooter />
+      </LazyMountSection>
       <div className="h-px w-full" data-section="footer-trigger" />
       <div data-section="footer">
-        <Footer />
+        <LazyMountSection minHeightClass="min-h-[220px]">
+          <Footer />
+        </LazyMountSection>
       </div>
       <LeadPopupFormHomeTeste
         isOpen={showLeadModal}

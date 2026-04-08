@@ -44,33 +44,28 @@ function getPersistedParams(locationSearch) {
   return new URLSearchParams(saved);
 }
 
-function rewriteLinks(params) {
-  if (!params || !params.toString()) return;
+function appendTrackingParams(href, params) {
+  if (!href || !params || !params.toString()) return href;
+  if (!shouldRewriteLink(href)) return href;
+  if (
+    href.startsWith("#") ||
+    href.startsWith("mailto:") ||
+    href.startsWith("tel:")
+  ) {
+    return href;
+  }
+  if (
+    href.includes("utm_source=") ||
+    href.includes("utm_medium=") ||
+    href.includes("utm_campaign=")
+  ) {
+    return href;
+  }
 
   const qs = params.toString();
   const sck = getUtmParamsExtraFromSearchParams(params);
-
-  document.querySelectorAll("a[href]").forEach((a) => {
-    const href = a.getAttribute("href");
-    if (!href) return;
-
-    if (
-      href.startsWith("#") ||
-      href.startsWith("mailto:") ||
-      href.startsWith("tel:")
-    )
-      return;
-
-    if (!shouldRewriteLink(href)) return;
-
-    // Evita duplicar grosseiramente
-    if (href.includes("utm_source=") || href.includes("utm_medium=") || href.includes("utm_campaign=")) {
-      return;
-    }
-
-    const separator = href.includes("?") ? "&" : "?";
-    a.setAttribute("href", `${href}${separator}${qs}${sck}`);
-  });
+  const separator = href.includes("?") ? "&" : "?";
+  return `${href}${separator}${qs}${sck}`;
 }
 
 export default function PreserveUtmLinks() {
@@ -78,13 +73,30 @@ export default function PreserveUtmLinks() {
 
   useEffect(() => {
     const params = getPersistedParams(location.search);
+    if (!params.toString()) return;
 
-    rewriteLinks(params);
+    // Aplica apenas nos links existentes no momento.
+    document.querySelectorAll("a[href]").forEach((a) => {
+      const href = a.getAttribute("href");
+      if (!href) return;
+      const nextHref = appendTrackingParams(href, params);
+      if (nextHref !== href) a.setAttribute("href", nextHref);
+    });
 
-    const observer = new MutationObserver(() => rewriteLinks(params));
-    observer.observe(document.body, { childList: true, subtree: true });
+    // Para links injetados depois, aplica no clique ao inves de observar todo o DOM.
+    const handleClickCapture = (event) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      const anchor = target.closest("a[href]");
+      if (!anchor) return;
+      const href = anchor.getAttribute("href");
+      if (!href) return;
+      const nextHref = appendTrackingParams(href, params);
+      if (nextHref !== href) anchor.setAttribute("href", nextHref);
+    };
+    document.addEventListener("click", handleClickCapture, true);
 
-    return () => observer.disconnect();
+    return () => document.removeEventListener("click", handleClickCapture, true);
   }, [location.search]);
 
   return null;

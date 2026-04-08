@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { InfoPalestrantes } from "../data/InfoPalestrantes";
 import CTAButton from "./Mascaras/CTAButton";
 import { smoothEase } from "../utils/motion";
+import { buildBackgroundImageVars } from "../utils/imageSet";
 
 const SlidePalestrantes = () => {
   // Trigger: controla o “ponto” do scroll em que a seção anima
@@ -86,8 +87,8 @@ const SlidePalestrantes = () => {
             {InfoPalestrantes.map((inf, index) => (
               <SwiperSlide key={index} className="!w-[230px]">
                 <div
-                  className="relative overflow-hidden bg-[#111111] bg-cover bg-center p-4 rounded-xl shadow-lg h-80 flex flex-col justify-between"
-                  style={{ backgroundImage: `url(${inf.img})` }}
+                  className="bg-modern-image relative overflow-hidden bg-black bg-cover bg-center p-4 rounded-xl shadow-lg h-80 flex flex-col justify-between"
+                  style={buildBackgroundImageVars(inf.img)}
                 >
                   <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/90 via-black/50 to-transparent pointer-events-none" />
                   <h4 className="relative z-10 font-bebas text-[#F5A205] text-xl text-center uppercase">

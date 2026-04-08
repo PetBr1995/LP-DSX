@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { InfoNovosPalestrantes } from "../data/InfoNovosPalestrantes";
 import CTAButton from "./Mascaras/CTAButton";
 import { smoothEase } from "../utils/motion";
+import { buildBackgroundImageVars } from "../utils/imageSet";
 
 const SlideNovosPalestrantes = ({ ctaLink = "/vendas" }) => {
   const inViewOptions = {
@@ -82,9 +83,9 @@ const SlideNovosPalestrantes = ({ ctaLink = "/vendas" }) => {
             {InfoNovosPalestrantes.map((inf, index) => (
               <SwiperSlide key={index} className="!w-[78vw] max-w-[260px] sm:!w-[230px]">
                 <div
-                  className="relative overflow-hidden bg-[#111111] bg-cover bg-top pb-4 px-4 rounded-xl shadow-lg h-80 flex flex-col justify-end"
+                  className="bg-modern-image relative overflow-hidden bg-black bg-cover bg-top pb-4 px-4 rounded-xl shadow-lg h-80 flex flex-col justify-end"
                   style={{
-                    backgroundImage: `url(${inf.img})`,
+                    ...buildBackgroundImageVars(inf.img),
                     backgroundSize: inf.bgSize,
                     backgroundPosition: inf.bgPosition,
                   }}
