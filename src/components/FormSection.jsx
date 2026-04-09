@@ -215,10 +215,15 @@ const FormSection = () => {
       id="form"
       className="
         relative pt-10 text-center
-        bg-[url('/optimized/bg-form-section.jpg')] bg-cover bg-center bg-no-repeat
+        bg-modern-image bg-cover bg-center bg-no-repeat
         w-full overflow-hidden
         after:absolute after:inset-0 after:content-[''] after:bg-black after:opacity-[0.80]
       "
+      style={{
+        "--bg-image-fallback": "url('/optimized/bg-form-section.jpg')",
+        "--bg-image-modern":
+          "image-set(url('/optimized/bg-form-section.avif') type('image/avif'))",
+      }}
     >
       {/* decoração girando */}
       <motion.div

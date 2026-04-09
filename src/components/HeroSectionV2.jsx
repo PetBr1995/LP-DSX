@@ -63,11 +63,15 @@ const HeroSectionV2 = () => {
                     whileInView="show"
                     viewport={inViewOptions}
                 >
-                    <img
-                        src="/dsx-2026.jpeg"
-                        alt="logo"
-                        className="object-contain h-30 sm:h-34 md:h-50 lg:h-56 w-auto"
-                    />
+                    <picture>
+                        <source srcSet="/optimized/step1/dsx-2026.avif" type="image/avif" />
+                        <source srcSet="/optimized/step1/dsx-2026.webp" type="image/webp" />
+                        <img
+                            src="/dsx-2026.jpeg"
+                            alt="logo"
+                            className="object-contain h-30 sm:h-34 md:h-50 lg:h-56 w-auto"
+                        />
+                    </picture>
                 </motion.div>
 
                 {/* Conteúdo */}
@@ -135,7 +139,11 @@ const HeroSectionV2 = () => {
                         ))}
                     </motion.div>
                     <div className="flex justify-start items-center pt-8">
-                        <img src="/local-dsx-2026.png" alt="logo" className="h-15" />
+                        <picture>
+                            <source srcSet="/optimized/step1/local-dsx-2026.avif" type="image/avif" />
+                            <source srcSet="/optimized/step1/local-dsx-2026.webp" type="image/webp" />
+                            <img src="/local-dsx-2026.png" alt="logo" className="h-15" />
+                        </picture>
                     </div>
                 </div>
             </div>

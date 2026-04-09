@@ -10,7 +10,25 @@ const BannerSection = () => {
                 <picture>
                     <source
                         media="(max-width: 768px)"
+                        type="image/avif"
+                        srcSet="/optimized/step1/12-[DSX]-Grupo-VIP-BANNER-LP-MOBILE.avif"
+                    />
+                    <source
+                        media="(max-width: 768px)"
+                        type="image/webp"
+                        srcSet="/optimized/step1/12-[DSX]-Grupo-VIP-BANNER-LP-MOBILE.webp"
+                    />
+                    <source
+                        media="(max-width: 768px)"
                         srcSet="/12-[DSX]-Grupo-VIP-BANNER-LP-MOBILE.png"
+                    />
+                    <source
+                        type="image/avif"
+                        srcSet="/optimized/step1/12-[DSX]-Grupo-VIP-BANNER-LP-WEB.avif"
+                    />
+                    <source
+                        type="image/webp"
+                        srcSet="/optimized/step1/12-[DSX]-Grupo-VIP-BANNER-LP-WEB.webp"
                     />
                     <img
                         className="w-full h-auto object-contain"

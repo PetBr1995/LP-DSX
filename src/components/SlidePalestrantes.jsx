@@ -69,12 +69,12 @@ const SlidePalestrantes = () => {
           Confira todos os palestrantes
         </motion.h3>
 
-        <motion.h5
+        <motion.h4
           variants={fadeUp}
           className="font-jamjuree font-normal text-center uppercase text-3xl"
         >
           que marcaram presença na edição de 2025
-        </motion.h5>
+        </motion.h4>
 
         <motion.div variants={fadeUp} className="my-10 max-w-7xl mx-auto px-4">
           <Swiper

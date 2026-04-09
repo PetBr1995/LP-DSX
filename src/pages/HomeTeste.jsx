@@ -1,6 +1,6 @@
 import { Suspense, lazy, useEffect, useMemo, useRef, useState } from "react";
 import useScrollToHash from "../hooks/useScrollToHash";
-import { isSupabaseConfigured, supabase } from "../lib/supabaseClient";
+import { getSupabaseClient, isSupabaseConfigured } from "../lib/supabaseClient";
 
 import SlideNovosPalestrantes from "../components/SlideNovosPalestrantes";
 import HeroSection from "../components/HeroSection";
@@ -147,7 +147,9 @@ const HomeTeste = () => {
   const hasLeadConvertedRef = useRef(false);
   const leadIdentityRef = useRef(null);
   const markSymplaFlagTrue = async () => {
-    if (!isSupabaseConfigured || !supabase) return;
+    if (!isSupabaseConfigured) return;
+    const supabase = await getSupabaseClient();
+    if (!supabase) return;
     const leadIdentity = leadIdentityRef.current;
     if (!leadIdentity?.email) return;
 
@@ -372,9 +374,11 @@ const HomeTeste = () => {
   };
 
   const persistTrackingEvents = async (events, leadIdentity) => {
-    if (!events?.length || !isSupabaseConfigured || !supabase || !leadIdentity) {
+    if (!events?.length || !isSupabaseConfigured || !leadIdentity) {
       return;
     }
+    const supabase = await getSupabaseClient();
+    if (!supabase) return;
 
     const sessionId = events[0]?.session_id || null;
     if (!sessionId) return;
@@ -767,7 +771,11 @@ const HomeTeste = () => {
         source: "landing-home-teste",
       };
 
-      if (!isSupabaseConfigured || !supabase) {
+      if (!isSupabaseConfigured) {
+        throw new Error("Supabase não configurado");
+      }
+      const supabase = await getSupabaseClient();
+      if (!supabase) {
         throw new Error("Supabase não configurado");
       }
 

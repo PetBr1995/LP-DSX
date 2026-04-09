@@ -7,19 +7,27 @@ const FaleConosco = () => {
   const cardInf = [
     {
       titulo: "Presença de marca",
-      img: "/thumb_card_1.png"
+      img: "/thumb_card_1.png",
+      avif: "/optimized/step1/thumb_card_1.avif",
+      webp: "/optimized/step1/thumb_card_1.webp",
     },
     {
       titulo: "Negócios gerados",
-      img: "/thumb_card_2.png"
+      img: "/thumb_card_2.png",
+      avif: "/optimized/step1/thumb_card_2.avif",
+      webp: "/optimized/step1/thumb_card_2.webp",
     },
     {
       titulo: "Conexões estratégicas",
-      img: "/thumb_card_3.png"
+      img: "/thumb_card_3.png",
+      avif: "/optimized/step1/thumb_card_3.avif",
+      webp: "/optimized/step1/thumb_card_3.webp",
     },
     {
       titulo: "Visibilidade integrada",
-      img: "/thumb_card_4.png"
+      img: "/thumb_card_4.png",
+      avif: "/optimized/step1/thumb_card_4.avif",
+      webp: "/optimized/step1/thumb_card_4.webp",
     },
   ]
   return (
@@ -29,17 +37,21 @@ const FaleConosco = () => {
       id="faleconosco"
       className="
           relative
+          bg-modern-image
           bg-cover 
           bg-center 
           bg-black
-          bg-[url('/banner-patrocinador.png')]
-          bg-cover
           bg-no-repeat
           bg-center 
           py-5
           sm:py-10
           md:py-15
         "
+      style={{
+        "--bg-image-fallback": "url('/banner-patrocinador.png')",
+        "--bg-image-modern":
+          "image-set(url('/optimized/step1/banner-patrocinador.avif') type('image/avif'))",
+      }}
     >
       {/* Overlay */}
 
@@ -57,7 +69,11 @@ const FaleConosco = () => {
         <div className="py-4 px-4 max-w-7xl mx-auto grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {cardInf.map((item) => (
             <div key={item.titulo} className="mx-auto">
-              <img src={item.img} alt="image" />
+              <picture>
+                <source srcSet={item.avif} type="image/avif" />
+                <source srcSet={item.webp} type="image/webp" />
+                <img src={item.img} alt="image" />
+              </picture>
               <h4 className="text-center mt-5 text-white font-jamjuree uppercase">
                 {item.titulo}
               </h4>

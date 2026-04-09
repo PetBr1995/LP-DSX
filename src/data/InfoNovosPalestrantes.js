@@ -83,7 +83,7 @@ export const InfoNovosPalestrantes = [
   {
     nome: "Netão Bom Beef",
     desc: "Eleito Homem de Negócios do ano - 2023 (Scale Awards)",
-    img: "/foto-netao-bom-beef.png",
+    img: "/foto-netao-bom-beef.PNG",
     badge: "Nacional",
   },
   {

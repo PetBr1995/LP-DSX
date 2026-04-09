@@ -44,11 +44,16 @@ const FAQ = () => {
         mx-auto
         px-4
         py-16
-        bg-[url(/optimized/banner-faq.jpg)]
+        bg-modern-image
         bg-cover
         bg-center
         bg-no-repeat
       "
+      style={{
+        "--bg-image-fallback": "url('/optimized/banner-faq.jpg')",
+        "--bg-image-modern":
+          "image-set(url('/optimized/banner-faq.avif') type('image/avif'))",
+      }}
     >
       <div className="pointer-events-none absolute inset-0 z-[1] bg-black/80" />
 

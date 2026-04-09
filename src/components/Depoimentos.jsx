@@ -8,18 +8,24 @@ const Depoimentos = ({ ctaLink = "/vendas" }) => {
       video: "https://vimeo.com/1148163374?fl=ip&fe=ec",
       desc: "Vozes que subiram ao palco para compartilhar visão e cases de sucesso.",
       thumb: "card-image/kepler-card-img.png",
+      thumbAvif: "/optimized/step1/card-image/kepler-card-img.avif",
+      thumbWebp: "/optimized/step1/card-image/kepler-card-img.webp",
     },
     {
       titulo: "Expositor",
       video: "https://vimeo.com/1148163345?fl=ip&fe=ec",
       desc: "Marcas que estiveram na linha de frente, gerando conexões, oportunidades e negócios",
       thumb: "card-image/expositor-card-img.png",
+      thumbAvif: "/optimized/step1/card-image/expositor-card-img.avif",
+      thumbWebp: "/optimized/step1/card-image/expositor-card-img.webp",
     },
     {
       titulo: "Participantes",
       video: "https://vimeo.com/1148163408?fl=ip&fe=ec",
       desc: "Empresários e profissionais que viveram o DSX 2025 e saíram com uma nova direção.",
       thumb: "/card-image/participante-card-img.png",
+      thumbAvif: "/optimized/step1/card-image/participante-card-img.avif",
+      thumbWebp: "/optimized/step1/card-image/participante-card-img.webp",
     },
   ]
 
@@ -106,18 +112,22 @@ const Depoimentos = ({ ctaLink = "/vendas" }) => {
 
             {/* Thumb */}
             <div className="mt-4 w-full aspect-video overflow-hidden rounded-xl relative">
-              <img
-                src={item.thumb}
-                alt={`Thumbnail ${item.titulo}`}
-                loading="lazy"
-                decoding="async"
-                className="
-                  absolute inset-0 h-full w-full object-cover
-                  transition-transform duration-300
-                  group-hover:scale-[1.03]
-                "
-                draggable={false}
-              />
+              <picture>
+                <source srcSet={item.thumbAvif} type="image/avif" />
+                <source srcSet={item.thumbWebp} type="image/webp" />
+                <img
+                  src={item.thumb}
+                  alt={`Thumbnail ${item.titulo}`}
+                  loading="lazy"
+                  decoding="async"
+                  className="
+                    absolute inset-0 h-full w-full object-cover
+                    transition-transform duration-300
+                    group-hover:scale-[1.03]
+                  "
+                  draggable={false}
+                />
+              </picture>
 
               {/* overlay */}
               <div className="absolute inset-0 bg-black/35 transition-opacity group-hover:bg-black/25" />

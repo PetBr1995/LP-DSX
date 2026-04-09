@@ -43,7 +43,6 @@ const HeroSection = ({ ctaLink = "/vendas" }) => {
       />
 
       <section className="relative w-full pb-[56%] overflow-hidden bg-black">
-        {/* VÍDEO (entra com fade) */}
         <iframe
           ref={iframeRef}
           src="https://player.vimeo.com/video/1146735494?autoplay=1&muted=1&loop=1&controls=0&title=0&byline=0&portrait=0&autopause=0&playsinline=1"
@@ -56,22 +55,24 @@ const HeroSection = ({ ctaLink = "/vendas" }) => {
           title="DSX Hero Video"
         />
 
-        {/* POSTER (some com fade quando o vídeo começar) */}
-        <img
-          src="/optimized/hero-banner.jpg"
-          alt=""
-          fetchPriority="high"
-          decoding="async"
+        <picture
           className={`
-            absolute inset-0 w-full h-full object-cover
+            absolute inset-0
             transition-opacity duration-700
             ${videoStarted ? "opacity-0" : "opacity-100"}
           `}
-        />
+        >
+          <source srcSet="/optimized/hero-banner.avif" type="image/avif" />
+          <img
+            src="/optimized/hero-banner.jpg"
+            alt=""
+            fetchPriority="high"
+            decoding="async"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        </picture>
 
-        {/* (Opcional) acabamento com gradiente */}
         <div className="absolute inset-0 bg-black/10" />
-
         <div className="relative z-10" />
       </section>
     </>
