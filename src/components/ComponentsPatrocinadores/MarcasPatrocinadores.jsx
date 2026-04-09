@@ -68,7 +68,7 @@ const MarcasPatrocinadores = () => {
                             "/patrocinadores/logo-digital.svg",
                             "/patrocinadores/logo-tore.svg",
                             "/patrocinadores/logo-onda-digital.svg",
-                            "/patrocinadores/logo-xpress.svg",
+                            "/optimized/step1/logo-parceiros/logo-xpress-dsx-2026.webp",
                             "/patrocinadores/logo-action.svg",
                             "/patrocinadores/logo-ac-display.svg",
                             "/patrocinadores/logo-manaus-play.svg",

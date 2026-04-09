@@ -8,12 +8,30 @@ import "swiper/css";
 import FormPatrocinadores from "./FormPatrocinadores";
 
 const InfoReferencias = [
-  { img: "/card-tallis.png" },
-  { img: "/Card-alfredo.png" },
-  { img: "/card-camila.png" },
-  { img: "/Card-kepler.png" },
-  { img: "/Card-hanna.png" },
-  { img: "/Card-rafael.png" },
+  {
+    avif: "/optimized/step1/card-tallis.avif",
+    webp: "/optimized/step1/card-tallis.webp",
+  },
+  {
+    avif: "/optimized/step1/Card-alfredo.avif",
+    webp: "/optimized/step1/Card-alfredo.webp",
+  },
+  {
+    avif: "/optimized/step1/card-camila.avif",
+    webp: "/optimized/step1/card-camila.webp",
+  },
+  {
+    avif: "/optimized/step1/Card-kepler.avif",
+    webp: "/optimized/step1/Card-kepler.webp",
+  },
+  {
+    avif: "/optimized/step1/Card-hanna.avif",
+    webp: "/optimized/step1/Card-hanna.webp",
+  },
+  {
+    avif: "/optimized/step1/Card-rafael.avif",
+    webp: "/optimized/step1/Card-rafael.webp",
+  },
 ];
 
 const ReferenciasPatrocinadores = () => {
@@ -112,7 +130,9 @@ const ReferenciasPatrocinadores = () => {
                       bg-cover bg-center
                       shadow-lg
                     "
-                    style={{ backgroundImage: `url(${item.img})` }}
+                    style={{
+                      backgroundImage: `image-set(url('${item.avif}') type('image/avif'), url('${item.webp}') type('image/webp'))`,
+                    }}
                   />
                 </SwiperSlide>
               ))}

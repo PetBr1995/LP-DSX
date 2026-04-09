@@ -15,7 +15,7 @@ const App = () => {
   return (
     <>
       <a href="#main-content" className="skip-link">
-        Pular para o conteudo principal
+        Pular para o conteúdo principal
       </a>
       <PreserveUtmLinks />
       <div id="main-content" tabIndex={-1}>

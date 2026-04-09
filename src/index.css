@@ -286,3 +286,119 @@ section.no-section-transition::after {
     will-change: transform;
   }
 }
+
+@keyframes newvendas-aquarium-drift-a {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(26px, -20px, 0) scale(1.04);
+  }
+}
+
+@keyframes newvendas-aquarium-drift-b {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-30px, 24px, 0) scale(1.06);
+  }
+}
+
+@keyframes newvendas-aquarium-drift-c {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(18px, 30px, 0) scale(1.05);
+  }
+}
+
+@keyframes newvendas-aquarium-drift-d {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-20px, -18px, 0) scale(1.05);
+  }
+}
+
+.newvendas-aquarium-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(40px);
+  opacity: 0.12;
+  mix-blend-mode: screen;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+.newvendas-aquarium-blob-a {
+  top: 8%;
+  left: -8%;
+  width: clamp(220px, 34vw, 520px);
+  height: clamp(220px, 34vw, 520px);
+  background: radial-gradient(circle at 30% 30%, rgba(245, 194, 43, 0.55) 0%, rgba(245, 194, 43, 0) 70%);
+  animation: newvendas-aquarium-drift-a 18s ease-in-out infinite;
+}
+
+.newvendas-aquarium-blob-b {
+  top: 28%;
+  right: -10%;
+  width: clamp(200px, 30vw, 470px);
+  height: clamp(200px, 30vw, 470px);
+  background: radial-gradient(circle at 60% 40%, rgba(255, 176, 64, 0.5) 0%, rgba(255, 176, 64, 0) 72%);
+  animation: newvendas-aquarium-drift-b 20s ease-in-out infinite;
+}
+
+.newvendas-aquarium-blob-c {
+  bottom: 20%;
+  left: 14%;
+  width: clamp(180px, 24vw, 360px);
+  height: clamp(180px, 24vw, 360px);
+  background: radial-gradient(circle at 40% 50%, rgba(245, 210, 71, 0.42) 0%, rgba(245, 210, 71, 0) 72%);
+  animation: newvendas-aquarium-drift-c 16s ease-in-out infinite;
+}
+
+.newvendas-aquarium-blob-d {
+  bottom: 6%;
+  right: 8%;
+  width: clamp(170px, 22vw, 340px);
+  height: clamp(170px, 22vw, 340px);
+  background: radial-gradient(circle at 50% 50%, rgba(231, 160, 64, 0.4) 0%, rgba(231, 160, 64, 0) 74%);
+  animation: newvendas-aquarium-drift-d 22s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .newvendas-aquarium-blob {
+    animation: none !important;
+  }
+}
+
+.painpoint-card {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0) scale(0.985);
+  transition:
+    opacity 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: 0ms;
+  will-change: opacity, transform;
+}
+
+.painpoint-card.visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  transition-delay: var(--enter-delay, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .painpoint-card {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

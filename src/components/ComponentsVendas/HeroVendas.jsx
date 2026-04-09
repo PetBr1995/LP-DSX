@@ -73,7 +73,7 @@ const HeroVendas = () => {
     <section
       className="
       relative pt-10 sm:pt-20 md:pt-30
-      bg-[url('/Banner-vendas-hero.png')]
+      bg-[url('/optimized/step1/Banner-vendas-hero.webp')]
       bg-center bg-cover bg-no-repeat
   
       after:content-['']
@@ -89,6 +89,10 @@ const HeroVendas = () => {
       after:z-[1]
       after:opacity-40 sm:after:opacity-60 md:after:opacity-85
     "
+      style={{
+        backgroundImage:
+          "image-set(url('/optimized/step1/Banner-vendas-hero.avif') type('image/avif'), url('/optimized/step1/Banner-vendas-hero.webp') type('image/webp'))",
+      }}
     >
       <div className="absolute inset-0 bg-black/55" />
 

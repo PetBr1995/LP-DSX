@@ -31,7 +31,7 @@ const CallToActionPatrocinadores = () => {
       className="
         relative
         flex items-center
-        bg-[url(/banner-call-section.png)]
+        bg-[url('/optimized/step1/banner-call-section.webp')]
         bg-cover
         bg-no-repeat
         bg-center
@@ -66,6 +66,10 @@ const CallToActionPatrocinadores = () => {
         before:bg-[url(/vector-28.svg)]
         before:z-10
       "
+      style={{
+        backgroundImage:
+          "image-set(url('/optimized/step1/banner-call-section.avif') type('image/avif'), url('/optimized/step1/banner-call-section.webp') type('image/webp'))",
+      }}
     >
       {/* Overlay preto 71% */}
       <div className="absolute inset-0 bg-black/70" />

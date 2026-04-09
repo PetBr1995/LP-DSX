@@ -1,0 +1,107 @@
+import { motion } from "framer-motion";
+import {
+  BadgeCheck,
+  BrainCircuit,
+  Handshake,
+  Megaphone,
+  ShoppingBag,
+  UserCog,
+  Wrench,
+} from "lucide-react";
+
+const normalizeTitle = (value = "") =>
+  value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
+
+const getTrackIcon = (title = "") => {
+  const normalized = normalizeTitle(title);
+
+  if (normalized.includes("vendas")) return Handshake;
+  if (normalized.includes("marketing")) return Megaphone;
+  if (normalized.includes("posicionamento") || normalized.includes("branding")) return BadgeCheck;
+  if (normalized.includes("inteligencia artificial")) return BrainCircuit;
+  if (normalized.includes("ferramentas") || normalized.includes("crescimento")) return Wrench;
+  if (normalized.includes("gestao comercial")) return UserCog;
+
+  return ShoppingBag;
+};
+
+const TracksSection = ({ items }) => {
+  return (
+    <section className="border-t border-[#2A2419] bg-[#0F0E0A] py-16 md:py-20">
+      <div className="mx-auto max-w-6xl px-4">
+        <h2 className="text-center font-anton text-[30px] uppercase leading-[1.12] text-white md:text-[52px] md:leading-[1.04]">
+          6 trilhas de conteúdo para <span className="text-[#C9A84C]">resultados reais</span>
+        </h2>
+
+        <p className="mx-auto mt-3 max-w-4xl text-center text-[15px] text-[#A79B83] md:text-[20px]">
+          Cada trilha foi desenhada para gerar ações práticas no dia seguinte ao evento.
+        </p>
+
+        <div className="mt-8 grid grid-cols-1 gap-4 md:mt-10 md:grid-cols-2">
+          {items.map((track, index) => {
+            const Icon = getTrackIcon(track.title);
+
+            return (
+              <motion.article
+                key={track.title}
+                initial={{
+                  opacity: 0,
+                  x: index % 2 === 0 ? -50 : 50,
+                  scale: 0.96,
+                }}
+                whileInView={{
+                  opacity: 1,
+                  x: 0,
+                  scale: 1,
+                }}
+                viewport={{ once: false, amount: 0.3 }} // 🔥 anima sempre que entra na tela
+                transition={{
+                  duration: 0.5,
+                  ease: [0.22, 1, 0.36, 1],
+                  delay: index * 0.06,
+                }}
+                className="group relative overflow-hidden rounded-[16px] border border-[#3A3222] bg-[#1E1A12] p-5 shadow-[inset_0_0_0_1px_rgba(201,168,76,0.07)] transition-colors duration-300 hover:border-[#A8893E] md:p-6"
+              >
+                {/* Linha decorativa */}
+                <div className="pointer-events-none absolute left-0 top-0 h-[1px] w-28 bg-gradient-to-r from-[#C9A84C]/80 to-transparent opacity-95" />
+
+                {/* Ícone */}
+                <motion.div
+                  whileHover={{ y: -2 }}
+                  transition={{ duration: 0.25, ease: "easeOut" }}
+                  className="mb-4 grid h-10 w-10 place-items-center rounded-[10px] border border-[#4A3F2A] bg-[#272115]"
+                >
+                  <motion.div
+                    whileHover={{ rotate: 4 }}
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <Icon
+                      className="h-[17px] w-[17px] text-[#E8DEC4] transition-colors duration-300 group-hover:text-[#C9A84C]"
+                      strokeWidth={2}
+                    />
+                  </motion.div>
+                </motion.div>
+
+                {/* Título */}
+                <h3 className="mt-1 text-[28px] font-bold leading-[1.16] text-white md:text-[36px] md:leading-tight">
+                  {track.title}
+                </h3>
+
+                {/* Descrição */}
+                <p className="mt-2 text-[14px] text-[#B7AA8A] md:text-[16px]">
+                  {track.description}
+                </p>
+              </motion.article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default TracksSection;

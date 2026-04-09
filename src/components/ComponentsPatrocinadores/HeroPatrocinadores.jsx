@@ -185,9 +185,13 @@ const HeroPatrocinadores = () => {
         <section
             className="
         relative isolate overflow-hidden
-        bg-[url('/BannerPatrocinadores.png')]
+        bg-[url('/optimized/step1/BannerPatrocinadores.webp')]
         bg-cover bg-center bg-no-repeat
       "
+            style={{
+                backgroundImage:
+                    "image-set(url('/optimized/step1/BannerPatrocinadores.avif') type('image/avif'), url('/optimized/step1/BannerPatrocinadores.webp') type('image/webp'))",
+            }}
         >
             {/* Overlay */}
             <div className="absolute inset-0 bg-black/55"></div>

@@ -1,4 +1,6 @@
-const HeaderMask = ({ titulo, textColor, backgroundColor, link, target, font }) => {
+const HeaderMask = ({ titulo, textColor, backgroundColor, link, target, font, size = "md" }) => {
+    const isLarge = size === "lg";
+
     return (
         <a href={link} target={target}>
             <section className="font-jamjuree relative z-10 flex justify-center items-center">
@@ -8,7 +10,9 @@ const HeaderMask = ({ titulo, textColor, backgroundColor, link, target, font }) 
                     
                     {/* Container interno */}
                     <div
-                        className="relative flex justify-center items-center rounded-[14px] w-[200px] h-10 overflow-hidden"
+                        className={`relative flex justify-center items-center rounded-[14px] overflow-hidden ${
+                            isLarge ? "min-w-[248px] h-12 px-6" : "min-w-[220px] h-11 px-5"
+                        }`}
                         style={{ backgroundColor }}
                     >
                         
@@ -20,7 +24,9 @@ const HeaderMask = ({ titulo, textColor, backgroundColor, link, target, font }) 
 
                         {/* Conteúdo */}
                         <p
-                            className="relative uppercase text-[14px]"
+                            className={`relative uppercase text-center leading-none ${
+                                isLarge ? "text-[15px]" : "text-[14px]"
+                            }`}
                             style={{ fontWeight: font, color: textColor }}
                         >
                             {titulo}

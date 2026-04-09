@@ -33,9 +33,13 @@ const Temas = () => {
       className="
         relative overflow-hidden
         py-16
-        bg-[url(/fundo-temas.png)]
+        bg-[url('/optimized/step1/fundo-temas.webp')]
         bg-cover bg-center bg-no-repeat
       "
+      style={{
+        backgroundImage:
+          "image-set(url('/optimized/step1/fundo-temas.avif') type('image/avif'), url('/optimized/step1/fundo-temas.webp') type('image/webp'))",
+      }}
     >
       {/* Overlay escuro */}
       <div className="absolute inset-0 bg-black/80 z-0" />

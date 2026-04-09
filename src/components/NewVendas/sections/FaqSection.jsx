@@ -1,0 +1,68 @@
+const FaqSection = ({ items, openFaqIndex, onToggleFaq }) => {
+  return (
+    <div className="border-t border-[#2A2419] bg-[#0F0E0A] py-16 md:py-20">
+      <div className="mx-auto max-w-6xl px-4">
+        <h2 className="text-center font-anton text-[30px] uppercase leading-[1.12] text-white md:text-[52px] md:leading-tight">
+          Perguntas frequentes
+        </h2>
+        <div className="mx-auto mt-10 max-w-5xl rounded-2xl border border-[#3A3222] bg-[#1E1A12] px-4 py-2 md:px-6">
+          {items.map((item, index) => {
+            const isOpen = openFaqIndex === index;
+            const answerId = `faq-answer-${index}`;
+
+            return (
+              <article key={item.pergunta} className="border-b border-[#3A3222] py-5 last:border-b-0">
+                <button
+                  type="button"
+                  className="flex w-full items-center justify-between gap-4 text-left"
+                  onClick={() => onToggleFaq(index)}
+                  aria-expanded={isOpen}
+                  aria-controls={answerId}
+                >
+                  <h3 className="pr-4 text-[17px] font-semibold leading-[1.24] text-white md:text-[26px] md:leading-tight">
+                    {item.pergunta}
+                  </h3>
+                  <span
+                    aria-hidden="true"
+                    className={`grid h-8 w-8 place-items-center text-[#C9A84C] transition duration-300 ease-in-out ${
+                      isOpen ? "rotate-180" : ""
+                    }`}
+                  >
+                    <img src="/arrow-down.svg" alt="" className="h-5 w-5" />
+                  </span>
+                </button>
+
+                <div
+                  className={`grid transition-all duration-300 ease-in-out ${
+                    isOpen ? "mt-3 grid-rows-[1fr] opacity-100" : "mt-0 grid-rows-[0fr] opacity-0"
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <p id={answerId} className="pr-8 text-[15px] text-[#C2B9A3] md:text-[18px]">
+                      {item.resposta}
+                    </p>
+                    {item.link ? (
+                      <div className="mt-3">
+                        <a
+                          href={item.link}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-2 rounded-md border border-[#C9A84C] px-3 py-2 text-sm font-semibold text-[#C9A84C] transition hover:bg-[#C9A84C] hover:text-black"
+                        >
+                          Entrar no grupo do WhatsApp
+                          <span aria-hidden>↗</span>
+                        </a>
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default FaqSection;

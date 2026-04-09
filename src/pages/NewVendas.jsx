@@ -1,11 +1,15 @@
 import { useEffect } from "react";
-import { NewVendasContent, NewVendasHero } from "../components/NewVendas";
+import {
+  NewVendasContent,
+  NewVendasHero,
+} from "../components/NewVendas";
+import HeaderMask from "../components/Mascaras/HeaderMask";
 
 const NewVendas = () => {
   useEffect(() => {
     const pageTitle = "Ingressos DSX 2026 | 3º Lote Aberto";
     const pageDescription =
-      "Garanta seu passaporte para o DSX 2026: o maior evento de negocios, marketing, vendas e inovacao do Norte. Dias 23 e 24 de julho em Manaus.";
+      "Garanta seu passaporte para o DSX 2026: o maior evento de negócios, marketing, vendas e inovação do Norte. Dias 23 e 24 de julho em Manaus.";
     const pageUrl = "https://dsx.com.vc/newvendas";
     const ogImage = "https://dsx.com.vc/Banner-vendas-hero.png";
 
@@ -69,7 +73,7 @@ const NewVendas = () => {
       url: pageUrl,
       location: {
         "@type": "Place",
-        name: "Centro de Convencoes Vasco Vasques",
+        name: "Centro de Convenções Vasco Vasques",
         address: {
           "@type": "PostalAddress",
           addressLocality: "Manaus",
@@ -134,21 +138,29 @@ const NewVendas = () => {
   }, []);
 
   return (
-    <section className="bg-[#050505] pb-28 md:pb-32" aria-label="Pagina de vendas DSX 2026">
-      <NewVendasHero />
-      <NewVendasContent />
+    <section
+      className="relative isolate overflow-hidden bg-[#0F0E0A] pb-28 md:pb-32"
+      aria-label="Página de vendas DSX 2026"
+    >
+      <div className="relative z-10">
+        <NewVendasHero />
+        <NewVendasContent />
+      </div>
 
-      <div className="fixed bottom-0 left-0 right-0 z-[130] border-t border-[#2F260A] bg-[#080808]/95 px-4 py-3 backdrop-blur-sm">
-        <a
-          href="/checkout"
-          aria-label="Garantir passaporte terceiro lote"
-          className="mx-auto block w-full max-w-[770px] rounded-xl bg-[#F5C02B] px-5 py-3 text-center text-[16px] font-extrabold uppercase leading-tight text-black transition hover:brightness-105 md:py-4 md:text-[28px]"
-        >
-          Garantir passaporte →
-          <span className="mt-1 block text-[11px] font-medium normal-case text-[#372A03] md:text-[15px]">
+      <div className="fixed bottom-0 left-0 right-0 z-[130] border-t border-[#2F2717] bg-[#0F0E0A]/95 px-4 py-3 backdrop-blur-sm">
+        <div className="mx-auto flex max-w-[770px] flex-col items-center">
+          <HeaderMask
+            titulo="Garantir meu passaporte"
+            link="#passaportes"
+            textColor="#FFFFFF"
+            backgroundColor="#1E1A12"
+            font="700"
+            size="lg"
+          />
+          <span className="mt-1 block text-[12px] font-semibold normal-case text-[#C9A84C] md:text-[16px]">
             3º Lote — a partir de R$497
           </span>
-        </a>
+        </div>
       </div>
     </section>
   );

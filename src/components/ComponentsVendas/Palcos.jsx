@@ -11,7 +11,16 @@ const Palcos = () => {
     <section className="py-10">
       <div className="max-w-7xl mx-auto px-4">
         {/* Imagem */}
-        <img src="/image-palcos.png" alt="Palcos" className="mb-6 mx-auto" />
+        <picture>
+          <source srcSet="/optimized/step1/image-palcos.avif" type="image/avif" />
+          <source srcSet="/optimized/step1/image-palcos.webp" type="image/webp" />
+          <img
+            src="/optimized/step1/image-palcos.webp"
+            alt="Palcos"
+            className="mb-6 mx-auto"
+            loading="lazy"
+          />
+        </picture>
 
         {/* Título */}
         <h2 className="text-white text-center font-anton uppercase text-4xl sm:text-5xl md:text-6xl leading-tight">
