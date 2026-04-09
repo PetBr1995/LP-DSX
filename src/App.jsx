@@ -28,7 +28,7 @@ const App = () => {
             <Route path="/whatsapp" element={<WhatsappPage />} />
             <Route path="/testeanimation" element={<TesteAnimation />} />
             <Route path="/checkout" element={<Checkout />} />
-            <Route path="/newvendas" element={<NewVendas />} />
+            <Route path="/vendas" element={<NewVendas />} />
             <Route path="/sobre" element={<Navigate to="/" replace />} />
           </Routes>
         </Suspense>

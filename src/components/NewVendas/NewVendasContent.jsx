@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useRef, useState } from "react";
 import {
   audienceProfiles,
   faqItems,
-  featuredSpeakers,
   painPoints,
   testimonials,
   tracks,
@@ -13,14 +12,17 @@ import {
   FooterSection,
   PainPointsSection,
   PassaportesSection,
-  SpeakersSection,
   TestimonialsSection,
   TracksSection,
 } from "./sections";
 
+const LazySpeakersSection = lazy(() => import("./sections/SpeakersSection"));
+
 const NewVendasContent = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
+  const [shouldLoadSpeakers, setShouldLoadSpeakers] = useState(false);
+  const speakersTriggerRef = useRef(null);
 
   useEffect(() => {
     const checkIsMobile = () => {
@@ -30,6 +32,32 @@ const NewVendasContent = () => {
     checkIsMobile();
     window.addEventListener("resize", checkIsMobile);
     return () => window.removeEventListener("resize", checkIsMobile);
+  }, []);
+
+  useEffect(() => {
+    const trigger = speakersTriggerRef.current;
+    if (!trigger) return;
+
+    if (!("IntersectionObserver" in window)) {
+      const timeoutId = window.setTimeout(() => setShouldLoadSpeakers(true), 0);
+      return () => window.clearTimeout(timeoutId);
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        setShouldLoadSpeakers(true);
+        observer.disconnect();
+      },
+      {
+        rootMargin: "380px 0px",
+        threshold: 0,
+      }
+    );
+
+    observer.observe(trigger);
+
+    return () => observer.disconnect();
   }, []);
 
   const handleBuyPassaporte = (targetLink) => {
@@ -44,7 +72,19 @@ const NewVendasContent = () => {
     <section className="border-t border-[#2A2419] bg-[#0F0E0A] pb-10 pt-8 text-white md:pb-14 md:pt-12">
       <PainPointsSection items={painPoints} />
       <TracksSection items={tracks} />
-      <SpeakersSection items={featuredSpeakers} />
+      <div ref={speakersTriggerRef}>
+        {shouldLoadSpeakers ? (
+          <Suspense
+            fallback={
+              <div className="border-t border-[#2A2419] bg-[#0F0E0A] py-16 md:py-20" />
+            }
+          >
+            <LazySpeakersSection />
+          </Suspense>
+        ) : (
+          <div className="border-t border-[#2A2419] bg-[#0F0E0A] py-16 md:py-20" />
+        )}
+      </div>
       <TestimonialsSection items={testimonials} />
       <AudienceSection items={audienceProfiles} />
 
