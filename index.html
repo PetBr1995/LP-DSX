@@ -105,21 +105,6 @@
       }
     </script>
 
-    <!-- Google Tag Manager -->
-    <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != 'dataLayer' ? '&l=' + l : '';
-        j.async = true;
-        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, 'script', 'dataLayer', 'GTM-W3FM6BQW');
-    </script>
-    <!-- End Google Tag Manager -->
-
   </head>
 
   <body>
@@ -135,6 +120,38 @@
     <!-- End Google Tag Manager (noscript) -->
 
     <div id="root"></div>
+    <script>
+      (function (w, d, l, i) {
+        function loadGtm() {
+          if (w.__DSX_GTM_LOADED__) return;
+          w.__DSX_GTM_LOADED__ = true;
+
+          w[l] = w[l] || [];
+          w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+
+          var script = d.createElement("script");
+          var dl = l !== "dataLayer" ? "&l=" + l : "";
+          script.async = true;
+          script.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+          d.head.appendChild(script);
+        }
+
+        function scheduleLoad() {
+          if ("requestIdleCallback" in w) {
+            w.requestIdleCallback(loadGtm, { timeout: 2500 });
+            return;
+          }
+          w.setTimeout(loadGtm, 1200);
+        }
+
+        if (d.readyState === "complete") {
+          scheduleLoad();
+          return;
+        }
+
+        w.addEventListener("load", scheduleLoad, { once: true });
+      })(window, document, "dataLayer", "GTM-W3FM6BQW");
+    </script>
     <script src="/js/dsx-tracker.js" defer></script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
