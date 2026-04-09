@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   NewVendasContent,
   NewVendasHero,
@@ -6,6 +6,8 @@ import {
 import HeaderMask from "../components/Mascaras/HeaderMask";
 
 const NewVendas = () => {
+  const [showStickyCta, setShowStickyCta] = useState(false);
+
   useEffect(() => {
     const pageTitle = "Ingressos DSX 2026 | 3º Lote Aberto";
     const pageDescription =
@@ -137,6 +139,26 @@ const NewVendas = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const ctaElement = document.getElementById("newvendas-primary-cta");
+
+    if (!ctaElement || !("IntersectionObserver" in window)) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const ctaPassedAboveViewport = !entry.isIntersecting && entry.boundingClientRect.top < 0;
+        setShowStickyCta(ctaPassedAboveViewport);
+      },
+      { threshold: 0 }
+    );
+
+    observer.observe(ctaElement);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
       className="relative isolate overflow-hidden bg-[#0F0E0A] pb-28 md:pb-32"
@@ -147,7 +169,13 @@ const NewVendas = () => {
         <NewVendasContent />
       </div>
 
-      <div className="fixed bottom-0 left-0 right-0 z-[130] border-t border-[#2F2717] bg-[#0F0E0A]/95 px-4 py-3 backdrop-blur-sm">
+      <div
+        className={`fixed bottom-0 left-0 right-0 z-[130] border-t border-[#2F2717] bg-[#0F0E0A]/95 px-4 py-3 backdrop-blur-sm transition-all duration-500 ease-out ${
+          showStickyCta
+            ? "translate-y-0 opacity-100"
+            : "pointer-events-none translate-y-6 opacity-0"
+        }`}
+      >
         <div className="mx-auto flex max-w-[770px] flex-col items-center">
           <HeaderMask
             titulo="Garantir meu passaporte"

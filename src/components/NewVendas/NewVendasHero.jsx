@@ -62,7 +62,7 @@ const NewVendasHero = () => {
             </p>
           </div>
 
-          <div className="mt-7 flex justify-center">
+          <div id="newvendas-primary-cta" className="mt-7 flex justify-center">
             <HeaderMask
               titulo="Garantir meu passaporte"
               link="#passaportes"
