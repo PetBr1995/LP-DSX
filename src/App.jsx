@@ -1,6 +1,8 @@
 import { Suspense, lazy } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import PreserveUtmLinks from "./components/PreserveUtmLinks";
+import Vendas2 from "./pages/Vendas2";
+import Vendas from "./pages/Vendas";
 
 const HomeTeste = lazy(() => import("./pages/HomeTeste"));
 const Palestrantes = lazy(() => import("./pages/Palestrantes"));
@@ -30,6 +32,7 @@ const App = () => {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/vendas" element={<NewVendas />} />
             <Route path="/sobre" element={<Navigate to="/" replace />} />
+            <Route path="/teste" element={<Vendas/>} />
           </Routes>
         </Suspense>
       </div>
