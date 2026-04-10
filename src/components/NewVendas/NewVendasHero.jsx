@@ -82,7 +82,7 @@ const NewVendasHero = () => {
           </h1>
           <div className="mx-auto flex max-w-4xl flex-wrap justify-center gap-x-3 gap-y-5 px-2 py-2">
             {metrics.map((item, index) => (
-              <div key={item.label} className="min-w-0 w-fit text-center md:w-[23%]">
+              <div key={item.label} className="min-w-0 w-[47%] text-center md:w-[23%]">
                 <p className="font-jamjuree text-[36px] leading-none tracking-normal text-transparent bg-gradient-to-b from-[#1DE3C1] via-[#0FAF95] to-[#0A6A5A] bg-clip-text sm:text-[42px] md:text-[64px]">
                   {formatMetricValue(animatedValues[index] ?? 0, item)}
                 </p>
