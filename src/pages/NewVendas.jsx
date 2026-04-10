@@ -164,6 +164,14 @@ const NewVendas = () => {
       className="relative isolate overflow-hidden bg-black pb-28 md:pb-32"
       aria-label="Página de vendas DSX 2026"
     >
+      <div className="pointer-events-none absolute inset-0 z-0">
+        <div
+          className="absolute left-4 top-28 h-16 w-16 bg-[url('/vector-11.svg')] bg-contain bg-center bg-no-repeat opacity-20 md:left-10 md:top-36 md:h-20 md:w-20"
+          style={{ animation: "spin 24s linear infinite" }}
+          aria-hidden="true"
+        />
+      </div>
+
       <div className="relative z-10">
         <NewVendasHero />
         <NewVendasContent />
