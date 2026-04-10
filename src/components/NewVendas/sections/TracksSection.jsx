@@ -70,21 +70,12 @@ const TracksSection = ({ items }) => {
                 <div className="pointer-events-none absolute left-0 top-0 h-[1px] w-full origin-left scale-x-[0.28] bg-gradient-to-r from-[#C9A84C]/80 to-transparent opacity-95 transition-transform duration-500 ease-out group-hover:scale-x-100" />
 
                 {/* Ícone */}
-                <motion.div
-                  whileHover={{ rotate: 0 }}
-                  transition={{ duration: 0.50, ease: "easeOut" }}
-                  className="relative mb-4 z-10 grid h-15 w-15 place-items-center rounded-[12px] border border-[#4A3F2A] bg-[#272115]"
-                >
-                  <motion.div
-                    whileHover={{ rotate: 0 }}
-                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                  >
-                    <Icon
-                      className="h-[17px] w-[17px] text-[#E8DEC4] transition-colors duration-300 group-hover:text-[#F5C02B]"
-                      strokeWidth={2}
-                    />
-                  </motion.div>
-                </motion.div>
+                <div className="relative z-10 mb-4 grid h-15 w-15 place-items-center rounded-[12px] border border-[#4A3F2A] bg-[#272115]">
+                  <Icon
+                    className="h-[22px] w-[22px] text-[#E8DEC4] transition-colors duration-300 group-hover:text-[#F5C02B]"
+                    strokeWidth={2.25}
+                  />
+                </div>
 
                 {/* Título */}
                 <h3 className="mt-1 text-[28px] font-bold leading-[1.16] text-white md:text-[36px] md:leading-tight">
