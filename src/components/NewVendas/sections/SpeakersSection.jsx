@@ -79,7 +79,7 @@ const SpeakersSection = () => {
           </Swiper>
         </div>
 
-        <p className="mt-10 text-center font-jamjuree text-[15px] font-normal leading-relaxed text-white md:text-[17px]">
+        <p className="mx-auto mt-10 inline-flex rounded-full border border-[#F5C02B]/45 bg-[#1E1A12] px-5 py-2 text-center font-jamjuree text-[19px] font-extrabold leading-relaxed tracking-[0.02em] text-white md:text-[26px]">
           40 palestrantes confirmados para a edição 2026
         </p>
       </div>

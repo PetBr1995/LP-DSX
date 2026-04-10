@@ -69,7 +69,7 @@ const NewVendasHero = () => {
                 decoding="async"
               />
             </div>
-            <p className="mt-0 text-center font-anton text-[14px] uppercase tracking-[0.04em] text-[#F5C02B] md:text-[15px]">
+            <p className="mt-0 text-center font-anton text-[14px] uppercase tracking-[0.04em] text-white md:text-[15px]">
               MANAUS - AM
             </p>
           </div>

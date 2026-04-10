@@ -98,31 +98,31 @@ export const audienceProfiles = [
     icon: "/person-green.svg",
     title: "Empresário",
     description:
-      "Empresário que deseja destravar o crescimento e alcançar o próximo nível da sua empresa em 2026.",
+      "Empresário com visão de crescimento, pronto para destravar o próximo nível da sua empresa.",
   },
   {
     icon: "/medal.svg",
     title: "Gestor ou líder",
     description:
-      "Gestor ou líder que toma decisões importantes, buscando mais clareza, método e leitura de mercado.",
+      "Gestor ou líder decisivo, em busca de mais clareza, método e leitura de mercado para tomar as melhores decisões.",
   },
   {
     icon: "/lamp.svg",
     title: "Profissional em ascensão",
     description:
-      "Profissional em ascensão que entende o valor de networking qualificado e referências de alto nível.",
+      "Profissional em ascensão, consciente do poder do networking qualificado e das referências de alto nível.",
   },
   {
     icon: "/people.svg",
     title: "Times de marketing e vendas",
     description:
-      "Times de marketing e vendas que precisam sair do operacional e focar em performance e resultado.",
+      "Times de marketing e vendas prontos para sair do operacional e focar em performance e resultado.",
   },
   {
     icon: "/studant.svg",
     title: "Estudante",
     description:
-      "Estudante que quer acelerar repertório, visão prática e conexão com o mercado.",
+      "Estudante acelerando repertório, visão prática e conexão com o mercado.",
   },
 ];
 

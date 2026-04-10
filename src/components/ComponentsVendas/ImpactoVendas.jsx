@@ -79,8 +79,8 @@ const ImpactoVendas = () => {
             }}
             className="group relative rounded-2xl overflow-hidden focus:outline-none"
           >
-            {/* CARD (quadrado no mobile) */}
-            <div className="relative bg-black aspect-square sm:aspect-[9/16]">
+            {/* CARD com altura padronizada para casar com Speakers */}
+            <div className="relative h-[260px] bg-black">
               {item.thumb && (
                 <img
                   src={item.thumb}

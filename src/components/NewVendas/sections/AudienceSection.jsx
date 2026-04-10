@@ -15,22 +15,24 @@ const AudienceSection = ({ items }) => {
           O DSX é para você...
         </h2>
 
-        <div className="mx-auto mt-10 grid max-w-6xl grid-cols-1 gap-4 md:grid-cols-3">
+        <div className="mx-auto mt-10 grid max-w-6xl grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {items.map((profile) => (
             <article
               key={profile.description}
               className="rounded-2xl border border-[#6B5C33] bg-[#1E1A12] p-5 shadow-[inset_0_0_0_1px_rgba(201,168,76,0.08)] md:p-6"
             >
-              <img
-                src={profile.icon}
-                alt=""
-                aria-hidden="true"
-                className="h-12 w-12 brightness-0 invert md:h-14 md:w-14"
-              />
-              <p className="mt-3 font-jamjuree text-[15px] font-normal leading-relaxed text-white md:text-[18px]">
-                <span className="font-bold text-[#F5C02B]">{profile.title}</span>{" "}
-                {getDescriptionWithoutLeadingTitle(profile.title, profile.description)}
-              </p>
+              <div className="flex items-center gap-4">
+                <img
+                  src={profile.icon}
+                  alt=""
+                  aria-hidden="true"
+                  className="h-10 w-10 shrink-0 brightness-0 invert md:h-12 md:w-12"
+                />
+                <p className="font-jamjuree text-[15px] font-normal leading-relaxed text-white md:text-[18px]">
+                  <span className="font-bold text-[#F5C02B]">{profile.title}</span>{" "}
+                  {getDescriptionWithoutLeadingTitle(profile.title, profile.description)}
+                </p>
+              </div>
             </article>
           ))}
         </div>
