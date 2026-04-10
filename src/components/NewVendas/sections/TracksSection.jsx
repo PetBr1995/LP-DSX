@@ -58,25 +58,25 @@ const TracksSection = ({ items }) => {
                   x: 0,
                   scale: 1,
                 }}
-                viewport={{ once: false, amount: 0.3 }} // 🔥 anima sempre que entra na tela
+                viewport={{ once: false, amount: 0.3 }}
                 transition={{
                   duration: 0.5,
                   ease: [0.22, 1, 0.36, 1],
                   delay: index * 0.06,
                 }}
-                className="group relative overflow-hidden rounded-[16px] border border-[#3A3222] bg-[#1E1A12] p-5 shadow-[inset_0_0_0_1px_rgba(201,168,76,0.07)] transition-colors duration-300 hover:border-[#A8893E] md:p-6"
+                className="group relative overflow-hidden rounded-[16px] border border-[#3A3222] bg-[#1E1A12] p-5 shadow-[inset_0_0_0_1px_rgba(201,168,76,0.07)] transition-colors duration-300 md:p-6"
               >
-                {/* Linha decorativa */}
-                <div className="pointer-events-none absolute left-0 top-0 h-[1px] w-28 bg-gradient-to-r from-[#C9A84C]/80 to-transparent opacity-95" />
+                {/* Linha decorativa com efeito de deslize */}
+                <div className="pointer-events-none absolute left-0 top-0 h-[1px] w-full origin-left scale-x-[0.28] bg-gradient-to-r from-[#C9A84C]/80 to-transparent opacity-95 transition-transform duration-500 ease-out group-hover:scale-x-100" />
 
                 {/* Ícone */}
                 <motion.div
-                  whileHover={{ y: -2 }}
-                  transition={{ duration: 0.25, ease: "easeOut" }}
-                  className="mb-4 grid h-10 w-10 place-items-center rounded-[10px] border border-[#4A3F2A] bg-[#272115]"
+                  whileHover={{ rotate: 0 }}
+                  transition={{ duration: 0.50, ease: "easeOut" }}
+                  className="relative mb-4 z-10 grid h-15 w-15 place-items-center rounded-[12px] border border-[#4A3F2A] bg-[#272115]"
                 >
                   <motion.div
-                    whileHover={{ rotate: 4 }}
+                    whileHover={{ rotate: 0 }}
                     transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                   >
                     <Icon
