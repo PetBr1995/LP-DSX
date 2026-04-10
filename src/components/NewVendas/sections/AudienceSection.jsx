@@ -21,12 +21,12 @@ const AudienceSection = ({ items }) => {
               key={profile.description}
               className="flex h-full min-h-[176px] items-center rounded-2xl border border-[#6B5C33] bg-[#1E1A12] p-5 shadow-[inset_0_0_0_1px_rgba(201,168,76,0.08)] md:min-h-[196px] md:p-6"
             >
-              <div className="flex w-full items-center gap-4">
+              <div className="flex w-full flex-col items-center gap-4 text-center md:items-start md:text-left">
                 <img
                   src={profile.icon}
                   alt=""
                   aria-hidden="true"
-                  className="h-10 w-10 shrink-0 brightness-0 invert md:h-12 md:w-12"
+                  className="h-14 w-14 shrink-0 brightness-0 invert"
                 />
                 <p className="font-jamjuree text-[15px] font-normal leading-relaxed text-white md:text-[18px]">
                   <span className="font-bold text-[#F5C02B]">{profile.title}</span>{" "}

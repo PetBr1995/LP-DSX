@@ -4,7 +4,7 @@ import NewVendasHeaderMask from "./NewVendasHeaderMask";
 const metrics = [
   { target: 2000, label: "Participantes", prefix: "+", suffix: "", useThousands: true },
   { target: 40, label: "Palestras", prefix: "+", suffix: "", useThousands: false },
-  { target: 30, label: "Expositores regionais", prefix: "+", suffix: "", useThousands: false },
+  { target: 30, label: "Expositores", prefix: "+", suffix: "", useThousands: false },
   { target: 2, label: "Imersão total", prefix: "", suffix: " dias", useThousands: false },
 ];
 
@@ -18,7 +18,7 @@ const NewVendasHero = () => {
   const [animatedValues, setAnimatedValues] = useState(metrics.map(() => 0));
 
   useEffect(() => {
-    const duration = 1400;
+    const duration = 1900;
     const start = performance.now();
     let frameId;
 
@@ -59,8 +59,8 @@ const NewVendasHero = () => {
 
       <div className="relative mx-auto max-w-6xl px-4 pb-10 pt-10 md:pb-12 md:pt-14">
         <div className="text-center space-y-5 md:space-y-6">
-          <div className="mx-auto w-[340px] md:w-[520px]">
-            <div className="h-50 md:h-40">
+          <div className="mx-auto w-full max-w-[340px] md:max-w-[520px]">
+            <div className="h-30 md:h-40">
               <img
                 src="/logo-dsx-2026-transparente.png"
                 alt="Logo DSX"
