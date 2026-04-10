@@ -4,12 +4,12 @@ const MotionArticle = motion.article;
 
 const TestimonialsSection = ({ items }) => {
   return (
-    <div className="border-t border-[#2A2419] bg-[#0F0E0A] py-16 md:py-20">
+    <div className="border-t border-[#D9DEE3] bg-[#F0F2F5] py-16 md:py-20">
       <div className="mx-auto max-w-6xl px-4">
-        <h2 className="text-center font-anton text-[30px] uppercase leading-[1.12] text-white md:text-[52px] md:leading-[1.05]">
+        <h2 className="text-center font-anton text-[30px] uppercase leading-[1.12] text-[#111B21] md:text-[52px] md:leading-[1.05]">
           O DSX mudou o jogo para quem participou
         </h2>
-        <p className="mt-2 text-center text-[15px] text-[#A79B83] md:text-[20px]">
+        <p className="mt-2 text-center text-[15px] text-[#54656F] md:text-[20px]">
           Depoimentos reais da edição 2025
         </p>
 

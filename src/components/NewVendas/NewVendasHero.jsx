@@ -77,7 +77,7 @@ const NewVendasHero = () => {
         </div>
       </div>
 
-      <div className="border-y border-[#2A2419] bg-[#16130E] px-4 py-5 text-center text-[17px] font-semibold tracking-[0.01em] text-white md:py-6 md:text-[24px]">
+      <div className="border-y border-[#5A4718] bg-[#3B2E10] px-4 py-5 text-center text-[17px] font-semibold tracking-[0.01em] text-white md:py-6 md:text-[24px]">
         O DSX consolidou o Norte como referência em inovação e tecnologia
       </div>
 

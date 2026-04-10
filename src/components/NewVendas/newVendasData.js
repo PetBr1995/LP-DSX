@@ -77,19 +77,19 @@ export const testimonials = [
     tag: "Palestrante",
     quote:
       '"Vozes que subiram ao palco para compartilhar visão e cases de sucesso."',
-    author: "Palestrante DSX 2025",
+    author: "João Kepler",
   },
   {
     tag: "Expositor",
     quote:
       '"Marcas que estiveram na linha de frente, gerando conexões, oportunidades e negócios."',
-    author: "Expositor DSX 2025",
+    author: "Augusto César",
   },
   {
     tag: "Participante",
     quote:
       '"Empresários e profissionais que viveram o DSX 2025 e saíram com uma nova direção."',
-    author: "Participante DSX 2025",
+    author: "Fernanda",
   },
 ];
 

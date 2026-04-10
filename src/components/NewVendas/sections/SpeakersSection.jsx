@@ -80,7 +80,7 @@ const SpeakersSection = () => {
         </div>
 
         <p className="mt-10 text-center text-[14px] text-[#A79B83] md:text-[18px]">
-          + dezenas de palestrantes confirmados para a edição 2026
+          40 palestrantes confirmados para a edição 2026
         </p>
       </div>
     </div>
