@@ -69,20 +69,20 @@ const NewVendasContent = () => {
   };
 
   return (
-    <section className="border-t border-[#2A2419] bg-[#0F0E0A] pb-10 pt-8 text-white md:pb-14 md:pt-12">
+    <section className="border-t border-[#2A2419] bg-black pb-10 pt-8 text-white md:pb-14 md:pt-12">
       <PainPointsSection items={painPoints} />
       <TracksSection items={tracks} />
       <div ref={speakersTriggerRef}>
         {shouldLoadSpeakers ? (
           <Suspense
             fallback={
-              <div className="border-t border-[#2A2419] bg-[#0F0E0A] py-16 md:py-20" />
+              <div className="border-t border-[#2A2419] bg-black py-16 md:py-20" />
             }
           >
             <LazySpeakersSection />
           </Suspense>
         ) : (
-          <div className="border-t border-[#2A2419] bg-[#0F0E0A] py-16 md:py-20" />
+          <div className="border-t border-[#2A2419] bg-black py-16 md:py-20" />
         )}
       </div>
       <TestimonialsSection items={testimonials} />

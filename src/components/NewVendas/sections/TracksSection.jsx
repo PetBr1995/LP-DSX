@@ -34,11 +34,11 @@ const TracksSection = ({ items }) => {
     <section className="border-t border-[#2A2419] bg-[#0F0E0A] py-16 md:py-20">
       <div className="mx-auto max-w-6xl px-4">
         <h2 className="text-center font-anton text-[30px] uppercase leading-[1.12] text-white md:text-[52px] md:leading-[1.04]">
-          6 trilhas de conteúdo para <span className="text-[#C9A84C]">resultados reais</span>
+          6 trilhas de conteúdo para <span className="text-[#F5C02B]">resultados reais</span>
         </h2>
 
         <p className="mx-auto mt-3 max-w-4xl text-center text-[15px] text-[#A79B83] md:text-[20px]">
-          Cada trilha foi desenhada para gerar ações práticas no dia seguinte ao evento.
+          Cada trilha foi desenhada para gerar ações práticas no dia seguinte do evento.
         </p>
 
         <div className="mt-8 grid grid-cols-1 gap-4 md:mt-10 md:grid-cols-2">
@@ -80,7 +80,7 @@ const TracksSection = ({ items }) => {
                     transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                   >
                     <Icon
-                      className="h-[17px] w-[17px] text-[#E8DEC4] transition-colors duration-300 group-hover:text-[#C9A84C]"
+                      className="h-[17px] w-[17px] text-[#E8DEC4] transition-colors duration-300 group-hover:text-[#F5C02B]"
                       strokeWidth={2}
                     />
                   </motion.div>

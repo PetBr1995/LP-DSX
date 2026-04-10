@@ -11,6 +11,9 @@ const FooterSection = () => {
             DSX — Digital Summit Experience © 2026 · Realização: Digital Hub Experience
           </p>
           <p className="mt-1 text-[11px] text-[#A79B83] md:text-[12px]">
+            CNPJ 10.279.661/0001-51
+          </p>
+          <p className="mt-1 text-[11px] text-[#A79B83] md:text-[12px]">
             Este site não faz parte do website do Facebook ou do Facebook Inc.
           </p>
         </div>

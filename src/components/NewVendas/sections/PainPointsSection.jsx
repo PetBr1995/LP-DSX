@@ -51,7 +51,7 @@ const PainPointsSection = ({ items }) => {
         ))}
       </div>
 
-      <p className="py-10 text-center font-anton text-[26px] uppercase leading-[1.18] text-[#C9A84C] md:py-12 md:text-[42px] md:leading-tight">
+      <p className="py-10 text-center font-anton text-[26px] uppercase leading-[1.18] text-[#F5C02B] md:py-12 md:text-[42px] md:leading-tight">
         No DSX, você resolve tudo isso em 2 dias.
       </p>
     </div>

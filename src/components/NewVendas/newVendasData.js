@@ -76,19 +76,19 @@ export const testimonials = [
   {
     tag: "Palestrante",
     quote:
-      '"A energia do público e a organização me surpreenderam. Um dos melhores eventos de que já participei no Norte."',
+      '"Vozes que subiram ao palco para compartilhar visão e cases de sucesso."',
     author: "Palestrante DSX 2025",
   },
   {
     tag: "Expositor",
     quote:
-      '"Fechei mais de 15 contatos comerciais em 2 dias. O retorno sobre o investimento foi imediato."',
+      '"Marcas que estiveram na linha de frente, gerando conexões, oportunidades e negócios."',
     author: "Expositor DSX 2025",
   },
   {
     tag: "Participante",
     quote:
-      '"Saí do DSX com uma visão completamente nova do meu negócio. As conexões que fiz já geraram 3 parcerias."',
+      '"Empresários e profissionais que viveram o DSX 2025 e saíram com uma nova direção."',
     author: "Participante DSX 2025",
   },
 ];

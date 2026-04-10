@@ -3,7 +3,7 @@ import {
   NewVendasContent,
   NewVendasHero,
 } from "../components/NewVendas";
-import HeaderMask from "../components/Mascaras/HeaderMask";
+import NewVendasHeaderMask from "../components/NewVendas/NewVendasHeaderMask";
 
 const NewVendas = () => {
   const [showStickyCta, setShowStickyCta] = useState(false);
@@ -161,7 +161,7 @@ const NewVendas = () => {
 
   return (
     <section
-      className="relative isolate overflow-hidden bg-[#0F0E0A] pb-28 md:pb-32"
+      className="relative isolate overflow-hidden bg-black pb-28 md:pb-32"
       aria-label="Página de vendas DSX 2026"
     >
       <div className="relative z-10">
@@ -170,14 +170,14 @@ const NewVendas = () => {
       </div>
 
       <div
-        className={`fixed bottom-0 left-0 right-0 z-[130] border-t border-[#2F2717] bg-[#0F0E0A]/95 px-4 py-3 backdrop-blur-sm transition-all duration-500 ease-out ${
+        className={`fixed bottom-0 left-0 right-0 z-[130] border-t border-[#2F2717] bg-black px-4 py-3 transition-all duration-500 ease-out ${
           showStickyCta
             ? "translate-y-0 opacity-100"
             : "pointer-events-none translate-y-6 opacity-0"
         }`}
       >
         <div className="mx-auto flex max-w-[770px] flex-col items-center">
-          <HeaderMask
+          <NewVendasHeaderMask
             titulo="Garantir meu passaporte"
             link="#passaportes"
             textColor="#FFFFFF"
@@ -185,8 +185,8 @@ const NewVendas = () => {
             font="700"
             size="lg"
           />
-          <span className="mt-1 block text-[12px] font-semibold normal-case text-[#C9A84C] md:text-[16px]">
-            3º Lote — a partir de R$497
+          <span className="mt-1 block text-[12px] font-semibold normal-case text-[#F5C02B] md:text-[16px]">
+            Vagas limitadas
           </span>
         </div>
       </div>

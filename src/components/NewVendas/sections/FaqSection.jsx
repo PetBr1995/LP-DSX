@@ -24,7 +24,7 @@ const FaqSection = ({ items, openFaqIndex, onToggleFaq }) => {
                   </h3>
                   <span
                     aria-hidden="true"
-                    className={`grid h-8 w-8 place-items-center text-[#C9A84C] transition duration-300 ease-in-out ${
+                    className={`grid h-8 w-8 place-items-center text-[#F5C02B] transition duration-300 ease-in-out ${
                       isOpen ? "rotate-180" : ""
                     }`}
                   >
@@ -47,7 +47,7 @@ const FaqSection = ({ items, openFaqIndex, onToggleFaq }) => {
                           href={item.link}
                           target="_blank"
                           rel="noreferrer"
-                          className="inline-flex items-center gap-2 rounded-md border border-[#C9A84C] px-3 py-2 text-sm font-semibold text-[#C9A84C] transition hover:bg-[#C9A84C] hover:text-black"
+                          className="inline-flex items-center gap-2 rounded-md border border-[#C9A84C] px-3 py-2 text-sm font-semibold text-[#F5C02B] transition hover:bg-[#C9A84C] hover:text-black"
                         >
                           Entrar no grupo do WhatsApp
                           <span aria-hidden>↗</span>
