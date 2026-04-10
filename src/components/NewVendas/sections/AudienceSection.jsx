@@ -15,13 +15,13 @@ const AudienceSection = ({ items }) => {
           O DSX é para você...
         </h2>
 
-        <div className="mx-auto mt-10 grid max-w-6xl grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto mt-10 grid max-w-6xl grid-cols-1 items-stretch gap-4 md:grid-cols-2 lg:grid-cols-3">
           {items.map((profile) => (
             <article
               key={profile.description}
-              className="rounded-2xl border border-[#6B5C33] bg-[#1E1A12] p-5 shadow-[inset_0_0_0_1px_rgba(201,168,76,0.08)] md:p-6"
+              className="flex h-full min-h-[176px] items-center rounded-2xl border border-[#6B5C33] bg-[#1E1A12] p-5 shadow-[inset_0_0_0_1px_rgba(201,168,76,0.08)] md:min-h-[196px] md:p-6"
             >
-              <div className="flex items-center gap-4">
+              <div className="flex w-full items-center gap-4">
                 <img
                   src={profile.icon}
                   alt=""

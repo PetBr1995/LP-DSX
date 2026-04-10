@@ -74,7 +74,7 @@ const NewVendasHero = () => {
             </p>
           </div>
 
-          <h1 className="mx-auto max-w-[22ch] font-anton text-[clamp(1rem,7.8vw,5rem)] uppercase leading-[1.2] tracking-[0.01em] text-[#F5C02B] md:max-w-[19ch] md:leading-[1.22]">
+          <h1 className="mx-auto font-anton text-[clamp(1rem,7.8vw,5rem)] uppercase leading-[1.2] tracking-[0.01em] text-[#F5C02B] md:leading-[1.22]">
             <span className="block">O maior evento de</span>
             <span className="block text-[#ffffff]">negócios, marketing,</span>
             <span className="block">
@@ -115,7 +115,7 @@ const NewVendasHero = () => {
         </div>
       </div>
 
-      <div className="border-y border-[#5A4718] bg-[#3B2E10] px-4 py-5 text-center text-[17px] font-semibold tracking-[0.01em] text-white md:py-6 md:text-[24px]">
+      <div className="border-y border-[#5A4718] bg-black px-4 py-5 text-center text-[17px] font-semibold tracking-[0.01em] text-white md:py-6 md:text-[24px]">
         O DSX consolidou o Norte como referência em inovação e tecnologia
       </div>
 

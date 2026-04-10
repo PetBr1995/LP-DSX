@@ -18,12 +18,12 @@ const SpeakersSection = () => {
   return (
     <div className="border-t border-[#2A2419] bg-[#0F0E0A] py-16 md:py-20">
       <div className="mx-auto max-w-6xl px-4">
-        <h2 className="text-center font-anton text-[30px] uppercase leading-[1.12] text-white md:text-[50px] md:leading-[1.05]">
+        <h1 className="text-center font-anton text-[26px] uppercase leading-[1.12] text-white md:text-[42px] md:leading-[1.05]">
+          40 palestrantes confirmados para a edição 2026
+        </h1>
+        <h2 className="mt-2 text-center font-jamjuree text-[18px] font-normal leading-relaxed text-white md:text-[22px]">
           Os principais nomes do mercado no palco do DSX
         </h2>
-        <p className="mt-2 text-center font-jamjuree text-[15px] font-normal leading-relaxed text-white md:text-[18px]">
-          Aprenda com quem transforma decisões em resultados
-        </p>
 
         <div className="mt-10">
           <Swiper
@@ -79,9 +79,6 @@ const SpeakersSection = () => {
           </Swiper>
         </div>
 
-        <p className="mx-auto mt-10 inline-flex rounded-full border border-[#F5C02B]/45 bg-[#1E1A12] px-5 py-2 text-center font-jamjuree text-[19px] font-extrabold leading-relaxed tracking-[0.02em] text-white md:text-[26px]">
-          40 palestrantes confirmados para a edição 2026
-        </p>
       </div>
     </div>
   );
