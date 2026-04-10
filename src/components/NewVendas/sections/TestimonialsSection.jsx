@@ -4,12 +4,12 @@ const MotionArticle = motion.article;
 
 const TestimonialsSection = ({ items }) => {
   return (
-    <div className="border-t border-[#D9DEE3] bg-[#F0F2F5] py-16 md:py-20">
+    <div className="border-t border-[#2A2419] bg-[#0F0E0A] py-16 md:py-20">
       <div className="mx-auto max-w-6xl px-4">
-        <h2 className="text-center font-anton text-[30px] uppercase leading-[1.12] text-[#111B21] md:text-[52px] md:leading-[1.05]">
+        <h2 className="text-center font-anton text-[30px] uppercase leading-[1.12] text-white md:text-[52px] md:leading-[1.05]">
           O DSX mudou o jogo para quem participou
         </h2>
-        <p className="mt-2 text-center text-[15px] text-[#54656F] md:text-[20px]">
+        <p className="mt-2 text-center text-[15px] text-[#A79B83] md:text-[20px]">
           Depoimentos reais da edição 2025
         </p>
 
@@ -36,7 +36,7 @@ const TestimonialsSection = ({ items }) => {
                     ease: [0.22, 1, 0.36, 1],
                     delay: index * 0.06,
                   }}
-                  className={`relative w-full max-w-[92%] border border-[#6B5C33]/75 bg-[#1E1A12] p-5 shadow-[inset_0_0_0_1px_rgba(201,168,76,0.08)] md:max-w-[78%] md:p-6 ${
+                  className={`relative w-full max-w-[92%] border border-[#BCC5CC] bg-[#DDE3E8] p-5 shadow-[inset_0_0_0_1px_rgba(17,27,33,0.05)] md:max-w-[78%] md:p-6 ${
                     bubbleOnRight ? "rounded-[18px] rounded-br-[8px]" : "rounded-[18px] rounded-bl-[8px]"
                   }`}
                 >
@@ -44,12 +44,12 @@ const TestimonialsSection = ({ items }) => {
                     <>
                       <span
                         aria-hidden="true"
-                        className="pointer-events-none absolute bottom-5 -right-[11px] h-5 w-3 bg-[#6B5C33]"
+                        className="pointer-events-none absolute bottom-5 -right-[11px] h-5 w-3 bg-[#BCC5CC]"
                         style={{ clipPath: "polygon(0 0, 100% 50%, 0 100%)" }}
                       />
                       <span
                         aria-hidden="true"
-                        className="pointer-events-none absolute bottom-5 -right-[9px] h-5 w-3 bg-[#1E1A12]"
+                        className="pointer-events-none absolute bottom-5 -right-[9px] h-5 w-3 bg-[#DDE3E8]"
                         style={{ clipPath: "polygon(0 0, 100% 50%, 0 100%)" }}
                       />
                     </>
@@ -57,22 +57,22 @@ const TestimonialsSection = ({ items }) => {
                     <>
                       <span
                         aria-hidden="true"
-                        className="pointer-events-none absolute bottom-5 -left-[11px] h-5 w-3 bg-[#6B5C33]"
+                        className="pointer-events-none absolute bottom-5 -left-[11px] h-5 w-3 bg-[#BCC5CC]"
                         style={{ clipPath: "polygon(100% 0, 0 50%, 100% 100%)" }}
                       />
                       <span
                         aria-hidden="true"
-                        className="pointer-events-none absolute bottom-5 -left-[9px] h-5 w-3 bg-[#1E1A12]"
+                        className="pointer-events-none absolute bottom-5 -left-[9px] h-5 w-3 bg-[#DDE3E8]"
                         style={{ clipPath: "polygon(100% 0, 0 50%, 100% 100%)" }}
                       />
                     </>
                   )}
 
-                  <span className="inline-flex rounded-md bg-[#2A2419] px-3 py-1 text-[11px] font-semibold text-[#EADCB0] md:text-[12px]">
+                  <span className="inline-flex rounded-md bg-[#CAD3DA] px-3 py-1 text-[11px] font-semibold text-[#33424C] md:text-[12px]">
                     {item.tag}
                   </span>
-                  <p className="mt-4 text-[16px] leading-relaxed text-[#DDD5C2] md:text-[20px]">{item.quote}</p>
-                  <p className="mt-4 text-[14px] font-semibold text-white md:text-[18px]">{item.author}</p>
+                  <p className="mt-4 text-[16px] leading-relaxed text-[#111B21] md:text-[20px]">{item.quote}</p>
+                  <p className="mt-4 text-[14px] font-semibold text-[#0B141A] md:text-[18px]">{item.author}</p>
                 </MotionArticle>
               </div>
             );
