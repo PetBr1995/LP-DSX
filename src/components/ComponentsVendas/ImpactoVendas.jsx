@@ -60,16 +60,16 @@ const ImpactoVendas = () => {
       after:absolute after:left-0 after:bottom-0 after:w-50 after:h-50 after:bg-no-repeat after:bg-center after:bg-cover after:bg-[url(/vector-30.svg)]
     "
     >
-      <h2 className="relative z-10 font-anton uppercase text-4xl sm:text-6xl text-white text-center">
+      <h2 className="relative z-10 mx-auto max-w-4xl px-4 text-center font-anton text-4xl uppercase leading-[1.08] text-white sm:text-6xl">
         O jogo muda quando você entra no ambiente certo
       </h2>
 
-      <p className="relative z-10 text-white text-center uppercase mt-3 opacity-80">
+      <p className="relative z-10 mx-auto mt-4 max-w-3xl px-4 text-center font-jamjuree text-[15px] font-normal leading-relaxed tracking-[0.04em] text-[#BFB39A] uppercase md:text-[17px]">
         Confira como a 1ª edição impactou no mercado da Região Norte.
       </p>
 
       {/* GRID */}
-      <div className="relative z-10 mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-7xl mx-auto px-4">
+      <div className="relative z-10 mx-auto mt-10 grid max-w-7xl grid-cols-1 gap-8 px-4 sm:grid-cols-2 md:mt-12 md:grid-cols-3">
         {videos.map((item, index) => (
           <button
             key={index}
@@ -105,7 +105,7 @@ const ImpactoVendas = () => {
 
               {/* Texto */}
               <div className="absolute bottom-4 left-4">
-                <p className="text-white uppercase font-bold tracking-wider">
+                <p className="text-sm font-bold uppercase tracking-[0.12em] text-white sm:text-base">
                   {item.titulo}
                 </p>
               </div>

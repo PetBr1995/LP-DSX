@@ -1,9 +1,9 @@
 import { Suspense, lazy, useEffect, useRef, useState } from "react";
+import ImpactoVendas from "../ComponentsVendas/ImpactoVendas";
 import {
   audienceProfiles,
   faqItems,
   painPoints,
-  testimonials,
   tracks,
 } from "./newVendasData";
 import {
@@ -12,7 +12,6 @@ import {
   FooterSection,
   PainPointsSection,
   PassaportesSection,
-  TestimonialsSection,
   TracksSection,
 } from "./sections";
 
@@ -70,8 +69,6 @@ const NewVendasContent = () => {
 
   return (
     <section className="border-t border-[#2A2419] bg-black pb-10 pt-8 text-white md:pb-14 md:pt-12">
-      <PainPointsSection items={painPoints} />
-      <TracksSection items={tracks} />
       <div ref={speakersTriggerRef}>
         {shouldLoadSpeakers ? (
           <Suspense
@@ -85,7 +82,9 @@ const NewVendasContent = () => {
           <div className="border-t border-[#2A2419] bg-black py-16 md:py-20" />
         )}
       </div>
-      <TestimonialsSection items={testimonials} />
+      <PainPointsSection items={painPoints} />
+      <TracksSection items={tracks} />
+      <ImpactoVendas />
       <AudienceSection items={audienceProfiles} />
 
       <PassaportesSection isMobile={isMobile} onBuyPassaporte={handleBuyPassaporte} />

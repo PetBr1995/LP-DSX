@@ -9,7 +9,7 @@ const TestimonialsSection = ({ items }) => {
         <h2 className="text-center font-anton text-[30px] uppercase leading-[1.12] text-white md:text-[52px] md:leading-[1.05]">
           O DSX mudou o jogo para quem participou
         </h2>
-        <p className="mt-2 text-center text-[15px] text-[#A79B83] md:text-[20px]">
+        <p className="mt-2 text-center text-[15px] text-white md:text-[20px]">
           Depoimentos reais da edição 2025
         </p>
 

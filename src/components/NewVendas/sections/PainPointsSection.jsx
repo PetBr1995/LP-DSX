@@ -40,7 +40,7 @@ const PainPointsSection = ({ items }) => {
         {items.map((item, index) => (
           <div
             key={item}
-            className="painpoint-card rounded-2xl border-l-2 border-red-600 bg-[#1E1A12] px-5 py-4 text-[14px] text-[#D8D2C3] shadow-[inset_0_0_0_1px_rgba(201,168,76,0.08)] md:text-[17px]"
+            className="painpoint-card rounded-2xl border-l-2 border-red-600 bg-[#1E1A12] px-5 py-4 font-jamjuree text-[15px] font-normal leading-relaxed text-white shadow-[inset_0_0_0_1px_rgba(201,168,76,0.08)] md:text-[17px]"
             style={{ "--enter-delay": `${index * 90}ms` }}
           >
             <span className="mr-2 inline-flex align-middle">

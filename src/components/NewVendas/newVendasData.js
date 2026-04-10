@@ -95,24 +95,34 @@ export const testimonials = [
 
 export const audienceProfiles = [
   {
+    icon: "/person-green.svg",
     title: "Empresário",
-    description: "Que precisa destravar o crescimento com estratégia e conexões certas.",
+    description:
+      "Empresário que deseja destravar o crescimento e alcançar o próximo nível da sua empresa em 2026.",
   },
   {
-    title: "Gestor e líder",
-    description: "Que toma decisões e precisa de visão de mercado atualizada.",
+    icon: "/medal.svg",
+    title: "Gestor ou líder",
+    description:
+      "Gestor ou líder que toma decisões importantes, buscando mais clareza, método e leitura de mercado.",
   },
   {
+    icon: "/lamp.svg",
     title: "Profissional em ascensão",
-    description: "Que busca networking qualificado e referências de alto nível.",
+    description:
+      "Profissional em ascensão que entende o valor de networking qualificado e referências de alto nível.",
   },
   {
-    title: "Time de marketing e vendas",
-    description: "Que precisa focar em performance, resultados e novas ferramentas.",
+    icon: "/people.svg",
+    title: "Times de marketing e vendas",
+    description:
+      "Times de marketing e vendas que precisam sair do operacional e focar em performance e resultado.",
   },
   {
-    title: "Estudante e universitário",
-    description: "Que quer acelerar a entrada no mercado com as conexões certas.",
+    icon: "/studant.svg",
+    title: "Estudante",
+    description:
+      "Estudante que quer acelerar repertório, visão prática e conexão com o mercado.",
   },
 ];
 

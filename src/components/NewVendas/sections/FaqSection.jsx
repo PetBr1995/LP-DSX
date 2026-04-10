@@ -38,7 +38,10 @@ const FaqSection = ({ items, openFaqIndex, onToggleFaq }) => {
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <p id={answerId} className="pr-8 text-[15px] text-[#C2B9A3] md:text-[18px]">
+                    <p
+                      id={answerId}
+                      className="pr-8 font-jamjuree text-[15px] font-normal leading-relaxed text-white md:text-[17px]"
+                    >
                       {item.resposta}
                     </p>
                     {item.link ? (

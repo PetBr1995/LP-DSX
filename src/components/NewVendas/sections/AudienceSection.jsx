@@ -1,22 +1,35 @@
 const AudienceSection = ({ items }) => {
+  const getDescriptionWithoutLeadingTitle = (title, description) => {
+    const normalizedTitle = title.toLowerCase();
+    const normalizedDescription = description.toLowerCase();
+
+    if (!normalizedDescription.startsWith(normalizedTitle)) return description;
+
+    return description.slice(title.length).trim().replace(/^[,.-]\s*/, "");
+  };
+
   return (
     <div className="border-t border-[#2A2419] bg-[#0F0E0A] py-16 md:py-20">
       <div className="mx-auto max-w-6xl px-4">
         <h2 className="text-center font-anton text-[30px] uppercase leading-[1.12] text-white md:text-[52px] md:leading-[1.03]">
-          O DSX é para você que é...
+          O DSX é para você...
         </h2>
 
         <div className="mx-auto mt-10 grid max-w-6xl grid-cols-1 gap-4 md:grid-cols-3">
           {items.map((profile) => (
             <article
-              key={profile.title}
+              key={profile.description}
               className="rounded-2xl border border-[#6B5C33] bg-[#1E1A12] p-5 shadow-[inset_0_0_0_1px_rgba(201,168,76,0.08)] md:p-6"
             >
-              <h3 className="text-[22px] font-bold leading-[1.18] text-[#F5C02B] md:text-[30px] md:leading-tight">
-                {profile.title}
-              </h3>
-              <p className="mt-3 text-[16px] leading-relaxed text-[#C2B9A3] md:text-[20px]">
-                {profile.description}
+              <img
+                src={profile.icon}
+                alt=""
+                aria-hidden="true"
+                className="h-12 w-12 brightness-0 invert md:h-14 md:w-14"
+              />
+              <p className="mt-3 font-jamjuree text-[15px] font-normal leading-relaxed text-white md:text-[18px]">
+                <span className="font-bold text-[#F5C02B]">{profile.title}</span>{" "}
+                {getDescriptionWithoutLeadingTitle(profile.title, profile.description)}
               </p>
             </article>
           ))}

@@ -193,7 +193,7 @@ const NewVendas = () => {
             font="700"
             size="lg"
           />
-          <span className="mt-1 block text-[12px] font-semibold normal-case text-[#F5C02B] md:text-[16px]">
+          <span className="mt-1 inline-block text-2xl font-black uppercase text-[#F5C02B]">
             Vagas limitadas
           </span>
         </div>

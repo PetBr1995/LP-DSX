@@ -37,7 +37,7 @@ const TracksSection = ({ items }) => {
           6 trilhas de conteúdo para <span className="text-[#F5C02B]">resultados reais</span>
         </h2>
 
-        <p className="mx-auto mt-3 max-w-4xl text-center text-[15px] text-[#A79B83] md:text-[20px]">
+        <p className="mx-auto mt-3 max-w-4xl text-center font-jamjuree text-[15px] font-normal leading-relaxed text-white md:text-[18px]">
           Cada trilha foi desenhada para gerar ações práticas no dia seguinte do evento.
         </p>
 
@@ -92,7 +92,7 @@ const TracksSection = ({ items }) => {
                 </h3>
 
                 {/* Descrição */}
-                <p className="mt-2 text-[14px] text-[#B7AA8A] md:text-[16px]">
+                <p className="mt-2 font-jamjuree text-[15px] font-normal leading-relaxed text-white md:text-[17px]">
                   {track.description}
                 </p>
               </motion.article>

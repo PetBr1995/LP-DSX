@@ -21,7 +21,7 @@ const SpeakersSection = () => {
         <h2 className="text-center font-anton text-[30px] uppercase leading-[1.12] text-white md:text-[50px] md:leading-[1.05]">
           Os principais nomes do mercado no palco do DSX
         </h2>
-        <p className="mt-2 text-center text-[15px] text-[#A79B83] md:text-[20px]">
+        <p className="mt-2 text-center font-jamjuree text-[15px] font-normal leading-relaxed text-white md:text-[18px]">
           Aprenda com quem transforma decisões em resultados
         </p>
 
@@ -69,7 +69,7 @@ const SpeakersSection = () => {
                     <h3 className="text-[18px] font-bold leading-[1.2] text-white md:text-[22px] md:leading-tight">
                       {speaker.nome}
                     </h3>
-                    <p className="mt-2 min-h-[44px] text-[13px] leading-relaxed text-[#B7AA8A] md:text-[15px]">
+                    <p className="mt-2 min-h-[44px] font-jamjuree text-[15px] font-normal leading-relaxed text-white md:text-[16px]">
                       {speaker.desc}
                     </p>
                   </div>
@@ -79,7 +79,7 @@ const SpeakersSection = () => {
           </Swiper>
         </div>
 
-        <p className="mt-10 text-center text-[14px] text-[#A79B83] md:text-[18px]">
+        <p className="mt-10 text-center font-jamjuree text-[15px] font-normal leading-relaxed text-white md:text-[17px]">
           40 palestrantes confirmados para a edição 2026
         </p>
       </div>
