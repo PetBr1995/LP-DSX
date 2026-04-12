@@ -147,7 +147,7 @@ export const faqItems = [
   {
     pergunta: "Posso comprar agora e trocar o nome do participante depois?",
     resposta:
-      "Sim. A titularidade do passaporte pode ser alterada até [Inserir Prazo/Data], entrando em contato com o nosso suporte.",
+      "Sim. A titularidade do passaporte pode ser alterada, entrando em contato com o nosso suporte.",
   },
   {
     pergunta: "Quais são as formas de pagamento?",
@@ -165,5 +165,3 @@ export const faqItems = [
       "O VIP é um acelerador de tempo. Além de sentar nas primeiras fileiras, você tem acesso ao Lounge VIP: um ambiente reservado, ideal para sentar, tomar um café e negociar olho no olho com os maiores decisores e palestrantes do evento.",
   },
 ];
-
-

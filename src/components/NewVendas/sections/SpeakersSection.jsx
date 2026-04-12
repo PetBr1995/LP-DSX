@@ -19,7 +19,7 @@ const SpeakersSection = () => {
     <div className="bg-black py-16 md:py-20">
       <div className="mx-auto max-w-6xl px-4">
         <h1 className="text-center font-anton text-[26px] uppercase leading-[1.12] text-white md:text-[42px] md:leading-[1.05]">
-          LISTA COMPLETA DE PALESTRANTES CONFIRMADOS
+          PRIMEIROS PALESTRANTES CONFIRMADOS
         </h1>
 
         <div className="mt-10">

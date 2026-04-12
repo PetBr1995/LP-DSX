@@ -80,12 +80,12 @@ const ImpactoVendas = () => {
             className="group relative rounded-2xl overflow-hidden focus:outline-none"
           >
             {/* CARD com altura padronizada para casar com Speakers */}
-            <div className="relative h-[260px] bg-black">
+            <div className="relative h-[260px] bg-black ">
               {item.thumb && (
                 <img
                   src={item.thumb}
                   alt={item.titulo}
-                  className="absolute inset-0 w-full h-full object-cover object-center"
+                  className="absolute inset-0 w-full h-full object-contain object-center"
                   loading="lazy"
                   draggable="false"
                 />

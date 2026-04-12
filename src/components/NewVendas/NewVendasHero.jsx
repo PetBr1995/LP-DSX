@@ -1,6 +1,7 @@
 ﻿import { useEffect, useState } from "react";
 import NewVendasHeaderMask from "./NewVendasHeaderMask";
 import { Calendar, MapPin } from "lucide-react";
+
 const metrics = [
   {
     target: 2000,
@@ -112,7 +113,7 @@ const NewVendasHero = () => {
               <img
                 src="/logo-dsx-loading.svg"
                 alt="DSX"
-                className="block h-[3em] w-auto object-contain"
+                className="block h-[1.12em] w-auto object-contain"
                 style={{ clipPath: "inset(0 1px 0 0)" }}
                 loading="eager"
                 decoding="async"
@@ -131,23 +132,38 @@ const NewVendasHero = () => {
               do Norte
             </span>
           </h1>
-          <div className="text-2xl">
-            <p>Dois dias de conteúdo estratégico e conexões de alto nível.</p>
+          <div className="mx-auto max-w-4xl">
+            <p className="text-center text-[clamp(1.15rem,4.8vw,2.6rem)] leading-[1.2] text-white">
+              <span className="block">Dois dias de conteúdo estratégico</span>
+              <span className="block">e conexões de alto nível.</span>
+            </p>
           </div>
-          <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
-            <div className="flex items-center justify-center gap-2 text-2xl">
-              <Calendar color="#F5C02B" />
+          <div className="mx-auto flex max-w-4xl flex-col items-center gap-2 text-center">
+            <div className="flex items-center justify-center gap-3 text-[clamp(1.1rem,4.5vw,2.1rem)]">
+              <span className="grid h-7 w-7 shrink-0 place-items-center">
+                <Calendar
+                  className="h-6 w-6 text-[#F5C02B]"
+                  strokeWidth={2.2}
+                />
+              </span>
               <p>23 e 24 de Julho.</p>
             </div>
-            <div className="flex items-center justify-center gap-2 text-2xl">
-              <MapPin color="#F5C02B" />
-              <p>Centro de Convenções Vasco Vasques - Manaus/AM</p>
+            <div className="flex items-start justify-center gap-3 text-[clamp(1.1rem,4.5vw,2.1rem)]">
+              <span className="mt-1 grid h-7 w-7 shrink-0 place-items-center">
+                <MapPin className="h-6 w-6 text-[#F5C02B]" strokeWidth={2.2} />
+              </span>
+              <p>
+                <span className="block">
+                  Centro de Convenções Vasco Vasques
+                </span>
+                <span className="block">Manaus/AM</span>
+              </p>
             </div>
           </div>
 
           <div id="newvendas-primary-cta" className="flex justify-center">
             <NewVendasHeaderMask
-              titulo="Garantir meu passaporte"
+              titulo="Comprar passaporte"
               link="#passaportes"
               textColor="#FFFFFF"
               backgroundColor="#1E1A12"
@@ -155,7 +171,6 @@ const NewVendasHero = () => {
               size="lg"
             />
           </div>
-          {/*Inicio da segunda dobra */}
 
           <div>
             <h3 className="font-anton text-[clamp(1.1rem,2.8vw,2rem)] uppercase tracking-[0.03em]">
@@ -165,14 +180,11 @@ const NewVendasHero = () => {
 
           <div className="mx-auto flex max-w-4xl flex-wrap justify-center gap-x-3 gap-y-5 px-2 py-2">
             {metrics.map((item, index) => (
-              <div
-                key={item.label}
-                className="min-w-0 w-[47%] text-center md:w-[23%]"
-              >
-                <p className="font-jamjuree font-extrabold text-[36px] leading-none tracking-normal text-white sm:text-[42px] md:text-[64px]">
+              <div key={item.label} className="min-w-0 w-[30%] text-center">
+                <p className="font-jamjuree font-extrabold text-[28px] leading-none tracking-normal text-white sm:text-[36px] md:text-[64px]">
                   {formatMetricValue(animatedValues[index] ?? 0, item)}
                 </p>
-                <p className="mt-1 font-jamjuree text-[13px] font-bold uppercase tracking-[0.02em] text-white md:text-[19px]">
+                <p className="mt-1 font-jamjuree text-[11px] font-bold uppercase tracking-[0.02em] text-white md:text-[19px]">
                   {item.label}
                 </p>
               </div>
@@ -181,7 +193,7 @@ const NewVendasHero = () => {
 
           <section className="mx-auto mt-8 w-full max-w-6xl">
             <h3 className="text-center font-anton text-[clamp(1.3rem,4.2vw,2.8rem)] uppercase leading-[1.08] tracking-[0.03em] text-[#F5C02B]">
-              Conheça os palestrantes do DSX 2026
+              Conheça os primeiros palestrantes confirmados do DSX
             </h3>
 
             <div className="mx-auto mt-6 grid w-full max-w-6xl grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">

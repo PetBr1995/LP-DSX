@@ -84,12 +84,16 @@ const SquishyPlanCard = ({ card, onBuyPassaporte }) => (
 
     <div className="relative z-10 transform-gpu [transform-style:preserve-3d] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-2px,28px)]">
       {card.badge ? (
-        <p className="inline-block rounded-full border border-[#F5D247]/45 bg-black/35 px-3 py-1 text-xs font-black uppercase tracking-[0.04em] text-[#F5D247]">
+        <p className="block text-center w-full rounded-full border border-red-600/50 bg-red-900/35 px-3 py-1.5 text-sm font-black uppercase tracking-[0.06em] text-red-500">
           {card.badge}
         </p>
-      ) : null}
+      ) : (
+        <div className="h-[30px]" />
+      )}
 
-      <p className="mt-3 text-sm font-semibold uppercase text-white/90">PASSAPORTE</p>
+      <p className="mt-3 text-sm font-semibold uppercase text-white/90">
+        PASSAPORTE
+      </p>
       <h3 className="mt-2 origin-left text-4xl font-black uppercase leading-[0.95] text-white transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-3px,46px)_scale(1.05)] lg:text-5xl">
         {card.nome}
       </h3>
@@ -108,11 +112,12 @@ const SquishyPlanCard = ({ card, onBuyPassaporte }) => (
         </ul>
       </div>
 
-      <p className="mt-4 origin-left bg-gradient-to-r from-[#F5D247] to-[#E7A040] bg-clip-text text-4xl font-black leading-[0.9] text-transparent transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-4px,58px)_scale(1.08)] lg:text-5xl">
-        R$ {card.price}
+      <p className="mt-4 origin-left bg-gradient-to-r from-[#F5D247] to-[#E7A040] bg-clip-text text-2xl font-black leading-[1] text-transparent whitespace-nowrap transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-4px,58px)_scale(1.08)] lg:text-3xl">
+        {card.installment}
       </p>
-      <p className="mt-2 text-sm font-semibold uppercase text-white/90">{card.installment}</p>
-      <p className="text-sm font-semibold uppercase text-white/90">{card.cash}</p>
+      <p className="mt-2 text-sm font-semibold uppercase text-white/90">
+        {card.cash}
+      </p>
 
       <button
         data-cta="sympla"
