@@ -99,6 +99,12 @@ export const InfoNovosPalestrantes = [
     badge: "Nacional",
   },
   {
+    nome: "Giullya Becker",
+    desc: "Criadora do Método dos Conteúdos Magnéticos",
+    img: "/novas-palestrantes/GIULLYA-BECKER.png",
+    badge: "Nacional",
+  },
+  {
     nome: "",
     desc: "",
     img: "/SILHUETA-1.png",

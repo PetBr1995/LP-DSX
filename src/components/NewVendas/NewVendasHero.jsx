@@ -113,7 +113,7 @@ const NewVendasHero = () => {
               <img
                 src="/logo-dsx-horizontal-2.svg"
                 alt="DSX"
-                className="block h-[1.12em] w-auto object-contain"
+                className="block h-[3em] w-auto object-contain"
                 style={{ clipPath: "inset(0 1px 0 0)" }}
                 loading="eager"
                 decoding="async"
