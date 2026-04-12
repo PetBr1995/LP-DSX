@@ -111,7 +111,7 @@ const NewVendasHero = () => {
             <span>O</span>
             <span className="inline-flex items-center">
               <img
-                src="/logo-dsx-loading.svg"
+                src="/logo-dsx-horizontal-2.svg"
                 alt="DSX"
                 className="block h-[1.12em] w-auto object-contain"
                 style={{ clipPath: "inset(0 1px 0 0)" }}
