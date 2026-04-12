@@ -107,20 +107,6 @@ const NewVendasHero = () => {
       />
       <div className="relative z-10 mx-auto max-w-6xl px-4 pb-10 pt-10 md:pb-12 md:pt-14">
         <div className="text-center space-y-5 md:space-y-6">
-          <h2 className="mx-auto flex flex-wrap items-center justify-center gap-2 font-anton text-[clamp(1.1rem,3.4vw,2rem)] uppercase leading-[1.1] tracking-[0.03em] text-white">
-            <span>O</span>
-            <span className="inline-flex items-center">
-              <img
-                src="/logo-dsx-horizontal-2.svg"
-                alt="DSX"
-                className="block h-[3em] w-auto object-contain"
-                style={{ clipPath: "inset(0 1px 0 0)" }}
-                loading="eager"
-                decoding="async"
-              />
-            </span>
-            <span>está de volta</span>
-          </h2>
           <h1 className="mx-auto max-w-6xl font-anton text-[clamp(1rem,5vw,4.8rem)] uppercase leading-[1.08] tracking-[0.012em] text-[#F5C02B] md:leading-[1.12]">
             <span className="block whitespace-nowrap">
               O maior evento de negócios,
@@ -132,6 +118,20 @@ const NewVendasHero = () => {
               do Norte
             </span>
           </h1>
+          <h2 className="mx-auto flex flex-wrap items-center justify-center gap-2 font-anton text-[clamp(1.1rem,3.4vw,2rem)] uppercase leading-[1.1] tracking-[0.03em] text-white">
+            <span>O</span>
+            <span className="inline-flex items-center">
+              <img
+                src="/logo-dsx-horizontal-2.svg"
+                alt="DSX"
+                className="block h-[3.5em] w-auto object-contain"
+                style={{ clipPath: "inset(0 1px 0 0)" }}
+                loading="eager"
+                decoding="async"
+              />
+            </span>
+            <span>está de volta</span>
+          </h2>
           <div className="mx-auto max-w-4xl">
             <p className="text-center text-[clamp(1.15rem,4.8vw,2.6rem)] leading-[1.2] text-white">
               <span className="block">Dois dias de conteúdo estratégico</span>
