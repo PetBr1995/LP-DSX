@@ -1,4 +1,4 @@
-const SlideFaixa = () => {
+﻿const SlideFaixa = () => {
     return (
       <div className="faixa-wrapper bg-[#F5A205] py-4">
         <div className="relative faixa-track">

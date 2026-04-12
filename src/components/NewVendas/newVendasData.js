@@ -1,41 +1,53 @@
-export const painPoints = [
-  "Seu concorrente está crescendo e você não entende como.",
-  "Investe em marketing, mas não vê retorno previsível.",
-  "Sua empresa depende 100% de indicação e boca a boca.",
-  "Quer usar IA e novas ferramentas, mas não sabe por onde começar.",
-  "Sente que falta estratégia, direção e as conexões certas.",
+﻿export const painPoints = [
+  "Seu concorrente estÃ¡ crescendo e vocÃª nÃ£o entende como.",
+  "Investe em marketing, mas nÃ£o vÃª retorno previsÃ­vel.",
+  "Sua empresa depende 100% de indicaÃ§Ã£o e boca a boca.",
+  "Quer usar IA e novas ferramentas, mas nÃ£o sabe por onde comeÃ§ar.",
+  "Sente que falta estratÃ©gia, direÃ§Ã£o e as conexÃµes certas.",
 ];
 
 export const tracks = [
   {
-    icon: "💰",
-    title: "Vendas",
-    description: "Atrair, negociar e fechar contratos maiores.",
-  },
-  {
-    icon: "📊",
-    title: "Marketing & Performance",
-    description: "Tráfego pago, funis e automações.",
-  },
-  {
     icon: "🎯",
-    title: "Posicionamento & Branding",
-    description: "Ser referência e destacar sua marca.",
+    title: "Vendas",
+    description:
+      "Descubra como atrair clientes de alto valor, negociar com previsibilidade e fechar contratos muito maiores para construir um modelo de receita sólida.",
+  },
+  {
+    icon: "🌟",
+    title: "Posicionamento e Branding",
+    description:
+      "Construa uma autoridade inquestionável. Saiba como se tornar a referência máxima na sua área e destacar a sua marca em um mercado saturado.",
+  },
+  {
+    icon: "📈",
+    title: "Marketing & Performance",
+    description:
+      "Domine o jogo da tração. Aprenda a estruturar tráfego pago, funis de venda, criativos de alta conversão e estratégias avançadas de automação.",
+  },
+  {
+    icon: "⚙️",
+    title: "Ferramentas de Crescimento",
+    description:
+      "Chega de tentar adivinhar o que funciona. Aprenda direto com especialistas as tecnologias e táticas modernas que realmente geram escala.",
   },
   {
     icon: "🤖",
     title: "Inteligência Artificial",
-    description: "Automatizar e escalar com IA.",
+    description:
+      "Transforme a IA na sua maior vantagem competitiva. Otimize a sua produção, eleve a produtividade do time e conecte automações com decisões baseadas 100% em dados.",
   },
   {
-    icon: "📈",
-    title: "Ferramentas de Crescimento",
-    description: "Estratégias e tecnologias de escala.",
-  },
-  {
-    icon: "🏢",
+    icon: "📊",
     title: "Gestão Comercial",
-    description: "Processos, CRM e operação.",
+    description:
+      "Pare de perder vendas por desorganização. Otimize cada etapa do seu processo comercial, use o seu CRM de forma inteligente e prepare a sua operação para escalar.",
+  },
+  {
+    icon: "🤝",
+    title: "Networking Cirúrgico",
+    description:
+      "A teoria aplicada na prática. Use tudo o que você aprendeu nos palcos para negociar direto com os mais de 2.000 decisores na nossa gigante Feira de Negócios.",
   },
 ];
 
@@ -43,30 +55,30 @@ export const featuredSpeakers = [
   {
     initials: "FM",
     name: "Fernando Miranda",
-    role: "CEO de Finanças",
+    role: "CEO de FinanÃ§as",
     color: "bg-[#F06400]",
   },
   {
     initials: "NC",
-    name: "Nicolas Charão",
+    name: "Nicolas CharÃ£o",
     role: "Founder Vaga VTX",
     color: "bg-[#1E63B8]",
   },
   {
     initials: "RR",
     name: "Roberto Reis",
-    role: "Relações Governamentais",
+    role: "RelaÃ§Ãµes Governamentais",
     color: "bg-[#3C7D2E]",
   },
   {
     initials: "JK",
-    name: "João Kepler",
+    name: "JoÃ£o Kepler",
     role: "Investidor & Mentor",
     color: "bg-[#6B23A8]",
   },
   {
     initials: "FS",
-    name: "Flávia Sassunkai",
+    name: "FlÃ¡via Sassunkai",
     role: "Estrategista Digital",
     color: "bg-[#D52A2A]",
   },
@@ -77,18 +89,18 @@ export const testimonials = [
     tag: "Palestrante",
     quote:
       '"Vozes que subiram ao palco para compartilhar visão e cases de sucesso."',
-    author: "João Kepler",
+    author: "JoÃ£o Kepler",
   },
   {
     tag: "Expositor",
     quote:
-      '"Marcas que estiveram na linha de frente, gerando conexões, oportunidades e negócios."',
-    author: "Augusto César",
+      '"Marcas que estiveram na linha de frente, gerando conexÃµes, oportunidades e negÃ³cios."',
+    author: "Augusto CÃ©sar",
   },
   {
     tag: "Participante",
     quote:
-      '"Empresários e profissionais que viveram o DSX 2025 e saíram com uma nova direção."',
+      '"Empresários e profissionais que viveram o DSX 2025 e saÃ­ram com uma nova direÃ§Ã£o."',
     author: "Fernanda",
   },
 ];
@@ -98,59 +110,60 @@ export const audienceProfiles = [
     icon: "/person-green.svg",
     title: "Empresário",
     description:
-      "Empresário com visão de crescimento, pronto para destravar o próximo nível da sua empresa.",
+      "Para quem quer expandir e está em busca de novos negócios. Grandes negócios nascem no ambiente certo. No DSX, você estará em um ambiente exclusivo para empresários com visão de crescimento e ainda terá a oportunidade de ter contato direto com palestrantes de referência nacional. As conexões que você faz aqui se transformam em parcerias, oportunidades e novos negócios, dentro e fora do evento.",
   },
   {
     icon: "/medal.svg",
-    title: "Gestor ou líder",
+    title: "Gestor e Líder",
     description:
-      "Gestor ou líder decisivo, em busca de mais clareza, método e leitura de mercado para tomar as melhores decisões.",
+      "Para quem precisa de clareza para decidir com segurança. Tomar boas decisões exige leitura de mercado, contexto e referência. O DSX entrega conhecimento aplicado e visão de cenário para você voltar com mais clareza sobre o que priorizar e como agir.",
   },
   {
     icon: "/lamp.svg",
-    title: "Profissional em ascensão",
+    title: "Profissional em Ascensão",
     description:
-      "Profissional em ascensão, consciente do poder do networking qualificado e das referências de alto nível.",
+      "Para quem entende que referência de alto nível acelera trajetória. Os palestrantes e os empresários que você acompanha de longe nas redes sociais estarão aqui, no mesmo ambiente. Essa proximidade com quem já chegou onde você quer chegar é rara, e o DSX proporciona isso.",
   },
   {
     icon: "/people.svg",
-    title: "Times de marketing e vendas",
+    title: "Times de Marketing e Vendas",
     description:
-      "Times de marketing e vendas prontos para sair do operacional e focar em performance e resultado.",
+      "Para o empresário que quer um time mais preparado e orientado a resultado. Trazer sua equipe para o DSX é um investimento direto em performance. Eles saem do operacional por um momento, absorvem estratégia real e voltam com repertório e qualificados para performar melhor e gerar mais resultado.",
   },
   {
     icon: "/studant.svg",
     title: "Estudante",
     description:
-      "Estudante acelerando repertório, visão prática e conexão com o mercado.",
+      "Para quem está construindo sua carreira e quer acelerar o aprendizado. O DSX concentra em um único evento o conhecimento que levaria anos para ser acessado de outra forma. Conteúdo de alto nível, aplicado e direto de quem está no mercado agora.",
   },
 ];
 
 export const faqItems = [
   {
-    pergunta: "Quando acontece o DSX 2026?",
+    pergunta: "O DSX é para o meu perfil de negócio?",
     resposta:
-      "O DSX 2026 acontece nos dias 23 e 24 de julho, no Centro de Convenções Vasco Vasques, em Manaus.",
+      "Se você é dono de empresa, líder de equipe, profissional autônomo ou executivo buscando crescimento escalável, previsibilidade de vendas e conexões de alto nível, o DSX é exatamente para você.",
   },
   {
-    pergunta: "Para quem é o DSX?",
+    pergunta: "Posso comprar agora e trocar o nome do participante depois?",
     resposta:
-      "Para empresários, gestores e líderes, profissionais em ascensão, times de marketing e vendas e estudantes/universitários que querem acelerar repertório, conexões e decisões com visão prática de mercado.",
+      "Sim. A titularidade do passaporte pode ser alterada até [Inserir Prazo/Data], entrando em contato com o nosso suporte.",
   },
   {
-    pergunta: "Já existe programação e palestrantes confirmados?",
+    pergunta: "Quais são as formas de pagamento?",
     resposta:
-      "A curadoria ainda está em construção, porém você pode conferir as presenças já confirmadas em nosso perfil oficial @dsx.summit. Para acompanhar os anúncios oficiais, entre no nosso Grupo VIP no WhatsApp:",
-    link: "https://chat.whatsapp.com/GXEsJXjFNBi1a3LLAiG90R",
+      "Você pode garantir o seu passaporte via PIX (com aprovação imediata) ou parcelar no cartão de crédito em até 12 vezes.",
   },
   {
-    pergunta: "Quais tipos de passaporte estarão disponíveis?",
+    pergunta: "A Feira de Negócios está inclusa em todos os passaportes?",
     resposta:
-      "Contamos com diferentes opções para perfis e objetivos, incluindo Standard, VIP, passaportes em grupo (10 e 5 pessoas), além de condições específicas para estudantes e PCD.",
+      "Sim. Tanto o passaporte Standard quanto o VIP dão acesso total à Feira de Negócios, onde estão os estandes e mais de 2.000 empresários.",
   },
   {
-    pergunta: "O evento emite certificado?",
+    pergunta: "Qual a diferença real do VIP?",
     resposta:
-      "Sim. O DSX 2026 contará com certificado de participação, com orientações de acesso e emissão informadas mais perto da data.",
+      "O VIP é um acelerador de tempo. Além de sentar nas primeiras fileiras, você tem acesso ao Lounge VIP: um ambiente reservado, ideal para sentar, tomar um café e negociar olho no olho com os maiores decisores e palestrantes do evento.",
   },
 ];
+
+

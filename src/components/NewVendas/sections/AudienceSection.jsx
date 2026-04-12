@@ -1,4 +1,4 @@
-const AudienceSection = ({ items }) => {
+﻿const AudienceSection = ({ items }) => {
   const getDescriptionWithoutLeadingTitle = (title, description) => {
     const normalizedTitle = title.toLowerCase();
     const normalizedDescription = description.toLowerCase();
@@ -9,10 +9,10 @@ const AudienceSection = ({ items }) => {
   };
 
   return (
-    <div className="border-t border-[#2A2419] bg-[#0F0E0A] py-16 md:py-20">
+    <div className="bg-black py-16 md:py-20">
       <div className="mx-auto max-w-6xl px-4">
         <h2 className="text-center font-anton text-[30px] uppercase leading-[1.12] text-white md:text-[52px] md:leading-[1.03]">
-          O DSX é para você...
+          Para quem é o DSX:
         </h2>
 
         <div className="mx-auto mt-10 grid max-w-6xl grid-cols-1 items-stretch gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -42,3 +42,4 @@ const AudienceSection = ({ items }) => {
 };
 
 export default AudienceSection;
+

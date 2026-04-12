@@ -16,14 +16,11 @@ const getOptimizedSources = (src = "") => {
 
 const SpeakersSection = () => {
   return (
-    <div className="border-t border-[#2A2419] bg-[#0F0E0A] py-16 md:py-20">
+    <div className="bg-black py-16 md:py-20">
       <div className="mx-auto max-w-6xl px-4">
         <h1 className="text-center font-anton text-[26px] uppercase leading-[1.12] text-white md:text-[42px] md:leading-[1.05]">
-          40 palestrantes confirmados para a edição 2026
+          LISTA COMPLETA DE PALESTRANTES CONFIRMADOS
         </h1>
-        <h2 className="mt-2 text-center font-jamjuree text-[18px] font-normal leading-relaxed text-white md:text-[22px]">
-          Os principais nomes do mercado no palco do DSX
-        </h2>
 
         <div className="mt-10">
           <Swiper
@@ -50,8 +47,14 @@ const SpeakersSection = () => {
                 <article className="group rounded-2xl border border-[#3A3222] bg-[#000000] p-3 shadow-[inset_0_0_0_1px_rgba(201,168,76,0.06)] transition duration-300 hover:border-[#C9A84C]/40">
                   <div className="relative h-[260px] overflow-hidden rounded-xl bg-[#000000]">
                     <picture>
-                      <source srcSet={getOptimizedSources(speaker.img).avif} type="image/avif" />
-                      <source srcSet={getOptimizedSources(speaker.img).webp} type="image/webp" />
+                      <source
+                        srcSet={getOptimizedSources(speaker.img).avif}
+                        type="image/avif"
+                      />
+                      <source
+                        srcSet={getOptimizedSources(speaker.img).webp}
+                        type="image/webp"
+                      />
                       <img
                         src={speaker.img}
                         alt={speaker.nome}
@@ -78,7 +81,6 @@ const SpeakersSection = () => {
             ))}
           </Swiper>
         </div>
-
       </div>
     </div>
   );

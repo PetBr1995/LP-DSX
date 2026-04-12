@@ -178,7 +178,7 @@ const NewVendas = () => {
       </div>
 
       <div
-        className={`fixed bottom-0 left-0 right-0 z-[130] border-t border-[#2F2717] bg-black px-4 py-3 transition-all duration-500 ease-out ${
+        className={`fixed bottom-0 left-0 right-0 z-[130] bg-black px-4 py-3 transition-all duration-500 ease-out ${
           showStickyCta
             ? "translate-y-0 opacity-100"
             : "pointer-events-none translate-y-6 opacity-0"

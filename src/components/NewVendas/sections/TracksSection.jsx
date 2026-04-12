@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+﻿import { motion } from "framer-motion";
 import {
   BadgeCheck,
   BrainCircuit,
@@ -25,20 +25,21 @@ const getTrackIcon = (title = "") => {
   if (normalized.includes("inteligencia artificial")) return BrainCircuit;
   if (normalized.includes("ferramentas") || normalized.includes("crescimento")) return Wrench;
   if (normalized.includes("gestao comercial")) return UserCog;
+  if (normalized.includes("networking")) return Handshake;
 
   return ShoppingBag;
 };
 
 const TracksSection = ({ items }) => {
   return (
-    <section className="border-t border-[#2A2419] bg-[#0F0E0A] py-16 md:py-20">
+    <section className="bg-black py-16 md:py-20">
       <div className="mx-auto max-w-6xl px-4">
         <h2 className="text-center font-anton text-[30px] uppercase leading-[1.12] text-white md:text-[52px] md:leading-[1.04]">
-          6 trilhas de conteúdo para <span className="text-[#F5C02B]">resultados reais</span>
+          O que você vai levar para a sua empresa?
         </h2>
 
         <p className="mx-auto mt-3 max-w-4xl text-center font-jamjuree text-[15px] font-normal leading-relaxed text-white md:text-[18px]">
-          Cada trilha foi desenhada para gerar ações práticas no dia seguinte do evento.
+          Trilhas práticas e aplicáveis para transformar estratégia em resultado.
         </p>
 
         <div className="mt-8 grid grid-cols-1 items-stretch gap-4 md:mt-10 md:grid-cols-2">
@@ -72,7 +73,7 @@ const TracksSection = ({ items }) => {
                 </div>
 
                 <div className="relative z-10 flex w-full items-center gap-4">
-                  {/* Ícone */}
+                  {/* Ãcone */}
                   <div className="grid h-15 w-15 shrink-0 place-items-center rounded-[12px] border border-[#4A3F2A] bg-[#272115]">
                     <Icon
                       className="h-[22px] w-[22px] text-[#E8DEC4] transition-colors duration-300 group-hover:text-[#F5C02B]"
@@ -81,12 +82,12 @@ const TracksSection = ({ items }) => {
                   </div>
 
                   <div>
-                    {/* Título */}
+                    {/* TÃ­tulo */}
                     <h3 className="text-[28px] font-bold leading-[1.16] text-white md:text-[36px] md:leading-tight">
                       {track.title}
                     </h3>
 
-                    {/* Descrição */}
+                    {/* DescriÃ§Ã£o */}
                     <p className="mt-2 font-jamjuree text-[15px] font-normal leading-relaxed text-white md:text-[17px]">
                       {track.description}
                     </p>
@@ -102,3 +103,4 @@ const TracksSection = ({ items }) => {
 };
 
 export default TracksSection;
+

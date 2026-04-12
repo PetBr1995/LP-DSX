@@ -1,11 +1,12 @@
-import { withHublaUtm } from "../../utils/hublaUtm";
+﻿import { withHublaUtm } from "../../utils/hublaUtm";
 
 const groupPassports = [
   {
     qtdPessoas: "5 pessoas",
     valor: "472,15",
+    installment: "12x de R$ 244,16",
+    cash: "ou R$ 472,15 à vista (valor por participante)",
     desconto: "5% OFF",
-    desc: "Ideal para times menores que querem alinhar visão e execução no DSX.",
     bgClass: "from-[#0B0B0B] via-[#1B1409] to-[#3A280D]",
     blobClass: "bg-[#F5D247]/18",
     stripClass: "bg-[#E7A040]/20",
@@ -14,8 +15,9 @@ const groupPassports = [
   {
     qtdPessoas: "10 pessoas",
     valor: "447,30",
+    installment: "12x de R$ 462,61",
+    cash: "ou R$ 447,30 à vista (valor por participante)",
     desconto: "10% OFF",
-    desc: "Pacote para empresas que querem levar liderança e operação para a imersão.",
     bgClass: "from-[#111111] via-[#1A1A1A] to-[#2E2212]",
     blobClass: "bg-[#F3CB46]/14",
     stripClass: "bg-[#E7A040]/18",
@@ -28,11 +30,10 @@ const PassaporteGrupoHomeTeste = ({ onBuyPassaporte }) => {
     <section className="pb-10 pt-2 md:pb-14">
       <div className="mx-auto max-w-6xl px-4">
         <h3 className="text-center font-anton text-2xl uppercase text-white sm:text-3xl md:text-4xl">
-          Passaporte em grupo
+          LEVE O SEU TIME
         </h3>
         <p className="mx-auto mt-3 max-w-2xl text-center text-sm text-white/80 sm:text-base">
-          Condições especiais para levar seu time inteiro e acelerar resultados
-          juntos.
+          Descontos exclusivos para compras em grupo.
         </p>
 
         <div className="mt-7 flex flex-col items-center gap-4 md:flex-row md:flex-wrap md:justify-center md:gap-6">
@@ -76,27 +77,22 @@ const PassaporteGrupoHomeTeste = ({ onBuyPassaporte }) => {
               />
 
               <div className="relative z-10 aquarium-content transform-gpu [transform-style:preserve-3d] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-2px,28px)]">
-                <span className="inline-block rounded-full border border-[#F5D247]/35 bg-black/25 px-3 py-1 text-xs font-semibold text-[#F5D247] transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-2px,36px)]">
-                  Em grupo
+                <span className="inline-block rounded-full border border-[#F5D247]/35 bg-black/25 px-3 py-1 text-xs font-semibold uppercase text-[#F5D247] transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-2px,36px)]">
+                  PASSAPORTE
                 </span>
 
+                <p className="mt-2 inline-block rounded-full border border-[#F5D247]/35 bg-black/20 px-3 py-1 text-sm font-black uppercase text-[#F5D247]">
+                  EM GRUPO {item.desconto}
+                </p>
                 <h4 className="mt-4 origin-left text-3xl font-black uppercase leading-[0.95] text-white transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-3px,44px)_scale(1.05)] sm:text-4xl">
                   {item.qtdPessoas}
                 </h4>
-                <p className="mt-2 inline-block rounded-full border border-[#F5D247]/35 bg-black/20 px-3 py-1 text-sm font-black uppercase text-[#F5D247]">
-                  {item.desconto}
-                </p>
 
                 <p className="mt-3 origin-left bg-gradient-to-r from-[#F5D247] to-[#E7A040] bg-clip-text text-4xl font-black leading-[0.9] text-transparent transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-4px,54px)_scale(1.08)] sm:text-5xl">
                   R$ {item.valor}
                 </p>
-                <p className="text-sm font-semibold uppercase text-white/90">
-                  Por pessoa
-                </p>
-
-                <p className="mt-4 text-sm leading-relaxed text-white/90 sm:text-base">
-                  {item.desc}
-                </p>
+                <p className="mt-2 text-sm font-semibold uppercase text-white/90">{item.installment}</p>
+                <p className="text-sm font-semibold text-white/90">{item.cash}</p>
 
                 <button
                   data-cta="sympla"
@@ -110,7 +106,7 @@ const PassaporteGrupoHomeTeste = ({ onBuyPassaporte }) => {
                   }}
                   className="mt-5 w-full rounded-xl bg-gradient-to-r from-[#F3CB46] to-[#E7A040] px-5 py-3 text-sm font-black uppercase tracking-wide text-black transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-2px,48px)] sm:text-base"
                 >
-                  Comprar passaporte
+                  COMPRAR AGORA
                 </button>
               </div>
             </article>
@@ -122,3 +118,6 @@ const PassaporteGrupoHomeTeste = ({ onBuyPassaporte }) => {
 };
 
 export default PassaporteGrupoHomeTeste;
+
+
+

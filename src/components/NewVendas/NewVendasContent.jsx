@@ -1,16 +1,10 @@
 import { Suspense, lazy, useEffect, useRef, useState } from "react";
 import ImpactoVendas from "../ComponentsVendas/ImpactoVendas";
-import {
-  audienceProfiles,
-  faqItems,
-  painPoints,
-  tracks,
-} from "./newVendasData";
+import { audienceProfiles, faqItems, tracks } from "./newVendasData";
 import {
   AudienceSection,
   FaqSection,
   FooterSection,
-  PainPointsSection,
   PassaportesSection,
   TracksSection,
 } from "./sections";
@@ -51,7 +45,7 @@ const NewVendasContent = () => {
       {
         rootMargin: "380px 0px",
         threshold: 0,
-      }
+      },
     );
 
     observer.observe(trigger);
@@ -68,26 +62,23 @@ const NewVendasContent = () => {
   };
 
   return (
-    <section className="border-t border-[#2A2419] bg-black pb-10 pt-8 text-white md:pb-14 md:pt-12">
+    <section className="bg-black pb-10 pt-8 text-white md:pb-14 md:pt-12">
       <div ref={speakersTriggerRef}>
         {shouldLoadSpeakers ? (
-          <Suspense
-            fallback={
-              <div className="border-t border-[#2A2419] bg-black py-16 md:py-20" />
-            }
-          >
+          <Suspense fallback={<div className="bg-black py-16 md:py-20" />}>
             <LazySpeakersSection />
           </Suspense>
         ) : (
-          <div className="border-t border-[#2A2419] bg-black py-16 md:py-20" />
+          <div className="bg-black py-16 md:py-20" />
         )}
       </div>
-      <PainPointsSection items={painPoints} />
+      <AudienceSection items={audienceProfiles} />
+      <PassaportesSection
+        isMobile={isMobile}
+        onBuyPassaporte={handleBuyPassaporte}
+      />
       <TracksSection items={tracks} />
       <ImpactoVendas />
-      <AudienceSection items={audienceProfiles} />
-
-      <PassaportesSection isMobile={isMobile} onBuyPassaporte={handleBuyPassaporte} />
 
       <FaqSection
         items={faqItems}

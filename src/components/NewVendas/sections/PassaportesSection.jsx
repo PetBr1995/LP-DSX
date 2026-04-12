@@ -6,7 +6,7 @@ const PassaportesSection = ({ isMobile, onBuyPassaporte }) => {
   return (
     <div
       id="passaportes"
-      className="border-t border-[#101010] bg-[url(/ELEMENTOS-BANNER-2.png)] bg-cover bg-center bg-no-repeat"
+      className="bg-black"
     >
       {isMobile ? (
         <PassaportesMobileHomeTeste onBuyPassaporte={onBuyPassaporte} />

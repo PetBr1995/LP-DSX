@@ -1,6 +1,6 @@
 const FaqSection = ({ items, openFaqIndex, onToggleFaq }) => {
   return (
-    <div className="border-t border-[#2A2419] bg-[#0F0E0A] py-16 md:py-20">
+    <div className="bg-black py-16 md:py-20">
       <div className="mx-auto max-w-6xl px-4">
         <h2 className="text-center font-anton text-[30px] uppercase leading-[1.12] text-white md:text-[52px] md:leading-tight">
           Perguntas frequentes
