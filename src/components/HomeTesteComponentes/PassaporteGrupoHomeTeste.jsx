@@ -92,7 +92,13 @@ const PassaporteGrupoHomeTeste = ({ onBuyPassaporte }) => {
               Fale diretamente com o nosso comercial e garanta a melhor
               condição para o seu time.
             </p>
-            <p className="mt-4 flex items-center gap-2 font-jamjuree text-base font-bold text-white md:text-lg">
+            <a
+              href="https://wa.me/5592985723838"
+              target="_blank"
+              rel="noreferrer"
+              className="mt-4 inline-flex items-center gap-2 font-jamjuree text-base font-bold text-white md:text-lg"
+              aria-label="Falar no WhatsApp"
+            >
               <img
                 src="/whatsapp.svg"
                 alt="WhatsApp"
@@ -101,7 +107,7 @@ const PassaporteGrupoHomeTeste = ({ onBuyPassaporte }) => {
                 decoding="async"
               />
               (92) 98572-3838
-            </p>
+            </a>
           </article>
         </div>
 
