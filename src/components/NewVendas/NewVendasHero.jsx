@@ -329,7 +329,7 @@ const NewVendasHero = () => {
               Conheça os primeiros palestrantes confirmados do DSX
             </h3>
 
-            <div className="relative mx-auto mt-6 w-full max-w-6xl">
+            <div className="relative mx-auto mt-6 w-full max-w-[920px]">
               <div
                 className={`overflow-hidden select-none ${isDraggingSpeakers ? "cursor-grabbing" : "cursor-grab"}`}
                 style={{ touchAction: "pan-y" }}
@@ -360,27 +360,29 @@ const NewVendasHero = () => {
                   {mainSpeakers.map((speaker) => (
                     <div
                       key={speaker.name}
-                      className="w-full shrink-0 px-1 sm:w-1/2 lg:w-1/3"
+                      className="w-full shrink-0 px-0.5 sm:w-1/2 sm:px-1 lg:w-1/3 lg:px-1.5"
                     >
-                      <article className="mx-auto flex h-full w-full max-w-[340px] flex-col overflow-hidden rounded-xl border border-[#5A4718] bg-black/80 text-left shadow-lg">
-                        <div className="relative h-[260px] w-full overflow-hidden bg-[#000000] sm:h-[290px] md:h-[310px]">
+                      <article className="flex h-full w-full flex-col overflow-hidden rounded-xl border border-[#5A4718] bg-black/80 text-left shadow-lg">
+                        <div className="relative h-[220px] w-full overflow-hidden bg-[#000000] sm:h-[250px] md:h-[270px]">
                           <img
                             src={speaker.image}
                             alt={speaker.name}
                             className="h-full w-full object-contain object-center"
                             loading="lazy"
                             decoding="async"
+                            draggable={false}
+                            onDragStart={(event) => event.preventDefault()}
                           />
                         </div>
 
-                        <div className="px-4 pt-3">
-                          <h4 className="font-bebas text-2xl uppercase tracking-[0.02em] text-[#F5A205]">
+                        <div className="px-3.5 pt-3">
+                          <h4 className="font-bebas text-[1.75rem] uppercase tracking-[0.02em] text-[#F5A205]">
                             {speaker.name}
                           </h4>
                         </div>
-                        <div className="flex-1 px-4 pb-4">
+                        <div className="flex-1 px-3.5 pb-3.5">
                           <p
-                            className="font-jamjuree text-sm leading-relaxed text-white/90 md:text-[15px]"
+                            className="font-jamjuree text-sm leading-relaxed text-white/90 md:text-[14px]"
                             style={{
                               display: "-webkit-box",
                               WebkitLineClamp: 5,

@@ -8,9 +8,6 @@ const cards = [
     installment: "12x de R$ 134,14",
     cash: "ou R$ 1.297,00 à vista",
     badge: "MAIS VENDIDO",
-    bgClass: "from-[#0B0B0B] via-[#1B1409] to-[#3A280D]",
-    blobClass: "bg-[#F5D247]/18",
-    stripClass: "bg-[#E7A040]/20",
     link: "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721?_gl=1*2h3vo2*_gcl_au*MTEwOTMyNDE4MC4xNzczNzg0OTQ3*_ga*MTA3ODc3NDQ3NS4xNzczNzg0OTQ4*_ga_KXH10SQTZF*czE3NzUwMjA3ODckbzgkZzEkdDE3NzUwMjE0MjYkajYwJGwwJGgxMjMxOTk1NDE3",
     benefits: [
       { label: "Lounge VIP exclusivo", included: true },
@@ -28,9 +25,6 @@ const cards = [
     price: "497,00",
     installment: "12x de R$ 51,40",
     cash: "ou R$ 497,00 à vista",
-    bgClass: "from-[#111111] via-[#1A1A1A] to-[#2E2212]",
-    blobClass: "bg-[#F3CB46]/14",
-    stripClass: "bg-[#E7A040]/18",
     link: "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721?_gl=1*2h3vo2*_gcl_au*MTEwOTMyNDE4MC4xNzczNzg0OTQ3*_ga*MTA3ODc3NDQ3NS4xNzczNzg0OTQ4*_ga_KXH10SQTZF*czE3NzUwMjA3ODckbzgkZzEkdDE3NzUwMjE0MjYkajYwJGwwJGgxMjMxOTk1NDE3",
     benefits: [
       { label: "Lounge VIP exclusivo", included: false },
@@ -47,43 +41,9 @@ const cards = [
 
 const SquishyPlanCard = ({ card, onBuyPassaporte }) => (
   <article
-    className={`group relative w-full max-w-[460px] overflow-hidden rounded-[22px] bg-gradient-to-br p-5 transform-gpu [transform-style:preserve-3d] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:[transform:perspective(1100px)_rotateX(4deg)_rotateY(-4deg)_scale(1.03)] lg:p-6 ${card.bgClass}`}
+    className="relative w-full max-w-[460px] overflow-hidden rounded-[22px] border border-[#E7A040]/35 bg-[#161616] p-5 lg:p-6"
   >
-    <div
-      className={`absolute h-60 w-56 ${card.blobClass} transform-gpu ${
-        card.nome === "VIP"
-          ? "-top-16 right-6 rounded-[34%]"
-          : "-top-14 left-5 rounded-[26px]"
-      } will-change-transform transition-all duration-900 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-        card.nome === "VIP"
-          ? "group-hover:translate-y-8 group-hover:-translate-x-6 group-hover:scale-110"
-          : "group-hover:translate-y-8 group-hover:translate-x-6 group-hover:scale-110"
-      }`}
-    />
-    <div
-      className={`absolute h-24 w-64 bg-black/35 transform-gpu ${
-        card.nome === "VIP"
-          ? "-bottom-9 left-5 rounded-[24px]"
-          : "-bottom-9 right-5 rounded-[24px]"
-      } will-change-transform transition-all duration-900 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-        card.nome === "VIP"
-          ? "group-hover:translate-x-8 group-hover:-translate-y-3 group-hover:scale-105"
-          : "group-hover:-translate-x-8 group-hover:-translate-y-3 group-hover:scale-105"
-      }`}
-    />
-    <div
-      className={`absolute h-16 w-48 ${card.stripClass} transform-gpu ${
-        card.nome === "VIP"
-          ? "left-8 top-1/2 -translate-y-1/2 -rotate-12 rounded-xl"
-          : "right-8 top-1/2 -translate-y-1/2 rotate-12 rounded-xl"
-      } will-change-transform transition-all duration-900 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-        card.nome === "VIP"
-          ? "group-hover:translate-x-6 group-hover:-translate-y-1/2 group-hover:rotate-0 group-hover:scale-115"
-          : "group-hover:-translate-x-6 group-hover:-translate-y-1/2 group-hover:rotate-0 group-hover:scale-115"
-      }`}
-    />
-
-    <div className="relative z-10 transform-gpu [transform-style:preserve-3d] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-2px,28px)]">
+    <div className="relative z-10">
       {card.badge ? (
         <p className="pointer-events-none absolute -right-18 top-6 z-20 flex h-8 w-64 rotate-[35deg] items-center justify-center whitespace-nowrap border-y border-[#FF6B6B]/75 bg-[#FF1F1F]/85 text-center text-xl font-black uppercase leading-none tracking-[0.08em] text-white shadow-[0_8px_20px_rgba(0,0,0,0.35)] lg:-right-25 lg:w-80 lg:text-xl">
           {card.badge}
@@ -95,7 +55,7 @@ const SquishyPlanCard = ({ card, onBuyPassaporte }) => (
       <p className="mt-3 text-sm font-semibold text-white/90">
         PASSAPORTE
       </p>
-      <h3 className="mt-2 origin-left text-4xl font-black uppercase leading-[0.95] text-white transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-3px,46px)_scale(1.05)] lg:text-5xl">
+      <h3 className="mt-2 text-4xl font-black uppercase leading-[0.95] text-white lg:text-5xl">
         {card.nome}
       </h3>
 
@@ -129,7 +89,7 @@ const SquishyPlanCard = ({ card, onBuyPassaporte }) => (
         </div>
       ) : null}
 
-      <div className="mt-4 transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-1px,32px)]">
+      <div className="mt-4">
         <ul className="space-y-2 rounded-xl bg-black/25 p-3">
           {card.benefits
             .filter((benefit) => benefit.included)
@@ -147,7 +107,7 @@ const SquishyPlanCard = ({ card, onBuyPassaporte }) => (
         </ul>
       </div>
 
-      <p className="mt-4 origin-left bg-gradient-to-r from-[#F5D247] to-[#E7A040] bg-clip-text text-2xl font-black leading-[1] text-transparent whitespace-nowrap transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-4px,58px)_scale(1.08)] lg:text-3xl">
+      <p className="mt-4 bg-gradient-to-r from-[#F5D247] to-[#E7A040] bg-clip-text text-2xl font-black leading-[1] text-transparent whitespace-nowrap lg:text-3xl">
         {`R$ ${card.price} à vista`}
       </p>
       <p className="mt-2 text-sm font-semibold text-white/90">
@@ -164,7 +124,7 @@ const SquishyPlanCard = ({ card, onBuyPassaporte }) => (
           }
           window.open(targetLink, "_blank");
         }}
-        className="mt-6 w-full rounded-xl bg-gradient-to-r from-[#F3CB46] to-[#E7A040] px-5 py-3 text-base font-black uppercase tracking-wide text-black transform-gpu transition duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:brightness-95 group-hover:[transform:translate3d(0,-2px,52px)]"
+        className="mt-6 w-full rounded-xl bg-gradient-to-r from-[#F3CB46] to-[#E7A040] px-5 py-3 text-base font-black uppercase tracking-wide text-black transition hover:brightness-95"
       >
         COMPRAR AGORA
       </button>
