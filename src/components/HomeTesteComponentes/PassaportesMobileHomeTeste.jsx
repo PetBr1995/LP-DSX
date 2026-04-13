@@ -1,4 +1,5 @@
 ﻿import { withHublaUtm } from "../../utils/hublaUtm";
+import { Check } from "lucide-react";
 
 const cards = [
   {
@@ -120,7 +121,9 @@ const PassaportesMobileHomeTeste = ({ onBuyPassaporte }) => {
                         key={benefit.label}
                         className="flex items-center gap-2 text-sm text-white"
                       >
-                        <span>✅</span>
+                        <span className="grid h-4 w-4 shrink-0 place-items-center rounded-full border border-[#22C55E]/70 bg-[#22C55E]/15 text-[#22C55E]">
+                          <Check className="h-2.5 w-2.5" strokeWidth={3} />
+                        </span>
                         <span>{benefit.label}</span>
                       </li>
                     ))}

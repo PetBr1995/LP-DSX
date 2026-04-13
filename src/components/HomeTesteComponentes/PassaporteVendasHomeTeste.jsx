@@ -1,4 +1,5 @@
 ﻿import { withHublaUtm } from "../../utils/hublaUtm";
+import { Check } from "lucide-react";
 
 const cards = [
   {
@@ -107,7 +108,9 @@ const SquishyPlanCard = ({ card, onBuyPassaporte }) => (
               key={benefit.label}
               className="flex items-center gap-2 text-xs text-white sm:text-sm"
             >
-              <span>✅</span>
+              <span className="grid h-4 w-4 shrink-0 place-items-center rounded-full border border-[#22C55E]/70 bg-[#22C55E]/15 text-[#22C55E] sm:h-4.5 sm:w-4.5">
+                <Check className="h-2.5 w-2.5 sm:h-3 sm:w-3" strokeWidth={3} />
+              </span>
               <span>{benefit.label}</span>
             </li>
           ))}
