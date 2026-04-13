@@ -90,19 +90,15 @@ const PassaporteGrupoHomeTeste = ({ onBuyPassaporte }) => {
               />
 
               <div className="relative z-10 aquarium-content transform-gpu [transform-style:preserve-3d] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-2px,28px)]">
-                <span className="inline-block rounded-full border border-[#F5D247]/35 bg-black/25 px-3 py-1 text-xs font-semibold uppercase text-[#F5D247] transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-2px,36px)]">
-                  PASSAPORTE
-                </span>
-
                 <p className="mt-2 inline-block rounded-full border border-[#F5D247]/35 bg-black/20 px-3 py-1 text-sm font-black uppercase text-[#F5D247]">
-                  EM GRUPO {item.desconto}
+                PASSAPORTE {item.qtdPessoas}
                 </p>
                 <h4 className="mt-4 origin-left text-3xl font-black uppercase leading-[0.95] text-white transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-3px,44px)_scale(1.05)] sm:text-4xl">
-                  {item.qtdPessoas}
+                  EM GRUPO {item.desconto}
                 </h4>
 
-                <p className="mt-3 origin-left bg-gradient-to-r from-[#F5D247] to-[#E7A040] bg-clip-text text-3xl font-black leading-[0.9] text-transparent transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-4px,54px)_scale(1.08)] sm:text-3xl">
-                  {`R$ ${item.valor} à vista`}
+                <p className="mt-3 origin-left bg-gradient-to-r from-[#F5D247] to-[#E7A040] bg-clip-text text-2xl font-black leading-[0.9] text-transparent transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-4px,54px)_scale(1.08)] sm:text-3xl">
+                  {`R$ ${item.valor} à vista (por pessoa)`}
                 </p>
                 <p className="mt-2 text-sm font-semibold text-white/90">
                   {`ou em ${item.installment}`}
