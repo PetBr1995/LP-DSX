@@ -84,14 +84,14 @@ const SquishyPlanCard = ({ card, onBuyPassaporte }) => (
 
     <div className="relative z-10 transform-gpu [transform-style:preserve-3d] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-2px,28px)]">
       {card.badge ? (
-        <p className="block text-center w-full rounded-full border border-red-600/50 bg-red-900/35 px-3 py-1.5 text-sm font-black uppercase tracking-[0.06em] text-red-500">
+        <p className="absolute rotate-40 text-center w-full -right-37 top-0 rounded-full border border-red-600/50 bg-red-900/35 px-3 py-1.5 text-sm font-black uppercase tracking-[0.06em] text-red-500">
           {card.badge}
         </p>
       ) : (
         <div className="h-[30px]" />
       )}
 
-      <p className="mt-3 text-sm font-semibold uppercase text-white/90">
+      <p className="mt-3 text-sm font-semibold text-white/90">
         PASSAPORTE
       </p>
       <h3 className="mt-2 origin-left text-4xl font-black uppercase leading-[0.95] text-white transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-3px,46px)_scale(1.05)] lg:text-5xl">
@@ -100,12 +100,14 @@ const SquishyPlanCard = ({ card, onBuyPassaporte }) => (
 
       <div className="mt-4 transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-1px,32px)]">
         <ul className="space-y-2 rounded-xl bg-black/25 p-3">
-          {card.benefits.map((benefit) => (
+          {card.benefits
+            .filter((benefit) => benefit.included)
+            .map((benefit) => (
             <li
               key={benefit.label}
               className="flex items-center gap-2 text-xs text-white sm:text-sm"
             >
-              <span>{benefit.included ? "✅" : "❌"}</span>
+              <span>✅</span>
               <span>{benefit.label}</span>
             </li>
           ))}
@@ -113,10 +115,10 @@ const SquishyPlanCard = ({ card, onBuyPassaporte }) => (
       </div>
 
       <p className="mt-4 origin-left bg-gradient-to-r from-[#F5D247] to-[#E7A040] bg-clip-text text-2xl font-black leading-[1] text-transparent whitespace-nowrap transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-4px,58px)_scale(1.08)] lg:text-3xl">
-        {card.installment}
+        {`R$ ${card.price} à vista`}
       </p>
-      <p className="mt-2 text-sm font-semibold uppercase text-white/90">
-        {card.cash}
+      <p className="mt-2 text-sm font-semibold text-white/90">
+        {`ou em ${card.installment}`}
       </p>
 
       <button

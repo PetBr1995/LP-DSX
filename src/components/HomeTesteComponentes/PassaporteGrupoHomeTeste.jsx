@@ -88,13 +88,11 @@ const PassaporteGrupoHomeTeste = ({ onBuyPassaporte }) => {
                   {item.qtdPessoas}
                 </h4>
 
-                {/* ✅ Parcelado agora em destaque */}
                 <p className="mt-3 origin-left bg-gradient-to-r from-[#F5D247] to-[#E7A040] bg-clip-text text-3xl font-black leading-[0.9] text-transparent transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-4px,54px)_scale(1.08)] sm:text-3xl">
-                  {item.installment}
+                  {`R$ ${item.valor} à vista`}
                 </p>
-                {/* ✅ Valor à vista agora na linha secundária */}
                 <p className="mt-2 text-sm font-semibold text-white/90">
-                  {item.cash}
+                  {`ou em ${item.installment}`}
                 </p>
 
                 <button

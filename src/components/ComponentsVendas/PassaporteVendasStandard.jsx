@@ -143,10 +143,13 @@ const PassaporteVendasStandard = () => {
                     className="font-extrabold text-center uppercase my-4 text-6xl"
                     style={{ color: card.textColor }}
                   >
-                    R$ {card.price}
+                    {`R$ ${card.price} à vista`}
+                  </p>
+                  <p className="text-white text-sm">
+                    {`ou em 12x de R$ ${card.parcelas}`}
                   </p>
                   {/* 
-                    <p className="text-white text-sm uppercase">
+                    <p className="text-white text-sm">
                       12x de {card.parcelas}
                     </p>
                       */}
@@ -159,9 +162,7 @@ const PassaporteVendasStandard = () => {
                       )
                     }
                     className="cursor-pointer uppercase bg-gradient-to-r from-[#F3CB46] to-[#E7A240] p-3 w-full mt-6 rounded-2xl font-bold"
-                  >
-                    Comprar agora
-                  </button>
+                  >COMPRAR AGORA</button>
                 </div>
 
                 {/* ✅ Vantagens: só STANDARD (sem itens VIP e sem "X") */}

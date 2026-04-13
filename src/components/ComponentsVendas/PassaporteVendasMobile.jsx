@@ -143,7 +143,10 @@ const PassaporteVendasMobile = () => {
                     className="font-bold uppercase my-4 text-4xl"
                     style={{ color: card.textColor }}
                   >
-                    R$ {card.price}
+                    {`R$ ${card.price} à vista`}
+                  </p>
+                  <p className="text-white text-sm">
+                    {`ou em 12x de R$ ${card.parcelas}`}
                   </p>
 
                   <button
@@ -151,9 +154,7 @@ const PassaporteVendasMobile = () => {
                       window.open(withHublaUtm(card.link), "_blank")
                     }
                     className="cursor-pointer uppercase bg-gradient-to-r from-[#F3CB46] to-[#E7A240] p-3 w-full mt-6 rounded-2xl font-bold"
-                  >
-                    Comprar agora
-                  </button>
+                  >COMPRAR AGORA</button>
                 </div>
 
                 {/* Vantagens */}

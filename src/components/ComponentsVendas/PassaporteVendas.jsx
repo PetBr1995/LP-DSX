@@ -179,7 +179,10 @@ const PassaporteVendas = () => {
                     className="font-bold uppercase my-4 text-4xl"
                     style={{ color: item.textColor }}
                   >
-                    R$ {item.price}
+                    {`R$ ${item.price} à vista`}
+                  </p>
+                  <p className="text-white text-sm">
+                    {`ou em 12x de R$ ${item.parcelas}`}
                   </p>
 
                   <button
@@ -187,9 +190,7 @@ const PassaporteVendas = () => {
                       window.open(withHublaUtm(item.link), "_blank")
                     }
                     className="relative z-50 cursor-pointer uppercase bg-gradient-to-r from-[#F3CB46] to-[#E7A240] p-3 w-full mt-6 rounded-2xl font-bold"
-                  >
-                    Comprar agora
-                  </button>
+                  >COMPRAR AGORA</button>
                 </div>
                 <div className="mt-12 relative">
                   {vantagens.map((vantagem, index) => {

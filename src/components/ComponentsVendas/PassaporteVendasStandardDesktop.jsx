@@ -119,11 +119,14 @@ const PassaporteVendasStandardDesktop = () => {
                     className="font-extrabold uppercase mt-4 text-5xl text-center"
                     style={{ color: item.textColor }}
                   >
-                    R$ {item.price}
+                    {`R$ ${item.price} à vista`}
+                  </p>
+                  <p className="text-white text-sm">
+                    {`ou em 12x de R$ ${item.parcelas}`}
                   </p>
 
                   {/* 
-                  <p className="text-white text-sm uppercase">
+                  <p className="text-white text-sm">
                     12x de {item.parcelas}
                   </p>
                     */}
@@ -136,9 +139,7 @@ const PassaporteVendasStandardDesktop = () => {
                       )
                     }
                     className="cursor-pointer uppercase bg-gradient-to-r from-[#F3CB46] to-[#E7A240] p-3 w-full mt-6 rounded-2xl font-bold"
-                  >
-                    Comprar agora
-                  </button>
+                  >COMPRAR AGORA</button>
                 </div>
                 <div className="mt-16 relative">
                   {vantagens.map((_, index) => (
