@@ -260,6 +260,47 @@ section.no-section-transition::after {
   }
 }
 
+@property --nv-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes nv-highlight-spin {
+  to {
+    --nv-angle: 360deg;
+  }
+}
+
+.nv-highlight-wrap {
+  position: relative;
+  border-radius: 16px;
+  padding: 2px;
+  overflow: hidden;
+}
+
+.nv-highlight-wrap::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: conic-gradient(
+    from var(--nv-angle, 0deg),
+    transparent 58%,
+    #f5c02b 70%,
+    #e7a040 88%,
+    transparent 100%
+  );
+  animation: nv-highlight-spin 3.2s linear infinite;
+  border-radius: 50%;
+}
+
+.nv-highlight-inner {
+  position: relative;
+  z-index: 1;
+  border-radius: 14px;
+  background: #0d0d0d;
+}
+
 @media (max-width: 767px) {
   .aquarium-card {
     animation: aquarium-card-sway 7.5s ease-in-out infinite;
@@ -402,4 +443,3 @@ section.no-section-transition::after {
     transition: none;
   }
 }
-

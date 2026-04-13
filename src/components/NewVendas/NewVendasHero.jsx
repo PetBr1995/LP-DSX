@@ -298,14 +298,16 @@ const NewVendasHero = () => {
             {experienceHighlights.map((item) => (
               <div
                 key={`${item.value}-${item.label}`}
-                className="rounded-xl border border-[#3A3222] bg-black/35 px-3 py-3 text-center"
+                className="nv-highlight-wrap"
               >
-                <p className="font-jamjuree font-extrabold leading-none text-[#F5C02B] text-[20px] md:text-[30px]">
-                  {item.value}
-                </p>
-                <p className="mt-1 font-jamjuree text-[10px] font-bold uppercase tracking-[0.02em] text-white md:text-[14px]">
-                  {item.label}
-                </p>
+                <div className="nv-highlight-inner px-3 py-3 text-center">
+                  <p className="font-jamjuree font-extrabold leading-none text-[#F5C02B] text-[20px] md:text-[30px]">
+                    {item.value}
+                  </p>
+                  <p className="mt-1 font-jamjuree text-[10px] font-bold uppercase tracking-[0.02em] text-white md:text-[14px]">
+                    {item.label}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
