@@ -3,6 +3,7 @@ import ImpactoVendas from "../ComponentsVendas/ImpactoVendas";
 import { audienceProfiles, faqItems, tracks } from "./newVendasData";
 import {
   AudienceSection,
+  BusinessExperienceSection,
   FaqSection,
   FooterSection,
   PassaportesSection,
@@ -77,6 +78,7 @@ const NewVendasContent = () => {
         isMobile={isMobile}
         onBuyPassaporte={handleBuyPassaporte}
       />
+      <BusinessExperienceSection />
       <TracksSection items={tracks} />
       <ImpactoVendas />
 

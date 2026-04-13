@@ -26,6 +26,13 @@ const metrics = [
   
 ];
 
+const experienceHighlights = [
+  { value: "3", label: "palcos simultâneos" },
+  { value: "VIP", label: "área exclusiva" },
+  { value: "FEIRA", label: "de negócios" },
+  { value: "PRAÇA", label: "de alimentação" },
+];
+
 const mainSpeakers = [
   {
     name: "João Branco",
@@ -155,6 +162,21 @@ const NewVendasHero = () => {
                   {formatMetricValue(animatedValues[index] ?? 0, item)}
                 </p>
                 <p className="mt-1 font-jamjuree text-[11px] font-bold uppercase tracking-[0.02em] text-white md:text-[19px]">
+                  {item.label}
+                </p>
+              </div>
+            ))}
+          </div>
+          <div className="mx-auto mt-2 grid w-full max-w-5xl grid-cols-2 gap-3 px-2 md:grid-cols-4 md:gap-4">
+            {experienceHighlights.map((item) => (
+              <div
+                key={`${item.value}-${item.label}`}
+                className="rounded-xl border border-[#3A3222] bg-black/35 px-3 py-3 text-center"
+              >
+                <p className="font-jamjuree font-extrabold leading-none text-[#F5C02B] text-[20px] md:text-[30px]">
+                  {item.value}
+                </p>
+                <p className="mt-1 font-jamjuree text-[10px] font-bold uppercase tracking-[0.02em] text-white md:text-[14px]">
                   {item.label}
                 </p>
               </div>

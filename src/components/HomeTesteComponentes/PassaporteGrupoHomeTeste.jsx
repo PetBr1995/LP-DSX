@@ -32,8 +32,21 @@ const PassaporteGrupoHomeTeste = ({ onBuyPassaporte }) => {
         <h3 className="text-center font-anton text-2xl uppercase text-white sm:text-3xl md:text-4xl">
           LEVE O SEU TIME
         </h3>
-        <p className="mx-auto mt-3 max-w-2xl text-center text-sm text-white/80 sm:text-base">
-          Descontos exclusivos para compras em grupo.
+        <div className="mx-auto mt-3 max-w-4xl space-y-3 text-center font-jamjuree text-sm text-white/85 sm:text-base">
+          <p>
+            Trazer seu time para o DSX é um investimento direto em performance.
+          </p>
+          <p>
+            Dois dias fora do operacional, absorvendo estratégia real de quem
+            está construindo negócios em escala.
+          </p>
+          <p>
+            Eles voltam com repertório, visão e ferramentas para gerar mais
+            resultado.
+          </p>
+        </div>
+        <p className="mt-4 text-center font-jamjuree text-base font-bold text-[#F5C02B] sm:text-lg">
+          Quanto maior o grupo, maior o desconto:
         </p>
 
         <div className="mt-7 flex flex-col items-center gap-4 md:flex-row md:flex-wrap md:justify-center md:gap-6">
@@ -112,6 +125,34 @@ const PassaporteGrupoHomeTeste = ({ onBuyPassaporte }) => {
               </div>
             </article>
           ))}
+        </div>
+
+        <div className="mx-auto mt-8 max-w-4xl rounded-2xl border border-[#3A3222] bg-[#121212] px-5 py-6 text-center md:px-8">
+          <p className="font-jamjuree text-sm font-semibold uppercase text-white/85 md:text-base">
+            Desconto válido para o Passaporte Standard.
+          </p>
+          <h4 className="mt-3 font-anton text-2xl uppercase text-[#F5C02B] md:text-3xl">
+            GARANTIR PASSAPORTES DO TIME
+          </h4>
+          <p className="mt-4 font-jamjuree text-base font-bold text-white md:text-lg">
+            Equipes maiores?
+          </p>
+          <p className="mx-auto mt-3 max-w-3xl font-jamjuree text-sm leading-relaxed text-white/85 md:text-base">
+            Temos condições exclusivas para grupos acima de 10 pessoas. Fale
+            diretamente com o nosso comercial e garanta a melhor condição para o
+            seu time.
+          </p>
+          <div className="mt-4 flex justify-center">
+            <div className="grid h-12 w-12 place-items-center rounded-full border border-[#25D366]/45 bg-[#25D366]/16 shadow-[0_0_24px_rgba(37,211,102,0.35)] md:h-14 md:w-14">
+              <img
+                src="/whatsapp.svg"
+                alt="WhatsApp"
+                className="h-7 w-7 object-contain md:h-8 md:w-8"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>
