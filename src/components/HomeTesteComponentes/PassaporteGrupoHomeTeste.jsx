@@ -127,7 +127,7 @@ const PassaporteGrupoHomeTeste = ({ onBuyPassaporte }) => {
           Desconto válido para o Passaporte Standard.
         </p>
 
-        <div className="mx-auto mt-4 max-w-4xl rounded-2xl border border-[#3A3222] bg-[#121212] px-5 py-6 text-center md:px-8">
+        <div className="mx-auto mt-4 max-w-[450px] rounded-2xl border border-[#3A3222] bg-[#121212] px-5 py-6 text-center md:px-8">
           <h4 className="font-anton text-2xl uppercase text-[#F5C02B] md:text-3xl">
             GARANTIR PASSAPORTES DO TIME
           </h4>
