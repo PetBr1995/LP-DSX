@@ -1,5 +1,6 @@
-﻿import { useEffect, useState } from "react";
+﻿import { useEffect, useRef, useState } from "react";
 import NewVendasHeaderMask from "./NewVendasHeaderMask";
+import { Calendar, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 
 const metrics = [
   {
@@ -23,7 +24,7 @@ const metrics = [
     suffix: "",
     useThousands: false,
   },
-  
+
 ];
 
 const experienceHighlights = [
@@ -69,6 +70,61 @@ const mainSpeakers = [
     image: "/novas-palestrantes/Roberto-Reis.png",
     bio: "Estrategista eleitoral com 27 anos de atuação. Em 2026 tem eleição. E política move mercado, capital e negócio. Você vai entender quais regras vão mudar no seu setor.",
   },
+  {
+    name: "Afrânio Soares",
+    image: "/palestrantes/AfranioSoares.png",
+    bio: "Doutor em Administração e fundador da Action Pesquisas, é a maior referência em inteligência de mercado da região Norte há mais de 25 anos.",
+  },
+  {
+    name: "Breno Maciel",
+    image: "/palestrantes/BrenoMaciel.png",
+    bio: "CEO da Vanguarda Martech, maior agência de marketing do Norte, gerencia mais de R$ 60 milhões em verbas de marketing e é palestrante do RD Summit pelo terceiro ano consecutivo.",
+  },
+  {
+    name: "Carlos Oshiro",
+    image: "/palestrantes/CarlosOshiro.png",
+    bio: "Fundador da Targo Educação Empresarial, colunista na CBN e referência no ecossistema empresarial de Manaus há mais de 25 anos.",
+  },
+  {
+    name: "Chay Santos",
+    image: "/foto-chay-santos.png",
+    bio: "CEO da Agência A Mangarataia e autora de Empreender Nunca Foi Sorte, especialista em branding estratégico e posicionamento de marcas.",
+  },
+  {
+    name: "Clayton Pascarelli",
+    image: "/foto-claytonpascarelli.png",
+    bio: "Jornalista, apresentador de TV e especialista em PNL aplicada à oratória, é um dos rostos mais conhecidos da imprensa televisiva do Amazonas.",
+  },
+  {
+    name: "Flávia Sausmikat",
+    image: "/palestrantes/FlaviaSausmikat.png",
+    bio: "Diretora-geral do Instituto Action de Pesquisas, atua há mais de duas décadas na análise de comportamentos sociais, eleitorais e de consumo em todo o Brasil.",
+  },
+  {
+    name: "Fabricio Alva",
+    image: "/palestrantes/FabricioAlva.png",
+    bio: "Especialista em gestão empresarial com foco em estruturação de operações e processos que preparam empresas para escalar.",
+  },
+  {
+    name: "Gisele Oshiro",
+    image: "/palestrantes/GiselleOshiro.png",
+    bio: "Empresária, especialista em inteligência emocional e apresentadora do podcast Mulheres que Inspiram na CBN.",
+  },
+  {
+    name: "Magno Rodrigues",
+    image: "/palestrantes/MagnoRodrigues.png",
+    bio: "Educador financeiro e fundador da Pega Bizu, criador de uma metodologia própria que já ajudou centenas de negócios a construírem uma gestão financeira eficiente.",
+  },
+  {
+    name: "Suelen Scop",
+    image: "/palestrantes/SuellenScop.png",
+    bio: "Psicóloga, diretora operacional da Singulari e especialista na aplicação prática de inteligência artificial em contextos reais de negócio.",
+  },
+  {
+    name: "Luís Eduardo Leal",
+    image: "/palestrantes/LuizEduardoLeal.png",
+    bio: "Diretor da Rumo MKT e da CDL Manaus, consultor em marketing digital e um dos nomes mais ativos no ecossistema empreendedor do Amazonas.",
+  },
 ];
 
 const formatMetricValue = (value, metric) => {
@@ -80,6 +136,10 @@ const formatMetricValue = (value, metric) => {
 
 const NewVendasHero = () => {
   const [animatedValues, setAnimatedValues] = useState(metrics.map(() => 0));
+  const [currentSpeakerIndex, setCurrentSpeakerIndex] = useState(0);
+  const [cardsPerView, setCardsPerView] = useState(3);
+  const [isDraggingSpeakers, setIsDraggingSpeakers] = useState(false);
+  const speakerDragStartXRef = useRef(null);
 
   useEffect(() => {
     const duration = 1900;
@@ -106,6 +166,57 @@ const NewVendasHero = () => {
     return () => cancelAnimationFrame(frameId);
   }, []);
 
+  useEffect(() => {
+    const getCardsPerView = () => {
+      if (window.innerWidth >= 1024) return 3;
+      if (window.innerWidth >= 640) return 2;
+      return 1;
+    };
+
+    const applyCardsPerView = () => {
+      const nextCardsPerView = getCardsPerView();
+      setCardsPerView(nextCardsPerView);
+      setCurrentSpeakerIndex((current) =>
+        Math.min(current, Math.max(mainSpeakers.length - nextCardsPerView, 0)),
+      );
+    };
+
+    applyCardsPerView();
+    window.addEventListener("resize", applyCardsPerView);
+    return () => window.removeEventListener("resize", applyCardsPerView);
+  }, []);
+
+  const maxSpeakerIndex = Math.max(mainSpeakers.length - cardsPerView, 0);
+
+  const goToNextSpeakerSlide = () => {
+    setCurrentSpeakerIndex((current) => (current >= maxSpeakerIndex ? 0 : current + 1));
+  };
+
+  const goToPreviousSpeakerSlide = () => {
+    setCurrentSpeakerIndex((current) => (current <= 0 ? maxSpeakerIndex : current - 1));
+  };
+
+  const handleSpeakerDragStart = (clientX) => {
+    speakerDragStartXRef.current = clientX;
+    setIsDraggingSpeakers(true);
+  };
+
+  const handleSpeakerDragEnd = (clientX) => {
+    if (speakerDragStartXRef.current === null) return;
+
+    const deltaX = clientX - speakerDragStartXRef.current;
+    const swipeThreshold = 50;
+
+    if (deltaX <= -swipeThreshold) {
+      goToNextSpeakerSlide();
+    } else if (deltaX >= swipeThreshold) {
+      goToPreviousSpeakerSlide();
+    }
+
+    speakerDragStartXRef.current = null;
+    setIsDraggingSpeakers(false);
+  };
+
   return (
     <section className="relative overflow-hidden bg-black text-white">
       <div
@@ -123,7 +234,7 @@ const NewVendasHero = () => {
               decoding="async"
             />
           </div>
-          <h1 className="mx-auto max-w-6xl font-anton text-[clamp(1.1rem,5vw,4.8rem)] uppercase leading-[1.08] tracking-[0.012em] md:leading-[1.12]">
+          <h1 className="mx-auto max-w-6xl font-anton text-[clamp(1.9rem,5vw,4.8rem)] uppercase leading-[1.3] tracking-[0.012em] md:leading-[1.12]">
             <span className="block text-[#F5C02B]">O MAIOR EVENTO</span>
             <span className="block text-white">
               DE NEGÓCIOS, MARKETING, VENDAS E INOVAÇÃO{" "}
@@ -136,13 +247,29 @@ const NewVendasHero = () => {
             </p>
           </div>
           <div>
-            <h3 className="font-anton text-[clamp(1.1rem,2.8vw,2rem)] uppercase tracking-[0.03em]">
-              Onde os maiores especialistas do país se encontram.
+            <h3 className="font-anton text-[clamp(1.5rem,2.8vw,2rem)] uppercase tracking-[0.03em]">
+              Onde os maiores especialistas <br /> do país se encontram.
             </h3>
           </div>
-          <p className="text-center text-[clamp(.95rem,2.8vw,1.45rem)] leading-[1.2] text-white/90">
-            23 e 24 de Julho — Centro de Convenções Vasco Vasques, Manaus/AM
-          </p>
+          <div className="flex items-center justify-center gap-2">
+            <span><Calendar color="#F5C02B" /></span>
+            <p className="text-center text-[clamp(.95rem,2.8vw,1.45rem)] leading-[1.2] text-white/90">
+              23 e 24 de Julho
+            </p>
+          </div>
+          <div className="flex items-center justify-center gap-3">
+            <span>
+              <MapPin color="#F5C02B"/>
+            </span>
+            <div>
+              <p>
+                Centro de Convenções
+              </p>
+              <p>
+                Vasco Vasques, Manaus/AM
+              </p>
+            </div>
+          </div>
 
           <div id="newvendas-primary-cta" className="flex justify-center">
             <NewVendasHeaderMask
@@ -188,34 +315,95 @@ const NewVendasHero = () => {
               Conheça os primeiros palestrantes confirmados do DSX
             </h3>
 
-            <div className="mx-auto mt-6 grid w-full max-w-6xl grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {mainSpeakers.map((speaker) => (
-                <article
-                  key={speaker.name}
-                  className="overflow-hidden rounded-xl border border-[#5A4718] bg-black/80 text-left shadow-lg"
+            <div className="relative mx-auto mt-6 w-full max-w-6xl">
+              <div
+                className={`overflow-hidden select-none ${isDraggingSpeakers ? "cursor-grabbing" : "cursor-grab"}`}
+                style={{ touchAction: "pan-y" }}
+                onMouseDown={(event) => handleSpeakerDragStart(event.clientX)}
+                onMouseUp={(event) => handleSpeakerDragEnd(event.clientX)}
+                onMouseLeave={(event) => {
+                  if (speakerDragStartXRef.current !== null) {
+                    handleSpeakerDragEnd(event.clientX);
+                  }
+                }}
+                onTouchStart={(event) => {
+                  const touch = event.touches[0];
+                  if (!touch) return;
+                  handleSpeakerDragStart(touch.clientX);
+                }}
+                onTouchEnd={(event) => {
+                  const touch = event.changedTouches[0];
+                  if (!touch) return;
+                  handleSpeakerDragEnd(touch.clientX);
+                }}
+              >
+                <div
+                  className="flex transition-transform duration-500 ease-out"
+                  style={{
+                    transform: `translateX(-${(currentSpeakerIndex * 100) / cardsPerView}%)`,
+                  }}
                 >
-                  <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#101010]">
-                    <img
-                      src={speaker.image}
-                      alt={speaker.name}
-                      className="h-full w-full object-contain object-center"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
+                  {mainSpeakers.map((speaker) => (
+                    <div
+                      key={speaker.name}
+                      className="w-full shrink-0 px-1 sm:w-1/2 lg:w-1/3"
+                    >
+                      <article className="mx-auto flex h-full w-full max-w-[340px] flex-col overflow-hidden rounded-xl border border-[#5A4718] bg-black/80 text-left shadow-lg">
+                        <div className="relative h-[260px] w-full overflow-hidden bg-[#000000] sm:h-[290px] md:h-[310px]">
+                          <img
+                            src={speaker.image}
+                            alt={speaker.name}
+                            className="h-full w-full object-contain object-center"
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </div>
 
-                  <div className="px-4 pt-3">
-                    <h4 className="font-bebas text-2xl uppercase tracking-[0.02em] text-[#F5A205]">
-                      {speaker.name}
-                    </h4>
-                  </div>
-                  <div className="px-4 pb-4">
-                    <p className="font-jamjuree text-sm leading-relaxed text-white/90 md:text-[15px]">
-                      {speaker.bio}
-                    </p>
-                  </div>
-                </article>
-              ))}
+                        <div className="px-4 pt-3">
+                          <h4 className="font-bebas text-2xl uppercase tracking-[0.02em] text-[#F5A205]">
+                            {speaker.name}
+                          </h4>
+                        </div>
+                        <div className="flex-1 px-4 pb-4">
+                          <p
+                            className="font-jamjuree text-sm leading-relaxed text-white/90 md:text-[15px]"
+                            style={{
+                              display: "-webkit-box",
+                              WebkitLineClamp: 5,
+                              WebkitBoxOrient: "vertical",
+                              overflow: "hidden",
+                            }}
+                          >
+                            {speaker.bio}
+                          </p>
+                        </div>
+                      </article>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {maxSpeakerIndex > 0 ? (
+                <>
+                  <button
+                    type="button"
+                    onClick={goToPreviousSpeakerSlide}
+                    aria-label="Slide anterior de palestrantes"
+                    className="absolute left-2 top-1/2 z-10 -translate-y-1/2 text-[#F5C02B] transition hover:scale-110 hover:text-[#FFD45A] md:left-3"
+                  >
+                    <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" strokeWidth={2.4} />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={goToNextSpeakerSlide}
+                    aria-label="Próximo slide de palestrantes"
+                    className="absolute right-2 top-1/2 z-10 -translate-y-1/2 text-[#F5C02B] transition hover:scale-110 hover:text-[#FFD45A] md:right-3"
+                  >
+                    <ChevronRight className="h-5 w-5 md:h-6 md:w-6" strokeWidth={2.4} />
+                  </button>
+
+                </>
+              ) : null}
             </div>
           </section>
         </div>
