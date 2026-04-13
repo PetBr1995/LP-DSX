@@ -140,15 +140,14 @@ const PassaporteGrupoHomeTeste = ({ onBuyPassaporte }) => {
             seu time.
           </p>
           <div className="mt-4 flex justify-center">
-            <div className="grid h-12 w-12 place-items-center rounded-full border border-[#25D366]/45 bg-[#25D366]/16 shadow-[0_0_24px_rgba(37,211,102,0.35)] md:h-14 md:w-14">
-              <img
-                src="/whatsapp.svg"
-                alt="WhatsApp"
-                className="h-7 w-7 object-contain md:h-8 md:w-8"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
+            <a
+              href="https://wa.me/5592985723838"
+              target="_blank"
+              rel="noreferrer"
+              className="font-jamjuree text-sm font-semibold text-white/90 transition hover:text-white md:text-base"
+            >
+              92 98572-3838
+            </a>
           </div>
         </div>
       </div>
