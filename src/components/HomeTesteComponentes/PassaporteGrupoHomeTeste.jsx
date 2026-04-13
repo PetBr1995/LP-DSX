@@ -144,9 +144,16 @@ const PassaporteGrupoHomeTeste = ({ onBuyPassaporte }) => {
               href="https://wa.me/5592985723838"
               target="_blank"
               rel="noreferrer"
-              className="font-jamjuree text-sm font-semibold text-white/90 transition hover:text-white md:text-base"
+              className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-[#25D366]/45 bg-[#25D366]/16 text-white transition hover:bg-[#25D366]/24"
+              aria-label="Falar no WhatsApp"
             >
-              92 98572-3838
+              <img
+                src="/whatsapp.svg"
+                alt="WhatsApp"
+                className="h-6 w-6 object-contain"
+                loading="lazy"
+                decoding="async"
+              />
             </a>
           </div>
         </div>
