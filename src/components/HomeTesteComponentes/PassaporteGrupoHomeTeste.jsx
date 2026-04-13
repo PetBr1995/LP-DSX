@@ -93,14 +93,14 @@ const PassaporteGrupoHomeTeste = ({ onBuyPassaporte }) => {
                 <p className="mt-2 inline-block rounded-full border border-[#F5D247]/35 bg-black/20 px-3 py-1 text-sm font-black uppercase text-[#F5D247]">
                 PASSAPORTE {item.qtdPessoas}
                 </p>
-                <h4 className="mt-4 origin-left text-3xl font-black uppercase leading-[0.95] text-white transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-3px,44px)_scale(1.05)] sm:text-4xl">
+                <h4 className="mt-4 origin-left text-2xl font-black uppercase leading-[0.95] text-white transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-3px,44px)_scale(1.05)] sm:text-3xl">
                   EM GRUPO {item.desconto}
                 </h4>
 
-                <p className="mt-3 origin-left bg-gradient-to-r from-[#F5D247] to-[#E7A040] bg-clip-text text-2xl font-black leading-[0.9] text-transparent transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-4px,54px)_scale(1.08)] sm:text-3xl">
+                <p className="mt-3 origin-left bg-gradient-to-r from-[#F5D247] to-[#E7A040] bg-clip-text text-xl font-black leading-[1] text-transparent transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-4px,54px)_scale(1.08)] sm:text-2xl">
                   {`R$ ${item.valor} à vista (por pessoa)`}
                 </p>
-                <p className="mt-2 text-sm font-semibold text-white/90">
+                <p className="mt-2 text-xs font-semibold text-white/90 sm:text-sm">
                   {`ou em ${item.installment}`}
                 </p>
 
@@ -123,11 +123,12 @@ const PassaporteGrupoHomeTeste = ({ onBuyPassaporte }) => {
           ))}
         </div>
 
-        <div className="mx-auto mt-8 max-w-4xl rounded-2xl border border-[#3A3222] bg-[#121212] px-5 py-6 text-center md:px-8">
-          <p className="font-jamjuree text-sm font-semibold uppercase text-white/85 md:text-base">
-            Desconto válido para o Passaporte Standard.
-          </p>
-          <h4 className="mt-3 font-anton text-2xl uppercase text-[#F5C02B] md:text-3xl">
+        <p className="mt-8 text-center font-jamjuree text-sm font-semibold text-white/85 md:text-base">
+          Desconto válido para o Passaporte Standard.
+        </p>
+
+        <div className="mx-auto mt-4 max-w-4xl rounded-2xl border border-[#3A3222] bg-[#121212] px-5 py-6 text-center md:px-8">
+          <h4 className="font-anton text-2xl uppercase text-[#F5C02B] md:text-3xl">
             GARANTIR PASSAPORTES DO TIME
           </h4>
           <p className="mt-4 font-jamjuree text-base font-bold text-white md:text-lg">

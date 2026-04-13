@@ -112,6 +112,38 @@ const PassaportesMobileHomeTeste = ({ onBuyPassaporte }) => {
                   {card.nome}
                 </h3>
 
+                {card.nome === "VIP" ? (
+                  <div className="mt-4 space-y-2 rounded-xl border border-[#5A4718]/70 bg-black/30 p-3">
+                    <p className="font-jamjuree text-sm font-bold text-[#F5C02B]">
+                      Para quem quer extrair o máximo do evento.
+                    </p>
+                    <p className="font-jamjuree text-xs leading-relaxed text-white/90">
+                      O VIP não é só acesso ao evento. É uma experiência
+                      diferente desde o momento que você chega.
+                    </p>
+                    <p className="font-jamjuree text-xs leading-relaxed text-white/90">
+                      Você ocupa as primeiras fileiras, recebe kit premium e tem
+                      acesso ao Lounge VIP exclusivo, o espaço onde os
+                      palestrantes também estarão. As conversas mais estratégicas
+                      do DSX acontecem ali.
+                    </p>
+                  </div>
+                ) : null}
+
+                {card.nome === "STANDARD" ? (
+                  <div className="mt-4 space-y-2 rounded-xl border border-[#5A4718]/70 bg-black/30 p-3">
+                    <p className="font-jamjuree text-sm font-bold text-[#F5C02B]">
+                      A porta de entrada para o maior evento de negócios do
+                      Norte.
+                    </p>
+                    <p className="font-jamjuree text-xs leading-relaxed text-white/90">
+                      Dois dias completos de imersão. Acesso a mais de 40
+                      palestras em três palcos simultâneos, feira de negócios e
+                      conteúdo que você realmente aplica.
+                    </p>
+                  </div>
+                ) : null}
+
                 <div className="mt-4">
                   <ul className="space-y-2 rounded-xl bg-black/25 p-3">
                     {card.benefits

@@ -85,7 +85,7 @@ const SquishyPlanCard = ({ card, onBuyPassaporte }) => (
 
     <div className="relative z-10 transform-gpu [transform-style:preserve-3d] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-2px,28px)]">
       {card.badge ? (
-        <p className="pointer-events-none absolute -right-18 top-6 z-20 flex h-8 w-64 rotate-[35deg] items-center justify-center whitespace-nowrap border-y border-[#FF6B6B]/75 bg-[#FF1F1F]/85 text-center text-xl font-black uppercase leading-none tracking-[0.08em] text-white shadow-[0_8px_20px_rgba(0,0,0,0.35)] lg:-right-20 lg:w-72 lg:text-xl">
+        <p className="pointer-events-none absolute -right-18 top-6 z-20 flex h-8 w-64 rotate-[35deg] items-center justify-center whitespace-nowrap border-y border-[#FF6B6B]/75 bg-[#FF1F1F]/85 text-center text-xl font-black uppercase leading-none tracking-[0.08em] text-white shadow-[0_8px_20px_rgba(0,0,0,0.35)] lg:-right-25 lg:w-80 lg:text-xl">
           {card.badge}
         </p>
       ) : (
@@ -98,6 +98,36 @@ const SquishyPlanCard = ({ card, onBuyPassaporte }) => (
       <h3 className="mt-2 origin-left text-4xl font-black uppercase leading-[0.95] text-white transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-3px,46px)_scale(1.05)] lg:text-5xl">
         {card.nome}
       </h3>
+
+      {card.nome === "VIP" ? (
+        <div className="mt-4 space-y-2 rounded-xl border border-[#5A4718]/70 bg-black/30 p-3">
+          <p className="font-jamjuree text-sm font-bold text-[#F5C02B]">
+            Para quem quer extrair o máximo do evento.
+          </p>
+          <p className="font-jamjuree text-xs leading-relaxed text-white/90">
+            O VIP não é só acesso ao evento. É uma experiência diferente desde
+            o momento que você chega.
+          </p>
+          <p className="font-jamjuree text-xs leading-relaxed text-white/90">
+            Você ocupa as primeiras fileiras, recebe kit premium e tem acesso
+            ao Lounge VIP exclusivo, o espaço onde os palestrantes também
+            estarão. As conversas mais estratégicas do DSX acontecem ali.
+          </p>
+        </div>
+      ) : null}
+
+      {card.nome === "STANDARD" ? (
+        <div className="mt-4 space-y-2 rounded-xl border border-[#5A4718]/70 bg-black/30 p-3">
+          <p className="font-jamjuree text-sm font-bold text-[#F5C02B]">
+            A porta de entrada para o maior evento de negócios do Norte.
+          </p>
+          <p className="font-jamjuree text-xs leading-relaxed text-white/90">
+            Dois dias completos de imersão. Acesso a mais de 40 palestras em
+            três palcos simultâneos, feira de negócios e conteúdo que você
+            realmente aplica.
+          </p>
+        </div>
+      ) : null}
 
       <div className="mt-4 transform-gpu transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-1px,32px)]">
         <ul className="space-y-2 rounded-xl bg-black/25 p-3">
