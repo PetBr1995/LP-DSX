@@ -1,12 +1,12 @@
 const FooterSection = () => {
   return (
-    <footer className="relative bg-black px-4 pb-8 pt-0">
-      <div className="mx-auto max-w-6xl space-y-6 text-center">
+    <footer className="relative bg-black px-4 pb-6 pt-0">
+      <div className="mx-auto max-w-6xl space-y-3 text-center">
         <p className="text-[14px] text-white md:text-[15px]">
           Pagamento 100% seguro · Parcelamento em até 12x
         </p>
 
-        <div className="pt-6">
+        <div className="pt-2">
           <p className="text-[13px] text-white md:text-[14px]">
             DSX — Digital Summit Experience © 2026 · Realização: Digital Hub Experience
           </p>
