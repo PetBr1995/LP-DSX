@@ -33,7 +33,7 @@ const NewVendasContent = () => {
   };
 
   return (
-    <section className="bg-black pb-10 pt-8 text-white md:pb-14 md:pt-12">
+    <section className="bg-black pb-10 pt-0 text-white md:pb-14 md:pt-0">
       <AudienceSection items={audienceProfiles} />
       <PassaportesSection
         isMobile={isMobile}

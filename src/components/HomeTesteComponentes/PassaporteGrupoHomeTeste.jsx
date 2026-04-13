@@ -27,7 +27,7 @@ const groupPassports = [
 
 const PassaporteGrupoHomeTeste = ({ onBuyPassaporte }) => {
   return (
-    <section className="pb-10 pt-2 md:pb-14">
+    <section className="pb-10 pt-0 md:pb-14 md:pt-0">
       <div className="mx-auto max-w-6xl px-4">
         <h3 className="text-center font-anton text-2xl uppercase text-white sm:text-3xl md:text-4xl">
           LEVE O SEU TIME

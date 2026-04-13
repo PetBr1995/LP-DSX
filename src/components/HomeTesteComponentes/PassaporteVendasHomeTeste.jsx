@@ -144,7 +144,7 @@ const SquishyPlanCard = ({ card, onBuyPassaporte }) => (
 
 const PassaporteVendasHomeTeste = ({ onBuyPassaporte }) => {
   return (
-    <section className="relative overflow-hidden py-10 md:py-14">
+    <section className="relative overflow-hidden pb-10 pt-0 md:pb-14 md:pt-0">
       <div className="mx-auto max-w-6xl px-4">
         <h2 className="text-center font-anton text-2xl uppercase leading-tight text-white sm:text-3xl md:text-4xl">
           GARANTA O SEU PASSAPORTE PARA 2 DIAS DE EVENTO

@@ -4,7 +4,7 @@ const MotionArticle = motion.article;
 
 const TestimonialsSection = ({ items }) => {
   return (
-    <div className="bg-black py-16 md:py-20">
+    <div className="bg-black pb-16 pt-0 md:pb-20 md:pt-0">
       <div className="mx-auto max-w-6xl px-4">
         <h2 className="text-center font-anton text-[30px] uppercase leading-[1.12] text-white md:text-[52px] md:leading-[1.05]">
           O DSX mudou o jogo para quem participou

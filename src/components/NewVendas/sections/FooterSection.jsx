@@ -1,6 +1,6 @@
 const FooterSection = () => {
   return (
-    <footer className="relative bg-black px-4 py-8">
+    <footer className="relative bg-black px-4 pb-8 pt-0">
       <div className="mx-auto max-w-6xl space-y-6 text-center">
         <p className="text-[14px] text-white md:text-[15px]">
           Pagamento 100% seguro · Parcelamento em até 12x

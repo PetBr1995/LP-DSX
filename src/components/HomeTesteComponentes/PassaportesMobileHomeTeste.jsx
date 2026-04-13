@@ -47,7 +47,7 @@ const cards = [
 
 const PassaportesMobileHomeTeste = ({ onBuyPassaporte }) => {
   return (
-    <section className="py-10">
+    <section className="pb-10 pt-0">
       <div className="mx-auto max-w-6xl px-4">
         <h2 className="text-center font-anton text-2xl uppercase leading-tight text-white sm:text-3xl">
           GARANTA O SEU PASSAPORTE <br /> PARA 2 DIAS DE EVENTO

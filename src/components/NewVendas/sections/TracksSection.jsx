@@ -32,7 +32,7 @@ const getTrackIcon = (title = "") => {
 
 const TracksSection = ({ items }) => {
   return (
-    <section className="bg-black py-16 md:py-20">
+    <section className="bg-black pb-16 pt-0 md:pb-20 md:pt-0">
       <div className="mx-auto max-w-6xl px-4">
         <h2 className="text-center font-anton text-[30px] uppercase leading-[1.12] text-white md:text-[52px] md:leading-[1.04]">
           O que você vai levar para a sua empresa?
@@ -103,4 +103,3 @@ const TracksSection = ({ items }) => {
 };
 
 export default TracksSection;
-
