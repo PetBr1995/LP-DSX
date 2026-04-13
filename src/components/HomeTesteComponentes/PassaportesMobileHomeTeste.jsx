@@ -50,7 +50,7 @@ const PassaportesMobileHomeTeste = ({ onBuyPassaporte }) => {
     <section className="py-10">
       <div className="mx-auto max-w-6xl px-4">
         <h2 className="text-center font-anton text-2xl uppercase leading-tight text-white sm:text-3xl">
-          GARANTA O SEU PASSAPORTE PARA 2 DIAS DE EVENTO
+          GARANTA O SEU PASSAPORTE <br /> PARA 2 DIAS DE EVENTO
         </h2>
         <p className="mt-3 text-center text-base font-black uppercase tracking-[0.04em] text-[#F5C02B] sm:text-lg">
           VAGAS LIMITADAS
@@ -98,7 +98,7 @@ const PassaportesMobileHomeTeste = ({ onBuyPassaporte }) => {
 
               <div className="relative z-10 aquarium-content transform-gpu [transform-style:preserve-3d] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-2px,24px)]">
                 {card.badge ? (
-                  <p className="pointer-events-none absolute -right-40 top-0 z-20 flex h-7 w-100 rotate-[35deg] items-center justify-center whitespace-nowrap border-y border-red-500/60 bg-red-900/55 text-center text-[10px] font-black uppercase leading-none tracking-[0.08em] text-red-300 shadow-[0_6px_16px_rgba(0,0,0,0.35)] sm:-right-18 sm:w-64 sm:text-xs">
+                  <p className="pointer-events-none absolute -right-40 top-0 z-20 flex h-8 w-100 rotate-[35deg] items-center justify-center whitespace-nowrap border-y border-[#FF6B6B]/75 bg-[#FF1F1F]/85 text-center text-sm font-black uppercase leading-none tracking-[0.06em] text-white shadow-[0_6px_16px_rgba(0,0,0,0.35)] sm:-right-18 sm:w-64 sm:text-base">
                     {card.badge}
                   </p>
                 ) : (

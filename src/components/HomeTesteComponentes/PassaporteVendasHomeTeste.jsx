@@ -85,7 +85,7 @@ const SquishyPlanCard = ({ card, onBuyPassaporte }) => (
 
     <div className="relative z-10 transform-gpu [transform-style:preserve-3d] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:translate3d(0,-2px,28px)]">
       {card.badge ? (
-        <p className="pointer-events-none absolute -right-18 top-6 z-20 flex h-8 w-64 rotate-[35deg] items-center justify-center whitespace-nowrap border-y border-red-500/60 bg-red-900/55 text-center text-xs font-black uppercase leading-none tracking-[0.08em] text-red-300 shadow-[0_8px_20px_rgba(0,0,0,0.35)] lg:-right-20 lg:w-72 lg:text-sm">
+        <p className="pointer-events-none absolute -right-18 top-6 z-20 flex h-8 w-64 rotate-[35deg] items-center justify-center whitespace-nowrap border-y border-[#FF6B6B]/75 bg-[#FF1F1F]/85 text-center text-xl font-black uppercase leading-none tracking-[0.08em] text-white shadow-[0_8px_20px_rgba(0,0,0,0.35)] lg:-right-20 lg:w-72 lg:text-xl">
           {card.badge}
         </p>
       ) : (

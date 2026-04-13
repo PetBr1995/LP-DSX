@@ -28,7 +28,7 @@ const metrics = [
 ];
 
 const experienceHighlights = [
-  { value: "3", label: "palcos simultâneos" },
+  { value: "3 PALCOS", label: "simultâneos" },
   { value: "VIP", label: "área exclusiva" },
   { value: "FEIRA", label: "de negócios" },
   { value: "PRAÇA", label: "de alimentação" },
@@ -188,6 +188,18 @@ const NewVendasHero = () => {
 
   const maxSpeakerIndex = Math.max(mainSpeakers.length - cardsPerView, 0);
 
+  useEffect(() => {
+    if (maxSpeakerIndex === 0 || isDraggingSpeakers) return;
+
+    const autoplayId = window.setInterval(() => {
+      setCurrentSpeakerIndex((current) =>
+        current >= maxSpeakerIndex ? 0 : current + 1,
+      );
+    }, 4200);
+
+    return () => window.clearInterval(autoplayId);
+  }, [maxSpeakerIndex, isDraggingSpeakers]);
+
   const goToNextSpeakerSlide = () => {
     setCurrentSpeakerIndex((current) => (current >= maxSpeakerIndex ? 0 : current + 1));
   };
@@ -247,7 +259,7 @@ const NewVendasHero = () => {
             </p>
           </div>
           <div>
-            <h3 className="font-anton text-[clamp(1.5rem,2.8vw,2rem)] uppercase tracking-[0.03em]">
+            <h3 className="font-anton text-[clamp(1.3rem,2.8vw,2rem)] uppercase tracking-[0.03em]">
               Onde os maiores especialistas <br /> do país se encontram.
             </h3>
           </div>
