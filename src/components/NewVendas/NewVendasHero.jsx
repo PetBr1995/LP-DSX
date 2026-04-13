@@ -107,7 +107,7 @@ const NewVendasHero = () => {
       />
       <div className="relative z-10 mx-auto max-w-6xl px-4 pb-10 pt-10 md:pb-12 md:pt-14">
         <div className="text-center space-y-5 md:space-y-6">
-          <h1 className="mx-auto max-w-6xl font-anton text-[clamp(1rem,5vw,4.8rem)] uppercase leading-[1.08] tracking-[0.012em] text-[#F5C02B] md:leading-[1.12]">
+          <h1 className="mx-auto max-w-6xl font-anton text-[clamp(1.1rem,5vw,4.8rem)] uppercase leading-[1.08] tracking-[0.012em] text-[#F5C02B] md:leading-[1.12]">
             <span className="block whitespace-nowrap">
               O maior evento de negócios,
             </span>
@@ -118,13 +118,13 @@ const NewVendasHero = () => {
               do Norte
             </span>
           </h1>
-          <h2 className="mx-auto flex flex-wrap items-center justify-center gap-2 font-anton text-[clamp(1.1rem,3.4vw,2rem)] uppercase leading-[1.1] tracking-[0.03em] text-white">
+          <h2 className="mx-auto flex flex-wrap items-center justify-center gap-2 font-anton text-[clamp(1.6rem,3.4vw,2rem)] uppercase leading-[1.1] tracking-[0.03em] text-white">
             <span>O</span>
             <span className="inline-flex items-center">
               <img
                 src="/logo-dsx-horizontal-2.svg"
                 alt="DSX"
-                className="block h-[3.5em] w-auto object-contain"
+                className="block h-[1.3em] w-auto object-contain"
                 style={{ clipPath: "inset(0 1px 0 0)" }}
                 loading="eager"
                 decoding="async"
@@ -133,26 +133,26 @@ const NewVendasHero = () => {
             <span>está de volta</span>
           </h2>
           <div className="mx-auto max-w-4xl">
-            <p className="text-center text-[clamp(1.15rem,4.8vw,2.6rem)] leading-[1.2] text-white">
+            <p className="text-center text-[clamp(1rem,4.8vw,2.6rem)] leading-[1.1] text-white/90">
               <span className="block">Dois dias de conteúdo estratégico</span>
               <span className="block">e conexões de alto nível.</span>
             </p>
           </div>
-          <div className="mx-auto flex max-w-4xl flex-col items-center gap-2 text-center">
-            <div className="flex items-center justify-center gap-3 text-[clamp(1.1rem,4.5vw,2.1rem)]">
-              <span className="grid h-7 w-7 shrink-0 place-items-center">
+          <div className="mx-auto flex max-w-4xl flex-col items-start gap-2 text-center">
+            <div className="flex items-center justify-center gap-1 text-[clamp(1rem,4.5vw,2.1rem)] leading-[1.1]">
+              <span className="grid h-auto w-auto shrink-0 place-items-center">
                 <Calendar
-                  className="h-6 w-6 text-[#F5C02B]"
+                  className="h-auto w-auto text-[#F5C02B]"
                   strokeWidth={2.2}
                 />
               </span>
-              <p>23 e 24 de Julho.</p>
+              <p className="text-white/90">23 e 24 de Julho.</p>
             </div>
-            <div className="flex items-start justify-center gap-3 text-[clamp(1.1rem,4.5vw,2.1rem)]">
-              <span className="mt-1 grid h-7 w-7 shrink-0 place-items-center">
-                <MapPin className="h-6 w-6 text-[#F5C02B]" strokeWidth={2.2} />
+            <div className="flex items-center justify-center gap-1 text-[clamp(.4rem,4.5vw,2.1rem)] leading-[1.1]">
+              <span className="mt-1 grid h-auto w-auto shrink-0 place-items-center">
+                <MapPin className=" mb-3 h-auto w-auto text-[#F5C02B]" strokeWidth={2.2} />
               </span>
-              <p>
+              <p className="text-white/90">
                 <span className="block">
                   Centro de Convenções Vasco Vasques
                 </span>
