@@ -40,7 +40,23 @@
     allSectionsEventSent: false,
   };
 
+  function updatePageContext(nextUrl) {
+    try {
+      var safeUrl = String(nextUrl || window.location.href || "");
+      var parsed = new URL(safeUrl, window.location.origin);
+      state.pageUrl = parsed.href;
+      state.page = parsed.pathname + parsed.search + parsed.hash;
+      return;
+    } catch {
+      // fallback para ambientes sem URL valida
+    }
+
+    state.pageUrl = window.location.href;
+    state.page = window.location.pathname + window.location.search + window.location.hash;
+  }
+
   function init() {
+    updatePageContext(window.location.href);
     trackPageView();
     trackSectionCompletion();
     trackBottomCompletion();
@@ -304,6 +320,9 @@
       track: function (name, data) {
         if (!name) return;
         pushEvent(String(name), data || {});
+      },
+      setPageContext: function (nextUrl) {
+        updatePageContext(nextUrl);
       },
     };
   }

@@ -1,6 +1,7 @@
 import { Suspense, lazy } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import PreserveUtmLinks from "./components/PreserveUtmLinks";
+import RoutePageTracking from "./components/RoutePageTracking";
 import Vendas2 from "./pages/Vendas2";
 import Vendas from "./pages/Vendas";
 
@@ -20,6 +21,7 @@ const App = () => {
         Pular para o conteúdo principal
       </a>
       <PreserveUtmLinks />
+      <RoutePageTracking />
       <div id="main-content" tabIndex={-1}>
         <Suspense fallback={<div className="min-h-screen bg-black" />}>
           <Routes>
