@@ -1,6 +1,9 @@
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import { motion } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect, useState } from "react";
 
 import { InfoNovosPalestrantes } from "../data/InfoNovosPalestrantes";
 import CTAButton from "./Mascaras/CTAButton";
@@ -8,6 +11,13 @@ import { smoothEase } from "../utils/motion";
 import { buildBackgroundImageVars } from "../utils/imageSet";
 
 const SlideNovosPalestrantes = ({ ctaLink = "/vendas" }) => {
+  const [swiperRef, setSwiperRef] = useState(null);
+
+  useEffect(() => {
+    if (!swiperRef?.autoplay) return;
+    swiperRef.autoplay.start();
+  }, [swiperRef]);
+
   const inViewOptions = {
     once: true,
     amount: 0.24,
@@ -72,38 +82,62 @@ const SlideNovosPalestrantes = ({ ctaLink = "/vendas" }) => {
         </motion.h5>
 
         <motion.div variants={fadeUp} className="my-10 max-w-7xl mx-auto px-4">
-          <Swiper
-            spaceBetween={16}
-            slidesPerView="auto"
-            loop={false}
-            grabCursor={true}
-            touchStartPreventDefault={false}
-            className="cursor-grab active:cursor-grabbing"
-          >
-            {InfoNovosPalestrantes.map((inf, index) => (
-              <SwiperSlide key={index} className="!w-[78vw] max-w-[260px] sm:!w-[230px]">
-                <div
-                  className="bg-modern-image relative overflow-hidden bg-black bg-cover bg-top pb-4 px-4 rounded-xl shadow-lg h-80 flex flex-col justify-end"
-                  style={{
-                    ...buildBackgroundImageVars(inf.img),
-                    backgroundSize: inf.bgSize,
-                    backgroundPosition: inf.bgPosition,
-                  }}
-                >
-                  <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/90 via-black/60 to-transparent pointer-events-none" />
-                  <div className="flex flex-col justify-start items-center h-18">
-                    <h4 className="relative z-50 font-bebas text-[#F5A205] text-3xl text-center uppercase">
-                      {inf.nome}
-                    </h4>
-                    <p className="relative z-40 font-roboto font-medium text-sm text-white text-center">
-                      {inf.desc}
-                    </p>
+          <div className="relative">
+            <Swiper
+              modules={[Autoplay]}
+              spaceBetween={16}
+              slidesPerView="auto"
+              loop={true}
+              autoplay={{
+                delay: 5000,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: false,
+              }}
+              grabCursor={true}
+              touchStartPreventDefault={false}
+              className="cursor-grab active:cursor-grabbing"
+              onSwiper={setSwiperRef}
+            >
+              {InfoNovosPalestrantes.map((inf, index) => (
+                <SwiperSlide key={index} className="!w-[78vw] max-w-[260px] sm:!w-[230px]">
+                  <div
+                    className="bg-modern-image relative overflow-hidden bg-black bg-cover bg-top pb-4 px-4 rounded-xl shadow-lg h-80 flex flex-col justify-end"
+                    style={{
+                      ...buildBackgroundImageVars(inf.img),
+                      backgroundSize: inf.bgSize,
+                      backgroundPosition: inf.bgPosition,
+                    }}
+                  >
+                    <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/90 via-black/60 to-transparent pointer-events-none" />
+                    <div className="flex flex-col justify-start items-center h-18">
+                      <h4 className="relative z-50 font-bebas text-[#F5A205] text-3xl text-center uppercase">
+                        {inf.nome}
+                      </h4>
+                      <p className="relative z-40 font-roboto font-medium text-sm text-white text-center">
+                        {inf.desc}
+                      </p>
+                    </div>
                   </div>
-
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            <button
+              type="button"
+              onClick={() => swiperRef?.slidePrev()}
+              aria-label="Slide anterior de palestrantes"
+              className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/35 p-1.5 text-[#F5A205] backdrop-blur-[2px] transition hover:scale-110 hover:bg-black/50 hover:text-[#D98A00] md:left-3"
+            >
+              <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" strokeWidth={2.4} />
+            </button>
+            <button
+              type="button"
+              onClick={() => swiperRef?.slideNext()}
+              aria-label="Próximo slide de palestrantes"
+              className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/35 p-1.5 text-[#F5A205] backdrop-blur-[2px] transition hover:scale-110 hover:bg-black/50 hover:text-[#D98A00] md:right-3"
+            >
+              <ChevronRight className="h-5 w-5 md:h-6 md:w-6" strokeWidth={2.4} />
+            </button>
+          </div>
         </motion.div>
 
         <motion.div variants={fadeUp} className="flex justify-center items-center">
