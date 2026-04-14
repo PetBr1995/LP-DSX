@@ -121,9 +121,9 @@ const mainSpeakers = [
     bio: "Psicóloga, diretora operacional da Singulari e especialista na aplicação prática de inteligência artificial em contextos reais de negócio.",
   },
   {
-    name: "Luís Eduardo Leal",
-    image: "/palestrantes/LuizEduardoLeal.png",
-    bio: "Diretor da Rumo MKT e da CDL Manaus, consultor em marketing digital e um dos nomes mais ativos no ecossistema empreendedor do Amazonas.",
+    name: "Giullya Becker",
+    image: "/novas-palestrantes/GIULLYA-BECKER.png",
+    bio: "Giullya Becker é publicitária e criadora do Método dos Conteúdos Magnéticos. Pioneira em oficinas práticas de criação, já formou milhares de alunos e se consolidou como referência em conteúdos que geram conexão e vendas com presença no digital.",
   },
 ];
 
