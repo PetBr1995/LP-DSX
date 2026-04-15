@@ -1,5 +1,6 @@
 ﻿import { withHublaUtm } from "../../utils/hublaUtm";
 import { Check } from "lucide-react";
+import { rememberDsxFormOrigin } from "../../utils/formOrigin";
 
 const cards = [
   {
@@ -133,8 +134,10 @@ const PassaportesMobileHomeTeste = ({ onBuyPassaporte }) => {
                   data-cta="sympla"
                   onClick={() => {
                     const targetLink = withHublaUtm(card.link);
+                    const formOrigin = card.nome;
+                    rememberDsxFormOrigin(formOrigin);
                     if (onBuyPassaporte) {
-                      onBuyPassaporte(targetLink);
+                      onBuyPassaporte(targetLink, formOrigin);
                       return;
                     }
                     window.open(targetLink, "_blank");

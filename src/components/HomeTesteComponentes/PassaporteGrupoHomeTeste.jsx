@@ -1,5 +1,7 @@
 ﻿import { withHublaUtm } from "../../utils/hublaUtm";
 
+import { rememberDsxFormOrigin } from "../../utils/formOrigin";
+
 const groupPassports = [
   {
     qtdPessoas: "5 pessoas",
@@ -68,8 +70,10 @@ const PassaporteGrupoHomeTeste = ({ onBuyPassaporte }) => {
                   data-cta="sympla"
                   onClick={() => {
                     const targetLink = withHublaUtm(item.link);
+                    const formOrigin = `Grupo ${item.qtdPessoas}`;
+                    rememberDsxFormOrigin(formOrigin);
                     if (onBuyPassaporte) {
-                      onBuyPassaporte(targetLink);
+                      onBuyPassaporte(targetLink, formOrigin);
                       return;
                     }
                     window.open(targetLink, "_blank");

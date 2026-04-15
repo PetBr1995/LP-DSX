@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ImpactoVendas from "../ComponentsVendas/ImpactoVendas";
 import { audienceProfiles, faqItems, tracks } from "./newVendasData";
+import { rememberDsxFormOrigin } from "../../utils/formOrigin";
 import {
   AudienceSection,
   BusinessExperienceSection,
@@ -24,7 +25,10 @@ const NewVendasContent = () => {
     return () => window.removeEventListener("resize", checkIsMobile);
   }, []);
 
-  const handleBuyPassaporte = (targetLink) => {
+  const handleBuyPassaporte = (targetLink, formOrigin) => {
+    if (formOrigin) {
+      rememberDsxFormOrigin(formOrigin);
+    }
     window.open(targetLink, "_blank", "noopener,noreferrer");
   };
 

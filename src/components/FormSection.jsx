@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { formatDsxFormOrigin } from "../utils/formOrigin";
 
 /**
  * ⚠️ CHAVES FAKE — APENAS EXEMPLO DIDÁTICO
@@ -151,12 +152,13 @@ const FormSection = () => {
     }
 
     setStatus("loading");
+    const formOrigin = "Home Principal";
 
     const payload = {
       event_type: "CONVERSION",
       event_family: "CDP",
       payload: {
-        conversion_identifier: "LP - Dsx 2026",
+        conversion_identifier: `LP - DSX 2026 - Formulario ${formOrigin}`,
         name: form.name.trim(),
         email: form.email.trim().toLowerCase(),
         personal_phone: formatWhatsappE164(form.whatsapp),
@@ -174,6 +176,7 @@ const FormSection = () => {
         cf_utm_content: sourceData.utm_content,
         cf_utm_source: sourceData.utm_source,
         cf_url_de_conversao: sourceData.page_url,
+        cf_origem_formulario: formatDsxFormOrigin(formOrigin, "Home Principal"),
       },
       tags: ["lista-antecipada", "dsx"],
       source: "landing-save-the-date",

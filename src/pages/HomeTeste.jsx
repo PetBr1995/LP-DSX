@@ -1,6 +1,11 @@
 import { Suspense, lazy, useEffect, useMemo, useRef, useState } from "react";
 import useScrollToHash from "../hooks/useScrollToHash";
 import { getSupabaseClient, isSupabaseConfigured } from "../lib/supabaseClient";
+import {
+  formatDsxFormOrigin,
+  readDsxFormOrigin,
+  rememberDsxFormOrigin,
+} from "../utils/formOrigin";
 
 import SlideNovosPalestrantes from "../components/SlideNovosPalestrantes";
 import HeroSection from "../components/HeroSection";
@@ -121,6 +126,9 @@ const HomeTeste = () => {
   const [hasClosedAutoPopup, setHasClosedAutoPopup] = useState(false);
   const [hasLeadConverted, setHasLeadConverted] = useState(false);
   const [leadModalOrigin, setLeadModalOrigin] = useState("auto");
+  const [leadFormOrigin, setLeadFormOrigin] = useState(() =>
+    readDsxFormOrigin("Home Principal")
+  );
 
   const [leadForm, setLeadForm] = useState({
     name: "",
@@ -681,8 +689,11 @@ const HomeTeste = () => {
     setShowLeadModal(false);
   };
 
-  const handleBuyPassaporte = (targetLink) => {
+  const handleBuyPassaporte = (targetLink, formOrigin) => {
     if (!targetLink) return;
+    const resolvedFormOrigin = formOrigin || readDsxFormOrigin("Checkout");
+    setLeadFormOrigin(resolvedFormOrigin);
+    rememberDsxFormOrigin(resolvedFormOrigin);
 
     dispatchJourneyEvent("buy_button_clicked", {
       target_link: targetLink,
@@ -744,12 +755,16 @@ const HomeTeste = () => {
       const email = formData.get("email")?.toString().trim().toLowerCase() || "";
       const phone = formData.get("phone")?.toString().trim() || "";
       const cargo = formData.get("cargo")?.toString().trim() || "";
+      const resolvedFormOrigin =
+        leadModalOrigin === "checkout"
+          ? leadFormOrigin || readDsxFormOrigin("Checkout")
+          : "Home Principal";
 
       const payload = {
         event_type: "CONVERSION",
         event_family: "CDP",
         payload: {
-          conversion_identifier: "LP - DSX 2026",
+          conversion_identifier: `LP - DSX 2026 - Formulario ${resolvedFormOrigin}`,
           name,
           email,
           personal_phone: phone,
@@ -766,6 +781,10 @@ const HomeTeste = () => {
           cf_utm_content: sourceData.utm_content,
           cf_utm_source: sourceData.utm_source,
           cf_url_de_conversao: sourceData.page_url,
+          cf_origem_formulario: formatDsxFormOrigin(
+            resolvedFormOrigin,
+            "Home Principal"
+          ),
         },
         tags: ["dsx-hometeste", "popup"],
         source: "landing-home-teste",

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { formatDsxFormOrigin } from "../../utils/formOrigin";
 
 // ===================
 // Utils
@@ -143,12 +144,13 @@ const FormVendas = () => {
 
     setStatus("loading");
     setMessage("");
+    const formOrigin = "NewVendas";
 
     const payload = {
       event_type: "CONVERSION",
       event_family: "CDP",
       payload: {
-        conversion_identifier: "LP - DSX VENDAS",
+        conversion_identifier: `LP - DSX 2026 - Formulario ${formOrigin}`,
         name: form.name.trim(),
         email: form.email.trim().toLowerCase(),
         personal_phone: formatWhatsappE164(form.whatsapp),
@@ -165,6 +167,7 @@ const FormVendas = () => {
         cf_utm_term: sourceData.utm_term,
         cf_utm_content: sourceData.utm_content,
         cf_url_de_conversao: sourceData.page_url,
+        cf_origem_formulario: formatDsxFormOrigin(formOrigin, "NewVendas"),
       },
       tags: ["dsx-vendas"],
       source: "landing-vendas",
