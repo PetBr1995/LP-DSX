@@ -120,6 +120,103 @@ function LazyMountSection({
 }
 
 const HomeTeste = () => {
+  useEffect(() => {
+    const pageTitle = "DSX | Digital Summit Experience";
+    const pageDescription =
+      "DSX 2026: o maior evento de negócios, marketing, vendas e inovação do Norte. Dias 23 e 24 de julho, em Manaus.";
+    const pageUrl = "https://dsx.com.vc/";
+    const ogImage = "https://dsx.com.vc/og-home-dsx-2026.jpg";
+
+    document.title = pageTitle;
+
+    const updates = [
+      { type: "name", key: "description", value: pageDescription },
+      { type: "property", key: "og:type", value: "website" },
+      { type: "property", key: "og:title", value: pageTitle },
+      { type: "property", key: "og:description", value: pageDescription },
+      { type: "property", key: "og:url", value: pageUrl },
+      { type: "property", key: "og:image", value: ogImage },
+      { type: "name", key: "twitter:card", value: "summary_large_image" },
+      { type: "name", key: "twitter:title", value: pageTitle },
+      { type: "name", key: "twitter:description", value: pageDescription },
+      { type: "name", key: "twitter:image", value: ogImage },
+      { type: "name", key: "twitter:url", value: pageUrl },
+    ];
+
+    const previousTags = updates.map((item) => {
+      const selector =
+        item.type === "name"
+          ? `meta[name="${item.key}"]`
+          : `meta[property="${item.key}"]`;
+      let tag = document.head.querySelector(selector);
+      const existed = Boolean(tag);
+      const previousContent = tag?.getAttribute("content");
+
+      if (!tag) {
+        tag = document.createElement("meta");
+        tag.setAttribute(item.type, item.key);
+        document.head.appendChild(tag);
+      }
+
+      tag.setAttribute("content", item.value);
+      return { tag, existed, previousContent };
+    });
+
+    let canonicalTag = document.head.querySelector('link[rel="canonical"]');
+    const canonicalExisted = Boolean(canonicalTag);
+    const previousCanonical = canonicalTag?.getAttribute("href");
+
+    if (!canonicalTag) {
+      canonicalTag = document.createElement("link");
+      canonicalTag.setAttribute("rel", "canonical");
+      document.head.appendChild(canonicalTag);
+    }
+    canonicalTag.setAttribute("href", pageUrl);
+
+    const iconSelector = 'link[rel="icon"]';
+    let iconTag = document.head.querySelector(iconSelector);
+    const iconExisted = Boolean(iconTag);
+    const previousIconHref = iconTag?.getAttribute("href");
+
+    if (!iconTag) {
+      iconTag = document.createElement("link");
+      iconTag.setAttribute("rel", "icon");
+      iconTag.setAttribute("type", "image/png");
+      document.head.appendChild(iconTag);
+    }
+    iconTag.setAttribute("href", "/favicon-dsx-new.png");
+
+    return () => {
+      previousTags.forEach(({ tag, existed, previousContent }) => {
+        if (!existed) {
+          tag.remove();
+          return;
+        }
+        if (previousContent === null) {
+          tag.removeAttribute("content");
+        } else {
+          tag.setAttribute("content", previousContent);
+        }
+      });
+
+      if (!canonicalExisted) {
+        canonicalTag?.remove();
+      } else if (previousCanonical === null) {
+        canonicalTag?.removeAttribute("href");
+      } else {
+        canonicalTag?.setAttribute("href", previousCanonical);
+      }
+
+      if (!iconExisted) {
+        iconTag?.remove();
+      } else if (previousIconHref === null) {
+        iconTag?.removeAttribute("href");
+      } else {
+        iconTag?.setAttribute("href", previousIconHref);
+      }
+    };
+  }, []);
+
   const [showTimerHeader, setShowTimerHeader] = useState(false);
   const [showLeadModal, setShowLeadModal] = useState(false);
   const [hasAutoPopupShown, setHasAutoPopupShown] = useState(false);
