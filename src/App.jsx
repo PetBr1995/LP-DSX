@@ -13,6 +13,9 @@ const WhatsappPage = lazy(() => import("./pages/WhatsappPage"));
 const TesteAnimation = lazy(() => import("./pages/testeAnimation"));
 const Checkout = lazy(() => import("./pages/Checkout"));
 const NewVendas = lazy(() => import("./pages/NewVendas"));
+const SpeakerLandingPage = lazy(() =>
+  import("./features/SpeakerLanding/SpeakerLandingPage"),
+);
 
 const App = () => {
   return (
@@ -33,6 +36,14 @@ const App = () => {
             <Route path="/testeanimation" element={<TesteAnimation />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/vendas" element={<NewVendas />} />
+            <Route
+              path="/lp/segmento/:slug"
+              element={<SpeakerLandingPage />}
+            />
+            <Route
+              path="/lp/:slug"
+              element={<SpeakerLandingPage />}
+            />
             <Route path="/sobre" element={<Navigate to="/" replace />} />
             <Route path="/teste" element={<Vendas/>} />
           </Routes>
