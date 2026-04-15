@@ -23,7 +23,7 @@ const segmentLandingList = [
     name: "Marketing",
     image: "/BannerCallToActionVendas.png",
     category: "Segmento Estratégico",
-    headline: "Segmento de Marketing no DSX 2026",
+    headline: "Marketing no DSX 2026",
     subtitle:
       "Estratégias práticas para posicionar sua marca, aumentar demanda e transformar conteúdo em crescimento previsível.",
     hook:

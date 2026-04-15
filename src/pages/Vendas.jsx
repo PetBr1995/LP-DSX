@@ -76,6 +76,20 @@ const Vendas = () => {
 
     canonicalTag.setAttribute("href", pageUrl);
 
+    const iconSelector = 'link[rel="icon"]';
+    let iconTag = document.head.querySelector(iconSelector);
+    const iconExisted = Boolean(iconTag);
+    const previousIconHref = iconTag?.getAttribute("href");
+
+    if (!iconTag) {
+      iconTag = document.createElement("link");
+      iconTag.setAttribute("rel", "icon");
+      iconTag.setAttribute("type", "image/png");
+      document.head.appendChild(iconTag);
+    }
+
+    iconTag.setAttribute("href", "/favicon-dsx-new.png");
+
     return () => {
       previousTags.forEach(({ tag, existed, previousContent }) => {
         if (!existed) {
@@ -96,6 +110,14 @@ const Vendas = () => {
         canonicalTag?.removeAttribute("href");
       } else {
         canonicalTag?.setAttribute("href", previousCanonical);
+      }
+
+      if (!iconExisted) {
+        iconTag?.remove();
+      } else if (previousIconHref === null) {
+        iconTag?.removeAttribute("href");
+      } else {
+        iconTag?.setAttribute("href", previousIconHref);
       }
     };
   }, []);
