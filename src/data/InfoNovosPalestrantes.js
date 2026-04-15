@@ -105,6 +105,12 @@ export const InfoNovosPalestrantes = [
     badge: "Nacional",
   },
   {
+    nome: "Fabricio Alva",
+    desc: "CEO do Grupo Digital e Consultor empresarial",
+    img: "/novas-palestrantes/slide-fabricio-alva.PNG",
+    badge: "Local",
+  },
+  {
     nome: "",
     desc: "",
     img: "/SILHUETA-1.png",
