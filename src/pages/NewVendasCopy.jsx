@@ -1,15 +1,95 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   NewVendasContent,
   NewVendasHero,
 } from "../components/NewVendas";
 import NewVendasHeaderMask from "../components/NewVendas/NewVendasHeaderMask";
+import LeadPopupFormHomeTeste from "../components/HomeTesteComponentes/LeadPopupFormHomeTeste";
+import { getSupabaseClient, isSupabaseConfigured } from "../lib/supabaseClient";
+import { formatDsxFormOrigin } from "../utils/formOrigin";
 
 const NEW_VENDAS_SYMPLA_URL =
   "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721";
+const RD_API_URL =
+  "https://api.rd.services/platform/conversions?api_key=MHnWDjBYARQKdwUsfZRbjtVmPEyoHnSqtgFz";
 
-const NewVendas = () => {
+function onlyDigits(value = "") {
+  return value.replace(/\D/g, "");
+}
+
+function isValidEmail(email = "") {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+}
+
+function normalizeHostname(value = "") {
+  return String(value || "")
+    .trim()
+    .toLowerCase()
+    .replace(/^www\./, "");
+}
+
+function detectSiteOriginFromUrl(value = "") {
+  if (!value) return "";
+
+  try {
+    const hostname = normalizeHostname(new URL(value).hostname);
+    if (!hostname) return "";
+    if (hostname.includes("dsx.com.vc")) return "dsx";
+    if (hostname.includes("digitalhub.com.vc")) return "digitalhub";
+    if (hostname.includes("digitaleduca.com.vc")) return "digitaleduca";
+    return hostname;
+  } catch {
+    return "";
+  }
+}
+
+function isMissingColumnError(error) {
+  const code = String(error?.code || "").toUpperCase();
+  const message = String(error?.message || "").toLowerCase();
+  return code === "PGRST204" || message.includes("column") || message.includes("schema cache");
+}
+
+const NewVendasCopy = () => {
   const [showStickyCta, setShowStickyCta] = useState(false);
+  const [showLeadModal, setShowLeadModal] = useState(false);
+  const [leadForm, setLeadForm] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    cargo: "",
+  });
+  const [sourceData, setSourceData] = useState({
+    page_url: "",
+    site_origin: "",
+    site_hostname: "",
+    utm_source: "",
+    utm_medium: "",
+    utm_campaign: "",
+    utm_term: "",
+    utm_content: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [mensagem, setMensagem] = useState("");
+  const [leadStatus, setLeadStatus] = useState("idle");
+
+  const errors = useMemo(() => {
+    const currentErrors = {};
+
+    if (!leadForm.name.trim()) currentErrors.name = "Informe seu nome completo.";
+    if (!isValidEmail(leadForm.email)) currentErrors.email = "Informe um e-mail válido.";
+
+    const phone = onlyDigits(leadForm.phone);
+    if (!(phone.length === 10 || phone.length === 11)) {
+      currentErrors.phone = "Informe um WhatsApp com DDD.";
+    }
+
+    if (!leadForm.cargo) currentErrors.cargo = "Selecione seu perfil.";
+
+    return currentErrors;
+  }, [leadForm]);
+
+  const isLeadFormValid = Object.keys(errors).length === 0;
+  const canSubmitLead = !loading;
 
   useEffect(() => {
     const pageTitle = "Ingressos DSX 2026 | 3º Lote Aberto";
@@ -143,6 +223,24 @@ const NewVendas = () => {
   }, []);
 
   useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentUrl = window.location.href;
+    const siteHostname = normalizeHostname(window.location.hostname);
+    const siteOrigin = detectSiteOriginFromUrl(currentUrl) || siteHostname;
+
+    setSourceData({
+      page_url: currentUrl,
+      site_origin: siteOrigin,
+      site_hostname: siteHostname,
+      utm_source: urlParams.get("utm_source") || "",
+      utm_medium: urlParams.get("utm_medium") || "",
+      utm_campaign: urlParams.get("utm_campaign") || "",
+      utm_term: urlParams.get("utm_term") || "",
+      utm_content: urlParams.get("utm_content") || "",
+    });
+  }, []);
+
+  useEffect(() => {
     const ctaElement = document.getElementById("newvendas-primary-cta");
 
     if (!ctaElement || !("IntersectionObserver" in window)) {
@@ -162,6 +260,190 @@ const NewVendas = () => {
     return () => observer.disconnect();
   }, []);
 
+  const openLeadModal = (event) => {
+    if (event) event.preventDefault();
+    if (loading) return;
+    setLeadStatus("idle");
+    setMensagem("Para continuar com a compra, preencha e envie o formulário.");
+    setShowLeadModal(true);
+  };
+
+  const closeLeadModal = () => {
+    if (loading) return;
+    setShowLeadModal(false);
+  };
+
+  const handleWhatsappMask = (e) => {
+    let value = e.target.value;
+    value = onlyDigits(value).slice(0, 11);
+
+    if (!value.length) {
+      setLeadForm((prev) => ({ ...prev, phone: "" }));
+      return;
+    }
+
+    if (value.length <= 2) value = `(${value}`;
+    else if (value.length <= 6) value = value.replace(/^(\d{2})(\d{0,4})/, "($1) $2");
+    else if (value.length <= 10) value = value.replace(/^(\d{2})(\d{4})(\d{0,4})/, "($1) $2-$3");
+    else value = value.replace(/^(\d{2})(\d{5})(\d{0,4})/, "($1) $2-$3");
+
+    setLeadForm((prev) => ({ ...prev, phone: value }));
+  };
+
+  const handleLeadSubmit = async (e) => {
+    e.preventDefault();
+    setMensagem("");
+
+    if (!isLeadFormValid || !canSubmitLead) {
+      setLeadStatus("error");
+      setMensagem("Revise os campos e tente novamente.");
+      return;
+    }
+
+    setLoading(true);
+    setLeadStatus("loading");
+
+    try {
+      const formData = new FormData(e.target);
+      const name = formData.get("name")?.toString().trim() || "";
+      const email = formData.get("email")?.toString().trim().toLowerCase() || "";
+      const phone = formData.get("phone")?.toString().trim() || "";
+      const cargo = formData.get("cargo")?.toString().trim() || "";
+      const resolvedFormOrigin = "NewVendasCopy";
+
+      const payload = {
+        event_type: "CONVERSION",
+        event_family: "CDP",
+        payload: {
+          conversion_identifier: `LP - DSX 2026 - Formulario ${resolvedFormOrigin}`,
+          name,
+          email,
+          personal_phone: phone,
+          voce_e: cargo,
+          cf_voce_e: cargo,
+          cf_cargo: cargo,
+          traffic_source: sourceData.utm_source,
+          traffic_campaign: sourceData.utm_campaign,
+          traffic_medium: sourceData.utm_medium,
+          traffic_value: sourceData.utm_term,
+          cf_utm_campaign: sourceData.utm_campaign,
+          cf_utm_medium: sourceData.utm_medium,
+          cf_utm_term: sourceData.utm_term,
+          cf_utm_content: sourceData.utm_content,
+          cf_utm_source: sourceData.utm_source,
+          cf_url_de_conversao: sourceData.page_url,
+          cf_origem_formulario: formatDsxFormOrigin(
+            resolvedFormOrigin,
+            "Home Principal",
+          ),
+        },
+        tags: ["dsx-hometeste", "popup"],
+        source: "landing-home-teste",
+      };
+
+      const rdResult = await fetch(RD_API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!rdResult.ok) {
+        throw new Error("Erro ao enviar para RD Station");
+      }
+
+      if (isSupabaseConfigured) {
+        const supabase = await getSupabaseClient();
+        if (supabase) {
+          const nowIso = new Date().toISOString();
+          const trackerState = window.DSXTracker?.getState?.() || {};
+          const sessionId =
+            trackerState.sessionId ||
+            (window.crypto?.randomUUID?.() || `session-${Date.now()}`);
+
+          const profilePayload = {
+            lead_email: email,
+            lead_name: name,
+            lead_phone: phone,
+            lead_cargo: cargo,
+            site_origin: sourceData.site_origin || null,
+            site_hostname: sourceData.site_hostname || window.location.hostname || null,
+            first_converted_at: nowIso,
+            last_seen_at: nowIso,
+            has_sympla_redirected: true,
+            last_sympla_redirected_at: nowIso,
+          };
+
+          let { error: profileError } = await supabase
+            .from("tracking_lead_profiles")
+            .upsert([profilePayload], { onConflict: "lead_email" });
+
+          if (profileError && isMissingColumnError(profileError)) {
+            const fallbackProfilePayload = { ...profilePayload };
+            delete fallbackProfilePayload.site_origin;
+            delete fallbackProfilePayload.site_hostname;
+            const retry = await supabase
+              .from("tracking_lead_profiles")
+              .upsert([fallbackProfilePayload], { onConflict: "lead_email" });
+            profileError = retry.error;
+          }
+
+          if (!profileError) {
+            const sessionPayload = {
+              session_id: sessionId,
+              lead_name: name,
+              lead_email: email,
+              lead_phone: phone,
+              lead_cargo: cargo,
+              site_origin: sourceData.site_origin || null,
+              site_hostname: sourceData.site_hostname || window.location.hostname || null,
+              page: sourceData.page_url || window.location.pathname + window.location.search,
+              referrer: document.referrer || null,
+              utm_source: sourceData.utm_source || sourceData.site_origin || null,
+              utm_medium: sourceData.utm_medium || null,
+              utm_campaign: sourceData.utm_campaign || null,
+              utm_content: sourceData.utm_content || null,
+              utm_term: sourceData.utm_term || null,
+              converted_at: nowIso,
+              has_sympla_redirected: true,
+              sympla_redirected_at: nowIso,
+            };
+
+            let { error: sessionError } = await supabase
+              .from("tracking_lead_sessions")
+              .upsert([sessionPayload], { onConflict: "session_id" });
+
+            if (sessionError && isMissingColumnError(sessionError)) {
+              const fallbackSessionPayload = { ...sessionPayload };
+              delete fallbackSessionPayload.site_origin;
+              delete fallbackSessionPayload.site_hostname;
+              const retry = await supabase
+                .from("tracking_lead_sessions")
+                .upsert([fallbackSessionPayload], { onConflict: "session_id" });
+              sessionError = retry.error;
+            }
+          }
+        }
+      }
+
+      setLeadStatus("success");
+      setMensagem("Cadastro enviado! Em breve entraremos em contato.");
+      setLeadForm({ name: "", phone: "", email: "", cargo: "" });
+      e.target.reset();
+      setTimeout(() => {
+        setShowLeadModal(false);
+        window.open(NEW_VENDAS_SYMPLA_URL, "_blank", "noopener,noreferrer");
+      }, 700);
+    } catch (_error) {
+      setLeadStatus("error");
+      setMensagem(_error?.message || "Erro ao enviar formulário. Tente novamente.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section
       className="relative isolate overflow-hidden bg-black pb-28 md:pb-32"
@@ -176,7 +458,9 @@ const NewVendas = () => {
       </div>
 
       <div className="relative z-10">
-        <NewVendasHero ctaLink={NEW_VENDAS_SYMPLA_URL} />
+        <div onClickCapture={openLeadModal}>
+          <NewVendasHero ctaLink="#lead-form" />
+        </div>
         <NewVendasContent />
       </div>
 
@@ -188,22 +472,39 @@ const NewVendas = () => {
         }`}
       >
         <div className="mx-auto flex max-w-[770px] flex-col items-center">
-          <NewVendasHeaderMask
+          <div onClickCapture={openLeadModal}>
+            <NewVendasHeaderMask
             titulo="Garantir meu passaporte"
-            link={NEW_VENDAS_SYMPLA_URL}
-            target="_blank"
+            link="#lead-form"
+            target="_self"
             textColor="#FFFFFF"
             backgroundColor="#1E1A12"
             font="700"
             size="lg"
-          />
+            />
+          </div>
           <span className="mt-1 inline-block text-2xl font-black uppercase text-[#F5C02B]">
             Vagas limitadas
           </span>
         </div>
       </div>
+
+      <LeadPopupFormHomeTeste
+        isOpen={showLeadModal}
+        popupStep={1}
+        canClose={!loading}
+        onClose={closeLeadModal}
+        onSubmit={handleLeadSubmit}
+        leadForm={leadForm}
+        setLeadForm={setLeadForm}
+        onWhatsappChange={handleWhatsappMask}
+        leadStatus={leadStatus}
+        message={mensagem}
+        loading={loading}
+        canSubmit={canSubmitLead}
+      />
     </section>
   );
 };
 
-export default NewVendas;
+export default NewVendasCopy;
