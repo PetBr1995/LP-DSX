@@ -134,7 +134,9 @@ const formatMetricValue = (value, metric) => {
   return `${metric.prefix}${baseValue}${metric.suffix}`;
 };
 
-const NewVendasHero = () => {
+const NewVendasHero = ({
+  ctaLink = "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721",
+}) => {
   const [animatedValues, setAnimatedValues] = useState(metrics.map(() => 0));
   const [currentSpeakerIndex, setCurrentSpeakerIndex] = useState(0);
   const [cardsPerView, setCardsPerView] = useState(3);
@@ -286,7 +288,8 @@ const NewVendasHero = () => {
           <div id="newvendas-primary-cta" className="flex justify-center">
             <NewVendasHeaderMask
               titulo="COMPRAR PASSAPORTE"
-              link="#passaportes"
+              link={ctaLink}
+              target="_blank"
               textColor="#FFFFFF"
               backgroundColor="#1E1A12"
               font="700"

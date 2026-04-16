@@ -5,6 +5,9 @@ import {
 } from "../components/NewVendas";
 import NewVendasHeaderMask from "../components/NewVendas/NewVendasHeaderMask";
 
+const NEW_VENDAS_SYMPLA_URL =
+  "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721";
+
 const NewVendas = () => {
   const [showStickyCta, setShowStickyCta] = useState(false);
 
@@ -173,7 +176,7 @@ const NewVendas = () => {
       </div>
 
       <div className="relative z-10">
-        <NewVendasHero />
+        <NewVendasHero ctaLink={NEW_VENDAS_SYMPLA_URL} />
         <NewVendasContent />
       </div>
 
@@ -187,7 +190,8 @@ const NewVendas = () => {
         <div className="mx-auto flex max-w-[770px] flex-col items-center">
           <NewVendasHeaderMask
             titulo="Garantir meu passaporte"
-            link="#passaportes"
+            link={NEW_VENDAS_SYMPLA_URL}
+            target="_blank"
             textColor="#FFFFFF"
             backgroundColor="#1E1A12"
             font="700"
