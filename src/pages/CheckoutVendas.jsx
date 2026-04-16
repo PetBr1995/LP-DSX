@@ -1,8 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Calendar, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import "swiper/css";
+import { Calendar, MapPin } from "lucide-react";
 import NewVendasHeaderMask from "../components/NewVendas/NewVendasHeaderMask";
 import { getSupabaseClient, isSupabaseConfigured } from "../lib/supabaseClient";
 import { formatDsxFormOrigin } from "../utils/formOrigin";
@@ -46,33 +43,6 @@ const galleryItems = [
   { src: "/img-ambiantes/amb-3.png", alt: "Painel com executivos" },
   { src: "/img-ambiantes/amb-2.png", alt: "Interação entre palestrantes" },
   { src: "/img-ambiantes/amb-1.png", alt: "Trocas em ambiente premium" },
-];
-const heroSpeakerSlides = [
-  {
-    name: "João Branco",
-    image: "/foto-joao-branco.png",
-    desc: "Ex-CMO do McDonald's, referência em posicionamento e marca.",
-  },
-  {
-    name: "João Kepler",
-    image: "/novas-palestrantes/Joao-Kepler.png",
-    desc: "Investidor e mentor, autor de best-sellers de negócios.",
-  },
-  {
-    name: "Fernando Miranda",
-    image: "/novas-palestrantes/Fernando-Miranda.png",
-    desc: "CEO da Staage e host de um dos maiores podcasts de marketing.",
-  },
-  {
-    name: "Nicolas Charão",
-    image: "/novas-palestrantes/Nicolas-Charao.png",
-    desc: "Especialista em crescimento e escala de negócios.",
-  },
-  {
-    name: "Roberto Reis",
-    image: "/novas-palestrantes/Roberto-Reis.png",
-    desc: "Estrategista com ampla experiência em cenário político e mercado.",
-  },
 ];
 const galleryTopRow = galleryItems.slice(0, 5);
 const galleryBottomRow = galleryItems.slice(5, 10);
@@ -193,11 +163,10 @@ const formatPhone = (value = "") => {
   return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
 };
 
-const PreCheckout = () => {
+const CheckoutVendas = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState(0);
   const [animatedValues, setAnimatedValues] = useState(metrics.map(() => 0));
   const [showLeadModal, setShowLeadModal] = useState(false);
-  const [mobileSpeakersSwiper, setMobileSpeakersSwiper] = useState(null);
   const [leadStatus, setLeadStatus] = useState("idle");
   const [leadError, setLeadError] = useState("");
   const [leadForm, setLeadForm] = useState({
@@ -409,7 +378,7 @@ const PreCheckout = () => {
 
             if (profileError) {
               console.error(
-                "[PreCheckout] erro ao salvar lead profile no Supabase",
+                "[CheckoutVendas] erro ao salvar lead profile no Supabase",
                 profileError,
               );
             } else {
@@ -452,7 +421,7 @@ const PreCheckout = () => {
 
               if (sessionError) {
                 console.error(
-                  "[PreCheckout] erro ao salvar lead session no Supabase",
+                  "[CheckoutVendas] erro ao salvar lead session no Supabase",
                   sessionError,
                 );
               } else {
@@ -465,7 +434,7 @@ const PreCheckout = () => {
                     occurred_at: nowIso,
                     page: window.location.pathname + window.location.search,
                     payload: {
-                      form_origin: "PreCheckout",
+                      form_origin: "CheckoutVendas",
                       site_origin: sourceData.site_origin || null,
                       site_hostname:
                         sourceData.site_hostname || window.location.hostname || null,
@@ -496,23 +465,23 @@ const PreCheckout = () => {
 
                 if (eventsError) {
                   console.error(
-                    "[PreCheckout] erro ao salvar tracking events no Supabase",
+                    "[CheckoutVendas] erro ao salvar tracking events no Supabase",
                     eventsError,
                   );
                 }
               }
             }
           } else {
-            console.warn("[PreCheckout] Supabase client indisponivel");
+            console.warn("[CheckoutVendas] Supabase client indisponivel");
           }
         } catch (supabaseError) {
           console.error(
-            "[PreCheckout] erro inesperado no tracking Supabase",
+            "[CheckoutVendas] erro inesperado no tracking Supabase",
             supabaseError,
           );
         }
       } else {
-        console.warn("[PreCheckout] Supabase nao configurado no ambiente");
+        console.warn("[CheckoutVendas] Supabase nao configurado no ambiente");
       }
 
       setLeadStatus("success");
@@ -520,7 +489,7 @@ const PreCheckout = () => {
       window.open(CHECKOUT_LINK, "_blank", "noopener,noreferrer");
     } catch (_error) {
       setLeadStatus("error");
-      console.error("[PreCheckout] erro no envio do lead", _error);
+      console.error("[CheckoutVendas] erro no envio do lead", _error);
       setLeadError(
         _error?.message || "Não foi possível enviar agora. Tente novamente.",
       );
@@ -543,7 +512,7 @@ const PreCheckout = () => {
           <div className="flex flex-col justify-center px-5 py-8 md:px-10 md:py-12">
             <div className="inline-flex w-fit self-center rounded-sm bg-[#0A0A0A] px-2 py-1 md:self-start">
               <img
-                src="/logo-dsx-horizontal-2.svg"
+                src="/logo-dsx-vertical.svg"
                 alt="DSX 2026"
                 className="h-12 w-auto object-contain md:h-14"
                 loading="eager"
@@ -619,7 +588,7 @@ const PreCheckout = () => {
 
           </div>
 
-          <div className="relative hidden min-h-[320px] md:block md:min-h-full">
+          <div className="relative min-h-[320px] md:min-h-full">
             <img
               src="/Banner-vendas-hero.png"
               alt="Palestrantes convidados no palco do DSX"
@@ -631,66 +600,6 @@ const PreCheckout = () => {
           </div>
         </div>
       </section>
-      <section className="bg-black px-4 pb-10 md:px-8 md:pb-14">
-        <div className="mx-auto w-full max-w-6xl overflow-hidden rounded-[24px] border border-white/10 bg-[#0B0B0B] md:rounded-[28px]">
-          <div className="relative">
-            <Swiper
-              modules={[Autoplay]}
-              slidesPerView={1}
-              spaceBetween={12}
-              breakpoints={{
-                640: { slidesPerView: 1.2, spaceBetween: 14 },
-                768: { slidesPerView: 2, spaceBetween: 16 },
-                1024: { slidesPerView: 2.4, spaceBetween: 18 },
-                1280: { slidesPerView: 3, spaceBetween: 20 },
-              }}
-              loop
-              autoplay={{ delay: 2800, disableOnInteraction: false }}
-              className="h-full"
-              onSwiper={setMobileSpeakersSwiper}
-            >
-              {heroSpeakerSlides.map((speaker) => (
-                <SwiperSlide key={`mobile-${speaker.name}`} className="h-full">
-                  <div className="relative h-[320px] w-full md:h-[420px] lg:h-[460px]">
-                    <img
-                      src={speaker.image}
-                      alt={speaker.name}
-                      className="h-full w-full bg-black object-contain p-2"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-                    <div className="absolute bottom-4 left-4 right-4 md:bottom-5 md:left-5 md:right-5 lg:bottom-6 lg:left-6 lg:right-6">
-                      <p className="font-bebas text-3xl uppercase tracking-[0.02em] text-[#F5A205] md:text-4xl lg:text-5xl">
-                        {speaker.name}
-                      </p>
-                      <p className="mt-1 font-jamjuree text-sm leading-relaxed text-white/90 md:mt-2 md:text-[15px] lg:max-w-[88%] lg:text-base">
-                        {speaker.desc}
-                      </p>
-                    </div>
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-            <button
-              type="button"
-              onClick={() => mobileSpeakersSwiper?.slidePrev()}
-              aria-label="Slide anterior de palestrantes"
-              className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/35 p-1.5 text-[#F5A205] backdrop-blur-[2px] transition hover:scale-110 hover:bg-black/50 hover:text-[#D98A00] md:left-3 md:p-2"
-            >
-              <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" strokeWidth={2.4} />
-            </button>
-            <button
-              type="button"
-              onClick={() => mobileSpeakersSwiper?.slideNext()}
-              aria-label="Próximo slide de palestrantes"
-              className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/35 p-1.5 text-[#F5A205] backdrop-blur-[2px] transition hover:scale-110 hover:bg-black/50 hover:text-[#D98A00] md:right-3 md:p-2"
-            >
-              <ChevronRight className="h-5 w-5 md:h-6 md:w-6" strokeWidth={2.4} />
-            </button>
-          </div>
-        </div>
-      </section>
 
       <section className="bg-[#ECECEC] px-4 py-14 text-black md:px-8 md:py-20">
         <div className="mx-auto w-full max-w-6xl">
@@ -698,21 +607,21 @@ const PreCheckout = () => {
             O DSX é para você...
           </h2>
 
-          <div className="mt-9 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+          <div className="mt-9 grid gap-5 md:grid-cols-2 lg:grid-cols-5">
             {audienceItems.map((item) => (
               <article
                 key={item.title}
-                className="flex items-center gap-3 rounded-2xl bg-white p-4 shadow-[0_10px_22px_rgba(0,0,0,0.08)] md:p-5"
+                className="flex items-center gap-3 rounded-2xl bg-white p-4 shadow-[0_10px_22px_rgba(0,0,0,0.08)]"
               >
                 <img
                   src="/vector-19.svg"
                   alt=""
                   aria-hidden="true"
-                  className="h-6 w-6 shrink-0 object-contain md:h-7 md:w-7"
+                  className="h-6 w-6 shrink-0 object-contain"
                   loading="lazy"
                   decoding="async"
                 />
-                <p className="font-jamjuree text-[1rem] leading-relaxed text-[#1A1A1A] md:text-[1.02rem]">
+                <p className="font-jamjuree text-[1.02rem] leading-relaxed text-[#1A1A1A]">
                   <strong>{item.title}</strong> {item.description}
                 </p>
               </article>
@@ -739,43 +648,44 @@ const PreCheckout = () => {
             Conteúdo aplicado, conexões de alto nível e experiências que aproximam
             decisores, marcas e oportunidades em um único lugar.
           </p>
-        </div>
-        <div className="mt-10 space-y-4 -mx-4 md:mx-auto md:max-w-[1280px]">
-          <div className="faixa-wrapper">
-            <div className="faixa-track gap-3 md:gap-5">
-              {[...galleryTopRow, ...galleryTopRow].map((item, index) => (
-                <div
-                  key={`top-${item.src}-${index}`}
-                  className="group w-[220px] shrink-0 overflow-hidden rounded-3xl border border-white/10 bg-[#0E0E0E] md:w-[300px] lg:w-[340px]"
-                >
-                  <img
-                    src={item.src}
-                    alt={item.alt}
-                    className="h-[180px] w-full object-cover transition duration-500 group-hover:scale-105 md:h-[210px] lg:h-[230px]"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
 
-          <div className="faixa-wrapper">
-            <div className="faixa-track-fast gap-3 md:gap-5" style={{ animationDirection: "reverse" }}>
-              {[...galleryBottomRow, ...galleryBottomRow].map((item, index) => (
-                <div
-                  key={`bottom-${item.src}-${index}`}
-                  className="group w-[220px] shrink-0 overflow-hidden rounded-3xl border border-white/10 bg-[#0E0E0E] md:w-[300px] lg:w-[340px]"
-                >
-                  <img
-                    src={item.src}
-                    alt={item.alt}
-                    className="h-[180px] w-full object-cover transition duration-500 group-hover:scale-105 md:h-[210px] lg:h-[230px]"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-              ))}
+          <div className="mt-10 space-y-4">
+            <div className="faixa-wrapper">
+              <div className="faixa-track gap-4">
+                {[...galleryTopRow, ...galleryTopRow].map((item, index) => (
+                  <div
+                    key={`top-${item.src}-${index}`}
+                    className="group w-[220px] shrink-0 overflow-hidden rounded-3xl border border-white/10 bg-[#0E0E0E] md:w-[250px]"
+                  >
+                    <img
+                      src={item.src}
+                      alt={item.alt}
+                      className="h-[180px] w-full object-cover transition duration-500 group-hover:scale-105 md:h-[200px]"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="faixa-wrapper">
+              <div className="faixa-track-fast gap-4" style={{ animationDirection: "reverse" }}>
+                {[...galleryBottomRow, ...galleryBottomRow].map((item, index) => (
+                  <div
+                    key={`bottom-${item.src}-${index}`}
+                    className="group w-[220px] shrink-0 overflow-hidden rounded-3xl border border-white/10 bg-[#0E0E0E] md:w-[250px]"
+                  >
+                    <img
+                      src={item.src}
+                      alt={item.alt}
+                      className="h-[180px] w-full object-cover transition duration-500 group-hover:scale-105 md:h-[200px]"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -847,8 +757,11 @@ const PreCheckout = () => {
             <div className="mb-4 flex items-start justify-between gap-3">
               <div>
                 <h3 className="font-anton text-2xl uppercase text-white md:text-3xl">
-                  PREENCHA O FORMULÁRIO PARA COMPRAR SEU PASSAPORTE
+                  Antes de continuar
                 </h3>
+                <p className="mt-1 font-jamjuree text-sm text-white/75 md:text-base">
+                  Preencha os dados para liberar seu acesso no Sympla.
+                </p>
               </div>
               <button
                 type="button"
@@ -930,4 +843,4 @@ const PreCheckout = () => {
   );
 };
 
-export default PreCheckout;
+export default CheckoutVendas;

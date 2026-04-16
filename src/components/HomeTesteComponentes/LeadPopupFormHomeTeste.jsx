@@ -14,6 +14,9 @@ const LeadPopupFormHomeTeste = ({
   message,
   loading,
   canSubmit,
+  headline = "Você está prestes a fazer parte de algo que está mudando o mercado do Norte.",
+  subheading = "Bem-vindo ao DSX 2026.",
+  description = "Preencha seus dados e faça parte desse movimento.",
 }) => {
   const MotionDiv = motion.div;
 
@@ -59,14 +62,18 @@ const LeadPopupFormHomeTeste = ({
             </button>
 
             <p className="pr-12 font-bebas text-[2rem] leading-[0.95] text-[#F5A205] sm:text-4xl md:text-5xl">
-              Você está prestes a fazer parte de algo que está mudando o mercado do Norte.
+              {headline}
             </p>
-            <h3 className="mt-2 max-w-[560px] font-jamjuree text-sm leading-relaxed text-white/85 sm:mt-3 md:text-base">
-              Bem-vindo ao DSX 2026.
-            </h3>
-            <p className="mt-2 max-w-[560px] font-jamjuree text-sm leading-relaxed text-white/85 md:text-base">
-              Preencha seus dados e faça parte desse movimento.
-            </p>
+            {subheading ? (
+              <h3 className="mt-2 max-w-[560px] font-jamjuree text-sm leading-relaxed text-white/85 sm:mt-3 md:text-base">
+                {subheading}
+              </h3>
+            ) : null}
+            {description ? (
+              <p className="mt-2 max-w-[560px] font-jamjuree text-sm leading-relaxed text-white/85 md:text-base">
+                {description}
+              </p>
+            ) : null}
 
             <form
               id="lead-form"

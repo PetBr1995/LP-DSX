@@ -502,6 +502,9 @@ const NewVendasCopy = () => {
         message={mensagem}
         loading={loading}
         canSubmit={canSubmitLead}
+        headline="PREENCHA O FORMULÁRIO PARA COMPRAR SEU PASSAPORTE"
+        subheading=""
+        description=""
       />
     </section>
   );
