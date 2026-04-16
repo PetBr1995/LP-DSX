@@ -550,17 +550,17 @@ const PreCheckout = () => {
                 decoding="async"
               />
             </div>
-            <h1 className="mt-4 max-w-xl text-center font-anton text-[clamp(2rem,6vw,2.5rem)] uppercase leading-[1.35] md:text-left">
+            <h1 className="mt-4 max-w-xl text-center font-anton text-[clamp(1.2rem,6vw,2.5rem)] uppercase leading-[1.35] md:text-left">
               O maior evento de negócios, marketing, vendas e inovação do Norte
             </h1>
            
             <div className="mx-auto mt-7 flex w-full max-w-4xl flex-wrap justify-center gap-x-4 gap-y-5 px-2 py-2 md:justify-start md:px-0">
               {metrics.map((item, index) => (
                 <div key={item.label} className="min-w-0 text-center md:text-left">
-                  <p className="font-jamjuree text-[38px] font-extrabold leading-none tracking-normal text-white md:text-[52px]">
+                  <p className="font-jamjuree text-[28px] font-extrabold leading-none tracking-normal text-white md:text-[52px]">
                     {formatMetricValue(animatedValues[index] ?? 0, item)}
                   </p>
-                  <p className="mt-1 font-jamjuree text-[11px] font-bold uppercase tracking-[0.02em] text-white md:text-[15px]">
+                  <p className="mt-1 font-jamjuree text-[8px] font-bold uppercase tracking-[0.02em] text-white md:text-[15px]">
                     {item.label}
                   </p>
                 </div>
