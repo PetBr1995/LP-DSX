@@ -780,10 +780,13 @@ const PreCheckout = () => {
             decisores, marcas e oportunidades em um único lugar.
           </p>
         </div>
-        <div className="mt-10 space-y-4 -mx-4 md:mx-auto md:max-w-[1280px]">
+        <div className="mt-10 space-y-4 -mx-4 md:-mx-8">
           <div className="faixa-wrapper">
-            <div className="faixa-track gap-3 md:gap-5">
-              {[...galleryTopRow, ...galleryTopRow].map((item, index) => (
+            <div
+              className="faixa-track gap-3 md:gap-5"
+              style={{ animationDuration: "92s" }}
+            >
+              {[...galleryTopRow, ...galleryTopRow, ...galleryTopRow, ...galleryTopRow].map((item, index) => (
                 <div
                   key={`top-${item.src}-${index}`}
                   className="group w-[220px] shrink-0 overflow-hidden rounded-3xl border border-white/10 bg-[#0E0E0E] md:w-[300px] lg:w-[340px]"
@@ -801,8 +804,11 @@ const PreCheckout = () => {
           </div>
 
           <div className="faixa-wrapper">
-            <div className="faixa-track-fast gap-3 md:gap-5" style={{ animationDirection: "reverse" }}>
-              {[...galleryBottomRow, ...galleryBottomRow].map((item, index) => (
+            <div
+              className="faixa-track-fast gap-3 md:gap-5"
+              style={{ animationDirection: "reverse", animationDuration: "64s" }}
+            >
+              {[...galleryBottomRow, ...galleryBottomRow, ...galleryBottomRow, ...galleryBottomRow].map((item, index) => (
                 <div
                   key={`bottom-${item.src}-${index}`}
                   className="group w-[220px] shrink-0 overflow-hidden rounded-3xl border border-white/10 bg-[#0E0E0E] md:w-[300px] lg:w-[340px]"
