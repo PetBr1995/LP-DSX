@@ -197,6 +197,7 @@ const PreCheckout = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState(0);
   const [animatedValues, setAnimatedValues] = useState(metrics.map(() => 0));
   const [showLeadModal, setShowLeadModal] = useState(false);
+  const [showStickyCta, setShowStickyCta] = useState(false);
   const [mobileSpeakersSwiper, setMobileSpeakersSwiper] = useState(null);
   const [leadStatus, setLeadStatus] = useState("idle");
   const [leadError, setLeadError] = useState("");
@@ -260,6 +261,27 @@ const PreCheckout = () => {
       utm_term: urlParams.get("utm_term") || "",
       utm_content: urlParams.get("utm_content") || "",
     });
+  }, []);
+
+  useEffect(() => {
+    const ctaElement = document.getElementById("newvendas-primary-cta");
+
+    if (!ctaElement || !("IntersectionObserver" in window)) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const ctaPassedAboveViewport =
+          !entry.isIntersecting && entry.boundingClientRect.top < 0;
+        setShowStickyCta(ctaPassedAboveViewport);
+      },
+      { threshold: 0 },
+    );
+
+    observer.observe(ctaElement);
+
+    return () => observer.disconnect();
   }, []);
 
   const handleOpenLeadModal = (event) => {
@@ -529,7 +551,7 @@ const PreCheckout = () => {
 
   return (
     <main className="bg-black text-white">
-      <section className="relative overflow-hidden px-4 pb-14 pt-10 md:px-8 md:pb-20 md:pt-14">
+      <section className="relative overflow-hidden px-4 pb-0 pt-10 md:px-8 md:pb-20 md:pt-14">
         <div
           className="pointer-events-none absolute inset-0 opacity-30"
           style={{
@@ -553,14 +575,14 @@ const PreCheckout = () => {
             <h1 className="mt-4 max-w-xl text-center font-anton text-[clamp(1.2rem,6vw,2.5rem)] uppercase leading-[1.35] md:text-left">
               O maior evento de negócios, marketing, vendas e inovação do Norte
             </h1>
-           
+
             <div className="mx-auto mt-7 flex w-full max-w-4xl flex-wrap justify-center gap-x-4 gap-y-5 px-2 py-2 md:justify-start md:px-0">
               {metrics.map((item, index) => (
                 <div key={item.label} className="min-w-0 text-center md:text-left">
                   <p className="font-jamjuree text-[28px] font-extrabold leading-none tracking-normal text-white md:text-[52px]">
                     {formatMetricValue(animatedValues[index] ?? 0, item)}
                   </p>
-                  <p className="mt-1 font-jamjuree text-[8px] font-bold uppercase tracking-[0.02em] text-white md:text-[15px]">
+                  <p className="mt-1 font-jamjuree text-[12px] font-bold uppercase tracking-[0.02em] text-white md:text-[15px]">
                     {item.label}
                   </p>
                 </div>
@@ -576,7 +598,7 @@ const PreCheckout = () => {
                     <p className="font-jamjuree text-[20px] font-extrabold leading-none text-[#F5C02B] md:text-[40px]">
                       {item.value}
                     </p>
-                    <p className="mt-1 font-jamjuree text-[10px] font-bold uppercase tracking-[0.02em] text-white md:text-[20px] md:leading-[1.05]">
+                    <p className="mt-1 font-jamjuree text-[12px] font-bold uppercase tracking-[0.02em] text-white md:text-[20px] md:leading-[1.05]">
                       {item.label}
                     </p>
                   </div>
@@ -613,13 +635,13 @@ const PreCheckout = () => {
                 size="lg"
               />
             </div>
-            <h2 className="mt-5 font-anton text-[clamp(1.2rem,2.8vw,1.8rem)] uppercase tracking-[0.02em] text-white">
-              Onde os maiores especialistas do país se encontram.
-            </h2>
+
 
           </div>
 
           <div className="relative hidden min-h-[320px] md:block md:min-h-full">
+
+
             <img
               src="/Banner-vendas-hero.png"
               alt="Palestrantes convidados no palco do DSX"
@@ -632,7 +654,10 @@ const PreCheckout = () => {
         </div>
       </section>
       <section className="bg-black px-4 pb-10 md:px-8 md:pb-14">
-        <div className="mx-auto w-full max-w-6xl overflow-hidden rounded-[24px] border border-white/10 bg-[#0B0B0B] md:rounded-[28px]">
+        <h2 className="mt-5 font-anton text-center text-[clamp(1.5rem,2.8vw,1.8rem)] uppercase tracking-[0.02em] text-white leading-[1.2]">
+          Onde os maiores especialistas <br /> do país se encontram
+        </h2>
+        <div className="mx-auto w-full mt-5 max-w-6xl overflow-hidden rounded-[24px] border border-white/10 bg-[#0B0B0B] md:rounded-[28px]">
           <div className="relative">
             <Swiper
               modules={[Autoplay]}
@@ -732,7 +757,7 @@ const PreCheckout = () => {
         />
 
         <div className="relative mx-auto w-full max-w-7xl">
-          <h2 className="text-center font-anton text-[clamp(2rem,6vw,3.7rem)] uppercase leading-none">
+          <h2 className="text-center font-anton text-[clamp(2rem,6vw,3.7rem)] uppercase leading-[1.2]">
             O Ambiente que gera negócios reais
           </h2>
           <p className="mx-auto mt-4 max-w-3xl text-center text-base leading-relaxed text-white/75 md:text-lg">
@@ -810,9 +835,8 @@ const PreCheckout = () => {
                       {item.question}
                     </h3>
                     <span
-                      className={`grid h-8 w-8 shrink-0 place-items-center rounded-full border border-[#3B3B3B] text-[#F5C02B] transition-transform duration-300 ${
-                        isOpen ? "rotate-180" : ""
-                      }`}
+                      className={`grid h-8 w-8 shrink-0 place-items-center rounded-full border border-[#3B3B3B] text-[#F5C02B] transition-transform duration-300 ${isOpen ? "rotate-180" : ""
+                        }`}
                       aria-hidden="true"
                     >
                       <img src="/arrow-down.svg" alt="" className="h-4 w-4" />
@@ -820,11 +844,10 @@ const PreCheckout = () => {
                   </button>
 
                   <div
-                    className={`grid overflow-hidden transition-all duration-300 ${
-                      isOpen
+                    className={`grid overflow-hidden transition-all duration-300 ${isOpen
                         ? "mt-3 grid-rows-[1fr] opacity-100"
                         : "grid-rows-[0fr] opacity-0"
-                    }`}
+                      }`}
                   >
                     <p className="overflow-hidden font-jamjuree text-[1rem] leading-relaxed text-white/80">
                       {item.answer}
@@ -926,6 +949,31 @@ const PreCheckout = () => {
           </div>
         </div>
       ) : null}
+
+      <div
+        className={`fixed bottom-0 left-0 right-0 z-[130] bg-black px-4 py-3 transition-all duration-500 ease-out ${
+          showStickyCta
+            ? "translate-y-0 opacity-100"
+            : "pointer-events-none translate-y-6 opacity-0"
+        }`}
+      >
+        <div className="mx-auto flex max-w-[770px] flex-col items-center">
+          <div onClickCapture={handleOpenLeadModal}>
+            <NewVendasHeaderMask
+              titulo="COMPRAR PASSAPORTE"
+              link="#lead-form-checkoutvendas"
+              target="_self"
+              textColor="#FFFFFF"
+              backgroundColor="#1E1A12"
+              font="700"
+              size="lg"
+            />
+          </div>
+          <span className="mt-1 inline-block text-2xl font-black uppercase text-[#F5C02B]">
+            Vagas limitadas
+          </span>
+        </div>
+      </div>
     </main>
   );
 };
