@@ -600,7 +600,7 @@ const PreCheckout = () => {
                 decoding="async"
               />
             </div>
-            <h1 className="mt-4 max-w-xl text-center font-anton text-[clamp(1.2rem,6vw,2.5rem)] uppercase leading-[1.35]">
+            <h1 className="mt-4 max-w-xl text-center font-anton text-[clamp(1.2rem,6vw,3.2rem)] md:max-w-4xl uppercase leading-[1.35]">
               O maior evento de negócios, marketing, vendas e inovação do Norte
             </h1>
 
@@ -669,8 +669,8 @@ const PreCheckout = () => {
         </div>
       </section>
       <section className="bg-black px-4 pb-10 md:px-8 md:pb-14">
-        <h2 className="mt-5 font-anton text-center text-[clamp(1.5rem,2.8vw,1.8rem)] uppercase tracking-[0.02em] text-white leading-[1.2]">
-          Onde os maiores especialistas <br /> do país se encontram
+        <h2 className="mx-auto mt-5 px-2 text-center font-anton text-[clamp(1.5rem,2.8vw,2rem)] uppercase leading-[1.12] tracking-[0.02em] text-white md:text-[clamp(2rem,3.8vw,2.7rem)] lg:whitespace-nowrap">
+          Onde os maiores especialistas do país se encontram
         </h2>
         <div className="mx-auto mt-5 w-full max-w-6xl overflow-hidden rounded-[24px] border border-white/10 bg-black md:rounded-[28px]">
           <div className="relative">
