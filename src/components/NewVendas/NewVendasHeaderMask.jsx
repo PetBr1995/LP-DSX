@@ -8,11 +8,17 @@ const NewVendasHeaderMask = ({
   target,
   font,
   size = "md",
+  onClick,
 }) => {
   const isLarge = size === "lg";
 
   return (
-    <a href={link} target={target} rel={target === "_blank" ? "noreferrer" : undefined}>
+    <a
+      href={link}
+      target={target}
+      rel={target === "_blank" ? "noreferrer" : undefined}
+      onClick={onClick}
+    >
       <section className="font-jamjuree relative z-10 flex items-center justify-center">
         <div className="group nv-mask-shell relative rounded-2xl bg-gradient-to-r from-[#8E3EEB] to-[#E0474A] p-[2px] shadow-[0_0_0_1px_rgba(224,71,74,0.2)] transition-all duration-300 hover:scale-[1.06] hover:shadow-[0_14px_34px_rgba(224,71,74,0.35)] active:scale-[0.98]">
           <div

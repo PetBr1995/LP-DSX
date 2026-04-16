@@ -458,9 +458,7 @@ const NewVendasCopy = () => {
       </div>
 
       <div className="relative z-10">
-        <div onClickCapture={openLeadModal}>
-          <NewVendasHero ctaLink="#lead-form" />
-        </div>
+        <NewVendasHero ctaLink="#lead-form" onPrimaryCtaClick={openLeadModal} />
         <NewVendasContent hidePassaporteButtons />
       </div>
 

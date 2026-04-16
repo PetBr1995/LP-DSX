@@ -61,6 +61,11 @@ const mainSpeakers = [
     bio: "O destravador de crescimento. Já ajudou mais de 50 negócios a cruzarem a barreira do primeiro milhão. Ele vai te provar que ter mais receita sem ter mais liberdade não é sucesso, é cilada.",
   },
   {
+    name: "Giullya Becker",
+    image: "/novas-palestrantes/GIULLYA-BECKER.png",
+    bio: "Giullya Becker é publicitária e criadora do Método dos Conteúdos Magnéticos. Pioneira em oficinas práticas de criação, já formou milhares de alunos e se consolidou como referência em conteúdos que geram conexão e vendas com presença no digital.",
+  },
+  {
     name: "Carolina Lima",
     image: "/foto-carolina-lima.png",
     bio: "17 anos construindo estratégia de conteúdo para marcas de sucesso. Você vai entender de uma vez por todas a mecânica da atração.",
@@ -77,12 +82,12 @@ const mainSpeakers = [
   },
   {
     name: "Breno Maciel",
-    image: "/palestrantes/BrenoMaciel.png",
+    image: "/foto-breno-maciel.png",
     bio: "CEO da Vanguarda Martech, maior agência de marketing do Norte, gerencia mais de R$ 60 milhões em verbas de marketing e é palestrante do RD Summit pelo terceiro ano consecutivo.",
   },
   {
     name: "Carlos Oshiro",
-    image: "/palestrantes/CarlosOshiro.png",
+    image: "/foto-carlos-oshiro.png",
     bio: "Fundador da Targo Educação Empresarial, colunista na CBN e referência no ecossistema empresarial de Manaus há mais de 25 anos.",
   },
   {
@@ -97,7 +102,7 @@ const mainSpeakers = [
   },
   {
     name: "Flávia Sausmikat",
-    image: "/palestrantes/FlaviaSausmikat.png",
+    image: "/novas-palestrantes/Flavia-Sausmikat.png",
     bio: "Diretora-geral do Instituto Action de Pesquisas, atua há mais de duas décadas na análise de comportamentos sociais, eleitorais e de consumo em todo o Brasil.",
   },
   {
@@ -107,7 +112,7 @@ const mainSpeakers = [
   },
   {
     name: "Gisele Oshiro",
-    image: "/palestrantes/GiselleOshiro.png",
+    image: "/novas-palestrantes/foto-giselle-oshiro.png",
     bio: "Empresária, especialista em inteligência emocional e apresentadora do podcast Mulheres que Inspiram na CBN.",
   },
   {
@@ -120,11 +125,6 @@ const mainSpeakers = [
     image: "/palestrantes/SuellenScop.png",
     bio: "Psicóloga, diretora operacional da Singulari e especialista na aplicação prática de inteligência artificial em contextos reais de negócio.",
   },
-  {
-    name: "Giullya Becker",
-    image: "/novas-palestrantes/GIULLYA-BECKER.png",
-    bio: "Giullya Becker é publicitária e criadora do Método dos Conteúdos Magnéticos. Pioneira em oficinas práticas de criação, já formou milhares de alunos e se consolidou como referência em conteúdos que geram conexão e vendas com presença no digital.",
-  },
 ];
 
 const formatMetricValue = (value, metric) => {
@@ -136,6 +136,7 @@ const formatMetricValue = (value, metric) => {
 
 const NewVendasHero = ({
   ctaLink = "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721",
+  onPrimaryCtaClick,
 }) => {
   const [animatedValues, setAnimatedValues] = useState(metrics.map(() => 0));
   const [currentSpeakerIndex, setCurrentSpeakerIndex] = useState(0);
@@ -290,6 +291,7 @@ const NewVendasHero = ({
               titulo="COMPRAR PASSAPORTE"
               link={ctaLink}
               target="_blank"
+              onClick={onPrimaryCtaClick}
               textColor="#FFFFFF"
               backgroundColor="#1E1A12"
               font="700"

@@ -143,6 +143,8 @@ const metrics = [
 const experienceHighlights = [
   { value: "3 PALCOS", label: "simultâneos" },
   { value: "FEIRA", label: "de negócios" },
+  { value: "VIP", label: "área exclusiva", desktopOnly: true },
+  { value: "PRAÇA", label: "de alimentação", desktopOnly: true },
 ];
 
 const formatMetricValue = (value, metric) => {
@@ -561,9 +563,9 @@ const PreCheckout = () => {
           aria-hidden="true"
         />
 
-        <div className="relative mx-auto grid w-full max-w-6xl overflow-hidden rounded-[28px] border border-white/10 bg-[#0B0B0B] md:grid-cols-2">
-          <div className="flex flex-col justify-center px-5 py-8 md:px-10 md:py-12">
-            <div className="inline-flex w-fit self-center rounded-sm bg-[#0A0A0A] px-2 py-1 md:self-start">
+        <div className="relative mx-auto w-full max-w-6xl overflow-hidden rounded-[28px] border border-white/10 bg-[#0B0B0B]">
+          <div className="flex flex-col items-center justify-center px-5 py-8 md:px-10 md:py-12">
+            <div className="inline-flex w-fit self-center rounded-sm bg-[#0A0A0A] px-2 py-1">
               <img
                 src="/logo-dsx-horizontal-2.svg"
                 alt="DSX 2026"
@@ -572,13 +574,13 @@ const PreCheckout = () => {
                 decoding="async"
               />
             </div>
-            <h1 className="mt-4 max-w-xl text-center font-anton text-[clamp(1.2rem,6vw,2.5rem)] uppercase leading-[1.35] md:text-left">
+            <h1 className="mt-4 max-w-xl text-center font-anton text-[clamp(1.2rem,6vw,2.5rem)] uppercase leading-[1.35]">
               O maior evento de negócios, marketing, vendas e inovação do Norte
             </h1>
 
-            <div className="mx-auto mt-7 flex w-full max-w-4xl flex-wrap justify-center gap-x-4 gap-y-5 px-2 py-2 md:justify-start md:px-0">
+            <div className="mx-auto mt-7 flex w-full max-w-4xl flex-wrap justify-center gap-x-4 gap-y-5 px-2 py-2 md:px-0">
               {metrics.map((item, index) => (
-                <div key={item.label} className="min-w-0 text-center md:text-left">
+                <div key={item.label} className="min-w-0 text-center">
                   <p className="font-jamjuree text-[28px] font-extrabold leading-none tracking-normal text-white md:text-[52px]">
                     {formatMetricValue(animatedValues[index] ?? 0, item)}
                   </p>
@@ -588,11 +590,13 @@ const PreCheckout = () => {
                 </div>
               ))}
             </div>
-            <div className="mx-auto mt-3 grid w-full max-w-[620px] grid-cols-2 gap-3 px-2 md:gap-5 md:px-0">
+            <div className="mx-auto mt-3 grid w-full max-w-[980px] grid-cols-2 gap-3 px-2 md:grid-cols-4 md:gap-5 md:px-0">
               {experienceHighlights.map((item) => (
                 <div
                   key={`${item.value}-${item.label}`}
-                  className="nv-highlight-wrap w-full"
+                  className={`nv-highlight-wrap w-full ${
+                    item.desktopOnly ? "hidden md:block" : ""
+                  }`}
                 >
                   <div className="nv-highlight-inner flex min-h-[104px] flex-col items-center justify-center px-3 py-3 text-center md:min-h-[132px] md:px-5">
                     <p className="font-jamjuree text-[20px] font-extrabold leading-none text-[#F5C02B] md:text-[40px]">
@@ -606,14 +610,14 @@ const PreCheckout = () => {
               ))}
             </div>
             <div className="mt-4 space-y-2 text-white/90">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center justify-center gap-2">
                 <Calendar size={18} color="#F5C02B" />
                 <p className="font-jamjuree text-[0.98rem] leading-relaxed">
                   23 e 24 de Julho
                 </p>
               </div>
-              <div className="flex items-start gap-2">
-                <MapPin size={18} color="#F5C02B" className="mt-0.5 shrink-0" />
+              <div className="flex items-center justify-center gap-2">
+                <MapPin size={18} color="#F5C02B" className="shrink-0" />
                 <p className="font-jamjuree text-[0.98rem] leading-relaxed">
                   Centro de Convenções Vasco Vasques, Manaus/AM
                 </p>
@@ -622,7 +626,7 @@ const PreCheckout = () => {
 
             <div
               id="newvendas-primary-cta"
-              className="mt-7"
+              className="mt-7 w-full max-w-[460px]"
               onClickCapture={handleOpenLeadModal}
             >
               <NewVendasHeaderMask
@@ -635,21 +639,6 @@ const PreCheckout = () => {
                 size="lg"
               />
             </div>
-
-
-          </div>
-
-          <div className="relative hidden min-h-[320px] md:block md:min-h-full">
-
-
-            <img
-              src="/Banner-vendas-hero.png"
-              alt="Palestrantes convidados no palco do DSX"
-              className="h-full w-full object-cover"
-              loading="eager"
-              decoding="async"
-            />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/45 via-transparent to-black/10" />
           </div>
         </div>
       </section>
@@ -657,7 +646,7 @@ const PreCheckout = () => {
         <h2 className="mt-5 font-anton text-center text-[clamp(1.5rem,2.8vw,1.8rem)] uppercase tracking-[0.02em] text-white leading-[1.2]">
           Onde os maiores especialistas <br /> do país se encontram
         </h2>
-        <div className="mx-auto w-full mt-5 max-w-6xl overflow-hidden rounded-[24px] border border-white/10 bg-[#0B0B0B] md:rounded-[28px]">
+        <div className="mx-auto mt-5 w-full max-w-6xl overflow-hidden rounded-[24px] border border-white/10 bg-black md:rounded-[28px]">
           <div className="relative">
             <Swiper
               modules={[Autoplay]}
