@@ -2,18 +2,31 @@ import PassaporteVendasHomeTeste from "../../HomeTesteComponentes/PassaporteVend
 import PassaportesMobileHomeTeste from "../../HomeTesteComponentes/PassaportesMobileHomeTeste";
 import PassaporteGrupoHomeTeste from "../../HomeTesteComponentes/PassaporteGrupoHomeTeste";
 
-const PassaportesSection = ({ isMobile, onBuyPassaporte }) => {
+const PassaportesSection = ({
+  isMobile,
+  onBuyPassaporte,
+  hidePassaporteButtons = false,
+}) => {
   return (
     <div
       id="passaportes"
       className="bg-black"
     >
       {isMobile ? (
-        <PassaportesMobileHomeTeste onBuyPassaporte={onBuyPassaporte} />
+        <PassaportesMobileHomeTeste
+          onBuyPassaporte={onBuyPassaporte}
+          hideBuyButton={hidePassaporteButtons}
+        />
       ) : (
-        <PassaporteVendasHomeTeste onBuyPassaporte={onBuyPassaporte} />
+        <PassaporteVendasHomeTeste
+          onBuyPassaporte={onBuyPassaporte}
+          hideBuyButton={hidePassaporteButtons}
+        />
       )}
-      <PassaporteGrupoHomeTeste onBuyPassaporte={onBuyPassaporte} />
+      <PassaporteGrupoHomeTeste
+        onBuyPassaporte={onBuyPassaporte}
+        hideBuyButton={hidePassaporteButtons}
+      />
     </div>
   );
 };

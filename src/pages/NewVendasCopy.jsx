@@ -461,7 +461,7 @@ const NewVendasCopy = () => {
         <div onClickCapture={openLeadModal}>
           <NewVendasHero ctaLink="#lead-form" />
         </div>
-        <NewVendasContent />
+        <NewVendasContent hidePassaporteButtons />
       </div>
 
       <div

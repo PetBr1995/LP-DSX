@@ -40,7 +40,10 @@ const cards = [
   },
 ];
 
-const PassaportesMobileHomeTeste = ({ onBuyPassaporte }) => {
+const PassaportesMobileHomeTeste = ({
+  onBuyPassaporte,
+  hideBuyButton = false,
+}) => {
   return (
     <section className="pb-10 pt-0">
       <div className="mx-auto max-w-6xl px-4">
@@ -130,22 +133,24 @@ const PassaportesMobileHomeTeste = ({ onBuyPassaporte }) => {
                   {`ou em ${card.installment}`}
                 </p>
 
-                <button
-                  data-cta="sympla"
-                  onClick={() => {
-                    const targetLink = withHublaUtm(card.link);
-                    const formOrigin = card.nome;
-                    rememberDsxFormOrigin(formOrigin);
-                    if (onBuyPassaporte) {
-                      onBuyPassaporte(targetLink, formOrigin);
-                      return;
-                    }
-                    window.open(targetLink, "_blank");
-                  }}
-                  className="mt-5 w-full rounded-xl bg-gradient-to-r from-[#F3CB46] to-[#E7A040] px-4 py-3 text-sm font-black uppercase tracking-wide text-black sm:text-base"
-                >
-                  COMPRAR AGORA
-                </button>
+                {!hideBuyButton ? (
+                  <button
+                    data-cta="sympla"
+                    onClick={() => {
+                      const targetLink = withHublaUtm(card.link);
+                      const formOrigin = card.nome;
+                      rememberDsxFormOrigin(formOrigin);
+                      if (onBuyPassaporte) {
+                        onBuyPassaporte(targetLink, formOrigin);
+                        return;
+                      }
+                      window.open(targetLink, "_blank");
+                    }}
+                    className="mt-5 w-full rounded-xl bg-gradient-to-r from-[#F3CB46] to-[#E7A040] px-4 py-3 text-sm font-black uppercase tracking-wide text-black sm:text-base"
+                  >
+                    COMPRAR AGORA
+                  </button>
+                ) : null}
               </div>
             </article>
           ))}

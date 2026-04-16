@@ -11,7 +11,7 @@ import {
   TracksSection,
 } from "./sections";
 
-const NewVendasContent = () => {
+const NewVendasContent = ({ hidePassaporteButtons = false }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
 
@@ -42,6 +42,7 @@ const NewVendasContent = () => {
       <PassaportesSection
         isMobile={isMobile}
         onBuyPassaporte={handleBuyPassaporte}
+        hidePassaporteButtons={hidePassaporteButtons}
       />
       <BusinessExperienceSection />
       <TracksSection items={tracks} />

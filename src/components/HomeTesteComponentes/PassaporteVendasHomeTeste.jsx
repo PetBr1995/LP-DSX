@@ -40,7 +40,7 @@ const cards = [
   },
 ];
 
-const SquishyPlanCard = ({ card, onBuyPassaporte }) => (
+const SquishyPlanCard = ({ card, onBuyPassaporte, hideBuyButton = false }) => (
   <article
     className="relative w-full max-w-[460px] overflow-hidden rounded-[22px] border border-[#E7A040]/35 bg-[#161616] p-5 lg:p-6"
   >
@@ -115,27 +115,32 @@ const SquishyPlanCard = ({ card, onBuyPassaporte }) => (
         {`ou em ${card.installment}`}
       </p>
 
-      <button
-        data-cta="sympla"
-        onClick={() => {
-          const targetLink = withHublaUtm(card.link);
-          const formOrigin = card.nome;
-          rememberDsxFormOrigin(formOrigin);
-          if (onBuyPassaporte) {
-            onBuyPassaporte(targetLink, formOrigin);
-            return;
-          }
-          window.open(targetLink, "_blank");
-        }}
-        className="mt-6 w-full rounded-xl bg-gradient-to-r from-[#F3CB46] to-[#E7A040] px-5 py-3 text-base font-black uppercase tracking-wide text-black transition hover:brightness-95"
-      >
-        COMPRAR AGORA
-      </button>
+      {!hideBuyButton ? (
+        <button
+          data-cta="sympla"
+          onClick={() => {
+            const targetLink = withHublaUtm(card.link);
+            const formOrigin = card.nome;
+            rememberDsxFormOrigin(formOrigin);
+            if (onBuyPassaporte) {
+              onBuyPassaporte(targetLink, formOrigin);
+              return;
+            }
+            window.open(targetLink, "_blank");
+          }}
+          className="mt-6 w-full rounded-xl bg-gradient-to-r from-[#F3CB46] to-[#E7A040] px-5 py-3 text-base font-black uppercase tracking-wide text-black transition hover:brightness-95"
+        >
+          COMPRAR AGORA
+        </button>
+      ) : null}
     </div>
   </article>
 );
 
-const PassaporteVendasHomeTeste = ({ onBuyPassaporte }) => {
+const PassaporteVendasHomeTeste = ({
+  onBuyPassaporte,
+  hideBuyButton = false,
+}) => {
   return (
     <section className="relative overflow-hidden pb-10 pt-0 md:pb-14 md:pt-0">
       <div className="mx-auto max-w-6xl px-4">
@@ -152,6 +157,7 @@ const PassaporteVendasHomeTeste = ({ onBuyPassaporte }) => {
               key={card.nome}
               card={card}
               onBuyPassaporte={onBuyPassaporte}
+              hideBuyButton={hideBuyButton}
             />
           ))}
         </div>

@@ -21,7 +21,10 @@ const groupPassports = [
   },
 ];
 
-const PassaporteGrupoHomeTeste = ({ onBuyPassaporte }) => {
+const PassaporteGrupoHomeTeste = ({
+  onBuyPassaporte,
+  hideBuyButton = false,
+}) => {
   return (
     <section className="pb-10 pt-0 md:pb-14 md:pt-0">
       <div className="mx-auto max-w-6xl px-4">
@@ -66,22 +69,24 @@ const PassaporteGrupoHomeTeste = ({ onBuyPassaporte }) => {
                   {`ou em ${item.installment}`}
                 </p>
 
-                <button
-                  data-cta="sympla"
-                  onClick={() => {
-                    const targetLink = withHublaUtm(item.link);
-                    const formOrigin = `Grupo ${item.qtdPessoas}`;
-                    rememberDsxFormOrigin(formOrigin);
-                    if (onBuyPassaporte) {
-                      onBuyPassaporte(targetLink, formOrigin);
-                      return;
-                    }
-                    window.open(targetLink, "_blank");
-                  }}
-                  className="mt-5 w-full rounded-xl bg-gradient-to-r from-[#F3CB46] to-[#E7A040] px-5 py-3 text-sm font-black uppercase tracking-wide text-black sm:text-base"
-                >
-                  COMPRAR AGORA
-                </button>
+                {!hideBuyButton ? (
+                  <button
+                    data-cta="sympla"
+                    onClick={() => {
+                      const targetLink = withHublaUtm(item.link);
+                      const formOrigin = `Grupo ${item.qtdPessoas}`;
+                      rememberDsxFormOrigin(formOrigin);
+                      if (onBuyPassaporte) {
+                        onBuyPassaporte(targetLink, formOrigin);
+                        return;
+                      }
+                      window.open(targetLink, "_blank");
+                    }}
+                    className="mt-5 w-full rounded-xl bg-gradient-to-r from-[#F3CB46] to-[#E7A040] px-5 py-3 text-sm font-black uppercase tracking-wide text-black sm:text-base"
+                  >
+                    COMPRAR AGORA
+                  </button>
+                ) : null}
               </div>
             </article>
           ))}
