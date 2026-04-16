@@ -13,6 +13,7 @@ const WhatsappPage = lazy(() => import("./pages/WhatsappPage"));
 const TesteAnimation = lazy(() => import("./pages/testeAnimation"));
 const Checkout = lazy(() => import("./pages/Checkout"));
 const NewVendas = lazy(() => import("./pages/NewVendas"));
+const CheckoutVendas = lazy(() => import("./pages/CheckoutVendas"));
 const SpeakerLandingPage = lazy(() =>
   import("./features/SpeakerLanding/SpeakerLandingPage"),
 );
@@ -35,6 +36,8 @@ const App = () => {
             <Route path="/whatsapp" element={<WhatsappPage />} />
             <Route path="/testeanimation" element={<TesteAnimation />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/checkoutvendas" element={<CheckoutVendas />} />
+            <Route path="/checkoutVendas" element={<CheckoutVendas />} />
             <Route path="/vendas" element={<NewVendas />} />
             <Route
               path="/lp/segmento/:slug"
