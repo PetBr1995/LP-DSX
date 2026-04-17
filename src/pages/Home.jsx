@@ -10,7 +10,6 @@ import FormSection from "../components/FormSection";
 import HeroSection from "../components/HeroSection";
 import NewTimerHeader from "../components/NewTimerHeader";
 import SecondSection from "../components/SecondSection";
-import SlidePalestrantes from "../components/SlidePalestrantes";
 import HeroSectionV2 from "../components/HeroSectionV2";
 import SlideFaixa from "../components/SlideFaixa";
 import Depoimentos from "../components/Depoimentos";
@@ -68,10 +67,6 @@ const Home = () => {
 
       <section id="home-content" data-section="home-content">
         <ContentSection />
-      </section>
-
-      <section id="home-palestrantes" data-section="home-palestrantes">
-        <SlidePalestrantes />
       </section>
 
       <section id="home-depoimentos" data-section="home-depoimentos">

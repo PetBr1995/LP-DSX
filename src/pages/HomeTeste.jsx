@@ -17,7 +17,6 @@ import LeadPopupFormHomeTeste from "../components/HomeTesteComponentes/LeadPopup
 const ContentSection = lazy(() => import("../components/ContentSection"));
 const FaleConosco = lazy(() => import("../components/FaleConosco"));
 const Footer = lazy(() => import("../components/Footer"));
-const SlidePalestrantes = lazy(() => import("../components/SlidePalestrantes"));
 const Depoimentos = lazy(() => import("../components/Depoimentos"));
 const PublicoDSX = lazy(() => import("../components/PublicoDSX"));
 const FAQ = lazy(() => import("../components/FAQ"));
@@ -962,11 +961,6 @@ const HomeTeste = () => {
       <div data-section="conteudo">
         <LazyMountSection minHeightClass="min-h-[700px] md:min-h-[620px]">
           <ContentSection />
-        </LazyMountSection>
-      </div>
-      <div data-section="palestrantes">
-        <LazyMountSection minHeightClass="min-h-[680px] md:min-h-[620px]">
-          <SlidePalestrantes />
         </LazyMountSection>
       </div>
       <div data-section="depoimentos">
