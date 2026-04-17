@@ -620,9 +620,7 @@ const PreCheckout = () => {
               {experienceHighlights.map((item) => (
                 <div
                   key={`${item.value}-${item.label}`}
-                  className={`nv-highlight-wrap w-full ${
-                    item.desktopOnly ? "hidden md:block" : ""
-                  }`}
+                  className="nv-highlight-wrap w-full"
                 >
                   <div className="nv-highlight-inner flex min-h-[104px] flex-col items-center justify-center px-3 py-3 text-center md:min-h-[132px] md:px-5">
                     <p className="font-jamjuree text-[20px] font-extrabold leading-none text-[#F5C02B] md:text-[40px]">
@@ -635,16 +633,16 @@ const PreCheckout = () => {
                 </div>
               ))}
             </div>
-            <div className="mt-4 space-y-2 text-white/90">
-              <div className="flex items-center justify-center gap-2">
+            <div className="mt-4 space-y-2 text-left text-white/90">
+              <div className="flex w-full items-center justify-start gap-1.5">
                 <Calendar size={18} color="#F5C02B" />
-                <p className="font-jamjuree text-[0.98rem] leading-relaxed">
+                <p className="text-left font-jamjuree text-[0.98rem] leading-relaxed">
                   23 e 24 de Julho
                 </p>
               </div>
-              <div className="flex items-center justify-center gap-2">
-                <MapPin size={18} color="#F5C02B" className="shrink-0" />
-                <p className="font-jamjuree text-[0.98rem] leading-relaxed">
+              <div className="flex w-full items-center justify-start gap-1.5">
+                <MapPin size={18} color="#F5C02B" className="mt-0.5 shrink-0" />
+                <p className="text-left font-jamjuree text-[0.98rem] leading-relaxed">
                   Centro de Convenções Vasco Vasques, Manaus/AM
                 </p>
               </div>
