@@ -96,11 +96,6 @@ const mainSpeakers = [
     bio: "CEO da Agência A Mangarataia e autora de Empreender Nunca Foi Sorte, especialista em branding estratégico e posicionamento de marcas.",
   },
   {
-    name: "Clayton Pascarelli",
-    image: "/foto-claytonpascarelli.png",
-    bio: "Jornalista, apresentador de TV e especialista em PNL aplicada à oratória, é um dos rostos mais conhecidos da imprensa televisiva do Amazonas.",
-  },
-  {
     name: "Flávia Sausmikat",
     image: "/novas-palestrantes/Flavia-Sausmikat.png",
     bio: "Diretora-geral do Instituto Action de Pesquisas, atua há mais de duas décadas na análise de comportamentos sociais, eleitorais e de consumo em todo o Brasil.",
