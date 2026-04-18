@@ -47,7 +47,7 @@ const LeadPopupFormHomeTeste = ({
             transition={{ duration: 0.36, ease: smoothEase }}
           >
             <div className="mb-5 h-[3px] w-24 rounded-full bg-gradient-to-r from-[#F5A205] to-[#FFD26A]" />
-
+            {/*
             <button
               type="button"
               onClick={onClose}
@@ -60,6 +60,7 @@ const LeadPopupFormHomeTeste = ({
             >
               ×
             </button>
+                */}
 
             <p className="text-center font-bebas pt-5 text-[2rem] leading-[0.95] text-[#F5A205] sm:text-4xl md:text-5xl">
               {headline}
