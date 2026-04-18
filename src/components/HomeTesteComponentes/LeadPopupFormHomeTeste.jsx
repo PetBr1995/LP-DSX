@@ -61,11 +61,11 @@ const LeadPopupFormHomeTeste = ({
               ×
             </button>
 
-            <p className="pr-12 font-bebas text-[2rem] leading-[0.95] text-[#F5A205] sm:text-4xl md:text-5xl">
+            <p className="text-center font-bebas pt-5 text-[2rem] leading-[0.95] text-[#F5A205] sm:text-4xl md:text-5xl">
               {headline}
             </p>
             {subheading ? (
-              <h3 className="mt-2 max-w-[560px] font-jamjuree text-sm leading-relaxed text-white/85 sm:mt-3 md:text-base">
+              <h3 className="m-auto mt-2 max-w-[560px] font-jamjuree text-[20px] font-bold text-center leading-relaxed uppercase text-[#F5A205] sm:mt-3 md:text-base">
                 {subheading}
               </h3>
             ) : null}

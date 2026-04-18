@@ -1,8 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import {
-  NewVendasContent,
-  NewVendasHero,
-} from "../components/NewVendas";
+import { NewVendasContent, NewVendasHero } from "../components/NewVendas";
 import NewVendasHeaderMask from "../components/NewVendas/NewVendasHeaderMask";
 import LeadPopupFormHomeTeste from "../components/HomeTesteComponentes/LeadPopupFormHomeTeste";
 import { getSupabaseClient, isSupabaseConfigured } from "../lib/supabaseClient";
@@ -46,7 +43,11 @@ function detectSiteOriginFromUrl(value = "") {
 function isMissingColumnError(error) {
   const code = String(error?.code || "").toUpperCase();
   const message = String(error?.message || "").toLowerCase();
-  return code === "PGRST204" || message.includes("column") || message.includes("schema cache");
+  return (
+    code === "PGRST204" ||
+    message.includes("column") ||
+    message.includes("schema cache")
+  );
 }
 
 const NewVendas = () => {
@@ -75,8 +76,10 @@ const NewVendas = () => {
   const errors = useMemo(() => {
     const currentErrors = {};
 
-    if (!leadForm.name.trim()) currentErrors.name = "Informe seu nome completo.";
-    if (!isValidEmail(leadForm.email)) currentErrors.email = "Informe um e-mail válido.";
+    if (!leadForm.name.trim())
+      currentErrors.name = "Informe seu nome completo.";
+    if (!isValidEmail(leadForm.email))
+      currentErrors.email = "Informe um e-mail válido.";
 
     const phone = onlyDigits(leadForm.phone);
     if (!(phone.length === 10 || phone.length === 11)) {
@@ -102,7 +105,11 @@ const NewVendas = () => {
 
     const updates = [
       { type: "name", key: "description", value: pageDescription },
-      { type: "name", key: "robots", value: "index,follow,max-image-preview:large" },
+      {
+        type: "name",
+        key: "robots",
+        value: "index,follow,max-image-preview:large",
+      },
       { type: "property", key: "og:type", value: "website" },
       { type: "property", key: "og:title", value: pageTitle },
       { type: "property", key: "og:description", value: pageDescription },
@@ -249,10 +256,11 @@ const NewVendas = () => {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        const ctaPassedAboveViewport = !entry.isIntersecting && entry.boundingClientRect.top < 0;
+        const ctaPassedAboveViewport =
+          !entry.isIntersecting && entry.boundingClientRect.top < 0;
         setShowStickyCta(ctaPassedAboveViewport);
       },
-      { threshold: 0 }
+      { threshold: 0 },
     );
 
     observer.observe(ctaElement);
@@ -273,7 +281,9 @@ const NewVendas = () => {
   useEffect(() => {
     const timerId = window.setTimeout(() => {
       setLeadStatus("idle");
-      setMensagem("Para continuar com a compra, preencha e envie o formulário.");
+      setMensagem(
+        "Para continuar com a compra, preencha e envie o formulário.",
+      );
       setShowLeadModal(true);
     }, 8000);
 
@@ -305,8 +315,10 @@ const NewVendas = () => {
     }
 
     if (value.length <= 2) value = `(${value}`;
-    else if (value.length <= 6) value = value.replace(/^(\d{2})(\d{0,4})/, "($1) $2");
-    else if (value.length <= 10) value = value.replace(/^(\d{2})(\d{4})(\d{0,4})/, "($1) $2-$3");
+    else if (value.length <= 6)
+      value = value.replace(/^(\d{2})(\d{0,4})/, "($1) $2");
+    else if (value.length <= 10)
+      value = value.replace(/^(\d{2})(\d{4})(\d{0,4})/, "($1) $2-$3");
     else value = value.replace(/^(\d{2})(\d{5})(\d{0,4})/, "($1) $2-$3");
 
     setLeadForm((prev) => ({ ...prev, phone: value }));
@@ -328,7 +340,8 @@ const NewVendas = () => {
     try {
       const formData = new FormData(e.target);
       const name = formData.get("name")?.toString().trim() || "";
-      const email = formData.get("email")?.toString().trim().toLowerCase() || "";
+      const email =
+        formData.get("email")?.toString().trim().toLowerCase() || "";
       const phone = formData.get("phone")?.toString().trim() || "";
       const cargo = formData.get("cargo")?.toString().trim() || "";
       const resolvedFormOrigin = "NewVendas";
@@ -383,7 +396,8 @@ const NewVendas = () => {
           const trackerState = window.DSXTracker?.getState?.() || {};
           const sessionId =
             trackerState.sessionId ||
-            (window.crypto?.randomUUID?.() || `session-${Date.now()}`);
+            window.crypto?.randomUUID?.() ||
+            `session-${Date.now()}`;
 
           const profilePayload = {
             lead_email: email,
@@ -391,7 +405,8 @@ const NewVendas = () => {
             lead_phone: phone,
             lead_cargo: cargo,
             site_origin: sourceData.site_origin || null,
-            site_hostname: sourceData.site_hostname || window.location.hostname || null,
+            site_hostname:
+              sourceData.site_hostname || window.location.hostname || null,
             first_converted_at: nowIso,
             last_seen_at: nowIso,
             has_sympla_redirected: true,
@@ -420,10 +435,14 @@ const NewVendas = () => {
               lead_phone: phone,
               lead_cargo: cargo,
               site_origin: sourceData.site_origin || null,
-              site_hostname: sourceData.site_hostname || window.location.hostname || null,
-              page: sourceData.page_url || window.location.pathname + window.location.search,
+              site_hostname:
+                sourceData.site_hostname || window.location.hostname || null,
+              page:
+                sourceData.page_url ||
+                window.location.pathname + window.location.search,
               referrer: document.referrer || null,
-              utm_source: sourceData.utm_source || sourceData.site_origin || null,
+              utm_source:
+                sourceData.utm_source || sourceData.site_origin || null,
               utm_medium: sourceData.utm_medium || null,
               utm_campaign: sourceData.utm_campaign || null,
               utm_content: sourceData.utm_content || null,
@@ -460,7 +479,9 @@ const NewVendas = () => {
       }, 700);
     } catch (error) {
       setLeadStatus("error");
-      setMensagem(error?.message || "Erro ao enviar formulário. Tente novamente.");
+      setMensagem(
+        error?.message || "Erro ao enviar formulário. Tente novamente.",
+      );
     } finally {
       setLoading(false);
     }
@@ -522,8 +543,8 @@ const NewVendas = () => {
         message={mensagem}
         loading={loading}
         canSubmit={canSubmitLead}
-        headline="PREENCHA O FORMULÁRIO PARA COMPRAR SEU PASSAPORTE"
-        subheading=""
+        headline="Preencha seus dados e faça parte do DSX 2026"
+        subheading="O maior evento de negócios, vendas, marketing e inovação do Norte"
         description=""
       />
     </section>
