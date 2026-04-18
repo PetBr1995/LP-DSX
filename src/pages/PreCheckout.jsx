@@ -1,39 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
-import { Calendar, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import "swiper/css";
+﻿import { useEffect, useMemo, useState } from "react";
+import { Calendar, MapPin } from "lucide-react";
 import NewVendasHeaderMask from "../components/NewVendas/NewVendasHeaderMask";
+import NewVendasSpeakersSlider from "../components/NewVendas/NewVendasSpeakersSlider";
+import AudienceSection from "../components/NewVendas/sections/AudienceSection";
+import { audienceProfiles } from "../components/NewVendas/newVendasData";
 import { getSupabaseClient, isSupabaseConfigured } from "../lib/supabaseClient";
 import { formatDsxFormOrigin } from "../utils/formOrigin";
-
-const audienceItems = [
-  {
-    title: "Empresário",
-    description:
-      "que precisa destravar o crescimento da sua empresa com estratégia.",
-  },
-  {
-    title: "Gestor e líder",
-    description:
-      "que tomam decisões e desejam mais clareza, método e visão de mercado.",
-  },
-  {
-    title: "Profissional em ascensão",
-    description:
-      "que busca networking qualificado e referências de alto nível.",
-  },
-  {
-    title: "Time de marketing e vendas",
-    description:
-      "que precisam focar em performance e resultado.",
-  },
-  {
-    title: "Estudante e universitário",
-    description:
-      "que buscam acelerar o repertório e se conectar com o mercado de trabalho.",
-  },
-];
 
 const galleryItems = [
   { src: "/img-ambiantes/amb-1.png", alt: "Networking entre participantes" },
@@ -46,33 +18,6 @@ const galleryItems = [
   { src: "/img-ambiantes/amb-3.png", alt: "Painel com executivos" },
   { src: "/img-ambiantes/amb-2.png", alt: "Interação entre palestrantes" },
   { src: "/img-ambiantes/amb-1.png", alt: "Trocas em ambiente premium" },
-];
-const heroSpeakerSlides = [
-  {
-    name: "João Branco",
-    image: "/foto-joao-branco.png",
-    desc: "Ex-CMO do McDonald's, referência em posicionamento e marca.",
-  },
-  {
-    name: "João Kepler",
-    image: "/novas-palestrantes/Joao-Kepler.png",
-    desc: "Investidor e mentor, autor de best-sellers de negócios.",
-  },
-  {
-    name: "Fernando Miranda",
-    image: "/novas-palestrantes/Fernando-Miranda.png",
-    desc: "CEO da Staage e host de um dos maiores podcasts de marketing.",
-  },
-  {
-    name: "Nicolas Charão",
-    image: "/novas-palestrantes/Nicolas-Charao.png",
-    desc: "Especialista em crescimento e escala de negócios.",
-  },
-  {
-    name: "Roberto Reis",
-    image: "/novas-palestrantes/Roberto-Reis.png",
-    desc: "Estrategista com ampla experiência em cenário político e mercado.",
-  },
 ];
 const galleryTopRow = galleryItems.slice(0, 5);
 const galleryBottomRow = galleryItems.slice(5, 10);
@@ -199,8 +144,6 @@ const PreCheckout = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState(0);
   const [animatedValues, setAnimatedValues] = useState(metrics.map(() => 0));
   const [showLeadModal, setShowLeadModal] = useState(false);
-  const [showStickyCta, setShowStickyCta] = useState(false);
-  const [mobileSpeakersSwiper, setMobileSpeakersSwiper] = useState(null);
   const [leadStatus, setLeadStatus] = useState("idle");
   const [leadError, setLeadError] = useState("");
   const [leadForm, setLeadForm] = useState({
@@ -289,27 +232,6 @@ const PreCheckout = () => {
       utm_term: urlParams.get("utm_term") || "",
       utm_content: urlParams.get("utm_content") || "",
     });
-  }, []);
-
-  useEffect(() => {
-    const ctaElement = document.getElementById("newvendas-primary-cta");
-
-    if (!ctaElement || !("IntersectionObserver" in window)) {
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        const ctaPassedAboveViewport =
-          !entry.isIntersecting && entry.boundingClientRect.top < 0;
-        setShowStickyCta(ctaPassedAboveViewport);
-      },
-      { threshold: 0 },
-    );
-
-    observer.observe(ctaElement);
-
-    return () => observer.disconnect();
   }, []);
 
   const handleOpenLeadModal = (event) => {
@@ -667,97 +589,9 @@ const PreCheckout = () => {
         </div>
       </section>
       <section className="bg-black px-4 pb-10 md:px-8 md:pb-14">
-        <h2 className="mx-auto mt-5 px-2 text-center font-anton text-[clamp(1.5rem,2.8vw,2rem)] uppercase leading-[1.12] tracking-[0.02em] text-white md:text-[clamp(2rem,3.8vw,2.7rem)] lg:whitespace-nowrap">
-          Onde os maiores especialistas do país se encontram
-        </h2>
-        <div className="mx-auto mt-5 w-full max-w-6xl overflow-hidden rounded-[24px] border border-white/10 bg-black md:rounded-[28px]">
-          <div className="relative">
-            <Swiper
-              modules={[Autoplay]}
-              slidesPerView={1}
-              spaceBetween={12}
-              breakpoints={{
-                640: { slidesPerView: 1.2, spaceBetween: 14 },
-                768: { slidesPerView: 2, spaceBetween: 16 },
-                1024: { slidesPerView: 2.4, spaceBetween: 18 },
-                1280: { slidesPerView: 3, spaceBetween: 20 },
-              }}
-              loop
-              autoplay={{ delay: 2800, disableOnInteraction: false }}
-              className="h-full"
-              onSwiper={setMobileSpeakersSwiper}
-            >
-              {heroSpeakerSlides.map((speaker) => (
-                <SwiperSlide key={`mobile-${speaker.name}`} className="h-full">
-                  <div className="relative h-[320px] w-full md:h-[420px] lg:h-[460px]">
-                    <img
-                      src={speaker.image}
-                      alt={speaker.name}
-                      className="h-full w-full bg-black object-contain p-2"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-                    <div className="absolute bottom-4 left-4 right-4 md:bottom-5 md:left-5 md:right-5 lg:bottom-6 lg:left-6 lg:right-6">
-                      <p className="font-bebas text-3xl uppercase tracking-[0.02em] text-[#F5A205] md:text-4xl lg:text-5xl">
-                        {speaker.name}
-                      </p>
-                      <p className="mt-1 font-jamjuree text-sm leading-relaxed text-white/90 md:mt-2 md:text-[15px] lg:max-w-[88%] lg:text-base">
-                        {speaker.desc}
-                      </p>
-                    </div>
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-            <button
-              type="button"
-              onClick={() => mobileSpeakersSwiper?.slidePrev()}
-              aria-label="Slide anterior de palestrantes"
-              className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/35 p-1.5 text-[#F5A205] backdrop-blur-[2px] transition hover:scale-110 hover:bg-black/50 hover:text-[#D98A00] md:left-3 md:p-2"
-            >
-              <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" strokeWidth={2.4} />
-            </button>
-            <button
-              type="button"
-              onClick={() => mobileSpeakersSwiper?.slideNext()}
-              aria-label="Próximo slide de palestrantes"
-              className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/35 p-1.5 text-[#F5A205] backdrop-blur-[2px] transition hover:scale-110 hover:bg-black/50 hover:text-[#D98A00] md:right-3 md:p-2"
-            >
-              <ChevronRight className="h-5 w-5 md:h-6 md:w-6" strokeWidth={2.4} />
-            </button>
-          </div>
-        </div>
+        <NewVendasSpeakersSlider />
       </section>
-
-      <section className="bg-[#ECECEC] px-4 py-14 text-black md:px-8 md:py-20">
-        <div className="mx-auto w-full max-w-6xl">
-          <h2 className="text-center font-anton text-[clamp(2rem,5vw,3rem)] uppercase leading-none">
-            O DSX é para você...
-          </h2>
-
-          <div className="mt-9 grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-            {audienceItems.map((item) => (
-              <article
-                key={item.title}
-                className="flex items-center gap-3 rounded-2xl bg-white p-4 shadow-[0_10px_22px_rgba(0,0,0,0.08)] md:p-5"
-              >
-                <img
-                  src="/vector-19.svg"
-                  alt=""
-                  aria-hidden="true"
-                  className="h-6 w-6 shrink-0 object-contain md:h-7 md:w-7"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <p className="font-jamjuree text-[1rem] leading-relaxed text-[#1A1A1A] md:text-[1.02rem]">
-                  <strong>{item.title}</strong> {item.description}
-                </p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      <AudienceSection items={audienceProfiles} />
 
       <section className="relative overflow-hidden bg-black px-4 py-14 md:px-8 md:py-20">
         <div
@@ -969,32 +803,10 @@ const PreCheckout = () => {
         </div>
       ) : null}
 
-      <div
-        className={`fixed bottom-0 left-0 right-0 z-[130] bg-black px-4 py-3 transition-all duration-500 ease-out ${
-          showStickyCta
-            ? "translate-y-0 opacity-100"
-            : "pointer-events-none translate-y-6 opacity-0"
-        }`}
-      >
-        <div className="mx-auto flex max-w-[770px] flex-col items-center">
-          <div onClickCapture={handleOpenLeadModal}>
-            <NewVendasHeaderMask
-              titulo="COMPRAR PASSAPORTE"
-              link="#lead-form-checkoutvendas"
-              target="_self"
-              textColor="#FFFFFF"
-              backgroundColor="#1E1A12"
-              font="700"
-              size="lg"
-            />
-          </div>
-          <span className="mt-1 inline-block text-2xl font-black uppercase text-[#F5C02B]">
-            Vagas limitadas
-          </span>
-        </div>
-      </div>
     </main>
   );
 };
 
 export default PreCheckout;
+
+

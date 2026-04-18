@@ -5,7 +5,7 @@ import { smoothEase } from "../../utils/motion";
 
 const NewTimerHeaderHomeTeste = ({
   isVisible,
-  headerText = "O evento comeÃ§a em:",
+  headerText = "O evento começa em:",
   ctaTitle = "3º lote disponível",
   ctaLink = "#passaportes",
   targetDate = "2026-07-23T00:00:00",
@@ -64,7 +64,7 @@ const NewTimerHeaderHomeTeste = ({
         <div className="w-full sm:w-auto flex justify-center sm:justify-start">
           {/* 
           <MainMask
-            titulo="O evento comeÃ§a em: "
+            titulo="O evento começa em: "
             backgroundColor="#F2F2F2"
             textColor="#000000"
             link="/vendas"
@@ -97,4 +97,5 @@ const NewTimerHeaderHomeTeste = ({
 };
 
 export default NewTimerHeaderHomeTeste;
+
 

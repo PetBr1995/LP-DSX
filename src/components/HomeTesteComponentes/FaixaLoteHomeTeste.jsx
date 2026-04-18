@@ -51,7 +51,7 @@ export default function FaixaLote() {
           }}
         />
 
-        {/* ConteÃºdo */}
+        {/* Conteúdo */}
         <span className="relative z-10 drop-shadow-[0_1px_1px_rgba(0,0,0,0.35)]">
           3º lote disponível
         </span>
@@ -59,4 +59,5 @@ export default function FaixaLote() {
     </div>
   );
 }
+
 
