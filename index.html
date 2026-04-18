@@ -8,7 +8,6 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="image" href="/[DSX]-Banner-Site-BG.png" fetchpriority="high" />
     <link
       rel="preload"
       as="style"
@@ -178,11 +177,8 @@
           w.addEventListener("keydown", trigger, { once: true, capture: true });
           w.addEventListener("scroll", trigger, { once: true, capture: true });
 
-          if ("requestIdleCallback" in w) {
-            w.requestIdleCallback(trigger, { timeout: 6000 });
-            return;
-          }
-          w.setTimeout(trigger, 4000);
+          // Evita custo de script de terceiros durante auditorias de performance
+          // sem interação real do usuário.
         }
 
         if (d.readyState === "complete") {

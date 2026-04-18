@@ -4,17 +4,12 @@ import FooterSection from "../../../components/NewVendas/sections/FooterSection"
 import {
   CalendarDays,
   CheckCircle2,
-  ChevronLeft,
-  ChevronRight,
   Clock3,
   MapPin,
   ShieldCheck,
   XCircle,
 } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import "swiper/css";
+import { useEffect, useMemo, useState } from "react";
 
 const THEME_COPY = {
   marketing: {
@@ -134,13 +129,10 @@ const formatAnimatedMetricValue = (value, metric) => {
 const SpeakerLandingTemplate = ({ speaker }) => {
   const speakerSlug = String(speaker?.slug || "").toLowerCase();
   const isNegocios = speakerSlug === "negocios";
-  const [negociosSpeakersSwiper, setNegociosSpeakersSwiper] = useState(null);
   const [isDepoimentoModalOpen, setIsDepoimentoModalOpen] = useState(false);
   const [activeDepoimentoVideo, setActiveDepoimentoVideo] = useState(null);
   const [negociosFaqOpenIndex, setNegociosFaqOpenIndex] = useState(0);
-  const immersionSectionRef = useRef(null);
-  const [shouldAnimateImmersionMetrics, setShouldAnimateImmersionMetrics] =
-    useState(false);
+  const [shouldLoadHeroVideo, setShouldLoadHeroVideo] = useState(false);
   const [isMobilePassaportes, setIsMobilePassaportes] = useState(false);
 
   const theme = useMemo(() => {
@@ -154,8 +146,9 @@ const SpeakerLandingTemplate = ({ speaker }) => {
     ],
     [],
   );
-  const [animatedMetricValues, setAnimatedMetricValues] = useState(
-    immersionMetricDefs.map(() => 0),
+  const animatedMetricValues = useMemo(
+    () => immersionMetricDefs.map((metric) => metric.target),
+    [immersionMetricDefs],
   );
 
   useEffect(() => {
@@ -167,53 +160,6 @@ const SpeakerLandingTemplate = ({ speaker }) => {
     window.addEventListener("resize", checkIsMobile);
     return () => window.removeEventListener("resize", checkIsMobile);
   }, []);
-
-  useEffect(() => {
-    const sectionNode = immersionSectionRef.current;
-    if (!sectionNode || shouldAnimateImmersionMetrics || !("IntersectionObserver" in window)) {
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShouldAnimateImmersionMetrics(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.25 },
-    );
-
-    observer.observe(sectionNode);
-
-    return () => observer.disconnect();
-  }, [shouldAnimateImmersionMetrics]);
-
-  useEffect(() => {
-    if (!shouldAnimateImmersionMetrics) return;
-
-    const duration = 1900;
-    const start = performance.now();
-    let frameId;
-
-    const animate = (now) => {
-      const elapsed = now - start;
-      const progress = Math.min(elapsed / duration, 1);
-      const easedProgress = 1 - Math.pow(1 - progress, 3);
-
-      const nextValues = immersionMetricDefs.map((metric) =>
-        Math.round(metric.target * easedProgress),
-      );
-      setAnimatedMetricValues(nextValues);
-
-      if (progress < 1) {
-        frameId = requestAnimationFrame(animate);
-      }
-    };
-
-    frameId = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(frameId);
-  }, [immersionMetricDefs, shouldAnimateImmersionMetrics]);
 
   if (!speaker) return null;
   const activePainPoints = speaker.painPoints?.length
@@ -314,14 +260,27 @@ const SpeakerLandingTemplate = ({ speaker }) => {
               </div>
 
               <div className="overflow-hidden rounded-[24px]">
-                <iframe
-                  src="https://player.vimeo.com/video/1146735494?autoplay=1&muted=1&loop=1&controls=0&title=0&byline=0&portrait=0&autopause=0&playsinline=1"
-                  title={`Aftermovie DSX - ${speaker.name}`}
-                  loading="lazy"
-                  allow="autoplay; fullscreen; picture-in-picture"
-                  allowFullScreen
-                  className="h-[220px] w-full border-0 sm:h-[260px] md:h-[530px]"
-                />
+                {shouldLoadHeroVideo ? (
+                  <iframe
+                    src="https://player.vimeo.com/video/1146735494?autoplay=1&muted=1&loop=1&controls=0&title=0&byline=0&portrait=0&autopause=0&playsinline=1"
+                    title={`Aftermovie DSX - ${speaker.name}`}
+                    loading="lazy"
+                    allow="autoplay; fullscreen; picture-in-picture"
+                    allowFullScreen
+                    className="h-[220px] w-full border-0 sm:h-[260px] md:h-[530px]"
+                  />
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => setShouldLoadHeroVideo(true)}
+                    className="group grid h-[220px] w-full place-items-center bg-[#121212] sm:h-[260px] md:h-[530px]"
+                    aria-label="Carregar vídeo do evento"
+                  >
+                    <span className="rounded-full border border-[#F5C02B]/50 px-5 py-2 font-jamjuree text-sm font-bold uppercase tracking-[0.08em] text-[#F5C02B] transition group-hover:bg-[#F5C02B]/10">
+                      Assistir vídeo
+                    </span>
+                  </button>
+                )}
               </div>
             </div>
           </section>
@@ -358,61 +317,30 @@ const SpeakerLandingTemplate = ({ speaker }) => {
           <section>
             <h2 className="font-anton text-3xl uppercase text-[#F5C02B] md:text-4xl text-center">{speaker.speakersHeadline}</h2>
             <div className="mx-auto mt-6 w-full max-w-6xl overflow-hidden rounded-[24px] border border-white/10 bg-black md:rounded-[28px]">
-              <div className="relative">
-                <Swiper
-                  modules={[Autoplay]}
-                  slidesPerView={1}
-                  spaceBetween={12}
-                  breakpoints={{
-                    640: { slidesPerView: 1.2, spaceBetween: 14 },
-                    768: { slidesPerView: 2, spaceBetween: 16 },
-                    1024: { slidesPerView: 2.4, spaceBetween: 18 },
-                    1280: { slidesPerView: 3, spaceBetween: 20 },
-                  }}
-                  loop
-                  autoplay={{ delay: 2800, disableOnInteraction: false }}
-                  className="h-full"
-                  onSwiper={setNegociosSpeakersSwiper}
-                >
-                  {(speaker.segmentSpeakers || []).map((item) => (
-                    <SwiperSlide key={`${item.name}-${item.image}`}>
-                      <article className="relative h-[320px] w-full md:h-[420px] lg:h-[460px]">
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          loading="lazy"
-                          decoding="async"
-                          className="h-full w-full bg-black object-contain p-2"
-                        />
-                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-                        <div className="absolute bottom-4 left-4 right-4 md:bottom-5 md:left-5 md:right-5 lg:bottom-6 lg:left-6 lg:right-6">
-                          <p className="font-anton text-3xl uppercase leading-none text-[#F5A205] md:text-4xl lg:text-5xl">
-                            {item.name}
-                          </p>
-                          <p className="mt-1 font-jamjuree text-sm leading-relaxed text-white/90 md:mt-2 md:text-[15px] lg:max-w-[88%] lg:text-base">
-                            {item.bio}
-                          </p>
-                        </div>
-                      </article>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-                <button
-                  type="button"
-                  onClick={() => negociosSpeakersSwiper?.slidePrev()}
-                  aria-label="Slide anterior de palestrantes"
-                  className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/35 p-1.5 text-[#F5A205] backdrop-blur-[2px] transition hover:scale-110 hover:bg-black/50 hover:text-[#D98A00] md:left-3 md:p-2"
-                >
-                  <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" strokeWidth={2.4} />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => negociosSpeakersSwiper?.slideNext()}
-                  aria-label="PrÃ³ximo slide de palestrantes"
-                  className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/35 p-1.5 text-[#F5A205] backdrop-blur-[2px] transition hover:scale-110 hover:bg-black/50 hover:text-[#D98A00] md:right-3 md:p-2"
-                >
-                  <ChevronRight className="h-5 w-5 md:h-6 md:w-6" strokeWidth={2.4} />
-                </button>
+              <div className="flex snap-x snap-mandatory gap-3 overflow-x-auto p-3 md:gap-4 md:p-4">
+                {(speaker.segmentSpeakers || []).map((item) => (
+                  <article
+                    key={`${item.name}-${item.image}`}
+                    className="relative h-[320px] w-[86%] shrink-0 snap-start overflow-hidden rounded-2xl border border-white/10 md:h-[420px] md:w-[48%] lg:h-[460px] lg:w-[32%]"
+                  >
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-full w-full bg-black object-contain p-2"
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+                    <div className="absolute bottom-4 left-4 right-4 md:bottom-5 md:left-5 md:right-5 lg:bottom-6 lg:left-6 lg:right-6">
+                      <p className="font-anton text-3xl uppercase leading-none text-[#F5A205] md:text-4xl lg:text-5xl">
+                        {item.name}
+                      </p>
+                      <p className="mt-1 font-jamjuree text-sm leading-relaxed text-white/90 md:mt-2 md:text-[15px] lg:max-w-[88%] lg:text-base">
+                        {item.bio}
+                      </p>
+                    </div>
+                  </article>
+                ))}
               </div>
             </div>
           </section>
@@ -512,10 +440,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
             </div>
           ) : null}
 
-          <section
-            ref={immersionSectionRef}
-            className="rounded-2xl border border-[#F5C02B]/30 bg-[linear-gradient(150deg,rgba(16,12,6,0.88)_0%,rgba(7,7,7,0.92)_78%)] p-6"
-          >
+          <section className="rounded-2xl border border-[#F5C02B]/30 bg-[linear-gradient(150deg,rgba(16,12,6,0.88)_0%,rgba(7,7,7,0.92)_78%)] p-6">
             <h2 className="font-anton text-[clamp(1.4rem,5vw,3.3rem)] text-center leading-[1.22] uppercase text-[#F5C02B]">{speaker.immersionHeadline}</h2>
             <div className="mt-6 flex w-full flex-wrap justify-center gap-x-8 gap-y-4 text-center">
               {immersionMetricDefs.map((item, index) => (
@@ -682,14 +607,27 @@ const SpeakerLandingTemplate = ({ speaker }) => {
           </div>
 
           <div className="overflow-hidden rounded-[24px] border border-[#F5C02B]/45 bg-black/60 shadow-[0_0_0_1px_rgba(255,221,130,0.16),0_20px_44px_rgba(0,0,0,0.55)]">
-            <iframe
-              src="https://player.vimeo.com/video/1146735494?autoplay=1&muted=1&loop=1&controls=0&title=0&byline=0&portrait=0&autopause=0&playsinline=1"
-              title={`Aftermovie DSX - ${speaker.name}`}
-              loading="lazy"
-              allow="autoplay; fullscreen; picture-in-picture"
-              allowFullScreen
-              className="h-[320px] w-full border-0 md:h-[480px]"
-            />
+            {shouldLoadHeroVideo ? (
+              <iframe
+                src="https://player.vimeo.com/video/1146735494?autoplay=1&muted=1&loop=1&controls=0&title=0&byline=0&portrait=0&autopause=0&playsinline=1"
+                title={`Aftermovie DSX - ${speaker.name}`}
+                loading="lazy"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowFullScreen
+                className="h-[320px] w-full border-0 md:h-[480px]"
+              />
+            ) : (
+              <button
+                type="button"
+                onClick={() => setShouldLoadHeroVideo(true)}
+                className="group grid h-[320px] w-full place-items-center bg-[#121212] md:h-[480px]"
+                aria-label="Carregar vídeo do evento"
+              >
+                <span className="rounded-full border border-[#F5C02B]/50 px-5 py-2 font-jamjuree text-sm font-bold uppercase tracking-[0.08em] text-[#F5C02B] transition group-hover:bg-[#F5C02B]/10">
+                  Assistir vídeo
+                </span>
+              </button>
+            )}
           </div>
         </section>
 

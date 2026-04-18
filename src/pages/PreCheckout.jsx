@@ -1,8 +1,6 @@
-﻿import { useEffect, useMemo, useState } from "react";
+﻿import { Suspense, lazy, useEffect, useMemo, useState } from "react";
 import { Calendar, MapPin } from "lucide-react";
 import NewVendasHeaderMask from "../components/NewVendas/NewVendasHeaderMask";
-import NewVendasSpeakersSlider from "../components/NewVendas/NewVendasSpeakersSlider";
-import AudienceSection from "../components/NewVendas/sections/AudienceSection";
 import { audienceProfiles } from "../components/NewVendas/newVendasData";
 import { getSupabaseClient, isSupabaseConfigured } from "../lib/supabaseClient";
 import {
@@ -10,6 +8,13 @@ import {
   readDsxFormOrigin,
   rememberDsxFormOrigin,
 } from "../utils/formOrigin";
+
+const NewVendasSpeakersSlider = lazy(
+  () => import("../components/NewVendas/NewVendasSpeakersSlider"),
+);
+const AudienceSection = lazy(
+  () => import("../components/NewVendas/sections/AudienceSection"),
+);
 
 const galleryItems = [
   {
@@ -195,10 +200,11 @@ const formatPhone = (value = "") => {
 
 const PreCheckout = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState(0);
-  const [animatedValues, setAnimatedValues] = useState(metrics.map(() => 0));
+  const [animatedValues] = useState(metrics.map((metric) => metric.target));
   const [showLeadModal, setShowLeadModal] = useState(false);
   const [leadStatus, setLeadStatus] = useState("idle");
   const [leadError, setLeadError] = useState("");
+  const [shouldRenderBelowFold, setShouldRenderBelowFold] = useState(false);
   const [leadFormOrigin, setLeadFormOrigin] = useState(() =>
     readDsxFormOrigin("Standard"),
   );
@@ -222,28 +228,16 @@ const PreCheckout = () => {
   const yearLabel = useMemo(() => new Date().getFullYear(), []);
 
   useEffect(() => {
-    const duration = 1900;
-    const start = performance.now();
-    let frameId;
-
-    const animate = (now) => {
-      const elapsed = now - start;
-      const progress = Math.min(elapsed / duration, 1);
-      const easedProgress = 1 - Math.pow(1 - progress, 3);
-
-      const nextValues = metrics.map((metric) =>
-        Math.round(metric.target * easedProgress),
+    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+      const idleId = window.requestIdleCallback(
+        () => setShouldRenderBelowFold(true),
+        { timeout: 1800 },
       );
-      setAnimatedValues(nextValues);
+      return () => window.cancelIdleCallback(idleId);
+    }
 
-      if (progress < 1) {
-        frameId = requestAnimationFrame(animate);
-      }
-    };
-
-    frameId = requestAnimationFrame(animate);
-
-    return () => cancelAnimationFrame(frameId);
+    const timeoutId = window.setTimeout(() => setShouldRenderBelowFold(true), 350);
+    return () => window.clearTimeout(timeoutId);
   }, []);
 
   useEffect(() => {
@@ -647,134 +641,140 @@ const PreCheckout = () => {
           </div>
         </div>
       </section>
-      <section className="bg-black px-4 pb-10 md:px-8 md:pb-14">
-        <NewVendasSpeakersSlider />
-      </section>
-      <AudienceSection items={audienceProfiles} />
+      {shouldRenderBelowFold ? (
+        <Suspense fallback={<div className="min-h-[120px]" aria-hidden="true" />}>
+          <section className="bg-black px-4 pb-10 md:px-8 md:pb-14">
+            <NewVendasSpeakersSlider />
+          </section>
+          <AudienceSection items={audienceProfiles} />
 
-      <section className="relative overflow-hidden bg-black px-4 py-14 md:px-8 md:py-20">
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(circle at 12% 85%, rgba(0,183,255,0.18), transparent 34%), radial-gradient(circle at 83% 5%, rgba(245,192,43,0.16), transparent 32%)",
-          }}
-          aria-hidden="true"
-        />
-
-        <div className="relative mx-auto w-full max-w-7xl">
-          <h2 className="text-center font-anton text-[clamp(2rem,6vw,3.7rem)] uppercase leading-[1.2]">
-            O Ambiente que gera negócios reais
-          </h2>
-          <p className="mx-auto mt-4 max-w-3xl text-center text-base leading-relaxed text-white/75 md:text-lg">
-            Conteúdo aplicado, conexões de alto nível e experiências que aproximam
-            decisores, marcas e oportunidades em um único lugar.
-          </p>
-        </div>
-        <div className="mt-10 space-y-4 -mx-4 md:-mx-8">
-          <div className="faixa-wrapper">
+          <section className="relative overflow-hidden bg-black px-4 py-14 md:px-8 md:py-20">
             <div
-              className="faixa-track gap-3 md:gap-5"
-              style={{ animationDuration: "92s" }}
-            >
-              {[...galleryTopRow, ...galleryTopRow, ...galleryTopRow, ...galleryTopRow].map((item, index) => (
-                <div
-                  key={`top-${item.src}-${index}`}
-                  className="group w-[220px] shrink-0 overflow-hidden rounded-3xl border border-white/10 bg-[#0E0E0E] md:w-[300px] lg:w-[340px]"
-                >
-                  <img
-                    src={item.src}
-                    alt={item.alt}
-                    className="h-[180px] w-full object-cover transition duration-500 group-hover:scale-105 md:h-[210px] lg:h-[230px]"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-              ))}
+              className="pointer-events-none absolute inset-0"
+              style={{
+                background:
+                  "radial-gradient(circle at 12% 85%, rgba(0,183,255,0.18), transparent 34%), radial-gradient(circle at 83% 5%, rgba(245,192,43,0.16), transparent 32%)",
+              }}
+              aria-hidden="true"
+            />
+
+            <div className="relative mx-auto w-full max-w-7xl">
+              <h2 className="text-center font-anton text-[clamp(2rem,6vw,3.7rem)] uppercase leading-[1.2]">
+                O Ambiente que gera negócios reais
+              </h2>
+              <p className="mx-auto mt-4 max-w-3xl text-center text-base leading-relaxed text-white/75 md:text-lg">
+                Conteúdo aplicado, conexões de alto nível e experiências que aproximam
+                decisores, marcas e oportunidades em um único lugar.
+              </p>
             </div>
-          </div>
-
-          <div className="faixa-wrapper">
-            <div
-              className="faixa-track-fast gap-3 md:gap-5"
-              style={{ animationDirection: "reverse", animationDuration: "64s" }}
-            >
-              {[...galleryBottomRow, ...galleryBottomRow, ...galleryBottomRow, ...galleryBottomRow].map((item, index) => (
+            <div className="mt-10 space-y-4 -mx-4 md:-mx-8">
+              <div className="faixa-wrapper">
                 <div
-                  key={`bottom-${item.src}-${index}`}
-                  className="group w-[220px] shrink-0 overflow-hidden rounded-3xl border border-white/10 bg-[#0E0E0E] md:w-[300px] lg:w-[340px]"
+                  className="faixa-track gap-3 md:gap-5"
+                  style={{ animationDuration: "92s" }}
                 >
-                  <img
-                    src={item.src}
-                    alt={item.alt}
-                    className="h-[180px] w-full object-cover transition duration-500 group-hover:scale-105 md:h-[210px] lg:h-[230px]"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-[#0A0A0A] px-4 pb-16 pt-14 md:px-8 md:pb-20 md:pt-20">
-        <div className="mx-auto w-full max-w-4xl">
-          <h2 className="text-center font-anton text-[clamp(2rem,5vw,3rem)] uppercase leading-none">
-            Perguntas frequentes
-          </h2>
-
-          <div className="mt-8 rounded-2xl border border-[#2B2B2B] bg-[#121212] p-2 md:p-3">
-            {faqItems.map((item, index) => {
-              const isOpen = openFaqIndex === index;
-
-              return (
-                <article
-                  key={item.question}
-                  className="border-b border-[#2B2B2B] px-3 py-4 last:border-b-0 md:px-4"
-                >
-                  <button
-                    type="button"
-                    className="flex w-full items-center justify-between gap-4 text-left"
-                    onClick={() =>
-                      setOpenFaqIndex((current) =>
-                        current === index ? -1 : index,
-                      )
-                    }
-                    aria-expanded={isOpen}
-                  >
-                    <h3 className="font-jamjuree text-lg font-semibold leading-snug text-white md:text-[1.35rem]">
-                      {item.question}
-                    </h3>
-                    <span
-                      className={`grid h-8 w-8 shrink-0 place-items-center rounded-full border border-[#3B3B3B] text-[#F5C02B] transition-transform duration-300 ${isOpen ? "rotate-180" : ""
-                        }`}
-                      aria-hidden="true"
+                  {[...galleryTopRow, ...galleryTopRow, ...galleryTopRow, ...galleryTopRow].map((item, index) => (
+                    <div
+                      key={`top-${item.src}-${index}`}
+                      className="group w-[220px] shrink-0 overflow-hidden rounded-3xl border border-white/10 bg-[#0E0E0E] md:w-[300px] lg:w-[340px]"
                     >
-                      <img src="/arrow-down.svg" alt="" className="h-4 w-4" />
-                    </span>
-                  </button>
+                      <img
+                        src={item.src}
+                        alt={item.alt}
+                        className="h-[180px] w-full object-cover transition duration-500 group-hover:scale-105 md:h-[210px] lg:h-[230px]"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
 
-                  <div
-                    className={`grid overflow-hidden transition-all duration-300 ${isOpen
-                        ? "mt-3 grid-rows-[1fr] opacity-100"
-                        : "grid-rows-[0fr] opacity-0"
-                      }`}
-                  >
-                    <p className="overflow-hidden font-jamjuree text-[1rem] leading-relaxed text-white/80">
-                      {item.answer}
-                    </p>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
+              <div className="faixa-wrapper">
+                <div
+                  className="faixa-track-fast gap-3 md:gap-5"
+                  style={{ animationDirection: "reverse", animationDuration: "64s" }}
+                >
+                  {[...galleryBottomRow, ...galleryBottomRow, ...galleryBottomRow, ...galleryBottomRow].map((item, index) => (
+                    <div
+                      key={`bottom-${item.src}-${index}`}
+                      className="group w-[220px] shrink-0 overflow-hidden rounded-3xl border border-white/10 bg-[#0E0E0E] md:w-[300px] lg:w-[340px]"
+                    >
+                      <img
+                        src={item.src}
+                        alt={item.alt}
+                        className="h-[180px] w-full object-cover transition duration-500 group-hover:scale-105 md:h-[210px] lg:h-[230px]"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
 
-          <p className="mt-8 text-center font-jamjuree text-sm text-white/45">
-            DSX {yearLabel}. Todos os direitos reservados.
-          </p>
-        </div>
-      </section>
+          <section className="bg-[#0A0A0A] px-4 pb-16 pt-14 md:px-8 md:pb-20 md:pt-20">
+            <div className="mx-auto w-full max-w-4xl">
+              <h2 className="text-center font-anton text-[clamp(2rem,5vw,3rem)] uppercase leading-none">
+                Perguntas frequentes
+              </h2>
+
+              <div className="mt-8 rounded-2xl border border-[#2B2B2B] bg-[#121212] p-2 md:p-3">
+                {faqItems.map((item, index) => {
+                  const isOpen = openFaqIndex === index;
+
+                  return (
+                    <article
+                      key={item.question}
+                      className="border-b border-[#2B2B2B] px-3 py-4 last:border-b-0 md:px-4"
+                    >
+                      <button
+                        type="button"
+                        className="flex w-full items-center justify-between gap-4 text-left"
+                        onClick={() =>
+                          setOpenFaqIndex((current) =>
+                            current === index ? -1 : index,
+                          )
+                        }
+                        aria-expanded={isOpen}
+                      >
+                        <h3 className="font-jamjuree text-lg font-semibold leading-snug text-white md:text-[1.35rem]">
+                          {item.question}
+                        </h3>
+                        <span
+                          className={`grid h-8 w-8 shrink-0 place-items-center rounded-full border border-[#3B3B3B] text-[#F5C02B] transition-transform duration-300 ${isOpen ? "rotate-180" : ""
+                            }`}
+                          aria-hidden="true"
+                        >
+                          <img src="/arrow-down.svg" alt="" className="h-4 w-4" />
+                        </span>
+                      </button>
+
+                      <div
+                        className={`grid overflow-hidden transition-all duration-300 ${isOpen
+                            ? "mt-3 grid-rows-[1fr] opacity-100"
+                            : "grid-rows-[0fr] opacity-0"
+                          }`}
+                      >
+                        <p className="overflow-hidden font-jamjuree text-[1rem] leading-relaxed text-white/80">
+                          {item.answer}
+                        </p>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+
+              <p className="mt-8 text-center font-jamjuree text-sm text-white/45">
+                DSX {yearLabel}. Todos os direitos reservados.
+              </p>
+            </div>
+          </section>
+        </Suspense>
+      ) : (
+        <div className="min-h-[120px]" aria-hidden="true" />
+      )}
 
       {showLeadModal ? (
         <div className="fixed inset-0 z-[200] grid place-items-center bg-black/75 px-4">
@@ -867,5 +867,7 @@ const PreCheckout = () => {
 };
 
 export default PreCheckout;
+
+
 
 
