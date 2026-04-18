@@ -11,7 +11,10 @@ import {
   TracksSection,
 } from "./sections";
 
-const NewVendasContent = ({ hidePassaporteButtons = false }) => {
+const NewVendasContent = ({
+  hidePassaporteButtons = false,
+  onBuyPassaporte: onBuyPassaporteProp,
+}) => {
   const [isMobile, setIsMobile] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
 
@@ -29,6 +32,11 @@ const NewVendasContent = ({ hidePassaporteButtons = false }) => {
     if (formOrigin) {
       rememberDsxFormOrigin(formOrigin);
     }
+    if (typeof onBuyPassaporteProp === "function") {
+      onBuyPassaporteProp(targetLink, formOrigin);
+      return;
+    }
+
     window.open(targetLink, "_blank", "noopener,noreferrer");
   };
 

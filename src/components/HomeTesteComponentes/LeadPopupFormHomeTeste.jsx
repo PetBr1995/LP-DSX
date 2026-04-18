@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+﻿import { AnimatePresence, motion } from "framer-motion";
 import { FormButton } from "../FormSection";
 import { smoothEase } from "../../utils/motion";
 
@@ -47,7 +47,6 @@ const LeadPopupFormHomeTeste = ({
             transition={{ duration: 0.36, ease: smoothEase }}
           >
             <div className="mb-5 h-[3px] w-24 rounded-full bg-gradient-to-r from-[#F5A205] to-[#FFD26A]" />
-            {/*
             <button
               type="button"
               onClick={onClose}
@@ -57,10 +56,7 @@ const LeadPopupFormHomeTeste = ({
                   : "text-white/40 cursor-not-allowed"
               }`}
               aria-label="Fechar formulário"
-            >
-              ×
-            </button>
-                */}
+            >x</button>
 
             <p className="text-center font-bebas pt-5 text-[2rem] leading-[0.95] text-[#F5A205] sm:text-4xl md:text-5xl">
               {headline}
@@ -193,3 +189,6 @@ const LeadPopupFormHomeTeste = ({
 };
 
 export default LeadPopupFormHomeTeste;
+
+
+

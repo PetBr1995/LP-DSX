@@ -133,6 +133,7 @@ const NewVendasHero = ({
   ctaLink = "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721",
   onPrimaryCtaClick,
 }) => {
+  const ctaTarget = ctaLink.startsWith("#") ? "_self" : "_blank";
   const [animatedValues, setAnimatedValues] = useState(metrics.map(() => 0));
   const [currentSpeakerIndex, setCurrentSpeakerIndex] = useState(0);
   const [cardsPerView, setCardsPerView] = useState(3);
@@ -285,7 +286,7 @@ const NewVendasHero = ({
             <NewVendasHeaderMask
               titulo="COMPRAR PASSAPORTE"
               link={ctaLink}
-              target="_blank"
+              target={ctaTarget}
               onClick={onPrimaryCtaClick}
               textColor="#FFFFFF"
               backgroundColor="#1E1A12"

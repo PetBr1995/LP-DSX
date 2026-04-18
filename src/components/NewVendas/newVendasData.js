@@ -1,9 +1,9 @@
 ﻿export const painPoints = [
-  "Seu concorrente estÃ¡ crescendo e vocÃª nÃ£o entende como.",
-  "Investe em marketing, mas nÃ£o vÃª retorno previsÃ­vel.",
-  "Sua empresa depende 100% de indicaÃ§Ã£o e boca a boca.",
-  "Quer usar IA e novas ferramentas, mas nÃ£o sabe por onde comeÃ§ar.",
-  "Sente que falta estratÃ©gia, direÃ§Ã£o e as conexÃµes certas.",
+  "Seu concorrente está crescendo e você não entende como.",
+  "Investe em marketing, mas não vê retorno previsível.",
+  "Sua empresa depende 100% de indicação e boca a boca.",
+  "Quer usar IA e novas ferramentas, mas não sabe por onde começar.",
+  "Sente que falta estratégia, direção e as conexões certas.",
 ];
 
 export const tracks = [
@@ -55,30 +55,30 @@ export const featuredSpeakers = [
   {
     initials: "FM",
     name: "Fernando Miranda",
-    role: "CEO de FinanÃ§as",
+    role: "CEO de Finanças",
     color: "bg-[#F06400]",
   },
   {
     initials: "NC",
-    name: "Nicolas CharÃ£o",
+    name: "Nicolas Charão",
     role: "Founder Vaga VTX",
     color: "bg-[#1E63B8]",
   },
   {
     initials: "RR",
     name: "Roberto Reis",
-    role: "RelaÃ§Ãµes Governamentais",
+    role: "Relações Governamentais",
     color: "bg-[#3C7D2E]",
   },
   {
     initials: "JK",
-    name: "JoÃ£o Kepler",
+    name: "João Kepler",
     role: "Investidor & Mentor",
     color: "bg-[#6B23A8]",
   },
   {
     initials: "FS",
-    name: "FlÃ¡via Sassunkai",
+    name: "Flávia Sassunkai",
     role: "Estrategista Digital",
     color: "bg-[#D52A2A]",
   },
@@ -89,18 +89,18 @@ export const testimonials = [
     tag: "Palestrante",
     quote:
       '"Vozes que subiram ao palco para compartilhar visão e cases de sucesso."',
-    author: "JoÃ£o Kepler",
+    author: "João Kepler",
   },
   {
     tag: "Expositor",
     quote:
-      '"Marcas que estiveram na linha de frente, gerando conexÃµes, oportunidades e negÃ³cios."',
-    author: "Augusto CÃ©sar",
+      '"Marcas que estiveram na linha de frente, gerando conexões, oportunidades e negócios."',
+    author: "Augusto César",
   },
   {
     tag: "Participante",
     quote:
-      '"Empresários e profissionais que viveram o DSX 2025 e saÃ­ram com uma nova direÃ§Ã£o."',
+      '"Empresários e profissionais que viveram o DSX 2025 e saíram com uma nova direção."',
     author: "Fernanda",
   },
 ];
@@ -165,3 +165,4 @@ export const faqItems = [
       "O VIP é um acelerador de tempo. Além de sentar nas primeiras fileiras, você tem acesso ao Lounge VIP: um ambiente reservado, ideal para sentar, tomar um café e negociar olho no olho com os maiores decisores e palestrantes do evento.",
   },
 ];
+

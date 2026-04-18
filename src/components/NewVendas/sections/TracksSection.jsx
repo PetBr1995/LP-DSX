@@ -73,7 +73,7 @@ const TracksSection = ({ items }) => {
                 </div>
 
                 <div className="relative z-10 flex w-full items-center gap-4">
-                  {/* Ãcone */}
+                  {/* Ícone */}
                   <div className="grid h-15 w-15 shrink-0 place-items-center rounded-[12px] border border-[#4A3F2A] bg-[#272115]">
                     <Icon
                       className="h-[22px] w-[22px] text-[#E8DEC4] transition-colors duration-300 group-hover:text-[#F5C02B]"
@@ -82,12 +82,12 @@ const TracksSection = ({ items }) => {
                   </div>
 
                   <div>
-                    {/* TÃ­tulo */}
+                    {/* Título */}
                     <h3 className="text-[28px] font-bold leading-[1.16] text-white md:text-[36px] md:leading-tight">
                       {track.title}
                     </h3>
 
-                    {/* DescriÃ§Ã£o */}
+                    {/* Descrição */}
                     <p className="mt-2 font-jamjuree text-[15px] font-normal leading-relaxed text-white md:text-[17px]">
                       {track.description}
                     </p>
@@ -103,3 +103,4 @@ const TracksSection = ({ items }) => {
 };
 
 export default TracksSection;
+

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+﻿import { useEffect, useMemo, useState } from "react";
 import { NewVendasContent, NewVendasHero } from "../components/NewVendas";
 import NewVendasHeaderMask from "../components/NewVendas/NewVendasHeaderMask";
 import LeadPopupFormHomeTeste from "../components/HomeTesteComponentes/LeadPopupFormHomeTeste";
@@ -53,6 +53,7 @@ function isMissingColumnError(error) {
 const NewVendas = () => {
   const [showStickyCta, setShowStickyCta] = useState(false);
   const [showLeadModal, setShowLeadModal] = useState(false);
+  const [pendingSymplaUrl, setPendingSymplaUrl] = useState(NEW_VENDAS_SYMPLA_URL);
   const [leadForm, setLeadForm] = useState({
     name: "",
     phone: "",
@@ -76,17 +77,21 @@ const NewVendas = () => {
   const errors = useMemo(() => {
     const currentErrors = {};
 
-    if (!leadForm.name.trim())
+    if (!leadForm.name.trim()) {
       currentErrors.name = "Informe seu nome completo.";
-    if (!isValidEmail(leadForm.email))
+    }
+    if (!isValidEmail(leadForm.email)) {
       currentErrors.email = "Informe um e-mail válido.";
+    }
 
     const phone = onlyDigits(leadForm.phone);
     if (!(phone.length === 10 || phone.length === 11)) {
       currentErrors.phone = "Informe um WhatsApp com DDD.";
     }
 
-    if (!leadForm.cargo) currentErrors.cargo = "Selecione seu perfil.";
+    if (!leadForm.cargo) {
+      currentErrors.cargo = "Selecione seu perfil.";
+    }
 
     return currentErrors;
   }, [leadForm]);
@@ -268,31 +273,6 @@ const NewVendas = () => {
     return () => observer.disconnect();
   }, []);
 
-  const openLeadModal = (event) => {
-    if (event) event.preventDefault();
-    if (loading) return;
-    setLeadStatus("idle");
-    setMensagem("Para continuar com a compra, preencha e envie o formulário.");
-    setShowLeadModal(true);
-  };
-
-  const closeLeadModal = () => {};
-  {
-    /*
-    useEffect(() => {
-      const timerId = window.setTimeout(() => {
-        setLeadStatus("idle");
-        setMensagem(
-          "Para continuar com a compra, preencha e envie o formulário.",
-        );
-        setShowLeadModal(true);
-      }, 8000);
-      
-      return () => window.clearTimeout(timerId);
-    }, []);
-    */
-  }
-
   useEffect(() => {
     if (!showLeadModal) return;
 
@@ -308,8 +288,24 @@ const NewVendas = () => {
     };
   }, [showLeadModal]);
 
-  const handleWhatsappMask = (e) => {
-    let value = e.target.value;
+  const openLeadGateForSympla = (targetLink) => {
+    if (loading) return;
+
+    setPendingSymplaUrl(targetLink || NEW_VENDAS_SYMPLA_URL);
+    setLeadStatus("idle");
+    setMensagem("Para continuar com a compra, preencha e envie o formulário.");
+    setShowLeadModal(true);
+  };
+
+  const closeLeadModal = () => {
+    if (loading) return;
+    setShowLeadModal(false);
+    setLeadStatus("idle");
+    setMensagem("");
+  };
+
+  const handleWhatsappMask = (event) => {
+    let value = event.target.value;
     value = onlyDigits(value).slice(0, 11);
 
     if (!value.length) {
@@ -327,8 +323,8 @@ const NewVendas = () => {
     setLeadForm((prev) => ({ ...prev, phone: value }));
   };
 
-  const handleLeadSubmit = async (e) => {
-    e.preventDefault();
+  const handleLeadSubmit = async (event) => {
+    event.preventDefault();
     setMensagem("");
 
     if (!isLeadFormValid || !canSubmitLead) {
@@ -341,10 +337,9 @@ const NewVendas = () => {
     setLeadStatus("loading");
 
     try {
-      const formData = new FormData(e.target);
+      const formData = new FormData(event.target);
       const name = formData.get("name")?.toString().trim() || "";
-      const email =
-        formData.get("email")?.toString().trim().toLowerCase() || "";
+      const email = formData.get("email")?.toString().trim().toLowerCase() || "";
       const phone = formData.get("phone")?.toString().trim() || "";
       const cargo = formData.get("cargo")?.toString().trim() || "";
       const resolvedFormOrigin = "NewVendas";
@@ -444,8 +439,7 @@ const NewVendas = () => {
                 sourceData.page_url ||
                 window.location.pathname + window.location.search,
               referrer: document.referrer || null,
-              utm_source:
-                sourceData.utm_source || sourceData.site_origin || null,
+              utm_source: sourceData.utm_source || sourceData.site_origin || null,
               utm_medium: sourceData.utm_medium || null,
               utm_campaign: sourceData.utm_campaign || null,
               utm_content: sourceData.utm_content || null,
@@ -475,16 +469,16 @@ const NewVendas = () => {
       setLeadStatus("success");
       setMensagem("Cadastro enviado! Em breve entraremos em contato.");
       setLeadForm({ name: "", phone: "", email: "", cargo: "" });
-      e.target.reset();
-      setTimeout(() => {
+      event.target.reset();
+
+      window.setTimeout(() => {
+        const targetUrl = pendingSymplaUrl || NEW_VENDAS_SYMPLA_URL;
         setShowLeadModal(false);
-        window.open(NEW_VENDAS_SYMPLA_URL, "_blank", "noopener,noreferrer");
+        window.open(targetUrl, "_blank", "noopener,noreferrer");
       }, 700);
     } catch (error) {
       setLeadStatus("error");
-      setMensagem(
-        error?.message || "Erro ao enviar formulário. Tente novamente.",
-      );
+      setMensagem(error?.message || "Erro ao enviar formulário. Tente novamente.");
     } finally {
       setLoading(false);
     }
@@ -504,8 +498,8 @@ const NewVendas = () => {
       </div>
 
       <div className="relative z-10">
-        <NewVendasHero ctaLink="#lead-form" onPrimaryCtaClick={openLeadModal} />
-        <NewVendasContent hidePassaporteButtons />
+        <NewVendasHero ctaLink="#passaportes" />
+        <NewVendasContent onBuyPassaporte={openLeadGateForSympla} />
       </div>
 
       <div
@@ -516,10 +510,10 @@ const NewVendas = () => {
         }`}
       >
         <div className="mx-auto flex max-w-[770px] flex-col items-center">
-          <div onClickCapture={openLeadModal}>
+          <div>
             <NewVendasHeaderMask
               titulo="Garantir meu passaporte"
-              link="#lead-form"
+              link="#passaportes"
               target="_self"
               textColor="#FFFFFF"
               backgroundColor="#1E1A12"
@@ -532,11 +526,10 @@ const NewVendas = () => {
           </span>
         </div>
       </div>
-      {/** */}
+
       <LeadPopupFormHomeTeste
         isOpen={showLeadModal}
-        popupStep={1}
-        canClose={false}
+        canClose
         onClose={closeLeadModal}
         onSubmit={handleLeadSubmit}
         leadForm={leadForm}
@@ -555,3 +548,4 @@ const NewVendas = () => {
 };
 
 export default NewVendas;
+
