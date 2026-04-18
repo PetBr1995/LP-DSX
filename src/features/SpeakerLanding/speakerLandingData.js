@@ -21,6 +21,9 @@ export const toSegmentSlug = (value = "") =>
     .replace(/\s+/g, "-")
     .replace(/-+/g, "-");
 
+const normalizeSegmentLookup = (value = "") =>
+  toSegmentSlug(String(value || "").replace(/\//g, " ").trim());
+
 const segmentLandingList = [
   {
     name: "Marketing",
@@ -82,6 +85,7 @@ const segmentLandingList = [
   },
   {
     name: "InovaÃ§Ã£o",
+    aliases: ["inovacao"],
     image: "/dsx-2026.jpeg",
     category: "Segmento EstratÃ©gico",
     headline: "Segmento de InovaÃ§Ã£o no DSX 2026",
@@ -111,6 +115,7 @@ const segmentLandingList = [
   },
   {
     name: "NegÃ³cios",
+    aliases: ["negocios"],
     image: "/optimized/step1/Banner-vendas-hero.webp",
     category: "Segmento EstratÃ©gico",
     headline: "Onde empresÃ¡rios constroem o futuro dos negÃ³cios no Norte.",
@@ -256,11 +261,23 @@ const segmentLandingList = [
   },
 }));
 
-const segmentBySlug = Object.fromEntries(
-  segmentLandingList.map((segment) => [segment.slug, segment]),
-);
+const segmentBySlug = segmentLandingList.reduce((acc, segment) => {
+  acc[segment.slug] = segment;
 
-export const getSegmentBySlug = (slug = "") => segmentBySlug[String(slug || "")];
+  (segment.aliases || []).forEach((alias) => {
+    const normalizedAlias = normalizeSegmentLookup(alias);
+    if (normalizedAlias) {
+      acc[normalizedAlias] = segment;
+    }
+  });
+
+  return acc;
+}, {});
+
+export const getSegmentBySlug = (slug = "") => {
+  const directKey = String(slug || "");
+  return segmentBySlug[directKey] || segmentBySlug[normalizeSegmentLookup(directKey)];
+};
 
 export { segmentLandingList };
 
