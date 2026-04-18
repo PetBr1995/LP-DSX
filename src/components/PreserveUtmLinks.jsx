@@ -10,6 +10,10 @@ const PREFIX_DOMAINS = [
 
 const STORAGE_KEY = "hubla_utms";
 
+const REWRITE_SELECTOR = PREFIX_DOMAINS.map(
+  (domain) => `a[href^="${domain}"]`,
+).join(", ");
+
 function getUtmParamsExtraFromSearchParams(sp) {
   const utm_source = sp.get("utm_source") ?? "";
   const utm_medium = sp.get("utm_medium") ?? "";
@@ -75,28 +79,56 @@ export default function PreserveUtmLinks() {
     const params = getPersistedParams(location.search);
     if (!params.toString()) return;
 
-    // Aplica apenas nos links existentes no momento.
-    document.querySelectorAll("a[href]").forEach((a) => {
-      const href = a.getAttribute("href");
-      if (!href) return;
-      const nextHref = appendTrackingParams(href, params);
-      if (nextHref !== href) a.setAttribute("href", nextHref);
-    });
+    let isCancelled = false;
+    let isListenerAttached = false;
 
-    // Para links injetados depois, aplica no clique ao inves de observar todo o DOM.
     const handleClickCapture = (event) => {
       const target = event.target;
       if (!(target instanceof Element)) return;
       const anchor = target.closest("a[href]");
       if (!anchor) return;
       const href = anchor.getAttribute("href");
-      if (!href) return;
+      if (!href || !shouldRewriteLink(href)) return;
       const nextHref = appendTrackingParams(href, params);
       if (nextHref !== href) anchor.setAttribute("href", nextHref);
     };
-    document.addEventListener("click", handleClickCapture, true);
 
-    return () => document.removeEventListener("click", handleClickCapture, true);
+    const applyToExistingLinks = () => {
+      if (isCancelled) return;
+      document.querySelectorAll(REWRITE_SELECTOR).forEach((anchor) => {
+        const href = anchor.getAttribute("href");
+        if (!href) return;
+        const nextHref = appendTrackingParams(href, params);
+        if (nextHref !== href) anchor.setAttribute("href", nextHref);
+      });
+
+      if (!isListenerAttached) {
+        document.addEventListener("click", handleClickCapture, true);
+        isListenerAttached = true;
+      }
+    };
+
+    let idleId = null;
+    let timeoutId = null;
+
+    if ("requestIdleCallback" in window) {
+      idleId = window.requestIdleCallback(applyToExistingLinks, { timeout: 1500 });
+    } else {
+      timeoutId = window.setTimeout(applyToExistingLinks, 200);
+    }
+
+    return () => {
+      isCancelled = true;
+      if (idleId !== null && "cancelIdleCallback" in window) {
+        window.cancelIdleCallback(idleId);
+      }
+      if (timeoutId !== null) {
+        window.clearTimeout(timeoutId);
+      }
+      if (isListenerAttached) {
+        document.removeEventListener("click", handleClickCapture, true);
+      }
+    };
   }, [location.search]);
 
   return null;
