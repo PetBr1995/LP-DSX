@@ -5,7 +5,11 @@ import NewVendasSpeakersSlider from "../components/NewVendas/NewVendasSpeakersSl
 import AudienceSection from "../components/NewVendas/sections/AudienceSection";
 import { audienceProfiles } from "../components/NewVendas/newVendasData";
 import { getSupabaseClient, isSupabaseConfigured } from "../lib/supabaseClient";
-import { formatDsxFormOrigin } from "../utils/formOrigin";
+import {
+  formatDsxFormOrigin,
+  readDsxFormOrigin,
+  rememberDsxFormOrigin,
+} from "../utils/formOrigin";
 
 const galleryItems = [
   { src: "/img-ambiantes/amb-1.png", alt: "Networking entre participantes" },
@@ -130,6 +134,25 @@ const isMissingColumnError = (error) => {
   );
 };
 
+const resolveRdConversionIdentifier = (origin = "") => {
+  const normalized = String(origin || "").trim().toLowerCase();
+
+  if (normalized.includes("vip")) {
+    return "DSX 2026 - Formulário VIP";
+  }
+  if (normalized.includes("standard")) {
+    return "DSX 2026 - Formulário Standard";
+  }
+  if (normalized.includes("grupo") && normalized.includes("10")) {
+    return "DSX 2026 - Formulário Grupo 10";
+  }
+  if (normalized.includes("grupo") && normalized.includes("5")) {
+    return "DSX 2026 - Formulário Grupo 5";
+  }
+
+  return "DSX 2026 - Formulário Standard";
+};
+
 const formatPhone = (value = "") => {
   const digits = onlyDigits(value).slice(0, 11);
   if (digits.length <= 2) return digits;
@@ -146,6 +169,9 @@ const PreCheckout = () => {
   const [showLeadModal, setShowLeadModal] = useState(false);
   const [leadStatus, setLeadStatus] = useState("idle");
   const [leadError, setLeadError] = useState("");
+  const [leadFormOrigin, setLeadFormOrigin] = useState(() =>
+    readDsxFormOrigin("Standard"),
+  );
   const [leadForm, setLeadForm] = useState({
     name: "",
     email: "",
@@ -236,6 +262,9 @@ const PreCheckout = () => {
 
   const handleOpenLeadModal = (event) => {
     event.preventDefault();
+    const resolvedOrigin = readDsxFormOrigin("Standard");
+    setLeadFormOrigin(resolvedOrigin);
+    rememberDsxFormOrigin(resolvedOrigin);
     setLeadError("");
     setLeadStatus("idle");
     setShowLeadModal(true);
@@ -284,12 +313,12 @@ const PreCheckout = () => {
     setLeadError("");
 
     try {
-      const resolvedFormOrigin = "Checkout";
+      const resolvedFormOrigin = leadFormOrigin || readDsxFormOrigin("Standard");
       const payload = {
         event_type: "CONVERSION",
         event_family: "CDP",
         payload: {
-          conversion_identifier: `LP - DSX 2026 - Formulario ${resolvedFormOrigin}`,
+          conversion_identifier: resolveRdConversionIdentifier(resolvedFormOrigin),
           name,
           email,
           personal_phone: phone,
@@ -723,7 +752,7 @@ const PreCheckout = () => {
             <div className="mb-4 flex items-start justify-between gap-3">
               <div>
                 <h3 className="font-anton text-2xl uppercase text-white md:text-3xl">
-                  PREENCHA O FORMULÁRIO PARA COMPRAR SEU PASSAPORTE
+                  GARANTA SUA VAGA
                 </h3>
               </div>
               <button

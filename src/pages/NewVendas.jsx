@@ -49,9 +49,29 @@ function isMissingColumnError(error) {
   );
 }
 
+function resolveRdConversionIdentifier(origin = "") {
+  const normalized = String(origin || "").trim().toLowerCase();
+
+  if (normalized.includes("vip")) {
+    return "DSX 2026 - Formulário VIP";
+  }
+  if (normalized.includes("standard")) {
+    return "DSX 2026 - Formulário Standard";
+  }
+  if (normalized.includes("grupo") && normalized.includes("10")) {
+    return "DSX 2026 - Formulário Grupo 10";
+  }
+  if (normalized.includes("grupo") && normalized.includes("5")) {
+    return "DSX 2026 - Formulário Grupo 5";
+  }
+
+  return "DSX 2026 - Formulário Standard";
+}
+
 const NewVendas = () => {
   const [showLeadModal, setShowLeadModal] = useState(false);
   const [pendingSymplaUrl, setPendingSymplaUrl] = useState(NEW_VENDAS_SYMPLA_URL);
+  const [selectedPassOrigin, setSelectedPassOrigin] = useState("Standard");
   const [leadForm, setLeadForm] = useState({
     name: "",
     phone: "",
@@ -265,10 +285,11 @@ const NewVendas = () => {
     };
   }, [showLeadModal]);
 
-  const openLeadGateForSympla = (targetLink) => {
+  const openLeadGateForSympla = (targetLink, formOrigin) => {
     if (loading) return;
 
     setPendingSymplaUrl(targetLink || NEW_VENDAS_SYMPLA_URL);
+    setSelectedPassOrigin(formOrigin || "Standard");
     setLeadStatus("idle");
     setMensagem("Para continuar com a compra, preencha e envie o formulário.");
     setShowLeadModal(true);
@@ -319,13 +340,13 @@ const NewVendas = () => {
       const email = formData.get("email")?.toString().trim().toLowerCase() || "";
       const phone = formData.get("phone")?.toString().trim() || "";
       const cargo = formData.get("cargo")?.toString().trim() || "";
-      const resolvedFormOrigin = "NewVendas";
+      const resolvedFormOrigin = selectedPassOrigin || "Standard";
 
       const payload = {
         event_type: "CONVERSION",
         event_family: "CDP",
         payload: {
-          conversion_identifier: `LP - DSX 2026 - Formulario ${resolvedFormOrigin}`,
+          conversion_identifier: resolveRdConversionIdentifier(resolvedFormOrigin),
           name,
           email,
           personal_phone: phone,
@@ -491,8 +512,8 @@ const NewVendas = () => {
         message={mensagem}
         loading={loading}
         canSubmit={canSubmitLead}
-        headline="Preencha seus dados e faça parte do DSX 2026"
-        subheading="O maior evento de negócios, vendas, marketing e inovação do Norte"
+        headline="GARANTA SUA VAGA"
+        subheading=""
         description=""
       />
     </section>
