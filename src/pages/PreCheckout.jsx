@@ -12,16 +12,46 @@ import {
 } from "../utils/formOrigin";
 
 const galleryItems = [
-  { src: "/img-ambiantes/amb-1.png", alt: "Networking entre participantes" },
-  { src: "/img-ambiantes/amb-2.png", alt: "Discussões estratégicas no evento" },
-  { src: "/img-ambiantes/amb-3.png", alt: "Palestra com plateia" },
-  { src: "/img-ambiantes/amb-4.png", alt: "Conteúdo em palco principal" },
-  { src: "/img-ambiantes/amb-5.png", alt: "Conversa sobre negócios" },
-  { src: "/img-ambiantes/amb-6.png", alt: "Momentos de conexão no DSX" },
-  { src: "/img-ambiantes/amb-7.png", alt: "Perguntas e respostas no auditório" },
-  { src: "/img-ambiantes/amb-3.png", alt: "Painel com executivos" },
-  { src: "/img-ambiantes/amb-2.png", alt: "Interação entre palestrantes" },
-  { src: "/img-ambiantes/amb-1.png", alt: "Trocas em ambiente premium" },
+  {
+    src: "/optimized/step1/img-ambiantes/amb-1.webp",
+    alt: "Networking entre participantes",
+  },
+  {
+    src: "/optimized/step1/img-ambiantes/amb-2.webp",
+    alt: "Discussões estratégicas no evento",
+  },
+  {
+    src: "/optimized/step1/img-ambiantes/amb-3.webp",
+    alt: "Palestra com plateia",
+  },
+  {
+    src: "/optimized/step1/img-ambiantes/amb-4.webp",
+    alt: "Conteúdo em palco principal",
+  },
+  {
+    src: "/optimized/step1/img-ambiantes/amb-5.webp",
+    alt: "Conversa sobre negócios",
+  },
+  {
+    src: "/optimized/step1/img-ambiantes/amb-6.webp",
+    alt: "Momentos de conexão no DSX",
+  },
+  {
+    src: "/optimized/step1/img-ambiantes/amb-7.webp",
+    alt: "Perguntas e respostas no auditório",
+  },
+  {
+    src: "/optimized/step1/img-ambiantes/amb-3.webp",
+    alt: "Painel com executivos",
+  },
+  {
+    src: "/optimized/step1/img-ambiantes/amb-2.webp",
+    alt: "Interação entre palestrantes",
+  },
+  {
+    src: "/optimized/step1/img-ambiantes/amb-1.webp",
+    alt: "Trocas em ambiente premium",
+  },
 ];
 const galleryTopRow = galleryItems.slice(0, 5);
 const galleryBottomRow = galleryItems.slice(5, 10);
