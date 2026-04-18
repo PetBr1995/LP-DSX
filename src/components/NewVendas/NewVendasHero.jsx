@@ -135,35 +135,23 @@ const NewVendasHero = ({
   onPrimaryCtaClick,
 }) => {
   const ctaTarget = ctaLink.startsWith("#") ? "_self" : "_blank";
-  const [animatedValues, setAnimatedValues] = useState(metrics.map(() => 0));
+  const [animatedValues] = useState(metrics.map((metric) => metric.target));
   const [currentSpeakerIndex, setCurrentSpeakerIndex] = useState(0);
   const [cardsPerView, setCardsPerView] = useState(3);
   const [isDraggingSpeakers, setIsDraggingSpeakers] = useState(false);
+  const [shouldRenderSpeakers, setShouldRenderSpeakers] = useState(false);
   const speakerDragStartXRef = useRef(null);
 
   useEffect(() => {
-    const duration = 1900;
-    const start = performance.now();
-    let frameId;
-
-    const animate = (now) => {
-      const elapsed = now - start;
-      const progress = Math.min(elapsed / duration, 1);
-      const easedProgress = 1 - Math.pow(1 - progress, 3);
-
-      const nextValues = metrics.map((metric) =>
-        Math.round(metric.target * easedProgress),
+    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+      const idleId = window.requestIdleCallback(
+        () => setShouldRenderSpeakers(true),
+        { timeout: 2200 },
       );
-      setAnimatedValues(nextValues);
-
-      if (progress < 1) {
-        frameId = requestAnimationFrame(animate);
-      }
-    };
-
-    frameId = requestAnimationFrame(animate);
-
-    return () => cancelAnimationFrame(frameId);
+      return () => window.cancelIdleCallback(idleId);
+    }
+    const timeoutId = window.setTimeout(() => setShouldRenderSpeakers(true), 300);
+    return () => window.clearTimeout(timeoutId);
   }, []);
 
   useEffect(() => {
@@ -330,8 +318,8 @@ const NewVendasHero = ({
             <h3 className="text-center font-anton text-[clamp(1.3rem,4.2vw,2.8rem)] uppercase leading-[1.08] tracking-[0.03em] text-[#F5C02B]">
               Conheça os primeiros palestrantes confirmados do DSX
             </h3>
-
-            <div className="relative mx-auto mt-6 w-full max-w-[920px]">
+            {shouldRenderSpeakers ? (
+              <div className="relative mx-auto mt-6 w-full max-w-[920px]">
               <div
                 className={`overflow-hidden select-none ${isDraggingSpeakers ? "cursor-grabbing" : "cursor-grab"}`}
                 style={{ touchAction: "pan-y" }}
@@ -435,7 +423,10 @@ const NewVendasHero = ({
 
                 </>
               ) : null}
-            </div>
+              </div>
+            ) : (
+              <div className="mx-auto mt-6 h-[270px] w-full max-w-[920px] rounded-xl border border-[#5A4718]/40 bg-black/40" />
+            )}
           </section>
         </div>
       </div>
