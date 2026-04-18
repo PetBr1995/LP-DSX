@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+﻿import { useEffect, useMemo, useState } from "react";
 import { Calendar, MapPin } from "lucide-react";
 import NewVendasHeaderMask from "../components/NewVendas/NewVendasHeaderMask";
 import { getSupabaseClient, isSupabaseConfigured } from "../lib/supabaseClient";
@@ -6,19 +6,19 @@ import { formatDsxFormOrigin } from "../utils/formOrigin";
 
 const audienceItems = [
   {
-    title: "Empresário",
+    title: "EmpresÃ¡rio",
     description:
-      "que precisa destravar o crescimento da sua empresa com estratégia.",
+      "que precisa destravar o crescimento da sua empresa com estratÃ©gia.",
   },
   {
-    title: "Gestor e líder",
+    title: "Gestor e lÃ­der",
     description:
-      "que tomam decisões e desejam mais clareza, método e visão de mercado.",
+      "que tomam decisÃµes e desejam mais clareza, mÃ©todo e visÃ£o de mercado.",
   },
   {
-    title: "Profissional em ascensão",
+    title: "Profissional em ascensÃ£o",
     description:
-      "que busca networking qualificado e referências de alto nível.",
+      "que busca networking qualificado e referÃªncias de alto nÃ­vel.",
   },
   {
     title: "Time de marketing e vendas",
@@ -26,52 +26,52 @@ const audienceItems = [
       "que precisam focar em performance e resultado.",
   },
   {
-    title: "Estudante e universitário",
+    title: "Estudante e universitÃ¡rio",
     description:
-      "que buscam acelerar o repertório e se conectar com o mercado de trabalho.",
+      "que buscam acelerar o repertÃ³rio e se conectar com o mercado de trabalho.",
   },
 ];
 
 const galleryItems = [
-  { src: "/img-ambiantes/amb-1.png", alt: "Networking entre participantes" },
-  { src: "/img-ambiantes/amb-2.png", alt: "Discussões estratégicas no evento" },
-  { src: "/img-ambiantes/amb-3.png", alt: "Palestra com plateia" },
-  { src: "/img-ambiantes/amb-4.png", alt: "Conteúdo em palco principal" },
-  { src: "/img-ambiantes/amb-5.png", alt: "Conversa sobre negócios" },
-  { src: "/img-ambiantes/amb-6.png", alt: "Momentos de conexão no DSX" },
-  { src: "/img-ambiantes/amb-7.png", alt: "Perguntas e respostas no auditório" },
-  { src: "/img-ambiantes/amb-3.png", alt: "Painel com executivos" },
-  { src: "/img-ambiantes/amb-2.png", alt: "Interação entre palestrantes" },
-  { src: "/img-ambiantes/amb-1.png", alt: "Trocas em ambiente premium" },
+  { src: "/optimized/step1/img-ambiantes/amb-1.webp", alt: "Networking entre participantes" },
+  { src: "/optimized/step1/img-ambiantes/amb-2.webp", alt: "DiscussÃµes estratÃ©gicas no evento" },
+  { src: "/optimized/step1/img-ambiantes/amb-3.webp", alt: "Palestra com plateia" },
+  { src: "/optimized/step1/img-ambiantes/amb-4.webp", alt: "ConteÃºdo em palco principal" },
+  { src: "/optimized/step1/img-ambiantes/amb-5.webp", alt: "Conversa sobre negÃ³cios" },
+  { src: "/optimized/step1/img-ambiantes/amb-6.webp", alt: "Momentos de conexÃ£o no DSX" },
+  { src: "/optimized/step1/img-ambiantes/amb-7.webp", alt: "Perguntas e respostas no auditÃ³rio" },
+  { src: "/optimized/step1/img-ambiantes/amb-3.webp", alt: "Painel com executivos" },
+  { src: "/optimized/step1/img-ambiantes/amb-2.webp", alt: "InteraÃ§Ã£o entre palestrantes" },
+  { src: "/optimized/step1/img-ambiantes/amb-1.webp", alt: "Trocas em ambiente premium" },
 ];
 const galleryTopRow = galleryItems.slice(0, 5);
 const galleryBottomRow = galleryItems.slice(5, 10);
 
 const faqItems = [
   {
-    question: "O DSX é para o meu perfil de negócio?",
+    question: "O DSX Ã© para o meu perfil de negÃ³cio?",
     answer:
-      "Se você é dono de empresa, líder de equipe, profissional autônomo ou executivo buscando crescimento escalável e conexões de alto nível, o DSX é para você.",
+      "Se vocÃª Ã© dono de empresa, lÃ­der de equipe, profissional autÃ´nomo ou executivo buscando crescimento escalÃ¡vel e conexÃµes de alto nÃ­vel, o DSX Ã© para vocÃª.",
   },
   {
     question: "Posso comprar agora e trocar o nome do participante depois?",
     answer:
-      "Sim. A titularidade do passaporte pode ser alterada entrando em contato com o suporte após a compra.",
+      "Sim. A titularidade do passaporte pode ser alterada entrando em contato com o suporte apÃ³s a compra.",
   },
   {
-    question: "Quais são as formas de pagamento?",
+    question: "Quais sÃ£o as formas de pagamento?",
     answer:
-      "Você pode garantir o seu passaporte via PIX (aprovação imediata) ou parcelar no cartão de crédito em até 12 vezes.",
+      "VocÃª pode garantir o seu passaporte via PIX (aprovaÃ§Ã£o imediata) ou parcelar no cartÃ£o de crÃ©dito em atÃ© 12 vezes.",
   },
   {
-    question: "A feira de negócios está inclusa em todos os passaportes?",
+    question: "A feira de negÃ³cios estÃ¡ inclusa em todos os passaportes?",
     answer:
-      "Sim. Tanto o passaporte Standard quanto o VIP dão acesso à feira e às ativações de marca durante o evento.",
+      "Sim. Tanto o passaporte Standard quanto o VIP dÃ£o acesso Ã  feira e Ã s ativaÃ§Ãµes de marca durante o evento.",
   },
   {
-    question: "Qual a diferença principal do VIP?",
+    question: "Qual a diferenÃ§a principal do VIP?",
     answer:
-      "O VIP inclui benefícios exclusivos, como área reservada, melhor experiência presencial e ambiente ideal para networking estratégico.",
+      "O VIP inclui benefÃ­cios exclusivos, como Ã¡rea reservada, melhor experiÃªncia presencial e ambiente ideal para networking estratÃ©gico.",
   },
 ];
 
@@ -81,9 +81,9 @@ const RD_API_URL =
   "https://api.rd.services/platform/conversions?api_key=MHnWDjBYARQKdwUsfZRbjtVmPEyoHnSqtgFz";
 
 const profileOptions = [
-  "Empresário",
+  "EmpresÃ¡rio",
   "Diretor ou Gestor",
-  "Profissional de marketing, vendas e operações",
+  "Profissional de marketing, vendas e operaÃ§Ãµes",
   "Estudante",
   "Outros",
 ];
@@ -111,8 +111,8 @@ const metrics = [
   },
 ];
 const experienceHighlights = [
-  { value: "3 PALCOS", label: "simultâneos" },
-  { value: "FEIRA", label: "de negócios" },
+  { value: "3 PALCOS", label: "simultÃ¢neos" },
+  { value: "FEIRA", label: "de negÃ³cios" },
 ];
 
 const formatMetricValue = (value, metric) => {
@@ -265,7 +265,7 @@ const CheckoutVendas = () => {
       return;
     }
     if (!isValidEmail(email)) {
-      setLeadError("Informe um e-mail válido.");
+      setLeadError("Informe um e-mail vÃ¡lido.");
       return;
     }
     if (!(phoneDigits.length === 10 || phoneDigits.length === 11)) {
@@ -273,7 +273,7 @@ const CheckoutVendas = () => {
       return;
     }
     if (!cargo) {
-      setLeadError("Selecione o campo 'Você é...'.");
+      setLeadError("Selecione o campo 'VocÃª Ã©...'.");
       return;
     }
 
@@ -356,7 +356,7 @@ const CheckoutVendas = () => {
       };
 
       // Mantem o mesmo tracking do HomeTeste quando Supabase estiver configurado.
-      // Se não estiver, não bloqueia a conversão nem o redirect para o Sympla.
+      // Se nÃ£o estiver, nÃ£o bloqueia a conversÃ£o nem o redirect para o Sympla.
       if (isSupabaseConfigured) {
         try {
           const supabase = await getSupabaseClient();
@@ -491,7 +491,7 @@ const CheckoutVendas = () => {
       setLeadStatus("error");
       console.error("[CheckoutVendas] erro no envio do lead", _error);
       setLeadError(
-        _error?.message || "Não foi possível enviar agora. Tente novamente.",
+        _error?.message || "NÃ£o foi possÃ­vel enviar agora. Tente novamente.",
       );
     }
   };
@@ -520,7 +520,7 @@ const CheckoutVendas = () => {
               />
             </div>
             <h1 className="mt-4 max-w-xl text-center font-anton text-[clamp(2rem,6vw,2.5rem)] uppercase leading-[1.35] md:text-left">
-              O maior evento de negócios, marketing, vendas e inovação do Norte
+              O maior evento de negÃ³cios, marketing, vendas e inovaÃ§Ã£o do Norte
             </h1>
            
             <div className="mx-auto mt-7 flex w-full max-w-4xl flex-wrap justify-center gap-x-4 gap-y-5 px-2 py-2 md:justify-start md:px-0">
@@ -562,7 +562,7 @@ const CheckoutVendas = () => {
               <div className="flex items-start gap-2">
                 <MapPin size={18} color="#F5C02B" className="mt-0.5 shrink-0" />
                 <p className="font-jamjuree text-[0.98rem] leading-relaxed">
-                  Centro de Convenções Vasco Vasques, Manaus/AM
+                  Centro de ConvenÃ§Ãµes Vasco Vasques, Manaus/AM
                 </p>
               </div>
             </div>
@@ -583,14 +583,14 @@ const CheckoutVendas = () => {
               />
             </div>
             <h2 className="mt-5 font-anton text-[clamp(1.2rem,2.8vw,1.8rem)] uppercase tracking-[0.02em] text-white">
-              Onde os maiores especialistas do país se encontram.
+              Onde os maiores especialistas do paÃ­s se encontram.
             </h2>
 
           </div>
 
           <div className="relative min-h-[320px] md:min-h-full">
             <img
-              src="/Banner-vendas-hero.png"
+              src="/optimized/step1/Banner-vendas-hero.webp"
               alt="Palestrantes convidados no palco do DSX"
               className="h-full w-full object-cover"
               loading="eager"
@@ -604,7 +604,7 @@ const CheckoutVendas = () => {
       <section className="bg-[#ECECEC] px-4 py-14 text-black md:px-8 md:py-20">
         <div className="mx-auto w-full max-w-6xl">
           <h2 className="text-center font-anton text-[clamp(2rem,5vw,3rem)] uppercase leading-none">
-            O DSX é para você...
+            O DSX Ã© para vocÃª...
           </h2>
 
           <div className="mt-9 grid gap-5 md:grid-cols-2 lg:grid-cols-5">
@@ -642,11 +642,11 @@ const CheckoutVendas = () => {
 
         <div className="relative mx-auto w-full max-w-7xl">
           <h2 className="text-center font-anton text-[clamp(2rem,6vw,3.7rem)] uppercase leading-none">
-            O Ambiente que gera negócios reais
+            O Ambiente que gera negÃ³cios reais
           </h2>
           <p className="mx-auto mt-4 max-w-3xl text-center text-base leading-relaxed text-white/75 md:text-lg">
-            Conteúdo aplicado, conexões de alto nível e experiências que aproximam
-            decisores, marcas e oportunidades em um único lugar.
+            ConteÃºdo aplicado, conexÃµes de alto nÃ­vel e experiÃªncias que aproximam
+            decisores, marcas e oportunidades em um Ãºnico lugar.
           </p>
 
           <div className="mt-10 space-y-4">
@@ -767,9 +767,9 @@ const CheckoutVendas = () => {
                 type="button"
                 onClick={handleCloseLeadModal}
                 className="grid h-9 w-9 place-items-center rounded-full border border-white/20 text-white/80 transition hover:bg-white/10"
-                aria-label="Fechar formulário"
+                aria-label="Fechar formulÃ¡rio"
               >
-                ×
+                Ã—
               </button>
             </div>
 
@@ -844,3 +844,4 @@ const CheckoutVendas = () => {
 };
 
 export default CheckoutVendas;
+

@@ -1,4 +1,4 @@
-import NewVendasHeaderMask from "../../../components/NewVendas/NewVendasHeaderMask";
+﻿import NewVendasHeaderMask from "../../../components/NewVendas/NewVendasHeaderMask";
 import PassaportesSection from "../../../components/NewVendas/sections/PassaportesSection";
 import FooterSection from "../../../components/NewVendas/sections/FooterSection";
 import {
@@ -19,20 +19,20 @@ import "swiper/css";
 const THEME_COPY = {
   marketing: {
     painPoints: [
-      "Investe em tráfego, mas não enxerga ROI com clareza.",
-      "Produz conteúdo, mas os leads não avançam para venda.",
-      "Equipe sem processo claro de aquisição e conversão.",
-      "Dependência de campanhas pontuais para bater meta.",
+      "Investe em trÃ¡fego, mas nÃ£o enxerga ROI com clareza.",
+      "Produz conteÃºdo, mas os leads nÃ£o avanÃ§am para venda.",
+      "Equipe sem processo claro de aquisiÃ§Ã£o e conversÃ£o.",
+      "DependÃªncia de campanhas pontuais para bater meta.",
     ],
-    promise: "Sair com funis e campanhas estruturados para gerar demanda previsível.",
+    promise: "Sair com funis e campanhas estruturados para gerar demanda previsÃ­vel.",
     ctaAfterSpeakers: "QUERO APRENDER COM ESSES ESPECIALISTAS",
     ctaAfterSocial: "QUERO FAZER PARTE",
     ctaAfterPrices: "GARANTIR POR 12x R$ 41,42",
-    ctaFinal: "GARANTIR AGORA — ULTIMAS VAGAS",
+    ctaFinal: "GARANTIR AGORA â€” ULTIMAS VAGAS",
   },
   vendas: {
     painPoints: [
-      "Time vende por esforço, sem processo repetivel.",
+      "Time vende por esforÃ§o, sem processo repetivel.",
       "Pipeline desorganizado e baixa previsibilidade mensal.",
       "Negociacao longa, com perda de margem no fechamento.",
       "Dependencia excessiva de poucos vendedores-chave.",
@@ -41,7 +41,7 @@ const THEME_COPY = {
     ctaAfterSpeakers: "QUERO FECHAR MAIS",
     ctaAfterSocial: "QUERO FAZER PARTE",
     ctaAfterPrices: "GARANTIR POR 12x R$ 41,42",
-    ctaFinal: "GARANTIR AGORA — ULTIMAS VAGAS",
+    ctaFinal: "GARANTIR AGORA â€” ULTIMAS VAGAS",
   },
   inovacao: {
     painPoints: [
@@ -54,7 +54,7 @@ const THEME_COPY = {
     ctaAfterSpeakers: "QUERO INOVAR COM METODO",
     ctaAfterSocial: "QUERO FAZER PARTE",
     ctaAfterPrices: "GARANTIR POR 12x R$ 41,42",
-    ctaFinal: "GARANTIR AGORA — ULTIMAS VAGAS",
+    ctaFinal: "GARANTIR AGORA â€” ULTIMAS VAGAS",
   },
   negocios: {
     painPoints: [
@@ -67,7 +67,7 @@ const THEME_COPY = {
     ctaAfterSpeakers: "QUERO CRESCER COM ESTRATEGIA",
     ctaAfterSocial: "QUERO FAZER PARTE",
     ctaAfterPrices: "GARANTIR POR 12x R$ 41,42",
-    ctaFinal: "GARANTIR AGORA — ULTIMAS VAGAS",
+    ctaFinal: "GARANTIR AGORA â€” ULTIMAS VAGAS",
   },
 };
 
@@ -223,7 +223,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
   const activeQuotes = speaker.socialProofQuotes?.length
     ? speaker.socialProofQuotes
     : [
-      "Saí com funil pronto e reduzi CPL em 32% em 30 dias.",
+      "SaÃ­ com funil pronto e reduzi CPL em 32% em 30 dias.",
       "Ajustamos o processo comercial e dobramos taxa de fechamento.",
       "Networking do evento virou parceria e novo canal de receita.",
     ];
@@ -236,13 +236,13 @@ const SpeakerLandingTemplate = ({ speaker }) => {
       ? speaker.socialProofVideos
       : [
         {
-          nome: "AUGUSTO CÉSAR",
+          nome: "AUGUSTO CÃ‰SAR",
           tipo: "EXPOSITOR",
           thumb: "/card-image/expositor-card-img.png",
           video: "https://vimeo.com/1148163345?fl=ip&fe=ec",
         },
         {
-          nome: "JOÃO KEPLER",
+          nome: "JOÃƒO KEPLER",
           tipo: "PALESTRANTE",
           thumb: "/card-image/kepler-card-img.png",
           video: "https://vimeo.com/1148163374?fl=ip&fe=ec",
@@ -259,9 +259,9 @@ const SpeakerLandingTemplate = ({ speaker }) => {
       window.open(targetLink, "_blank", "noopener,noreferrer");
     };
     const immersionHighlights = [
-      { value: "3 PALCOS", label: "simultâneos" },
-      { value: "FEIRA", label: "de Negócios" },
-      { value: "VIP", label: "área exclusiva" },
+      { value: "3 PALCOS", label: "simultÃ¢neos" },
+      { value: "FEIRA", label: "de NegÃ³cios" },
+      { value: "VIP", label: "Ã¡rea exclusiva" },
       { value: "MANAUS", label: "Vasco Vasques" },
     ];
 
@@ -294,12 +294,12 @@ const SpeakerLandingTemplate = ({ speaker }) => {
                   </div>
                   <div className="flex w-full items-center justify-start gap-1.5">
                     <MapPin size={18} className="shrink-0 text-[#F5C02B]" />
-                    <p className="font-jamjuree text-[0.98rem] leading-relaxed">Centro de Convenções Vasco Vasques, Manaus/AM</p>
+                    <p className="font-jamjuree text-[0.98rem] leading-relaxed">Centro de ConvenÃ§Ãµes Vasco Vasques, Manaus/AM</p>
                   </div>
                 </div>
 
                 <p className="mt-6 font-jamjuree text-sm font-bold uppercase tracking-[0.1em] text-[#F5C02B]">
-                  3º lote • Poucas vagas disponíveis
+                  3Âº lote â€¢ Poucas vagas disponÃ­veis
                 </p>
                 <div className="mt-3 w-fit mx-auto md:mx-0">
                   <NewVendasHeaderMask
@@ -328,7 +328,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
 
           <section className="rounded-2xl border border-white/10 bg-[#0E0E0E]/85 p-6">
             <h2 className="font-anton text-[clamp(1.3rem,5vw,3.3rem)] text-center md:text-start uppercase text-[#FF8B8B] leading-[1.22]">
-              Você construiu um negócio que funciona, mas que ainda não sobrevive sem você?
+              VocÃª construiu um negÃ³cio que funciona, mas que ainda nÃ£o sobrevive sem vocÃª?
             </h2>
             <ul className="mt-6 space-y-3 font-jamjuree text-white/85">
               {activePainPoints.map((item) => (
@@ -408,7 +408,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
                 <button
                   type="button"
                   onClick={() => negociosSpeakersSwiper?.slideNext()}
-                  aria-label="Próximo slide de palestrantes"
+                  aria-label="PrÃ³ximo slide de palestrantes"
                   className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/35 p-1.5 text-[#F5A205] backdrop-blur-[2px] transition hover:scale-110 hover:bg-black/50 hover:text-[#D98A00] md:right-3 md:p-2"
                 >
                   <ChevronRight className="h-5 w-5 md:h-6 md:w-6" strokeWidth={2.4} />
@@ -472,7 +472,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
             <div className="fixed inset-0 z-[220] grid place-items-center px-4">
               <button
                 type="button"
-                aria-label="Fechar vídeo"
+                aria-label="Fechar vÃ­deo"
                 className="absolute inset-0 bg-black/75"
                 onClick={() => {
                   setIsDepoimentoModalOpen(false);
@@ -493,7 +493,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
                     }}
                     aria-label="Fechar"
                   >
-                    ✕
+                    âœ•
                   </button>
                 </div>
                 <div className="aspect-video bg-black">
@@ -881,7 +881,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
             </p>
           ) : null}
           <div className="mt-5 grid gap-4 md:grid-cols-3">
-            <img src="/BannerCallToActionVendas.png" alt="Ambiente DSX" className="h-40 w-full rounded-xl object-cover md:h-48" />
+            <img src="/optimized/step1/BannerCallToActionVendas.webp" alt="Ambiente DSX" className="h-40 w-full rounded-xl object-cover md:h-48" />
             <img src="/local-dsx-2026.png" alt="Local do evento DSX" className="h-40 w-full rounded-xl object-cover md:h-48" />
             <img src="/dsx-2026.jpeg" alt="Experiencia de palco DSX" className="h-40 w-full rounded-xl object-cover md:h-48" />
           </div>
@@ -892,10 +892,10 @@ const SpeakerLandingTemplate = ({ speaker }) => {
             <article className="rounded-2xl border border-white/10 bg-[#101010]/90 p-6">
               <h2 className="font-anton text-3xl uppercase">Criativos em alta</h2>
               <p className="mt-2 font-jamjuree text-white/75">
-                Peças já validadas em DSX.com.vc/vendas.
+                PeÃ§as jÃ¡ validadas em DSX.com.vc/vendas.
               </p>
               <div className="mt-4 grid gap-3">
-                <img src="/Banner-vendas-hero.png" alt="Criativo DSX hero" className="h-40 w-full rounded-xl object-cover" />
+                <img src="/optimized/step1/Banner-vendas-hero.webp" alt="Criativo DSX hero" className="h-40 w-full rounded-xl object-cover" />
                 <img src="/card-image/participante-card-img.png" alt="Criativo DSX participante" className="h-40 w-full rounded-xl object-cover" />
                 <img src="/card-image/expositor-card-img.png" alt="Criativo DSX expositor" className="h-40 w-full rounded-xl object-cover" />
               </div>
@@ -903,7 +903,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
             <article className="rounded-2xl border border-[#F5C02B]/25 bg-[#12100A]/90 p-6">
               <h2 className="font-anton text-3xl uppercase text-[#F5C02B]">{speaker.groupHeadline || "Ninguem cresce sozinho"}</h2>
               <p className="mt-3 font-jamjuree text-white/88">
-                {speaker.groupCopy || "Garanta o passaporte em grupo e acelere a execução com o seu time."}
+                {speaker.groupCopy || "Garanta o passaporte em grupo e acelere a execuÃ§Ã£o com o seu time."}
               </p>
               <div className="mt-4 grid gap-3">
                 <img src="/12-[DSX]-Grupo-VIP-BANNER-LP-WEB.png" alt="Passaporte em grupo DSX web" className="hidden h-32 w-full rounded-xl object-cover md:block" />
@@ -913,7 +913,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
                 {speaker.urgencyHeadline || "GARANTIR NO LOTE ATUAL"}
               </p>
               <p className="mt-2 font-jamjuree text-sm text-white/80">
-                {speaker.urgencyCopy || "O mercado não espera. Garanta sua cadeira antes da virada de lote."}
+                {speaker.urgencyCopy || "O mercado nÃ£o espera. Garanta sua cadeira antes da virada de lote."}
               </p>
             </article>
           </section>
@@ -1003,7 +1003,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
 
         <section className="relative overflow-hidden rounded-[26px] border border-[#F5C02B]/35 p-6 md:p-8">
           <div className="pointer-events-none absolute inset-0">
-            <img src="/BannerCallToActionVendas.png" alt="" aria-hidden="true" className="h-full w-full object-cover" />
+            <img src="/optimized/step1/BannerCallToActionVendas.webp" alt="" aria-hidden="true" className="h-full w-full object-cover" />
             <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(0,0,0,0.72)_0%,rgba(0,0,0,0.62)_48%,rgba(10,7,3,0.8)_100%)]" />
           </div>
           <div className="relative">
@@ -1030,7 +1030,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
             </p>
             <div className="mt-6 w-fit">
               <NewVendasHeaderMask
-                titulo={isNegocios ? "GARANTIR AGORA — ULTIMAS VAGAS DO 3º LOTE" : theme.ctaFinal}
+                titulo={isNegocios ? "GARANTIR AGORA â€” ULTIMAS VAGAS DO 3Âº LOTE" : theme.ctaFinal}
                 link={speaker.ctaLink}
                 textColor="#FFFFFF"
                 backgroundColor="#17140D"
@@ -1046,7 +1046,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
 
         <footer className="border-t border-white/10 pt-6 font-jamjuree text-xs text-white/55">
           <p>Digital Hub Eventos LTDA | CNPJ 10.279.661/0001-51</p>
-          <p className="mt-1">Endereço eletrônico: https://dsx.com.vc</p>
+          <p className="mt-1">EndereÃ§o eletrÃ´nico: https://dsx.com.vc</p>
           <p className="mt-1">Politica de privacidade | Termos de uso | Politica de cancelamento e transferencia</p>
         </footer>
       </div>
@@ -1071,3 +1071,4 @@ const SpeakerLandingTemplate = ({ speaker }) => {
 };
 
 export default SpeakerLandingTemplate;
+

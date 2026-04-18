@@ -1,4 +1,4 @@
-import HeaderMask from "../Mascaras/HeaderMask"
+﻿import HeaderMask from "../Mascaras/HeaderMask"
 import MainMask from "../Mascaras/MainMask"
 
 const CallToActionVendas = () => {
@@ -7,7 +7,7 @@ const CallToActionVendas = () => {
       className="
         relative w-full
 
-        bg-[url('/BannerCallToActionVendas.png')]
+        bg-[url('/optimized/step1/BannerCallToActionVendas.webp')]
         bg-cover bg-no-repeat
         bg-[center_top]
         sm:bg-center
@@ -47,8 +47,8 @@ const CallToActionVendas = () => {
             max-w-xl sm:max-w-2xl lg:max-w-3xl
           "
         >
-          <span className="text-[#F5D247]">Feira de Negócios:</span>{" "}
-          conexões que viram oportunidades
+          <span className="text-[#F5D247]">Feira de NegÃ³cios:</span>{" "}
+          conexÃµes que viram oportunidades
         </h2>
 
         <p
@@ -60,8 +60,8 @@ const CallToActionVendas = () => {
             max-w-md sm:max-w-xl lg:max-w-2xl
           "
         >
-          Com a circulação de mais de 2.000 visitantes, a feira cria oportunidades
-          de troca e geração de negócios durante os dois dias de evento.
+          Com a circulaÃ§Ã£o de mais de 2.000 visitantes, a feira cria oportunidades
+          de troca e geraÃ§Ã£o de negÃ³cios durante os dois dias de evento.
         </p>
 
         <div className="mt-6 sm:mt-8">
@@ -73,3 +73,4 @@ const CallToActionVendas = () => {
 }
 
 export default CallToActionVendas
+

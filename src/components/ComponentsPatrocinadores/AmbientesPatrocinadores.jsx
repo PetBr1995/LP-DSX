@@ -1,28 +1,28 @@
-import { Swiper, SwiperSlide } from "swiper/react";
+﻿import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 
 const InfoAmbientes = [
     {
-        img: "img-ambiantes/amb-1.png",
+        img: "optimized/step1/img-ambiantes/amb-1.webp",
     },
     {
-        img: "img-ambiantes/amb-2.png",
+        img: "optimized/step1/img-ambiantes/amb-2.webp",
     },
     {
-        img: "img-ambiantes/amb-3.png",
+        img: "optimized/step1/img-ambiantes/amb-3.webp",
     },
     {
-        img: "img-ambiantes/amb-4.png",
+        img: "optimized/step1/img-ambiantes/amb-4.webp",
     },
     {
-        img: "img-ambiantes/amb-5.png",
+        img: "optimized/step1/img-ambiantes/amb-5.webp",
     },
     {
-        img: "img-ambiantes/amb-6.png",
+        img: "optimized/step1/img-ambiantes/amb-6.webp",
     },
     {
-        img: "img-ambiantes/amb-7.png",
+        img: "optimized/step1/img-ambiantes/amb-7.webp",
     },
 ];
 
@@ -31,15 +31,15 @@ const AmbientesPatrocinadores = () => {
         <section className="relative bg-black text-white overflow-hidden after:absolute after:content-[''] after:bottom-0 after:right-0  after:w-70 after:h-70 after:bg-[url(/vector-25.svg)] after:bg-cover after:bg-center after:bg-no-repeat">
             <div className="relative z-10 pt-10 pb-20">
                 <h2 className="text-center font-anton uppercase text-4xl leading-tight">
-                    O AMBIENTE QUE COLOCA SUA MARCA EM EVIDÊNCIA
+                    O AMBIENTE QUE COLOCA SUA MARCA EM EVIDÃŠNCIA
                 </h2>
 
                 <p className="mt-3 text-center font-jamjuree font-extralight text-lg text-white/80 max-w-3xl mx-auto px-4">
-                    Amplie sua presença, atraia leads qualificados e escolha o espaço que reforça o seu posicionamento
+                    Amplie sua presenÃ§a, atraia leads qualificados e escolha o espaÃ§o que reforÃ§a o seu posicionamento
                 </p>
 
                 <div className="relative my-12 max-w-7xl mx-auto px-4">
-                    {/* Botões de navegação (iguais ao teu) */}
+                    {/* BotÃµes de navegaÃ§Ã£o (iguais ao teu) */}
                     <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 z-20 hidden md:flex">
                         <button
                             className="
@@ -53,7 +53,7 @@ const AmbientesPatrocinadores = () => {
     "
                             aria-label="Anterior"
                         >
-                            ‹
+                            â€¹
                         </button>
 
                         <button
@@ -65,9 +65,9 @@ const AmbientesPatrocinadores = () => {
       cursor-pointer
       rounded-l-none
     "
-                            aria-label="Próximo"
+                            aria-label="PrÃ³ximo"
                         >
-                            ›
+                            â€º
                         </button>
                     </div>
 
@@ -103,3 +103,4 @@ const AmbientesPatrocinadores = () => {
 };
 
 export default AmbientesPatrocinadores;
+

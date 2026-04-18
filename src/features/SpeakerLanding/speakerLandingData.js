@@ -1,4 +1,4 @@
-const DEFAULT_EVENT = {
+﻿const DEFAULT_EVENT = {
   name: "DSX 2026",
   date: "23 e 24 de julho",
   city: "Manaus",
@@ -24,145 +24,145 @@ export const toSegmentSlug = (value = "") =>
 const segmentLandingList = [
   {
     name: "Marketing",
-    image: "/BannerCallToActionVendas.png",
-    category: "Segmento Estratégico",
+    image: "/optimized/step1/BannerCallToActionVendas.webp",
+    category: "Segmento EstratÃ©gico",
     headline: "Marketing no DSX 2026",
     subtitle:
-      "Estratégias práticas para posicionar sua marca, aumentar demanda e transformar conteúdo em crescimento previsível.",
+      "EstratÃ©gias prÃ¡ticas para posicionar sua marca, aumentar demanda e transformar conteÃºdo em crescimento previsÃ­vel.",
     hook:
-      "Da atração ao fechamento: você vai enxergar o marketing como sistema de geração de receita.",
+      "Da atraÃ§Ã£o ao fechamento: vocÃª vai enxergar o marketing como sistema de geraÃ§Ã£o de receita.",
     about:
-      "A trilha de Marketing foi desenhada para empresas que querem sair do improviso e construir uma máquina de aquisição com consistência.",
+      "A trilha de Marketing foi desenhada para empresas que querem sair do improviso e construir uma mÃ¡quina de aquisiÃ§Ã£o com consistÃªncia.",
     topics: [
       "Posicionamento de marca com autoridade no mercado",
-      "Conteúdo que gera atenção, relacionamento e conversão",
-      "Aquisição previsível com tráfego, funis e ofertas",
+      "ConteÃºdo que gera atenÃ§Ã£o, relacionamento e conversÃ£o",
+      "AquisiÃ§Ã£o previsÃ­vel com trÃ¡fego, funis e ofertas",
     ],
     outcomes: [
-      "Plano de ação para destravar demanda qualificada",
-      "Estrutura clara para escalar presença e vendas",
-      "Decisões orientadas por dados e performance",
+      "Plano de aÃ§Ã£o para destravar demanda qualificada",
+      "Estrutura clara para escalar presenÃ§a e vendas",
+      "DecisÃµes orientadas por dados e performance",
     ],
     segmentSpeakers: [
       { name: "Camila Renaux", image: "/palestrantes/CamilaRenaux.png" },
       { name: "Rafael Kiso", image: "/palestrantes/RafaelKiso.png" },
       { name: "Carol Lima", image: "/palestrantes/CarolLima.png" },
-      { name: "André Siqueira", image: "/palestrantes/AndreSiqueira.png" },
+      { name: "AndrÃ© Siqueira", image: "/palestrantes/AndreSiqueira.png" },
       { name: "Hanah Franklin", image: "/palestrantes/HanahFranklin.png" },
     ],
   },
   {
     name: "Vendas",
-    image: "/Banner-vendas-hero.png",
-    category: "Segmento Estratégico",
+    image: "/optimized/step1/Banner-vendas-hero.webp",
+    category: "Segmento EstratÃ©gico",
     headline: "Segmento de Vendas no DSX 2026",
     subtitle:
-      "Métodos de prospecção, negociação e fechamento para vender com mais margem, previsibilidade e escala.",
+      "MÃ©todos de prospecÃ§Ã£o, negociaÃ§Ã£o e fechamento para vender com mais margem, previsibilidade e escala.",
     hook:
-      "Menos achismo comercial e mais processo: da abordagem ao fechamento com direção.",
+      "Menos achismo comercial e mais processo: da abordagem ao fechamento com direÃ§Ã£o.",
     about:
-      "A trilha de Vendas conecta estratégia e execução para quem quer crescimento real sem depender de sorte ou sazonalidade.",
+      "A trilha de Vendas conecta estratÃ©gia e execuÃ§Ã£o para quem quer crescimento real sem depender de sorte ou sazonalidade.",
     topics: [
-      "Prospecção inteligente para gerar oportunidades reais",
-      "Negociação de alto valor e fechamento consultivo",
-      "Gestão de pipeline e previsibilidade comercial",
+      "ProspecÃ§Ã£o inteligente para gerar oportunidades reais",
+      "NegociaÃ§Ã£o de alto valor e fechamento consultivo",
+      "GestÃ£o de pipeline e previsibilidade comercial",
     ],
     outcomes: [
       "Playbook comercial para aplicar no time",
       "Ritual de vendas com indicadores de performance",
-      "Estratégias para aumentar taxa de conversão",
+      "EstratÃ©gias para aumentar taxa de conversÃ£o",
     ],
     segmentSpeakers: [
       { name: "Tallis Gomes", image: "/palestrantes/TallisGomes.png" },
-      { name: "Nicolas Charão", image: "/palestrantes/NicolasCharao.png" },
-      { name: "João Brognoli", image: "/palestrantes/JoaoBrognoli.png" },
+      { name: "Nicolas CharÃ£o", image: "/palestrantes/NicolasCharao.png" },
+      { name: "JoÃ£o Brognoli", image: "/palestrantes/JoaoBrognoli.png" },
       { name: "Alfredo Soares", image: "/palestrantes/AlfredoSoares.png" },
       { name: "Fernando Miranda", image: "/palestrantes/FernandoMiranda.png" },
     ],
   },
   {
-    name: "Inovação",
+    name: "InovaÃ§Ã£o",
     image: "/dsx-2026.jpeg",
-    category: "Segmento Estratégico",
-    headline: "Segmento de Inovação no DSX 2026",
+    category: "Segmento EstratÃ©gico",
+    headline: "Segmento de InovaÃ§Ã£o no DSX 2026",
     subtitle:
-      "Como aplicar tecnologia, IA e novos modelos de execução para acelerar eficiência e vantagem competitiva.",
+      "Como aplicar tecnologia, IA e novos modelos de execuÃ§Ã£o para acelerar eficiÃªncia e vantagem competitiva.",
     hook:
-      "Inovação aplicada ao negócio real: menos tendência vazia, mais resultado concreto.",
+      "InovaÃ§Ã£o aplicada ao negÃ³cio real: menos tendÃªncia vazia, mais resultado concreto.",
     about:
-      "A trilha de Inovação mostra como transformar mudanças de mercado em oportunidades com foco em velocidade e adaptação.",
+      "A trilha de InovaÃ§Ã£o mostra como transformar mudanÃ§as de mercado em oportunidades com foco em velocidade e adaptaÃ§Ã£o.",
     topics: [
-      "IA aplicada ao marketing, vendas e operação",
-      "Automação de processos para ganho de produtividade",
-      "Tomada de decisão com visão de futuro e dados",
+      "IA aplicada ao marketing, vendas e operaÃ§Ã£o",
+      "AutomaÃ§Ã£o de processos para ganho de produtividade",
+      "Tomada de decisÃ£o com visÃ£o de futuro e dados",
     ],
     outcomes: [
-      "Mapa prático de adoção de inovação",
-      "Identificação dos gargalos que mais travam escala",
-      "Estratégias para acelerar execução com tecnologia",
+      "Mapa prÃ¡tico de adoÃ§Ã£o de inovaÃ§Ã£o",
+      "IdentificaÃ§Ã£o dos gargalos que mais travam escala",
+      "EstratÃ©gias para acelerar execuÃ§Ã£o com tecnologia",
     ],
     segmentSpeakers: [
-      { name: "João Kepler", image: "/palestrantes/JoaoKepler.png" },
-      { name: "Maurício Stellato", image: "/palestrantes/MauricioStellato.png" },
+      { name: "JoÃ£o Kepler", image: "/palestrantes/JoaoKepler.png" },
+      { name: "MaurÃ­cio Stellato", image: "/palestrantes/MauricioStellato.png" },
       { name: "Gerson Toller", image: "/palestrantes/GersonToller.png" },
       { name: "Suelen Scop", image: "/palestrantes/SuellenScop.png" },
       { name: "Lucas Pimenta", image: "/palestrantes/LucasPimenta.png" },
     ],
   },
   {
-    name: "Negócios",
-    image: "/Banner-vendas-hero.png",
-    category: "Segmento Estratégico",
-    headline: "Onde empresários constroem o futuro dos negócios no Norte.",
+    name: "NegÃ³cios",
+    image: "/optimized/step1/Banner-vendas-hero.webp",
+    category: "Segmento EstratÃ©gico",
+    headline: "Onde empresÃ¡rios constroem o futuro dos negÃ³cios no Norte.",
     subtitle:
-      "Conecte-se com quem já escalou operações de milhões e entenda o modelo de gestão da nova economia.",
+      "Conecte-se com quem jÃ¡ escalou operaÃ§Ãµes de milhÃµes e entenda o modelo de gestÃ£o da nova economia.",
     hook:
-      "Em 2 dias, você sai com o mapa completo para a construir uma empresa que cresce sem depender só de você.",
+      "Em 2 dias, vocÃª sai com o mapa completo para a construir uma empresa que cresce sem depender sÃ³ de vocÃª.",
     about:
-      "Imersão construída para donos de negócio e líderes que precisam estruturar governança, processos e delegação para ganhar escala com previsibilidade.",
+      "ImersÃ£o construÃ­da para donos de negÃ³cio e lÃ­deres que precisam estruturar governanÃ§a, processos e delegaÃ§Ã£o para ganhar escala com previsibilidade.",
     topics: [
-      "Estrutura e governança para decisões de alto impacto",
-      "Processos-chave e delegação para escalar com previsibilidade",
-      "Crescimento com clareza estratégica e execução disciplinada",
+      "Estrutura e governanÃ§a para decisÃµes de alto impacto",
+      "Processos-chave e delegaÃ§Ã£o para escalar com previsibilidade",
+      "Crescimento com clareza estratÃ©gica e execuÃ§Ã£o disciplinada",
     ],
     painPoints: [
-      "Você é o maior gargalo da sua empresa, toda decisão passa por você.",
+      "VocÃª Ã© o maior gargalo da sua empresa, toda decisÃ£o passa por vocÃª.",
       "Faturamento cresce, mas lucro some em custo fixo e retrabalho.",
-      "Seu time executa, mas não pensa. Você ainda precisa resolver tudo.",
-      "Você sabe que precisa de processos, mas nunca tem tempo pra montar.",
-      "Toda vez que tira o pé do acelerador, a empresa desacelera junto.",
+      "Seu time executa, mas nÃ£o pensa. VocÃª ainda precisa resolver tudo.",
+      "VocÃª sabe que precisa de processos, mas nunca tem tempo pra montar.",
+      "Toda vez que tira o pÃ© do acelerador, a empresa desacelera junto.",
     ],
     transitionLine:
-      "Você não chegou até aqui por falta de esforço. Chegou até aqui com o modelo errado de empresa. E o DSX existe para mudar isso.",
-    outcomesHeadline: "O que você sai tendo depois do DSX para o seu negócio:",
+      "VocÃª nÃ£o chegou atÃ© aqui por falta de esforÃ§o. Chegou atÃ© aqui com o modelo errado de empresa. E o DSX existe para mudar isso.",
+    outcomesHeadline: "O que vocÃª sai tendo depois do DSX para o seu negÃ³cio:",
     outcomes: [
-      "Estrutura de governança: quem decide o quê, quando e como.",
+      "Estrutura de governanÃ§a: quem decide o quÃª, quando e como.",
       "Mapa de processos-chave: os 3 fluxos que mais impactam seu caixa, desenhados e prontos.",
-      "Método de delegação: como transferir responsabilidade sem perder qualidade.",
-      "Plano de crescimento previsível: meta, indicador, ação. Sem achismo.",
-      "Clareza sobre o próximo movimento estratégico da sua empresa.",
+      "MÃ©todo de delegaÃ§Ã£o: como transferir responsabilidade sem perder qualidade.",
+      "Plano de crescimento previsÃ­vel: meta, indicador, aÃ§Ã£o. Sem achismo.",
+      "Clareza sobre o prÃ³ximo movimento estratÃ©gico da sua empresa.",
     ],
     speakersHeadline: "PALESTRANTES CONFIRMADOS NO DSX 2026",
     segmentSpeakers: [
       {
-        name: "João Kepler",
+        name: "JoÃ£o Kepler",
         image: "/novas-palestrantes/Joao-Kepler.png",
         bio: "O maior investidor-anjo do Brasil. Especialista em Equity e em como preparar sua empresa para valer 10x mais no mercado.",
       },
       {
-        name: "Nicolas Charão",
+        name: "Nicolas CharÃ£o",
         image: "/novas-palestrantes/Nicolas-Charao.png",
-        bio: "Com mais de 10 anos de experiência, já mentoreou centenas de empresários e donos de agência, contribuindo para a formação de mais de 50 negócios milionários.",
+        bio: "Com mais de 10 anos de experiÃªncia, jÃ¡ mentoreou centenas de empresÃ¡rios e donos de agÃªncia, contribuindo para a formaÃ§Ã£o de mais de 50 negÃ³cios milionÃ¡rios.",
       },
       {
-        name: "Netão Bom Beef",
+        name: "NetÃ£o Bom Beef",
         image: "/foto-netao-bom-beef.PNG",
-        bio: "Do açougue de bairro a um faturamento de R$1 milhão por dia. O case real de como transformar produto em uma rede de franquias escalável.",
+        bio: "Do aÃ§ougue de bairro a um faturamento de R$1 milhÃ£o por dia. O case real de como transformar produto em uma rede de franquias escalÃ¡vel.",
       },
       {
         name: "Carlos Oshiro",
         image: "/foto-carlos-oshiro.png",
-        bio: "Ajuda empresários a transitar a mentalidade da velha para a nova economia. Tem um ecossistema de mais de 1500 empresários de Manaus na nova economia.",
+        bio: "Ajuda empresÃ¡rios a transitar a mentalidade da velha para a nova economia. Tem um ecossistema de mais de 1500 empresÃ¡rios de Manaus na nova economia.",
       },
       {
         name: "Chay Santos",
@@ -170,26 +170,26 @@ const segmentLandingList = [
         bio: "Estrategista de Marketing e Branding. Especialista em construir posicionamentos que permitam cobrar mais caro e dominar nichos de mercado.",
       },
       {
-        name: "Fabrício Alva",
+        name: "FabrÃ­cio Alva",
         image: "/novas-palestrantes/slide-fabricio-alva.PNG",
-        bio: "Consultor empresarial, estrategista de negócios e especialista em performance. Já ajudou empresas e profissionais a estruturarem seus negócios com mais clareza, eficiência e previsibilidade.",
+        bio: "Consultor empresarial, estrategista de negÃ³cios e especialista em performance. JÃ¡ ajudou empresas e profissionais a estruturarem seus negÃ³cios com mais clareza, eficiÃªncia e previsibilidade.",
       },
     ],
-    socialProofHeadline: "Quem já esteve no DSX não volta ao mesmo nível de negócio",
+    socialProofHeadline: "Quem jÃ¡ esteve no DSX nÃ£o volta ao mesmo nÃ­vel de negÃ³cio",
     socialProofQuotes: [
-      "Saí do DSX com clareza para reorganizar minha operação e ganhamos velocidade no crescimento.",
-      "Foi o ponto de virada para delegar melhor e parar de centralizar todas as decisões.",
-      "As conexões que fiz no evento se transformaram em parcerias reais para o negócio.",
+      "SaÃ­ do DSX com clareza para reorganizar minha operaÃ§Ã£o e ganhamos velocidade no crescimento.",
+      "Foi o ponto de virada para delegar melhor e parar de centralizar todas as decisÃµes.",
+      "As conexÃµes que fiz no evento se transformaram em parcerias reais para o negÃ³cio.",
     ],
     socialProofVideos: [
       {
-        nome: "AUGUSTO CÉSAR",
+        nome: "AUGUSTO CÃ‰SAR",
         tipo: "EXPOSITOR",
         thumb: "/card-image/expositor-card-img.png",
         video: "https://vimeo.com/1148163345?fl=ip&fe=ec",
       },
       {
-        nome: "JOÃO KEPLER",
+        nome: "JOÃƒO KEPLER",
         tipo: "PALESTRANTE",
         thumb: "/card-image/kepler-card-img.png",
         video: "https://vimeo.com/1148163374?fl=ip&fe=ec",
@@ -202,43 +202,43 @@ const segmentLandingList = [
       },
     ],
     immersionHeadline:
-      "O DSX é uma imersão construída para quem não tem tempo a perder.",
+      "O DSX Ã© uma imersÃ£o construÃ­da para quem nÃ£o tem tempo a perder.",
     immersionBullets: [
-      "2 dias de conteúdos estratégicos com os maiores nomes do mercado",
+      "2 dias de conteÃºdos estratÃ©gicos com os maiores nomes do mercado",
       "+40 palestras",
-      "3 palcos simultâneos",
-      "Feira de Negócios",
-      "Local: Centro de Convenções Vasco Vasques",
+      "3 palcos simultÃ¢neos",
+      "Feira de NegÃ³cios",
+      "Local: Centro de ConvenÃ§Ãµes Vasco Vasques",
     ],
     valueAnchor:
-      "O custo de não estar no DSX é muito maior do que o valor do passaporte. Um erro na sua estratégia de escala ou um processo de delegação mal feito custa, por mês, dez vezes o investimento que você fará hoje.",
-    groupHeadline: "Ninguém cresce sozinho",
+      "O custo de nÃ£o estar no DSX Ã© muito maior do que o valor do passaporte. Um erro na sua estratÃ©gia de escala ou um processo de delegaÃ§Ã£o mal feito custa, por mÃªs, dez vezes o investimento que vocÃª farÃ¡ hoje.",
+    groupHeadline: "NinguÃ©m cresce sozinho",
     groupCopy:
-      "Monte sua delegação e acelere decisões com o time alinhado no mesmo método de crescimento.",
+      "Monte sua delegaÃ§Ã£o e acelere decisÃµes com o time alinhado no mesmo mÃ©todo de crescimento.",
     urgencyHeadline: "GARANTIR NO LOTE ATUAL",
     urgencyCopy:
-      "O mercado não espera. Garanta sua cadeira no setor de decisões antes da virada de lote.",
+      "O mercado nÃ£o espera. Garanta sua cadeira no setor de decisÃµes antes da virada de lote.",
     faqs: [
       {
-        q: "Para quem é o DSX?",
-        a: "Para donos de negócio e empreendedores que querem estruturar suas empresas para crescer e perceberam que o amadorismo na gestão está drenando o lucro.",
+        q: "Para quem Ã© o DSX?",
+        a: "Para donos de negÃ³cio e empreendedores que querem estruturar suas empresas para crescer e perceberam que o amadorismo na gestÃ£o estÃ¡ drenando o lucro.",
       },
       {
         q: "Como funciona o parcelamento?",
-        a: "Você pode garantir o seu passaporte via PIX (com aprovação imediata) ou parcelar no cartão de crédito em até 12 vezes.",
+        a: "VocÃª pode garantir o seu passaporte via PIX (com aprovaÃ§Ã£o imediata) ou parcelar no cartÃ£o de crÃ©dito em atÃ© 12 vezes.",
       },
       {
-        q: "O que está incluso no ingresso VIP?",
-        a: "Lounge VIP exclusivo, networking com decisores, kit premium, primeiras fileiras, 2 dias de evento, +40 palestras, feira de negócios e certificado de participação.",
+        q: "O que estÃ¡ incluso no ingresso VIP?",
+        a: "Lounge VIP exclusivo, networking com decisores, kit premium, primeiras fileiras, 2 dias de evento, +40 palestras, feira de negÃ³cios e certificado de participaÃ§Ã£o.",
       },
     ],
-    finalHeadline: "Não estar no DSX também é uma decisão estratégica.",
+    finalHeadline: "NÃ£o estar no DSX tambÃ©m Ã© uma decisÃ£o estratÃ©gica.",
     finalSubheadline:
-      "Só certifique-se de que você consegue arcar com o preço dela.",
+      "SÃ³ certifique-se de que vocÃª consegue arcar com o preÃ§o dela.",
     finalRecap: [
-      "23 e 24 de julho • Manaus • Centro de Convenções Vasco Vasques — 2 dias de imersão com os melhores especialistas em negócios do Brasil.",
-      "Estrutura, processos, delegação e crescimento: tudo o que falta para sua empresa funcionar sem você.",
-      "3º lote com poucas vagas restantes neste valor.",
+      "23 e 24 de julho â€¢ Manaus â€¢ Centro de ConvenÃ§Ãµes Vasco Vasques â€” 2 dias de imersÃ£o com os melhores especialistas em negÃ³cios do Brasil.",
+      "Estrutura, processos, delegaÃ§Ã£o e crescimento: tudo o que falta para sua empresa funcionar sem vocÃª.",
+      "3Âº lote com poucas vagas restantes neste valor.",
     ],
   },
 ].map((segment) => ({
@@ -263,3 +263,4 @@ const segmentBySlug = Object.fromEntries(
 export const getSegmentBySlug = (slug = "") => segmentBySlug[String(slug || "")];
 
 export { segmentLandingList };
+
