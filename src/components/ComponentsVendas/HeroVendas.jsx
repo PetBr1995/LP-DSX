@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+﻿import { useEffect, useRef, useState } from "react";
 import Player from "@vimeo/player";
 import CTAButton from "../../components/Mascaras/CTAButton";
 
@@ -27,7 +27,7 @@ const HeroVendas = () => {
     const onPlay = () => setIsPlaying(true);
     const onPause = () => setIsPlaying(false);
 
-    // corta o vídeo em 1:37 e volta pro início (loop "cortado")
+    // corta o vÃ­deo em 1:37 e volta pro inÃ­cio (loop "cortado")
     const onTimeUpdate = (data) => {
       if (data?.seconds >= END_TIME) {
         player
@@ -97,17 +97,27 @@ const HeroVendas = () => {
       <div className="absolute inset-0 bg-black/55" />
 
       <div className="relative z-10 flex flex-col items-center px-4">
-        <img
-          src="/DSX-2026-icon-1.png"
-          className="mb-10 w-40 md:w-70"
-          alt="logo-dsx"
-        />
+                <picture>
+          <source
+            srcSet="/optimized/step1/DSX-2026-icon-1.avif"
+            type="image/avif"
+          />
+          <source
+            srcSet="/optimized/step1/DSX-2026-icon-1.webp"
+            type="image/webp"
+          />
+          <img
+            src="/DSX-2026-icon-1.png"
+            className="mb-10 w-40 md:w-70"
+            alt="logo-dsx"
+          />
+        </picture>
 
         <h2 className="max-w-7xl text-center font-anton uppercase text-white text-3xl sm:text-4xl md:text-6xl mb-10">
-          O MAIOR EVENTO DE NEGÓCIOS, MARKETING, VENDAS E INOVAÇÃO DO NORTE
+          O MAIOR EVENTO DE NEGÃ“CIOS, MARKETING, VENDAS E INOVAÃ‡ÃƒO DO NORTE
         </h2>
 
-        {/* 🔥 VIDEO */}
+        {/* ðŸ”¥ VIDEO */}
         <div className="mt-12 w-full flex justify-center">
           <div className="w-full max-w-5xl">
             <div className="relative w-full aspect-video overflow-hidden rounded-2xl bg-black shadow-xl">
@@ -129,7 +139,7 @@ const HeroVendas = () => {
               />
 
               {/*
-              Se quiser voltar com o overlay de play, é só descomentar.
+              Se quiser voltar com o overlay de play, Ã© sÃ³ descomentar.
               {!isPlaying && (
                 <div className="absolute inset-0 grid place-items-center bg-black/45 backdrop-blur-[2px]">
                   <button
@@ -169,3 +179,4 @@ const HeroVendas = () => {
 };
 
 export default HeroVendas;
+

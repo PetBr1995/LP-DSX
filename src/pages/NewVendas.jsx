@@ -1,11 +1,14 @@
 ﻿import { Suspense, lazy, useEffect, useMemo, useState } from "react";
-import { NewVendasContent, NewVendasHero } from "../components/NewVendas";
+import NewVendasHero from "../components/NewVendas/NewVendasHero";
 import { formatDsxFormOrigin } from "../utils/formOrigin";
 
 const NEW_VENDAS_SYMPLA_URL =
   "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721";
 const RD_API_URL =
   "https://api.rd.services/platform/conversions?api_key=MHnWDjBYARQKdwUsfZRbjtVmPEyoHnSqtgFz";
+const NewVendasContent = lazy(() =>
+  import("../components/NewVendas/NewVendasContent"),
+);
 const LeadPopupFormHomeTeste = lazy(() =>
   import("../components/HomeTesteComponentes/LeadPopupFormHomeTeste"),
 );
@@ -92,6 +95,7 @@ const NewVendas = () => {
   const [loading, setLoading] = useState(false);
   const [mensagem, setMensagem] = useState("");
   const [leadStatus, setLeadStatus] = useState("idle");
+  const [shouldRenderContent, setShouldRenderContent] = useState(false);
 
   const errors = useMemo(() => {
     const currentErrors = {};
@@ -123,7 +127,7 @@ const NewVendas = () => {
     const pageDescription =
       "Garanta seu passaporte para o DSX 2026: o maior evento de negócios, marketing, vendas e inovação do Norte. Dias 23 e 24 de julho em Manaus.";
     const pageUrl = "https://dsx.com.vc/newvendas";
-    const ogImage = "https://dsx.com.vc/Banner-vendas-hero.png";
+    const ogImage = "https://dsx.com.vc/optimized/step1/Banner-vendas-hero.webp";
 
     document.title = pageTitle;
 
@@ -285,6 +289,19 @@ const NewVendas = () => {
       document.documentElement.style.overflow = previousHtmlOverflow;
     };
   }, [showLeadModal]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+      const idleId = window.requestIdleCallback(
+        () => setShouldRenderContent(true),
+        { timeout: 1400 },
+      );
+      return () => window.cancelIdleCallback(idleId);
+    }
+
+    const timeoutId = window.setTimeout(() => setShouldRenderContent(true), 180);
+    return () => window.clearTimeout(timeoutId);
+  }, []);
 
   const openLeadGateForSympla = (targetLink, formOrigin) => {
     if (loading) return;
@@ -499,7 +516,13 @@ const NewVendas = () => {
 
       <div className="relative z-10">
         <NewVendasHero ctaLink="#passaportes" />
-        <NewVendasContent onBuyPassaporte={openLeadGateForSympla} />
+        {shouldRenderContent ? (
+          <Suspense fallback={<div className="min-h-[120px]" />}>
+            <NewVendasContent onBuyPassaporte={openLeadGateForSympla} />
+          </Suspense>
+        ) : (
+          <div className="min-h-[120px]" aria-hidden="true" />
+        )}
       </div>
 
       {showLeadModal ? (

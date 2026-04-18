@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 import CTAButton from "./Mascaras/CTAButton";
 import HeaderMask from "./Mascaras/HeaderMask";
 
@@ -31,12 +31,22 @@ const Header = ({ className = "", ctaLink = "/vendas" }) => {
         `}
       >
         <a href="/#home">
-          {/* Logo (sempre visível) */}
-          <img
-            src="/DSX-2026-icon-1.png"
-            alt="logo"
-            className="h-[32px] sm:h-[40px] w-auto"
-          />
+          {/* Logo (sempre visÃ­vel) */}
+                    <picture>
+            <source
+              srcSet="/optimized/step1/DSX-2026-icon-1.avif"
+              type="image/avif"
+            />
+            <source
+              srcSet="/optimized/step1/DSX-2026-icon-1.webp"
+              type="image/webp"
+            />
+            <img
+              src="/DSX-2026-icon-1.png"
+              alt="logo"
+              className="h-[32px] sm:h-[40px] w-auto"
+            />
+          </picture>
         </a>
 
         {/* Desktop actions */}
@@ -59,7 +69,7 @@ const Header = ({ className = "", ctaLink = "/vendas" }) => {
           aria-expanded={open}
           onClick={toggle}
         >
-          {/* Ícone hambúrguer simples (SVG) */}
+          {/* Ãcone hambÃºrguer simples (SVG) */}
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
             <path
               d="M4 7h16M4 12h16M4 17h16"
@@ -117,3 +127,4 @@ const Header = ({ className = "", ctaLink = "/vendas" }) => {
 };
 
 export default Header;
+
