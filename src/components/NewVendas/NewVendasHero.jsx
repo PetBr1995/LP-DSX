@@ -219,10 +219,16 @@ const NewVendasHero = ({
 
   return (
     <section className="relative overflow-hidden bg-black text-white">
-      <div
-        className="pointer-events-none absolute inset-0 z-0 bg-[url(/[DSX]-Banner-Site-BG.png)] bg-cover bg-center bg-no-repeat opacity-40"
-        aria-hidden="true"
-      />
+      <div className="pointer-events-none absolute inset-0 z-0 opacity-40" aria-hidden="true">
+        <img
+          src="/[DSX]-Banner-Site-BG.png"
+          alt=""
+          className="h-full w-full object-cover object-center"
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
+        />
+      </div>
       <div className="relative z-10 mx-auto max-w-6xl px-4 pb-10 pt-10 md:pb-12 md:pt-14">
         <div className="text-center space-y-5 md:space-y-6">
           <div className="flex justify-center">

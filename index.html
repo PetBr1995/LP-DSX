@@ -8,22 +8,24 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="image" href="/[DSX]-Banner-Site-BG.png" fetchpriority="high" />
     <link
-      rel="stylesheet"
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=Anton&family=Bai+Jamjuree:wght@200;300;400;500;600;700&family=Bebas+Neue&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
     />
     <link
-      rel="preload"
-      as="image"
-      href="/optimized/hero-banner.avif"
-      fetchpriority="high"
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Bai+Jamjuree:wght@200;300;400;500;600;700&family=Bebas+Neue&family=Roboto:ital,wght@0,100..900&display=swap"
+      media="print"
+      onload="this.media='all'"
     />
-    <link
-      rel="preload"
-      as="image"
-      href="/background-banner-2.png"
-      fetchpriority="high"
-    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Anton&family=Bai+Jamjuree:wght@200;300;400;500;600;700&family=Bebas+Neue&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      />
+    </noscript>
 
     <title>DSX | Digital Summit Experience</title>
     <meta
@@ -150,11 +152,21 @@
           d.head.appendChild(rdScript);
         }
 
+        function loadDsxTracker() {
+          if (w.__DSX_TRACKER_LOADED__) return;
+          w.__DSX_TRACKER_LOADED__ = true;
+          var trackerScript = d.createElement("script");
+          trackerScript.defer = true;
+          trackerScript.src = "/js/dsx-tracker.js";
+          d.head.appendChild(trackerScript);
+        }
+
         function scheduleLoaders() {
           var hasTriggered = false;
           function trigger() {
             if (hasTriggered) return;
             hasTriggered = true;
+            loadDsxTracker();
             loadGtm();
             w.setTimeout(loadRdLoader, 1000);
             w.removeEventListener("pointerdown", trigger, true);
@@ -181,7 +193,6 @@
         w.addEventListener("load", scheduleLoaders, { once: true });
       })(window, document, "dataLayer", "GTM-W3FM6BQW");
     </script>
-    <script src="/js/dsx-tracker.js" defer></script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
