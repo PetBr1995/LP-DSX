@@ -277,18 +277,21 @@ const NewVendas = () => {
   };
 
   const closeLeadModal = () => {};
-
-  useEffect(() => {
-    const timerId = window.setTimeout(() => {
-      setLeadStatus("idle");
-      setMensagem(
-        "Para continuar com a compra, preencha e envie o formulário.",
-      );
-      setShowLeadModal(true);
-    }, 8000);
-
-    return () => window.clearTimeout(timerId);
-  }, []);
+  {
+    /*
+    useEffect(() => {
+      const timerId = window.setTimeout(() => {
+        setLeadStatus("idle");
+        setMensagem(
+          "Para continuar com a compra, preencha e envie o formulário.",
+        );
+        setShowLeadModal(true);
+      }, 8000);
+      
+      return () => window.clearTimeout(timerId);
+    }, []);
+    */
+  }
 
   useEffect(() => {
     if (!showLeadModal) return;
@@ -529,7 +532,7 @@ const NewVendas = () => {
           </span>
         </div>
       </div>
-
+      {/** */}
       <LeadPopupFormHomeTeste
         isOpen={showLeadModal}
         popupStep={1}
