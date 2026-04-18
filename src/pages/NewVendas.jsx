@@ -1,6 +1,5 @@
 ﻿import { useEffect, useMemo, useState } from "react";
 import { NewVendasContent, NewVendasHero } from "../components/NewVendas";
-import NewVendasHeaderMask from "../components/NewVendas/NewVendasHeaderMask";
 import LeadPopupFormHomeTeste from "../components/HomeTesteComponentes/LeadPopupFormHomeTeste";
 import { getSupabaseClient, isSupabaseConfigured } from "../lib/supabaseClient";
 import { formatDsxFormOrigin } from "../utils/formOrigin";
@@ -51,7 +50,6 @@ function isMissingColumnError(error) {
 }
 
 const NewVendas = () => {
-  const [showStickyCta, setShowStickyCta] = useState(false);
   const [showLeadModal, setShowLeadModal] = useState(false);
   const [pendingSymplaUrl, setPendingSymplaUrl] = useState(NEW_VENDAS_SYMPLA_URL);
   const [leadForm, setLeadForm] = useState({
@@ -250,27 +248,6 @@ const NewVendas = () => {
       utm_term: urlParams.get("utm_term") || "",
       utm_content: urlParams.get("utm_content") || "",
     });
-  }, []);
-
-  useEffect(() => {
-    const ctaElement = document.getElementById("newvendas-primary-cta");
-
-    if (!ctaElement || !("IntersectionObserver" in window)) {
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        const ctaPassedAboveViewport =
-          !entry.isIntersecting && entry.boundingClientRect.top < 0;
-        setShowStickyCta(ctaPassedAboveViewport);
-      },
-      { threshold: 0 },
-    );
-
-    observer.observe(ctaElement);
-
-    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -502,31 +479,6 @@ const NewVendas = () => {
         <NewVendasContent onBuyPassaporte={openLeadGateForSympla} />
       </div>
 
-      <div
-        className={`fixed bottom-0 left-0 right-0 z-[130] bg-black px-4 py-3 transition-all duration-500 ease-out ${
-          showStickyCta
-            ? "translate-y-0 opacity-100"
-            : "pointer-events-none translate-y-6 opacity-0"
-        }`}
-      >
-        <div className="mx-auto flex max-w-[770px] flex-col items-center">
-          <div>
-            <NewVendasHeaderMask
-              titulo="Garantir meu passaporte"
-              link="#passaportes"
-              target="_self"
-              textColor="#FFFFFF"
-              backgroundColor="#1E1A12"
-              font="700"
-              size="lg"
-            />
-          </div>
-          <span className="mt-1 inline-block text-2xl font-black uppercase text-[#F5C02B]">
-            Vagas limitadas
-          </span>
-        </div>
-      </div>
-
       <LeadPopupFormHomeTeste
         isOpen={showLeadModal}
         canClose
@@ -548,4 +500,6 @@ const NewVendas = () => {
 };
 
 export default NewVendas;
+
+
 
