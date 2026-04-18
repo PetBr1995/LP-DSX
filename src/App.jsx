@@ -2,8 +2,6 @@ import { Suspense, lazy } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import PreserveUtmLinks from "./components/PreserveUtmLinks";
 import RoutePageTracking from "./components/RoutePageTracking";
-import Vendas2 from "./pages/Vendas2";
-import Vendas from "./pages/Vendas";
 
 const HomeTeste = lazy(() => import("./pages/HomeTeste"));
 const Palestrantes = lazy(() => import("./pages/Palestrantes"));
@@ -15,6 +13,7 @@ const Checkout = lazy(() => import("./pages/Checkout"));
 const NewVendas = lazy(() => import("./pages/NewVendas"));
 const NewVendasCopy = lazy(() => import("./pages/NewVendasCopy"));
 const PreCheckout = lazy(() => import("./pages/PreCheckout"));
+const Vendas = lazy(() => import("./pages/Vendas"));
 const SpeakerLandingPage = lazy(
   () => import("./features/SpeakerLanding/SpeakerLandingPage"),
 );

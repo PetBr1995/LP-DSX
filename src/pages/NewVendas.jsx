@@ -1,13 +1,14 @@
-﻿import { useEffect, useMemo, useState } from "react";
+﻿import { Suspense, lazy, useEffect, useMemo, useState } from "react";
 import { NewVendasContent, NewVendasHero } from "../components/NewVendas";
-import LeadPopupFormHomeTeste from "../components/HomeTesteComponentes/LeadPopupFormHomeTeste";
-import { getSupabaseClient, isSupabaseConfigured } from "../lib/supabaseClient";
 import { formatDsxFormOrigin } from "../utils/formOrigin";
 
 const NEW_VENDAS_SYMPLA_URL =
   "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721";
 const RD_API_URL =
   "https://api.rd.services/platform/conversions?api_key=MHnWDjBYARQKdwUsfZRbjtVmPEyoHnSqtgFz";
+const LeadPopupFormHomeTeste = lazy(() =>
+  import("../components/HomeTesteComponentes/LeadPopupFormHomeTeste"),
+);
 
 function onlyDigits(value = "") {
   return value.replace(/\D/g, "");
@@ -385,8 +386,9 @@ const NewVendas = () => {
         throw new Error("Erro ao enviar para RD Station");
       }
 
-      if (isSupabaseConfigured) {
-        const supabase = await getSupabaseClient();
+      const supabaseRuntime = await import("../lib/supabaseClient");
+      if (supabaseRuntime.isSupabaseConfigured) {
+        const supabase = await supabaseRuntime.getSupabaseClient();
         if (supabase) {
           const nowIso = new Date().toISOString();
           const trackerState = window.DSXTracker?.getState?.() || {};
@@ -500,27 +502,32 @@ const NewVendas = () => {
         <NewVendasContent onBuyPassaporte={openLeadGateForSympla} />
       </div>
 
-      <LeadPopupFormHomeTeste
-        isOpen={showLeadModal}
-        canClose
-        onClose={closeLeadModal}
-        onSubmit={handleLeadSubmit}
-        leadForm={leadForm}
-        setLeadForm={setLeadForm}
-        onWhatsappChange={handleWhatsappMask}
-        leadStatus={leadStatus}
-        message={mensagem}
-        loading={loading}
-        canSubmit={canSubmitLead}
-        headline="GARANTA SUA VAGA"
-        subheading=""
-        description=""
-      />
+      {showLeadModal ? (
+        <Suspense fallback={null}>
+          <LeadPopupFormHomeTeste
+            isOpen={showLeadModal}
+            canClose
+            onClose={closeLeadModal}
+            onSubmit={handleLeadSubmit}
+            leadForm={leadForm}
+            setLeadForm={setLeadForm}
+            onWhatsappChange={handleWhatsappMask}
+            leadStatus={leadStatus}
+            message={mensagem}
+            loading={loading}
+            canSubmit={canSubmitLead}
+            headline="GARANTA SUA VAGA"
+            subheading=""
+            description=""
+          />
+        </Suspense>
+      ) : null}
     </section>
   );
 };
 
 export default NewVendas;
+
 
 
 
