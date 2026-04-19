@@ -370,7 +370,7 @@ const segmentLandingList = [
     ],
     transitionLine:
       "Você não chegou até aqui por falta de esforço. Chegou até aqui com o modelo errado de empresa. E o DSX existe para mudar isso.",
-    outcomesHeadline: "O que você sai tendo depois do DSX para o seu negócio:",
+    outcomesHeadline: "O que você sai tendo depois do DSX:",
     outcomes: [
       "Estrutura de governança: quem decide o quê, quando e como.",
       "Mapa de processos-chave: os 3 fluxos que mais impactam seu caixa, desenhados e prontos.",

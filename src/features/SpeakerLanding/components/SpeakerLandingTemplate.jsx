@@ -338,9 +338,9 @@ const SpeakerLandingTemplate = ({ speaker }) => {
       window.open(targetLink, "_blank", "noopener,noreferrer");
     };
     const immersionHighlights = [
+      { value: "+40", label: "palestras" },
       { value: "3 PALCOS", label: "simultâneos" },
       { value: "FEIRA", label: "de Negócios" },
-      { value: "VIP", label: "área exclusiva" },
       { value: "MANAUS", label: "Vasco Vasques" },
     ];
 
@@ -430,7 +430,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
             >
           <section className="rounded-2xl border border-[#F5C02B]/35 bg-[#0E0E0E]/85 p-6">
             <h2 className="font-anton text-[clamp(1.3rem,5vw,3.3rem)] text-center md:text-start uppercase text-[#FF8B8B] leading-[1.22]">
-              Você construiu um negócio que funciona, mas que ainda não sobrevive sem você?
+              {speaker.about}
             </h2>
             <ul className="mt-6 space-y-3 font-jamjuree text-white/85">
               {activePainPoints.map((item) => (
@@ -1259,11 +1259,11 @@ const SpeakerLandingTemplate = ({ speaker }) => {
 
       <div className="fixed inset-x-0 bottom-0 z-50 border-t border-[#F5C02B]/35 bg-black/95 p-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] backdrop-blur-sm md:hidden">
         <p className="mb-2 text-center font-jamjuree text-[11px] font-bold uppercase tracking-[0.08em] text-[#F5C02B]">
-          {LOT_CONFIG.currentLot}: ultimas {LOT_CONFIG.remainingSeats} vagas
+          3º lote • Poucas vagas disponíveis
         </p>
         <div className="mx-auto w-fit">
           <NewVendasHeaderMask
-            titulo="GARANTIR MINHA VAGA"
+            titulo="GARANTIR MEU PASSAPORTE"
             link={speaker.ctaLink}
             textColor="#FFFFFF"
             backgroundColor="#17140D"
