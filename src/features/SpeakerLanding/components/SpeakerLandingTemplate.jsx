@@ -130,7 +130,11 @@ const formatAnimatedMetricValue = (value, metric) => {
 
 const SpeakerLandingTemplate = ({ speaker }) => {
   const speakerSlug = String(speaker?.slug || "").toLowerCase();
-  const useNegociosTemplate = speakerSlug === "negocios" || speakerSlug === "marketing";
+  const useNegociosTemplate =
+    speakerSlug === "negocios" ||
+    speakerSlug === "marketing" ||
+    speakerSlug === "vendas" ||
+    speakerSlug === "inovacao";
   const [isDepoimentoModalOpen, setIsDepoimentoModalOpen] = useState(false);
   const [activeDepoimentoVideo, setActiveDepoimentoVideo] = useState(null);
   const [negociosFaqOpenIndex, setNegociosFaqOpenIndex] = useState(0);

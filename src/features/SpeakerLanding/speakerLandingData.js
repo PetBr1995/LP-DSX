@@ -146,61 +146,203 @@ const segmentLandingList = [
   {
     name: "Vendas",
     image: "/optimized/step1/Banner-vendas-hero.webp",
-    category: "Segmento EstratÃ©gico",
-    headline: "Segmento de Vendas no DSX 2026",
+    category: "Segmento Estratégico",
+    headline:
+      "Vender não pode ser uma questão de sorte. Construa uma máquina de vendas que funciona mesmo quando seu melhor vendedor sai",
     subtitle:
-      "MÃ©todos de prospecÃ§Ã£o, negociaÃ§Ã£o e fechamento para vender com mais margem, previsibilidade e escala.",
-    hook: "Menos achismo comercial e mais processo: da abordagem ao fechamento com direÃ§Ã£o.",
+      "Para empreendedores, gestores e profissionais de vendas que sabem que venda previsível não é sorte nem carisma. É método, processo e métricas.",
+    hook: "Em 2 dias, você sai com processo, funil e time estruturados para fechar mais. Sem depender de talento individual.",
     about:
-      "A trilha de Vendas conecta estratÃ©gia e execuÃ§Ã£o para quem quer crescimento real sem depender de sorte ou sazonalidade.",
+      "Você tem vendedores. Mas tem um processo validado, ou cada um vende do jeito que quer?",
     topics: [
-      "ProspecÃ§Ã£o inteligente para gerar oportunidades reais",
-      "NegociaÃ§Ã£o de alto valor e fechamento consultivo",
-      "GestÃ£o de pipeline e previsibilidade comercial",
+      "Vendas",
+      "Marketing & Performance",
+      "Ferramentas de Crescimento",
+      "Inteligência Artificial",
+      "Gestão Comercial",
     ],
+    painPoints: [
+      "Seu processo de vendas existe na cabeça de uma pessoa, não num playbook.",
+      "Quando entra um vendedor novo, leva meses para atingir a meta.",
+      "Taxa de conversão varia demais entre os vendedores, sem consistência.",
+      "Você não sabe exatamente em qual etapa do funil estão perdendo negócios.",
+      "Seu time vende por volume e pressão, não por processo e método.",
+    ],
+    transitionLine:
+      "No DSX você aprende a construir o sistema que qualquer bom vendedor consegue replicar.",
+    outcomesHeadline: "O QUE VOCÊ LEVA DO DSX",
     outcomes: [
-      "Playbook comercial para aplicar no time",
-      "Ritual de vendas com indicadores de performance",
-      "EstratÃ©gias para aumentar taxa de conversÃ£o",
+      "Vendas: descubra como atrair clientes de alto valor, negociar com previsibilidade e fechar contratos maiores, construindo um modelo de receita que não depende de mês bom ou vendedor motivado.",
+      "Marketing & Performance: pare de impulsionar no achismo. Aprenda a estruturar tráfego pago, funis de venda e criativos de alta conversão que geram lead qualificado e reduzem o custo de aquisição.",
+      "Ferramentas de Crescimento: chega de testar o que não funciona. Aprenda direto com especialistas as tecnologias e táticas que realmente escalam operações comerciais, sem desperdiçar verba nem tempo.",
+      "Inteligência Artificial: transforme a IA em vantagem competitiva no seu processo de vendas. Automatize tarefas, eleve a produtividade do time comercial e tome decisões baseadas 100% em dados.",
+      "Gestão Comercial: pare de perder vendas por desorganização. Estruture cada etapa do processo comercial, use o CRM de forma inteligente e prepare sua operação para escalar sem perder negócio no caminho.",
     ],
+    speakersHeadline: "PALESTRANTES CONFIRMADOS NO DSX 2026",
     segmentSpeakers: [
-      { name: "Tallis Gomes", image: "/palestrantes/TallisGomes.png" },
-      { name: "Nicolas CharÃ£o", image: "/palestrantes/NicolasCharao.png" },
-      { name: "JoÃ£o Brognoli", image: "/palestrantes/JoaoBrognoli.png" },
-      { name: "Alfredo Soares", image: "/palestrantes/AlfredoSoares.png" },
-      { name: "Fernando Miranda", image: "/palestrantes/FernandoMiranda.png" },
+      {
+        name: "Breno Maciel",
+        image: "/foto-breno-maciel.png",
+        bio: "Estrategista de Vendas e Processos. Especialista em estruturação de máquinas de vendas que geram previsibilidade e escala para empresas de médio e grande porte.",
+      },
+      {
+        name: "Magno Rodrigues",
+        image: "/foto-magno-rodrigues.png",
+        bio: "Especialista em Performance de Time e Gestão Comercial. Mentor de líderes que buscam transformar grupos de vendedores em esquadrões de fechamento orientados por dados.",
+      },
+      {
+        name: "Roberta Veras",
+        image: "/palestrantes/RobertaGaspar.png",
+        bio: "Especialista em Vendas Consultivas e Experiência do Cliente. Focada em otimização de funil e aumento de LTV (Lifetime Value) através de processos replicáveis.",
+      },
+    ],
+    socialProofHeadline:
+      "Quem aplicou métodos aprendidos no DSX não voltou a fazer vendas no achismo.",
+    socialProofQuotes: [
+      "Depois do DSX, nosso time passou a vender com processo e previsibilidade real.",
+      "Ajustamos funil e abordagem comercial, e a taxa de fechamento subiu com consistência.",
+      "Saímos do improviso e montamos uma operação comercial que funciona sem depender de herói.",
+    ],
+    immersionHeadline:
+      "O DSX é um evento construído para quem não tem tempo a perder.",
+    immersionBullets: [
+      "2 dias de conteúdos estratégicos com os maiores nomes do mercado",
+      "+40 palestras",
+      "3 palcos simultâneos",
+      "Feira de Negócios",
+      "Local: Centro de Convenções Vasco Vasques",
+    ],
+    valueAnchor:
+      "Qual é o custo de um vendedor novo levar 6 meses para performar? Ou de um lead qualificado ser perdido por falta de processo? O passaporte do DSX custa menos do que um mês de meta não batida por falta de processo.",
+    groupHeadline: "NINGUÉM CRESCE SOZINHO",
+    groupCopy:
+      "Traga seu time para alinhar funil, script e operação comercial no mesmo método de crescimento.",
+    urgencyHeadline: "GARANTIR NO LOTE ATUAL",
+    urgencyCopy: "3º lote • Poucas vagas disponíveis.",
+    faqs: [
+      {
+        q: "Para quem é o DSX?",
+        a: "Para empreendedores, gestores e profissionais de vendas que lideram times e sabem que o problema não é o vendedor, é a falta de processo, método e métricas por trás dele.",
+      },
+      {
+        q: "Serve para vendas B2B e B2C?",
+        a: "Sim. O conteúdo do DSX foi desenvolvido para funcionar em qualquer modelo de venda: consultiva, transacional, recorrente ou por projeto.",
+      },
+      {
+        q: "Como funciona o parcelamento?",
+        a: "Em até 12x no cartão de crédito.",
+      },
+    ],
+    finalHeadline:
+      "Cada semana sem um processo de vendas que funciona é mais lead perdido, mais verba queimada e mais meta não batida. Isso muda no DSX.",
+    finalRecap: [
+      "23 e 24 de julho • Manaus • Centro de Convenções Vasco Vasques — 2 dias de imersão para construir uma máquina de vendas previsível.",
+      "Funil, script e treinamento: tudo estruturado antes de sair do evento.",
+      "3º lote com poucas vagas restantes neste valor.",
     ],
   },
   {
-    name: "InovaÃ§Ã£o",
+    name: "Inovação",
     aliases: ["inovacao"],
     image: "/dsx-2026.jpeg",
-    category: "Segmento EstratÃ©gico",
-    headline: "Segmento de InovaÃ§Ã£o no DSX 2026",
+    category: "Segmento Estratégico",
+    headline:
+      "Domine o método para inovar sua operação e manter sua empresa relevante e lucrativa",
     subtitle:
-      "Como aplicar tecnologia, IA e novos modelos de execuÃ§Ã£o para acelerar eficiÃªncia e vantagem competitiva.",
-    hook: "InovaÃ§Ã£o aplicada ao negÃ³cio real: menos tendÃªncia vazia, mais resultado concreto.",
+      "Menos teoria, mais método para aplicar tecnologia onde ela realmente importa: no seu caixa.",
+    hook: "Em 2 dias, você terá o framework prático para antecipar tendências e aplicar tecnologia onde ela realmente gera escala.",
     about:
-      "A trilha de InovaÃ§Ã£o mostra como transformar mudanÃ§as de mercado em oportunidades com foco em velocidade e adaptaÃ§Ã£o.",
+      "Você sente que o mercado está mudando mais rápido do que sua empresa consegue acompanhar?",
     topics: [
-      "IA aplicada ao marketing, vendas e operaÃ§Ã£o",
-      "AutomaÃ§Ã£o de processos para ganho de produtividade",
-      "Tomada de decisÃ£o com visÃ£o de futuro e dados",
+      "Radar de mercado",
+      "Framework de priorização",
+      "Processo de validação",
+      "Cultura de inovação",
+      "Roteiro de tecnologia",
     ],
+    painPoints: [
+      "Você vê concorrentes novos crescendo em meses o que você levou anos para construir.",
+      "Tenta inovar, mas as ideias morrem antes de virar produto ou processo.",
+      "Sua equipe é boa no operacional, mas não tem cultura de pensar diferente.",
+      "Já investiu em tecnologia que não entregou o retorno prometido.",
+      "Você sabe que precisa mudar, mas não sabe por onde começar sem comprometer o que já funciona.",
+    ],
+    transitionLine:
+      "Inovação sem método é apenas gasto. No DSX Inovação você aprende a estrutura que transforma experimentação em vantagem competitiva sustentável.",
+    outcomesHeadline: "O que você sai tendo depois do DSX:",
     outcomes: [
-      "Mapa prÃ¡tico de adoÃ§Ã£o de inovaÃ§Ã£o",
-      "IdentificaÃ§Ã£o dos gargalos que mais travam escala",
-      "EstratÃ©gias para acelerar execuÃ§Ã£o com tecnologia",
+      "Radar de mercado: como identificar movimentos antes que virem ameaça.",
+      "Framework de priorização: como escolher o que inovar primeiro com o menor risco.",
+      "Processo de validação: como testar uma ideia nova em poucos dias e com baixo custo.",
+      "Cultura de inovação: como criar um ambiente onde seu time pensa em melhoria contínua.",
+      "Roteiro de tecnologia: quais ferramentas e tendências realmente importam para o seu negócio agora.",
     ],
+    speakersHeadline: "PALESTRANTES CONFIRMADOS NO DSX 2026",
     segmentSpeakers: [
-      { name: "JoÃ£o Kepler", image: "/palestrantes/JoaoKepler.png" },
       {
-        name: "MaurÃ­cio Stellato",
-        image: "/palestrantes/MauricioStellato.png",
+        name: "Afrânio Soares",
+        image: "/novas-palestrantes/Afranio-Soares.png",
+        bio: "O maior estrategista de dados e cenários do Norte. Fundador da Action, traduz números em decisões de mercado que antecipam tendências antes que elas virem ameaças.",
       },
-      { name: "Gerson Toller", image: "/palestrantes/GersonToller.png" },
-      { name: "Suelen Scop", image: "/palestrantes/SuellenScop.png" },
-      { name: "Lucas Pimenta", image: "/palestrantes/LucasPimenta.png" },
+      {
+        name: "Gisele Oshiro",
+        image: "/novas-palestrantes/foto-giselle-oshiro.png",
+        bio: "Transforma inteligência emocional em estratégia aplicada ao negócio, impactando decisões, liderança e performance.",
+      },
+      {
+        name: "Suelen Scop",
+        image: "/novas-palestrantes/foto-suelen-scop.png",
+        bio: "Psicóloga e estrategista de IA aplicada ao lucro. Especialista em integrar inteligência artificial no fluxo empresarial para reduzir custos e acelerar a produtividade.",
+      },
+      {
+        name: "Flávia Sausmikat",
+        image: "/novas-palestrantes/Flavia-Sausmikat.png",
+        bio: "Especialista em análise de comportamento social e de consumo, unindo rigor técnico e sensibilidade para gerar insights relevantes e estratégicos para organizações.",
+      },
+    ],
+    socialProofHeadline:
+      "Depoimentos de quem aprendeu a aplicar inovação com assertividade.",
+    socialProofQuotes: [
+      "Saímos com um plano claro para inovar sem comprometer a operação atual.",
+      "Aplicamos o framework do DSX e validamos novas iniciativas com muito menos risco.",
+      "A visão estratégica de inovação trouxe decisões mais rápidas e melhores resultados.",
+    ],
+    immersionHeadline:
+      "O DSX é uma imersão construída para quem não tem tempo a perder.",
+    immersionBullets: [
+      "2 dias de conteúdos estratégicos com os maiores nomes do mercado",
+      "+40 palestras",
+      "3 palcos simultâneos",
+      "Feira de Negócios",
+      "Local: Centro de Convenções Vasco Vasques",
+    ],
+    valueAnchor:
+      "Qual o preço de continuar investindo tempo e dinheiro em processos que o mercado já abandonou? O DSX Inovação não é um gasto; é o seguro contra a obsolescência do seu negócio.",
+    groupHeadline: "NINGUÉM CRESCE SOZINHO",
+    groupCopy:
+      "Leve seu time para alinhar tecnologia, priorização e execução da inovação com o mesmo método.",
+    urgencyHeadline: "GARANTIR NO LOTE ATUAL",
+    urgencyCopy: "3º lote • Poucas vagas disponíveis.",
+    faqs: [
+      {
+        q: "Para quem é o DSX?",
+        a: "Para donos de negócio e líderes que querem entender como usar a inovação como ferramenta estratégica.",
+      },
+      {
+        q: "Preciso entender de tecnologia para aproveitar?",
+        a: "Não. O DSX foi feito justamente para o dono do negócio, não para o programador. Você não vai aprender a fazer código, vai aprender a comprar, gerir e implementar inovação para ter vantagem competitiva.",
+      },
+      {
+        q: "Como funciona o parcelamento?",
+        a: "Em até 12 vezes no cartão de crédito.",
+      },
+    ],
+    finalHeadline:
+      "O mercado não espera. As empresas que ganham nos próximos anos já estão aprendendo a inovar com método. O DSX Inovação é o seu próximo passo.",
+    finalRecap: [
+      "23 e 24 de julho • Manaus • Centro de Convenções Vasco Vasques — 2 dias de imersão em inovação estratégica para empreendedores.",
+      "Framework, validação, tendências e cultura: o kit completo para inovar com resultado.",
+      "3º lote com poucas vagas restantes neste valor.",
     ],
   },
   {
