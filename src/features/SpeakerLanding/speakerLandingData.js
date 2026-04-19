@@ -22,36 +22,125 @@ export const toSegmentSlug = (value = "") =>
     .replace(/-+/g, "-");
 
 const normalizeSegmentLookup = (value = "") =>
-  toSegmentSlug(String(value || "").replace(/\//g, " ").trim());
+  toSegmentSlug(
+    String(value || "")
+      .replace(/\//g, " ")
+      .trim(),
+  );
 
 const segmentLandingList = [
   {
     name: "Marketing",
     image: "/optimized/step1/BannerCallToActionVendas.webp",
-    category: "Segmento EstratÃ©gico",
-    headline: "Marketing no DSX 2026",
+    category: "Segmento Estratégico",
+    headline:
+      "Pare de tratar o seu tráfego como aposta. No DSX, o marketing é ciência de dados e lucro",
     subtitle:
-      "EstratÃ©gias prÃ¡ticas para posicionar sua marca, aumentar demanda e transformar conteÃºdo em crescimento previsÃ­vel.",
-    hook:
-      "Da atraÃ§Ã£o ao fechamento: vocÃª vai enxergar o marketing como sistema de geraÃ§Ã£o de receita.",
+      "O ambiente presencial onde empresários e gestores dominam a aquisição de clientes com previsibilidade e escala.",
+    hook: "Em 2 dias, você terá o direcionamento estratégico para eliminar o desperdício de verba e construir um sistema de vendas que não depende da sorte, mas de método.",
     about:
-      "A trilha de Marketing foi desenhada para empresas que querem sair do improviso e construir uma mÃ¡quina de aquisiÃ§Ã£o com consistÃªncia.",
+      "Você investe em social media, design e tráfego todo mês, mas não sabe exatamente o que está funcionando e o que está queimando dinheiro?",
     topics: [
-      "Posicionamento de marca com autoridade no mercado",
-      "ConteÃºdo que gera atenÃ§Ã£o, relacionamento e conversÃ£o",
-      "AquisiÃ§Ã£o previsÃ­vel com trÃ¡fego, funis e ofertas",
+      "Posicionamento e autoridade de marca em mercados saturados sem depender de impulsionamento toda semana.",
+      "Estratégias de tráfego pago, funis de venda e criativos de alta conversão que realmente escalam.",
+      "Inteligência artificial aplicada para produzir mais, gastar menos e decidir com base em dados.",
     ],
+    painPoints: [
+      "Você investe em anúncios todo mês mas no final não sabe se lucrou ou só movimentou dinheiro.",
+      "O custo para conseguir um novo cliente sobe todo mês e você não sabe por quê.",
+      "Cada campanha parece um teste novo, nunca um sistema replicável.",
+      "Você depende de agências que entregam relatórios, mas não entregam clientes.",
+      "Seu conteúdo gera alcance, mas não gera caixa.",
+    ],
+    transitionLine:
+      "Marketing sem método não tem escala. No DSX você aprende a construir a máquina, não só apertar o botão.",
+    outcomesHeadline: "O que você vai encontrar no DSX:",
     outcomes: [
-      "Plano de aÃ§Ã£o para destravar demanda qualificada",
-      "Estrutura clara para escalar presenÃ§a e vendas",
-      "DecisÃµes orientadas por dados e performance",
+      "Como construir posicionamento e autoridade de marca em mercados saturados.",
+      "Estratégias de tráfego pago, funis de venda e criativos de alta conversão que realmente escalam.",
+      "O que os maiores times criativos do Brasil estão fazendo agora para transformar conteúdo em venda.",
+      "Como usar inteligência artificial para produzir mais, gastar menos e tomar decisões baseadas em dados.",
+      "Ferramentas e táticas modernas que geram escala sem precisar adivinhar o que funciona.",
+      "Network com outros profissionais e acesso direto a palestrantes que estão no centro do mercado nacional.",
     ],
+    speakersHeadline: "PALESTRANTES CONFIRMADOS NO DSX 2026",
     segmentSpeakers: [
-      { name: "Camila Renaux", image: "/palestrantes/CamilaRenaux.png" },
-      { name: "Rafael Kiso", image: "/palestrantes/RafaelKiso.png" },
-      { name: "Carol Lima", image: "/palestrantes/CarolLima.png" },
-      { name: "AndrÃ© Siqueira", image: "/palestrantes/AndreSiqueira.png" },
-      { name: "Hanah Franklin", image: "/palestrantes/HanahFranklin.png" },
+      {
+        name: "Fernando Miranda",
+        image: "/novas-palestrantes/Fernando-Miranda.png",
+        bio: "Liderou o crescimento de uma operação de educação em 40 vezes. Especialista em Growth e Ciência de Marketing, focado em transformar dados em faturamento bruto.",
+      },
+      {
+        name: "Roberto Reis",
+        image: "/novas-palestrantes/Roberto-Reis.png",
+        bio: "Estrategista de Liderança e Performance. Mentor de mais de 1.200 líderes, especialista em comunicação de impacto que converte atenção em decisão.",
+      },
+      {
+        name: "Carolina Lima",
+        image: "/foto-carolina-lima.png",
+        bio: "+17 anos de experiência em mídias sociais, une visão estratégica e criativa, com formação multidisciplinar e atuação empreendedora no e-commerce.",
+      },
+      {
+        name: "João Branco",
+        image: "/foto-joao-branco.png",
+        bio: "O CMO responsável pelo Méqui. Transformou a maior rede de fast-food do mundo no Brasil, batendo recordes de vendas com marca e performance integradas.",
+      },
+      {
+        name: "Giullya Becker",
+        image: "/novas-palestrantes/GIULLYA-BECKER.png",
+        bio: "Criadora do Método dos Conteúdos Magnéticos. Pioneira em oficinas práticas de criação, referência em conteúdos que geram conexão e vendas.",
+      },
+      {
+        name: "Clayton Pascarelli",
+        image: "/foto-claytonpascarelli.png",
+        bio: "Especialista em jornalismo investigativo e PNL aplicada à oratória, atuando na formação de profissionais e líderes para comunicação com segurança.",
+      },
+      {
+        name: "Rafael Liporace",
+        image: "/palestrantes/RafaelLiporace.png",
+        bio: "CEO da Tardezinha. Mentor por trás da maior turnê da história da música brasileira. Expert em economia criativa e em transformar eventos em ativos de milhões.",
+      },
+    ],
+    socialProofHeadline:
+      "Quem aplicou o método DSX não voltou a fazer marketing no achismo.",
+    socialProofQuotes: [
+      "Depois do DSX, estruturamos o funil e paramos de investir no escuro.",
+      "Saímos do achismo para um processo claro de aquisição e conversão.",
+      "O conteúdo aplicado no evento mudou nosso resultado já na semana seguinte.",
+    ],
+    immersionHeadline:
+      "O DSX é uma imersão construída para quem não tem tempo a perder.",
+    immersionBullets: [
+      "2 dias de conteúdos estratégicos com os maiores nomes do mercado",
+      "+40 palestras",
+      "3 palcos simultâneos",
+      "Feira de Negócios",
+      "Local: Centro de Convenções Vasco Vasques",
+    ],
+    valueAnchor:
+      "Quanto custa para o seu negócio continuar investindo por mês em anúncios que não trazem lucro? O DSX se paga no primeiro ajuste de campanha que você fizer na segunda-feira pós-evento.",
+    groupHeadline: "Ninguém cresce sozinho",
+    groupCopy:
+      "Passaporte em grupo para alinhar time, acelerar decisões e aplicar o método DSX com execução coordenada.",
+    urgencyHeadline: "GARANTIR NO LOTE ATUAL",
+    urgencyCopy: "3º lote • Poucas vagas disponíveis.",
+    faqs: [
+      {
+        q: "Para quem é o DSX?",
+        a: "Para donos de negócio, empreendedores, gestores e profissionais que querem construir uma operação de marketing previsível dentro da própria empresa em busca de ROI.",
+      },
+      {
+        q: "Como funciona o parcelamento?",
+        a: "Em até 12x sem juros no cartão.",
+      },
+    ],
+    finalHeadline:
+      "Cada semana sem uma estratégia de marketing que funciona é mais verba queimada.",
+    finalSubheadline: "Isso acaba no DSX Marketing.",
+    finalRecap: [
+      "23 e 24 de julho • Manaus • Centro de Convenções Vasco Vasques.",
+      "2 dias de imersão com os maiores nomes do mercado nacional.",
+      "3º lote com poucas vagas restantes neste valor.",
     ],
   },
   {
@@ -61,8 +150,7 @@ const segmentLandingList = [
     headline: "Segmento de Vendas no DSX 2026",
     subtitle:
       "MÃ©todos de prospecÃ§Ã£o, negociaÃ§Ã£o e fechamento para vender com mais margem, previsibilidade e escala.",
-    hook:
-      "Menos achismo comercial e mais processo: da abordagem ao fechamento com direÃ§Ã£o.",
+    hook: "Menos achismo comercial e mais processo: da abordagem ao fechamento com direÃ§Ã£o.",
     about:
       "A trilha de Vendas conecta estratÃ©gia e execuÃ§Ã£o para quem quer crescimento real sem depender de sorte ou sazonalidade.",
     topics: [
@@ -91,8 +179,7 @@ const segmentLandingList = [
     headline: "Segmento de InovaÃ§Ã£o no DSX 2026",
     subtitle:
       "Como aplicar tecnologia, IA e novos modelos de execuÃ§Ã£o para acelerar eficiÃªncia e vantagem competitiva.",
-    hook:
-      "InovaÃ§Ã£o aplicada ao negÃ³cio real: menos tendÃªncia vazia, mais resultado concreto.",
+    hook: "InovaÃ§Ã£o aplicada ao negÃ³cio real: menos tendÃªncia vazia, mais resultado concreto.",
     about:
       "A trilha de InovaÃ§Ã£o mostra como transformar mudanÃ§as de mercado em oportunidades com foco em velocidade e adaptaÃ§Ã£o.",
     topics: [
@@ -107,7 +194,10 @@ const segmentLandingList = [
     ],
     segmentSpeakers: [
       { name: "JoÃ£o Kepler", image: "/palestrantes/JoaoKepler.png" },
-      { name: "MaurÃ­cio Stellato", image: "/palestrantes/MauricioStellato.png" },
+      {
+        name: "MaurÃ­cio Stellato",
+        image: "/palestrantes/MauricioStellato.png",
+      },
       { name: "Gerson Toller", image: "/palestrantes/GersonToller.png" },
       { name: "Suelen Scop", image: "/palestrantes/SuellenScop.png" },
       { name: "Lucas Pimenta", image: "/palestrantes/LucasPimenta.png" },
@@ -118,11 +208,10 @@ const segmentLandingList = [
     aliases: ["negocios"],
     image: "/optimized/step1/Banner-vendas-hero.webp",
     category: "Segmento Estratégico",
-    headline: "Onde empresários constroem o futuro dos negócios no Norte.",
+    headline: "Onde empresários constroem o futuro dos negócios no Norte",
     subtitle:
       "Conecte-se com quem já escalou operações de milhões e entenda o modelo de gestão da nova economia.",
-    hook:
-      "Em 2 dias, você sai com o mapa completo para construir uma empresa que cresce sem depender só de você.",
+    hook: "Em 2 dias, você sai com o mapa completo para construir uma empresa que cresce sem depender só de você.",
     about:
       "Imersão construída para donos de negócio e líderes que precisam estruturar governança, processos e delegação para ganhar escala com previsibilidade.",
     topics: [
@@ -180,7 +269,8 @@ const segmentLandingList = [
         bio: "Consultor empresarial, estrategista de negócios e especialista em performance. Já ajudou empresas e profissionais a estruturarem seus negócios com mais clareza, eficiência e previsibilidade.",
       },
     ],
-    socialProofHeadline: "Quem já esteve no DSX não volta ao mesmo nível de negócio",
+    socialProofHeadline:
+      "Quem já esteve no DSX não volta ao mesmo nível de negócio",
     socialProofQuotes: [
       "Saí do DSX com clareza para reorganizar minha operação e ganhamos velocidade no crescimento.",
       "Foi o ponto de virada para delegar melhor e parar de centralizar todas as decisões.",
@@ -276,8 +366,9 @@ const segmentBySlug = segmentLandingList.reduce((acc, segment) => {
 
 export const getSegmentBySlug = (slug = "") => {
   const directKey = String(slug || "");
-  return segmentBySlug[directKey] || segmentBySlug[normalizeSegmentLookup(directKey)];
+  return (
+    segmentBySlug[directKey] || segmentBySlug[normalizeSegmentLookup(directKey)]
+  );
 };
 
 export { segmentLandingList };
-

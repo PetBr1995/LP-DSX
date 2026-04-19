@@ -130,7 +130,7 @@ const formatAnimatedMetricValue = (value, metric) => {
 
 const SpeakerLandingTemplate = ({ speaker }) => {
   const speakerSlug = String(speaker?.slug || "").toLowerCase();
-  const isNegocios = speakerSlug === "negocios";
+  const useNegociosTemplate = speakerSlug === "negocios" || speakerSlug === "marketing";
   const [isDepoimentoModalOpen, setIsDepoimentoModalOpen] = useState(false);
   const [activeDepoimentoVideo, setActiveDepoimentoVideo] = useState(null);
   const [negociosFaqOpenIndex, setNegociosFaqOpenIndex] = useState(0);
@@ -160,7 +160,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
   );
 
   useEffect(() => {
-    if (!isNegocios) {
+    if (!useNegociosTemplate) {
       setShouldLoadHeroVideo(false);
       return undefined;
     }
@@ -178,10 +178,10 @@ const SpeakerLandingTemplate = ({ speaker }) => {
       window.cancelAnimationFrame(frameA);
       window.cancelAnimationFrame(frameB);
     };
-  }, [isNegocios]);
+  }, [useNegociosTemplate]);
 
   useEffect(() => {
-    if (!isNegocios) return undefined;
+    if (!useNegociosTemplate) return undefined;
 
     const triggerEl = negociosBelowFoldTriggerRef.current;
     if (!triggerEl) return undefined;
@@ -203,7 +203,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
 
     observer.observe(triggerEl);
     return () => observer.disconnect();
-  }, [isNegocios, speakerSlug]);
+  }, [useNegociosTemplate, speakerSlug]);
 
   useEffect(() => {
     const checkIsMobile = () => {
@@ -219,7 +219,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
   const maxSegmentSpeakerIndex = Math.max(segmentSpeakerCount - segmentCardsPerView, 0);
 
   useEffect(() => {
-    if (!isNegocios) return undefined;
+    if (!useNegociosTemplate) return undefined;
 
     const getCardsPerView = () => {
       if (window.innerWidth >= 1024) return 3;
@@ -238,10 +238,10 @@ const SpeakerLandingTemplate = ({ speaker }) => {
     applyCardsPerView();
     window.addEventListener("resize", applyCardsPerView);
     return () => window.removeEventListener("resize", applyCardsPerView);
-  }, [isNegocios, segmentSpeakerCount]);
+  }, [useNegociosTemplate, segmentSpeakerCount]);
 
   useEffect(() => {
-    if (!isNegocios || maxSegmentSpeakerIndex === 0 || isDraggingSegmentSpeakers) return undefined;
+    if (!useNegociosTemplate || maxSegmentSpeakerIndex === 0 || isDraggingSegmentSpeakers) return undefined;
 
     const autoplayId = window.setInterval(() => {
       setSegmentSpeakerIndex((current) =>
@@ -250,12 +250,12 @@ const SpeakerLandingTemplate = ({ speaker }) => {
     }, 4200);
 
     return () => window.clearInterval(autoplayId);
-  }, [isNegocios, maxSegmentSpeakerIndex, isDraggingSegmentSpeakers]);
+  }, [useNegociosTemplate, maxSegmentSpeakerIndex, isDraggingSegmentSpeakers]);
 
   useEffect(() => {
-    if (!isNegocios) return;
+    if (!useNegociosTemplate) return;
     setSegmentSpeakerIndex(0);
-  }, [isNegocios, speaker?.slug]);
+  }, [useNegociosTemplate, speaker?.slug]);
 
   const goToNextSegmentSpeakerSlide = () => {
     setSegmentSpeakerIndex((current) =>
@@ -306,7 +306,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
     ? toVimeoEmbedUrl(activeDepoimentoVideo.video)
     : "";
 
-  if (isNegocios) {
+  if (useNegociosTemplate) {
     const socialVideos = speaker.socialProofVideos?.length
       ? speaker.socialProofVideos
       : [
@@ -365,7 +365,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
                     <iframe
                       src="https://player.vimeo.com/video/1146735494?autoplay=1&muted=1&loop=1&controls=0&title=0&byline=0&portrait=0&autopause=0&playsinline=1"
                       title={`Aftermovie DSX - ${speaker.name}`}
-                      loading={isNegocios ? "eager" : "lazy"}
+                      loading={useNegociosTemplate ? "eager" : "lazy"}
                       allow="autoplay; fullscreen; picture-in-picture"
                       allowFullScreen
                       className="h-[220px] w-full border-0 sm:h-[260px] md:h-[530px]"
@@ -840,7 +840,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
                 <iframe
                   src="https://player.vimeo.com/video/1146735494?autoplay=1&muted=1&loop=1&controls=0&title=0&byline=0&portrait=0&autopause=0&playsinline=1"
                   title={`Aftermovie DSX - ${speaker.name}`}
-                  loading={isNegocios ? "eager" : "lazy"}
+                  loading={useNegociosTemplate ? "eager" : "lazy"}
                   allow="autoplay; fullscreen; picture-in-picture"
                   allowFullScreen
                   className="h-[260px] w-full border-0 md:h-[530px]"
@@ -1055,7 +1055,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
           </div>
         </section>
 
-        {isNegocios ? (
+        {useNegociosTemplate ? (
           <section className="grid gap-6 md:grid-cols-2">
             <article className="rounded-2xl border border-white/10 bg-[#101010]/90 p-6">
               <h2 className="font-anton text-3xl uppercase">Criativos em alta</h2>
@@ -1139,7 +1139,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
           </section>
         )}
 
-        {!isNegocios ? (
+        {!useNegociosTemplate ? (
           <section className="rounded-2xl border border-[#F5C02B]/35 bg-[linear-gradient(160deg,rgba(24,16,6,0.92)_0%,rgba(12,12,12,0.94)_75%)] p-6">
             <h2 className="inline-flex items-center gap-2 font-anton text-3xl uppercase text-[#F5C02B]">
               <ShieldCheck size={24} />
@@ -1232,7 +1232,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
             </p>
             <div className="mt-6 w-fit">
               <NewVendasHeaderMask
-              titulo={isNegocios ? "GARANTIR AGORA — ULTIMAS VAGAS DO 3º LOTE" : theme.ctaFinal}
+              titulo={useNegociosTemplate ? "GARANTIR AGORA — ULTIMAS VAGAS DO 3º LOTE" : theme.ctaFinal}
                 link={speaker.ctaLink}
                 textColor="#FFFFFF"
                 backgroundColor="#17140D"
@@ -1273,4 +1273,5 @@ const SpeakerLandingTemplate = ({ speaker }) => {
 };
 
 export default SpeakerLandingTemplate;
+
 
