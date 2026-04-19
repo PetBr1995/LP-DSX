@@ -34,9 +34,9 @@ const SlidePalestrantes = () => {
 
   return (
     <section className="relative bg-black text-white overflow-hidden">
-      {/* Fundo branco com clip-path criando a aba/ponta preta à direita */}
+      {/* Fundo preto com clip-path criando a aba/ponta preta à direita */}
       <div
-        className="absolute inset-0 bg-white"
+        className="absolute inset-0 bg-black"
         style={{
           "--shift": "clamp(60px, 14vw, 260px)",
           "--bottom": "clamp(18px, 3.5vw, 56px)",
@@ -56,7 +56,7 @@ const SlidePalestrantes = () => {
 
       {/* Conteúdo por cima (com animação de entrada da seção) */}
       <motion.div
-        className="relative z-10 text-black pt-10 pb-20"
+        className="relative z-10 text-white pt-10 pb-20"
         variants={container}
         initial="hidden"
         whileInView="show"

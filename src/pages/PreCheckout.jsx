@@ -1,4 +1,4 @@
-﻿import { Suspense, lazy, useEffect, useMemo, useState } from "react";
+﻿import { Suspense, lazy, useEffect, useMemo, useRef, useState } from "react";
 import { Calendar, MapPin } from "lucide-react";
 import NewVendasHeaderMask from "../components/NewVendas/NewVendasHeaderMask";
 import { audienceProfiles } from "../components/NewVendas/newVendasData";
@@ -60,6 +60,8 @@ const galleryItems = [
 ];
 const galleryTopRow = galleryItems.slice(0, 5);
 const galleryBottomRow = galleryItems.slice(5, 10);
+const galleryTopRowMarquee = [...galleryTopRow, ...galleryTopRow];
+const galleryBottomRowMarquee = [...galleryBottomRow, ...galleryBottomRow];
 
 const faqItems = [
   {
@@ -205,6 +207,7 @@ const PreCheckout = () => {
   const [leadStatus, setLeadStatus] = useState("idle");
   const [leadError, setLeadError] = useState("");
   const [shouldRenderBelowFold, setShouldRenderBelowFold] = useState(false);
+  const belowFoldTriggerRef = useRef(null);
   const [leadFormOrigin, setLeadFormOrigin] = useState(() =>
     readDsxFormOrigin("Standard"),
   );
@@ -228,16 +231,26 @@ const PreCheckout = () => {
   const yearLabel = useMemo(() => new Date().getFullYear(), []);
 
   useEffect(() => {
-    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
-      const idleId = window.requestIdleCallback(
-        () => setShouldRenderBelowFold(true),
-        { timeout: 1800 },
-      );
-      return () => window.cancelIdleCallback(idleId);
+    const triggerEl = belowFoldTriggerRef.current;
+    if (!triggerEl) return undefined;
+
+    if (!("IntersectionObserver" in window)) {
+      const timeoutId = window.setTimeout(() => setShouldRenderBelowFold(true), 900);
+      return () => window.clearTimeout(timeoutId);
     }
 
-    const timeoutId = window.setTimeout(() => setShouldRenderBelowFold(true), 350);
-    return () => window.clearTimeout(timeoutId);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldRenderBelowFold(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "280px 0px" },
+    );
+
+    observer.observe(triggerEl);
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -641,12 +654,19 @@ const PreCheckout = () => {
           </div>
         </div>
       </section>
+      <div ref={belowFoldTriggerRef} className="h-px w-full" aria-hidden="true" />
       {shouldRenderBelowFold ? (
         <Suspense fallback={<div className="min-h-[120px]" aria-hidden="true" />}>
-          <section className="bg-black px-4 pb-10 md:px-8 md:pb-14">
-            <NewVendasSpeakersSlider />
-          </section>
-          <AudienceSection items={audienceProfiles} />
+          <div
+            style={{
+              contentVisibility: "auto",
+              containIntrinsicSize: "1px 1400px",
+            }}
+          >
+            <section className="bg-black px-4 pb-10 md:px-8 md:pb-14">
+              <NewVendasSpeakersSlider />
+            </section>
+            <AudienceSection items={audienceProfiles} />
 
           <section className="relative overflow-hidden bg-black px-4 py-14 md:px-8 md:py-20">
             <div
@@ -673,7 +693,7 @@ const PreCheckout = () => {
                   className="faixa-track gap-3 md:gap-5"
                   style={{ animationDuration: "92s" }}
                 >
-                  {[...galleryTopRow, ...galleryTopRow, ...galleryTopRow, ...galleryTopRow].map((item, index) => (
+                  {galleryTopRowMarquee.map((item, index) => (
                     <div
                       key={`top-${item.src}-${index}`}
                       className="group w-[220px] shrink-0 overflow-hidden rounded-3xl border border-white/10 bg-[#0E0E0E] md:w-[300px] lg:w-[340px]"
@@ -684,6 +704,7 @@ const PreCheckout = () => {
                         className="h-[180px] w-full object-cover transition duration-500 group-hover:scale-105 md:h-[210px] lg:h-[230px]"
                         loading="lazy"
                         decoding="async"
+                        fetchPriority="low"
                       />
                     </div>
                   ))}
@@ -695,7 +716,7 @@ const PreCheckout = () => {
                   className="faixa-track-fast gap-3 md:gap-5"
                   style={{ animationDirection: "reverse", animationDuration: "64s" }}
                 >
-                  {[...galleryBottomRow, ...galleryBottomRow, ...galleryBottomRow, ...galleryBottomRow].map((item, index) => (
+                  {galleryBottomRowMarquee.map((item, index) => (
                     <div
                       key={`bottom-${item.src}-${index}`}
                       className="group w-[220px] shrink-0 overflow-hidden rounded-3xl border border-white/10 bg-[#0E0E0E] md:w-[300px] lg:w-[340px]"
@@ -706,6 +727,7 @@ const PreCheckout = () => {
                         className="h-[180px] w-full object-cover transition duration-500 group-hover:scale-105 md:h-[210px] lg:h-[230px]"
                         loading="lazy"
                         decoding="async"
+                        fetchPriority="low"
                       />
                     </div>
                   ))}
@@ -771,6 +793,7 @@ const PreCheckout = () => {
               </p>
             </div>
           </section>
+          </div>
         </Suspense>
       ) : (
         <div className="min-h-[120px]" aria-hidden="true" />
@@ -867,6 +890,7 @@ const PreCheckout = () => {
 };
 
 export default PreCheckout;
+
 
 
 

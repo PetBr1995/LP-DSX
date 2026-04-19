@@ -1,7 +1,6 @@
 ﻿import { useEffect, useRef, useState } from "react";
 import NewVendasHeaderMask from "./NewVendasHeaderMask";
 import { Calendar, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
-import { getSpeakerImageSources } from "./speakerImageUtils";
 
 const metrics = [
   {
@@ -360,28 +359,15 @@ const NewVendasHero = ({
                     >
                       <article className="flex h-full w-full flex-col overflow-hidden rounded-xl border border-[#5A4718] bg-black/80 text-left shadow-lg">
                         <div className="relative h-[220px] w-full overflow-hidden bg-[#000000] sm:h-[250px] md:h-[270px]">
-                          {(() => {
-                            const imageSources = getSpeakerImageSources(speaker.image);
-                            return (
-                              <picture>
-                                {imageSources.avif ? (
-                                  <source srcSet={imageSources.avif} type="image/avif" />
-                                ) : null}
-                                {imageSources.webp ? (
-                                  <source srcSet={imageSources.webp} type="image/webp" />
-                                ) : null}
-                                <img
-                                  src={imageSources.fallback}
-                                  alt={speaker.name}
-                                  className="h-full w-full object-contain object-center"
-                                  loading="lazy"
-                                  decoding="async"
-                                  draggable={false}
-                                  onDragStart={(event) => event.preventDefault()}
-                                />
-                              </picture>
-                            );
-                          })()}
+                          <img
+                            src={speaker.image}
+                            alt={speaker.name}
+                            className="h-full w-full object-contain object-center"
+                            loading="lazy"
+                            decoding="async"
+                            draggable={false}
+                            onDragStart={(event) => event.preventDefault()}
+                          />
                         </div>
 
                         <div className="px-3.5 pt-3">

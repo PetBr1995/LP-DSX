@@ -1,7 +1,7 @@
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import PreserveUtmLinks from "./components/PreserveUtmLinks";
-import RoutePageTracking from "./components/RoutePageTracking";
+const PreserveUtmLinks = lazy(() => import("./components/PreserveUtmLinks"));
+const RoutePageTracking = lazy(() => import("./components/RoutePageTracking"));
 
 const HomeTeste = lazy(() => import("./pages/HomeTeste"));
 const Palestrantes = lazy(() => import("./pages/Palestrantes"));
@@ -19,13 +19,32 @@ const SpeakerLandingPage = lazy(
 );
 
 const App = () => {
+  const [shouldLoadTracking, setShouldLoadTracking] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+      const idleId = window.requestIdleCallback(
+        () => setShouldLoadTracking(true),
+        { timeout: 1200 },
+      );
+      return () => window.cancelIdleCallback(idleId);
+    }
+
+    const timeoutId = window.setTimeout(() => setShouldLoadTracking(true), 300);
+    return () => window.clearTimeout(timeoutId);
+  }, []);
+
   return (
     <>
       <a href="#main-content" className="skip-link">
         Pular para o conteúdo principal
       </a>
-      <PreserveUtmLinks />
-      <RoutePageTracking />
+      {shouldLoadTracking ? (
+        <Suspense fallback={null}>
+          <PreserveUtmLinks />
+          <RoutePageTracking />
+        </Suspense>
+      ) : null}
       <div id="main-content" tabIndex={-1}>
         <Suspense fallback={<div className="min-h-screen bg-black" />}>
           <Routes>

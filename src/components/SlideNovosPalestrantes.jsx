@@ -42,7 +42,7 @@ const SlideNovosPalestrantes = ({ ctaLink = "/vendas" }) => {
   return (
     <section className="relative bg-black text-white overflow-hidden">
       <div
-        className="absolute inset-0 bg-white"
+        className="absolute inset-0 bg-black"
         style={{
           "--shift": "clamp(60px, 14vw, 260px)",
           "--bottom": "clamp(18px, 3.5vw, 56px)",
@@ -61,7 +61,7 @@ const SlideNovosPalestrantes = ({ ctaLink = "/vendas" }) => {
       />
 
       <motion.div
-        className="relative z-10 text-black pt-10 pb-20"
+        className="relative z-10 text-white pt-10 pb-20"
         variants={container}
         initial="hidden"
         whileInView="show"

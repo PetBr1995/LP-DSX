@@ -6,14 +6,6 @@ import { InfoNovosPalestrantes } from "../../../data/InfoNovosPalestrantes";
 
 const speakers = InfoNovosPalestrantes.filter((item) => item?.nome?.trim());
 
-const getOptimizedSources = (src = "") => {
-  const base = src.replace(/\.[^.]+$/i, "");
-  return {
-    avif: `/optimized${base}.avif`,
-    webp: `/optimized${base}.webp`,
-  };
-};
-
 const SpeakersSection = () => {
   return (
     <div className="bg-black pb-16 pt-0 md:pb-20 md:pt-0">
@@ -46,25 +38,15 @@ const SpeakersSection = () => {
               <SwiperSlide key={`${speaker.nome}-${speaker.img}`}>
                 <article className="group rounded-2xl border border-[#3A3222] bg-[#000000] p-3 shadow-[inset_0_0_0_1px_rgba(201,168,76,0.06)] transition duration-300 hover:border-[#C9A84C]/40">
                   <div className="relative h-[260px] overflow-hidden rounded-xl bg-[#000000]">
-                    <picture>
-                      <source
-                        srcSet={getOptimizedSources(speaker.img).avif}
-                        type="image/avif"
-                      />
-                      <source
-                        srcSet={getOptimizedSources(speaker.img).webp}
-                        type="image/webp"
-                      />
-                      <img
-                        src={speaker.img}
-                        alt={speaker.nome}
-                        loading="lazy"
-                        decoding="async"
-                        width="640"
-                        height="800"
-                        className="h-full w-full object-contain object-top"
-                      />
-                    </picture>
+                    <img
+                      src={speaker.img}
+                      alt={speaker.nome}
+                      loading="lazy"
+                      decoding="async"
+                      width="640"
+                      height="800"
+                      className="h-full w-full object-contain object-top"
+                    />
                     <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/90 via-black/55 to-transparent" />
                   </div>
 

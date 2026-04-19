@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useState } from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import { Suspense, lazy, useEffect, useMemo, useState } from "react";
+
+const Header = lazy(() => import("../components/Header"));
+const Footer = lazy(() => import("../components/Footer"));
 
 const checkoutMock = {
   produto: "Passaporte DSX 2026 - Standard",
@@ -171,6 +172,10 @@ const Checkout = () => {
     () => valorTotal / parcelas,
     [valorTotal, parcelas],
   );
+  const parcelOptions = useMemo(
+    () => Array.from({ length: checkoutMock.maxParcelas }, (_, index) => index + 1),
+    [],
+  );
 
   const cardNumberPreview = useMemo(() => {
     if (!form.cartao) return "0000 0000 0000 0000";
@@ -207,7 +212,9 @@ const Checkout = () => {
 
   return (
     <section className="min-h-screen bg-black text-white">
-      <Header />
+      <Suspense fallback={<div className="h-[75px]" aria-hidden="true" />}>
+        <Header />
+      </Suspense>
 
       <div className="pt-[110px] pb-12 px-4">
         <div className="max-w-6xl mx-auto">
@@ -349,13 +356,11 @@ const Checkout = () => {
                     onChange={(e) => setParcelas(Number(e.target.value))}
                     className="w-full appearance-none rounded-xl border border-[#F5A205]/40 bg-black/35 p-3 pr-10 text-white font-jamjuree focus:outline-none focus:border-[#F5A205]"
                   >
-                    {Array.from({ length: checkoutMock.maxParcelas }, (_, index) => index + 1).map(
-                      (parcela) => (
-                        <option key={parcela} value={parcela} className="bg-[#111111]">
-                          {parcela}x de {formatCurrency(valorTotal / parcela)} sem juros
-                        </option>
-                      ),
-                    )}
+                    {parcelOptions.map((parcela) => (
+                      <option key={parcela} value={parcela} className="bg-[#111111]">
+                        {parcela}x de {formatCurrency(valorTotal / parcela)} sem juros
+                      </option>
+                    ))}
                   </select>
                   <img
                     src="/arrow-down.svg"
@@ -438,7 +443,9 @@ const Checkout = () => {
         </div>
       </div>
 
-      <Footer />
+      <Suspense fallback={<div className="h-[120px]" aria-hidden="true" />}>
+        <Footer />
+      </Suspense>
     </section>
   );
 };
