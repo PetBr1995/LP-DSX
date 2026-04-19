@@ -418,6 +418,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
           <div ref={negociosBelowFoldTriggerRef} className="h-px w-full" aria-hidden="true" />
           {shouldRenderNegociosBelowFold ? (
             <div
+              className="space-y-12 md:space-y-16"
               style={{
                 contentVisibility: "auto",
                 containIntrinsicSize: "1px 3600px",
