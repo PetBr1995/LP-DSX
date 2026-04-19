@@ -169,7 +169,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
   const activeQuotes = speaker.socialProofQuotes?.length
     ? speaker.socialProofQuotes
     : [
-      "SaÃ­ com funil pronto e reduzi CPL em 32% em 30 dias.",
+      "Saí com funil pronto e reduzi CPL em 32% em 30 dias.",
       "Ajustamos o processo comercial e dobramos taxa de fechamento.",
       "Networking do evento virou parceria e novo canal de receita.",
     ];
@@ -182,13 +182,13 @@ const SpeakerLandingTemplate = ({ speaker }) => {
       ? speaker.socialProofVideos
       : [
         {
-          nome: "AUGUSTO CÃ‰SAR",
+          nome: "AUGUSTO CÉSAR",
           tipo: "EXPOSITOR",
           thumb: "/card-image/expositor-card-img.png",
           video: "https://vimeo.com/1148163345?fl=ip&fe=ec",
         },
         {
-          nome: "JOÃƒO KEPLER",
+          nome: "JOÃO KEPLER",
           tipo: "PALESTRANTE",
           thumb: "/card-image/kepler-card-img.png",
           video: "https://vimeo.com/1148163374?fl=ip&fe=ec",
@@ -205,9 +205,9 @@ const SpeakerLandingTemplate = ({ speaker }) => {
       window.open(targetLink, "_blank", "noopener,noreferrer");
     };
     const immersionHighlights = [
-      { value: "3 PALCOS", label: "simultÃ¢neos" },
-      { value: "FEIRA", label: "de NegÃ³cios" },
-      { value: "VIP", label: "Ã¡rea exclusiva" },
+      { value: "3 PALCOS", label: "simultâneos" },
+      { value: "FEIRA", label: "de Negócios" },
+      { value: "VIP", label: "área exclusiva" },
       { value: "MANAUS", label: "Vasco Vasques" },
     ];
 
@@ -240,12 +240,12 @@ const SpeakerLandingTemplate = ({ speaker }) => {
                   </div>
                   <div className="flex w-full items-center justify-start gap-1.5">
                     <MapPin size={18} className="shrink-0 text-[#F5C02B]" />
-                    <p className="font-jamjuree text-[0.98rem] leading-relaxed">Centro de ConvenÃ§Ãµes Vasco Vasques, Manaus/AM</p>
+                    <p className="font-jamjuree text-[0.98rem] leading-relaxed">Centro de Convenções Vasco Vasques, Manaus/AM</p>
                   </div>
                 </div>
 
                 <p className="mt-6 font-jamjuree text-sm font-bold uppercase tracking-[0.1em] text-[#F5C02B]">
-                  3Âº lote â€¢ Poucas vagas disponÃ­veis
+                  3º lote • Poucas vagas disponíveis
                 </p>
                 <div className="mt-3 w-fit mx-auto md:mx-0">
                   <NewVendasHeaderMask
@@ -287,7 +287,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
 
           <section className="rounded-2xl border border-white/10 bg-[#0E0E0E]/85 p-6">
             <h2 className="font-anton text-[clamp(1.3rem,5vw,3.3rem)] text-center md:text-start uppercase text-[#FF8B8B] leading-[1.22]">
-              VocÃª construiu um negÃ³cio que funciona, mas que ainda nÃ£o sobrevive sem vocÃª?
+              Você construiu um negócio que funciona, mas que ainda não sobrevive sem você?
             </h2>
             <ul className="mt-6 space-y-3 font-jamjuree text-white/85">
               {activePainPoints.map((item) => (
@@ -400,7 +400,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
             <div className="fixed inset-0 z-[220] grid place-items-center px-4">
               <button
                 type="button"
-                aria-label="Fechar vÃ­deo"
+                aria-label="Fechar vídeo"
                 className="absolute inset-0 bg-black/75"
                 onClick={() => {
                   setIsDepoimentoModalOpen(false);
@@ -421,7 +421,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
                     }}
                     aria-label="Fechar"
                   >
-                    âœ•
+                    ✕
                   </button>
                 </div>
                 <div className="aspect-video bg-black">
@@ -573,61 +573,85 @@ const SpeakerLandingTemplate = ({ speaker }) => {
       </div>
 
       <div className="relative z-10 mx-auto max-w-6xl space-y-12 px-4 pb-16 pt-8 md:space-y-16 md:pt-12">
-        <section className="grid items-center gap-8 md:grid-cols-[1.1fr_0.9fr]">
-          <div>
-            <p className="font-jamjuree text-xs font-bold uppercase tracking-[0.14em] text-[#F5C02B] md:text-sm">
-              {speaker.name} | {speaker.event.name}
-            </p>
-            <h1 className="mt-3 font-anton text-4xl uppercase leading-[1.02] md:text-6xl">{speaker.headline}</h1>
-            <p className="mt-4 max-w-2xl font-jamjuree text-base text-white/85 md:text-xl">{speaker.subtitle}</p>
-            <p className="mt-4 border-l-2 border-[#F5C02B]/50 pl-4 font-jamjuree text-[#F9E1A5]">{speaker.hook}</p>
-            <div className="mt-6 flex flex-wrap items-center gap-3 text-sm uppercase tracking-[0.08em] text-white/80">
-              <span className="inline-flex items-center gap-2 rounded-full border border-[#F5C02B]/35 bg-[#111111]/80 px-4 py-2">
-                <CalendarDays size={16} className="text-[#F5C02B]" />
-                {speaker.event.date}
-              </span>
-              <span className="inline-flex items-center gap-2 rounded-full border border-[#F5C02B]/35 bg-[#111111]/80 px-4 py-2">
-                <MapPin size={16} className="text-[#F5C02B]" />
-                {speaker.event.city}
-              </span>
-            </div>
-            <div className="mt-7 w-fit">
-              <NewVendasHeaderMask
-                titulo="GARANTIR MINHA VAGA"
-                link={speaker.ctaLink}
-                textColor="#FFFFFF"
-                backgroundColor="#17140D"
-                font="700"
-                size="lg"
-              />
-              <p className="mt-3 text-center font-jamjuree text-xs font-bold uppercase tracking-[0.1em] text-[#F5C02B]">
+        <section className="overflow-hidden rounded-[28px] border border-white/10 bg-[#0B0B0B]">
+          <div className="grid items-center gap-5 p-5 pb-0 md:grid-cols-[1.08fr_0.92fr] md:p-10">
+            <div className="text-center md:text-left">
+              <div className="inline-flex w-fit rounded-sm bg-[#0A0A0A] px-2 py-1 mx-auto md:mx-0">
+                <img
+                  src="/logo-dsx-horizontal-2.svg"
+                  alt="DSX 2026"
+                  className="h-12 w-auto object-contain md:h-14"
+                />
+              </div>
+              <p className="mt-3 font-jamjuree text-xs font-bold uppercase tracking-[0.14em] text-[#F5C02B] md:text-sm">
+                {speaker.name} | {speaker.event.name}
+              </p>
+              <h1 className="mt-3 font-anton text-[clamp(1.6rem,5vw,3.3rem)] uppercase leading-[1.2]">{speaker.headline}</h1>
+              <p className="mt-4 max-w-2xl font-jamjuree text-base text-white/85 md:text-lg mx-auto md:mx-0">{speaker.subtitle}</p>
+              <p className="mt-4 border-l-2 border-[#F5C02B]/50 pl-4 font-jamjuree text-[#F9E1A5] text-left md:text-left">{speaker.hook}</p>
+
+              <div className="mx-auto mt-6 flex max-w-2xl flex-wrap justify-center gap-x-5 gap-y-4 md:mx-0 md:justify-start">
+                {immersionMetricDefs.map((item, index) => (
+                  <div key={item.label} className="min-w-0 text-center md:text-left">
+                    <p className="font-jamjuree text-[28px] font-extrabold leading-none text-white md:text-[44px]">
+                      {formatAnimatedMetricValue(animatedMetricValues[index] ?? 0, item)}
+                    </p>
+                    <p className="mt-1 font-jamjuree text-[11px] font-bold uppercase tracking-[0.02em] text-white md:text-[14px]">
+                      {item.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-4 space-y-2 text-left text-white/90">
+                <div className="flex w-full items-center justify-start gap-1.5">
+                  <CalendarDays size={18} className="shrink-0 text-[#F5C02B]" />
+                  <p className="font-jamjuree text-[0.98rem] leading-relaxed">{speaker.event.date}</p>
+                </div>
+                <div className="flex w-full items-center justify-start gap-1.5">
+                  <MapPin size={18} className="shrink-0 text-[#F5C02B]" />
+                  <p className="font-jamjuree text-[0.98rem] leading-relaxed">{speaker.event.city}</p>
+                </div>
+              </div>
+
+              <div className="mt-6 w-fit mx-auto md:mx-0">
+                <NewVendasHeaderMask
+                  titulo="GARANTIR MINHA VAGA"
+                  link={speaker.ctaLink}
+                  textColor="#FFFFFF"
+                  backgroundColor="#17140D"
+                  font="700"
+                  size="lg"
+                />
+              </div>
+              <p className="mt-3 text-center font-jamjuree text-xs font-bold uppercase tracking-[0.1em] text-[#F5C02B] md:text-left">
                 {LOT_CONFIG.currentLot} - ultimas {LOT_CONFIG.remainingSeats} vagas neste preco
               </p>
             </div>
-          </div>
 
-          <div className="overflow-hidden rounded-[24px] border border-[#F5C02B]/45 bg-black/60 shadow-[0_0_0_1px_rgba(255,221,130,0.16),0_20px_44px_rgba(0,0,0,0.55)]">
-            {shouldLoadHeroVideo ? (
-              <iframe
-                src="https://player.vimeo.com/video/1146735494?autoplay=1&muted=1&loop=1&controls=0&title=0&byline=0&portrait=0&autopause=0&playsinline=1"
-                title={`Aftermovie DSX - ${speaker.name}`}
-                loading="lazy"
-                allow="autoplay; fullscreen; picture-in-picture"
-                allowFullScreen
-                className="h-[320px] w-full border-0 md:h-[480px]"
-              />
-            ) : (
-              <button
-                type="button"
-                onClick={() => setShouldLoadHeroVideo(true)}
-                className="group grid h-[320px] w-full place-items-center bg-[#121212] md:h-[480px]"
-                aria-label="Carregar vídeo do evento"
-              >
-                <span className="rounded-full border border-[#F5C02B]/50 px-5 py-2 font-jamjuree text-sm font-bold uppercase tracking-[0.08em] text-[#F5C02B] transition group-hover:bg-[#F5C02B]/10">
-                  Assistir vídeo
-                </span>
-              </button>
-            )}
+            <div className="overflow-hidden rounded-[24px] border border-white/10 bg-black/60 shadow-[0_0_0_1px_rgba(255,221,130,0.12),0_20px_44px_rgba(0,0,0,0.55)]">
+              {shouldLoadHeroVideo ? (
+                <iframe
+                  src="https://player.vimeo.com/video/1146735494?autoplay=1&muted=1&loop=1&controls=0&title=0&byline=0&portrait=0&autopause=0&playsinline=1"
+                  title={`Aftermovie DSX - ${speaker.name}`}
+                  loading="lazy"
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  allowFullScreen
+                  className="h-[260px] w-full border-0 md:h-[530px]"
+                />
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setShouldLoadHeroVideo(true)}
+                  className="group grid h-[260px] w-full place-items-center bg-[#121212] md:h-[530px]"
+                  aria-label="Carregar vídeo do evento"
+                >
+                  <span className="rounded-full border border-[#F5C02B]/50 px-5 py-2 font-jamjuree text-sm font-bold uppercase tracking-[0.08em] text-[#F5C02B] transition group-hover:bg-[#F5C02B]/10">
+                    Assistir vídeo
+                  </span>
+                </button>
+              )}
+            </div>
           </div>
         </section>
 
@@ -704,7 +728,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
                   alt={item.name}
                   loading="lazy"
                   decoding="async"
-                  className="h-[250px] w-full object-cover object-top"
+                  className="h-[250px] w-full bg-black object-contain object-center p-2"
                 />
                 <div className="bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,rgba(0,0,0,0.92)_45%)] px-3 pb-4 pt-5">
                   <p className="font-anton text-[1.3rem] uppercase leading-none text-[#F5C02B]">{item.name}</p>
@@ -830,7 +854,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
             <article className="rounded-2xl border border-white/10 bg-[#101010]/90 p-6">
               <h2 className="font-anton text-3xl uppercase">Criativos em alta</h2>
               <p className="mt-2 font-jamjuree text-white/75">
-                PeÃ§as jÃ¡ validadas em DSX.com.vc/vendas.
+                Peças já validadas em DSX.com.vc/vendas.
               </p>
               <div className="mt-4 grid gap-3">
                 <img src="/optimized/step1/Banner-vendas-hero.webp" alt="Criativo DSX hero" className="h-40 w-full rounded-xl object-cover" />
@@ -841,7 +865,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
             <article className="rounded-2xl border border-[#F5C02B]/25 bg-[#12100A]/90 p-6">
               <h2 className="font-anton text-3xl uppercase text-[#F5C02B]">{speaker.groupHeadline || "Ninguem cresce sozinho"}</h2>
               <p className="mt-3 font-jamjuree text-white/88">
-                {speaker.groupCopy || "Garanta o passaporte em grupo e acelere a execuÃ§Ã£o com o seu time."}
+                {speaker.groupCopy || "Garanta o passaporte em grupo e acelere a execução com o seu time."}
               </p>
               <div className="mt-4 grid gap-3">
                 <img src="/12-[DSX]-Grupo-VIP-BANNER-LP-WEB.png" alt="Passaporte em grupo DSX web" className="hidden h-32 w-full rounded-xl object-cover md:block" />
@@ -851,7 +875,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
                 {speaker.urgencyHeadline || "GARANTIR NO LOTE ATUAL"}
               </p>
               <p className="mt-2 font-jamjuree text-sm text-white/80">
-                {speaker.urgencyCopy || "O mercado nÃ£o espera. Garanta sua cadeira antes da virada de lote."}
+                {speaker.urgencyCopy || "O mercado não espera. Garanta sua cadeira antes da virada de lote."}
               </p>
             </article>
           </section>
@@ -927,15 +951,49 @@ const SpeakerLandingTemplate = ({ speaker }) => {
 
         <section className="rounded-2xl border border-white/10 bg-[#0E0E0E]/90 p-6">
           <h2 className="font-anton text-3xl uppercase">FAQ</h2>
-          <div className="mt-4 space-y-3">
-            {activeFaqs.map((item) => (
-              <details key={item.q} className="rounded-xl border border-white/10 bg-[#171717] p-4">
-                <summary className="cursor-pointer font-jamjuree text-sm font-semibold uppercase tracking-[0.06em] text-[#F5C02B]">
-                  {item.q}
-                </summary>
-                <p className="mt-3 font-jamjuree text-sm text-white/85">{item.a}</p>
-              </details>
-            ))}
+          <div className="mt-6 rounded-2xl border border-[#2B2B2B] bg-[#121212] p-2 md:p-3">
+            {activeFaqs.map((item, index) => {
+              const isOpen = negociosFaqOpenIndex === index;
+
+              return (
+                <article
+                  key={item.q}
+                  className="border-b border-[#2B2B2B] px-3 py-4 last:border-b-0 md:px-4"
+                >
+                  <button
+                    type="button"
+                    className="flex w-full items-center justify-between gap-4 text-left"
+                    onClick={() =>
+                      setNegociosFaqOpenIndex((current) =>
+                        current === index ? -1 : index,
+                      )
+                    }
+                    aria-expanded={isOpen}
+                  >
+                    <h3 className="font-jamjuree text-lg font-semibold leading-snug text-white md:text-[1.35rem]">
+                      {item.q}
+                    </h3>
+                    <span
+                      className={`grid h-8 w-8 shrink-0 place-items-center rounded-full border border-[#3B3B3B] text-[#F5C02B] transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                      aria-hidden="true"
+                    >
+                      <img src="/arrow-down.svg" alt="" className="h-4 w-4" />
+                    </span>
+                  </button>
+
+                  <div
+                    className={`grid overflow-hidden transition-all duration-300 ${isOpen
+                      ? "mt-3 grid-rows-[1fr] opacity-100"
+                      : "grid-rows-[0fr] opacity-0"
+                      }`}
+                  >
+                    <p className="overflow-hidden font-jamjuree text-[1rem] leading-relaxed text-white/80">
+                      {item.a}
+                    </p>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </section>
 
@@ -968,7 +1026,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
             </p>
             <div className="mt-6 w-fit">
               <NewVendasHeaderMask
-                titulo={isNegocios ? "GARANTIR AGORA â€” ULTIMAS VAGAS DO 3Âº LOTE" : theme.ctaFinal}
+              titulo={isNegocios ? "GARANTIR AGORA — ULTIMAS VAGAS DO 3º LOTE" : theme.ctaFinal}
                 link={speaker.ctaLink}
                 textColor="#FFFFFF"
                 backgroundColor="#17140D"
@@ -984,7 +1042,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
 
         <footer className="border-t border-white/10 pt-6 font-jamjuree text-xs text-white/55">
           <p>Digital Hub Eventos LTDA | CNPJ 10.279.661/0001-51</p>
-          <p className="mt-1">EndereÃ§o eletrÃ´nico: https://dsx.com.vc</p>
+          <p className="mt-1">Endereço eletrônico: https://dsx.com.vc</p>
           <p className="mt-1">Politica de privacidade | Termos de uso | Politica de cancelamento e transferencia</p>
         </footer>
       </div>
