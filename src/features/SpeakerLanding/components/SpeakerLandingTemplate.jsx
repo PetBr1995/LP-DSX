@@ -134,12 +134,14 @@ const SpeakerLandingTemplate = ({ speaker }) => {
   const [isDepoimentoModalOpen, setIsDepoimentoModalOpen] = useState(false);
   const [activeDepoimentoVideo, setActiveDepoimentoVideo] = useState(null);
   const [negociosFaqOpenIndex, setNegociosFaqOpenIndex] = useState(0);
-  const [shouldLoadHeroVideo, setShouldLoadHeroVideo] = useState(() => isNegocios);
+  const [shouldLoadHeroVideo, setShouldLoadHeroVideo] = useState(false);
   const [isMobilePassaportes, setIsMobilePassaportes] = useState(false);
   const [segmentSpeakerIndex, setSegmentSpeakerIndex] = useState(0);
   const [segmentCardsPerView, setSegmentCardsPerView] = useState(3);
   const [isDraggingSegmentSpeakers, setIsDraggingSegmentSpeakers] = useState(false);
   const segmentSpeakerDragStartXRef = useRef(null);
+  const [shouldRenderNegociosBelowFold, setShouldRenderNegociosBelowFold] = useState(false);
+  const negociosBelowFoldTriggerRef = useRef(null);
 
   const theme = useMemo(() => {
     return THEME_COPY[speakerSlug] || THEME_COPY.marketing;
@@ -158,8 +160,50 @@ const SpeakerLandingTemplate = ({ speaker }) => {
   );
 
   useEffect(() => {
-    setShouldLoadHeroVideo(isNegocios);
+    if (!isNegocios) {
+      setShouldLoadHeroVideo(false);
+      return undefined;
+    }
+
+    let frameA = 0;
+    let frameB = 0;
+
+    frameA = window.requestAnimationFrame(() => {
+      frameB = window.requestAnimationFrame(() => {
+        setShouldLoadHeroVideo(true);
+      });
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frameA);
+      window.cancelAnimationFrame(frameB);
+    };
   }, [isNegocios]);
+
+  useEffect(() => {
+    if (!isNegocios) return undefined;
+
+    const triggerEl = negociosBelowFoldTriggerRef.current;
+    if (!triggerEl) return undefined;
+
+    if (!("IntersectionObserver" in window)) {
+      const timeoutId = window.setTimeout(() => setShouldRenderNegociosBelowFold(true), 900);
+      return () => window.clearTimeout(timeoutId);
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldRenderNegociosBelowFold(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "320px 0px" },
+    );
+
+    observer.observe(triggerEl);
+    return () => observer.disconnect();
+  }, [isNegocios, speakerSlug]);
 
   useEffect(() => {
     const checkIsMobile = () => {
@@ -371,6 +415,14 @@ const SpeakerLandingTemplate = ({ speaker }) => {
             </div>
           </section>
 
+          <div ref={negociosBelowFoldTriggerRef} className="h-px w-full" aria-hidden="true" />
+          {shouldRenderNegociosBelowFold ? (
+            <div
+              style={{
+                contentVisibility: "auto",
+                containIntrinsicSize: "1px 3600px",
+              }}
+            >
           <section className="rounded-2xl border border-[#F5C02B]/35 bg-[#0E0E0E]/85 p-6">
             <h2 className="font-anton text-[clamp(1.3rem,5vw,3.3rem)] text-center md:text-start uppercase text-[#FF8B8B] leading-[1.22]">
               Você construiu um negócio que funciona, mas que ainda não sobrevive sem você?
@@ -709,6 +761,10 @@ const SpeakerLandingTemplate = ({ speaker }) => {
           </section>
 
           <FooterSection />
+            </div>
+          ) : (
+            <div className="min-h-[720px]" aria-hidden="true" />
+          )}
         </div>
       </section>
     );
