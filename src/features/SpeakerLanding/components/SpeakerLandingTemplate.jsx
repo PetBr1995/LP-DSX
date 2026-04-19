@@ -353,7 +353,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
 
         <div className="relative z-10 mx-auto max-w-6xl space-y-12 px-4 pb-16 pt-8 md:space-y-16 md:pt-12">
           <section className="overflow-hidden rounded-[28px] border border-[#F5C02B]/35 bg-[#0B0B0B]">
-            <div className="p-5 pb-0 md:p-10">
+            <div className="p-5 pb-6 md:p-10">
               <div className="mx-auto max-w-4xl text-center">
                 <div className="mx-auto inline-flex w-fit rounded-sm bg-[#0A0A0A] px-2 py-1">
                   <img
@@ -784,7 +784,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
 
       <div className="relative z-10 mx-auto max-w-6xl space-y-12 px-4 pb-16 pt-8 md:space-y-16 md:pt-12">
         <section className="overflow-hidden rounded-[28px] border border-white/10 bg-[#0B0B0B]">
-          <div className="grid items-center gap-5 p-5 pb-0 md:grid-cols-[1.08fr_0.92fr] md:p-10">
+          <div className="grid items-center gap-5 p-5 pb-6 md:grid-cols-[1.08fr_0.92fr] md:p-10">
             <div className="text-center md:text-left">
               <div className="inline-flex w-fit rounded-sm bg-[#0A0A0A] px-2 py-1 mx-auto md:mx-0">
                 <img
@@ -1257,7 +1257,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
         </footer>
       </div>
 
-      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-[#F5C02B]/35 bg-black/95 p-3 backdrop-blur-sm md:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-[#F5C02B]/35 bg-black/95 p-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] backdrop-blur-sm md:hidden">
         <p className="mb-2 text-center font-jamjuree text-[11px] font-bold uppercase tracking-[0.08em] text-[#F5C02B]">
           {LOT_CONFIG.currentLot}: ultimas {LOT_CONFIG.remainingSeats} vagas
         </p>
