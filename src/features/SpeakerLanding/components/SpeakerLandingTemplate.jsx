@@ -3,13 +3,15 @@ import PassaportesSection from "../../../components/NewVendas/sections/Passaport
 import FooterSection from "../../../components/NewVendas/sections/FooterSection";
 import {
   CalendarDays,
+  ChevronLeft,
+  ChevronRight,
   CheckCircle2,
   Clock3,
   MapPin,
   ShieldCheck,
   XCircle,
 } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 const THEME_COPY = {
   marketing: {
@@ -132,8 +134,12 @@ const SpeakerLandingTemplate = ({ speaker }) => {
   const [isDepoimentoModalOpen, setIsDepoimentoModalOpen] = useState(false);
   const [activeDepoimentoVideo, setActiveDepoimentoVideo] = useState(null);
   const [negociosFaqOpenIndex, setNegociosFaqOpenIndex] = useState(0);
-  const [shouldLoadHeroVideo, setShouldLoadHeroVideo] = useState(false);
+  const [shouldLoadHeroVideo, setShouldLoadHeroVideo] = useState(() => isNegocios);
   const [isMobilePassaportes, setIsMobilePassaportes] = useState(false);
+  const [segmentSpeakerIndex, setSegmentSpeakerIndex] = useState(0);
+  const [segmentCardsPerView, setSegmentCardsPerView] = useState(3);
+  const [isDraggingSegmentSpeakers, setIsDraggingSegmentSpeakers] = useState(false);
+  const segmentSpeakerDragStartXRef = useRef(null);
 
   const theme = useMemo(() => {
     return THEME_COPY[speakerSlug] || THEME_COPY.marketing;
@@ -152,6 +158,10 @@ const SpeakerLandingTemplate = ({ speaker }) => {
   );
 
   useEffect(() => {
+    setShouldLoadHeroVideo(isNegocios);
+  }, [isNegocios]);
+
+  useEffect(() => {
     const checkIsMobile = () => {
       setIsMobilePassaportes(window.innerWidth <= 1015);
     };
@@ -160,6 +170,81 @@ const SpeakerLandingTemplate = ({ speaker }) => {
     window.addEventListener("resize", checkIsMobile);
     return () => window.removeEventListener("resize", checkIsMobile);
   }, []);
+
+  const segmentSpeakerCount = speaker?.segmentSpeakers?.length || 0;
+  const maxSegmentSpeakerIndex = Math.max(segmentSpeakerCount - segmentCardsPerView, 0);
+
+  useEffect(() => {
+    if (!isNegocios) return undefined;
+
+    const getCardsPerView = () => {
+      if (window.innerWidth >= 1024) return 3;
+      if (window.innerWidth >= 640) return 2;
+      return 1;
+    };
+
+    const applyCardsPerView = () => {
+      const nextCardsPerView = getCardsPerView();
+      setSegmentCardsPerView(nextCardsPerView);
+      setSegmentSpeakerIndex((current) =>
+        Math.min(current, Math.max(segmentSpeakerCount - nextCardsPerView, 0)),
+      );
+    };
+
+    applyCardsPerView();
+    window.addEventListener("resize", applyCardsPerView);
+    return () => window.removeEventListener("resize", applyCardsPerView);
+  }, [isNegocios, segmentSpeakerCount]);
+
+  useEffect(() => {
+    if (!isNegocios || maxSegmentSpeakerIndex === 0 || isDraggingSegmentSpeakers) return undefined;
+
+    const autoplayId = window.setInterval(() => {
+      setSegmentSpeakerIndex((current) =>
+        current >= maxSegmentSpeakerIndex ? 0 : current + 1,
+      );
+    }, 4200);
+
+    return () => window.clearInterval(autoplayId);
+  }, [isNegocios, maxSegmentSpeakerIndex, isDraggingSegmentSpeakers]);
+
+  useEffect(() => {
+    if (!isNegocios) return;
+    setSegmentSpeakerIndex(0);
+  }, [isNegocios, speaker?.slug]);
+
+  const goToNextSegmentSpeakerSlide = () => {
+    setSegmentSpeakerIndex((current) =>
+      current >= maxSegmentSpeakerIndex ? 0 : current + 1,
+    );
+  };
+
+  const goToPreviousSegmentSpeakerSlide = () => {
+    setSegmentSpeakerIndex((current) =>
+      current <= 0 ? maxSegmentSpeakerIndex : current - 1,
+    );
+  };
+
+  const handleSegmentSpeakerDragStart = (clientX) => {
+    segmentSpeakerDragStartXRef.current = clientX;
+    setIsDraggingSegmentSpeakers(true);
+  };
+
+  const handleSegmentSpeakerDragEnd = (clientX) => {
+    if (segmentSpeakerDragStartXRef.current === null) return;
+
+    const deltaX = clientX - segmentSpeakerDragStartXRef.current;
+    const swipeThreshold = 50;
+
+    if (deltaX <= -swipeThreshold) {
+      goToNextSegmentSpeakerSlide();
+    } else if (deltaX >= swipeThreshold) {
+      goToPreviousSegmentSpeakerSlide();
+    }
+
+    segmentSpeakerDragStartXRef.current = null;
+    setIsDraggingSegmentSpeakers(false);
+  };
 
   if (!speaker) return null;
   const activePainPoints = speaker.painPoints?.length
@@ -215,14 +300,14 @@ const SpeakerLandingTemplate = ({ speaker }) => {
       <section className="relative isolate overflow-hidden bg-black pb-16 text-white md:pb-8">
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_14%_10%,rgba(245,192,43,0.18)_0%,rgba(0,0,0,0.96)_48%)]" />
-          <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(245,192,43,0.08)_0%,rgba(0,0,0,0)_44%,rgba(165,48,48,0.12)_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(245,192,43,0.08)_0%,rgba(0,0,0,0)_44%,rgba(0,0,0,0.92)_100%)]" />
         </div>
 
         <div className="relative z-10 mx-auto max-w-6xl space-y-12 px-4 pb-16 pt-8 md:space-y-16 md:pt-12">
-          <section className="overflow-hidden rounded-[28px] border border-white/10 bg-[#0B0B0B]">
-            <div className="grid items-center gap-0 p-5 pb-0 md:grid-cols-[1.05fr_0.95fr] md:p-10">
-              <div className="text-center md:text-left">
-                <div className="inline-flex w-fit rounded-sm bg-[#0A0A0A] px-2 py-1 mx-auto md:mx-0">
+          <section className="overflow-hidden rounded-[28px] border border-[#F5C02B]/35 bg-[#0B0B0B]">
+            <div className="p-5 pb-0 md:p-10">
+              <div className="mx-auto max-w-4xl text-center">
+                <div className="mx-auto inline-flex w-fit rounded-sm bg-[#0A0A0A] px-2 py-1">
                   <img
                     src="/logo-dsx-horizontal-2.svg"
                     alt="DSX 2026"
@@ -230,15 +315,40 @@ const SpeakerLandingTemplate = ({ speaker }) => {
                   />
                 </div>
                 <h1 className="mt-4 font-anton text-[clamp(1.6rem,5vw,3.3rem)] uppercase leading-[1.2]">{speaker.headline}</h1>
-                <p className="mt-4 max-w-2xl font-jamjuree text-base text-white/85 md:text-lg mx-auto md:mx-0">{speaker.subtitle}</p>
-                <p className="mt-4 border-l-2 border-[#F5C02B]/50 pl-4 font-jamjuree text-[#F9E1A5] text-left md:text-left">{speaker.hook}</p>
 
-                <div className="mt-5 space-y-2 text-left text-white/90">
-                  <div className="flex w-full items-center justify-start gap-1.5">
+                <div className="mx-auto mt-6 w-full max-w-3xl overflow-hidden rounded-[24px]">
+                  {shouldLoadHeroVideo ? (
+                    <iframe
+                      src="https://player.vimeo.com/video/1146735494?autoplay=1&muted=1&loop=1&controls=0&title=0&byline=0&portrait=0&autopause=0&playsinline=1"
+                      title={`Aftermovie DSX - ${speaker.name}`}
+                      loading={isNegocios ? "eager" : "lazy"}
+                      allow="autoplay; fullscreen; picture-in-picture"
+                      allowFullScreen
+                      className="h-[220px] w-full border-0 sm:h-[260px] md:h-[530px]"
+                    />
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => setShouldLoadHeroVideo(true)}
+                      className="group grid h-[220px] w-full place-items-center bg-[#121212] sm:h-[260px] md:h-[530px]"
+                      aria-label="Carregar vídeo do evento"
+                    >
+                      <span className="rounded-full border border-[#F5C02B]/50 px-5 py-2 font-jamjuree text-sm font-bold uppercase tracking-[0.08em] text-[#F5C02B] transition group-hover:bg-[#F5C02B]/10">
+                        Assistir vídeo
+                      </span>
+                    </button>
+                  )}
+                </div>
+
+                <p className="mx-auto mt-4 max-w-2xl font-jamjuree text-base text-white/85 md:text-lg">{speaker.subtitle}</p>
+                <p className="mx-auto mt-4 max-w-2xl border-l-2 border-[#F5C02B]/50 pl-4 text-left font-jamjuree text-[#F9E1A5]">{speaker.hook}</p>
+
+                <div className="mx-auto mt-5 max-w-md space-y-2 text-white/90">
+                  <div className="flex w-full items-center justify-center gap-1.5">
                     <CalendarDays size={18} className="shrink-0 text-[#F5C02B]" />
                     <p className="font-jamjuree text-[0.98rem] leading-relaxed">23 e 24 de Julho</p>
                   </div>
-                  <div className="flex w-full items-center justify-start gap-1.5">
+                  <div className="flex w-full items-center justify-center gap-1.5">
                     <MapPin size={18} className="shrink-0 text-[#F5C02B]" />
                     <p className="font-jamjuree text-[0.98rem] leading-relaxed">Centro de Convenções Vasco Vasques, Manaus/AM</p>
                   </div>
@@ -247,7 +357,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
                 <p className="mt-6 font-jamjuree text-sm font-bold uppercase tracking-[0.1em] text-[#F5C02B]">
                   3º lote • Poucas vagas disponíveis
                 </p>
-                <div className="mt-3 w-fit mx-auto md:mx-0">
+                <div className="mx-auto mt-3 w-fit">
                   <NewVendasHeaderMask
                     titulo="GARANTIR MEU PASSAPORTE"
                     link={speaker.ctaLink}
@@ -258,34 +368,10 @@ const SpeakerLandingTemplate = ({ speaker }) => {
                   />
                 </div>
               </div>
-
-              <div className="overflow-hidden rounded-[24px]">
-                {shouldLoadHeroVideo ? (
-                  <iframe
-                    src="https://player.vimeo.com/video/1146735494?autoplay=1&muted=1&loop=1&controls=0&title=0&byline=0&portrait=0&autopause=0&playsinline=1"
-                    title={`Aftermovie DSX - ${speaker.name}`}
-                    loading="lazy"
-                    allow="autoplay; fullscreen; picture-in-picture"
-                    allowFullScreen
-                    className="h-[220px] w-full border-0 sm:h-[260px] md:h-[530px]"
-                  />
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() => setShouldLoadHeroVideo(true)}
-                    className="group grid h-[220px] w-full place-items-center bg-[#121212] sm:h-[260px] md:h-[530px]"
-                    aria-label="Carregar vídeo do evento"
-                  >
-                    <span className="rounded-full border border-[#F5C02B]/50 px-5 py-2 font-jamjuree text-sm font-bold uppercase tracking-[0.08em] text-[#F5C02B] transition group-hover:bg-[#F5C02B]/10">
-                      Assistir vídeo
-                    </span>
-                  </button>
-                )}
-              </div>
             </div>
           </section>
 
-          <section className="rounded-2xl border border-white/10 bg-[#0E0E0E]/85 p-6">
+          <section className="rounded-2xl border border-[#F5C02B]/35 bg-[#0E0E0E]/85 p-6">
             <h2 className="font-anton text-[clamp(1.3rem,5vw,3.3rem)] text-center md:text-start uppercase text-[#FF8B8B] leading-[1.22]">
               Você construiu um negócio que funciona, mas que ainda não sobrevive sem você?
             </h2>
@@ -316,36 +402,100 @@ const SpeakerLandingTemplate = ({ speaker }) => {
 
           <section>
             <h2 className="font-anton text-3xl uppercase text-[#F5C02B] md:text-4xl text-center">{speaker.speakersHeadline}</h2>
-            <div className="mx-auto mt-6 w-full max-w-6xl overflow-hidden rounded-[24px] border border-white/10 bg-black md:rounded-[28px]">
-              <div className="flex snap-x snap-mandatory gap-3 overflow-x-auto p-3 md:gap-4 md:p-4">
-                {(speaker.segmentSpeakers || []).map((item) => (
-                  <article
-                    key={`${item.name}-${item.image}`}
-                    className="relative h-[320px] w-[86%] shrink-0 snap-start overflow-hidden rounded-2xl border border-white/10 md:h-[420px] md:w-[48%] lg:h-[460px] lg:w-[32%]"
-                  >
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      loading="lazy"
-                      decoding="async"
-                      className="h-full w-full bg-black object-contain p-2"
-                    />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-                    <div className="absolute bottom-4 left-4 right-4 md:bottom-5 md:left-5 md:right-5 lg:bottom-6 lg:left-6 lg:right-6">
-                      <p className="font-anton text-3xl uppercase leading-none text-[#F5A205] md:text-4xl lg:text-5xl">
-                        {item.name}
-                      </p>
-                      <p className="mt-1 font-jamjuree text-sm leading-relaxed text-white/90 md:mt-2 md:text-[15px] lg:max-w-[88%] lg:text-base">
-                        {item.bio}
-                      </p>
+            <div className="relative mx-auto mt-6 w-full max-w-[920px]">
+              <div
+                className={`overflow-hidden select-none ${isDraggingSegmentSpeakers ? "cursor-grabbing" : "cursor-grab"}`}
+                style={{ touchAction: "pan-y" }}
+                onMouseDown={(event) => handleSegmentSpeakerDragStart(event.clientX)}
+                onMouseUp={(event) => handleSegmentSpeakerDragEnd(event.clientX)}
+                onMouseLeave={(event) => {
+                  if (segmentSpeakerDragStartXRef.current !== null) {
+                    handleSegmentSpeakerDragEnd(event.clientX);
+                  }
+                }}
+                onTouchStart={(event) => {
+                  const touch = event.touches[0];
+                  if (!touch) return;
+                  handleSegmentSpeakerDragStart(touch.clientX);
+                }}
+                onTouchEnd={(event) => {
+                  const touch = event.changedTouches[0];
+                  if (!touch) return;
+                  handleSegmentSpeakerDragEnd(touch.clientX);
+                }}
+              >
+                <div
+                  className="flex transition-transform duration-500 ease-out"
+                  style={{
+                    transform: `translateX(-${(segmentSpeakerIndex * 100) / segmentCardsPerView}%)`,
+                  }}
+                >
+                  {(speaker.segmentSpeakers || []).map((item) => (
+                    <div
+                      key={`${item.name}-${item.image}`}
+                      className="w-full shrink-0 px-0.5 sm:w-1/2 sm:px-1 lg:w-1/3 lg:px-1.5"
+                    >
+                      <article className="flex h-full w-full flex-col overflow-hidden rounded-xl border border-[#F5C02B]/35 bg-black/80 text-left shadow-lg">
+                        <div className="relative h-[220px] w-full overflow-hidden bg-[#000000] sm:h-[250px] md:h-[270px]">
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                            className="h-full w-full object-contain object-center"
+                            loading="lazy"
+                            decoding="async"
+                            draggable={false}
+                            onDragStart={(event) => event.preventDefault()}
+                          />
+                        </div>
+
+                        <div className="px-3.5 pt-3">
+                          <h4 className="font-bebas text-[1.75rem] uppercase tracking-[0.02em] text-[#F5A205]">
+                            {item.name}
+                          </h4>
+                        </div>
+                        <div className="flex-1 px-3.5 pb-3.5">
+                          <p
+                            className="font-jamjuree text-sm leading-relaxed text-white/90 md:text-[14px]"
+                            style={{
+                              display: "-webkit-box",
+                              WebkitLineClamp: 5,
+                              WebkitBoxOrient: "vertical",
+                              overflow: "hidden",
+                            }}
+                          >
+                            {item.bio}
+                          </p>
+                        </div>
+                      </article>
                     </div>
-                  </article>
-                ))}
+                  ))}
+                </div>
               </div>
+
+              {maxSegmentSpeakerIndex > 0 ? (
+                <>
+                  <button
+                    type="button"
+                    onClick={goToPreviousSegmentSpeakerSlide}
+                    aria-label="Slide anterior de palestrantes"
+                    className="absolute left-2 top-1/2 z-10 -translate-y-1/2 text-[#F5C02B] transition hover:scale-110 hover:text-[#FFD45A] md:left-3"
+                  >
+                    <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" strokeWidth={2.4} />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={goToNextSegmentSpeakerSlide}
+                    aria-label="Próximo slide de palestrantes"
+                    className="absolute right-2 top-1/2 z-10 -translate-y-1/2 text-[#F5C02B] transition hover:scale-110 hover:text-[#FFD45A] md:right-3"
+                  >
+                    <ChevronRight className="h-5 w-5 md:h-6 md:w-6" strokeWidth={2.4} />
+                  </button>
+                </>
+              ) : null}
             </div>
           </section>
 
-          <section className="rounded-2xl border border-white/10 bg-[#0C0C0C]/90 p-6">
+          <section className="rounded-2xl border border-[#F5C02B]/35 bg-[#0C0C0C]/90 p-6">
             <h2 className="font-anton text-[clamp(1.6rem,5vw,3.3rem)] leading-[1.22] uppercase text-center">{speaker.socialProofHeadline}</h2>
             <div className="mt-6 grid gap-4 md:grid-cols-3">
               {socialVideos.map((item, index) => (
@@ -407,8 +557,8 @@ const SpeakerLandingTemplate = ({ speaker }) => {
                   setActiveDepoimentoVideo(null);
                 }}
               />
-              <div className="relative z-[221] w-full max-w-4xl overflow-hidden rounded-2xl border border-white/15 bg-black">
-                <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
+              <div className="relative z-[221] w-full max-w-4xl overflow-hidden rounded-2xl border border-[#F5C02B]/35 bg-black">
+                <div className="flex items-center justify-between border-b border-[#F5C02B]/35 px-4 py-3">
                   <p className="font-anton text-xl uppercase text-white">
                     {activeDepoimentoVideo?.nome || "Depoimento"}
                   </p>
@@ -440,7 +590,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
             </div>
           ) : null}
 
-          <section className="rounded-2xl border border-[#F5C02B]/30 bg-[linear-gradient(150deg,rgba(16,12,6,0.88)_0%,rgba(7,7,7,0.92)_78%)] p-6">
+          <section className="rounded-2xl border border-[#F5C02B]/35 bg-[linear-gradient(150deg,rgba(16,12,6,0.88)_0%,rgba(7,7,7,0.92)_78%)] p-6">
             <h2 className="font-anton text-[clamp(1.4rem,5vw,3.3rem)] text-center leading-[1.22] uppercase text-[#F5C02B]">{speaker.immersionHeadline}</h2>
             <div className="mt-6 flex w-full flex-wrap justify-center gap-x-8 gap-y-4 text-center">
               {immersionMetricDefs.map((item, index) => (
@@ -468,12 +618,12 @@ const SpeakerLandingTemplate = ({ speaker }) => {
                 </div>
               ))}
             </div>
-            <p className="mt-6 rounded-xl border border-[#F5C02B]/25 bg-[#15120B] p-4 font-jamjuree text-sm text-[#F8E3AA]">
+            <p className="mt-6 rounded-xl border border-[#F5C02B]/35 bg-[#15120B] p-4 font-jamjuree text-sm text-[#F8E3AA]">
               {speaker.valueAnchor}
             </p>
           </section>
 
-          <section>
+          <section className="overflow-hidden rounded-2xl border border-[#F5C02B]/35">
             <PassaportesSection
               isMobile={isMobilePassaportes}
               onBuyPassaporte={handleBuyPassaporte}
@@ -481,16 +631,16 @@ const SpeakerLandingTemplate = ({ speaker }) => {
             />
           </section>
 
-          <section className="rounded-2xl border border-white/10 bg-[#0E0E0E]/90 p-6">
+          <section className="rounded-2xl border border-[#F5C02B]/35 bg-black p-6">
             <h2 className="font-anton text-3xl uppercase">FAQ</h2>
-            <div className="mt-6 rounded-2xl border border-[#2B2B2B] bg-[#121212] p-2 md:p-3">
+            <div className="mt-6 rounded-2xl border border-[#F5C02B]/35 bg-black p-2 md:p-3">
               {activeFaqs.map((item, index) => {
                 const isOpen = negociosFaqOpenIndex === index;
 
                 return (
                   <article
                     key={item.q}
-                    className="border-b border-[#2B2B2B] px-3 py-4 last:border-b-0 md:px-4"
+                    className="border-b border-[#F5C02B]/35 px-3 py-4 last:border-b-0 md:px-4"
                   >
                     <button
                       type="button"
@@ -506,7 +656,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
                         {item.q}
                       </h3>
                       <span
-                        className={`grid h-8 w-8 shrink-0 place-items-center rounded-full border border-[#3B3B3B] text-[#F5C02B] transition-transform duration-300 ${isOpen ? "rotate-180" : ""
+                        className={`grid h-8 w-8 shrink-0 place-items-center rounded-full border border-[#F5C02B]/35 text-[#F5C02B] transition-transform duration-300 ${isOpen ? "rotate-180" : ""
                           }`}
                         aria-hidden="true"
                       >
@@ -530,10 +680,9 @@ const SpeakerLandingTemplate = ({ speaker }) => {
             </div>
           </section>
 
-          <section className="relative overflow-hidden rounded-[26px] border border-[#F5C02B]/35 p-6 md:p-8">
+          <section className="relative overflow-hidden rounded-[26px] border border-[#F5C02B]/35 bg-black p-6 md:p-8">
             <div className="pointer-events-none absolute inset-0">
-
-              <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(0,0,0,0.72)_0%,rgba(0,0,0,0.62)_48%,rgba(10,7,3,0.8)_100%)]" />
+              <div className="absolute inset-0 bg-black" />
             </div>
             <div className="relative">
               <h2 className="font-anton leading-[1.22] uppercase text-center text-[clamp(1.5rem,5vw,3.3rem)] md:text-start">{speaker.finalHeadline}</h2>
@@ -634,7 +783,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
                 <iframe
                   src="https://player.vimeo.com/video/1146735494?autoplay=1&muted=1&loop=1&controls=0&title=0&byline=0&portrait=0&autopause=0&playsinline=1"
                   title={`Aftermovie DSX - ${speaker.name}`}
-                  loading="lazy"
+                  loading={isNegocios ? "eager" : "lazy"}
                   allow="autoplay; fullscreen; picture-in-picture"
                   allowFullScreen
                   className="h-[260px] w-full border-0 md:h-[530px]"
