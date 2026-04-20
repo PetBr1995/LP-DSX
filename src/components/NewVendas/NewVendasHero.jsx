@@ -47,6 +47,7 @@ const NewVendasHero = ({
 }) => {
   const ctaTarget = ctaLink.startsWith("#") ? "_self" : "_blank";
   const [animatedValues] = useState(metrics.map((metric) => metric.target));
+  const [showSecondaryBlocks, setShowSecondaryBlocks] = useState(false);
   const [currentSpeakerIndex, setCurrentSpeakerIndex] = useState(0);
   const [cardsPerView, setCardsPerView] = useState(3);
   const [mainSpeakers, setMainSpeakers] = useState([]);
@@ -54,6 +55,16 @@ const NewVendasHero = ({
   const [hasSpeakersNearViewport, setHasSpeakersNearViewport] = useState(false);
   const speakerDragStartXRef = useRef(null);
   const speakersSectionRef = useRef(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && "requestAnimationFrame" in window) {
+      const rafId = window.requestAnimationFrame(() => setShowSecondaryBlocks(true));
+      return () => window.cancelAnimationFrame(rafId);
+    }
+
+    const timeoutId = window.setTimeout(() => setShowSecondaryBlocks(true), 16);
+    return () => window.clearTimeout(timeoutId);
+  }, []);
 
   useEffect(() => {
     const sectionElement = speakersSectionRef.current;
@@ -161,10 +172,10 @@ const NewVendasHero = ({
 
   return (
     <section className="relative overflow-hidden bg-black text-white">
-      <div className="pointer-events-none absolute inset-0 z-0 opacity-40" aria-hidden="true">
+      <div className="pointer-events-none absolute inset-0 z-0 opacity-40">
         <img
           src="/[DSX]-Banner-Site-BG.png"
-          alt=""
+          alt="Banner oficial do DSX 2026"
           className="h-full w-full object-cover object-center"
           loading="eager"
           decoding="async"
@@ -232,35 +243,41 @@ const NewVendasHero = ({
             />
           </div>
 
-          <div className="mx-auto flex max-w-4xl flex-wrap justify-center gap-x-3 gap-y-5 px-2 py-2">
-            {metrics.map((item, index) => (
-              <div key={item.label} className="min-w-0 w-[30%] text-center">
-                <p className="font-jamjuree font-extrabold text-[28px] leading-none tracking-normal text-white sm:text-[36px] md:text-[64px]">
-                  {formatMetricValue(animatedValues[index] ?? 0, item)}
-                </p>
-                <p className="mt-1 font-jamjuree text-[11px] font-bold uppercase tracking-[0.02em] text-white md:text-[19px]">
-                  {item.label}
-                </p>
+          {showSecondaryBlocks ? (
+            <>
+              <div className="mx-auto flex max-w-4xl flex-wrap justify-center gap-x-3 gap-y-5 px-2 py-2">
+                {metrics.map((item, index) => (
+                  <div key={item.label} className="min-w-0 w-[30%] text-center">
+                    <p className="font-jamjuree font-extrabold text-[28px] leading-none tracking-normal text-white sm:text-[36px] md:text-[64px]">
+                      {formatMetricValue(animatedValues[index] ?? 0, item)}
+                    </p>
+                    <p className="mt-1 font-jamjuree text-[11px] font-bold uppercase tracking-[0.02em] text-white md:text-[19px]">
+                      {item.label}
+                    </p>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-          <div className="mx-auto mt-2 grid w-full max-w-5xl grid-cols-2 gap-3 px-2 md:grid-cols-4 md:gap-4">
-            {experienceHighlights.map((item) => (
-              <div
-                key={`${item.value}-${item.label}`}
-                className="nv-highlight-wrap"
-              >
-                <div className="nv-highlight-inner px-3 py-3 text-center">
-                  <p className="font-jamjuree font-extrabold leading-none text-[#F5C02B] text-[20px] md:text-[30px]">
-                    {item.value}
-                  </p>
-                  <p className="mt-1 font-jamjuree text-[10px] font-bold uppercase tracking-[0.02em] text-white md:text-[14px]">
-                    {item.label}
-                  </p>
-                </div>
+              <div className="mx-auto mt-2 grid w-full max-w-5xl grid-cols-2 gap-3 px-2 md:grid-cols-4 md:gap-4">
+                {experienceHighlights.map((item) => (
+                  <div
+                    key={`${item.value}-${item.label}`}
+                    className="nv-highlight-wrap"
+                  >
+                    <div className="nv-highlight-inner px-3 py-3 text-center">
+                      <p className="font-jamjuree font-extrabold leading-none text-[#F5C02B] text-[20px] md:text-[30px]">
+                        {item.value}
+                      </p>
+                      <p className="mt-1 font-jamjuree text-[10px] font-bold uppercase tracking-[0.02em] text-white md:text-[14px]">
+                        {item.label}
+                      </p>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </>
+          ) : (
+            <div className="mx-auto h-[190px] w-full max-w-5xl" aria-hidden="true" />
+          )}
 
           <section
             ref={speakersSectionRef}
