@@ -8,10 +8,13 @@ const FooterSection = () => {
 
         <div className="pt-2">
           <p className="text-[13px] text-white md:text-[14px]">
-            DSX — Digital Summit Experience © 2026 · Realização: Digital Hub Experience
+            DSX — Digital Summit Experience © 2026 · Realização: Digital Hub Experience · Todos os direitos reservados.
           </p>
           <p className="mt-1 text-[13px] text-white md:text-[14px]">
             CNPJ 10.279.661/0001-51
+          </p>
+          <p className="mt-1 text-[13px] text-white md:text-[14px]">
+            Endereço eletrônico: https://dsx.com.vc
           </p>
         </div>
       </div>

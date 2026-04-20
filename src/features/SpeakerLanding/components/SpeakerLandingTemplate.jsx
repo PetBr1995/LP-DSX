@@ -1,6 +1,8 @@
 ﻿import NewVendasHeaderMask from "../../../components/NewVendas/NewVendasHeaderMask";
 import PassaportesSection from "../../../components/NewVendas/sections/PassaportesSection";
 import FooterSection from "../../../components/NewVendas/sections/FooterSection";
+import LeadPopupFormHomeTeste from "../../../components/HomeTesteComponentes/LeadPopupFormHomeTeste";
+import { formatDsxFormOrigin } from "../../../utils/formOrigin";
 import {
   CalendarDays,
   ChevronLeft,
@@ -12,6 +14,11 @@ import {
   XCircle,
 } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
+
+const NEW_VENDAS_SYMPLA_URL =
+  "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721";
+const RD_API_URL =
+  "https://api.rd.services/platform/conversions?api_key=MHnWDjBYARQKdwUsfZRbjtVmPEyoHnSqtgFz";
 
 const THEME_COPY = {
   marketing: {
@@ -128,6 +135,65 @@ const formatAnimatedMetricValue = (value, metric) => {
   return `${metric.prefix}${baseValue}${metric.suffix}`;
 };
 
+function onlyDigits(value = "") {
+  return value.replace(/\D/g, "");
+}
+
+function isValidEmail(email = "") {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+}
+
+function normalizeHostname(value = "") {
+  return String(value || "")
+    .trim()
+    .toLowerCase()
+    .replace(/^www\./, "");
+}
+
+function detectSiteOriginFromUrl(value = "") {
+  if (!value) return "";
+
+  try {
+    const hostname = normalizeHostname(new URL(value).hostname);
+    if (!hostname) return "";
+    if (hostname.includes("dsx.com.vc")) return "dsx";
+    if (hostname.includes("digitalhub.com.vc")) return "digitalhub";
+    if (hostname.includes("digitaleduca.com.vc")) return "digitaleduca";
+    return hostname;
+  } catch {
+    return "";
+  }
+}
+
+function isMissingColumnError(error) {
+  const code = String(error?.code || "").toUpperCase();
+  const message = String(error?.message || "").toLowerCase();
+  return (
+    code === "PGRST204" ||
+    message.includes("column") ||
+    message.includes("schema cache")
+  );
+}
+
+function resolveRdConversionIdentifier(origin = "") {
+  const normalized = String(origin || "").trim().toLowerCase();
+
+  if (normalized.includes("vip")) {
+    return "DSX 2026 - Formulário VIP";
+  }
+  if (normalized.includes("standard")) {
+    return "DSX 2026 - Formulário Standard";
+  }
+  if (normalized.includes("grupo") && normalized.includes("10")) {
+    return "DSX 2026 - Formulário Grupo 10";
+  }
+  if (normalized.includes("grupo") && normalized.includes("5")) {
+    return "DSX 2026 - Formulário Grupo 5";
+  }
+
+  return "DSX 2026 - Formulário Standard";
+}
+
 const SpeakerLandingTemplate = ({ speaker }) => {
   const speakerSlug = String(speaker?.slug || "").toLowerCase();
   const useNegociosTemplate =
@@ -146,10 +212,57 @@ const SpeakerLandingTemplate = ({ speaker }) => {
   const segmentSpeakerDragStartXRef = useRef(null);
   const [shouldRenderNegociosBelowFold, setShouldRenderNegociosBelowFold] = useState(false);
   const negociosBelowFoldTriggerRef = useRef(null);
+  const [showLeadModal, setShowLeadModal] = useState(false);
+  const [pendingSymplaUrl, setPendingSymplaUrl] = useState(
+    speaker?.ctaLink || NEW_VENDAS_SYMPLA_URL,
+  );
+  const [selectedPassOrigin, setSelectedPassOrigin] = useState("Standard");
+  const [leadForm, setLeadForm] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    cargo: "",
+  });
+  const [sourceData, setSourceData] = useState({
+    page_url: "",
+    site_origin: "",
+    site_hostname: "",
+    utm_source: "",
+    utm_medium: "",
+    utm_campaign: "",
+    utm_term: "",
+    utm_content: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [mensagem, setMensagem] = useState("");
+  const [leadStatus, setLeadStatus] = useState("idle");
 
   const theme = useMemo(() => {
     return THEME_COPY[speakerSlug] || THEME_COPY.marketing;
   }, [speakerSlug]);
+  const errors = useMemo(() => {
+    const currentErrors = {};
+
+    if (!leadForm.name.trim()) {
+      currentErrors.name = "Informe seu nome completo.";
+    }
+    if (!isValidEmail(leadForm.email)) {
+      currentErrors.email = "Informe um e-mail válido.";
+    }
+
+    const phone = onlyDigits(leadForm.phone);
+    if (!(phone.length === 10 || phone.length === 11)) {
+      currentErrors.phone = "Informe um WhatsApp com DDD.";
+    }
+
+    if (!leadForm.cargo) {
+      currentErrors.cargo = "Selecione seu perfil.";
+    }
+
+    return currentErrors;
+  }, [leadForm]);
+  const isLeadFormValid = Object.keys(errors).length === 0;
+  const canSubmitLead = !loading;
   const immersionMetricDefs = useMemo(
     () => [
       { target: 2000, label: "PARTICIPANTES", prefix: "+", suffix: "", useThousands: true },
@@ -261,6 +374,39 @@ const SpeakerLandingTemplate = ({ speaker }) => {
     setSegmentSpeakerIndex(0);
   }, [useNegociosTemplate, speaker?.slug]);
 
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentUrl = window.location.href;
+    const siteHostname = normalizeHostname(window.location.hostname);
+    const siteOrigin = detectSiteOriginFromUrl(currentUrl) || siteHostname;
+
+    setSourceData({
+      page_url: currentUrl,
+      site_origin: siteOrigin,
+      site_hostname: siteHostname,
+      utm_source: urlParams.get("utm_source") || "",
+      utm_medium: urlParams.get("utm_medium") || "",
+      utm_campaign: urlParams.get("utm_campaign") || "",
+      utm_term: urlParams.get("utm_term") || "",
+      utm_content: urlParams.get("utm_content") || "",
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!showLeadModal) return;
+
+    const previousBodyOverflow = document.body.style.overflow;
+    const previousHtmlOverflow = document.documentElement.style.overflow;
+
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousBodyOverflow;
+      document.documentElement.style.overflow = previousHtmlOverflow;
+    };
+  }, [showLeadModal]);
+
   const goToNextSegmentSpeakerSlide = () => {
     setSegmentSpeakerIndex((current) =>
       current >= maxSegmentSpeakerIndex ? 0 : current + 1,
@@ -292,6 +438,205 @@ const SpeakerLandingTemplate = ({ speaker }) => {
 
     segmentSpeakerDragStartXRef.current = null;
     setIsDraggingSegmentSpeakers(false);
+  };
+
+  const openLeadGateForSympla = (targetLink, formOrigin) => {
+    if (loading) return;
+
+    setPendingSymplaUrl(targetLink || speaker?.ctaLink || NEW_VENDAS_SYMPLA_URL);
+    setSelectedPassOrigin(formOrigin || "Standard");
+    setLeadStatus("idle");
+    setMensagem("Para continuar com a compra, preencha e envie o formulário.");
+    setShowLeadModal(true);
+  };
+
+  const closeLeadModal = () => {
+    if (loading) return;
+    setShowLeadModal(false);
+    setLeadStatus("idle");
+    setMensagem("");
+  };
+
+  const handleWhatsappMask = (event) => {
+    let value = event.target.value;
+    value = onlyDigits(value).slice(0, 11);
+
+    if (!value.length) {
+      setLeadForm((prev) => ({ ...prev, phone: "" }));
+      return;
+    }
+
+    if (value.length <= 2) value = `(${value}`;
+    else if (value.length <= 6)
+      value = value.replace(/^(\d{2})(\d{0,4})/, "($1) $2");
+    else if (value.length <= 10)
+      value = value.replace(/^(\d{2})(\d{4})(\d{0,4})/, "($1) $2-$3");
+    else value = value.replace(/^(\d{2})(\d{5})(\d{0,4})/, "($1) $2-$3");
+
+    setLeadForm((prev) => ({ ...prev, phone: value }));
+  };
+
+  const handleLeadSubmit = async (event) => {
+    event.preventDefault();
+    setMensagem("");
+
+    if (!isLeadFormValid || !canSubmitLead) {
+      setLeadStatus("error");
+      setMensagem("Revise os campos e tente novamente.");
+      return;
+    }
+
+    setLoading(true);
+    setLeadStatus("loading");
+
+    try {
+      const formData = new FormData(event.target);
+      const name = formData.get("name")?.toString().trim() || "";
+      const email = formData.get("email")?.toString().trim().toLowerCase() || "";
+      const phone = formData.get("phone")?.toString().trim() || "";
+      const cargo = formData.get("cargo")?.toString().trim() || "";
+      const resolvedFormOrigin = selectedPassOrigin || "Standard";
+
+      const payload = {
+        event_type: "CONVERSION",
+        event_family: "CDP",
+        payload: {
+          conversion_identifier: resolveRdConversionIdentifier(resolvedFormOrigin),
+          name,
+          email,
+          personal_phone: phone,
+          voce_e: cargo,
+          cf_voce_e: cargo,
+          cf_cargo: cargo,
+          traffic_source: sourceData.utm_source,
+          traffic_campaign: sourceData.utm_campaign,
+          traffic_medium: sourceData.utm_medium,
+          traffic_value: sourceData.utm_term,
+          cf_utm_campaign: sourceData.utm_campaign,
+          cf_utm_medium: sourceData.utm_medium,
+          cf_utm_term: sourceData.utm_term,
+          cf_utm_content: sourceData.utm_content,
+          cf_utm_source: sourceData.utm_source,
+          cf_url_de_conversao: sourceData.page_url,
+          cf_origem_formulario: formatDsxFormOrigin(
+            resolvedFormOrigin,
+            "Home Principal",
+          ),
+        },
+        tags: ["dsx-hometeste", "popup"],
+        source: "landing-home-teste",
+      };
+
+      const rdResult = await fetch(RD_API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!rdResult.ok) {
+        throw new Error("Erro ao enviar para RD Station");
+      }
+
+      const supabaseRuntime = await import("../../../lib/supabaseClient");
+      if (supabaseRuntime.isSupabaseConfigured) {
+        const supabase = await supabaseRuntime.getSupabaseClient();
+        if (supabase) {
+          const nowIso = new Date().toISOString();
+          const trackerState = window.DSXTracker?.getState?.() || {};
+          const sessionId =
+            trackerState.sessionId ||
+            window.crypto?.randomUUID?.() ||
+            `session-${Date.now()}`;
+
+          const profilePayload = {
+            lead_email: email,
+            lead_name: name,
+            lead_phone: phone,
+            lead_cargo: cargo,
+            site_origin: sourceData.site_origin || null,
+            site_hostname:
+              sourceData.site_hostname || window.location.hostname || null,
+            first_converted_at: nowIso,
+            last_seen_at: nowIso,
+            has_sympla_redirected: true,
+            last_sympla_redirected_at: nowIso,
+          };
+
+          let { error: profileError } = await supabase
+            .from("tracking_lead_profiles")
+            .upsert([profilePayload], { onConflict: "lead_email" });
+
+          if (profileError && isMissingColumnError(profileError)) {
+            const fallbackProfilePayload = { ...profilePayload };
+            delete fallbackProfilePayload.site_origin;
+            delete fallbackProfilePayload.site_hostname;
+            const retry = await supabase
+              .from("tracking_lead_profiles")
+              .upsert([fallbackProfilePayload], { onConflict: "lead_email" });
+            profileError = retry.error;
+          }
+
+          if (!profileError) {
+            const sessionPayload = {
+              session_id: sessionId,
+              lead_name: name,
+              lead_email: email,
+              lead_phone: phone,
+              lead_cargo: cargo,
+              site_origin: sourceData.site_origin || null,
+              site_hostname:
+                sourceData.site_hostname || window.location.hostname || null,
+              page:
+                sourceData.page_url ||
+                window.location.pathname + window.location.search,
+              referrer: document.referrer || null,
+              utm_source: sourceData.utm_source || sourceData.site_origin || null,
+              utm_medium: sourceData.utm_medium || null,
+              utm_campaign: sourceData.utm_campaign || null,
+              utm_content: sourceData.utm_content || null,
+              utm_term: sourceData.utm_term || null,
+              converted_at: nowIso,
+              has_sympla_redirected: true,
+              sympla_redirected_at: nowIso,
+            };
+
+            let { error: sessionError } = await supabase
+              .from("tracking_lead_sessions")
+              .upsert([sessionPayload], { onConflict: "session_id" });
+
+            if (sessionError && isMissingColumnError(sessionError)) {
+              const fallbackSessionPayload = { ...sessionPayload };
+              delete fallbackSessionPayload.site_origin;
+              delete fallbackSessionPayload.site_hostname;
+              const retry = await supabase
+                .from("tracking_lead_sessions")
+                .upsert([fallbackSessionPayload], { onConflict: "session_id" });
+              sessionError = retry.error;
+            }
+          }
+        }
+      }
+
+      setLeadStatus("success");
+      setMensagem("Cadastro enviado! Em breve entraremos em contato.");
+      setLeadForm({ name: "", phone: "", email: "", cargo: "" });
+      event.target.reset();
+
+      window.setTimeout(() => {
+        const targetUrl =
+          pendingSymplaUrl || speaker?.ctaLink || NEW_VENDAS_SYMPLA_URL;
+        setShowLeadModal(false);
+        window.open(targetUrl, "_blank", "noopener,noreferrer");
+      }, 700);
+    } catch (error) {
+      setLeadStatus("error");
+      setMensagem(error?.message || "Erro ao enviar formulário. Tente novamente.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (!speaker) return null;
@@ -333,9 +678,8 @@ const SpeakerLandingTemplate = ({ speaker }) => {
           video: "https://vimeo.com/1148163408?fl=ip&fe=ec",
         },
       ];
-    const handleBuyPassaporte = (targetLink) => {
-      if (!targetLink) return;
-      window.open(targetLink, "_blank", "noopener,noreferrer");
+    const handleBuyPassaporte = (targetLink, formOrigin) => {
+      openLeadGateForSympla(targetLink, formOrigin);
     };
     const immersionHighlights = [
       { value: "+40", label: "palestras" },
@@ -408,7 +752,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
                 <div className="mx-auto mt-3 w-fit">
                   <NewVendasHeaderMask
                     titulo="GARANTIR MEU PASSAPORTE"
-                    link={speaker.ctaLink}
+                    link="#passaportes"
                     textColor="#FFFFFF"
                     backgroundColor="#1E1A12"
                     font="700"
@@ -441,20 +785,6 @@ const SpeakerLandingTemplate = ({ speaker }) => {
               ))}
             </ul>
             <p className="mt-6 font-jamjuree text-base text-[#F8E3AA]">{speaker.transitionLine}</p>
-          </section>
-
-          <section className="rounded-2xl bg-[#ECECEC] p-6 text-black md:p-8">
-            <h2 className="font-anton text-[clamp(1.6rem,5vw,3.3rem)] text-center md:text-start uppercase leading-[1.2] md:text-4xl">{speaker.outcomesHeadline}</h2>
-            <div className="mt-6 grid gap-4 md:grid-cols-2">
-              {speaker.outcomes.map((item) => (
-                <article key={item} className="rounded-2xl bg-white p-4 shadow-[0_10px_22px_rgba(0,0,0,0.08)]">
-                  <p className="inline-flex items-center gap-2 font-jamjuree text-sm text-[#1A1A1A]">
-                    <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-[#D98A00]" />
-                    <span>{item}</span>
-                  </p>
-                </article>
-              ))}
-            </div>
           </section>
 
           <section>
@@ -549,6 +879,20 @@ const SpeakerLandingTemplate = ({ speaker }) => {
                   </button>
                 </>
               ) : null}
+            </div>
+          </section>
+
+          <section className="rounded-2xl bg-[#ECECEC] p-6 text-black md:p-8">
+            <h2 className="font-anton text-[clamp(1.6rem,5vw,3.3rem)] text-center md:text-start uppercase leading-[1.2] md:text-4xl">{speaker.outcomesHeadline}</h2>
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+              {speaker.outcomes.map((item) => (
+                <article key={item} className="rounded-2xl bg-white p-4 shadow-[0_10px_22px_rgba(0,0,0,0.08)]">
+                  <p className="inline-flex items-center gap-2 font-jamjuree text-sm text-[#1A1A1A]">
+                    <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-[#D98A00]" />
+                    <span>{item}</span>
+                  </p>
+                </article>
+              ))}
             </div>
           </section>
 
@@ -755,7 +1099,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
               <div className="mt-6 w-fit">
                 <NewVendasHeaderMask
                   titulo="GARANTIR MEU PASSAPORTE"
-                  link={speaker.ctaLink}
+                  link="#passaportes"
                   textColor="#FFFFFF"
                   backgroundColor="#17140D"
                   font="700"
@@ -771,6 +1115,24 @@ const SpeakerLandingTemplate = ({ speaker }) => {
             <div className="min-h-[720px]" aria-hidden="true" />
           )}
         </div>
+        {showLeadModal ? (
+          <LeadPopupFormHomeTeste
+            isOpen={showLeadModal}
+            canClose
+            onClose={closeLeadModal}
+            onSubmit={handleLeadSubmit}
+            leadForm={leadForm}
+            setLeadForm={setLeadForm}
+            onWhatsappChange={handleWhatsappMask}
+            leadStatus={leadStatus}
+            message={mensagem}
+            loading={loading}
+            canSubmit={canSubmitLead}
+            headline="GARANTA SUA VAGA"
+            subheading=""
+            description=""
+          />
+        ) : null}
       </section>
     );
   }
@@ -1236,7 +1598,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
             </p>
             <div className="mt-6 w-fit">
               <NewVendasHeaderMask
-              titulo={useNegociosTemplate ? "GARANTIR AGORA — ULTIMAS VAGAS DO 3º LOTE" : theme.ctaFinal}
+              titulo={useNegociosTemplate ? "GARANTIR AGORA — ÚLTIMAS VAGAS DO 3º LOTE" : theme.ctaFinal}
                 link={speaker.ctaLink}
                 textColor="#FFFFFF"
                 backgroundColor="#17140D"
@@ -1264,7 +1626,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
         <div className="mx-auto w-fit">
           <NewVendasHeaderMask
             titulo="GARANTIR MEU PASSAPORTE"
-            link={speaker.ctaLink}
+            link="#passaportes"
             textColor="#FFFFFF"
             backgroundColor="#17140D"
             font="700"
@@ -1277,5 +1639,3 @@ const SpeakerLandingTemplate = ({ speaker }) => {
 };
 
 export default SpeakerLandingTemplate;
-
-

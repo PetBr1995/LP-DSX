@@ -350,33 +350,35 @@ const segmentLandingList = [
     aliases: ["negocios"],
     image: "/optimized/step1/Banner-vendas-hero.webp",
     category: "Segmento Estratégico",
-    headline: "Onde empresários constroem o futuro dos negócios no Norte",
+    headline: "Onde empresários constroem o futuro dos negócios no Norte.",
     subtitle:
       "Conecte-se com quem já escalou operações de milhões e entenda o modelo de gestão da nova economia.",
-    hook: "Em 2 dias, você sai com o mapa completo para construir uma empresa que cresce sem depender só de você.",
+    hook: "Em 2 dias, você sai com direcionamento para construir uma empresa que cresce sem depender só de você.",
     about:
-      "Imersão construída para donos de negócio e líderes que precisam estruturar governança, processos e delegação para ganhar escala com previsibilidade.",
+      "Você construiu um negócio que funciona, mas que ainda não sobrevive sem você?",
     topics: [
       "Estrutura e governança para decisões de alto impacto",
       "Processos-chave e delegação para escalar com previsibilidade",
       "Crescimento com clareza estratégica e execução disciplinada",
     ],
     painPoints: [
-      "Você é o maior gargalo da sua empresa, toda decisão passa por você.",
-      "Faturamento cresce, mas lucro some em custo fixo e retrabalho.",
-      "Seu time executa, mas não pensa. Você ainda precisa resolver tudo.",
-      "Você sabe que precisa de processos, mas nunca tem tempo para montar.",
-      "Toda vez que tira o pé do acelerador, a empresa desacelera junto.",
+      "Você é o maior gargalo da sua empresa, toda decisão passa por você",
+      "Faturamento cresce, mas lucro some em custo fixo e retrabalho",
+      "Seu time executa, mas não pensa. Você ainda precisa resolver tudo",
+      "Você sabe que precisa de processos, mas nunca tem tempo pra montar",
+      "Toda vez que tira o pé do acelerador, a empresa desacelera junto",
     ],
     transitionLine:
-      "Você não chegou até aqui por falta de esforço. Chegou até aqui com o modelo errado de empresa. E o DSX existe para mudar isso.",
-    outcomesHeadline: "O que você sai tendo depois do DSX:",
+      "",
+    outcomesHeadline: "O que você leva do DSX para o seu negócio:",
     outcomes: [
-      "Estrutura de governança: quem decide o quê, quando e como.",
-      "Mapa de processos-chave: os 3 fluxos que mais impactam seu caixa, desenhados e prontos.",
-      "Método de delegação: como transferir responsabilidade sem perder qualidade.",
-      "Plano de crescimento previsível: meta, indicador, ação. Sem achismo.",
-      "Clareza sobre o próximo movimento estratégico da sua empresa.",
+      "Vendas: Descubra como atrair clientes de alto valor, negociar com previsibilidade e fechar contratos maiores. Construindo um modelo de receita que não depende de mês bom ou vendedor motivado.",
+      "Posicionamento e Branding: Pare de brigar por atenção em mercado saturado. Aprenda como construir uma marca que o mercado reconhece, respeita e procura.",
+      "Marketing & Performance: Pare de impulsionar no achismo. Aprenda a estruturar tráfego pago, funis de venda e criativos de alta conversão que geram cliente qualificado e reduzem o custo de aquisição.",
+      "Ferramentas de Crescimento: Chega de testar o que não funciona. Aprenda direto com especialistas as tecnologias e táticas que realmente escalam operações, sem desperdiçar verba nem tempo.",
+      "Inteligência Artificial: Transforme a IA em vantagem competitiva. Automatize processos, eleve a produtividade do time e tome decisões baseadas 100% em dados, antes que o seu concorrente faça isso primeiro.",
+      "Gestão Comercial: Pare de perder negócio por desorganização. Estruture cada etapa do processo comercial, use o CRM de forma inteligente e prepare sua operação para crescer sem perder cliente no caminho.",
+      "Feira de Negócios: Mais de 2.000 decisores no mesmo espaço. A teoria que você absorveu nos palcos entra em prática aqui, em conversas com pessoas que têm o mesmo nível de ambição que você.",
     ],
     speakersHeadline: "PALESTRANTES CONFIRMADOS NO DSX 2026",
     segmentSpeakers: [
@@ -398,7 +400,7 @@ const segmentLandingList = [
       {
         name: "Carlos Oshiro",
         image: "/foto-carlos-oshiro.png",
-        bio: "Ajuda empresários a transitar a mentalidade da velha para a nova economia. Tem um ecossistema de mais de 1.500 empresários de Manaus na nova economia.",
+        bio: "Ajuda empresários a transitar a mentalidade da velha para a nova economia. Tem um ecossistema de mais de 1500 empresários de Manaus na nova economia.",
       },
       {
         name: "Chay Santos",
@@ -408,7 +410,7 @@ const segmentLandingList = [
       {
         name: "Fabrício Alva",
         image: "/novas-palestrantes/slide-fabricio-alva.PNG",
-        bio: "Consultor empresarial, estrategista de negócios e especialista em performance. Já ajudou empresas e profissionais a estruturarem seus negócios com mais clareza, eficiência e previsibilidade.",
+        bio: "Consultor empresarial, estrategista de negócios e especialista em performance,já ajudou empresas e profissionais a estruturarem seus negócios com mais clareza, eficiência e previsibilidade, unindo experiência prática com o uso inteligente da tecnologia.",
       },
     ],
     socialProofHeadline:
@@ -441,8 +443,8 @@ const segmentLandingList = [
     immersionHeadline:
       "O DSX é uma imersão construída para quem não tem tempo a perder.",
     immersionBullets: [
-      "2 dias de conteúdos estratégicos com os maiores nomes do mercado",
-      "+40 palestras",
+      "2 dias dias de conteúdos estratégicos com os maiores nomes do mercado",
+      "de 40 palestras",
       "3 palcos simultâneos",
       "Feira de Negócios",
       "Local: Centro de Convenções Vasco Vasques",
@@ -451,14 +453,14 @@ const segmentLandingList = [
       "O custo de não estar no DSX é muito maior do que o valor do passaporte. Um erro na sua estratégia de escala ou um processo de delegação mal feito custa, por mês, dez vezes o investimento que você fará hoje.",
     groupHeadline: "Ninguém cresce sozinho",
     groupCopy:
-      "Monte sua delegação e acelere decisões com o time alinhado no mesmo método de crescimento.",
+      "Ninguém cresce sozinho",
     urgencyHeadline: "GARANTIR NO LOTE ATUAL",
     urgencyCopy:
       "O mercado não espera. Garanta sua cadeira no setor de decisões antes da virada de lote.",
     faqs: [
       {
         q: "Para quem é o DSX?",
-        a: "Para donos de negócio e empreendedores que querem estruturar suas empresas para crescer e perceberam que o amadorismo na gestão está drenando o lucro.",
+        a: "Para empresários e microempreendedores que querem sair do modo operacional e construir uma empresa que escala, com método, não com sorte.",
       },
       {
         q: "Como funciona o parcelamento?",
@@ -466,7 +468,7 @@ const segmentLandingList = [
       },
       {
         q: "O que está incluso no ingresso VIP?",
-        a: "Lounge VIP exclusivo, networking com decisores, kit premium, primeiras fileiras, 2 dias de evento, +40 palestras, feira de negócios e certificado de participação.",
+        a: "Lounge VIP exclusivo, networking com decisores, kit premium, primeiras fileiras, 2 dias de evento, +40 palestras, feira de negócios.",
       },
     ],
     finalHeadline: "Não estar no DSX também é uma decisão estratégica.",

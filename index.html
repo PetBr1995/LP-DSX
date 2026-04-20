@@ -6,6 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="x-ua-compatible" content="IE=edge" />
 
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-W3FM6BQW');</script>
+    <!-- End Google Tag Manager -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -126,21 +134,7 @@
 
     <div id="root"></div>
     <script>
-      (function (w, d, l, i) {
-        function loadGtm() {
-          if (w.__DSX_GTM_LOADED__) return;
-          w.__DSX_GTM_LOADED__ = true;
-
-          w[l] = w[l] || [];
-          w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-
-          var script = d.createElement("script");
-          var dl = l !== "dataLayer" ? "&l=" + l : "";
-          script.async = true;
-          script.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-          d.head.appendChild(script);
-        }
-
+      (function (w, d) {
         function loadRdLoader() {
           if (w.__DSX_RD_LOADED__) return;
           w.__DSX_RD_LOADED__ = true;
@@ -166,7 +160,6 @@
             if (hasTriggered) return;
             hasTriggered = true;
             loadDsxTracker();
-            loadGtm();
             w.setTimeout(loadRdLoader, 1000);
             w.removeEventListener("pointerdown", trigger, true);
             w.removeEventListener("keydown", trigger, true);
@@ -176,9 +169,6 @@
           w.addEventListener("pointerdown", trigger, { once: true, capture: true });
           w.addEventListener("keydown", trigger, { once: true, capture: true });
           w.addEventListener("scroll", trigger, { once: true, capture: true });
-
-          // Evita custo de script de terceiros durante auditorias de performance
-          // sem interação real do usuário.
         }
 
         if (d.readyState === "complete") {
@@ -187,7 +177,7 @@
         }
 
         w.addEventListener("load", scheduleLoaders, { once: true });
-      })(window, document, "dataLayer", "GTM-W3FM6BQW");
+      })(window, document);
     </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>

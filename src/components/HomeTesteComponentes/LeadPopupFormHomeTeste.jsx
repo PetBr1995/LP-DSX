@@ -50,13 +50,15 @@ const LeadPopupFormHomeTeste = ({
             <button
               type="button"
               onClick={onClose}
-              className={`absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-2xl leading-none ${
+              className={`absolute right-4 top-4 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-[#F5A205]/40 bg-[#1A1A1A]/92 shadow-[0_8px_22px_rgba(0,0,0,0.45)] backdrop-blur-sm ${
                 canClose
-                  ? "text-white/80 transition hover:border-white/35 hover:text-white"
-                  : "text-white/40 cursor-not-allowed"
+                  ? "text-[#F5A205] transition duration-200 hover:scale-105 hover:border-[#FFD27A] hover:bg-[#242424] hover:text-[#FFD27A] active:scale-95"
+                  : "cursor-not-allowed text-[#F5A205]/45"
               }`}
               aria-label="Fechar formulário"
-            >x</button>
+            >
+              <span className="text-xl leading-none">×</span>
+            </button>
 
             <p className="text-center font-bebas pt-5 text-[2rem] leading-[0.95] text-[#F5A205] sm:text-4xl md:text-5xl">
               {headline}
@@ -189,6 +191,5 @@ const LeadPopupFormHomeTeste = ({
 };
 
 export default LeadPopupFormHomeTeste;
-
 
 
