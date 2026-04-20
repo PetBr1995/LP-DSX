@@ -194,7 +194,7 @@ const segmentLandingList = [
       },
       {
         name: "Roberta Veras",
-        image: "/palestrantes/RobertaGaspar.png",
+        image: "/Roberta_veras.png",
         bio: "Especialista em Vendas Consultivas e Experiência do Cliente. Focada em otimização de funil e aumento de LTV (Lifetime Value) através de processos replicáveis.",
       },
     ],

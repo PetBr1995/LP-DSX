@@ -111,6 +111,12 @@ export const InfoNovosPalestrantes = [
     badge: "Local",
   },
   {
+    nome: "Roberta Veras",
+    desc: "Educadora financeira, consultora empresarial e especialista em vendas.",
+    img: "/Roberta_veras.png",
+    badge: "Local",
+  },
+  {
     nome: "",
     desc: "",
     img: "/SILHUETA-1.png",

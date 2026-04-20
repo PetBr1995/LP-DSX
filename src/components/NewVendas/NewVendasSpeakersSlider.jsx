@@ -92,6 +92,11 @@ const mainSpeakers = [
     image: "/palestrantes/SuellenScop.png",
     bio: "Psicóloga, diretora operacional da Singulari e especialista na aplicação prática de inteligência artificial em contextos reais de negócio.",
   },
+  {
+    name: "Roberta Veras",
+    image: "/Roberta_veras.png",
+    bio: "Educadora financeira, consultora empresarial e especialista em vendas. Possui uma trajetória construída no varejo e no empreendedorismo como gestora de franquias e performance comercial com destaque nacional.",
+  },
 ];
 
 const NewVendasSpeakersSlider = () => {
