@@ -26,6 +26,7 @@
         w[l] = w[l] || [];
 
         var hasLoadedGtm = false;
+        var timeoutId = null;
         var interactionEvents = ["pointerdown", "keydown", "scroll", "touchstart"];
 
         function hasAttributionParams() {
@@ -53,9 +54,17 @@
         }
 
         function cleanupTriggers() {
+          if (timeoutId) {
+            w.clearTimeout(timeoutId);
+            timeoutId = null;
+          }
+
           for (var idx = 0; idx < interactionEvents.length; idx += 1) {
             w.removeEventListener(interactionEvents[idx], onInteraction, true);
           }
+
+          d.removeEventListener("visibilitychange", onVisibilityChange, true);
+          w.removeEventListener("pagehide", onPageHide, true);
         }
 
         function loadGtm(loadReason) {
@@ -82,6 +91,16 @@
           loadGtm("interaction");
         }
 
+        function onVisibilityChange() {
+          if (d.visibilityState === "hidden") {
+            loadGtm("visibility_hidden");
+          }
+        }
+
+        function onPageHide() {
+          loadGtm("pagehide");
+        }
+
         if (hasAttributionParams()) {
           loadGtm("attribution_param");
           return;
@@ -94,6 +113,20 @@
             passive: true,
           });
         }
+
+        d.addEventListener("visibilitychange", onVisibilityChange, {
+          once: true,
+          capture: true,
+        });
+        w.addEventListener("pagehide", onPageHide, {
+          once: true,
+          capture: true,
+        });
+
+        // Safety net for quick bounces without interaction.
+        timeoutId = w.setTimeout(function () {
+          loadGtm("timeout_1200ms");
+        }, 1200);
 
       })(window, document, "script", "dataLayer", "GTM-W3FM6BQW");
     </script>
