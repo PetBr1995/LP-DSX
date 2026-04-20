@@ -6,12 +6,117 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="x-ua-compatible" content="IE=edge" />
 
+    <link rel="dns-prefetch" href="//www.googletagmanager.com" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+
     <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-W3FM6BQW');</script>
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+
+        var hasLoadedGtm = false;
+        var timeoutId = null;
+        var interactionEvents = ["pointerdown", "keydown", "scroll", "touchstart"];
+
+        function hasAttributionParams() {
+          var params = new URLSearchParams(w.location.search);
+          var trafficParams = [
+            "utm_source",
+            "utm_medium",
+            "utm_campaign",
+            "utm_id",
+            "utm_term",
+            "utm_content",
+            "gclid",
+            "gbraid",
+            "wbraid",
+            "fbclid",
+            "ttclid",
+            "msclkid",
+          ];
+
+          for (var idx = 0; idx < trafficParams.length; idx += 1) {
+            if (params.has(trafficParams[idx])) return true;
+          }
+
+          return false;
+        }
+
+        function cleanupTriggers() {
+          if (timeoutId) {
+            w.clearTimeout(timeoutId);
+            timeoutId = null;
+          }
+
+          for (var idx = 0; idx < interactionEvents.length; idx += 1) {
+            w.removeEventListener(interactionEvents[idx], onInteraction, true);
+          }
+
+          d.removeEventListener("visibilitychange", onVisibilityChange, true);
+        }
+
+        function loadGtm(loadReason) {
+          if (hasLoadedGtm) return;
+          hasLoadedGtm = true;
+
+          w[l].push({
+            "gtm.start": new Date().getTime(),
+            event: "gtm.js",
+            gtm_load_reason: loadReason,
+          });
+
+          var firstScript = d.getElementsByTagName(s)[0];
+          var gtmScript = d.createElement(s);
+          var dl = l !== "dataLayer" ? "&l=" + l : "";
+
+          gtmScript.async = true;
+          gtmScript.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+          firstScript.parentNode.insertBefore(gtmScript, firstScript);
+          cleanupTriggers();
+        }
+
+        function onInteraction() {
+          loadGtm("interaction");
+        }
+
+        function onVisibilityChange() {
+          if (d.visibilityState === "hidden") {
+            loadGtm("visibility_hidden");
+          }
+        }
+
+        if (hasAttributionParams()) {
+          loadGtm("attribution_param");
+          return;
+        }
+
+        for (var idx = 0; idx < interactionEvents.length; idx += 1) {
+          w.addEventListener(interactionEvents[idx], onInteraction, {
+            once: true,
+            capture: true,
+            passive: true,
+          });
+        }
+
+        d.addEventListener("visibilitychange", onVisibilityChange, {
+          once: true,
+          capture: true,
+        });
+
+        if ("requestIdleCallback" in w) {
+          w.requestIdleCallback(
+            function () {
+              loadGtm("idle");
+            },
+            { timeout: 2000 },
+          );
+        }
+
+        timeoutId = w.setTimeout(function () {
+          loadGtm("timeout_2500ms");
+        }, 2500);
+      })(window, document, "script", "dataLayer", "GTM-W3FM6BQW");
+    </script>
     <!-- End Google Tag Manager -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
