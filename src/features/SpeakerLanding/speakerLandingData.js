@@ -94,11 +94,6 @@ const segmentLandingList = [
         bio: "Criadora do Método dos Conteúdos Magnéticos. Pioneira em oficinas práticas de criação, já formou milhares de alunos e se consolidou como referência em conteúdos que geram conexão e vendas com presença no digital.",
       },
       {
-        name: "Clayton Pascarelli",
-        image: "/foto-claytonpascarelli.png",
-        bio: "Especialista em jornalismo investigativo e PNL aplicada à oratória, também atua na formação de profissionais, ajudando empresários e líderes a se comunicarem com mais segurança.",
-      },
-      {
         name: "Fernan Bravo",
         image: "/palestrantes/ErickFernandes.png",
         bio: "Consultor de posicionamento, apresentador de TV, host do PodRolar, maior podcast do Norte do Brasil, e Head de Comunicação do Grupo Digital Comunicação. Especialista em transformar autoridade em audiência e audiência em resultado.",
