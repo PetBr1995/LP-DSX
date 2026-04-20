@@ -365,8 +365,11 @@ section.no-section-transition::after {
     #e7a040 88%,
     transparent 100%
   );
-  animation: nv-highlight-spin 3.2s linear infinite;
   border-radius: 50%;
+}
+
+.nv-animations-ready .nv-highlight-wrap::before {
+  animation: nv-highlight-spin 3.2s linear infinite;
 }
 
 .nv-highlight-inner {
