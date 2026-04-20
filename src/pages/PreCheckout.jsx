@@ -3,6 +3,7 @@ import { Calendar, MapPin } from "lucide-react";
 import NewVendasHeaderMask from "../components/NewVendas/NewVendasHeaderMask";
 import { audienceProfiles } from "../components/NewVendas/newVendasData";
 import { getSupabaseClient, isSupabaseConfigured } from "../lib/supabaseClient";
+import LeadPopupFormHomeTeste from "../components/HomeTesteComponentes/LeadPopupFormHomeTeste";
 import {
   formatDsxFormOrigin,
   readDsxFormOrigin,
@@ -96,13 +97,6 @@ const CHECKOUT_LINK =
 const RD_API_URL =
   "https://api.rd.services/platform/conversions?api_key=MHnWDjBYARQKdwUsfZRbjtVmPEyoHnSqtgFz";
 
-const profileOptions = [
-  "Empresário",
-  "Diretor ou Gestor",
-  "Profissional de marketing, vendas e operações",
-  "Estudante",
-  "Outros",
-];
 const metrics = [
   {
     target: 2000,
@@ -172,22 +166,7 @@ const isMissingColumnError = (error) => {
 };
 
 const resolveRdConversionIdentifier = (origin = "") => {
-  const normalized = String(origin || "").trim().toLowerCase();
-
-  if (normalized.includes("vip")) {
-    return "DSX 2026 - Formulário VIP";
-  }
-  if (normalized.includes("standard")) {
-    return "DSX 2026 - Formulário Standard";
-  }
-  if (normalized.includes("grupo") && normalized.includes("10")) {
-    return "DSX 2026 - Formulário Grupo 10";
-  }
-  if (normalized.includes("grupo") && normalized.includes("5")) {
-    return "DSX 2026 - Formulário Grupo 5";
-  }
-
-  return "DSX 2026 - Formulário Standard";
+  return "DSX 2026 - LP: Preckechout";
 };
 
 const formatPhone = (value = "") => {
@@ -799,99 +778,26 @@ const PreCheckout = () => {
         <div className="min-h-[120px]" aria-hidden="true" />
       )}
 
-      {showLeadModal ? (
-        <div className="fixed inset-0 z-[200] grid place-items-center bg-black/75 px-4">
-          <div className="w-full max-w-[560px] rounded-2xl border border-[#3A3222] bg-[#111111] p-5 shadow-[0_20px_60px_rgba(0,0,0,0.5)] md:p-6">
-            <div className="mb-4 flex items-start justify-between gap-3">
-              <div>
-                <h3 className="font-anton text-2xl uppercase text-white md:text-3xl">
-                  GARANTA SUA VAGA
-                </h3>
-              </div>
-              <button
-                type="button"
-                onClick={handleCloseLeadModal}
-                className="grid h-9 w-9 place-items-center rounded-full border border-white/20 text-white/80 transition hover:bg-white/10"
-                aria-label="Fechar formulário"
-              >
-                ×
-              </button>
-            </div>
-
-            <form id="lead-form-checkoutvendas" onSubmit={handleLeadSubmit} className="space-y-3">
-              <input
-                type="text"
-                placeholder="Nome"
-                value={leadForm.name}
-                onChange={(event) => handleLeadInputChange("name", event.target.value)}
-                className="w-full rounded-xl border border-[#2E2E2E] bg-[#181818] px-4 py-3 font-jamjuree text-white outline-none transition focus:border-[#F5C02B]"
-                required
-              />
-              <input
-                type="email"
-                placeholder="E-mail"
-                value={leadForm.email}
-                onChange={(event) => handleLeadInputChange("email", event.target.value)}
-                className="w-full rounded-xl border border-[#2E2E2E] bg-[#181818] px-4 py-3 font-jamjuree text-white outline-none transition focus:border-[#F5C02B]"
-                required
-              />
-              <input
-                type="tel"
-                placeholder="Telefone"
-                value={leadForm.phone}
-                onChange={(event) => handleLeadInputChange("phone", event.target.value)}
-                className="w-full rounded-xl border border-[#2E2E2E] bg-[#181818] px-4 py-3 font-jamjuree text-white outline-none transition focus:border-[#F5C02B]"
-                required
-              />
-              <select
-                value={leadForm.cargo}
-                onChange={(event) => handleLeadInputChange("cargo", event.target.value)}
-                className="w-full rounded-xl border border-[#2E2E2E] bg-[#181818] px-4 py-3 font-jamjuree text-white outline-none transition focus:border-[#F5C02B]"
-                required
-              >
-                <option value="" disabled>
-                  Selecione
-                </option>
-                {profileOptions.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-
-              {leadError ? (
-                <p className="font-jamjuree text-sm text-[#FF7C7C]">{leadError}</p>
-              ) : null}
-
-              <div className="mt-2 flex justify-center">
-                <button
-                  type="submit"
-                  disabled={leadStatus === "loading"}
-                  className="group nv-mask-shell relative rounded-2xl bg-gradient-to-r from-[#8E3EEB] to-[#E0474A] p-[2px] shadow-[0_0_0_1px_rgba(224,71,74,0.2)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_14px_34px_rgba(224,71,74,0.35)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70"
-                >
-                  <span className="relative flex h-12 min-w-[248px] items-center justify-center overflow-hidden rounded-[14px] bg-[#1E1A12] px-6">
-                    <span className="nv-mask-shine pointer-events-none absolute inset-y-0 -left-[40%] w-[36%] rotate-12 bg-white/30 blur-sm transition-transform duration-500 ease-out group-hover:translate-x-[430%]" />
-                    <span className="nv-mask-glow pointer-events-none absolute inset-0 rounded-[14px] bg-gradient-to-r from-[#8E3EEB] to-[#E0474A] opacity-45 blur-md transition-opacity duration-300 group-hover:opacity-65" />
-                    <span className="relative text-center font-jamjuree text-[15px] font-bold uppercase leading-none text-white">
-                      {leadStatus === "loading"
-                        ? "Enviando..."
-                        : "Comprar agora"}
-                    </span>
-                  </span>
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      ) : null}
+      <LeadPopupFormHomeTeste
+        isOpen={showLeadModal}
+        canClose={leadStatus !== "loading"}
+        onClose={handleCloseLeadModal}
+        onSubmit={handleLeadSubmit}
+        leadForm={leadForm}
+        setLeadForm={setLeadForm}
+        onWhatsappChange={(event) => handleLeadInputChange("phone", event.target.value)}
+        leadStatus={leadStatus}
+        message={leadError}
+        loading={leadStatus === "loading"}
+        canSubmit={leadStatus !== "loading"}
+        headline="GARANTA SUA VAGA"
+        subheading=""
+        description=""
+      />
 
     </main>
   );
 };
 
 export default PreCheckout;
-
-
-
-
 

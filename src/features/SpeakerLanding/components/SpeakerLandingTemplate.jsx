@@ -180,19 +180,19 @@ function resolveRdConversionIdentifier(segmentName = "", origin = "") {
   const normalized = String(origin || "").trim().toLowerCase();
 
   if (normalized.includes("vip")) {
-    return `DSX 2026 - LP: ${normalizedSegmentName} Formulário VIP`;
+    return `DSX 2026 - LP: ${normalizedSegmentName} - Formulário VIP`;
   }
   if (normalized.includes("standard")) {
-    return `DSX 2026 - LP: ${normalizedSegmentName} Formulário Standard`;
+    return `DSX 2026 - LP: ${normalizedSegmentName} - Formulário Standard`;
   }
   if (normalized.includes("grupo") && normalized.includes("10")) {
-    return `DSX 2026 - LP: ${normalizedSegmentName} Formulário Grupo 10`;
+    return `DSX 2026 - LP: ${normalizedSegmentName} - Formulário Grupo 10`;
   }
   if (normalized.includes("grupo") && normalized.includes("5")) {
-    return `DSX 2026 - LP: ${normalizedSegmentName} Formulário Grupo 5`;
+    return `DSX 2026 - LP: ${normalizedSegmentName} - Formulário Grupo 5`;
   }
 
-  return `DSX 2026 - LP: ${normalizedSegmentName} Formulário Standard`;
+  return `DSX 2026 - LP: ${normalizedSegmentName} - Formulário Standard`;
 }
 
 const SpeakerLandingTemplate = ({ speaker }) => {
