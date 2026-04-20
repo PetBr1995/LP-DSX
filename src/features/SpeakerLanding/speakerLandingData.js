@@ -276,7 +276,7 @@ const segmentLandingList = [
     ],
     transitionLine:
       "Inovação sem método é apenas gasto. No DSX Inovação você aprende a estrutura que transforma experimentação em vantagem competitiva sustentável.",
-    outcomesHeadline: "O que você sai tendo depois do DSX:",
+    outcomesHeadline: "O que você leva do DSX:",
     outcomes: [
       "Radar de mercado: como identificar movimentos antes que virem ameaça",
       "Framework de priorização: como escolher o que inovar primeiro com o menor risco",
