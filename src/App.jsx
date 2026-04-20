@@ -70,6 +70,7 @@ const App = () => {
             <Route path="/lp/:slug" element={<SpeakerLandingPage />} />
             <Route path="/sobre" element={<HomeTeste/>} />
             <Route path="/teste" element={<Vendas />} />
+            <Route path="/patrocinadores" element={<Patrocinadores/>}/> 
           </Routes>
         </Suspense>
       </div>
