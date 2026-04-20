@@ -175,23 +175,24 @@ function isMissingColumnError(error) {
   );
 }
 
-function resolveRdConversionIdentifier(origin = "") {
+function resolveRdConversionIdentifier(segmentName = "", origin = "") {
+  const normalizedSegmentName = String(segmentName || "").trim() || "Segmento";
   const normalized = String(origin || "").trim().toLowerCase();
 
   if (normalized.includes("vip")) {
-    return "DSX 2026 - Formulário VIP";
+    return `DSX 2026 - LP: ${normalizedSegmentName} Formulário VIP`;
   }
   if (normalized.includes("standard")) {
-    return "DSX 2026 - Formulário Standard";
+    return `DSX 2026 - LP: ${normalizedSegmentName} Formulário Standard`;
   }
   if (normalized.includes("grupo") && normalized.includes("10")) {
-    return "DSX 2026 - Formulário Grupo 10";
+    return `DSX 2026 - LP: ${normalizedSegmentName} Formulário Grupo 10`;
   }
   if (normalized.includes("grupo") && normalized.includes("5")) {
-    return "DSX 2026 - Formulário Grupo 5";
+    return `DSX 2026 - LP: ${normalizedSegmentName} Formulário Grupo 5`;
   }
 
-  return "DSX 2026 - Formulário Standard";
+  return `DSX 2026 - LP: ${normalizedSegmentName} Formulário Standard`;
 }
 
 const SpeakerLandingTemplate = ({ speaker }) => {
@@ -501,7 +502,10 @@ const SpeakerLandingTemplate = ({ speaker }) => {
         event_type: "CONVERSION",
         event_family: "CDP",
         payload: {
-          conversion_identifier: resolveRdConversionIdentifier(resolvedFormOrigin),
+          conversion_identifier: resolveRdConversionIdentifier(
+            speaker?.name,
+            resolvedFormOrigin,
+          ),
           name,
           email,
           personal_phone: phone,

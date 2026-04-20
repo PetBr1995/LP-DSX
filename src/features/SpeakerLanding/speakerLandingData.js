@@ -306,11 +306,6 @@ const segmentLandingList = [
         image: "/novas-palestrantes/Flavia-Sausmikat.png",
         bio: "Especialista em análise de comportamento social e de consumo, unindo rigor técnico e sensibilidade para gerar insights relevantes e estratégicos para organizações.",
       },
-      {
-        name: "Dr. Thales Stein",
-        image: "/card-image/participante-card-img.png",
-        bio: "Estrategista de Performance Humana. Especialista em otimizar a biologia do tomador de decisão para suportar a pressão da escala e manter o foco na inovação.",
-      },
     ],
     socialProofHeadline:
       "Depoimentos de quem aprendeu a aplicar inovação com assertividade",
