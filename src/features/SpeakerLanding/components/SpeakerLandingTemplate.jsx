@@ -497,6 +497,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
       const phone = formData.get("phone")?.toString().trim() || "";
       const cargo = formData.get("cargo")?.toString().trim() || "";
       const resolvedFormOrigin = selectedPassOrigin || "Standard";
+      const lpIdentifier = `LP-${String(speaker?.slug || "segmento").trim()}`;
 
       const payload = {
         event_type: "CONVERSION",
@@ -563,6 +564,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
             site_origin: sourceData.site_origin || null,
             site_hostname:
               sourceData.site_hostname || window.location.hostname || null,
+            lp_identifier: lpIdentifier,
             first_converted_at: nowIso,
             last_seen_at: nowIso,
             has_sympla_redirected: true,
@@ -577,6 +579,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
             const fallbackProfilePayload = { ...profilePayload };
             delete fallbackProfilePayload.site_origin;
             delete fallbackProfilePayload.site_hostname;
+            delete fallbackProfilePayload.lp_identifier;
             const retry = await supabase
               .from("tracking_lead_profiles")
               .upsert([fallbackProfilePayload], { onConflict: "lead_email" });
@@ -593,6 +596,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
               site_origin: sourceData.site_origin || null,
               site_hostname:
                 sourceData.site_hostname || window.location.hostname || null,
+              lp_identifier: lpIdentifier,
               page:
                 sourceData.page_url ||
                 window.location.pathname + window.location.search,
@@ -615,6 +619,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
               const fallbackSessionPayload = { ...sessionPayload };
               delete fallbackSessionPayload.site_origin;
               delete fallbackSessionPayload.site_hostname;
+              delete fallbackSessionPayload.lp_identifier;
               const retry = await supabase
                 .from("tracking_lead_sessions")
                 .upsert([fallbackSessionPayload], { onConflict: "session_id" });
