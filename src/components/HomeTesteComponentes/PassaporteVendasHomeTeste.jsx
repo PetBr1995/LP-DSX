@@ -126,7 +126,7 @@ const SquishyPlanCard = ({ card, onBuyPassaporte, hideBuyButton = false }) => (
               onBuyPassaporte(targetLink, formOrigin);
               return;
             }
-            window.open(targetLink, "_blank");
+            window.location.href = targetLink;
           }}
           className="mt-6 w-full rounded-xl bg-gradient-to-r from-[#F3CB46] to-[#E7A040] px-5 py-3 text-base font-black uppercase tracking-wide text-black transition hover:brightness-95"
         >

@@ -434,7 +434,7 @@ const NewVendasCopy = () => {
       e.target.reset();
       setTimeout(() => {
         setShowLeadModal(false);
-        window.open(NEW_VENDAS_SYMPLA_URL, "_blank", "noopener,noreferrer");
+        window.location.href = NEW_VENDAS_SYMPLA_URL;
       }, 700);
     } catch (_error) {
       setLeadStatus("error");
@@ -509,4 +509,3 @@ const NewVendasCopy = () => {
 };
 
 export default NewVendasCopy;
-

@@ -80,7 +80,7 @@ const PassaporteGrupoHomeTeste = ({
                         onBuyPassaporte(targetLink, formOrigin);
                         return;
                       }
-                      window.open(targetLink, "_blank");
+                      window.location.href = targetLink;
                     }}
                     className="mt-5 w-full rounded-xl bg-gradient-to-r from-[#F3CB46] to-[#E7A040] px-5 py-3 text-sm font-black uppercase tracking-wide text-black sm:text-base"
                   >

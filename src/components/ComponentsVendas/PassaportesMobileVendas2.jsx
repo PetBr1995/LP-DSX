@@ -164,7 +164,7 @@ const PassaportesMobileVendas2 = () => {
 
                     <button
                       onClick={() =>
-                        window.open(withHublaUtm(card.link), "_blank")
+                        (window.location.href = withHublaUtm(card.link))
                       }
                       className="cursor-pointer uppercase bg-gradient-to-r from-[#F3CB46] to-[#E7A240] p-3 w-full mt-6 rounded-2xl font-bold"
                     >COMPRAR AGORA</button>

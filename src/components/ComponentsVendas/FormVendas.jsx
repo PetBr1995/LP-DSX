@@ -199,11 +199,7 @@ const FormVendas = () => {
       });
 
       // 👉 Redirect para o grupo VIP do WhatsApp
-      window.open(
-        "https://chat.whatsapp.com/GXEsJXjFNBi1a3LLAiG90R",
-        "_blank",
-        "noopener,noreferrer"
-      );
+      window.location.href = "https://chat.whatsapp.com/GXEsJXjFNBi1a3LLAiG90R";
     } catch (err) {
       setStatus("error");
       setMessage("Erro ao enviar formulário. Tente novamente.");

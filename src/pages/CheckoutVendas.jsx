@@ -486,7 +486,7 @@ const CheckoutVendas = () => {
 
       setLeadStatus("success");
       setShowLeadModal(false);
-      window.open(CHECKOUT_LINK, "_blank", "noopener,noreferrer");
+      window.location.href = CHECKOUT_LINK;
     } catch (_error) {
       setLeadStatus("error");
       console.error("[CheckoutVendas] erro no envio do lead", _error);
@@ -844,4 +844,3 @@ const CheckoutVendas = () => {
 };
 
 export default CheckoutVendas;
-

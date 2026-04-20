@@ -638,7 +638,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
         const targetUrl =
           pendingSymplaUrl || speaker?.ctaLink || NEW_VENDAS_SYMPLA_URL;
         setShowLeadModal(false);
-        window.open(targetUrl, "_blank", "noopener,noreferrer");
+        window.location.href = targetUrl;
       }, 700);
     } catch (error) {
       setLeadStatus("error");

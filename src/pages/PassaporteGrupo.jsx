@@ -74,7 +74,9 @@
               <p className="text-white uppercase">Por pessoa</p>
 
               <button
-                onClick={() => window.open(item.link, "_blank")}
+                onClick={() => {
+                  window.location.href = item.link;
+                }}
                 className="w-full p-2 rounded-xl my-8 cursor-pointer font-bold uppercase bg-linear-to-r from-[#F3CB46] to-[#E7A240]"
               >
                 Comprar agora

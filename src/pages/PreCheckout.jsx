@@ -534,7 +534,7 @@ const PreCheckout = () => {
 
       setLeadStatus("success");
       setShowLeadModal(false);
-      window.open(CHECKOUT_LINK, "_blank", "noopener,noreferrer");
+      window.location.href = CHECKOUT_LINK;
     } catch (_error) {
       setLeadStatus("error");
       console.error("[PreCheckout] erro no envio do lead", _error);
@@ -800,4 +800,3 @@ const PreCheckout = () => {
 };
 
 export default PreCheckout;
-

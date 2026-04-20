@@ -803,7 +803,7 @@ const HomeTeste = () => {
       dispatchJourneyEvent("sympla_redirected", {
         target_link: targetLink,
       });
-      window.open(targetLink, "_blank");
+      window.location.href = targetLink;
       return;
     }
 

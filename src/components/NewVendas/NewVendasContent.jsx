@@ -37,7 +37,7 @@ const NewVendasContent = ({
       return;
     }
 
-    window.open(targetLink, "_blank", "noopener,noreferrer");
+    window.location.href = targetLink;
   };
 
   const handleToggleFaq = (index) => {

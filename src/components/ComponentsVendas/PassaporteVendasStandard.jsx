@@ -156,10 +156,7 @@ const PassaporteVendasStandard = () => {
 
                   <button
                     onClick={() =>
-                      window.open(
-                        withHublaUtm("https://hub.la/r/EREq9bO1fsVKl6sG7Axo"),
-                        "_blank"
-                      )
+                      (window.location.href = withHublaUtm("https://hub.la/r/EREq9bO1fsVKl6sG7Axo"))
                     }
                     className="cursor-pointer uppercase bg-gradient-to-r from-[#F3CB46] to-[#E7A240] p-3 w-full mt-6 rounded-2xl font-bold"
                   >COMPRAR AGORA</button>

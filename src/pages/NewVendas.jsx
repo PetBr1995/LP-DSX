@@ -491,7 +491,7 @@ const NewVendas = () => {
       window.setTimeout(() => {
         const targetUrl = pendingSymplaUrl || NEW_VENDAS_SYMPLA_URL;
         setShowLeadModal(false);
-        window.open(targetUrl, "_blank", "noopener,noreferrer");
+        window.location.href = targetUrl;
       }, 700);
     } catch (error) {
       setLeadStatus("error");
@@ -550,7 +550,6 @@ const NewVendas = () => {
 };
 
 export default NewVendas;
-
 
 
 
