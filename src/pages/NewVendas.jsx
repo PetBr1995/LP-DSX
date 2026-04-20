@@ -353,6 +353,7 @@ const NewVendas = () => {
     setLeadStatus("loading");
 
     try {
+      const lpIdentifier = "LP DSX - Principal";
       const formData = new FormData(event.target);
       const name = formData.get("name")?.toString().trim() || "";
       const email = formData.get("email")?.toString().trim().toLowerCase() || "";
@@ -422,6 +423,7 @@ const NewVendas = () => {
             site_origin: sourceData.site_origin || null,
             site_hostname:
               sourceData.site_hostname || window.location.hostname || null,
+            lp_identifier: lpIdentifier,
             first_converted_at: nowIso,
             last_seen_at: nowIso,
             has_sympla_redirected: true,
@@ -436,10 +438,19 @@ const NewVendas = () => {
             const fallbackProfilePayload = { ...profilePayload };
             delete fallbackProfilePayload.site_origin;
             delete fallbackProfilePayload.site_hostname;
-            const retry = await supabase
+            let retry = await supabase
               .from("tracking_lead_profiles")
               .upsert([fallbackProfilePayload], { onConflict: "lead_email" });
             profileError = retry.error;
+
+            if (profileError && isMissingColumnError(profileError)) {
+              const fallbackProfileWithoutLp = { ...fallbackProfilePayload };
+              delete fallbackProfileWithoutLp.lp_identifier;
+              retry = await supabase
+                .from("tracking_lead_profiles")
+                .upsert([fallbackProfileWithoutLp], { onConflict: "lead_email" });
+              profileError = retry.error;
+            }
           }
 
           if (!profileError) {
@@ -452,6 +463,7 @@ const NewVendas = () => {
               site_origin: sourceData.site_origin || null,
               site_hostname:
                 sourceData.site_hostname || window.location.hostname || null,
+              lp_identifier: lpIdentifier,
               page:
                 sourceData.page_url ||
                 window.location.pathname + window.location.search,
@@ -474,10 +486,19 @@ const NewVendas = () => {
               const fallbackSessionPayload = { ...sessionPayload };
               delete fallbackSessionPayload.site_origin;
               delete fallbackSessionPayload.site_hostname;
-              const retry = await supabase
+              let retry = await supabase
                 .from("tracking_lead_sessions")
                 .upsert([fallbackSessionPayload], { onConflict: "session_id" });
               sessionError = retry.error;
+
+              if (sessionError && isMissingColumnError(sessionError)) {
+                const fallbackSessionWithoutLp = { ...fallbackSessionPayload };
+                delete fallbackSessionWithoutLp.lp_identifier;
+                retry = await supabase
+                  .from("tracking_lead_sessions")
+                  .upsert([fallbackSessionWithoutLp], { onConflict: "session_id" });
+                sessionError = retry.error;
+              }
             }
           }
         }
@@ -550,6 +571,5 @@ const NewVendas = () => {
 };
 
 export default NewVendas;
-
 
 

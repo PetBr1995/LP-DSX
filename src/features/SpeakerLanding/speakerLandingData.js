@@ -249,35 +249,35 @@ const segmentLandingList = [
     image: "/dsx-2026.jpeg",
     category: "Segmento Estratégico",
     headline:
-      "Domine o método para inovar sua operação e manter sua empresa relevante e lucrativa",
+      "O repertório estratégico para manter sua operação lucrativa e relevante",
     subtitle:
       "Menos teoria, mais método para aplicar tecnologia onde ela realmente importa: no seu caixa",
-    hook: "Em 2 dias, você terá o framework prático para antecipar tendências e aplicar tecnologia onde ela realmente gera escala.",
+    hook: "2 dias de imersão para atualizar seu framework de decisão e antecipar as tendências que já estão mudando o jogo no Norte.",
     about:
       "Você sente que o mercado está mudando mais rápido do que sua empresa consegue acompanhar?",
     topics: [
-      "Radar de mercado",
-      "Framework de priorização",
-      "Processo de validação",
-      "Cultura de inovação",
-      "Roteiro de tecnologia",
+      "Estratégia de Vendas",
+      "Marketing & Performance de Dados",
+      "Tecnologias de Escala",
+      "Inteligência Artificial Aplicada",
+      "Gestão e Governança Comercial",
     ],
     painPoints: [
-      "Você vê concorrentes novos crescendo em meses o que você levou anos para construir",
-      "Tenta inovar, mas as ideias morrem antes de virar produto ou processo",
-      "Sua equipe é boa no operacional, mas não tem cultura de pensar diferente",
-      "Já investiu em tecnologia que não entregou o retorno prometido",
-      "Você sabe que precisa mudar, mas não sabe por onde começar sem comprometer o que já funciona",
+      "Você vê novos players crescendo em meses o que sua estrutura levou anos para consolidar",
+      "Suas tentativas de inovação morrem como custo, sem virar processo ou margem",
+      "Sua equipe está presa no operacional e ignora a cultura de eficiência",
+      "Você investiu em ferramentas que geram complexidade, não retorno",
+      "Você sabe que precisa mudar, mas não tem o método para o próximo passo",
     ],
     transitionLine:
-      "Inovação sem método é apenas gasto. No DSX Inovação você aprende a estrutura que transforma experimentação em vantagem competitiva sustentável.",
-    outcomesHeadline: "O que você leva do DSX:",
+      "Inovação sem método é apenas gasto. No DSX, você aprende a estrutura que transforma experimentação em vantagem competitiva.",
+    outcomesHeadline: "Estratégia de Vendas",
     outcomes: [
-      "Radar de mercado: como identificar movimentos antes que virem ameaça",
-      "Framework de priorização: como escolher o que inovar primeiro com o menor risco",
-      "Processo de validação: como testar uma ideia nova em poucos dias e com baixo custo",
-      "Cultura de inovação: como criar um ambiente onde seu time pensa em melhoria contínua",
-      "Roteiro de tecnologia: quais ferramentas e tendências realmente importam para o seu negócio agora",
+      "Estratégia de Vendas Implemente o método para atrair clientes de alto valor e negociar com previsibilidade. Construa um modelo de receita robusto, onde o fechamento de grandes contratos não depende de sazonalidade ou motivação individual, mas de processo.",
+      "Marketing & Performance de Dados Substitua o \"achismo\" por ativos digitais. Estruture funis de venda e criativos de alta conversão focados em reduzir o custo de aquisição (CAC) e elevar a qualidade do lead que chega à sua mesa.",
+      "Tecnologias de Escala Elimine o desperdício com ferramentas que não entregam retorno. Tenha acesso às tecnologias e táticas de crescimento que realmente escalam operações comerciais, validadas por quem já domina o jogo.",
+      "Inteligência Artificial Aplicada Transforme a IA em vantagem competitiva real. Automatize o operacional, eleve a produtividade do time e utilize a inteligência de dados como suporte central para suas decisões estratégicas.",
+      "Gestão e Governança Comercial Blindagem contra a desorganização. Estruture cada etapa do seu processo comercial com inteligência de CRM para preparar sua operação para o próximo nível de escala, sem perder margem no caminho.",
     ],
     speakersHeadline: "PALESTRANTES CONFIRMADOS NO DSX 2026",
     segmentSpeakers: [
@@ -301,6 +301,11 @@ const segmentLandingList = [
         image: "/novas-palestrantes/Flavia-Sausmikat.png",
         bio: "Especialista em análise de comportamento social e de consumo, unindo rigor técnico e sensibilidade para gerar insights relevantes e estratégicos para organizações.",
       },
+      {
+        name: "Dr. Thales Stein",
+        image: "/card-image/participante-card-img.png",
+        bio: "Estrategista de Performance Humana. Especialista em otimizar a biologia do tomador de decisão para suportar a pressão da escala e manter o foco na inovação.",
+      },
     ],
     socialProofHeadline:
       "Depoimentos de quem aprendeu a aplicar inovação com assertividade",
@@ -310,14 +315,14 @@ const segmentLandingList = [
     immersionHeadline:
       "O DSX é uma imersão construída para quem não tem tempo a perder",
     immersionBullets: [
-      "2 dias dias de conteúdos estratégicos com os maiores nomes do mercado",
-      "de 40 palestras",
-      "3 palcos simultâneos",
-      "Feira de Negócios",
+      "2 dias de imersão estratégica com quem domina o mercado.",
+      "+40 palestras técnicas.",
+      "3 palcos simultâneos: Escolha o conteúdo que sua empresa precisa agora.",
+      "Feira de Negócios: Networking direto com decisores e parceiros estratégicos.",
       "Local: Centro de Convenções Vasco Vasques",
     ],
     valueAnchor:
-      "Qual o preço de continuar investindo tempo e dinheiro em processos que o mercado já abandonou? O DSX Inovação não é um gasto; é o seguro contra a obsolescência do seu negócio.",
+      "Qual é o custo de um vendedor novo levar 6 meses para performar? Ou de um lead qualificado ser perdido por falta de processo? O passaporte do DSX custa menos do que um mês de meta não batida por falta de processo.",
     groupHeadline: "NINGUÉM CRESCE SOZINHO",
     groupCopy:
       "COLOCAR OS CRIATIVOS QUE JÁ ESTÃO FUNCIONANDO DO DSX.COM.VC/VENDAS.",
@@ -329,7 +334,7 @@ const segmentLandingList = [
         a: "Para donos de negócio e líderes que querem entender como usar a inovação como ferramenta estratégica.",
       },
       {
-        q: "Preciso entender de tecnologia para aproveitar?:",
+        q: "Preciso entender de tecnologia para aproveitar?",
         a: "Não. O DSX foi feito justamente para o dono do negócio, não para o programador. Você não vai aprender a \"fazer código\", você vai aprender a comprar, gerir e implementar inovação para ter vantagem competitiva. Se você toma decisões na empresa, este lugar é seu.",
       },
       {

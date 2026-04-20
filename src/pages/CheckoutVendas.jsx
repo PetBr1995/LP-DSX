@@ -281,6 +281,7 @@ const CheckoutVendas = () => {
     setLeadError("");
 
     try {
+      const lpIdentifier = "LP DSX - Checkout";
       const resolvedFormOrigin = "Checkout";
       const payload = {
         event_type: "CONVERSION",
@@ -349,6 +350,7 @@ const CheckoutVendas = () => {
         lead_cargo: leadIdentity.cargo,
         site_origin: sourceData.site_origin || null,
         site_hostname: sourceData.site_hostname || window.location.hostname || null,
+        lp_identifier: lpIdentifier,
         first_converted_at: nowIso,
         last_seen_at: nowIso,
         has_sympla_redirected: true,
@@ -370,10 +372,19 @@ const CheckoutVendas = () => {
               const fallbackProfilePayload = { ...profilePayload };
               delete fallbackProfilePayload.site_origin;
               delete fallbackProfilePayload.site_hostname;
-              const retry = await supabase
+              let retry = await supabase
                 .from("tracking_lead_profiles")
                 .upsert([fallbackProfilePayload], { onConflict: "lead_email" });
               profileError = retry.error;
+
+              if (profileError && isMissingColumnError(profileError)) {
+                const fallbackProfileWithoutLp = { ...fallbackProfilePayload };
+                delete fallbackProfileWithoutLp.lp_identifier;
+                retry = await supabase
+                  .from("tracking_lead_profiles")
+                  .upsert([fallbackProfileWithoutLp], { onConflict: "lead_email" });
+                profileError = retry.error;
+              }
             }
 
             if (profileError) {
@@ -391,6 +402,7 @@ const CheckoutVendas = () => {
                 site_origin: sourceData.site_origin || null,
                 site_hostname:
                   sourceData.site_hostname || window.location.hostname || null,
+                lp_identifier: lpIdentifier,
                 page:
                   sourceData.page_url ||
                   window.location.pathname + window.location.search,
@@ -413,10 +425,19 @@ const CheckoutVendas = () => {
                 const fallbackSessionPayload = { ...sessionPayload };
                 delete fallbackSessionPayload.site_origin;
                 delete fallbackSessionPayload.site_hostname;
-                const retry = await supabase
+                let retry = await supabase
                   .from("tracking_lead_sessions")
                   .upsert([fallbackSessionPayload], { onConflict: "session_id" });
                 sessionError = retry.error;
+
+                if (sessionError && isMissingColumnError(sessionError)) {
+                  const fallbackSessionWithoutLp = { ...fallbackSessionPayload };
+                  delete fallbackSessionWithoutLp.lp_identifier;
+                  retry = await supabase
+                    .from("tracking_lead_sessions")
+                    .upsert([fallbackSessionWithoutLp], { onConflict: "session_id" });
+                  sessionError = retry.error;
+                }
               }
 
               if (sessionError) {
@@ -435,6 +456,7 @@ const CheckoutVendas = () => {
                     page: window.location.pathname + window.location.search,
                     payload: {
                       form_origin: "CheckoutVendas",
+                      lp_identifier: lpIdentifier,
                       site_origin: sourceData.site_origin || null,
                       site_hostname:
                         sourceData.site_hostname || window.location.hostname || null,

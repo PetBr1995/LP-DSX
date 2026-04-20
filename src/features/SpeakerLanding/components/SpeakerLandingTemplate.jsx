@@ -497,7 +497,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
       const phone = formData.get("phone")?.toString().trim() || "";
       const cargo = formData.get("cargo")?.toString().trim() || "";
       const resolvedFormOrigin = selectedPassOrigin || "Standard";
-      const lpIdentifier = `LP-${String(speaker?.slug || "segmento").trim()}`;
+      const lpIdentifier = `LP DSX - ${String(speaker?.name || "Segmento").trim()}`;
 
       const payload = {
         event_type: "CONVERSION",
@@ -579,14 +579,32 @@ const SpeakerLandingTemplate = ({ speaker }) => {
             const fallbackProfilePayload = { ...profilePayload };
             delete fallbackProfilePayload.site_origin;
             delete fallbackProfilePayload.site_hostname;
-            delete fallbackProfilePayload.lp_identifier;
-            const retry = await supabase
+            let retry = await supabase
               .from("tracking_lead_profiles")
               .upsert([fallbackProfilePayload], { onConflict: "lead_email" });
             profileError = retry.error;
+
+            if (profileError && isMissingColumnError(profileError)) {
+              const fallbackProfileWithoutLp = { ...fallbackProfilePayload };
+              delete fallbackProfileWithoutLp.lp_identifier;
+              retry = await supabase
+                .from("tracking_lead_profiles")
+                .upsert([fallbackProfileWithoutLp], { onConflict: "lead_email" });
+              profileError = retry.error;
+            }
           }
 
           if (!profileError) {
+            // Best-effort update to persist LP identifier when fallback inserts omit some fields.
+            try {
+              await supabase
+                .from("tracking_lead_profiles")
+                .update({ lp_identifier: lpIdentifier })
+                .eq("lead_email", email);
+            } catch {
+              // Ignore when column is unavailable or policy prevents this update.
+            }
+
             const sessionPayload = {
               session_id: sessionId,
               lead_name: name,
@@ -619,11 +637,31 @@ const SpeakerLandingTemplate = ({ speaker }) => {
               const fallbackSessionPayload = { ...sessionPayload };
               delete fallbackSessionPayload.site_origin;
               delete fallbackSessionPayload.site_hostname;
-              delete fallbackSessionPayload.lp_identifier;
-              const retry = await supabase
+              let retry = await supabase
                 .from("tracking_lead_sessions")
                 .upsert([fallbackSessionPayload], { onConflict: "session_id" });
               sessionError = retry.error;
+
+              if (sessionError && isMissingColumnError(sessionError)) {
+                const fallbackSessionWithoutLp = { ...fallbackSessionPayload };
+                delete fallbackSessionWithoutLp.lp_identifier;
+                retry = await supabase
+                  .from("tracking_lead_sessions")
+                  .upsert([fallbackSessionWithoutLp], { onConflict: "session_id" });
+                sessionError = retry.error;
+              }
+            }
+
+            if (!sessionError) {
+              // Best-effort update to persist LP identifier when fallback inserts omit some fields.
+              try {
+                await supabase
+                  .from("tracking_lead_sessions")
+                  .update({ lp_identifier: lpIdentifier })
+                  .eq("session_id", sessionId);
+              } catch {
+                // Ignore when column is unavailable or policy prevents this update.
+              }
             }
           }
         }
