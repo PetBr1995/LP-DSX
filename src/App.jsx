@@ -68,7 +68,7 @@ const App = () => {
             <Route path="/vendas-leads" element={<NewVendasCopy />} />
             <Route path="/lp/segmento/:slug" element={<SpeakerLandingPage />} />
             <Route path="/lp/:slug" element={<SpeakerLandingPage />} />
-            <Route path="/sobre" element={<Navigate to="/" replace />} />
+            <Route path="/sobre" element={<HomeTeste/>} />
             <Route path="/teste" element={<Vendas />} />
           </Routes>
         </Suspense>
