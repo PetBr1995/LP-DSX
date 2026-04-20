@@ -100,7 +100,7 @@ const segmentLandingList = [
       },
       {
         name: "Rafael Liporace",
-        image: "/palestrantes/RafaelLiporace.png",
+        image: "/optimized/step1/Rafael_liporace.PNG",
         bio: "CEO da Tardezinha. O mentor por trás da maior turnê da história da música brasileira. Expert em economia criativa e em transformar eventos em ativos de milhões.",
       },
     ],
@@ -411,7 +411,7 @@ const segmentLandingList = [
       },
       {
         name: "Fabrício Alva",
-        image: "/novas-palestrantes/slide-fabricio-alva.PNG",
+        image: "/optimized/step1/Fabricio_alva.PNG",
         bio: "Consultor empresarial, estrategista de negócios e especialista em performance,já ajudou empresas e profissionais a estruturarem seus negócios com mais clareza, eficiência e previsibilidade, unindo experiência prática com o uso inteligente da tecnologia.",
       },
     ],

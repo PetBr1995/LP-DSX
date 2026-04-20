@@ -101,7 +101,13 @@ export const InfoNovosPalestrantes = [
   {
     nome: "Fabricio Alva",
     desc: "CEO do Grupo Digital e Consultor empresarial",
-    img: "/novas-palestrantes/slide-fabricio-alva.PNG",
+    img: "/optimized/step1/Fabricio_alva.PNG",
+    badge: "Local",
+  },
+  {
+    nome: "Rafael Liporace",
+    desc: "Cofundador e CEO da Tardezinha",
+    img: "/optimized/step1/Rafael_liporace.PNG",
     badge: "Local",
   },
   {

@@ -69,8 +69,13 @@ const mainSpeakers = [
   },
   {
     name: "Fabricio Alva",
-    image: "/palestrantes/FabricioAlva.png",
+    image: "/optimized/step1/Fabricio_alva.PNG",
     bio: "Especialista em gestão empresarial com foco em estruturação de operações e processos que preparam empresas para escalar.",
+  },
+  {
+    name: "Rafael Liporace",
+    image: "/optimized/step1/Rafael_liporace.PNG",
+    bio: "Cofundador e CEO da Tardezinha, estrategista por trás da maior turnê da história do entretenimento brasileiro. Especialista em escala exponencial e gestão de grandes operações, lidera empresas premiadas nacionalmente por sua cultura de performance e excelência operacional.",
   },
   {
     name: "Gisele Oshiro",

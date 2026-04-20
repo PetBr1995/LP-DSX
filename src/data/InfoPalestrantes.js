@@ -79,7 +79,7 @@
     {
         nome: "Rafael Liporace",
         desc: "ReferÃªncia nacional em marketing promocional e encantamento.",
-        img: "/palestrantes/RafaelLiporace.png"
+        img: "/optimized/step1/Rafael_liporace.PNG"
     },
 
     {
@@ -140,7 +140,7 @@
     {
         nome: "FabrÃ­cio Alva",
         desc: "Consultor estratÃ©gico, empreendedor e especialista em performance empresarial.",
-        img: "/palestrantes/FabricioAlva.png"
+        img: "/optimized/step1/Fabricio_alva.PNG"
     },
     {
         nome: "Flavia Soares",
