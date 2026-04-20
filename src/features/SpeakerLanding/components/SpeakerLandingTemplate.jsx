@@ -691,10 +691,10 @@ const SpeakerLandingTemplate = ({ speaker }) => {
       openLeadGateForSympla(targetLink, formOrigin);
     };
     const immersionHighlights = [
+      { value: "+2mil", label: "Participantes" },
       { value: "+40", label: "palestras" },
       { value: "3 PALCOS", label: "simultâneos" },
       { value: "FEIRA", label: "de Negócios" },
-      { value: "MANAUS", label: "Vasco Vasques" },
     ];
 
     return (
@@ -1002,18 +1002,9 @@ const SpeakerLandingTemplate = ({ speaker }) => {
 
           <section className="rounded-2xl border border-[#F5C02B]/35 bg-[linear-gradient(150deg,rgba(16,12,6,0.88)_0%,rgba(7,7,7,0.92)_78%)] p-6">
             <h2 className="font-anton text-[clamp(1.4rem,5vw,3.3rem)] text-center leading-[1.22] uppercase text-[#F5C02B]">{speaker.immersionHeadline}</h2>
-            <div className="mt-6 flex w-full flex-wrap justify-center gap-x-8 gap-y-4 text-center">
-              {immersionMetricDefs.map((item, index) => (
-                <div key={item.label} className="min-w-0">
-                  <p className="font-jamjuree text-[24px] font-extrabold leading-none text-white md:text-[64px]">
-                    {formatAnimatedMetricValue(animatedMetricValues[index] ?? 0, item)}
-                  </p>
-                  <p className="mt-1 font-jamjuree font-black text-[9px] font-bold uppercase tracking-[0.02em] text-white/90 md:text-[14px]">
-                    {item.label}
-                  </p>
-                </div>
-              ))}
-            </div>
+            <p className="mt-4 text-center font-jamjuree text-base font-bold uppercase tracking-[0.08em] text-white/90 md:text-lg">
+              2 dias de imersão estratégica com quem domina o mercado.
+            </p>
             <div className="mt-5 grid w-full grid-cols-2 gap-3 md:grid-cols-4">
               {immersionHighlights.map((item) => (
                 <div key={`${item.value}-${item.label}`} className="nv-highlight-wrap w-full">
@@ -1027,6 +1018,20 @@ const SpeakerLandingTemplate = ({ speaker }) => {
                   </div>
                 </div>
               ))}
+            </div>
+            <div className="mt-5 space-y-2 text-left text-white/90">
+              <div className="flex w-full items-center justify-start gap-1.5">
+                <CalendarDays size={18} className="shrink-0 text-[#F5C02B]" />
+                <p className="font-jamjuree text-[1.08rem] font-bold leading-relaxed md:text-[1.18rem]">
+                  23 e 24 de Julho
+                </p>
+              </div>
+              <div className="flex w-full items-center justify-start gap-1.5">
+                <MapPin size={18} className="shrink-0 text-[#F5C02B]" />
+                <p className="font-jamjuree text-[1.08rem] font-bold leading-relaxed md:text-[1.18rem]">
+                  Centro de Convenções Vasco Vasques, Manaus/AM
+                </p>
+              </div>
             </div>
             <p className="mt-6 rounded-xl border border-[#F5C02B]/35 bg-[#15120B] p-4 font-jamjuree text-sm text-[#F8E3AA]">
               {speaker.valueAnchor}
