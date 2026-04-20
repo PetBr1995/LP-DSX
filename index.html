@@ -6,8 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="x-ua-compatible" content="IE=edge" />
 
-    <link rel="dns-prefetch" href="//www.googletagmanager.com" />
-    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <link
+      rel="preload"
+      as="image"
+      href="/[DSX]-Banner-Site-BG.png"
+      fetchpriority="high"
+    />
 
     <!-- Google Tag Manager -->
     <script>
@@ -15,7 +19,6 @@
         w[l] = w[l] || [];
 
         var hasLoadedGtm = false;
-        var timeoutId = null;
         var interactionEvents = ["pointerdown", "keydown", "scroll", "touchstart"];
 
         function hasAttributionParams() {
@@ -43,16 +46,9 @@
         }
 
         function cleanupTriggers() {
-          if (timeoutId) {
-            w.clearTimeout(timeoutId);
-            timeoutId = null;
-          }
-
           for (var idx = 0; idx < interactionEvents.length; idx += 1) {
             w.removeEventListener(interactionEvents[idx], onInteraction, true);
           }
-
-          d.removeEventListener("visibilitychange", onVisibilityChange, true);
         }
 
         function loadGtm(loadReason) {
@@ -79,12 +75,6 @@
           loadGtm("interaction");
         }
 
-        function onVisibilityChange() {
-          if (d.visibilityState === "hidden") {
-            loadGtm("visibility_hidden");
-          }
-        }
-
         if (hasAttributionParams()) {
           loadGtm("attribution_param");
           return;
@@ -98,23 +88,6 @@
           });
         }
 
-        d.addEventListener("visibilitychange", onVisibilityChange, {
-          once: true,
-          capture: true,
-        });
-
-        if ("requestIdleCallback" in w) {
-          w.requestIdleCallback(
-            function () {
-              loadGtm("idle");
-            },
-            { timeout: 2000 },
-          );
-        }
-
-        timeoutId = w.setTimeout(function () {
-          loadGtm("timeout_2500ms");
-        }, 2500);
       })(window, document, "script", "dataLayer", "GTM-W3FM6BQW");
     </script>
     <!-- End Google Tag Manager -->

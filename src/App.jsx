@@ -1,5 +1,6 @@
 import { Suspense, lazy, useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
+import NewVendas from "./pages/NewVendas";
 const PreserveUtmLinks = lazy(() => import("./components/PreserveUtmLinks"));
 const RoutePageTracking = lazy(() => import("./components/RoutePageTracking"));
 
@@ -10,7 +11,6 @@ const Patrocinadores = lazy(() => import("./pages/Patrocinadores"));
 const WhatsappPage = lazy(() => import("./pages/WhatsappPage"));
 const TesteAnimation = lazy(() => import("./pages/testeAnimation"));
 const Checkout = lazy(() => import("./pages/Checkout"));
-const NewVendas = lazy(() => import("./pages/NewVendas"));
 const NewVendasCopy = lazy(() => import("./pages/NewVendasCopy"));
 const PreCheckout = lazy(() => import("./pages/PreCheckout"));
 const Vendas = lazy(() => import("./pages/Vendas"));
