@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import HeroVendas from "../components/ComponentsVendas/HeroVendas";
 import SecondSectionVendas from "../components/ComponentsVendas/SecondSectionVendas";
@@ -25,7 +25,7 @@ const Vendas = () => {
   useEffect(() => {
     const pageTitle = "Ingressos DSX 2026 | Garanta seu passaporte";
     const pageDescription =
-      "Compre seu ingresso para o DSX 2026, o maior evento de negÃ³cios, marketing, vendas e inovaÃ§Ã£o do Norte do Brasil. Garanta seu passaporte.";
+      "Compre seu ingresso para o DSX 2026, o maior evento de negócios, marketing, vendas e inovação do Norte do Brasil. Garanta seu passaporte.";
     const pageUrl = "https://dsx.com.vc/vendas";
     const ogImage = "https://dsx.com.vc/optimized/step1/Banner-vendas-hero.webp";
 

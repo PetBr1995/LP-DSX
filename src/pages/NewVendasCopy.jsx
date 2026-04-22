@@ -1,4 +1,4 @@
-﻿import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   NewVendasContent,
   NewVendasHero,
@@ -76,7 +76,7 @@ const NewVendasCopy = () => {
     const currentErrors = {};
 
     if (!leadForm.name.trim()) currentErrors.name = "Informe seu nome completo.";
-    if (!isValidEmail(leadForm.email)) currentErrors.email = "Informe um e-mail vÃ¡lido.";
+    if (!isValidEmail(leadForm.email)) currentErrors.email = "Informe um e-mail válido.";
 
     const phone = onlyDigits(leadForm.phone);
     if (!(phone.length === 10 || phone.length === 11)) {
@@ -92,9 +92,9 @@ const NewVendasCopy = () => {
   const canSubmitLead = !loading;
 
   useEffect(() => {
-    const pageTitle = "Ingressos DSX 2026 | 3Âº Lote Aberto";
+    const pageTitle = "Ingressos DSX 2026 | 3º Lote Aberto";
     const pageDescription =
-      "Garanta seu passaporte para o DSX 2026: o maior evento de negÃ³cios, marketing, vendas e inovaÃ§Ã£o do Norte. Dias 23 e 24 de julho em Manaus.";
+      "Garanta seu passaporte para o DSX 2026: o maior evento de negócios, marketing, vendas e inovação do Norte. Dias 23 e 24 de julho em Manaus.";
     const pageUrl = "https://dsx.com.vc/newvendas";
     const ogImage = "https://dsx.com.vc/optimized/step1/Banner-vendas-hero.webp";
 
@@ -158,7 +158,7 @@ const NewVendasCopy = () => {
       url: pageUrl,
       location: {
         "@type": "Place",
-        name: "Centro de ConvenÃ§Ãµes Vasco Vasques",
+        name: "Centro de Convenções Vasco Vasques",
         address: {
           "@type": "PostalAddress",
           addressLocality: "Manaus",
@@ -264,7 +264,7 @@ const NewVendasCopy = () => {
     if (event) event.preventDefault();
     if (loading) return;
     setLeadStatus("idle");
-    setMensagem("Para continuar com a compra, preencha e envie o formulÃ¡rio.");
+    setMensagem("Para continuar com a compra, preencha e envie o formulário.");
     setShowLeadModal(true);
   };
 
@@ -438,7 +438,7 @@ const NewVendasCopy = () => {
       }, 700);
     } catch (_error) {
       setLeadStatus("error");
-      setMensagem(_error?.message || "Erro ao enviar formulÃ¡rio. Tente novamente.");
+      setMensagem(_error?.message || "Erro ao enviar formulário. Tente novamente.");
     } finally {
       setLoading(false);
     }
@@ -447,7 +447,7 @@ const NewVendasCopy = () => {
   return (
     <section
       className="relative isolate overflow-hidden bg-black pb-28 md:pb-32"
-      aria-label="PÃ¡gina de vendas DSX 2026"
+      aria-label="Página de vendas DSX 2026"
     >
       <div className="pointer-events-none absolute inset-0 z-0">
         <div
@@ -500,7 +500,7 @@ const NewVendasCopy = () => {
         message={mensagem}
         loading={loading}
         canSubmit={canSubmitLead}
-        headline="PREENCHA O FORMULÃRIO PARA COMPRAR SEU PASSAPORTE"
+        headline="PREENCHA O FORMULÁRIO PARA COMPRAR SEU PASSAPORTE"
         subheading=""
         description=""
       />

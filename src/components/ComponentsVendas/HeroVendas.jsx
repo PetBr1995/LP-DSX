@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Player from "@vimeo/player";
 import CTAButton from "../../components/Mascaras/CTAButton";
 
@@ -27,7 +27,7 @@ const HeroVendas = () => {
     const onPlay = () => setIsPlaying(true);
     const onPause = () => setIsPlaying(false);
 
-    // corta o vÃ­deo em 1:37 e volta pro inÃ­cio (loop "cortado")
+    // corta o vídeo em 1:37 e volta pro início (loop "cortado")
     const onTimeUpdate = (data) => {
       if (data?.seconds >= END_TIME) {
         player
@@ -139,7 +139,7 @@ const HeroVendas = () => {
               />
 
               {/*
-              Se quiser voltar com o overlay de play, Ã© sÃ³ descomentar.
+              Se quiser voltar com o overlay de play, é só descomentar.
               {!isPlaying && (
                 <div className="absolute inset-0 grid place-items-center bg-black/45 backdrop-blur-[2px]">
                   <button

@@ -1,22 +1,22 @@
-﻿export const InfoPalestrantes = [
+export const InfoPalestrantes = [
     {
         nome: "Tallis Gomes",
-        desc: "Crescimento, LideranÃ§a e ExecuÃ§Ã£o de Alto Impacto ",
+        desc: "Crescimento, Liderança e Execução de Alto Impacto ",
         img: "/palestrantes/TallisGomes.png"
     },
     {
         nome: "Alfredo Soares",
-        desc: "Empreendedor e sÃ³cio do G4 EducaÃ§Ã£o",
+        desc: "Empreendedor e sócio do G4 Educação",
         img: "/palestrantes/AlfredoSoares.png"
     },
     {
-        nome: "JoÃ£o Kepler",
+        nome: "João Kepler",
         desc: "Investidor anjo, empreendedor e autor best-seller.",
         img: "/palestrantes/JoaoKepler.png"
     },
     {
         nome: "Camila Renaux",
-        desc: "Especialista em Marketing EstratÃ©gico, Marketing Digital e InteligÃªncia Artificial pelo MIT.",
+        desc: "Especialista em Marketing Estratégico, Marketing Digital e Inteligência Artificial pelo MIT.",
         img: "/palestrantes/CamilaRenaux.png"
     },
     {
@@ -25,13 +25,13 @@
         img: "/palestrantes/RafaelKiso.png"
     },
     {
-        nome: "JoÃ£o Brognoli",
+        nome: "João Brognoli",
         desc: "CEO da Duo&Co",
         img: "/palestrantes/JoaoBrognoli.png"
     },
     {
-        nome: "Nicolas CharÃ£o",
-        desc: "ReferÃªncia nacional em performance comercial.",
+        nome: "Nicolas Charão",
+        desc: "Referência nacional em performance comercial.",
         img: "/palestrantes/NicolasCharao.png"
     },
     {
@@ -40,7 +40,7 @@
         img: "/palestrantes/FernandoMiranda.png"
     },
     {
-        nome: "AndrÃ© Siqueira",
+        nome: "André Siqueira",
         desc: "Cofundador da RD Station",
         img: "/palestrantes/AndreSiqueira.png"
     },
@@ -52,7 +52,7 @@
 
     {
         nome: "Lucas Pimenta",
-        desc: "Estrategista digital polÃ­tico",
+        desc: "Estrategista digital político",
         img: "/palestrantes/LucasPimenta.png"
     },
     {
@@ -67,18 +67,18 @@
     },
     {
         nome: "Hanah Franklin",
-        desc: "Criadora de conteÃºdo, futurista e especialista em comportamento digital.",
+        desc: "Criadora de conteúdo, futurista e especialista em comportamento digital.",
         img: "/palestrantes/HanahFranklin.png"
     },
 
     {
         nome: "Ben Ludmer",
-        desc: "MÃ¡gico, humorista e roteirista, especialista em storytelling e encantamento.",
+        desc: "Mágico, humorista e roteirista, especialista em storytelling e encantamento.",
         img: "/palestrantes/BenLudmer.png"
     },
     {
         nome: "Rafael Liporace",
-        desc: "ReferÃªncia nacional em marketing promocional e encantamento.",
+        desc: "Referência nacional em marketing promocional e encantamento.",
         img: "/optimized/step1/Rafael_liporace.PNG"
     },
 
@@ -89,7 +89,7 @@
     },
     {
         nome: "Alcides Netto",
-        desc: "FotÃ³grafo publicitÃ¡rio e criador audiovisual.",
+        desc: "Fotógrafo publicitário e criador audiovisual.",
         img: "/palestrantes/AlcidesNetto.png"
     },
     {
@@ -104,7 +104,7 @@
     },
     {
         nome: "Rodrigo Araujo",
-        desc: "Gestor de Marketing e Vendas na AgÃªncia Digital ComunicaÃ§Ã£o",
+        desc: "Gestor de Marketing e Vendas na Agência Digital Comunicação",
         img: "/palestrantes/RodrigoAraujo.png"
     },
     {
@@ -114,12 +114,12 @@
     },
     {
         nome: "Rodrigo Kallas",
-        desc: "SÃ³cio e CEO da Kallas MÃ­dia OOH",
+        desc: "Sócio e CEO da Kallas Mídia OOH",
         img: "/palestrantes/RodrigoKallas.png"
     },
     {
         nome: "Rodrigo Waughan",
-        desc: "Presidente do Grupo GÃ©rbera",
+        desc: "Presidente do Grupo Gérbera",
         img: "/palestrantes/RodrigoWaughan.png"
     },
     {
@@ -138,23 +138,23 @@
         img: "/palestrantes/DiegoCestaro.png"
     },
     {
-        nome: "FabrÃ­cio Alva",
-        desc: "Consultor estratÃ©gico, empreendedor e especialista em performance empresarial.",
+        nome: "Fabrício Alva",
+        desc: "Consultor estratégico, empreendedor e especialista em performance empresarial.",
         img: "/optimized/step1/Fabricio_alva.PNG"
     },
     {
         nome: "Flavia Soares",
-        desc: "ReferÃªncia em pesquisa qualitativa e comportamento do consumidor.",
+        desc: "Referência em pesquisa qualitativa e comportamento do consumidor.",
         img: "/optimized/palestrantes/FlaviaSausmikat.webp"
     },
     {
-        nome: "AimÃ©e Gomes",
-        desc: "Especialista em trÃ¡fego pago, analista de dados e estrategista digital.",
+        nome: "Aimée Gomes",
+        desc: "Especialista em tráfego pago, analista de dados e estrategista digital.",
         img: "/palestrantes/AimeeGomes.png"
     },
     {
         nome: "Glauber Gomes",
-        desc: "Co-fundador da rumomkt e da rumo.ia, especialista em estratÃ©gia digital e inteligÃªncia artificial.",
+        desc: "Co-fundador da rumomkt e da rumo.ia, especialista em estratégia digital e inteligência artificial.",
         img: "/palestrantes/GlauberGomes.png"
     },
     {
@@ -164,27 +164,27 @@
     },
     {
         nome: "Roberta Gaspar",
-        desc: "COO do All In Club, especialista em experiÃªncia do cliente e cultura organizacional.",
+        desc: "COO do All In Club, especialista em experiência do cliente e cultura organizacional.",
         img: "/palestrantes/RobertaGaspar.png"
     },
     {
-        nome: "MaurÃ­cio Stellato",
-        desc: "ReferÃªncia nacional em automaÃ§Ã£o de conversas e estratÃ©gia com IA.",
+        nome: "Maurício Stellato",
+        desc: "Referência nacional em automação de conversas e estratégia com IA.",
         img: "/palestrantes/MauricioStellato.png"
     },
     {
         nome: "Bianca Guedes",
-        desc: "Triatleta e influenciadora digital, referÃªncia em performance e autenticidade.",
+        desc: "Triatleta e influenciadora digital, referência em performance e autenticidade.",
         img: "/palestrantes/BiancaGuedes.png"
     },
     {
         nome: "Jack Serafim",
-        desc: "Especialista em marketing polÃ­tico, comunicaÃ§Ã£o pÃºblica e posicionamento estratÃ©gico.",
+        desc: "Especialista em marketing político, comunicação pública e posicionamento estratégico.",
         img: "/palestrantes/JackSefarim.png"
     },
     {
         nome: "Mariah Acris",
-        desc: "Diretora audiovisual e publicitÃ¡ria.",
+        desc: "Diretora audiovisual e publicitária.",
         img: "/palestrantes/MariahAcris.png"
     },
     {
@@ -203,7 +203,7 @@
         img: "/palestrantes/SuellenScop.png"
     },
     {
-        nome: "JÃ©ssica Nery",
+        nome: "Jéssica Nery",
         desc: "Especialista em Marketing Digital e Vendas",
         img: "/palestrantes/JessicaNery.png"
     },
@@ -213,8 +213,8 @@
         img: "/palestrantes/CarolGuerra.png"
     },
     {
-        nome: "AfrÃ¢nio Soares Filho",
-        desc: "ReferÃªncia regional em inteligÃªncia de mercado e anÃ¡lise estratÃ©gica.",
+        nome: "Afrânio Soares Filho",
+        desc: "Referência regional em inteligência de mercado e análise estratégica.",
         img: "/palestrantes/AfranioSoares.png"
     },
     {
@@ -224,7 +224,7 @@
     },
     {
         nome: "Erick Fernandes",
-        desc: "Diretor Comercial do Centro do AlumÃ­nio.",
+        desc: "Diretor Comercial do Centro do Alumínio.",
         img: "/palestrantes/ErickFernandes.png"
     },
     {

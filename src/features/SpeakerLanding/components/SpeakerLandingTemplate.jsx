@@ -1,4 +1,4 @@
-﻿import NewVendasHeaderMask from "../../../components/NewVendas/NewVendasHeaderMask";
+import NewVendasHeaderMask from "../../../components/NewVendas/NewVendasHeaderMask";
 import PassaportesSection from "../../../components/NewVendas/sections/PassaportesSection";
 import FooterSection from "../../../components/NewVendas/sections/FooterSection";
 import LeadPopupFormHomeTeste from "../../../components/HomeTesteComponentes/LeadPopupFormHomeTeste";
@@ -23,20 +23,20 @@ const RD_API_URL =
 const THEME_COPY = {
   marketing: {
     painPoints: [
-      "Investe em trÃ¡fego, mas nÃ£o enxerga ROI com clareza.",
-      "Produz conteÃºdo, mas os leads nÃ£o avanÃ§am para venda.",
-      "Equipe sem processo claro de aquisiÃ§Ã£o e conversÃ£o.",
-      "DependÃªncia de campanhas pontuais para bater meta.",
+      "Investe em tráfego, mas não enxerga ROI com clareza.",
+      "Produz conteúdo, mas os leads não avançam para venda.",
+      "Equipe sem processo claro de aquisição e conversão.",
+      "Dependência de campanhas pontuais para bater meta.",
     ],
-    promise: "Sair com funis e campanhas estruturados para gerar demanda previsÃ­vel.",
+    promise: "Sair com funis e campanhas estruturados para gerar demanda previsível.",
     ctaAfterSpeakers: "QUERO APRENDER COM ESSES ESPECIALISTAS",
     ctaAfterSocial: "QUERO FAZER PARTE",
     ctaAfterPrices: "GARANTIR POR 12x R$ 41,42",
-    ctaFinal: "GARANTIR AGORA â€” ULTIMAS VAGAS",
+    ctaFinal: "GARANTIR AGORA — ULTIMAS VAGAS",
   },
   vendas: {
     painPoints: [
-      "Time vende por esforÃ§o, sem processo repetivel.",
+      "Time vende por esforço, sem processo repetivel.",
       "Pipeline desorganizado e baixa previsibilidade mensal.",
       "Negociacao longa, com perda de margem no fechamento.",
       "Dependencia excessiva de poucos vendedores-chave.",
@@ -45,7 +45,7 @@ const THEME_COPY = {
     ctaAfterSpeakers: "QUERO FECHAR MAIS",
     ctaAfterSocial: "QUERO FAZER PARTE",
     ctaAfterPrices: "GARANTIR POR 12x R$ 41,42",
-    ctaFinal: "GARANTIR AGORA â€” ULTIMAS VAGAS",
+    ctaFinal: "GARANTIR AGORA — ULTIMAS VAGAS",
   },
   inovacao: {
     painPoints: [
@@ -58,7 +58,7 @@ const THEME_COPY = {
     ctaAfterSpeakers: "QUERO INOVAR COM METODO",
     ctaAfterSocial: "QUERO FAZER PARTE",
     ctaAfterPrices: "GARANTIR POR 12x R$ 41,42",
-    ctaFinal: "GARANTIR AGORA â€” ULTIMAS VAGAS",
+    ctaFinal: "GARANTIR AGORA — ULTIMAS VAGAS",
   },
   negocios: {
     painPoints: [
@@ -71,7 +71,7 @@ const THEME_COPY = {
     ctaAfterSpeakers: "QUERO CRESCER COM ESTRATEGIA",
     ctaAfterSocial: "QUERO FAZER PARTE",
     ctaAfterPrices: "GARANTIR POR 12x R$ 41,42",
-    ctaFinal: "GARANTIR AGORA â€” ULTIMAS VAGAS",
+    ctaFinal: "GARANTIR AGORA — ULTIMAS VAGAS",
   },
 };
 

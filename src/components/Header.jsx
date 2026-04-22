@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import CTAButton from "./Mascaras/CTAButton";
 import HeaderMask from "./Mascaras/HeaderMask";
 
@@ -31,7 +31,7 @@ const Header = ({ className = "", ctaLink = "/vendas" }) => {
         `}
       >
         <a href="/#home">
-          {/* Logo (sempre visÃ­vel) */}
+          {/* Logo (sempre visível) */}
                     <picture>
             <source
               srcSet="/optimized/step1/DSX-2026-icon-1.avif"
@@ -69,7 +69,7 @@ const Header = ({ className = "", ctaLink = "/vendas" }) => {
           aria-expanded={open}
           onClick={toggle}
         >
-          {/* Ãcone hambÃºrguer simples (SVG) */}
+          {/* Ícone hambúrguer simples (SVG) */}
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
             <path
               d="M4 7h16M4 12h16M4 17h16"

@@ -1,4 +1,4 @@
-﻿export const InfoPalestrantesRegionais = [
+export const InfoPalestrantesRegionais = [
 
     {
         nome: "Djalma Pinheiro",
@@ -7,7 +7,7 @@
     },
     {
         nome: "Alcides Netto",
-        desc: "FotÃ³grafo publicitÃ¡rio e criador audiovisual.",
+        desc: "Fotógrafo publicitário e criador audiovisual.",
         img: "/palestrantes/AlcidesNetto.png"
     },
     {
@@ -22,7 +22,7 @@
     },
     {
         nome: "Rodrigo Araujo",
-        desc: "Gestor de Marketing e Vendas na AgÃªncia Digital ComunicaÃ§Ã£o",
+        desc: "Gestor de Marketing e Vendas na Agência Digital Comunicação",
         img: "/palestrantes/RodrigoAraujo.png"
     },
     {
@@ -32,12 +32,12 @@
     },
     {
         nome: "Rodrigo Kallas",
-        desc: "SÃ³cio e CEO da Kallas MÃ­dia OOH",
+        desc: "Sócio e CEO da Kallas Mídia OOH",
         img: "/palestrantes/RodrigoKallas.png"
     },
     {
         nome: "Rodrigo Waughan",
-        desc: "Presidente do Grupo GÃ©rbera",
+        desc: "Presidente do Grupo Gérbera",
         img: "/palestrantes/RodrigoWaughan.png"
     },
     {
@@ -56,23 +56,23 @@
         img: "/palestrantes/DiegoCestaro.png"
     },
     {
-        nome: "FabrÃ­cio Alva",
-        desc: "Consultor estratÃ©gico, empreendedor e especialista em performance empresarial.",
+        nome: "Fabrício Alva",
+        desc: "Consultor estratégico, empreendedor e especialista em performance empresarial.",
         img: "/optimized/step1/Fabricio_alva.PNG"
     },
     {
         nome: "Flavia Soares",
-        desc: "ReferÃªncia em pesquisa qualitativa e comportamento do consumidor.",
+        desc: "Referência em pesquisa qualitativa e comportamento do consumidor.",
         img: "/optimized/palestrantes/FlaviaSausmikat.webp"
     },
     {
-        nome: "AimÃ©e Gomes",
-        desc: "Especialista em trÃ¡fego pago, analista de dados e estrategista digital.",
+        nome: "Aimée Gomes",
+        desc: "Especialista em tráfego pago, analista de dados e estrategista digital.",
         img: "/palestrantes/AimeeGomes.png"
     },
     {
         nome: "Glauber Gomes",
-        desc: "Co-fundador da rumomkt e da rumo.ia, especialista em estratÃ©gia digital e inteligÃªncia artificial.",
+        desc: "Co-fundador da rumomkt e da rumo.ia, especialista em estratégia digital e inteligência artificial.",
         img: "/palestrantes/GlauberGomes.png"
     },
     {
@@ -82,27 +82,27 @@
     },
     {
         nome: "Roberta Gaspar",
-        desc: "COO do All In Club, especialista em experiÃªncia do cliente e cultura organizacional.",
+        desc: "COO do All In Club, especialista em experiência do cliente e cultura organizacional.",
         img: "/palestrantes/RobertaGaspar.png"
     },
     {
-        nome: "MaurÃ­cio Stellato",
-        desc: "ReferÃªncia nacional em automaÃ§Ã£o de conversas e estratÃ©gia com IA.",
+        nome: "Maurício Stellato",
+        desc: "Referência nacional em automação de conversas e estratégia com IA.",
         img: "/palestrantes/MauricioStellato.png"
     },
     {
         nome: "Bianca Guedes",
-        desc: "Triatleta e influenciadora digital, referÃªncia em performance e autenticidade.",
+        desc: "Triatleta e influenciadora digital, referência em performance e autenticidade.",
         img: "/palestrantes/BiancaGuedes.png"
     },
     {
         nome: "Jack Serafim",
-        desc: "Especialista em marketing polÃ­tico, comunicaÃ§Ã£o pÃºblica e posicionamento estratÃ©gico.",
+        desc: "Especialista em marketing político, comunicação pública e posicionamento estratégico.",
         img: "/palestrantes/JackSefarim.png"
     },
     {
         nome: "Mariah Acris",
-        desc: "Diretora audiovisual e publicitÃ¡ria.",
+        desc: "Diretora audiovisual e publicitária.",
         img: "/palestrantes/MariahAcris.png"
     },
     {
@@ -121,7 +121,7 @@
         img: "/palestrantes/SuellenScop.png"
     },
     {
-        nome: "JÃ©ssica Nery",
+        nome: "Jéssica Nery",
         desc: "Especialista em Marketing Digital e Vendas",
         img: "/palestrantes/JessicaNery.png"
     },
@@ -131,8 +131,8 @@
         img: "/palestrantes/CarolGuerra.png"
     },
     {
-        nome: "AfrÃ¢nio Soares Filho",
-        desc: "ReferÃªncia regional em inteligÃªncia de mercado e anÃ¡lise estratÃ©gica.",
+        nome: "Afrânio Soares Filho",
+        desc: "Referência regional em inteligência de mercado e análise estratégica.",
         img: "/palestrantes/AfranioSoares.png"
     },
     {
@@ -142,7 +142,7 @@
     },
     {
         nome: "Erick Fernandes",
-        desc: "Diretor Comercial do Centro do AlumÃ­nio.",
+        desc: "Diretor Comercial do Centro do Alumínio.",
         img: "/palestrantes/ErickFernandes.png"
     },
     {
