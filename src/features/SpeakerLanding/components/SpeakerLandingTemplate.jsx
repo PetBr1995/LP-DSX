@@ -782,14 +782,14 @@ const SpeakerLandingTemplate = ({ speaker }) => {
                 <p className="mx-auto mt-4 max-w-2xl font-jamjuree text-base text-white/85 md:text-lg">{speaker.subtitle}</p>
                 <p className="mx-auto mt-4 max-w-2xl border-l-2 border-[#F5C02B]/50 pl-4 text-left font-jamjuree text-[#F9E1A5]">{speaker.hook}</p>
 
-                <div className="mx-auto mt-5 max-w-md space-y-2 text-white/90">
-                  <div className="flex w-full items-center justify-center gap-1.5">
-                    <CalendarDays size={18} className="shrink-0 text-[#F5C02B]" />
-                    <p className="font-jamjuree text-[0.98rem] leading-relaxed">23 e 24 de Julho</p>
+                <div className="mx-auto mt-5 w-full max-w-md space-y-2 text-left text-white/90">
+                  <div className="flex w-full items-start justify-start gap-2">
+                    <CalendarDays size={18} className="mt-0.5 shrink-0 text-[#F5C02B]" />
+                    <p className="font-jamjuree text-[0.98rem] leading-relaxed">{speaker.event.date}</p>
                   </div>
-                  <div className="flex w-full items-center justify-center gap-1.5">
-                    <MapPin size={18} className="shrink-0 text-[#F5C02B]" />
-                    <p className="font-jamjuree text-[0.98rem] leading-relaxed">Centro de Convenções Vasco Vasques, Manaus/AM</p>
+                  <div className="flex w-full items-start justify-start gap-2">
+                    <MapPin size={18} className="mt-0.5 shrink-0 text-[#F5C02B]" />
+                    <p className="font-jamjuree text-[0.98rem] leading-relaxed">{speaker.event.city}</p>
                   </div>
                 </div>
 
@@ -932,14 +932,23 @@ const SpeakerLandingTemplate = ({ speaker }) => {
           <section className="rounded-2xl bg-[#ECECEC] p-6 text-black md:p-8">
             <h2 className="font-anton text-[clamp(1.6rem,5vw,3.3rem)] text-center md:text-start uppercase leading-[1.2] md:text-4xl">{speaker.outcomesHeadline}</h2>
             <div className="mt-6 grid gap-4 md:grid-cols-2">
-              {speaker.outcomes.map((item) => (
-                <article key={item} className="rounded-2xl bg-white p-4 shadow-[0_10px_22px_rgba(0,0,0,0.08)]">
-                  <p className="inline-flex items-center gap-2 font-jamjuree text-sm text-[#1A1A1A]">
-                    <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-[#D98A00]" />
-                    <span>{item}</span>
-                  </p>
-                </article>
-              ))}
+              {speaker.outcomes.map((item) => {
+                const title = typeof item === "string" ? "" : item?.title || "";
+                const description =
+                  typeof item === "string" ? item : item?.description || "";
+
+                return (
+                  <article key={typeof item === "string" ? item : `${title}-${description}`} className="rounded-2xl bg-white p-4 shadow-[0_10px_22px_rgba(0,0,0,0.08)]">
+                    <div className="flex items-start gap-2 font-jamjuree text-sm text-[#1A1A1A]">
+                      <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-[#D98A00]" />
+                      <div>
+                        {title ? <p className="font-bold">{title}</p> : null}
+                        <p>{description}</p>
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           </section>
 
@@ -1058,16 +1067,16 @@ const SpeakerLandingTemplate = ({ speaker }) => {
               ))}
             </div>
             <div className="mt-5 space-y-2 text-left text-white/90">
-              <div className="flex w-full items-center justify-start gap-1.5">
-                <CalendarDays size={18} className="shrink-0 text-[#F5C02B]" />
+              <div className="flex w-full items-start justify-start gap-2">
+                <CalendarDays size={18} className="mt-0.5 shrink-0 text-[#F5C02B]" />
                 <p className="font-jamjuree text-[1.08rem] font-bold leading-relaxed md:text-[1.18rem]">
-                  23 e 24 de Julho
+                  {speaker.event.date}
                 </p>
               </div>
-              <div className="flex w-full items-center justify-start gap-1.5">
-                <MapPin size={18} className="shrink-0 text-[#F5C02B]" />
+              <div className="flex w-full items-start justify-start gap-2">
+                <MapPin size={18} className="mt-0.5 shrink-0 text-[#F5C02B]" />
                 <p className="font-jamjuree text-[1.08rem] font-bold leading-relaxed md:text-[1.18rem]">
-                  Centro de Convenções Vasco Vasques, Manaus/AM
+                  {speaker.event.city}
                 </p>
               </div>
             </div>
@@ -1228,12 +1237,12 @@ const SpeakerLandingTemplate = ({ speaker }) => {
               </div>
 
               <div className="mt-4 space-y-2 text-left text-white/90">
-                <div className="flex w-full items-center justify-start gap-1.5">
-                  <CalendarDays size={18} className="shrink-0 text-[#F5C02B]" />
+                <div className="flex w-full items-start justify-start gap-2">
+                  <CalendarDays size={18} className="mt-0.5 shrink-0 text-[#F5C02B]" />
                   <p className="font-jamjuree text-[0.98rem] leading-relaxed">{speaker.event.date}</p>
                 </div>
-                <div className="flex w-full items-center justify-start gap-1.5">
-                  <MapPin size={18} className="shrink-0 text-[#F5C02B]" />
+                <div className="flex w-full items-start justify-start gap-2">
+                  <MapPin size={18} className="mt-0.5 shrink-0 text-[#F5C02B]" />
                   <p className="font-jamjuree text-[0.98rem] leading-relaxed">{speaker.event.city}</p>
                 </div>
               </div>
@@ -1320,12 +1329,24 @@ const SpeakerLandingTemplate = ({ speaker }) => {
               {speaker.outcomesHeadline || "Transformacao Que Voce Leva"}
             </h2>
             <ul className="mt-5 space-y-3 font-jamjuree text-white/90">
-              {speaker.outcomes.map((item) => (
-                <li key={item} className="flex items-start gap-2">
-                  <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[#F5C02B]" />
-                  <span>{item}</span>
-                </li>
-              ))}
+              {speaker.outcomes.map((item) => {
+                const title = typeof item === "string" ? "" : item?.title || "";
+                const description =
+                  typeof item === "string" ? item : item?.description || "";
+
+                return (
+                  <li
+                    key={typeof item === "string" ? item : `${title}-${description}`}
+                    className="flex items-start gap-2"
+                  >
+                    <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[#F5C02B]" />
+                    <div>
+                      {title ? <p className="font-bold">{title}</p> : null}
+                      <p>{description}</p>
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
             <p className="mt-5 rounded-xl border border-[#F5C02B]/25 bg-[#171107] px-4 py-3 font-jamjuree text-sm text-[#F8E3AA]">
               Dado da ultima edicao: +{speaker.socialProof.attendees} participantes e +{speaker.socialProof.talks} palestras aplicadas.

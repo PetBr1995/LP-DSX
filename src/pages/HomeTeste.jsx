@@ -120,10 +120,10 @@ function LazyMountSection({
 
 const HomeTeste = () => {
   useEffect(() => {
-    const pageTitle = "DSX | Digital Summit Experience";
+    const pageTitle = "Sobre | DSX | Digital Summit Experience";
     const pageDescription =
       "DSX 2026: o maior evento de negócios, marketing, vendas e inovação do Norte. Dias 23 e 24 de julho, em Manaus.";
-    const pageUrl = "https://dsx.com.vc/";
+    const pageUrl = "https://dsx.com.vc/sobre";
     const ogImage = "https://dsx.com.vc/og-home-dsx-2026.jpg";
 
     document.title = pageTitle;

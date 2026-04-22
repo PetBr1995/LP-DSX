@@ -14,6 +14,7 @@ const Checkout = lazy(() => import("./pages/Checkout"));
 const NewVendasCopy = lazy(() => import("./pages/NewVendasCopy"));
 const PreCheckout = lazy(() => import("./pages/PreCheckout"));
 const Vendas = lazy(() => import("./pages/Vendas"));
+const LPAyla = lazy(() => import("./pages/LPAyla"));
 const SpeakerLandingPage = lazy(
   () => import("./features/SpeakerLanding/SpeakerLandingPage"),
 );
@@ -66,6 +67,7 @@ const App = () => {
             />
             <Route path="/vendas" element={<NewVendas />} />
             <Route path="/vendas-leads" element={<NewVendasCopy />} />
+            <Route path="/lpayla" element={<LPAyla />} />
             <Route path="/lp/segmento/:slug" element={<SpeakerLandingPage />} />
             <Route path="/lp/:slug" element={<SpeakerLandingPage />} />
             <Route path="/sobre" element={<HomeTeste/>} />

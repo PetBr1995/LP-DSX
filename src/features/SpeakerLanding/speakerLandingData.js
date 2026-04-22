@@ -150,7 +150,7 @@ const segmentLandingList = [
     image: "/optimized/step1/Banner-vendas-hero.webp",
     category: "Segmento Estratégico",
     headline:
-      "Vender não pode ser uma questão de sorte Construa uma máquina de vendas que funciona mesmo quando seu melhor vendedor sai",
+      "Vender não pode ser uma questão de sorte, Construa uma máquina de vendas que funciona mesmo quando seu melhor vendedor sai",
     subtitle:
       "Para empreendedores, gestores e profissionais de vendas que sabem que venda previsível não é sorte nem carisma. É método, processo e métricas",
     hook: "Em 2 dias, você sai com processo, funil e time estruturados para fechar mais. Sem depender de talento individual.",
@@ -174,11 +174,31 @@ const segmentLandingList = [
       "No DSX você aprende a construir o sistema que qualquer bom vendedor consegue replicar.",
     outcomesHeadline: "O QUE VOCÊ LEVA DO DSX",
     outcomes: [
-      "Vendas Descubra como atrair clientes de alto valor, negociar com previsibilidade e fechar contratos maiores, construindo um modelo de receita que não depende de mês bom ou vendedor motivado.",
-      "Marketing & Performance Pare de impulsionar no achismo. Aprenda a estruturar tráfego pago, funis de venda e criativos de alta conversão que geram lead qualificado e reduzem o custo de aquisição.",
-      "Ferramentas de Crescimento Chega de testar o que não funciona. Aprenda direto com especialistas as tecnologias e táticas que realmente escalam operações comerciais, sem desperdiçar verba nem tempo.",
-      "Inteligência Artificial Transforme a IA em vantagem competitiva no seu processo de vendas. Automatize tarefas, eleve a produtividade do time comercial e tome decisões baseadas 100% em dados.",
-      "Gestão Comercial Pare de perder vendas por desorganização. Estruture cada etapa do processo comercial, use o CRM de forma inteligente e prepare sua operação para escalar sem perder negócio no caminho.",
+      {
+        title: "Vendas",
+        description:
+          "Descubra como atrair clientes de alto valor, negociar com previsibilidade e fechar contratos maiores, construindo um modelo de receita que não depende de mês bom ou vendedor motivado.",
+      },
+      {
+        title: "Marketing & Performance",
+        description:
+          "Pare de impulsionar no achismo. Aprenda a estruturar tráfego pago, funis de venda e criativos de alta conversão que geram lead qualificado e reduzem o custo de aquisição.",
+      },
+      {
+        title: "Ferramentas de Crescimento",
+        description:
+          "Chega de testar o que não funciona. Aprenda direto com especialistas as tecnologias e táticas que realmente escalam operações comerciais, sem desperdiçar verba nem tempo.",
+      },
+      {
+        title: "Inteligência Artificial",
+        description:
+          "Transforme a IA em vantagem competitiva no seu processo de vendas. Automatize tarefas, eleve a produtividade do time comercial e tome decisões baseadas 100% em dados.",
+      },
+      {
+        title: "Gestão Comercial",
+        description:
+          "Pare de perder vendas por desorganização. Estruture cada etapa do processo comercial, use o CRM de forma inteligente e prepare sua operação para escalar sem perder negócio no caminho.",
+      },
     ],
     speakersHeadline: "PALESTRANTES CONFIRMADOS NO DSX 2026",
     segmentSpeakers: [
@@ -273,11 +293,31 @@ const segmentLandingList = [
       "Inovação sem método é apenas gasto. No DSX, você aprende a estrutura que transforma experimentação em vantagem competitiva.",
     outcomesHeadline: "Estratégia de Vendas",
     outcomes: [
-      "Estratégia de Vendas Implemente o método para atrair clientes de alto valor e negociar com previsibilidade. Construa um modelo de receita robusto, onde o fechamento de grandes contratos não depende de sazonalidade ou motivação individual, mas de processo.",
-      "Marketing & Performance de Dados Substitua o \"achismo\" por ativos digitais. Estruture funis de venda e criativos de alta conversão focados em reduzir o custo de aquisição (CAC) e elevar a qualidade do lead que chega à sua mesa.",
-      "Tecnologias de Escala Elimine o desperdício com ferramentas que não entregam retorno. Tenha acesso às tecnologias e táticas de crescimento que realmente escalam operações comerciais, validadas por quem já domina o jogo.",
-      "Inteligência Artificial Aplicada Transforme a IA em vantagem competitiva real. Automatize o operacional, eleve a produtividade do time e utilize a inteligência de dados como suporte central para suas decisões estratégicas.",
-      "Gestão e Governança Comercial Blindagem contra a desorganização. Estruture cada etapa do seu processo comercial com inteligência de CRM para preparar sua operação para o próximo nível de escala, sem perder margem no caminho.",
+      {
+        title: "Estratégia de vendas",
+        description:
+          "Implemente processos inteligentes para atrair clientes de alto valor e negociar com previsibilidade. Construa um modelo de receita robusto onde o fechamento de grandes contratos não depende de sazonalidade ou motivação individual, mas de sistema e dado.",
+      },
+      {
+        title: "Marketing orientado por dados",
+        description:
+          "Substitua o achismo por ativos digitais mensuráveis. Estruture funis de venda e criativos de alta conversão focados em reduzir o CAC e elevar a qualidade do lead, com decisões baseadas em métrica, não em intuição.",
+      },
+      {
+        title: "Ferramentas para escalar",
+        description:
+          "Pare de investir em ferramenta que não entrega retorno. Tenha acesso às tecnologias e táticas de crescimento validadas por quem já domina o jogo, e saia do evento sabendo exatamente o que implementar primeiro.",
+      },
+      {
+        title: "Inteligência artificial aplicada a negócios",
+        description:
+          "Transforme a IA em vantagem competitiva antes que o seu concorrente faça isso primeiro. Automatize o operacional, eleve a produtividade do time e use inteligência de dados como suporte central para as suas decisões estratégicas.",
+      },
+      {
+        title: "Gestão e governança comercial",
+        description:
+          "Blindagem contra desorganização. Estruture cada etapa do processo comercial com inteligência de CRM, e prepare sua operação para o próximo nível de escala sem perder margem no caminho.",
+      },
     ],
     speakersHeadline: "PALESTRANTES CONFIRMADOS NO DSX 2026",
     segmentSpeakers: [
@@ -354,7 +394,7 @@ const segmentLandingList = [
   },
   {
     name: "Negócios",
-    aliases: ["negocios"],
+    aliases: ["negocios", "necogios"],
     image: "/optimized/step1/Banner-vendas-hero.webp",
     category: "Segmento Estratégico",
     headline: "Onde empresários constroem o futuro dos negócios no Norte",
@@ -377,15 +417,43 @@ const segmentLandingList = [
     ],
     transitionLine:
       "",
-    outcomesHeadline: "O que você leva do DSX para o seu negócio:",
+    outcomesHeadline: "O QUE VOCE SAI TENDO DEPOIS DO DSX PARA O SEU NEGOCIO:",
     outcomes: [
-      "Vendas: Descubra como atrair clientes de alto valor, negociar com previsibilidade e fechar contratos maiores. Construindo um modelo de receita que não depende de mês bom ou vendedor motivado.",
-      "Posicionamento e Branding: Pare de brigar por atenção em mercado saturado. Aprenda como construir uma marca que o mercado reconhece, respeita e procura.",
-      "Marketing & Performance: Pare de impulsionar no achismo. Aprenda a estruturar tráfego pago, funis de venda e criativos de alta conversão que geram cliente qualificado e reduzem o custo de aquisição.",
-      "Ferramentas de Crescimento: Chega de testar o que não funciona. Aprenda direto com especialistas as tecnologias e táticas que realmente escalam operações, sem desperdiçar verba nem tempo.",
-      "Inteligência Artificial: Transforme a IA em vantagem competitiva. Automatize processos, eleve a produtividade do time e tome decisões baseadas 100% em dados, antes que o seu concorrente faça isso primeiro.",
-      "Gestão Comercial: Pare de perder negócio por desorganização. Estruture cada etapa do processo comercial, use o CRM de forma inteligente e prepare sua operação para crescer sem perder cliente no caminho.",
-      "Feira de Negócios: Mais de 2.000 decisores no mesmo espaço. A teoria que você absorveu nos palcos entra em prática aqui, em conversas com pessoas que têm o mesmo nível de ambição que você.",
+      {
+        title: "Vendas",
+        description:
+          "Descubra como atrair clientes de alto valor, negociar com previsibilidade e fechar contratos maiores. Construindo um modelo de receita que nao depende de mes bom ou vendedor motivado.",
+      },
+      {
+        title: "Posicionamento e Branding",
+        description:
+          "Pare de brigar por atencao em um mercado saturado. Aprenda como construir uma marca que o mercado reconhece, respeita e procura.",
+      },
+      {
+        title: "Marketing & Performance",
+        description:
+          "Pare de impulsionar no achismo. Aprenda a estruturar trafego pago, funis de venda e criativos de alta conversao que geram cliente qualificado e reduzem o custo de aquisicao.",
+      },
+      {
+        title: "Ferramentas de Crescimento",
+        description:
+          "Chega de testar o que nao funciona. Aprenda direto com especialistas as tecnologias e taticas que realmente escalam operacoes, sem desperdicar verba nem tempo.",
+      },
+      {
+        title: "Inteligencia Artificial",
+        description:
+          "Transforme a IA em vantagem competitiva. Automatize processos, eleve a produtividade do time e tome decisoes baseadas 100% em dados, antes que o seu concorrente faca isso primeiro.",
+      },
+      {
+        title: "Gestao Comercial",
+        description:
+          "Pare de perder negocio por desorganizacao. Estruture cada etapa do processo comercial, use o CRM de forma inteligente e prepare sua operacao para crescer sem perder cliente no caminho.",
+      },
+      {
+        title: "Feira de Negocios",
+        description:
+          "Mais de 2.000 decisores no mesmo espaco. A teoria que voce absorveu nos palcos entra em pratica aqui, em conversas com pessoas que tem o mesmo nivel de ambicao que voce.",
+      },
     ],
     speakersHeadline: "PALESTRANTES CONFIRMADOS NO DSX 2026",
     segmentSpeakers: [
