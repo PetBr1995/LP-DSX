@@ -13,7 +13,6 @@ import {
   formatWhatsappMask,
   getFieldError,
   getFirstFormError,
-  isMissingColumnError,
   normalizeHostname,
 } from "../features/LPAyla/utils";
 import LPAylaFormStage from "../features/LPAyla/components/LPAylaFormStage";
@@ -143,95 +142,25 @@ const LPAyla = () => {
       if (supabaseRuntime.isSupabaseConfigured) {
         const supabase = await supabaseRuntime.getSupabaseClient();
         if (supabase) {
-          const nowIso = new Date().toISOString();
-          const trackerState = window.DSXTracker?.getState?.() || {};
-          const sessionId =
-            trackerState.sessionId ||
-            window.crypto?.randomUUID?.() ||
-            `session-${Date.now()}`;
-
-          const profilePayload = {
-            lead_email: form.email.trim().toLowerCase(),
-            lead_name: form.name.trim(),
-            lead_phone: form.phone.trim(),
-            lead_cargo: form.cargo,
-            site_origin: sourceData.site_origin || null,
-            site_hostname: sourceData.site_hostname || window.location.hostname || null,
-            lp_identifier: "LP Ayla",
-            first_converted_at: nowIso,
-            last_seen_at: nowIso,
-            has_sympla_redirected: false,
-            last_sympla_redirected_at: null,
+          const leadPayload = {
+            name: form.name.trim(),
+            phone: form.phone.trim(),
+            email: form.email.trim().toLowerCase(),
+            cargo: form.cargo,
           };
 
-          let { error: profileError } = await supabase
-            .from("tracking_lead_profiles")
-            .upsert([profilePayload], { onConflict: "lead_email" });
+          const { error: leadError } = await supabase
+            .from("lp_ayla_chat_leads")
+            .insert([leadPayload]);
 
-          if (profileError && isMissingColumnError(profileError)) {
-            const fallbackProfilePayload = { ...profilePayload };
-            delete fallbackProfilePayload.site_origin;
-            delete fallbackProfilePayload.site_hostname;
-            let retry = await supabase
-              .from("tracking_lead_profiles")
-              .upsert([fallbackProfilePayload], { onConflict: "lead_email" });
-            profileError = retry.error;
-
-            if (profileError && isMissingColumnError(profileError)) {
-              const fallbackProfileWithoutLp = { ...fallbackProfilePayload };
-              delete fallbackProfileWithoutLp.lp_identifier;
-              retry = await supabase
-                .from("tracking_lead_profiles")
-                .upsert([fallbackProfileWithoutLp], { onConflict: "lead_email" });
-              profileError = retry.error;
-            }
-          }
-
-          if (!profileError) {
-            const sessionPayload = {
-              session_id: sessionId,
-              lead_name: form.name.trim(),
-              lead_email: form.email.trim().toLowerCase(),
-              lead_phone: form.phone.trim(),
-              lead_cargo: form.cargo,
-              site_origin: sourceData.site_origin || null,
-              site_hostname:
-                sourceData.site_hostname || window.location.hostname || null,
-              lp_identifier: "LP Ayla",
-              page: sourceData.page_url || window.location.pathname + window.location.search,
-              referrer: document.referrer || null,
-              utm_source: sourceData.utm_source || sourceData.site_origin || null,
-              utm_medium: sourceData.utm_medium || null,
-              utm_campaign: sourceData.utm_campaign || null,
-              utm_content: sourceData.utm_content || null,
-              utm_term: sourceData.utm_term || null,
-              converted_at: nowIso,
-              has_sympla_redirected: false,
-              sympla_redirected_at: null,
-            };
-
-            let { error: sessionError } = await supabase
-              .from("tracking_lead_sessions")
-              .upsert([sessionPayload], { onConflict: "session_id" });
-
-            if (sessionError && isMissingColumnError(sessionError)) {
-              const fallbackSessionPayload = { ...sessionPayload };
-              delete fallbackSessionPayload.site_origin;
-              delete fallbackSessionPayload.site_hostname;
-              let retry = await supabase
-                .from("tracking_lead_sessions")
-                .upsert([fallbackSessionPayload], { onConflict: "session_id" });
-              sessionError = retry.error;
-
-              if (sessionError && isMissingColumnError(sessionError)) {
-                const fallbackSessionWithoutLp = { ...fallbackSessionPayload };
-                delete fallbackSessionWithoutLp.lp_identifier;
-                retry = await supabase
-                  .from("tracking_lead_sessions")
-                  .upsert([fallbackSessionWithoutLp], { onConflict: "session_id" });
-                sessionError = retry.error;
-              }
-            }
+          if (leadError && leadError.code !== "23505") {
+            console.error("[LPAyla] Supabase insert failed", {
+              code: leadError.code,
+              message: leadError.message,
+              details: leadError.details,
+              hint: leadError.hint,
+            });
+            throw new Error("Erro ao salvar lead no Supabase.");
           }
         }
       }
