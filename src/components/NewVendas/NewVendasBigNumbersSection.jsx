@@ -61,7 +61,7 @@ const NewVendasBigNumbersSection = () => {
           {experienceHighlights.map((item) => (
             <div
               key={`${item.value}-${item.label}`}
-              className="nv-highlight-wrap"
+              className="nv-highlight-wrap nv-highlight-wrap--sync"
             >
               <div className="nv-highlight-inner px-3 py-3 text-center">
                 <p className="font-jamjuree font-extrabold leading-none text-[#F5C02B] text-[20px] md:text-[30px]">

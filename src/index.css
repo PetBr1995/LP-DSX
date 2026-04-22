@@ -372,6 +372,12 @@ section.no-section-transition::after {
   animation: nv-highlight-spin 3.2s linear infinite;
 }
 
+.nv-animations-ready .nv-highlight-wrap.nv-highlight-wrap--sync::before {
+  animation-direction: normal;
+  animation-delay: 0s;
+  animation-duration: 3.2s;
+}
+
 .nv-highlight-inner {
   position: relative;
   z-index: 1;
