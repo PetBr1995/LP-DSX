@@ -172,15 +172,20 @@ const NewVendasHero = ({
 
   return (
     <section className="relative overflow-hidden bg-black text-white">
-      <div className="pointer-events-none absolute inset-0 z-0 opacity-40">
-        <img
-          src="/[DSX]-Banner-Site-BG.png"
-          alt="Banner oficial do DSX 2026"
-          className="h-full w-full object-cover object-center"
-          loading="eager"
-          decoding="async"
-          fetchPriority="high"
-        />
+      <div className="pointer-events-none absolute inset-0 z-0">
+        <picture>
+          <source srcSet="/optimized/banner-faq.avif" type="image/avif" />
+          <source srcSet="/optimized/banner-faq.webp" type="image/webp" />
+          <img
+            src="/optimized/banner-faq.jpg"
+            alt="Banner oficial do DSX 2026"
+            className="h-full w-full object-cover object-center opacity-30"
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
+          />
+        </picture>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/46 to-black/54" />
       </div>
       <div className="relative z-10 mx-auto max-w-6xl px-4 pb-10 pt-10 md:pb-12 md:pt-14">
         <div className="text-center space-y-5 md:space-y-6">
@@ -201,7 +206,7 @@ const NewVendasHero = ({
             </span>
           </h1>
           <div className="mx-auto max-w-4xl">
-            <p className="text-center text-[clamp(1rem,4.8vw,2.6rem)] leading-[1.1] text-white/90">
+            <p className="text-center text-[clamp(1rem,4.8vw,1.8rem)] leading-[1.1] text-white/90">
               Dois dias de conteúdo estratégico e conexões de alto nível.
             </p>
           </div>
@@ -210,23 +215,26 @@ const NewVendasHero = ({
               Onde os maiores especialistas <br /> do país se encontram.
             </h3>
           </div>
-          <div className="flex items-center justify-center gap-2">
-            <span><Calendar color="#F5C02B" /></span>
-            <p className="text-center text-[clamp(.95rem,2.8vw,1.45rem)] leading-[1.2] text-white/90">
-              23 e 24 de Julho
-            </p>
-          </div>
-          <div className="flex items-center justify-center gap-3">
-            <span>
-              <MapPin color="#F5C02B"/>
-            </span>
-            <div>
-              <p>
-                Centro de Convenções
+          <div className="flex justify-center items-center gap-4">
+
+            <div className="flex items-center justify-center gap-2">
+              <span><Calendar color="#F5C02B" /></span>
+              <p className="text-center text-[clamp(.95rem,2.8vw,1rem)] leading-[1.2] text-white/90">
+                23 e 24 de Julho
               </p>
-              <p>
-                Vasco Vasques, Manaus/AM
-              </p>
+            </div>
+            <div className="flex items-center justify-center gap-3">
+              <span>
+                <MapPin color="#F5C02B" />
+              </span>
+              <div>
+                <p>
+                  Centro de Convenções
+                </p>
+                <p>
+                  Vasco Vasques, Manaus/AM
+                </p>
+              </div>
             </div>
           </div>
 
@@ -288,96 +296,96 @@ const NewVendasHero = ({
             </h3>
             {hasSpeakersNearViewport && mainSpeakers.length > 0 ? (
               <div className="relative mx-auto mt-6 w-full max-w-[920px]">
-              <div
-                className={`overflow-hidden select-none ${isDraggingSpeakers ? "cursor-grabbing" : "cursor-grab"}`}
-                style={{ touchAction: "pan-y" }}
-                onMouseDown={(event) => handleSpeakerDragStart(event.clientX)}
-                onMouseUp={(event) => handleSpeakerDragEnd(event.clientX)}
-                onMouseLeave={(event) => {
-                  if (speakerDragStartXRef.current !== null) {
-                    handleSpeakerDragEnd(event.clientX);
-                  }
-                }}
-                onTouchStart={(event) => {
-                  const touch = event.touches[0];
-                  if (!touch) return;
-                  handleSpeakerDragStart(touch.clientX);
-                }}
-                onTouchEnd={(event) => {
-                  const touch = event.changedTouches[0];
-                  if (!touch) return;
-                  handleSpeakerDragEnd(touch.clientX);
-                }}
-              >
                 <div
-                  className="flex transition-transform duration-500 ease-out"
-                  style={{
-                    transform: `translateX(-${(currentSpeakerIndex * 100) / cardsPerView}%)`,
+                  className={`overflow-hidden select-none ${isDraggingSpeakers ? "cursor-grabbing" : "cursor-grab"}`}
+                  style={{ touchAction: "pan-y" }}
+                  onMouseDown={(event) => handleSpeakerDragStart(event.clientX)}
+                  onMouseUp={(event) => handleSpeakerDragEnd(event.clientX)}
+                  onMouseLeave={(event) => {
+                    if (speakerDragStartXRef.current !== null) {
+                      handleSpeakerDragEnd(event.clientX);
+                    }
+                  }}
+                  onTouchStart={(event) => {
+                    const touch = event.touches[0];
+                    if (!touch) return;
+                    handleSpeakerDragStart(touch.clientX);
+                  }}
+                  onTouchEnd={(event) => {
+                    const touch = event.changedTouches[0];
+                    if (!touch) return;
+                    handleSpeakerDragEnd(touch.clientX);
                   }}
                 >
-                  {mainSpeakers.map((speaker) => (
-                    <div
-                      key={speaker.name}
-                      className="w-full shrink-0 px-0.5 sm:w-1/2 sm:px-1 lg:w-1/3 lg:px-1.5"
-                    >
-                      <article className="flex h-full w-full flex-col overflow-hidden rounded-xl border border-[#5A4718] bg-black/80 text-left shadow-lg">
-                        <div className="relative h-[220px] w-full overflow-hidden bg-[#000000] sm:h-[250px] md:h-[270px]">
-                          <img
-                            src={speaker.image}
-                            alt={speaker.name}
-                            className="h-full w-full object-contain object-center"
-                            loading="lazy"
-                            decoding="async"
-                            draggable={false}
-                            onDragStart={(event) => event.preventDefault()}
-                          />
-                        </div>
+                  <div
+                    className="flex transition-transform duration-500 ease-out"
+                    style={{
+                      transform: `translateX(-${(currentSpeakerIndex * 100) / cardsPerView}%)`,
+                    }}
+                  >
+                    {mainSpeakers.map((speaker) => (
+                      <div
+                        key={speaker.name}
+                        className="w-full shrink-0 px-0.5 sm:w-1/2 sm:px-1 lg:w-1/3 lg:px-1.5"
+                      >
+                        <article className="flex h-full w-full flex-col overflow-hidden rounded-xl border border-[#5A4718] bg-black/80 text-left shadow-lg">
+                          <div className="relative h-[220px] w-full overflow-hidden bg-[#000000] sm:h-[250px] md:h-[270px]">
+                            <img
+                              src={speaker.image}
+                              alt={speaker.name}
+                              className="h-full w-full object-contain object-center"
+                              loading="lazy"
+                              decoding="async"
+                              draggable={false}
+                              onDragStart={(event) => event.preventDefault()}
+                            />
+                          </div>
 
-                        <div className="px-3.5 pt-3">
-                          <h4 className="font-bebas text-[1.75rem] uppercase tracking-[0.02em] text-[#F5A205]">
-                            {speaker.name}
-                          </h4>
-                        </div>
-                        <div className="flex-1 px-3.5 pb-3.5">
-                          <p
-                            className="font-jamjuree text-sm leading-relaxed text-white/90 md:text-[14px]"
-                            style={{
-                              display: "-webkit-box",
-                              WebkitLineClamp: 5,
-                              WebkitBoxOrient: "vertical",
-                              overflow: "hidden",
-                            }}
-                          >
-                            {speaker.bio}
-                          </p>
-                        </div>
-                      </article>
-                    </div>
-                  ))}
+                          <div className="px-3.5 pt-3">
+                            <h4 className="font-bebas text-[1.75rem] uppercase tracking-[0.02em] text-[#F5A205]">
+                              {speaker.name}
+                            </h4>
+                          </div>
+                          <div className="flex-1 px-3.5 pb-3.5">
+                            <p
+                              className="font-jamjuree text-sm leading-relaxed text-white/90 md:text-[14px]"
+                              style={{
+                                display: "-webkit-box",
+                                WebkitLineClamp: 5,
+                                WebkitBoxOrient: "vertical",
+                                overflow: "hidden",
+                              }}
+                            >
+                              {speaker.bio}
+                            </p>
+                          </div>
+                        </article>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
 
-              {maxSpeakerIndex > 0 ? (
-                <>
-                  <button
-                    type="button"
-                    onClick={goToPreviousSpeakerSlide}
-                    aria-label="Slide anterior de palestrantes"
-                    className="absolute left-2 top-1/2 z-10 -translate-y-1/2 text-[#F5C02B] transition hover:scale-110 hover:text-[#FFD45A] md:left-3"
-                  >
-                    <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" strokeWidth={2.4} />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={goToNextSpeakerSlide}
-                    aria-label="Próximo slide de palestrantes"
-                    className="absolute right-2 top-1/2 z-10 -translate-y-1/2 text-[#F5C02B] transition hover:scale-110 hover:text-[#FFD45A] md:right-3"
-                  >
-                    <ChevronRight className="h-5 w-5 md:h-6 md:w-6" strokeWidth={2.4} />
-                  </button>
+                {maxSpeakerIndex > 0 ? (
+                  <>
+                    <button
+                      type="button"
+                      onClick={goToPreviousSpeakerSlide}
+                      aria-label="Slide anterior de palestrantes"
+                      className="absolute left-2 top-1/2 z-10 -translate-y-1/2 text-[#F5C02B] transition hover:scale-110 hover:text-[#FFD45A] md:left-3"
+                    >
+                      <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" strokeWidth={2.4} />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={goToNextSpeakerSlide}
+                      aria-label="Próximo slide de palestrantes"
+                      className="absolute right-2 top-1/2 z-10 -translate-y-1/2 text-[#F5C02B] transition hover:scale-110 hover:text-[#FFD45A] md:right-3"
+                    >
+                      <ChevronRight className="h-5 w-5 md:h-6 md:w-6" strokeWidth={2.4} />
+                    </button>
 
-                </>
-              ) : null}
+                  </>
+                ) : null}
               </div>
             ) : (
               <div className="mx-auto mt-6 h-[270px] w-full max-w-[920px] rounded-xl border border-[#5A4718]/40 bg-black/40" />
