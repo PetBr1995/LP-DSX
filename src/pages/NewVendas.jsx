@@ -1,5 +1,6 @@
 ﻿import { Suspense, lazy, useEffect, useMemo, useState } from "react";
 import NewVendasHero from "../components/NewVendas/NewVendasHero";
+import TrendSpeakersHero from "../components/TrendSpeakersHero";
 import { formatDsxFormOrigin } from "../utils/formOrigin";
 
 const NEW_VENDAS_SYMPLA_URL =
@@ -537,6 +538,7 @@ const NewVendas = () => {
 
       <div className="relative z-10">
         <NewVendasHero ctaLink="#passaportes" />
+        <TrendSpeakersHero />
         {shouldRenderContent ? (
           <Suspense fallback={<div className="min-h-[120px]" />}>
             <NewVendasContent onBuyPassaporte={openLeadGateForSympla} />
@@ -571,5 +573,4 @@ const NewVendas = () => {
 };
 
 export default NewVendas;
-
 

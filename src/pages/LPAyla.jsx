@@ -139,8 +139,13 @@ const LPAyla = () => {
       }
 
       const supabaseRuntime = await import("../lib/supabaseClient");
-      if (supabaseRuntime.isSupabaseConfigured) {
-        const supabase = await supabaseRuntime.getSupabaseClient();
+      const supabaseTarget = "ayla";
+      const isAylaConfigured = supabaseRuntime.isSupabaseConfiguredFor
+        ? supabaseRuntime.isSupabaseConfiguredFor(supabaseTarget)
+        : supabaseRuntime.isSupabaseConfigured;
+
+      if (isAylaConfigured) {
+        const supabase = await supabaseRuntime.getSupabaseClient(supabaseTarget);
         if (supabase) {
           const leadPayload = {
             name: form.name.trim(),
@@ -171,7 +176,7 @@ const LPAyla = () => {
         }
       } else {
         console.warn(
-          "[LPAyla] Supabase is not configured. Check VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.",
+          "[LPAyla] Supabase (Ayla) is not configured. Check VITE_SUPABASE_AYLA_URL and VITE_SUPABASE_AYLA_ANON_KEY.",
         );
       }
 
