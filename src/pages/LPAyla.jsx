@@ -17,7 +17,6 @@ import {
   normalizeHostname,
 } from "../features/LPAyla/utils";
 import LPAylaFormStage from "../features/LPAyla/components/LPAylaFormStage";
-import LPAylaEventStage from "../features/LPAyla/components/LPAylaEventStage";
 
 const LPAyla = () => {
   const navigate = useNavigate();
@@ -27,17 +26,9 @@ const LPAyla = () => {
   const [status, setStatus] = useState("idle");
   const [message, setMessage] = useState("");
   const [sourceData, setSourceData] = useState(SOURCE_INITIAL_STATE);
-  const [currentStage, setCurrentStage] = useState("form");
 
   const inputRef = useRef(null);
   const step = FORM_STEPS[stepIndex];
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get("etapa") === "evento") {
-      setCurrentStage("evento");
-    }
-  }, []);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -249,21 +240,18 @@ const LPAyla = () => {
       setMessage("Perfeito. Seus dados foram enviados com sucesso.");
 
       const params = new URLSearchParams(window.location.search);
-      params.set("etapa", "evento");
+      params.delete("etapa");
+      const queryString = params.toString();
+      const targetUrl = queryString ? `/vendas?${queryString}` : "/vendas";
 
       window.setTimeout(() => {
-        setCurrentStage("evento");
-        navigate(`/lpayla?${params.toString()}`, { replace: true });
+        navigate(targetUrl, { replace: true });
       }, 700);
     } catch {
       setStatus("error");
       setMessage("Nao foi possivel enviar agora. Tente novamente.");
     }
   };
-
-  if (currentStage === "evento") {
-    return <LPAylaEventStage />;
-  }
 
   return (
     <LPAylaFormStage
