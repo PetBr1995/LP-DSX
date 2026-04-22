@@ -1,53 +1,13 @@
 ﻿import { useEffect, useRef, useState } from "react";
 import NewVendasHeaderMask from "./NewVendasHeaderMask";
+import NewVendasBigNumbersSection from "./NewVendasBigNumbersSection";
 import { Calendar, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
-
-const metrics = [
-  {
-    target: 2000,
-    label: "Participantes",
-    prefix: "+",
-    suffix: "",
-    useThousands: true,
-  },
-  {
-    target: 40,
-    label: "Palestras",
-    prefix: "+",
-    suffix: "",
-    useThousands: false,
-  },
-  {
-    target: 30,
-    label: "Expositores",
-    prefix: "+",
-    suffix: "",
-    useThousands: false,
-  },
-
-];
-
-const experienceHighlights = [
-  { value: "3 PALCOS", label: "simultâneos" },
-  { value: "VIP", label: "área exclusiva" },
-  { value: "FEIRA", label: "de negócios" },
-  { value: "PRAÇA", label: "de alimentação" },
-];
-
-const formatMetricValue = (value, metric) => {
-  const baseValue = metric.useThousands
-    ? value.toLocaleString("pt-BR")
-    : String(value);
-  return `${metric.prefix}${baseValue}${metric.suffix}`;
-};
 
 const NewVendasHero = ({
   ctaLink = "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721",
   onPrimaryCtaClick,
 }) => {
   const ctaTarget = ctaLink.startsWith("#") ? "_self" : "_blank";
-  const [animatedValues] = useState(metrics.map((metric) => metric.target));
-  const [showSecondaryBlocks, setShowSecondaryBlocks] = useState(false);
   const [currentSpeakerIndex, setCurrentSpeakerIndex] = useState(0);
   const [cardsPerView, setCardsPerView] = useState(3);
   const [mainSpeakers, setMainSpeakers] = useState([]);
@@ -55,16 +15,6 @@ const NewVendasHero = ({
   const [hasSpeakersNearViewport, setHasSpeakersNearViewport] = useState(false);
   const speakerDragStartXRef = useRef(null);
   const speakersSectionRef = useRef(null);
-
-  useEffect(() => {
-    if (typeof window !== "undefined" && "requestAnimationFrame" in window) {
-      const rafId = window.requestAnimationFrame(() => setShowSecondaryBlocks(true));
-      return () => window.cancelAnimationFrame(rafId);
-    }
-
-    const timeoutId = window.setTimeout(() => setShowSecondaryBlocks(true), 16);
-    return () => window.clearTimeout(timeoutId);
-  }, []);
 
   useEffect(() => {
     const sectionElement = speakersSectionRef.current;
@@ -171,24 +121,25 @@ const NewVendasHero = ({
   };
 
   return (
-    <section className="relative overflow-hidden bg-black text-white">
-      <div className="pointer-events-none absolute inset-0 z-0">
-        <picture>
-          <source srcSet="/optimized/banner-faq.avif" type="image/avif" />
-          <source srcSet="/optimized/banner-faq.webp" type="image/webp" />
-          <img
-            src="/optimized/banner-faq.jpg"
-            alt="Banner oficial do DSX 2026"
-            className="h-full w-full object-cover object-center opacity-30"
-            loading="eager"
-            decoding="async"
-            fetchPriority="high"
-          />
-        </picture>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/46 to-black/54" />
-      </div>
-      <div className="relative z-10 mx-auto max-w-6xl px-4 pb-10 pt-10 md:pb-12 md:pt-14">
-        <div className="text-center space-y-5 md:space-y-6">
+    <section className="bg-black text-white">
+      <div className="relative overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 z-0">
+          <picture>
+            <source srcSet="/optimized/banner-faq.avif" type="image/avif" />
+            <source srcSet="/optimized/banner-faq.webp" type="image/webp" />
+            <img
+              src="/optimized/banner-faq.jpg"
+              alt="Banner oficial do DSX 2026"
+              className="h-full w-full object-cover object-center opacity-30"
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
+            />
+          </picture>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/46 to-black/54" />
+        </div>
+        <div className="relative z-10 mx-auto max-w-6xl px-4 pb-10 pt-10 md:pb-12 md:pt-14">
+          <div className="text-center space-y-5 md:space-y-6">
           <div className="flex justify-center">
             <img
               src="/logo-dsx-horizontal-2.svg"
@@ -250,46 +201,14 @@ const NewVendasHero = ({
               size="lg"
             />
           </div>
-
-          {showSecondaryBlocks ? (
-            <>
-              <div className="mx-auto flex max-w-4xl flex-wrap justify-center gap-x-3 gap-y-5 px-2 py-2">
-                {metrics.map((item, index) => (
-                  <div key={item.label} className="min-w-0 w-[30%] text-center">
-                    <p className="font-jamjuree font-extrabold text-[28px] leading-none tracking-normal text-white sm:text-[36px] md:text-[64px]">
-                      {formatMetricValue(animatedValues[index] ?? 0, item)}
-                    </p>
-                    <p className="mt-1 font-jamjuree text-[11px] font-bold uppercase tracking-[0.02em] text-white md:text-[19px]">
-                      {item.label}
-                    </p>
-                  </div>
-                ))}
-              </div>
-              <div className="mx-auto mt-2 grid w-full max-w-5xl grid-cols-2 gap-3 px-2 md:grid-cols-4 md:gap-4">
-                {experienceHighlights.map((item) => (
-                  <div
-                    key={`${item.value}-${item.label}`}
-                    className="nv-highlight-wrap"
-                  >
-                    <div className="nv-highlight-inner px-3 py-3 text-center">
-                      <p className="font-jamjuree font-extrabold leading-none text-[#F5C02B] text-[20px] md:text-[30px]">
-                        {item.value}
-                      </p>
-                      <p className="mt-1 font-jamjuree text-[10px] font-bold uppercase tracking-[0.02em] text-white md:text-[14px]">
-                        {item.label}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </>
-          ) : (
-            <div className="mx-auto h-[190px] w-full max-w-5xl" aria-hidden="true" />
-          )}
-
+          </div>
+        </div>
+      </div>
+      <NewVendasBigNumbersSection />
+      <div className="mx-auto max-w-6xl px-4 pb-10 pt-2 md:pb-12 md:pt-4">
           <section
             ref={speakersSectionRef}
-            className="mx-auto mt-8 w-full max-w-6xl"
+            className="mx-auto mt-10 w-full max-w-6xl md:mt-12"
           >
             <h3 className="text-center font-anton text-[clamp(1.3rem,4.2vw,2.8rem)] uppercase leading-[1.08] tracking-[0.03em] text-[#F5C02B]">
               Conheça os primeiros palestrantes confirmados do DSX
@@ -392,7 +311,6 @@ const NewVendasHero = ({
             )}
           </section>
         </div>
-      </div>
     </section>
   );
 };
