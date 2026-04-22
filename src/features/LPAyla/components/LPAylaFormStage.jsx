@@ -84,9 +84,8 @@ const LPAylaFormStage = ({
             {Array.from({ length: totalSteps }).map((_, index) => (
               <span
                 key={`progress-dot-${index}`}
-                className={`h-1 w-full rounded-full ${
-                  index <= stepIndex ? "bg-white" : "bg-white/20"
-                }`}
+                className={`h-1 w-full rounded-full ${index <= stepIndex ? "bg-white" : "bg-white/20"
+                  }`}
               />
             ))}
           </div>
@@ -106,8 +105,7 @@ const LPAylaFormStage = ({
             </div>
             <div className="max-w-[680px] rounded-2xl bg-[#f4f6f8] px-4 py-3 shadow-[0_2px_8px_rgba(0,0,0,0.08)]">
               <p className="break-words font-jamjuree text-[15px] leading-relaxed text-[#1f2937]">
-                Empresas que aplicam IA de forma pratica estao reduzindo custos e
-                aumentando resultado. Vamos comecar seu cadastro para o DSX 2026.
+                Empresas que dominam métodos escaláveis e networking estratégico crescem mais rápido e não perdem espaço para a concorrência. Quer descobrir como o DSX 2026 pode acelerar os resultados do seu negócio?
               </p>
             </div>
           </div>
@@ -168,11 +166,10 @@ const LPAylaFormStage = ({
 
           {(status === "error" || status === "success") && message ? (
             <p
-              className={`rounded-xl px-4 py-3 font-jamjuree text-sm ${
-                status === "success"
+              className={`rounded-xl px-4 py-3 font-jamjuree text-sm ${status === "success"
                   ? "bg-green-500/15 text-green-700"
                   : "bg-red-500/15 text-red-700"
-              }`}
+                }`}
             >
               {message}
             </p>
@@ -196,11 +193,10 @@ const LPAylaFormStage = ({
                       type="button"
                       onClick={() => onChange("cargo", option)}
                       disabled={isComposerLocked}
-                      className={`rounded-full border px-4 py-2 font-jamjuree text-sm transition ${
-                        isSelected
+                      className={`rounded-full border px-4 py-2 font-jamjuree text-sm transition ${isSelected
                           ? "border-[#021b39] bg-[#021b39] text-white"
                           : "border-[#c8ced8] bg-white text-[#0f172a] hover:border-[#021b39]/50"
-                      } disabled:cursor-not-allowed disabled:opacity-50`}
+                        } disabled:cursor-not-allowed disabled:opacity-50`}
                     >
                       {option}
                     </button>
