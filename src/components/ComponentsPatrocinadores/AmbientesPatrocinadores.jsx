@@ -31,15 +31,15 @@ const AmbientesPatrocinadores = () => {
         <section className="relative bg-black text-white overflow-hidden after:absolute after:content-[''] after:bottom-0 after:right-0  after:w-70 after:h-70 after:bg-[url(/vector-25.svg)] after:bg-cover after:bg-center after:bg-no-repeat">
             <div className="relative z-10 pt-10 pb-20">
                 <h2 className="text-center font-anton uppercase text-4xl leading-tight">
-                    O AMBIENTE QUE COLOCA SUA MARCA EM EVIDÃŠNCIA
+                    O AMBIENTE QUE COLOCA SUA MARCA EM EVIDÊNCIA
                 </h2>
 
                 <p className="mt-3 text-center font-jamjuree font-extralight text-lg text-white/80 max-w-3xl mx-auto px-4">
-                    Amplie sua presenÃ§a, atraia leads qualificados e escolha o espaÃ§o que reforÃ§a o seu posicionamento
+                    Amplie sua presença, atraia leads qualificados e escolha o espaço que reforça o seu posicionamento
                 </p>
 
                 <div className="relative my-12 max-w-7xl mx-auto px-4">
-                    {/* BotÃµes de navegaÃ§Ã£o (iguais ao teu) */}
+                    {/* Botões de navegação (iguais ao teu) */}
                     <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 z-20 hidden md:flex">
                         <button
                             className="
@@ -53,7 +53,7 @@ const AmbientesPatrocinadores = () => {
     "
                             aria-label="Anterior"
                         >
-                            â€¹
+                            ‹
                         </button>
 
                         <button
@@ -65,9 +65,9 @@ const AmbientesPatrocinadores = () => {
       cursor-pointer
       rounded-l-none
     "
-                            aria-label="PrÃ³ximo"
+                            aria-label="Próximo"
                         >
-                            â€º
+                            ›
                         </button>
                     </div>
 
@@ -103,4 +103,3 @@ const AmbientesPatrocinadores = () => {
 };
 
 export default AmbientesPatrocinadores;
-

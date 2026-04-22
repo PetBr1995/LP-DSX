@@ -15,9 +15,9 @@ import BotaoWP from "../components/BotaoWP";
 
 const Patrocinadores = () => {
     useEffect(() => {
-        const pageTitle = "Patrocine o DSX 2026 | Maior evento de negÃ³cios do Norte do Brasil";
+        const pageTitle = "Patrocine o DSX 2026 | Maior evento de negócios do Norte do Brasil";
         const pageDescription =
-            "Associe sua marca ao maior evento de negÃ³cios, marketing, vendas e inovaÃ§Ã£o do Norte do Brasil. ConheÃ§a as cotas de patrocÃ­nio do DSX 2026.";
+            "Associe sua marca ao maior evento de negócios, marketing, vendas e inovação do Norte do Brasil. Conheça as cotas de patrocínio do DSX 2026.";
         const pageUrl = "https://dsx.com.vc/patrocinador";
         const ogImage = "https://dsx.com.vc/optimized/step1/banner-patrocinador.webp";
 
@@ -112,4 +112,3 @@ const Patrocinadores = () => {
 };
 
 export default Patrocinadores;
-

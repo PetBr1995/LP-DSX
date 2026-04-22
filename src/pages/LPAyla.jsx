@@ -153,6 +153,12 @@ const LPAyla = () => {
             .from("lp_ayla_chat_leads")
             .insert([leadPayload]);
 
+          if (leadError?.code === "23505") {
+            console.warn("[LPAyla] Lead already exists (duplicate email)", {
+              email: leadPayload.email,
+            });
+          }
+
           if (leadError && leadError.code !== "23505") {
             console.error("[LPAyla] Supabase insert failed", {
               code: leadError.code,
@@ -163,6 +169,10 @@ const LPAyla = () => {
             throw new Error("Erro ao salvar lead no Supabase.");
           }
         }
+      } else {
+        console.warn(
+          "[LPAyla] Supabase is not configured. Check VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.",
+        );
       }
 
       setStatus("success");
