@@ -25,8 +25,13 @@ export function formatWhatsappE164(value = "") {
 }
 
 export function getFieldError(field, form) {
-  if (field === "name" && !form.name.trim()) {
-    return "Informe seu nome completo.";
+  if (field === "name") {
+    const normalizedName = form.name.trim().replace(/\s+/g, " ");
+    const nameParts = normalizedName.split(" ").filter(Boolean);
+
+    if (nameParts.length < 2) {
+      return "Informe nome e sobrenome.";
+    }
   }
 
   if (field === "phone") {

@@ -74,7 +74,7 @@ const LPAylaFormStage = ({
   };
 
   return (
-    <main className="min-h-screen bg-[#ECECEC] text-[#0f172a]">
+    <main className="min-h-screen overflow-x-hidden bg-[#ECECEC] text-[#0f172a]">
       <header className="sticky top-0 z-20 border-b border-white/15 bg-[#021b39]">
         <div className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between px-4 sm:px-6">
           <div>
@@ -105,7 +105,7 @@ const LPAylaFormStage = ({
               />
             </div>
             <div className="max-w-[680px] rounded-2xl bg-[#f4f6f8] px-4 py-3 shadow-[0_2px_8px_rgba(0,0,0,0.08)]">
-              <p className="font-jamjuree text-[15px] leading-relaxed text-[#1f2937]">
+              <p className="break-words font-jamjuree text-[15px] leading-relaxed text-[#1f2937]">
                 Empresas que aplicam IA de forma pratica estao reduzindo custos e
                 aumentando resultado. Vamos comecar seu cadastro para o DSX 2026.
               </p>
@@ -128,7 +128,7 @@ const LPAylaFormStage = ({
                     />
                   </div>
                   <div className="max-w-[680px] rounded-2xl bg-white px-4 py-3 shadow-[0_2px_8px_rgba(0,0,0,0.08)]">
-                    <p className="font-jamjuree text-[15px] leading-relaxed text-[#0f172a]">
+                    <p className="break-words font-jamjuree text-[15px] leading-relaxed text-[#0f172a]">
                       {stepItem.title}
                     </p>
                   </div>
@@ -137,7 +137,7 @@ const LPAylaFormStage = ({
                 {!isCurrent && answer ? (
                   <div className="flex justify-end">
                     <div className="max-w-[680px] rounded-2xl bg-[#021b39] px-4 py-3 shadow-[0_2px_8px_rgba(0,0,0,0.12)]">
-                      <p className="font-jamjuree text-[15px] leading-relaxed text-white">
+                      <p className="break-words font-jamjuree text-[15px] leading-relaxed text-white">
                         {answer}
                       </p>
                     </div>
@@ -232,14 +232,16 @@ const LPAylaFormStage = ({
             </div>
           ) : (
             <div className="flex items-center gap-2 rounded-full border border-[#d0d5dd] bg-white px-3 py-2">
-              <button
-                type="button"
-                onClick={onBack}
-                disabled={!hasPreviousStep || status === "loading" || isComposerLocked}
-                className="rounded-full px-3 py-2 font-jamjuree text-xs font-semibold uppercase tracking-[0.08em] text-[#64748b] transition hover:bg-[#f1f5f9] disabled:cursor-not-allowed disabled:opacity-40"
-              >
-                Voltar
-              </button>
+              {hasPreviousStep ? (
+                <button
+                  type="button"
+                  onClick={onBack}
+                  disabled={status === "loading" || isComposerLocked}
+                  className="rounded-full px-3 py-2 font-jamjuree text-xs font-semibold uppercase tracking-[0.08em] text-[#64748b] transition hover:bg-[#f1f5f9] disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  Voltar
+                </button>
+              ) : null}
               <input
                 ref={inputRef}
                 type={activeStep.type}
