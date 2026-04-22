@@ -40,6 +40,34 @@ const experienceItems = [
 ];
 
 const BusinessExperienceSection = () => {
+  const firstRowItems = experienceItems.slice(0, 3);
+  const secondRowItems = experienceItems.slice(3, 5);
+
+  const renderExperienceCard = ({ title, description, Icon }) => (
+    <article
+      key={title}
+      className="group relative overflow-hidden rounded-[16px] border border-[#8A7640]/70 p-5 md:p-6"
+    >
+      <div className="pointer-events-none absolute inset-[1.2px] rounded-[15px] bg-black" />
+      <div className="relative z-10 flex items-start gap-4">
+        <div className="grid h-12 w-12 shrink-0 place-items-center rounded-[12px] border border-[#4A3F2A] bg-[#272115]">
+          <Icon
+            className="h-6 w-6 text-[#E8DEC4] transition-colors duration-300 group-hover:text-[#F5C02B]"
+            strokeWidth={2.2}
+          />
+        </div>
+        <div>
+          <h3 className="font-anton text-[22px] uppercase leading-[1.05] text-[#F5C02B] md:text-[28px]">
+            {title}
+          </h3>
+          <p className="mt-2 font-jamjuree text-[14px] leading-relaxed text-white md:text-[16px]">
+            {description}
+          </p>
+        </div>
+      </div>
+    </article>
+  );
+
   return (
     <section className="bg-black pb-16 pt-0 md:pb-20 md:pt-0">
       <div className="mx-auto max-w-6xl px-4">
@@ -52,31 +80,13 @@ const BusinessExperienceSection = () => {
           gerar negócios, conhecimento e conexões de alto nível.
         </p>
 
-        <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {experienceItems.map(({ title, description, Icon }) => (
-            <article
-              key={title}
-              className="group relative overflow-hidden rounded-[16px] border border-[#8A7640]/70 p-5 md:p-6"
-            >
-              <div className="pointer-events-none absolute inset-[1.2px] rounded-[15px] bg-black" />
-              <div className="relative z-10 flex items-start gap-4">
-                <div className="grid h-12 w-12 shrink-0 place-items-center rounded-[12px] border border-[#4A3F2A] bg-[#272115]">
-                  <Icon
-                    className="h-6 w-6 text-[#E8DEC4] transition-colors duration-300 group-hover:text-[#F5C02B]"
-                    strokeWidth={2.2}
-                  />
-                </div>
-                <div>
-                  <h3 className="font-anton text-[22px] uppercase leading-[1.05] text-[#F5C02B] md:text-[28px]">
-                    {title}
-                  </h3>
-                  <p className="mt-2 font-jamjuree text-[14px] leading-relaxed text-white md:text-[16px]">
-                    {description}
-                  </p>
-                </div>
-              </div>
-            </article>
-          ))}
+        <div className="mt-10 space-y-4">
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+            {firstRowItems.map(renderExperienceCard)}
+          </div>
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+            {secondRowItems.map(renderExperienceCard)}
+          </div>
         </div>
       </div>
     </section>
