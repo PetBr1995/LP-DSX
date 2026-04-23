@@ -155,7 +155,7 @@ const NewVendasHero = ({
               Onde os maiores especialistas <br /> do país se encontram.
             </h3>
           </div>
-          <div className="flex justify-center items-center gap-4">
+          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
 
             <div className="flex items-center justify-center gap-2">
               <span><Calendar color="#F5C02B" /></span>

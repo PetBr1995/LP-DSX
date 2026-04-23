@@ -255,8 +255,8 @@ const TrendSpeakersHero = () => {
                 <img
                   src={speaker.image}
                   alt={speaker.name}
-                  className={`absolute inset-0 h-full w-auto max-w-none object-cover object-top grayscale transition-[filter,width,min-width] duration-500 ${
-                    enableReveal ? "group-hover:grayscale-0" : ""
+                  className={`absolute inset-0 h-full w-auto max-w-none object-cover object-top transition-[filter,width,min-width] duration-500 ${
+                    enableReveal ? "grayscale group-hover:grayscale-0" : ""
                   }`}
                   style={{
                     left: "50%",
