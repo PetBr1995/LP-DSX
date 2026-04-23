@@ -174,9 +174,11 @@ const NewVendasSpeakersSlider = () => {
 
   return (
     <section className="mx-auto mt-8 w-full max-w-6xl">
+      {/*
       <h3 className="text-center font-anton text-[clamp(1.3rem,4.2vw,2.8rem)] uppercase leading-[1.08] tracking-[0.03em] text-[#F5C02B]">
         Conheça os primeiros palestrantes confirmados do DSX
       </h3>
+        */}
 
       <div className="relative mx-auto mt-6 w-full max-w-[920px]">
         <div

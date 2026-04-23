@@ -7,7 +7,6 @@ import {
   rememberDsxFormOrigin,
 } from "../utils/formOrigin";
 
-import TrendSpeakersHero from "../components/TrendSpeakersHero";
 import HeroSection from "../components/HeroSection";
 import NewTimerHeaderHomeTeste from "../components/HomeTesteComponentes/NewTimerHeaderHomeTeste";
 import HeroSectionV2 from "../components/HeroSectionV2";
@@ -939,9 +938,6 @@ const HomeTeste = () => {
 
   return (
     <section id="home" className="bg-black pb-43 md:pb-18 overflow-x-hidden">
-      <div data-section="novos-palestrantes">
-        <TrendSpeakersHero />
-      </div>
       <div data-section="hero">
         <HeroSection ctaLink="#passaportes" />
       </div>

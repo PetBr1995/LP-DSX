@@ -1,7 +1,7 @@
 ﻿import { useEffect, useRef, useState } from "react";
 import NewVendasHeaderMask from "./NewVendasHeaderMask";
 import NewVendasBigNumbersSection from "./NewVendasBigNumbersSection";
-import TrendSpeakersHero from "../TrendSpeakersHero";
+import NewVendasSpeakersSlider from "./NewVendasSpeakersSlider";
 import { Calendar, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 
 const NewVendasHero = ({
@@ -143,7 +143,7 @@ const NewVendasHero = ({
             </span>
           </h1>
           <div className="relative left-1/2 right-1/2 w-screen -translate-x-1/2">
-            <TrendSpeakersHero />
+            <NewVendasSpeakersSlider />
           </div>
           <div className="mx-auto max-w-4xl">
             <p className="text-center text-[clamp(1rem,4.8vw,1.8rem)] leading-[1.1] text-white/90">

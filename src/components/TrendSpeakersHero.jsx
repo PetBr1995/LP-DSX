@@ -231,7 +231,7 @@ const TrendSpeakersHero = () => {
           const hasHovered = hoveredCard !== null;
           const isHovered = hoveredCard === index;
           const baseWidth = 100 / Math.max(visibleCount, 1);
-          const expandedWidth = visibleCount >= 5 ? 36 : visibleCount >= 4 ? 40 : 48;
+          const expandedWidth = visibleCount >= 5 ? 32 : visibleCount >= 4 ? 36 : 44;
           const collapsedWidth = hasHovered
             ? (100 - expandedWidth) / Math.max(visibleCount - 1, 1)
             : baseWidth;
