@@ -43,6 +43,7 @@ const TrendSpeakersHero = () => {
 
   const [startIndex, setStartIndex] = useState(0);
   const [hoveredCard, setHoveredCard] = useState(null);
+  const [mobileActiveIndex, setMobileActiveIndex] = useState(null);
   const [isPaused, setIsPaused] = useState(false);
   const [isSliding, setIsSliding] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
@@ -164,20 +165,32 @@ const TrendSpeakersHero = () => {
     if (!isSliding) {
       return Array.from({ length: visibleCount }, (_, offset) => {
         const idx = mod(startIndex + offset, totalSpeakers);
-        return { ...trendSpeakers[idx], _renderKey: `${idx}-${offset}` };
+        return {
+          ...trendSpeakers[idx],
+          _sourceIndex: idx,
+          _renderKey: `${idx}-${offset}`,
+        };
       });
     }
 
     if (slideDirection === "next") {
       return Array.from({ length: visibleCount + 1 }, (_, offset) => {
         const idx = mod(startIndex + offset, totalSpeakers);
-        return { ...trendSpeakers[idx], _renderKey: `${idx}-${offset}-next` };
+        return {
+          ...trendSpeakers[idx],
+          _sourceIndex: idx,
+          _renderKey: `${idx}-${offset}-next`,
+        };
       });
     }
 
     return Array.from({ length: visibleCount + 1 }, (_, offset) => {
       const idx = mod(startIndex - 1 + offset, totalSpeakers);
-      return { ...trendSpeakers[idx], _renderKey: `${idx}-${offset}-prev` };
+      return {
+        ...trendSpeakers[idx],
+        _sourceIndex: idx,
+        _renderKey: `${idx}-${offset}-prev`,
+      };
     });
   }, [
     isSliding,
@@ -187,6 +200,15 @@ const TrendSpeakersHero = () => {
     trendSpeakers,
     visibleCount,
   ]);
+
+  const hasVisibleSelectedMobileCard =
+    isMobileTwoUp &&
+    mobileActiveIndex !== null &&
+    visibleSpeakers.some((speaker) => speaker._sourceIndex === mobileActiveIndex);
+  const effectiveMobileActiveIndex =
+    hasVisibleSelectedMobileCard && mobileActiveIndex !== null
+      ? mobileActiveIndex
+      : visibleSpeakers[0]?._sourceIndex ?? null;
 
   return (
     <section
@@ -216,6 +238,8 @@ const TrendSpeakersHero = () => {
       >
         {visibleSpeakers.map((speaker, index) => {
           const enableReveal = !isMobileTwoUp;
+          const isMobileActive =
+            isMobileTwoUp && effectiveMobileActiveIndex === speaker._sourceIndex;
           const hasHovered = hoveredCard !== null;
           const isHovered = hoveredCard === index;
           const baseWidth = 100 / Math.max(visibleCount, 1);
@@ -245,6 +269,10 @@ const TrendSpeakersHero = () => {
                 if (!enableReveal) return;
                 if (!isSliding && !isDragging) setHoveredCard(index);
               }}
+              onClick={() => {
+                if (!isMobileTwoUp || isSliding) return;
+                setMobileActiveIndex(speaker._sourceIndex);
+              }}
             >
               <div className="flex min-h-[82px] items-center justify-center overflow-hidden bg-[#F5D247] px-2 py-2 text-center md:min-h-[96px] md:px-3 md:py-2.5">
                 <h3 className="w-full overflow-hidden text-ellipsis whitespace-nowrap text-center font-anton text-[0.92rem] uppercase leading-[0.9] tracking-tight md:text-[1.1rem]">
@@ -256,7 +284,11 @@ const TrendSpeakersHero = () => {
                   src={speaker.image}
                   alt={speaker.name}
                   className={`absolute inset-0 h-full w-auto max-w-none object-cover object-top transition-[filter,width,min-width] duration-500 ${
-                    enableReveal ? "grayscale group-hover:grayscale-0" : ""
+                    enableReveal
+                      ? "grayscale group-hover:grayscale-0"
+                      : isMobileActive
+                        ? ""
+                        : "grayscale"
                   }`}
                   style={{
                     left: "50%",
