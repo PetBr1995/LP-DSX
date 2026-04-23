@@ -194,7 +194,7 @@ const NewVendasHero = ({
         </div>
       </div>
       <NewVendasBigNumbersSection />
-      <div className="mx-auto max-w-6xl px-4 pb-10 pt-2 md:pb-12 md:pt-4">
+      <div className="hidden mx-auto max-w-6xl px-4 pb-10 pt-2 md:pb-12 md:pt-4">
           <section
             ref={speakersSectionRef}
             className="mx-auto mt-10 w-full max-w-6xl md:mt-12"
