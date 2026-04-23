@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { InfoNovosPalestrantes } from "../data/InfoNovosPalestrantes";
-import { ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 function normalizeSpeakerName(value = "") {
   return String(value || "")
@@ -12,8 +12,8 @@ function normalizeSpeakerName(value = "") {
 }
 
 function getVisibleCount(width) {
-  if (width >= 1200) return 5;
-  if (width >= 900) return 4;
+  if (width >= 1024) return 10;
+  if (width >= 769) return 7;
   if (width >= 640) return 3;
   return 2;
 }
@@ -43,7 +43,6 @@ const TrendSpeakersHero = () => {
 
   const [startIndex, setStartIndex] = useState(0);
   const [hoveredCard, setHoveredCard] = useState(null);
-  const [mobileActiveIndex, setMobileActiveIndex] = useState(null);
   const [isPaused, setIsPaused] = useState(false);
   const [isSliding, setIsSliding] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
@@ -201,15 +200,6 @@ const TrendSpeakersHero = () => {
     visibleCount,
   ]);
 
-  const hasVisibleSelectedMobileCard =
-    isMobileTwoUp &&
-    mobileActiveIndex !== null &&
-    visibleSpeakers.some((speaker) => speaker._sourceIndex === mobileActiveIndex);
-  const effectiveMobileActiveIndex =
-    hasVisibleSelectedMobileCard && mobileActiveIndex !== null
-      ? mobileActiveIndex
-      : visibleSpeakers[0]?._sourceIndex ?? null;
-
   return (
     <section
       className={`relative w-full overflow-hidden bg-[#111111] text-black ${
@@ -238,8 +228,6 @@ const TrendSpeakersHero = () => {
       >
         {visibleSpeakers.map((speaker, index) => {
           const enableReveal = !isMobileTwoUp;
-          const isMobileActive =
-            isMobileTwoUp && effectiveMobileActiveIndex === speaker._sourceIndex;
           const hasHovered = hoveredCard !== null;
           const isHovered = hoveredCard === index;
           const baseWidth = 100 / Math.max(visibleCount, 1);
@@ -269,13 +257,9 @@ const TrendSpeakersHero = () => {
                 if (!enableReveal) return;
                 if (!isSliding && !isDragging) setHoveredCard(index);
               }}
-              onClick={() => {
-                if (!isMobileTwoUp || isSliding) return;
-                setMobileActiveIndex(speaker._sourceIndex);
-              }}
             >
               <div className="flex min-h-[82px] items-center justify-center overflow-hidden bg-[#F5D247] px-2 py-2 text-center md:min-h-[96px] md:px-3 md:py-2.5">
-                <h3 className="w-full overflow-hidden text-ellipsis whitespace-nowrap text-center font-anton text-[0.92rem] uppercase leading-[0.9] tracking-tight md:text-[1.1rem]">
+                <h3 className="w-full overflow-hidden text-ellipsis whitespace-nowrap text-center font-anton text-[1.08rem] uppercase leading-[0.92] tracking-tight md:text-[1.32rem]">
                   {speaker.name}
                 </h3>
               </div>
@@ -283,13 +267,7 @@ const TrendSpeakersHero = () => {
                 <img
                   src={speaker.image}
                   alt={speaker.name}
-                  className={`absolute inset-0 h-full w-auto max-w-none object-cover object-top transition-[filter,width,min-width] duration-500 ${
-                    enableReveal
-                      ? "grayscale group-hover:grayscale-0"
-                      : isMobileActive
-                        ? ""
-                        : "grayscale"
-                  }`}
+                  className="absolute inset-0 h-full w-auto max-w-none object-cover object-top transition-[width,min-width] duration-500"
                   style={{
                     left: "50%",
                     transform: "translateX(-50%)",
