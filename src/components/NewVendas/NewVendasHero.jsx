@@ -1,6 +1,7 @@
 ﻿import { useEffect, useRef, useState } from "react";
 import NewVendasHeaderMask from "./NewVendasHeaderMask";
 import NewVendasBigNumbersSection from "./NewVendasBigNumbersSection";
+import TrendSpeakersHero from "../TrendSpeakersHero";
 import { Calendar, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 
 const NewVendasHero = ({
@@ -123,21 +124,6 @@ const NewVendasHero = ({
   return (
     <section className="bg-black text-white">
       <div className="relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 z-0">
-          <picture>
-            <source srcSet="/optimized/banner-faq.avif" type="image/avif" />
-            <source srcSet="/optimized/banner-faq.webp" type="image/webp" />
-            <img
-              src="/optimized/banner-faq.jpg"
-              alt="Banner oficial do DSX 2026"
-              className="h-full w-full object-cover object-center opacity-30"
-              loading="eager"
-              decoding="async"
-              fetchPriority="high"
-            />
-          </picture>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/46 to-black/54" />
-        </div>
         <div className="relative z-10 mx-auto max-w-6xl px-4 pb-10 pt-10 md:pb-12 md:pt-14">
           <div className="text-center space-y-5 md:space-y-6">
           <div className="flex justify-center">
@@ -156,6 +142,9 @@ const NewVendasHero = ({
               <span className="text-[#F5C02B]">DO NORTE</span>
             </span>
           </h1>
+          <div className="relative left-1/2 right-1/2 w-screen -translate-x-1/2">
+            <TrendSpeakersHero />
+          </div>
           <div className="mx-auto max-w-4xl">
             <p className="text-center text-[clamp(1rem,4.8vw,1.8rem)] leading-[1.1] text-white/90">
               Dois dias de conteúdo estratégico e conexões de alto nível.

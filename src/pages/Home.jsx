@@ -1,7 +1,7 @@
 ﻿import { useEffect, useMemo, useState } from "react";
 import useScrollToHash from "../hooks/useScrollToHash";
 
-import SlideNovosPalestrantes from "../components/SlideNovosPalestrantes"
+import TrendSpeakersHero from "../components/TrendSpeakersHero";
 import ContentSection from "../components/ContentSection";
 import DsxConsolidation from "../components/DscConsolidation";
 import FaleConosco from "../components/FaleConosco";
@@ -40,6 +40,10 @@ const Home = () => {
 
   return (
     <section id="home" className="bg-black pb-43 md:pb-18 overflow-x-hidden">
+      <section id="home-novos-palestrantes" data-section="home-novos-palestrantes">
+        <TrendSpeakersHero />
+      </section>
+
       <section id="home-hero" data-section="home-hero">
         <HeroSection />
       </section>
@@ -50,10 +54,6 @@ const Home = () => {
 
       <section id="home-faixa" data-section="home-faixa">
         <SlideFaixa />
-      </section>
-
-      <section id="home-novos-palestrantes" data-section="home-novos-palestrantes">
-        <SlideNovosPalestrantes />
       </section>
 
       <section id="home-timer-header" data-section="home-timer-header">
