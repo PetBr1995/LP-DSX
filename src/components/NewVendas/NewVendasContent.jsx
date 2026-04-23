@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ImpactoVendas from "../ComponentsVendas/ImpactoVendas";
+import ParceirosSection from "../ParceirosSection";
 import { audienceProfiles, faqItems, tracks } from "./newVendasData";
 import { rememberDsxFormOrigin } from "../../utils/formOrigin";
 import {
@@ -55,6 +56,7 @@ const NewVendasContent = ({
       <BusinessExperienceSection />
       <TracksSection items={tracks} />
       <ImpactoVendas />
+      <ParceirosSection />
 
       <FaqSection
         items={faqItems}
