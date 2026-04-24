@@ -1,17 +1,31 @@
 const STORAGE_KEY = "hubla_utms";
 
+function dedupeParams(params) {
+  const deduped = new URLSearchParams();
+  const seen = new Set();
+
+  params.forEach((value, key) => {
+    if (seen.has(key)) return;
+    seen.add(key);
+    deduped.set(key, value);
+  });
+
+  return deduped;
+}
+
 function getCurrentOrStoredParams() {
   const current = new URLSearchParams(window.location.search);
+  const dedupedCurrent = dedupeParams(current);
 
   // Se a URL atual tem query, salva e usa
-  if (current.toString()) {
-    sessionStorage.setItem(STORAGE_KEY, current.toString());
-    return current;
+  if (dedupedCurrent.toString()) {
+    sessionStorage.setItem(STORAGE_KEY, dedupedCurrent.toString());
+    return dedupedCurrent;
   }
 
   // Senão, tenta recuperar o que foi salvo
   const saved = sessionStorage.getItem(STORAGE_KEY) || "";
-  return new URLSearchParams(saved);
+  return dedupeParams(new URLSearchParams(saved));
 }
 
 function buildSck(params) {
@@ -36,6 +50,10 @@ export function withHublaUtm(url) {
   if (!params.toString()) return url;
 
   const u = new URL(url);
+  const destinationParams = dedupeParams(u.searchParams);
+
+  // Normaliza query de destino para evitar parâmetros repetidos (ex: referrer duplicado)
+  u.search = destinationParams.toString();
 
   // Merge dos params atuais/stored na URL de destino
   params.forEach((value, key) => {
