@@ -1,6 +1,7 @@
 ﻿import { Suspense, lazy, useEffect, useMemo, useState } from "react";
 import NewVendasHero from "../components/NewVendas/NewVendasHero";
 import { formatDsxFormOrigin } from "../utils/formOrigin";
+import { withHublaUtm } from "../utils/hublaUtm";
 
 const NEW_VENDAS_SYMPLA_URL =
   "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721";
@@ -511,8 +512,9 @@ const NewVendas = () => {
 
       window.setTimeout(() => {
         const targetUrl = pendingSymplaUrl || NEW_VENDAS_SYMPLA_URL;
+        const redirectUrl = withHublaUtm(targetUrl);
         setShowLeadModal(false);
-        window.location.href = targetUrl;
+        window.location.href = redirectUrl;
       }, 700);
     } catch (error) {
       setLeadStatus("error");

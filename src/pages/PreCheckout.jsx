@@ -9,6 +9,7 @@ import {
   readDsxFormOrigin,
   rememberDsxFormOrigin,
 } from "../utils/formOrigin";
+import { withHublaUtm } from "../utils/hublaUtm";
 
 const NewVendasSpeakersSlider = lazy(
   () => import("../components/NewVendas/NewVendasSpeakersSlider"),
@@ -384,6 +385,7 @@ const PreCheckout = () => {
         trackerState.sessionId ||
         (window.crypto?.randomUUID?.() || `session-${Date.now()}`);
       const nowIso = new Date().toISOString();
+      const redirectUrl = withHublaUtm(CHECKOUT_LINK);
       const leadIdentity = {
         email,
         name,
@@ -520,7 +522,7 @@ const PreCheckout = () => {
                     occurred_at: nowIso,
                     page: window.location.pathname + window.location.search,
                     payload: {
-                      target_link: CHECKOUT_LINK,
+                      target_link: redirectUrl,
                       site_origin: sourceData.site_origin || null,
                       site_hostname:
                         sourceData.site_hostname || window.location.hostname || null,
@@ -556,7 +558,7 @@ const PreCheckout = () => {
 
       setLeadStatus("success");
       setShowLeadModal(false);
-      window.location.href = CHECKOUT_LINK;
+      window.location.href = redirectUrl;
     } catch (_error) {
       setLeadStatus("error");
       console.error("[PreCheckout] erro no envio do lead", _error);
