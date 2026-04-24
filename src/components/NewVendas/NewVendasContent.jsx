@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ImpactoVendas from "../ComponentsVendas/ImpactoVendas";
 import ParceirosSection from "../ParceirosSection";
+import NewVendasSpeakersSlider from "./NewVendasSpeakersSlider";
 import { audienceProfiles, faqItems, tracks } from "./newVendasData";
 import { rememberDsxFormOrigin } from "../../utils/formOrigin";
 import {
@@ -47,6 +48,9 @@ const NewVendasContent = ({
 
   return (
     <section className="bg-black pb-10 pt-0 text-white md:pb-14 md:pt-0">
+      <section className="bg-black px-4 pb-10 md:px-8 md:pb-14">
+        <NewVendasSpeakersSlider />
+      </section>
       <AudienceSection items={audienceProfiles} />
       <PassaportesSection
         isMobile={isMobile}
