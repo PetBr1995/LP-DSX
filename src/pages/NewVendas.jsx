@@ -538,6 +538,20 @@ const NewVendas = () => {
       </div>
 
       <div className="relative z-10">
+        <section className="w-full bg-black">
+          <div className="w-full md:mx-auto md:max-w-[1200px]">
+            <picture>
+              <source media="(min-width: 768px)" srcSet="/banner-desktop.png" />
+              <img
+                src="/banner-mobile.png"
+                alt="Banner DSX"
+                className="block h-auto w-full object-cover"
+                loading="eager"
+                decoding="async"
+              />
+            </picture>
+          </div>
+        </section>
         <NewVendasHero ctaLink="#passaportes" />
         {shouldRenderContent ? (
           <Suspense fallback={<div className="min-h-[120px]" />}>
