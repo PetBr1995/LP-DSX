@@ -65,7 +65,6 @@ const App = () => {
               path="/checkoutVendas"
               element={<Navigate to="/precheckout" replace />}
             />
-            <Route path="/vendas" element={<NewVendas />} />
             <Route path="/vendas-leads" element={<NewVendasCopy />} />
             <Route path="/lpayla" element={<LPAyla />} />
             <Route path="/lp/segmento/:slug" element={<SpeakerLandingPage />} />

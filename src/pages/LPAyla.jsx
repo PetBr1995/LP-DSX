@@ -186,7 +186,7 @@ const LPAyla = () => {
       const params = new URLSearchParams(window.location.search);
       params.delete("etapa");
       const queryString = params.toString();
-      const targetUrl = queryString ? `/vendas?${queryString}` : "/vendas";
+      const targetUrl = queryString ? `/?${queryString}` : "/";
 
       window.setTimeout(() => {
         navigate(targetUrl, { replace: true });
