@@ -40,6 +40,45 @@ const apoioLogos = [
   },
 ];
 
+const expositoresLogos = [
+  {
+    src: "/logo-parceiros/logo-stock360.png",
+    alt: "Stock360",
+  },
+  {
+    src: "/logo-parceiros/Logo_Influx.png",
+    alt: "Influx",
+  },
+  {
+    src: "/logo-parceiros/logo-paracabos.webp",
+    alt: "Paracabos",
+  },
+  {
+    src: "/logo-parceiros/logo-AC%20Display.png",
+    alt: "AC Display",
+  },
+  {
+    src: "/logo-parceiros/logo-lord-brownie.png",
+    alt: "Lord Brownie",
+    sizeClass: "max-h-25 sm:max-h-30",
+  },
+  {
+    src: "/logo-parceiros/Logo_Polo.png",
+    alt: "Polo",
+    sizeClass: "max-h-25 sm:max-h-30",
+  },
+  {
+    src: "/logo-parceiros/Logo_TS_Clinic.png",
+    alt: "TS Clinic",
+    sizeClass: "max-h-25 sm:max-h-30",
+  },
+  {
+    src: "/logo-parceiros/logo-CIA-DO-ESPETO.png",
+    alt: "Cia do Espeto",
+    sizeClass: "max-h-25 sm:max-h-30",
+  },
+];
+
 const ParceirosSection = () => {
   return (
     <section className="bg-black px-4 py-14 sm:px-6 lg:px-8">
@@ -94,6 +133,28 @@ const ParceirosSection = () => {
             </div>
           </article>
           </div>
+
+          <article className="mt-6 rounded-xl bg-black p-5 sm:p-6">
+            <h3 className="mb-4 text-center font-jamjuree text-lg font-semibold capitalize tracking-wide text-[#F5A205]">
+              Expositores:
+            </h3>
+
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {expositoresLogos.map((logo) => (
+                <div
+                  key={logo.src}
+                  className="flex min-h-[92px] items-center justify-center rounded-lg border border-white/10 bg-white/5 px-4 py-4"
+                >
+                  <img
+                    src={logo.src}
+                    alt={logo.alt}
+                    className={`w-auto object-contain ${logo.sizeClass || "max-h-10 sm:max-h-12"}`}
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+          </article>
         </div>
       </div>
     </section>
