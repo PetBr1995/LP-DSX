@@ -5,13 +5,12 @@ import {
 } from "../components/NewVendas";
 import NewVendasHeaderMask from "../components/NewVendas/NewVendasHeaderMask";
 import LeadPopupFormHomeTeste from "../components/HomeTesteComponentes/LeadPopupFormHomeTeste";
+import { RD_API_URL } from "../lib/rdStation";
 import { getSupabaseClient, isSupabaseConfigured } from "../lib/supabaseClient";
 import { formatDsxFormOrigin } from "../utils/formOrigin";
 
 const NEW_VENDAS_SYMPLA_URL =
   "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721";
-const RD_API_URL =
-  "https://api.rd.services/platform/conversions?api_key=MHnWDjBYARQKdwUsfZRbjtVmPEyoHnSqtgFz";
 
 function onlyDigits(value = "") {
   return value.replace(/\D/g, "");

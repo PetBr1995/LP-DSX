@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { RD_API_URL } from "../../lib/rdStation";
 
 /** helpers */
 function onlyDigits(v = "") {
@@ -137,17 +138,14 @@ const FormPatrocinadores = () => {
     };
 
     try {
-      const res = await fetch(
-        "https://api.rd.services/platform/conversions?api_key=MHnWDjBYARQKdwUsfZRbjtVmPEyoHnSqtgFz",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify(payload),
-        }
-      );
+      const res = await fetch(RD_API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
 
       const data = await res.json().catch(() => ({}));
 

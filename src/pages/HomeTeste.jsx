@@ -1,5 +1,6 @@
 import { Suspense, lazy, useEffect, useMemo, useRef, useState } from "react";
 import useScrollToHash from "../hooks/useScrollToHash";
+import { RD_API_URL } from "../lib/rdStation";
 import { getSupabaseClient, isSupabaseConfigured } from "../lib/supabaseClient";
 import {
   formatDsxFormOrigin,
@@ -893,17 +894,14 @@ const HomeTeste = () => {
         throw new Error("Supabase não configurado");
       }
 
-      const rdResult = await fetch(
-        "https://api.rd.services/platform/conversions?api_key=MHnWDjBYARQKdwUsfZRbjtVmPEyoHnSqtgFz",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify(payload),
-        }
-      );
+      const rdResult = await fetch(RD_API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
 
       if (!rdResult.ok) {
         throw new Error("Erro ao enviar para RD Station");

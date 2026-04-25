@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { RD_API_URL } from "../lib/rdStation";
 import { formatDsxFormOrigin } from "../utils/formOrigin";
 
 /**
@@ -183,17 +184,14 @@ const FormSection = () => {
     };
 
     try {
-      const res = await fetch(
-        "https://api.rd.services/platform/conversions?api_key=MHnWDjBYARQKdwUsfZRbjtVmPEyoHnSqtgFz",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify(payload),
-        }
-      );
+      const res = await fetch(RD_API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
 
       const data = await res.json().catch(() => ({}));
 

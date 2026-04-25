@@ -1,5 +1,4 @@
-export const RD_API_URL =
-  "https://api.rd.services/platform/conversions?api_key=MHnWDjBYARQKdwUsfZRbjtVmPEyoHnSqtgFz";
+export { RD_API_URL } from "../../lib/rdStation";
 
 export const FORM_INITIAL_STATE = {
   name: "",

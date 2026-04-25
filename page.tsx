@@ -96,6 +96,12 @@ const formatarWhatsapp = (numero: string): string => {
   return `+55${somenteNumeros}`;
 };
 
+const RD_API_URL =
+  process.env.NEXT_PUBLIC_RD_STATION_CONVERSIONS_URL ||
+  (process.env.NEXT_PUBLIC_RD_STATION_API_KEY
+    ? `https://api.rd.services/platform/conversions?api_key=${encodeURIComponent(process.env.NEXT_PUBLIC_RD_STATION_API_KEY)}`
+    : "https://api.rd.services/platform/conversions?api_key=MHnWDjBYARQKdwUsfZRbjtVmPEyoHnSqtgFz");
+
 export default function Home() {
 
  const [sourceData, setSourceData] = useState({
@@ -203,17 +209,14 @@ export default function Home() {
      console.log("Payload enviado para RD Station:", formData.faturamento, formData.perfil);
  
      try {
-       const response = await fetch(
-         "https://api.rd.services/platform/conversions?api_key=MHnWDjBYARQKdwUsfZRbjtVmPEyoHnSqtgFz",
-         {
-           method: "POST",
-           headers: {
-             "Content-Type": "application/json",
-             "Accept": "application/json",
-           },
-           body: JSON.stringify(payload),
-         }
-       );
+       const response = await fetch(RD_API_URL, {
+         method: "POST",
+         headers: {
+           "Content-Type": "application/json",
+           "Accept": "application/json",
+         },
+         body: JSON.stringify(payload),
+       });
  
        if (response.ok) {
          dlPush({

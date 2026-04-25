@@ -2,6 +2,7 @@
 import { Calendar, MapPin } from "lucide-react";
 import NewVendasHeaderMask from "../components/NewVendas/NewVendasHeaderMask";
 import { audienceProfiles } from "../components/NewVendas/newVendasData";
+import { RD_API_URL } from "../lib/rdStation";
 import { getSupabaseClient, isSupabaseConfigured } from "../lib/supabaseClient";
 import LeadPopupFormHomeTeste from "../components/HomeTesteComponentes/LeadPopupFormHomeTeste";
 import {
@@ -95,8 +96,6 @@ const faqItems = [
 
 const CHECKOUT_LINK =
   "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721";
-const RD_API_URL =
-  "https://api.rd.services/platform/conversions?api_key=MHnWDjBYARQKdwUsfZRbjtVmPEyoHnSqtgFz";
 
 const metrics = [
   {
