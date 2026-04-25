@@ -20,7 +20,7 @@ const NewVendasHeaderMask = ({
       onClick={onClick}
     >
       <section className="font-jamjuree relative z-10 flex items-center justify-center">
-        <div className="group nv-mask-shell relative rounded-2xl bg-gradient-to-r from-[#8E3EEB] to-[#E0474A] p-[2px] shadow-[0_0_0_1px_rgba(224,71,74,0.2)] transition-all duration-300 hover:scale-[1.06] hover:shadow-[0_14px_34px_rgba(224,71,74,0.35)] active:scale-[0.98]">
+        <div className="group nv-mask-shell relative rounded-2xl bg-gradient-to-r from-[#8E3EEB] to-[#E0474A] p-[2px] shadow-[0_0_0_1px_rgba(224,71,74,0.2)] transition-all duration-300 hover:shadow-[0_14px_34px_rgba(224,71,74,0.35)]">
           <div
             className={`relative flex items-center justify-center overflow-hidden rounded-[14px] ${
               isLarge ? "h-12 min-w-[248px] px-6" : "h-11 min-w-[220px] px-5"

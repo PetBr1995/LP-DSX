@@ -1,4 +1,5 @@
 import { useMemo, useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 
 const ImpactoVendas = () => {
   const videos = [
@@ -34,13 +35,17 @@ const ImpactoVendas = () => {
   const toVimeoEmbed = (url) => {
     try {
       const u = new URL(url);
-      const id = u.pathname.split("/").filter(Boolean)[0];
+      const pathParts = u.pathname.split("/").filter(Boolean);
+      const id = [...pathParts].reverse().find((part) => /^\d+$/.test(part));
+      if (!id) return url;
 
-      const params = new URLSearchParams(u.search);
+      const params = new URLSearchParams();
       params.set("autoplay", "1");
       params.set("title", "0");
       params.set("byline", "0");
       params.set("portrait", "0");
+      params.set("playsinline", "1");
+      params.set("dnt", "1");
 
       return `https://player.vimeo.com/video/${id}?${params.toString()}`;
     } catch {
@@ -115,42 +120,47 @@ const ImpactoVendas = () => {
       </div>
 
       {/* MODAL */}
-      {open && (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center">
-          <div
-            className="absolute inset-0 bg-black/70"
-            onClick={() => setOpen(false)}
-          />
+      {open &&
+        createPortal(
+          <div className="fixed inset-0 z-[2147483647] flex items-center justify-center">
+            <div
+              className="absolute inset-0 bg-black/70"
+              onClick={() => setOpen(false)}
+            />
 
-          <div className="relative z-10 w-full max-w-4xl mx-4 bg-black rounded-xl overflow-hidden">
-            <div className="flex justify-between items-center p-3 border-b border-white/10">
-              <span className="text-white uppercase font-anton">
-                {active?.titulo}
-              </span>
+            <div className="relative z-10 w-full max-w-4xl mx-4 bg-black rounded-xl overflow-hidden">
+              <div className="flex justify-between items-center p-3 border-b border-white/10">
+                <span className="text-white uppercase font-anton">
+                  {active?.titulo}
+                </span>
 
-              <button
-                onClick={() => setOpen(false)}
-                className="text-white text-xl hover:opacity-70 transition"
+                <button
+                  onClick={() => setOpen(false)}
+                  className="text-white text-xl hover:opacity-70 transition"
+                >
+                  ✕
+                </button>
+              </div>
+
+              <div
+                className="relative w-full bg-black"
+                style={{ aspectRatio: "16 / 9" }}
               >
-                ✕
-              </button>
+                {embedUrl && (
+                  <iframe
+                    src={embedUrl}
+                    className="absolute inset-0 block w-full h-full"
+                    allow="autoplay; fullscreen"
+                    allowFullScreen
+                    frameBorder="0"
+                    title="Vídeo"
+                  />
+                )}
+              </div>
             </div>
-
-            <div className="aspect-video bg-black">
-              {embedUrl && (
-                <iframe
-                  src={embedUrl}
-                  className="w-full h-full"
-                  allow="autoplay; fullscreen"
-                  allowFullScreen
-                  frameBorder="0"
-                  title="Vídeo"
-                />
-              )}
-            </div>
-          </div>
-        </div>
-      )}
+          </div>,
+          document.body
+        )}
     </section>
   );
 };

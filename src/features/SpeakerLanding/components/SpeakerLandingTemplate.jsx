@@ -15,6 +15,7 @@ import {
   XCircle,
 } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 const NEW_VENDAS_SYMPLA_URL =
   "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721";
@@ -113,13 +114,17 @@ const FAQS = [
 const toVimeoEmbedUrl = (url) => {
   try {
     const parsedUrl = new URL(url);
-    const id = parsedUrl.pathname.split("/").filter(Boolean)[0];
+    const pathParts = parsedUrl.pathname.split("/").filter(Boolean);
+    const id = [...pathParts].reverse().find((part) => /^\d+$/.test(part));
+    if (!id) return url;
 
-    const params = new URLSearchParams(parsedUrl.search);
+    const params = new URLSearchParams();
     params.set("autoplay", "1");
     params.set("title", "0");
     params.set("byline", "0");
     params.set("portrait", "0");
+    params.set("playsinline", "1");
+    params.set("dnt", "1");
 
     return `https://player.vimeo.com/video/${id}?${params.toString()}`;
   } catch {
@@ -1002,49 +1007,55 @@ const SpeakerLandingTemplate = ({ speaker }) => {
             </div>
           </section>
 
-          {isDepoimentoModalOpen ? (
-            <div className="fixed inset-0 z-[220] grid place-items-center px-4">
-              <button
-                type="button"
-                aria-label="Fechar vídeo"
-                className="absolute inset-0 bg-black/75"
-                onClick={() => {
-                  setIsDepoimentoModalOpen(false);
-                  setActiveDepoimentoVideo(null);
-                }}
-              />
-              <div className="relative z-[221] w-full max-w-4xl overflow-hidden rounded-2xl border border-[#F5C02B]/35 bg-black">
-                <div className="flex items-center justify-between border-b border-[#F5C02B]/35 px-4 py-3">
-                  <p className="font-anton text-xl uppercase text-white">
-                    {activeDepoimentoVideo?.nome || "Depoimento"}
-                  </p>
+          {isDepoimentoModalOpen
+            ? createPortal(
+                <div className="fixed inset-0 z-[2147483647] grid place-items-center px-4">
                   <button
                     type="button"
-                    className="text-white/80 transition hover:text-white"
+                    aria-label="Fechar vídeo"
+                    className="absolute inset-0 bg-black/75"
                     onClick={() => {
                       setIsDepoimentoModalOpen(false);
                       setActiveDepoimentoVideo(null);
                     }}
-                    aria-label="Fechar"
-                  >
-                    ✕
-                  </button>
-                </div>
-                <div className="aspect-video bg-black">
-                  {activeDepoimentoEmbedUrl ? (
-                    <iframe
-                      src={activeDepoimentoEmbedUrl}
-                      className="h-full w-full"
-                      allow="autoplay; fullscreen; picture-in-picture"
-                      allowFullScreen
-                      frameBorder="0"
-                      title={`Depoimento ${activeDepoimentoVideo?.nome || ""}`}
-                    />
-                  ) : null}
-                </div>
-              </div>
-            </div>
-          ) : null}
+                  />
+                  <div className="relative z-[1] w-full max-w-4xl overflow-hidden rounded-2xl border border-[#F5C02B]/35 bg-black">
+                    <div className="flex items-center justify-between border-b border-[#F5C02B]/35 px-4 py-3">
+                      <p className="font-anton text-xl uppercase text-white">
+                        {activeDepoimentoVideo?.nome || "Depoimento"}
+                      </p>
+                      <button
+                        type="button"
+                        className="text-white/80 transition hover:text-white"
+                        onClick={() => {
+                          setIsDepoimentoModalOpen(false);
+                          setActiveDepoimentoVideo(null);
+                        }}
+                        aria-label="Fechar"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                    <div
+                      className="relative w-full bg-black"
+                      style={{ aspectRatio: "16 / 9" }}
+                    >
+                      {activeDepoimentoEmbedUrl ? (
+                        <iframe
+                          src={activeDepoimentoEmbedUrl}
+                          className="absolute inset-0 block h-full w-full"
+                          allow="autoplay; fullscreen; picture-in-picture"
+                          allowFullScreen
+                          frameBorder="0"
+                          title={`Depoimento ${activeDepoimentoVideo?.nome || ""}`}
+                        />
+                      ) : null}
+                    </div>
+                  </div>
+                </div>,
+                document.body
+              )
+            : null}
 
           <section className="rounded-2xl border border-[#F5C02B]/35 bg-[linear-gradient(150deg,rgba(16,12,6,0.88)_0%,rgba(7,7,7,0.92)_78%)] p-6">
             <h2 className="font-anton text-[clamp(1.4rem,5vw,3.3rem)] text-center leading-[1.22] uppercase text-[#F5C02B]">{speaker.immersionHeadline}</h2>

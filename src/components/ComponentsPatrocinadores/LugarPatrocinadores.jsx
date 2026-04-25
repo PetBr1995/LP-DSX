@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 
 // ✅ ajuste o caminho conforme sua estrutura
 import FormPatrocinadores from "./FormPatrocinadores";
@@ -36,14 +37,17 @@ const LugarPatrocinadores = () => {
   const toVimeoEmbed = (url) => {
     try {
       const u = new URL(url);
-      const id = u.pathname.split("/").filter(Boolean)[0];
+      const pathParts = u.pathname.split("/").filter(Boolean);
+      const id = [...pathParts].reverse().find((part) => /^\d+$/.test(part));
       if (!id) return url;
 
-      const params = new URLSearchParams(u.search);
+      const params = new URLSearchParams();
       params.set("autoplay", "1");
       params.set("title", "0");
       params.set("byline", "0");
       params.set("portrait", "0");
+      params.set("playsinline", "1");
+      params.set("dnt", "1");
 
       return `https://player.vimeo.com/video/${id}?${params.toString()}`;
     } catch {
@@ -81,7 +85,6 @@ const LugarPatrocinadores = () => {
       document.body.style.overflow = "";
       window.removeEventListener("keydown", onKeyDown);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, isSponsorModalOpen]);
 
   return (
@@ -173,47 +176,52 @@ const LugarPatrocinadores = () => {
         </div>
 
         {/* MODAL VÍDEO */}
-        {open && (
-          <div className="fixed inset-0 z-50" aria-modal="true" role="dialog">
-            <div className="absolute inset-0 bg-black/70" onClick={closeVideoModal} />
+        {open &&
+          createPortal(
+            <div className="fixed inset-0 z-[2147483647]" aria-modal="true" role="dialog">
+              <div className="absolute inset-0 bg-black/70" onClick={closeVideoModal} />
 
-            <div className="relative mx-auto flex min-h-screen max-w-5xl items-center justify-center p-4">
-              <div className="relative w-full rounded-xl bg-[#0b0f14] border border-white/10 shadow-xl overflow-hidden">
-                <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
-                  <h3 className="text-white font-anton uppercase text-lg">
-                    {active?.titulo}
-                  </h3>
+              <div className="relative mx-auto flex min-h-screen max-w-5xl items-center justify-center p-4">
+                <div className="relative w-full rounded-xl bg-[#0b0f14] border border-white/10 shadow-xl overflow-hidden">
+                  <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
+                    <h3 className="text-white font-anton uppercase text-lg">
+                      {active?.titulo}
+                    </h3>
 
-                  <button
-                    type="button"
-                    onClick={closeVideoModal}
-                    className="
-                      text-white/80 hover:text-white transition p-2
-                      focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 rounded-md
-                    "
-                    aria-label="Fechar"
+                    <button
+                      type="button"
+                      onClick={closeVideoModal}
+                      className="
+                        text-white/80 hover:text-white transition p-2
+                        focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 rounded-md
+                      "
+                      aria-label="Fechar"
+                    >
+                      ✕
+                    </button>
+                  </div>
+
+                  <div
+                    className="relative w-full bg-black"
+                    style={{ aspectRatio: "16 / 9" }}
                   >
-                    ✕
-                  </button>
-                </div>
-
-                <div className="w-full aspect-video bg-black">
-                  {embedUrl && (
-                    <iframe
-                      key={embedUrl}
-                      src={embedUrl}
-                      className="h-full w-full"
-                      frameBorder="0"
-                      allow="autoplay; fullscreen; picture-in-picture"
-                      allowFullScreen
-                      title={active?.titulo || "Vídeo"}
-                    />
-                  )}
+                    {embedUrl && (
+                      <iframe
+                        key={embedUrl}
+                        src={embedUrl}
+                        className="absolute inset-0 block h-full w-full"
+                        frameBorder="0"
+                        allow="autoplay; fullscreen; picture-in-picture"
+                        allowFullScreen
+                        title={active?.titulo || "Vídeo"}
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        )}
+            </div>,
+            document.body
+          )}
 
         {/* CTA */}
         <button
@@ -235,53 +243,55 @@ const LugarPatrocinadores = () => {
       </div>
 
       {/* ✅ MODAL PATROCÍNIO */}
-      {isSponsorModalOpen && (
-        <div
-          className="fixed inset-0 z-[999] bg-black/70 backdrop-blur-[2px] flex items-center justify-center px-4"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Formulário de Patrocínio"
-          onMouseDown={(e) => {
-            // fecha clicando fora
-            if (e.target === e.currentTarget) setIsSponsorModalOpen(false);
-          }}
-        >
-          <div className="relative w-full max-w-xl">
-            {/* botão fechar */}
-            <button
-              type="button"
-              onClick={() => setIsSponsorModalOpen(false)}
-              className="
-                absolute -top-3 -right-3
-                w-10 h-10 rounded-full
-                bg-white text-black
-                shadow-lg
-                grid place-items-center
-                hover:scale-105 transition
-              "
-              aria-label="Fechar"
-            >
-              ✕
-            </button>
+      {isSponsorModalOpen &&
+        createPortal(
+          <div
+            className="fixed inset-0 z-[2147483647] bg-black/70 backdrop-blur-[2px] flex items-center justify-center px-4"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Formulário de Patrocínio"
+            onMouseDown={(e) => {
+              // fecha clicando fora
+              if (e.target === e.currentTarget) setIsSponsorModalOpen(false);
+            }}
+          >
+            <div className="relative w-full max-w-xl">
+              {/* botão fechar */}
+              <button
+                type="button"
+                onClick={() => setIsSponsorModalOpen(false)}
+                className="
+                  absolute -top-3 -right-3
+                  w-10 h-10 rounded-full
+                  bg-white text-black
+                  shadow-lg
+                  grid place-items-center
+                  hover:scale-105 transition
+                "
+                aria-label="Fechar"
+              >
+                ✕
+              </button>
 
-            {/* conteúdo */}
-            <div className="rounded-2xl overflow-hidden">
-              <div className="bg-white px-6 pt-6">
-                <h3 className="text-xl font-bold text-slate-900">
-                  Quero patrocinar o DSX 2026
-                </h3>
-                <p className="text-sm text-slate-600 mt-1">
-                  Preencha os dados e nossa equipe entra em contato.
-                </p>
-              </div>
+              {/* conteúdo */}
+              <div className="rounded-2xl overflow-hidden">
+                <div className="bg-white px-6 pt-6">
+                  <h3 className="text-xl font-bold text-slate-900">
+                    Quero patrocinar o DSX 2026
+                  </h3>
+                  <p className="text-sm text-slate-600 mt-1">
+                    Preencha os dados e nossa equipe entra em contato.
+                  </p>
+                </div>
 
-              <div className="bg-white px-6 pb-6 pt-4">
-                <FormPatrocinadores />
+                <div className="bg-white px-6 pb-6 pt-4">
+                  <FormPatrocinadores />
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      )}
+          </div>,
+          document.body
+        )}
     </section>
   );
 };
