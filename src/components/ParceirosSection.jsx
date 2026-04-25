@@ -67,6 +67,11 @@ const expositoresLogos = [
     alt: "TS Clinic",
     sizeClass: "max-h-25 sm:max-h-30",
   },
+  {
+    src: "/logo-vbot.png",
+    alt: "VBOT",
+    sizeClass: "max-h-25 sm:max-h-30",
+  },
 ];
 
 const foodLogos = [
