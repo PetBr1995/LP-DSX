@@ -6,11 +6,11 @@ import { withHublaUtm } from "../utils/hublaUtm";
 
 const NEW_VENDAS_SYMPLA_URL =
   "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721";
-const NewVendasContent = lazy(() =>
-  import("../components/NewVendas/NewVendasContent"),
+const NewVendasContent = lazy(
+  () => import("../components/NewVendas/NewVendasContent"),
 );
-const LeadPopupFormHomeTeste = lazy(() =>
-  import("../components/HomeTesteComponentes/LeadPopupFormHomeTeste"),
+const LeadPopupFormHomeTeste = lazy(
+  () => import("../components/HomeTesteComponentes/LeadPopupFormHomeTeste"),
 );
 
 function onlyDigits(value = "") {
@@ -54,7 +54,9 @@ function isMissingColumnError(error) {
 }
 
 function resolveRdConversionIdentifier(origin = "") {
-  const normalized = String(origin || "").trim().toLowerCase();
+  const normalized = String(origin || "")
+    .trim()
+    .toLowerCase();
 
   if (normalized.includes("vip")) {
     return "DSX 2026 - Formulário VIP";
@@ -74,7 +76,9 @@ function resolveRdConversionIdentifier(origin = "") {
 
 const NewVendas = () => {
   const [showLeadModal, setShowLeadModal] = useState(false);
-  const [pendingSymplaUrl, setPendingSymplaUrl] = useState(NEW_VENDAS_SYMPLA_URL);
+  const [pendingSymplaUrl, setPendingSymplaUrl] = useState(
+    NEW_VENDAS_SYMPLA_URL,
+  );
   const [selectedPassOrigin, setSelectedPassOrigin] = useState("Standard");
   const [leadForm, setLeadForm] = useState({
     name: "",
@@ -127,7 +131,8 @@ const NewVendas = () => {
     const pageDescription =
       "Garanta seu passaporte para o DSX 2026: o maior evento de negócios, marketing, vendas e inovação do Norte. Dias 23 e 24 de julho em Manaus.";
     const pageUrl = "https://dsx.com.vc/newvendas";
-    const ogImage = "https://dsx.com.vc/optimized/step1/Banner-vendas-hero.webp";
+    const ogImage =
+      "https://dsx.com.vc/optimized/step1/Banner-vendas-hero.webp";
 
     document.title = pageTitle;
 
@@ -299,7 +304,10 @@ const NewVendas = () => {
       return () => window.cancelIdleCallback(idleId);
     }
 
-    const timeoutId = window.setTimeout(() => setShouldRenderContent(true), 180);
+    const timeoutId = window.setTimeout(
+      () => setShouldRenderContent(true),
+      180,
+    );
     return () => window.clearTimeout(timeoutId);
   }, []);
 
@@ -356,7 +364,8 @@ const NewVendas = () => {
       const lpIdentifier = "LP DSX - Principal";
       const formData = new FormData(event.target);
       const name = formData.get("name")?.toString().trim() || "";
-      const email = formData.get("email")?.toString().trim().toLowerCase() || "";
+      const email =
+        formData.get("email")?.toString().trim().toLowerCase() || "";
       const phone = formData.get("phone")?.toString().trim() || "";
       const cargo = formData.get("cargo")?.toString().trim() || "";
       const resolvedFormOrigin = selectedPassOrigin || "Standard";
@@ -365,7 +374,8 @@ const NewVendas = () => {
         event_type: "CONVERSION",
         event_family: "CDP",
         payload: {
-          conversion_identifier: resolveRdConversionIdentifier(resolvedFormOrigin),
+          conversion_identifier:
+            resolveRdConversionIdentifier(resolvedFormOrigin),
           name,
           email,
           personal_phone: phone,
@@ -448,7 +458,9 @@ const NewVendas = () => {
               delete fallbackProfileWithoutLp.lp_identifier;
               retry = await supabase
                 .from("tracking_lead_profiles")
-                .upsert([fallbackProfileWithoutLp], { onConflict: "lead_email" });
+                .upsert([fallbackProfileWithoutLp], {
+                  onConflict: "lead_email",
+                });
               profileError = retry.error;
             }
           }
@@ -468,7 +480,8 @@ const NewVendas = () => {
                 sourceData.page_url ||
                 window.location.pathname + window.location.search,
               referrer: document.referrer || null,
-              utm_source: sourceData.utm_source || sourceData.site_origin || null,
+              utm_source:
+                sourceData.utm_source || sourceData.site_origin || null,
               utm_medium: sourceData.utm_medium || null,
               utm_campaign: sourceData.utm_campaign || null,
               utm_content: sourceData.utm_content || null,
@@ -496,7 +509,9 @@ const NewVendas = () => {
                 delete fallbackSessionWithoutLp.lp_identifier;
                 retry = await supabase
                   .from("tracking_lead_sessions")
-                  .upsert([fallbackSessionWithoutLp], { onConflict: "session_id" });
+                  .upsert([fallbackSessionWithoutLp], {
+                    onConflict: "session_id",
+                  });
                 sessionError = retry.error;
               }
             }
@@ -517,7 +532,9 @@ const NewVendas = () => {
       }, 700);
     } catch (error) {
       setLeadStatus("error");
-      setMensagem(error?.message || "Erro ao enviar formulário. Tente novamente.");
+      setMensagem(
+        error?.message || "Erro ao enviar formulário. Tente novamente.",
+      );
     } finally {
       setLoading(false);
     }
@@ -542,7 +559,7 @@ const NewVendas = () => {
             <picture>
               <source media="(min-width: 768px)" srcSet="/banner-desktop.png" />
               <img
-                src="/banner-mobile.png"
+                src="/banner-mobile-2.png"
                 alt="Banner DSX"
                 className="block h-auto w-full object-cover"
                 loading="eager"
