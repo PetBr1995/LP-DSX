@@ -97,6 +97,11 @@ const mainSpeakers = [
     image: "/Roberta_veras.png",
     bio: "Educadora financeira, consultora empresarial e especialista em vendas. Possui uma trajetória construída no varejo e no empreendedorismo como gestora de franquias e performance comercial com destaque nacional.",
   },
+  {
+    name: "Thales Schincariol",
+    image: "/foto-thales.png",
+    bio: "Médico e CEO da TS Clinic, especialista em Medicina Integrativa, Nutrologia e Ciências do Envelhecimento. Une 12 anos de experiência clínica à visão estratégica de negócios como chave da longevidade e alta performance para líderes de negócio.",
+  },
 ];
 
 const NewVendasSpeakersSlider = () => {
@@ -174,11 +179,9 @@ const NewVendasSpeakersSlider = () => {
 
   return (
     <section className="mx-auto mt-8 w-full max-w-6xl">
-
       <h3 className="text-center font-anton text-[clamp(1.3rem,4.2vw,2.8rem)] uppercase leading-[1.08] tracking-[0.03em] text-[#F5C02B]">
         Conheça os primeiros palestrantes confirmados do DSX
       </h3>
-
 
       <div className="relative mx-auto mt-6 w-full max-w-[920px]">
         <div
@@ -258,7 +261,10 @@ const NewVendasSpeakersSlider = () => {
               aria-label="Slide anterior de palestrantes"
               className="absolute left-2 top-1/2 z-10 -translate-y-1/2 text-[#F5C02B] transition hover:scale-110 hover:text-[#FFD45A] md:left-3"
             >
-              <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" strokeWidth={2.4} />
+              <ChevronLeft
+                className="h-5 w-5 md:h-6 md:w-6"
+                strokeWidth={2.4}
+              />
             </button>
             <button
               type="button"
@@ -266,7 +272,10 @@ const NewVendasSpeakersSlider = () => {
               aria-label="Próximo slide de palestrantes"
               className="absolute right-2 top-1/2 z-10 -translate-y-1/2 text-[#F5C02B] transition hover:scale-110 hover:text-[#FFD45A] md:right-3"
             >
-              <ChevronRight className="h-5 w-5 md:h-6 md:w-6" strokeWidth={2.4} />
+              <ChevronRight
+                className="h-5 w-5 md:h-6 md:w-6"
+                strokeWidth={2.4}
+              />
             </button>
           </>
         ) : null}
