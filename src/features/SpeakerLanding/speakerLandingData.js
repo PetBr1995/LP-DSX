@@ -94,11 +94,6 @@ const segmentLandingList = [
         bio: "Criadora do Método dos Conteúdos Magnéticos. Pioneira em oficinas práticas de criação, já formou milhares de alunos e se consolidou como referência em conteúdos que geram conexão e vendas com presença no digital.",
       },
       {
-        name: "Fernan Bravo",
-        image: "/palestrantes/ErickFernandes.png",
-        bio: "Consultor de posicionamento, apresentador de TV, host do PodRolar, maior podcast do Norte do Brasil, e Head de Comunicação do Grupo Digital Comunicação. Especialista em transformar autoridade em audiência e audiência em resultado.",
-      },
-      {
         name: "Rafael Liporace",
         image: "/optimized/step1/Rafael_liporace.PNG",
         bio: "CEO da Tardezinha. O mentor por trás da maior turnê da história da música brasileira. Expert em economia criativa e em transformar eventos em ativos de milhões.",
@@ -375,7 +370,7 @@ const segmentLandingList = [
       },
       {
         q: "Preciso entender de tecnologia para aproveitar?",
-        a: "Não. O DSX foi feito justamente para o dono do negócio, não para o programador. Você não vai aprender a \"fazer código\", você vai aprender a comprar, gerir e implementar inovação para ter vantagem competitiva. Se você toma decisões na empresa, este lugar é seu.",
+        a: 'Não. O DSX foi feito justamente para o dono do negócio, não para o programador. Você não vai aprender a "fazer código", você vai aprender a comprar, gerir e implementar inovação para ter vantagem competitiva. Se você toma decisões na empresa, este lugar é seu.',
       },
       {
         q: "Como funciona o parcelamento?",
@@ -415,9 +410,8 @@ const segmentLandingList = [
       "Você sabe que precisa de processos, mas nunca tem tempo pra montar",
       "Toda vez que tira o pé do acelerador, a empresa desacelera junto",
     ],
-    transitionLine:
-      "",
-    outcomesHeadline: "O QUE VOCE SAI TENDO DEPOIS DO DSX PARA O SEU NEGOCIO:",
+    transitionLine: "",
+    outcomesHeadline: "O QUE VOCÊ LEVA DO DSX PARA O SEU NEGÓCIO",
     outcomes: [
       {
         title: "Vendas",
@@ -527,8 +521,7 @@ const segmentLandingList = [
     valueAnchor:
       "O custo de não estar no DSX é muito maior do que o valor do passaporte. Um erro na sua estratégia de escala ou um processo de delegação mal feito custa, por mês, dez vezes o investimento que você fará hoje.",
     groupHeadline: "Ninguém cresce sozinho",
-    groupCopy:
-      "Ninguém cresce sozinho",
+    groupCopy: "Ninguém cresce sozinho",
     urgencyHeadline: "GARANTIR NO LOTE ATUAL",
     urgencyCopy:
       "O mercado não espera. Garanta sua cadeira no setor de decisões antes da virada de lote.",
