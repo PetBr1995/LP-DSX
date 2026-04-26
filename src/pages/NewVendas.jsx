@@ -559,7 +559,7 @@ const NewVendas = () => {
             <picture>
               <source media="(min-width: 768px)" srcSet="/banner-desktop.png" />
               <img
-                src="/banner-mobile-2.png"
+                src="/banner-mobile-3.png"
                 alt="Banner DSX"
                 className="block h-auto w-full object-cover"
                 loading="eager"
