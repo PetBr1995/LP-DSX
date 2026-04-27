@@ -50,7 +50,6 @@ const App = () => {
         <Suspense fallback={<div className="min-h-screen bg-black" />}>
           <Routes>
             <Route path="/" element={<NewVendas />} />
-            <Route path="/palestrantes" element={<Palestrantes />} />
             <Route path="/agradecimento" element={<Agradecimento />} />
             <Route path="/patrocinador" element={<Patrocinadores />} />
             <Route path="/whatsapp" element={<WhatsappPage />} />
