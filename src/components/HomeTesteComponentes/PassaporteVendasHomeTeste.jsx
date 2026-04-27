@@ -5,7 +5,6 @@ import { rememberDsxFormOrigin } from "../../utils/formOrigin";
 const cards = [
   {
     nome: "VIP",
-    lote: "Lote 2",
     price: "1.297,00",
     installment: "12x de R$ 134,14",
     cash: "ou R$ 1.297,00 à vista",
@@ -56,11 +55,15 @@ const SquishyPlanCard = ({ card, onBuyPassaporte, hideBuyButton = false }) => (
       <p className="mt-3 text-xs font-semibold text-white/90">
         PASSAPORTE
       </p>
-      <div className="mt-2 inline-flex w-fit items-center gap-2 rounded-md border border-[#F5D247]/65 bg-gradient-to-r from-[#2D220A] via-[#4B3911] to-[#2D220A] px-3 py-1.5 shadow-[0_0_0_1px_rgba(245,210,71,0.2),0_8px_18px_rgba(0,0,0,0.35)]">
-        <span className="h-2 w-2 rounded-full bg-[#F5D247]" />
-        <span className="text-[11px] font-black uppercase tracking-[0.12em] text-[#FFE27A]">
-          {card.lote}
-        </span>
+      <div className="mt-2 min-h-[34px]">
+        {card.lote ? (
+          <div className="inline-flex w-fit items-center gap-2 rounded-md border border-[#F5D247]/65 bg-gradient-to-r from-[#2D220A] via-[#4B3911] to-[#2D220A] px-3 py-1.5 shadow-[0_0_0_1px_rgba(245,210,71,0.2),0_8px_18px_rgba(0,0,0,0.35)]">
+            <span className="h-2 w-2 rounded-full bg-[#F5D247]" />
+            <span className="text-[11px] font-black uppercase tracking-[0.12em] text-[#FFE27A]">
+              {card.lote}
+            </span>
+          </div>
+        ) : null}
       </div>
       <h3 className="mt-2 text-3xl font-black uppercase leading-[0.95] text-white lg:text-4xl">
         {card.nome}

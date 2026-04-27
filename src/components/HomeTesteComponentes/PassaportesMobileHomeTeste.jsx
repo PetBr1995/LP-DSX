@@ -5,7 +5,6 @@ import { rememberDsxFormOrigin } from "../../utils/formOrigin";
 const cards = [
   {
     nome: "VIP",
-    lote: "Lote 2",
     price: "1.297,00",
     installment: "12x de R$ 134,14",
     cash: "ou R$ 1.297,00 à vista",
@@ -74,9 +73,13 @@ const PassaportesMobileHomeTeste = ({
                 <p className="mt-3 text-xs font-semibold text-white/90">
                   PASSAPORTE
                 </p>
-                <p className="mt-1 inline-flex rounded-full border border-[#F5D247]/30 bg-black/30 px-2 py-1 text-[10px] font-black uppercase tracking-[0.08em] text-[#F5D247]">
-                  {card.lote}
-                </p>
+                <div className="mt-1 min-h-[26px]">
+                  {card.lote ? (
+                    <p className="inline-flex rounded-full border border-[#F5D247]/30 bg-black/30 px-2 py-1 text-[10px] font-black uppercase tracking-[0.08em] text-[#F5D247]">
+                      {card.lote}
+                    </p>
+                  ) : null}
+                </div>
                 <h3 className="mt-2 text-3xl font-black uppercase leading-[0.9] text-white sm:text-4xl">
                   {card.nome}
                 </h3>
