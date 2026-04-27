@@ -235,10 +235,17 @@
         function loadRdLoader() {
           if (w.__DSX_RD_LOADED__) return;
           w.__DSX_RD_LOADED__ = true;
+          var rdLoaderId = "%VITE_RD_STATION_LOADER_ID%";
+          var isValidLoaderId = /^[a-f0-9-]{36}$/i.test(rdLoaderId || "");
+          if (!isValidLoaderId) {
+            rdLoaderId = "1bb9cfdb-9ebd-405c-af85-378a62659e52";
+          }
           var rdScript = d.createElement("script");
           rdScript.async = true;
           rdScript.src =
-            "https://d335luupugsy2.cloudfront.net/js/loader-scripts/1bb9cfdb-9ebd-405c-af85-378a62659e52-loader.js";
+            "https://d335luupugsy2.cloudfront.net/js/loader-scripts/" +
+            rdLoaderId +
+            "-loader.js";
           d.head.appendChild(rdScript);
         }
 
