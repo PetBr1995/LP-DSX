@@ -16,6 +16,7 @@ import {
   normalizeHostname,
 } from "../features/LPAyla/utils";
 import LPAylaFormStage from "../features/LPAyla/components/LPAylaFormStage";
+import { withRdTrackingToken } from "../lib/rdStationTracking";
 
 const LPAyla = () => {
   const navigate = useNavigate();
@@ -131,7 +132,7 @@ const LPAyla = () => {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(withRdTrackingToken(payload)),
       });
 
       if (!response.ok) {

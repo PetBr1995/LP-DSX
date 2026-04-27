@@ -3,6 +3,7 @@ import PassaportesSection from "../../../components/NewVendas/sections/Passaport
 import FooterSection from "../../../components/NewVendas/sections/FooterSection";
 import LeadPopupFormHomeTeste from "../../../components/HomeTesteComponentes/LeadPopupFormHomeTeste";
 import { RD_API_URL } from "../../../lib/rdStation";
+import { withRdTrackingToken } from "../../../lib/rdStationTracking";
 import { formatDsxFormOrigin } from "../../../utils/formOrigin";
 import {
   CalendarDays,
@@ -542,7 +543,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(withRdTrackingToken(payload)),
       });
 
       if (!rdResult.ok) {

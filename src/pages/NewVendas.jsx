@@ -1,6 +1,7 @@
 ﻿import { Suspense, lazy, useEffect, useMemo, useState } from "react";
 import NewVendasHero from "../components/NewVendas/NewVendasHero";
 import { RD_API_URL } from "../lib/rdStation";
+import { withRdTrackingToken } from "../lib/rdStationTracking";
 import { formatDsxFormOrigin } from "../utils/formOrigin";
 import { withHublaUtm } from "../utils/hublaUtm";
 
@@ -407,7 +408,7 @@ const NewVendas = () => {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(withRdTrackingToken(payload)),
       });
 
       if (!rdResult.ok) {

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { RD_API_URL } from "../../lib/rdStation";
+import { withRdTrackingToken } from "../../lib/rdStationTracking";
 
 /** helpers */
 function onlyDigits(v = "") {
@@ -150,14 +151,14 @@ const HeroPatrocinadores = () => {
                     "Content-Type": "application/json",
                     Accept: "application/json",
                 },
-                body: JSON.stringify(payload),
+                body: JSON.stringify(withRdTrackingToken(payload)),
             });
 
             // // ✅ Alternativa (PROD): via backend/proxy
             // const res = await fetch("/api/lead", {
             //   method: "POST",
             //   headers: { "Content-Type": "application/json" },
-            //   body: JSON.stringify(payload),
+            //   body: JSON.stringify(withRdTrackingToken(payload)),
             // });
 
             const data = await res.json().catch(() => ({}));

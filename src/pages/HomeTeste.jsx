@@ -1,6 +1,7 @@
 import { Suspense, lazy, useEffect, useMemo, useRef, useState } from "react";
 import useScrollToHash from "../hooks/useScrollToHash";
 import { RD_API_URL } from "../lib/rdStation";
+import { withRdTrackingToken } from "../lib/rdStationTracking";
 import { getSupabaseClient, isSupabaseConfigured } from "../lib/supabaseClient";
 import {
   formatDsxFormOrigin,
@@ -900,7 +901,7 @@ const HomeTeste = () => {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(withRdTrackingToken(payload)),
       });
 
       if (!rdResult.ok) {

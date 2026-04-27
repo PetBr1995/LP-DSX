@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { RD_API_URL } from "../../lib/rdStation";
+import { withRdTrackingToken } from "../../lib/rdStationTracking";
 import { formatDsxFormOrigin } from "../../utils/formOrigin";
 
 // ===================
@@ -181,7 +182,7 @@ const FormVendas = () => {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(withRdTrackingToken(payload)),
       });
 
       if (!res.ok) {

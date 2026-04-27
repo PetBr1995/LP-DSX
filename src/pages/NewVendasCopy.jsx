@@ -6,6 +6,7 @@ import {
 import NewVendasHeaderMask from "../components/NewVendas/NewVendasHeaderMask";
 import LeadPopupFormHomeTeste from "../components/HomeTesteComponentes/LeadPopupFormHomeTeste";
 import { RD_API_URL } from "../lib/rdStation";
+import { withRdTrackingToken } from "../lib/rdStationTracking";
 import { getSupabaseClient, isSupabaseConfigured } from "../lib/supabaseClient";
 import { formatDsxFormOrigin } from "../utils/formOrigin";
 
@@ -346,7 +347,7 @@ const NewVendasCopy = () => {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(withRdTrackingToken(payload)),
       });
 
       if (!rdResult.ok) {

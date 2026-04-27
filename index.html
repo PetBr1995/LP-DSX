@@ -252,28 +252,16 @@
         }
 
         function scheduleLoaders() {
-          var hasTriggered = false;
-          function trigger() {
-            if (hasTriggered) return;
-            hasTriggered = true;
-            loadDsxTracker();
-            w.setTimeout(loadRdLoader, 1000);
-            w.removeEventListener("pointerdown", trigger, true);
-            w.removeEventListener("keydown", trigger, true);
-            w.removeEventListener("scroll", trigger, true);
-          }
-
-          w.addEventListener("pointerdown", trigger, { once: true, capture: true });
-          w.addEventListener("keydown", trigger, { once: true, capture: true });
-          w.addEventListener("scroll", trigger, { once: true, capture: true });
+          loadDsxTracker();
+          loadRdLoader();
         }
 
-        if (d.readyState === "complete") {
+        if (d.readyState === "complete" || d.readyState === "interactive") {
           scheduleLoaders();
           return;
         }
 
-        w.addEventListener("load", scheduleLoaders, { once: true });
+        d.addEventListener("DOMContentLoaded", scheduleLoaders, { once: true });
       })(window, document);
     </script>
     <script type="module" src="/src/main.jsx"></script>

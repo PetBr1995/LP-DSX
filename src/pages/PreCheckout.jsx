@@ -3,6 +3,7 @@ import { Calendar, MapPin } from "lucide-react";
 import NewVendasHeaderMask from "../components/NewVendas/NewVendasHeaderMask";
 import { audienceProfiles } from "../components/NewVendas/newVendasData";
 import { RD_API_URL } from "../lib/rdStation";
+import { withRdTrackingToken } from "../lib/rdStationTracking";
 import { getSupabaseClient, isSupabaseConfigured } from "../lib/supabaseClient";
 import LeadPopupFormHomeTeste from "../components/HomeTesteComponentes/LeadPopupFormHomeTeste";
 import {
@@ -451,7 +452,7 @@ const PreCheckout = () => {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(withRdTrackingToken(payload)),
       });
 
       const rdData = await rdResult.json().catch(() => ({}));
