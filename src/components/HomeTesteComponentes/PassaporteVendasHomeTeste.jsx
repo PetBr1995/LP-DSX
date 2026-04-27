@@ -44,7 +44,7 @@ const cards = [
 
 const SquishyPlanCard = ({ card, onBuyPassaporte, hideBuyButton = false }) => (
   <article
-    className="relative flex h-full min-h-[760px] w-full max-w-[460px] overflow-hidden rounded-[22px] border border-[#E7A040]/35 bg-[#161616] p-5 lg:p-6"
+    className="relative flex min-h-[760px] w-full max-w-[460px] self-stretch overflow-hidden rounded-[22px] border border-[#E7A040]/35 bg-[#161616] p-5 lg:p-6"
   >
     <div className="relative z-10 flex h-full w-full flex-col">
       {card.badge ? (
@@ -163,7 +163,7 @@ const PassaporteVendasHomeTeste = ({
           VAGAS LIMITADAS
         </p>
 
-        <div className="mt-8 mx-auto flex w-full max-w-[940px] flex-wrap justify-center gap-3 lg:gap-4">
+        <div className="mt-8 mx-auto flex w-full max-w-[940px] flex-wrap items-stretch justify-center gap-3 lg:gap-4">
           {cards.map((card) => (
             <SquishyPlanCard
               key={card.nome}
