@@ -102,6 +102,11 @@ const mainSpeakers = [
     image: "/foto-thales.png",
     bio: "Médico e CEO da TS Clinic, especialista em Medicina Integrativa, Nutrologia e Ciências do Envelhecimento. Une 12 anos de experiência clínica à visão estratégica de negócios como chave da longevidade e alta performance para líderes de negócio.",
   },
+  {
+    name: "Guto Galamba",
+    image: "/foto_guto_galamba.png",
+    bio: "Criador dos movimentos Anti-Obesity e Make Brazil Healthy Again, forma profissionais para o digital. Cofundador do Grupo GH e sócio da Higia Farmacêutica e Mythos Health Center, já impactou mais de 150 mil pessoas e foi reconhecido pela ONU com o Prêmio Martin Luther King.",
+  },
 ];
 
 const NewVendasSpeakersSlider = () => {
