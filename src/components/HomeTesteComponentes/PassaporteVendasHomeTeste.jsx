@@ -5,7 +5,7 @@ import { rememberDsxFormOrigin } from "../../utils/formOrigin";
 const cards = [
   {
     nome: "VIP",
-    lote: "Lote 2",
+    lote: "Lote 4",
     price: "1.297,00",
     installment: "12x de R$ 134,14",
     cash: "ou R$ 1.297,00 à vista",
@@ -163,7 +163,7 @@ const PassaporteVendasHomeTeste = ({
           VAGAS LIMITADAS
         </p>
 
-        <div className="mt-8 mx-auto grid w-full max-w-[940px] grid-cols-1 justify-items-center gap-3 lg:grid-cols-2 lg:gap-4">
+        <div className="mt-8 mx-auto flex w-full max-w-[940px] flex-wrap justify-center gap-3 lg:gap-4">
           {cards.map((card) => (
             <SquishyPlanCard
               key={card.nome}

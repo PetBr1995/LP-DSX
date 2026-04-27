@@ -50,7 +50,7 @@ const PassaporteGrupoHomeTeste = ({
           Quanto maior o grupo, maior o desconto:
         </p>
 
-        <div className="mt-7 mx-auto grid w-full max-w-[1128px] grid-cols-1 justify-items-center gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-3">
+        <div className="mt-7 mx-auto flex w-full max-w-[1128px] flex-wrap justify-center gap-4 md:gap-6 lg:grid lg:grid-cols-3 lg:justify-items-center">
           {groupPassports.map((item) => (
             <article
               key={item.qtdPessoas}
