@@ -5,6 +5,7 @@ import { rememberDsxFormOrigin } from "../../utils/formOrigin";
 const cards = [
   {
     nome: "VIP",
+    lote: "Lote 2",
     price: "1.297,00",
     installment: "12x de R$ 134,14",
     cash: "ou R$ 1.297,00 à vista",
@@ -23,9 +24,10 @@ const cards = [
   },
   {
     nome: "STANDARD",
-    price: "497,00",
-    installment: "12x de R$ 51,40",
-    cash: "ou R$ 497,00 à vista",
+    lote: "Lote 4",
+    price: "697,00",
+    installment: "12x de R$ 59,52",
+    cash: "ou R$ 697,00 à vista",
     link: "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721?_gl=1*2h3vo2*_gcl_au*MTEwOTMyNDE4MC4xNzczNzg0OTQ3*_ga*MTA3ODc3NDQ3NS4xNzczNzg0OTQ4*_ga_KXH10SQTZF*czE3NzUwMjA3ODckbzgkZzEkdDE3NzUwMjE0MjYkajYwJGwwJGgxMjMxOTk1NDE3",
     benefits: [
       { label: "Lounge VIP exclusivo", included: false },
@@ -71,6 +73,9 @@ const PassaportesMobileHomeTeste = ({
 
                 <p className="mt-3 text-xs font-semibold text-white/90">
                   PASSAPORTE
+                </p>
+                <p className="mt-1 inline-flex rounded-full border border-[#F5D247]/30 bg-black/30 px-2 py-1 text-[10px] font-black uppercase tracking-[0.08em] text-[#F5D247]">
+                  {card.lote}
                 </p>
                 <h3 className="mt-2 text-3xl font-black uppercase leading-[0.9] text-white sm:text-4xl">
                   {card.nome}
