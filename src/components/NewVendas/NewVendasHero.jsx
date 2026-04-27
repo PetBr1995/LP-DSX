@@ -11,7 +11,7 @@ const NewVendasHero = ({
   return (
     <section className="bg-black text-white">
       <div className="relative overflow-hidden">
-        <div className="relative z-10 mx-auto max-w-6xl px-4 pb-10 pt-10 md:pb-12 md:pt-14">
+        <div className="relative z-10 mx-auto max-w-6xl px-4 pb-10 pt-10 md:pb-12 md:pt-0">
           <div className="text-center space-y-5 md:space-y-6">
             <div className="flex justify-center">
               <img

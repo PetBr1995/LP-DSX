@@ -558,9 +558,9 @@ const NewVendas = () => {
         <section className="w-full bg-black">
           <div className="w-full md:mx-auto md:max-w-[1200px]">
             <picture>
-              <source media="(min-width: 768px)" srcSet="/banner-desktop.png" />
+              <source media="(min-width: 768px)" srcSet="/banner-desktop-v2.png" />
               <img
-                src="/banner-mobile-3.png"
+                src="/banner-v2.png"
                 alt="Banner DSX"
                 className="block h-auto w-full object-cover"
                 loading="eager"
