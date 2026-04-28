@@ -1,3 +1,112 @@
+{/**
+  
+  -- =========================================================
+-- Tabela para receber agendamentos da LP (Calendario)
+-- Supabase / Postgres
+-- =========================================================
+
+-- 1) Extensão para gerar UUID
+create extension if not exists "pgcrypto";
+
+-- 2) Tabela principal
+create table if not exists public.lp_newvendas_agendamentos (
+  id uuid primary key default gen_random_uuid(),
+  nome text not null check (char_length(trim(nome)) >= 3),
+  email text not null check (position('@' in email) > 1),
+  telefone text not null check (char_length(trim(telefone)) >= 8),
+
+  -- Formato esperado do front: "08:00" ... "17:00"
+  horario text not null check (horario ~ '^(0[8-9]|1[0-7]):00$'),
+
+  -- Formato esperado do front: "YYYYMMDD"
+  data_agendada char(8) not null check (data_agendada ~ '^[0-9]{8}$'),
+
+  -- Campo derivado para facilitar filtro/BI (opcional, mas útil)
+  data_agendada_date date generated always as (
+    to_date(data_agendada, 'YYYYMMDD')
+  ) stored,
+
+  status text not null default 'agendado'
+    check (status in ('agendado', 'cancelado', 'reagendado', 'concluido')),
+
+  origem text not null default 'lp-newvendas',
+  observacoes text,
+
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+-- 3) Evita duplicidade de mesmo email no mesmo dia/horário
+create unique index if not exists uq_lp_newvendas_agendamento_slot
+  on public.lp_newvendas_agendamentos (email, data_agendada, horario);
+
+-- 4) Índices para consultas por agenda
+create index if not exists idx_lp_newvendas_agenda_data_horario
+  on public.lp_newvendas_agendamentos (data_agendada, horario);
+
+create index if not exists idx_lp_newvendas_created_at
+  on public.lp_newvendas_agendamentos (created_at desc);
+
+-- 5) Trigger para updated_at
+create or replace function public.set_updated_at()
+returns trigger
+language plpgsql
+as $$
+begin
+  new.updated_at = now();
+  return new;
+end;
+$$;
+
+drop trigger if exists trg_lp_newvendas_set_updated_at on public.lp_newvendas_agendamentos;
+create trigger trg_lp_newvendas_set_updated_at
+before update on public.lp_newvendas_agendamentos
+for each row
+execute function public.set_updated_at();
+
+-- 6) RLS
+alter table public.lp_newvendas_agendamentos enable row level security;
+
+-- Limpa policies antigas (se houver)
+drop policy if exists "insert_agendamento_anon" on public.lp_newvendas_agendamentos;
+drop policy if exists "select_agendamento_service_only" on public.lp_newvendas_agendamentos;
+drop policy if exists "update_agendamento_service_only" on public.lp_newvendas_agendamentos;
+drop policy if exists "delete_agendamento_service_only" on public.lp_newvendas_agendamentos;
+
+-- Permite INSERT para anon/authenticated (útil se seu endpoint usar anon key direto)
+create policy "insert_agendamento_anon"
+on public.lp_newvendas_agendamentos
+for insert
+to anon, authenticated
+with check (true);
+
+-- Não libera leitura pública (recomendado)
+-- Service role ignora RLS por padrão.
+create policy "select_agendamento_service_only"
+on public.lp_newvendas_agendamentos
+for select
+to authenticated
+using (false);
+
+create policy "update_agendamento_service_only"
+on public.lp_newvendas_agendamentos
+for update
+to authenticated
+using (false)
+with check (false);
+
+create policy "delete_agendamento_service_only"
+on public.lp_newvendas_agendamentos
+for delete
+to authenticated
+using (false);
+
+  
+  */}
+
+
+
+
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { formatDsxFormOrigin } from "../utils/formOrigin";
@@ -187,7 +296,9 @@ const LPAyla = () => {
       const params = new URLSearchParams(window.location.search);
       params.delete("etapa");
       const queryString = params.toString();
-      const targetUrl = queryString ? `/?${queryString}` : "/";
+      const targetUrl = queryString
+        ? `/calendario?${queryString}`
+        : "/calendario";
 
       window.setTimeout(() => {
         navigate(targetUrl, { replace: true });
