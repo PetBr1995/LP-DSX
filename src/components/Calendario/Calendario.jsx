@@ -15,7 +15,7 @@ const MESES_PT = [
   "Dezembro",
 ];
 
-const DIAS_SEMANA_PT = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sab", "Dom"];
+const DIAS_ABREV = ["DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SAB"];
 const HORARIOS_DISPONIVEIS = [
   "08:00",
   "09:00",
@@ -46,11 +46,13 @@ const Calendario = () => {
     new Date(today.getFullYear(), today.getMonth(), 1),
   );
   const [selectedDate, setSelectedDate] = useState(today);
+  const [selectedHorario, setSelectedHorario] = useState("10:00");
+  const [dayWindowStart, setDayWindowStart] = useState(0);
+
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [popupError, setPopupError] = useState("");
   const [popupStatus, setPopupStatus] = useState("idle");
   const [popupMessage, setPopupMessage] = useState("");
-  const [selectedHorario, setSelectedHorario] = useState("10:00");
   const [leadData, setLeadData] = useState({
     nome: "",
     email: "",
@@ -74,16 +76,24 @@ const Calendario = () => {
     return cells;
   }, [currentMonth]);
 
-  const selectedLabel = `${selectedDate.getDate()} de ${
-    MESES_PT[selectedDate.getMonth()]
-  } de ${selectedDate.getFullYear()}`;
   const isDayAvailable = (dateValue) => {
-    const weekDay = dateValue.getDay(); // 0 domingo, 6 sabado
+    const weekDay = dateValue.getDay();
     if (weekDay === 0 || weekDay === 6) return false;
     const hour = Number(selectedHorario.split(":")[0]);
     return (dateValue.getDate() + hour) % 3 !== 0;
   };
-  const selectedDateIsAvailable = isDayAvailable(selectedDate);
+
+  const availableDays = useMemo(
+    () => dayCells.filter((item) => item && isDayAvailable(item)),
+    [dayCells, selectedHorario],
+  );
+
+  const visibleDays = availableDays.slice(dayWindowStart, dayWindowStart + 2);
+
+  const selectedLabel = `${DIAS_ABREV[selectedDate.getDay()]} ${pad2(
+    selectedDate.getDate(),
+  )}/${pad2(selectedDate.getMonth() + 1)}`;
+
   const isEmailValido = (email) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || "").trim());
 
@@ -165,152 +175,143 @@ const Calendario = () => {
   };
 
   useEffect(() => {
-    if (isDayAvailable(selectedDate)) return;
-    const firstAvailable = dayCells.find((item) => item && isDayAvailable(item));
-    if (firstAvailable) setSelectedDate(firstAvailable);
-  }, [selectedHorario, currentMonth, dayCells]); // eslint-disable-line react-hooks/exhaustive-deps
+    if (availableDays.length === 0) return;
+    const stillAvailable = availableDays.some(
+      (day) => day.toDateString() === selectedDate.toDateString(),
+    );
+    if (!stillAvailable) setSelectedDate(availableDays[0]);
+  }, [availableDays, selectedDate]);
+
+  useEffect(() => {
+    setDayWindowStart(0);
+  }, [selectedHorario, currentMonth]);
+
+  const canGoPrevDays = dayWindowStart > 0;
+  const canGoNextDays = dayWindowStart + 2 < availableDays.length;
 
   return (
-    <section className="rounded-[28px] bg-[#f8f8f8] p-4 shadow-[0_10px_30px_rgba(15,23,42,0.08)] sm:p-6">
-      <header className="mb-4 flex items-center justify-between">
-        <div className="flex items-center gap-2">
+    <section className="overflow-hidden rounded-2xl bg-[#012642] shadow-[0_20px_50px_rgba(0,0,0,0.24)]">
+      <div className="px-5 pb-6 pt-5 text-white sm:px-7">
+        <div className="flex items-center justify-end border-b border-white/40 pb-4">
+          <p className="font-jamjuree text-lg font-semibold">Programas Presenciais</p>
+        </div>
+
+        <div className="mt-5 flex items-start justify-between gap-3">
+          <div>
+            <p className="font-jamjuree text-4xl font-bold leading-none">Ultimo passo:</p>
+            <p className="mt-2 font-jamjuree text-xl font-semibold">Entrevista para validacao do seu perfil</p>
+          </div>
+          <div className="shrink-0 rounded-full border border-[#f9cc8b] px-3 py-1 font-jamjuree text-sm font-bold text-[#f9cc8b]">
+            01:28
+          </div>
+        </div>
+
+        <div className="mt-4 flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <p className="font-jamjuree text-sm text-white/70">Mes</p>
+            <p className="font-jamjuree text-lg font-semibold">{monthLabel}</p>
+          </div>
+          <div>
+            <label className="mb-1 block font-jamjuree text-sm text-white/75">Horario da reuniao</label>
+            <select
+              value={selectedHorario}
+              onChange={(event) => setSelectedHorario(event.target.value)}
+              className="h-10 min-w-[130px] rounded-lg border border-white/25 bg-[#073354] px-3 font-jamjuree text-sm text-white outline-none"
+            >
+              {HORARIOS_DISPONIVEIS.map((horario) => (
+                <option key={horario} value={horario}>
+                  {horario}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        <div className="mt-6 flex items-center gap-3">
           <button
             type="button"
-            onClick={() =>
-              setCurrentMonth(
-                new Date(
-                  currentMonth.getFullYear(),
-                  currentMonth.getMonth() - 1,
-                  1,
-                ),
-              )
-            }
-            className="font-jamjuree text-lg text-[#9ca3af] transition hover:text-[#2f2f33]"
-            aria-label="Mes anterior"
+            onClick={() => canGoPrevDays && setDayWindowStart((prev) => prev - 1)}
+            disabled={!canGoPrevDays}
+            className="grid h-10 w-10 place-items-center rounded-full bg-[#001a2f] text-xl disabled:opacity-40"
           >
             ‹
           </button>
-          <h2 className="font-jamjuree text-2xl font-bold text-[#2f2f33]">
-            {monthLabel}
-          </h2>
+
+          <div className="grid flex-1 grid-cols-2 gap-3">
+            {visibleDays.map((day) => {
+              const isSelected = day.toDateString() === selectedDate.toDateString();
+              const dayShort = DIAS_ABREV[day.getDay()];
+              const dayFull = `${pad2(day.getDate())}/${pad2(day.getMonth() + 1)}`;
+
+              return (
+                <button
+                  key={day.toISOString()}
+                  type="button"
+                  onClick={() => setSelectedDate(day)}
+                  className={`rounded-xl border px-3 py-3 text-center font-jamjuree transition ${
+                    isSelected
+                      ? "border-[#ff7e66] bg-white/10"
+                      : "border-white/20 bg-white/5 hover:bg-white/10"
+                  }`}
+                >
+                  <p className="text-sm font-semibold text-white/75">{dayShort}</p>
+                  <p className="text-3xl font-bold text-white">{dayFull}</p>
+                </button>
+              );
+            })}
+          </div>
+
           <button
             type="button"
-            onClick={() =>
-              setCurrentMonth(
-                new Date(
-                  currentMonth.getFullYear(),
-                  currentMonth.getMonth() + 1,
-                  1,
-                ),
-              )
-            }
-            className="font-jamjuree text-lg text-[#9ca3af] transition hover:text-[#2f2f33]"
-            aria-label="Proximo mes"
+            onClick={() => canGoNextDays && setDayWindowStart((prev) => prev + 1)}
+            disabled={!canGoNextDays}
+            className="grid h-10 w-10 place-items-center rounded-full bg-[#001a2f] text-xl disabled:opacity-40"
           >
             ›
           </button>
         </div>
-        <p className="font-jamjuree text-sm font-semibold text-[#8b8f98]">
-          Data escolhida: <span className="text-[#2f2f33]">{selectedLabel}</span>
+      </div>
+
+      <div className="bg-[#f5f6f8] px-5 pb-6 pt-5 sm:px-7">
+        <p className="mb-3 font-jamjuree text-sm font-semibold text-[#4b5563]">
+          Horarios disponiveis para {selectedLabel}
         </p>
-      </header>
 
-      <div className="mb-4">
-        <label className="mb-1 block font-jamjuree text-sm font-semibold text-[#6b7280]">
-          Selecione primeiro o horario da reuniao
-        </label>
-        <select
-          value={selectedHorario}
-          onChange={(event) => setSelectedHorario(event.target.value)}
-          className="h-11 w-full rounded-xl border border-[#d1d5db] bg-white px-3 font-jamjuree text-sm text-[#2f2f33] outline-none focus:border-[#2f2f33] sm:max-w-[220px]"
-        >
-          {HORARIOS_DISPONIVEIS.map((horario) => (
-            <option key={horario} value={horario}>
-              {horario}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className="mb-3 grid grid-cols-7 gap-2">
-        {DIAS_SEMANA_PT.map((day) => (
-          <span
-            key={day}
-            className="text-center font-jamjuree text-sm text-[#b1b5be]"
-          >
-            {day}
-          </span>
-        ))}
-      </div>
-
-      <div className="grid grid-cols-7 gap-2 sm:gap-2.5">
-        {dayCells.map((dateValue, index) => {
-          if (!dateValue) {
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
+          {HORARIOS_DISPONIVEIS.map((horario) => {
+            const isChosen = horario === selectedHorario;
             return (
-              <div
-                key={`empty-${index}`}
-                className="h-11 rounded-2xl border border-transparent sm:h-12"
-              />
+              <button
+                key={horario}
+                type="button"
+                onClick={() => setSelectedHorario(horario)}
+                className={`h-11 rounded-lg border font-jamjuree text-lg font-semibold transition ${
+                  isChosen
+                    ? "border-[#233c69] bg-[#233c69] text-white"
+                    : "border-[#7b86a5] bg-white text-[#384562] hover:bg-[#eef1f6]"
+                }`}
+              >
+                {horario}
+              </button>
             );
-          }
+          })}
+        </div>
 
-          const isSelected =
-            dateValue.getDate() === selectedDate.getDate() &&
-            dateValue.getMonth() === selectedDate.getMonth() &&
-            dateValue.getFullYear() === selectedDate.getFullYear();
-          const isAvailable = isDayAvailable(dateValue);
-          const isToday =
-            dateValue.getDate() === today.getDate() &&
-            dateValue.getMonth() === today.getMonth() &&
-            dateValue.getFullYear() === today.getFullYear();
-
-          return (
-            <button
-              type="button"
-              key={`${dateValue.toISOString()}-${index}`}
-              onClick={() => handleOpenPopup(dateValue)}
-              disabled={!isAvailable}
-              className={`relative flex h-11 items-center justify-center rounded-2xl border bg-[#f4f4f5] font-jamjuree text-sm transition sm:h-12 ${
-                !isAvailable
-                  ? "cursor-not-allowed border-[#eceff3] text-[#c2c7d0] opacity-55"
-                  : isSelected
-                  ? "border-[#ff8f84] text-[#2f2f33] shadow-[inset_0_0_0_1px_rgba(255,143,132,0.35)]"
-                  : "border-[#ebedf0] text-[#3f3f46] hover:border-[#d0d4db]"
-              }`}
-              aria-label={`Selecionar dia ${dateValue.getDate()}`}
-            >
-              <span>{dateValue.getDate()}</span>
-              {isToday ? (
-                <span className="absolute bottom-1 h-1 w-1 rounded-full bg-[#2f2f33]" />
-              ) : null}
-            </button>
-          );
-        })}
-      </div>
-
-      <div className="mt-5 flex flex-wrap gap-3">
-        <button
-          type="button"
-          onClick={() => handleOpenPopup(selectedDate)}
-          disabled={!selectedDateIsAvailable}
-          className="rounded-xl bg-[#2f2f33] px-4 py-2.5 font-jamjuree text-sm font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
-        >
-          Agendar reuniao neste dia
-        </button>
-        <a
-          href="/"
-          className="rounded-xl border border-[#d9dce2] bg-white px-4 py-2.5 font-jamjuree text-sm font-semibold text-[#52525b] transition hover:bg-[#f2f2f4]"
-        >
-          Voltar para inicio
-        </a>
+        <div className="mt-4 flex justify-end">
+          <button
+            type="button"
+            onClick={() => handleOpenPopup(selectedDate)}
+            className="rounded-lg bg-[#102d56] px-5 py-2.5 font-jamjuree text-sm font-bold uppercase tracking-[0.08em] text-white"
+          >
+            Confirmar horario
+          </button>
+        </div>
       </div>
 
       {isPopupOpen ? (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/45 px-4">
           <div className="w-full max-w-md rounded-2xl bg-white p-5 shadow-2xl">
-            <h3 className="font-jamjuree text-xl font-bold text-[#2f2f33]">
-              Confirmar agendamento
-            </h3>
+            <h3 className="font-jamjuree text-xl font-bold text-[#2f2f33]">Confirmar agendamento</h3>
             <p className="mt-1 font-jamjuree text-sm text-[#6b7280]">
               Reuniao para {selectedLabel} as {selectedHorario}
             </p>
