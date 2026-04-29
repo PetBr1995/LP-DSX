@@ -40,6 +40,29 @@ const toGoogleDateTime = (date, hour = 10, minute = 0) => {
   return `${year}${month}${day}T${hh}${mm}00`;
 };
 
+const buildGoogleCalendarUrl = ({ date, horario, nome }) => {
+  const [hour, minute] = horario.split(":").map(Number);
+  const startDate = new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate(),
+    hour,
+    minute,
+    0,
+  );
+  const endDate = new Date(startDate.getTime() + 60 * 60 * 1000);
+
+  const params = new URLSearchParams({
+    action: "TEMPLATE",
+    text: "DSX 2026 - Entrevista de Perfil",
+    dates: `${toGoogleDateTime(startDate, startDate.getHours(), startDate.getMinutes())}/${toGoogleDateTime(endDate, endDate.getHours(), endDate.getMinutes())}`,
+    details: `Entrevista de validacao de perfil para o DSX 2026.${nome ? ` Participante: ${nome}.` : ""}`,
+    location: "Online",
+  });
+
+  return `https://calendar.google.com/calendar/render?${params.toString()}`;
+};
+
 const Calendario = () => {
   const today = new Date();
   const [currentMonth, setCurrentMonth] = useState(
@@ -164,10 +187,12 @@ const Calendario = () => {
 
       setPopupStatus("success");
       setPopupMessage("Agendamento concluido com sucesso.");
-
-      window.setTimeout(() => {
-        window.location.href = "/";
-      }, 1200);
+      const googleCalendarUrl = buildGoogleCalendarUrl({
+        date: selectedDate,
+        horario: selectedHorario,
+        nome: leadData.nome.trim(),
+      });
+      window.location.href = googleCalendarUrl;
     } catch {
       setPopupStatus("idle");
       setPopupError("Nao foi possivel concluir o agendamento. Tente novamente.");
