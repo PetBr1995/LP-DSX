@@ -95,6 +95,11 @@ const partnerGroups = [
         alt: "Cia do Espeto",
         sizeClass: "max-h-25 sm:max-h-30",
       },
+      {
+        src: "/logo-maquinista.png",
+        alt: "Maquinista",
+        sizeClass: "max-h-15 sm:max-h-20",
+      },
     ],
   },
 ];
