@@ -80,6 +80,10 @@ const partnerGroups = [
         alt: "VBOT",
         sizeClass: "max-h-25 sm:max-h-30",
       },
+      {
+        src: "/logo-totvs.png",
+        alt: "TOTVS",
+      },
     ],
   },
   {
@@ -99,6 +103,10 @@ const partnerGroups = [
         src: "/logo-maquinista.png",
         alt: "Maquinista",
         sizeClass: "max-h-15 sm:max-h-20",
+      },
+      {
+        src: "/logo-interconveniencia.png",
+        alt: "Inter Conveniencia",
       },
     ],
   },
