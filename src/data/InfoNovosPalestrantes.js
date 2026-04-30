@@ -99,6 +99,18 @@ export const InfoNovosPalestrantes = [
     badge: "Nacional",
   },
   {
+    nome: "Carol Guerra",
+    desc: "Especialista em branding e gestão de marcas de luxo.",
+    img: "/novas-palestrantes/CAROL_GUERRA.PNG",
+    badge: "Nacional",
+  },
+  {
+    nome: "Fernan Bravo",
+    desc: "Consultor de posicionamento e host do PodRolar.",
+    img: "/novas-palestrantes/FERNAN_BRAVO.PNG",
+    badge: "Nacional",
+  },
+  {
     nome: "Fabricio Alva",
     desc: "CEO do Grupo Digital e Consultor empresarial",
     img: "/novas-palestrantes/Fabricio_alva.PNG",

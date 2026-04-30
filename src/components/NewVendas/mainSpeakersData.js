@@ -75,6 +75,16 @@ export const mainSpeakersData = [
     bio: "Cofundador e CEO da Tardezinha, estrategista por trás da maior turnê da história do entretenimento brasileiro. Especialista em escala exponencial e gestão de grandes operações, lidera empresas premiadas nacionalmente por sua cultura de performance e excelência operacional.",
   },
   {
+    name: "Carol Guerra",
+    image: "/novas-palestrantes/CAROL_GUERRA.PNG",
+    bio: "Carol Guerra é especialista em branding e gestão de marcas de luxo no Norte do Brasil. Fundadora da CG Branding, soma mais de 5 mil projetos e atuação internacional.",
+  },
+  {
+    name: "Fernan Bravo",
+    image: "/novas-palestrantes/FERNAN_BRAVO.PNG",
+    bio: "Fernan Bravo é consultor de posicionamento, apresentador de TV, host do PodRolar, maior podcast do Norte do Brasil, e Head de Comunicação do Grupo Digital Comunicação. Criador do Método Bravo, ajuda profissionais a converter autoridade em audiência.",
+  },
+  {
     name: "Gisele Oshiro",
     image: "/novas-palestrantes/foto-giselle-oshiro.png",
     bio: "Empresária, especialista em inteligência emocional e apresentadora do podcast Mulheres que Inspiram na CBN.",
