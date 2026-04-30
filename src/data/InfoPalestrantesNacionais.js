@@ -79,7 +79,7 @@ export const InfoPalestrantesNacionais = [
     {
         nome: "Rafael Liporace",
         desc: "Referência nacional em marketing promocional e encantamento.",
-        img: "/optimized/step1/Rafael_liporace.PNG"
+        img: "/novas-palestrantes/Rafael_liporace.PNG"
     },
 
 ]

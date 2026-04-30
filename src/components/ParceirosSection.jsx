@@ -44,6 +44,10 @@ const partnerGroups = [
         alt: "Puraka",
         sizeClass: "max-h-14 sm:max-h-16",
       },
+      {
+        src: "/logo_via_direta.png",
+        alt: "Via Direta",
+      },
     ],
   },
   {
@@ -129,8 +133,10 @@ const LogoCard = ({ logo, highlighted = false }) => (
   </div>
 );
 
-const PartnerGroup = ({ group, className = "" }) => {
+const PartnerGroup = ({ group, className = "", logosGridClass = "" }) => {
   const isSingle = group.layout === "single";
+  const defaultGridClass = "grid grid-cols-1 gap-4 sm:grid-cols-2";
+  const appliedGridClass = logosGridClass || defaultGridClass;
 
   return (
     <article className={`rounded-xl bg-black p-5 sm:p-6 ${className}`.trim()}>
@@ -138,7 +144,7 @@ const PartnerGroup = ({ group, className = "" }) => {
         {group.title}:
       </h3>
 
-      <div className={isSingle ? "grid place-items-center gap-4" : "grid grid-cols-1 gap-4 sm:grid-cols-2"}>
+      <div className={isSingle ? "grid place-items-center gap-4" : appliedGridClass}>
         {group.logos.map((logo) => (
           <LogoCard key={logo.src} logo={logo} highlighted={isSingle} />
         ))}
@@ -158,13 +164,22 @@ const ParceirosSection = () => {
         </h2>
 
         <div className="mt-6 rounded-2xl border border-[#F5A205]/50 bg-black/80 p-6 sm:p-8 lg:p-10">
-          <div className="grid gap-6 md:grid-cols-2">
-            <PartnerGroup group={realizacao} />
-            <PartnerGroup group={apoio} />
-          </div>
-
-          <PartnerGroup group={expositores} className="mt-6" />
-          <PartnerGroup group={food} className="mt-6" />
+          <PartnerGroup group={realizacao} />
+          <PartnerGroup
+            group={apoio}
+            className="mt-6"
+            logosGridClass="grid grid-cols-2 gap-4 lg:grid-cols-4"
+          />
+          <PartnerGroup
+            group={expositores}
+            className="mt-6"
+            logosGridClass="grid grid-cols-2 gap-4 lg:grid-cols-4"
+          />
+          <PartnerGroup
+            group={food}
+            className="mt-6"
+            logosGridClass="grid grid-cols-2 gap-4 lg:grid-cols-4"
+          />
         </div>
       </div>
     </section>

@@ -40,44 +40,44 @@ export const InfoNovosPalestrantes = [
   {
     nome: "Carolina Lima",
     desc: "Diretora de Social Media na 8D Hubify e autora best-seller",
-    img: "/foto-carolina-lima.png",
+    img: "/novas-palestrantes/foto-carolina-lima.png",
     badge: "Nacional",
   },
   {
     nome: "Carlos Oshiro",
     desc: "Fundador da Targo Consultoria Empresarial",
-    img: "/foto-carlos-oshiro.png",
+    img: "/novas-palestrantes/foto-carlos-oshiro.png",
     badge: "Local",
   },
 
   {
     nome: "Breno Maciel",
     desc: "CEO da Vanguarda Martech",
-    img: "/foto-breno-maciel.png",
+    img: "/novas-palestrantes/foto-breno-maciel.png",
     badge: "Local",
   },
   {
     nome: "João Branco",
     desc: "Conselheiro e Professor de Marketing",
-    img: "/foto-joao-branco.png",
+    img: "/novas-palestrantes/foto-joao-branco.png",
     badge: "Nacional",
   },
   {
     nome: "Chay Santos",
     desc: "CEO da Mangarataia agência criativa",
-    img: "/foto-chay-santos.png",
+    img: "/novas-palestrantes/foto-chay-santos.png",
     badge: "Local",
   },
   {
     nome: "Magno Rodrigues",
     desc: "Especialista de Gestão Financeira",
-    img: "/foto-magno-rodrigues.png",
+    img: "/novas-palestrantes/foto-magno-rodrigues.png",
     badge: "Local",
   },
   {
     nome: "Netão Bom Beef",
     desc: "Eleito Homem de Negócios do ano - 2023 (Scale Awards)",
-    img: "/foto-netao-bom-beef.PNG",
+    img: "/novas-palestrantes/foto-netao-bom-beef.PNG",
     badge: "Nacional",
   },
   {
@@ -101,39 +101,39 @@ export const InfoNovosPalestrantes = [
   {
     nome: "Fabricio Alva",
     desc: "CEO do Grupo Digital e Consultor empresarial",
-    img: "/optimized/step1/Fabricio_alva.PNG",
+    img: "/novas-palestrantes/Fabricio_alva.PNG",
     badge: "Local",
   },
   {
     nome: "Rafael Liporace",
     desc: "Cofundador e CEO da Tardezinha",
-    img: "/optimized/step1/Rafael_liporace.PNG",
+    img: "/novas-palestrantes/Rafael_liporace.PNG",
     badge: "Local",
   },
   {
     nome: "Roberta Veras",
     desc: "Educadora financeira, consultora empresarial e especialista em vendas.",
-    img: "/Roberta_veras.png",
+    img: "/novas-palestrantes/Roberta_veras.png",
     badge: "Local",
   },
   {
     nome: "",
     desc: "",
-    img: "/SILHUETA-1.png",
+    img: "/novas-palestrantes/SILHUETA-1.png",
   },
   {
     nome: "",
     desc: "",
-    img: "/SILHUETA-2.png",
+    img: "/novas-palestrantes/SILHUETA-2.png",
   },
   {
     nome: "",
     desc: "",
-    img: "/SILHUETA-3.png",
+    img: "/novas-palestrantes/SILHUETA-3.png",
   },
   {
     nome: "",
     desc: "",
-    img: "/SILHUETA-1.png",
+    img: "/novas-palestrantes/SILHUETA-1.png",
   },
 ];

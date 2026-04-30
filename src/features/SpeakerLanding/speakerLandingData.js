@@ -80,12 +80,12 @@ const segmentLandingList = [
       },
       {
         name: "Carolina Lima",
-        image: "/foto-carolina-lima.png",
+        image: "/novas-palestrantes/foto-carolina-lima.png",
         bio: "+17 anos de experiência em mídias sociais, une visão estratégica e criativa, com formação multidisciplinar e atuação empreendedora no e-commerce.",
       },
       {
         name: "João Branco",
-        image: "/foto-joao-branco.png",
+        image: "/novas-palestrantes/foto-joao-branco.png",
         bio: "O CMO responsável pelo 'Méqui'. Transformou a maior rede de fast-food do mundo no Brasil, batendo todos os recordes de vendas através de marca e performance integradas",
       },
       {
@@ -95,7 +95,7 @@ const segmentLandingList = [
       },
       {
         name: "Rafael Liporace",
-        image: "/optimized/step1/Rafael_liporace.PNG",
+        image: "/novas-palestrantes/Rafael_liporace.PNG",
         bio: "CEO da Tardezinha. O mentor por trás da maior turnê da história da música brasileira. Expert em economia criativa e em transformar eventos em ativos de milhões.",
       },
     ],
@@ -199,17 +199,17 @@ const segmentLandingList = [
     segmentSpeakers: [
       {
         name: "Breno Maciel",
-        image: "/foto-breno-maciel.png",
+        image: "/novas-palestrantes/foto-breno-maciel.png",
         bio: "Estrategista de Vendas e Processos. Especialista em estruturação de máquinas de vendas que geram previsibilidade e escala para empresas de médio e grande porte.",
       },
       {
         name: "Magno Rodrigues",
-        image: "/foto-magno-rodrigues.png",
+        image: "/novas-palestrantes/foto-magno-rodrigues.png",
         bio: "Especialista em Performance de Time e Gestão Comercial. Mentor de líderes que buscam transformar grupos de vendedores em esquadrões de fechamento orientados por dados.",
       },
       {
         name: "Roberta Veras",
-        image: "/Roberta_veras.png",
+        image: "/novas-palestrantes/Roberta_veras.png",
         bio: "Especialista em Vendas Consultivas e Experiência do Cliente. Focada em otimização de funil e aumento de LTV (Lifetime Value) através de processos replicáveis.",
       },
     ],
@@ -463,22 +463,22 @@ const segmentLandingList = [
       },
       {
         name: "Netão Bom Beef",
-        image: "/foto-netao-bom-beef.PNG",
+        image: "/novas-palestrantes/foto-netao-bom-beef.PNG",
         bio: "Do açougue de bairro a um faturamento de R$ 1 milhão por dia. O case real de como transformar produto em uma rede de franquias escalável.",
       },
       {
         name: "Carlos Oshiro",
-        image: "/foto-carlos-oshiro.png",
+        image: "/novas-palestrantes/foto-carlos-oshiro.png",
         bio: "Ajuda empresários a transitar a mentalidade da velha para a nova economia. Tem um ecossistema de mais de 1500 empresários de Manaus na nova economia.",
       },
       {
         name: "Chay Santos",
-        image: "/foto-chay-santos.png",
+        image: "/novas-palestrantes/foto-chay-santos.png",
         bio: "Estrategista de Marketing e Branding. Especialista em construir posicionamentos que permitam cobrar mais caro e dominar nichos de mercado.",
       },
       {
         name: "Fabrício Alva",
-        image: "/optimized/step1/Fabricio_alva.PNG",
+        image: "/novas-palestrantes/Fabricio_alva.PNG",
         bio: "Consultor empresarial, estrategista de negócios e especialista em performance,já ajudou empresas e profissionais a estruturarem seus negócios com mais clareza, eficiência e previsibilidade, unindo experiência prática com o uso inteligente da tecnologia.",
       },
     ],

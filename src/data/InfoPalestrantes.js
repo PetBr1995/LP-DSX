@@ -79,7 +79,7 @@ export const InfoPalestrantes = [
     {
         nome: "Rafael Liporace",
         desc: "Referência nacional em marketing promocional e encantamento.",
-        img: "/optimized/step1/Rafael_liporace.PNG"
+        img: "/novas-palestrantes/Rafael_liporace.PNG"
     },
 
     {
@@ -140,7 +140,7 @@ export const InfoPalestrantes = [
     {
         nome: "Fabrício Alva",
         desc: "Consultor estratégico, empreendedor e especialista em performance empresarial.",
-        img: "/optimized/step1/Fabricio_alva.PNG"
+        img: "/novas-palestrantes/Fabricio_alva.PNG"
     },
     {
         nome: "Flavia Soares",

@@ -1,7 +1,7 @@
 export const mainSpeakersData = [
   {
     name: "João Branco",
-    image: "/foto-joao-branco.png",
+    image: "/novas-palestrantes/foto-joao-branco.png",
     bio: "O CMO que transformou o McDonald's em Méqui. Foram quase 10 anos na linha de frente, batendo absolutamente todos os recordes da história da marca no Brasil.",
   },
   {
@@ -11,7 +11,7 @@ export const mainSpeakersData = [
   },
   {
     name: "Netão Bom Beef",
-    image: "/foto-netao-bom-beef.PNG",
+    image: "/novas-palestrantes/foto-netao-bom-beef.PNG",
     bio: "A verdadeira aula de escala física. Ele começou com um açougue de bairro. Hoje, fatura R$ 1 MILHÃO por dia. A trajetória real que vai virar aprendizado puro para quem quer construir um império.",
   },
   {
@@ -31,7 +31,7 @@ export const mainSpeakersData = [
   },
   {
     name: "Carolina Lima",
-    image: "/foto-carolina-lima.png",
+    image: "/novas-palestrantes/foto-carolina-lima.png",
     bio: "17 anos construindo estratégia de conteúdo para marcas de sucesso. Você vai entender de uma vez por todas a mecânica da atração.",
   },
   {
@@ -46,17 +46,17 @@ export const mainSpeakersData = [
   },
   {
     name: "Breno Maciel",
-    image: "/foto-breno-maciel.png",
+    image: "/novas-palestrantes/foto-breno-maciel.png",
     bio: "CEO da Vanguarda Martech, maior agência de marketing do Norte, gerencia mais de R$ 60 milhões em verbas de marketing e é palestrante do RD Summit pelo terceiro ano consecutivo.",
   },
   {
     name: "Carlos Oshiro",
-    image: "/foto-carlos-oshiro.png",
+    image: "/novas-palestrantes/foto-carlos-oshiro.png",
     bio: "Fundador da Targo Educação Empresarial, colunista na CBN e referência no ecossistema empresarial de Manaus há mais de 25 anos.",
   },
   {
     name: "Chay Santos",
-    image: "/foto-chay-santos.png",
+    image: "/novas-palestrantes/foto-chay-santos.png",
     bio: "CEO da Agência A Mangarataia e autora de Empreender Nunca Foi Sorte, especialista em branding estratégico e posicionamento de marcas.",
   },
   {
@@ -66,12 +66,12 @@ export const mainSpeakersData = [
   },
   {
     name: "Fabricio Alva",
-    image: "/optimized/step1/Fabricio_alva.PNG",
+    image: "/novas-palestrantes/Fabricio_alva.PNG",
     bio: "Especialista em gestão empresarial com foco em estruturação de operações e processos que preparam empresas para escalar.",
   },
   {
     name: "Rafael Liporace",
-    image: "/optimized/step1/Rafael_liporace.PNG",
+    image: "/novas-palestrantes/Rafael_liporace.PNG",
     bio: "Cofundador e CEO da Tardezinha, estrategista por trás da maior turnê da história do entretenimento brasileiro. Especialista em escala exponencial e gestão de grandes operações, lidera empresas premiadas nacionalmente por sua cultura de performance e excelência operacional.",
   },
   {
@@ -91,7 +91,7 @@ export const mainSpeakersData = [
   },
   {
     name: "Roberta Veras",
-    image: "/Roberta_veras.png",
+    image: "/novas-palestrantes/Roberta_veras.png",
     bio: "Educadora financeira, consultora empresarial e especialista em vendas. Possui uma trajetória construída no varejo e no empreendedorismo como gestora de franquias e performance comercial com destaque nacional.",
   },
 ];

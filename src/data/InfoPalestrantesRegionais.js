@@ -58,7 +58,7 @@ export const InfoPalestrantesRegionais = [
     {
         nome: "Fabrício Alva",
         desc: "Consultor estratégico, empreendedor e especialista em performance empresarial.",
-        img: "/optimized/step1/Fabricio_alva.PNG"
+        img: "/novas-palestrantes/Fabricio_alva.PNG"
     },
     {
         nome: "Flavia Soares",
