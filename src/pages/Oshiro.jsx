@@ -459,14 +459,13 @@ const Oshiro = () => {
               decoding="async"
             />
             <h1 className="mt-5 font-anton text-[clamp(2rem,5vw,2.8rem)] uppercase leading-[1.08]">
-              Convite exclusivo: 20% OFF no DSX 2026
+              Você recebeu um acesso exclusivo ao DSX 2026
             </h1>
             <h2 className="mt-3 font-jamjuree text-[1.05rem] font-semibold uppercase tracking-[0.04em] text-[#FFD36D]">
-              Benefício para empresários, C-levels e líderes corporativos
+              Garanta 20% OFF no seu passaporte para estar no maior evento de
+              negócios do Norte
             </h2>
-            <p className="mt-5 max-w-md font-jamjuree text-[1rem] leading-relaxed text-white/85">
-              20% de desconto em todos os passaportes por tempo limitado.
-            </p>
+
           </div>
 
         </div>
@@ -484,11 +483,11 @@ const Oshiro = () => {
 
       {showLeadModal ? (
         <div
-          className="fixed inset-0 z-[70] flex items-center justify-center bg-black/80 px-4 py-8"
+          className="fixed inset-0 z-[70] overflow-y-auto bg-black/80 px-4 py-6 md:py-8"
           onClick={handleCloseLeadModal}
         >
           <div
-            className="relative w-full max-w-4xl rounded-[28px] border border-white/20 bg-[#07090D] p-5 md:p-8"
+            className="relative mx-auto my-auto w-full max-w-4xl rounded-[28px] border border-white/20 bg-[#07090D] p-5 md:p-8"
             onClick={(event) => event.stopPropagation()}
           >
             <button
@@ -615,7 +614,7 @@ const Oshiro = () => {
                     titulo={leadStatus === "loading" ? "Enviando..." : "Garantir 20% OFF"}
                     textColor="#000"
                     disabled={leadStatus === "loading"}
-                    leftWidthClass="w-[255px]"
+                    leftWidthClass="w-[170px] sm:w-[255px]"
                   />
                 </div>
               </div>
