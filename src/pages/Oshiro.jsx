@@ -25,6 +25,27 @@ const revenueOptions = [
   "Acima de R$ 5 milhões/ano",
 ];
 
+const resolveRdConversionIdentifier = (origin = "") => {
+  const normalized = String(origin || "")
+    .trim()
+    .toLowerCase();
+
+  if (normalized.includes("vip")) {
+    return "DSX 2026 - Formulário VIP";
+  }
+  if (normalized.includes("standard")) {
+    return "DSX 2026 - Formulário Standard";
+  }
+  if (normalized.includes("grupo") && normalized.includes("10")) {
+    return "DSX 2026 - Formulário Grupo 10";
+  }
+  if (normalized.includes("grupo") && normalized.includes("5")) {
+    return "DSX 2026 - Formulário Grupo 5";
+  }
+
+  return `LP - DSX 2026 - Formulario ${origin || "Oshiro"}`;
+};
+
 const onlyDigits = (value = "") => value.replace(/\D/g, "");
 const isValidEmail = (email = "") => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
@@ -73,6 +94,8 @@ const Oshiro = () => {
   const [leadStatus, setLeadStatus] = useState("idle");
   const [isMobile, setIsMobile] = useState(false);
   const [showLeadModal, setShowLeadModal] = useState(false);
+  const [pendingSymplaUrl, setPendingSymplaUrl] = useState(CHECKOUT_LINK);
+  const [selectedPassOrigin, setSelectedPassOrigin] = useState("Oshiro");
   const [leadSuccessMessage, setLeadSuccessMessage] = useState("");
   const [leadError, setLeadError] = useState("");
   const [leadForm, setLeadForm] = useState({
@@ -137,7 +160,9 @@ const Oshiro = () => {
     };
   }, [showLeadModal]);
 
-  const handleBuyPassaporte = () => {
+  const handleBuyPassaporte = (targetLink, formOrigin) => {
+    setPendingSymplaUrl(targetLink || CHECKOUT_LINK);
+    setSelectedPassOrigin(formOrigin || "Oshiro");
     setLeadError("");
     setLeadSuccessMessage("");
     setLeadStatus("idle");
@@ -166,6 +191,7 @@ const Oshiro = () => {
     const cargo = leadForm.cargo.trim();
     const company = leadForm.company.trim();
     const revenue = leadForm.revenue.trim();
+    const resolvedFormOrigin = selectedPassOrigin || "Oshiro";
 
     if (!name) {
       setLeadError("Informe seu nome.");
@@ -198,12 +224,11 @@ const Oshiro = () => {
 
     try {
       const lpIdentifier = "LP DSX - Oshiro";
-      const resolvedFormOrigin = "Oshiro";
       const payload = {
         event_type: "CONVERSION",
         event_family: "CDP",
         payload: {
-          conversion_identifier: `LP - DSX 2026 - Formulario ${resolvedFormOrigin}`,
+          conversion_identifier: resolveRdConversionIdentifier(resolvedFormOrigin),
           name,
           email,
           personal_phone: phone,
@@ -357,6 +382,7 @@ const Oshiro = () => {
                     page: window.location.pathname + window.location.search,
                     payload: {
                       form_origin: "Oshiro",
+                      passaporte_origem: resolvedFormOrigin,
                       lp_identifier: lpIdentifier,
                       site_origin: sourceData.site_origin || null,
                       site_hostname:
@@ -375,7 +401,8 @@ const Oshiro = () => {
                     occurred_at: nowIso,
                     page: window.location.pathname + window.location.search,
                     payload: {
-                      target_link: CHECKOUT_LINK,
+                      target_link: pendingSymplaUrl || CHECKOUT_LINK,
+                      passaporte_origem: resolvedFormOrigin,
                       site_origin: sourceData.site_origin || null,
                       site_hostname:
                         sourceData.site_hostname || window.location.hostname || null,
@@ -399,7 +426,7 @@ const Oshiro = () => {
       setLeadSuccessMessage("Lead enviado com sucesso. Redirecionando para o Sympla...");
       setShowLeadModal(false);
       window.setTimeout(() => {
-        window.location.href = CHECKOUT_LINK;
+        window.location.href = pendingSymplaUrl || CHECKOUT_LINK;
       }, 1200);
     } catch (_error) {
       setLeadStatus("error");
