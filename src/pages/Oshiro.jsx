@@ -4,6 +4,7 @@ import { withRdTrackingToken } from "../lib/rdStationTracking";
 import { getSupabaseClient, isSupabaseConfigured } from "../lib/supabaseClient";
 import { formatDsxFormOrigin } from "../utils/formOrigin";
 import PassaportesSection from "../components/NewVendas/sections/PassaportesSection";
+import { FormButton } from "../components/FormSection";
 
 const CHECKOUT_LINK =
   "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721";
@@ -14,6 +15,14 @@ const profileOptions = [
   "Profissional de marketing, vendas e operações",
   "Estudante",
   "Outros",
+];
+
+const revenueOptions = [
+  "Até R$ 100 mil/ano",
+  "R$ 100 mil a R$ 500 mil/ano",
+  "R$ 500 mil a R$ 1 milhão/ano",
+  "R$ 1 milhão a R$ 5 milhões/ano",
+  "Acima de R$ 5 milhões/ano",
 ];
 
 const onlyDigits = (value = "") => value.replace(/\D/g, "");
@@ -63,12 +72,15 @@ const formatPhone = (value = "") => {
 const Oshiro = () => {
   const [leadStatus, setLeadStatus] = useState("idle");
   const [isMobile, setIsMobile] = useState(false);
+  const [leadSuccessMessage, setLeadSuccessMessage] = useState("");
   const [leadError, setLeadError] = useState("");
   const [leadForm, setLeadForm] = useState({
     name: "",
     email: "",
     phone: "",
     cargo: "",
+    company: "",
+    revenue: "",
   });
   const [sourceData, setSourceData] = useState({
     page_url: "",
@@ -131,6 +143,8 @@ const Oshiro = () => {
     const phoneDigits = onlyDigits(leadForm.phone);
     const phone = leadForm.phone.trim();
     const cargo = leadForm.cargo.trim();
+    const company = leadForm.company.trim();
+    const revenue = leadForm.revenue.trim();
 
     if (!name) {
       setLeadError("Informe seu nome.");
@@ -148,9 +162,18 @@ const Oshiro = () => {
       setLeadError("Selecione o campo 'Você é...'.");
       return;
     }
+    if (!company) {
+      setLeadError("Informe o nome da empresa.");
+      return;
+    }
+    if (!revenue) {
+      setLeadError("Selecione o faturamento.");
+      return;
+    }
 
     setLeadStatus("loading");
     setLeadError("");
+    setLeadSuccessMessage("");
 
     try {
       const lpIdentifier = "LP DSX - Oshiro";
@@ -163,7 +186,10 @@ const Oshiro = () => {
           name,
           email,
           personal_phone: phone,
+          company_name: company,
           voce_e: cargo,
+          cf_nome_da_empresa: company,
+          cf_faturamento: revenue,
           cf_voce_e: cargo,
           cf_cargo: cargo,
           traffic_source: sourceData.utm_source,
@@ -316,6 +342,8 @@ const Oshiro = () => {
                         sourceData.site_hostname || window.location.hostname || null,
                       page_url: sourceData.page_url || window.location.href,
                       profile: cargo,
+                      company_name: company,
+                      revenue,
                     },
                   },
                   {
@@ -347,7 +375,10 @@ const Oshiro = () => {
       }
 
       setLeadStatus("success");
-      window.location.href = CHECKOUT_LINK;
+      setLeadSuccessMessage("Lead enviado com sucesso. Redirecionando para o Sympla...");
+      window.setTimeout(() => {
+        window.location.href = CHECKOUT_LINK;
+      }, 1200);
     } catch (_error) {
       setLeadStatus("error");
       console.error("[Oshiro] erro no envio do lead", _error);
@@ -402,66 +433,118 @@ const Oshiro = () => {
       <section className="mx-auto mt-8 w-full max-w-5xl">
         <div
           id="oshiro-form"
-          className="rounded-2xl border border-white/15 bg-black/55 p-4 md:p-6"
+          className="rounded-[28px] border border-white/20 bg-[#07090D] p-5 md:p-9"
         >
-          <p className="text-center font-jamjuree text-sm font-semibold uppercase tracking-[0.08em] text-[#F5C02B]">
-            Preencha e garanta seu desconto
+          <div className="h-[3px] w-24 rounded-full bg-[#F5B42A]" />
+          <p className="mt-7 text-center font-anton text-[clamp(2rem,4vw,3.1rem)] uppercase leading-none text-[#F5B42A]">
+            Garanta sua vaga
           </p>
-          <form onSubmit={handleLeadSubmit} className="mt-4 space-y-3">
+          <form onSubmit={handleLeadSubmit} className="mt-7 space-y-4">
+            <label className="block">
+              <span className="mb-2 block font-jamjuree text-xs uppercase tracking-[0.11em] text-white/70">
+                Nome completo
+              </span>
             <input
               type="text"
               value={leadForm.name}
               onChange={(e) => handleLeadInputChange("name", e.target.value)}
-              placeholder="Nome completo"
-              className="h-12 w-full rounded-xl border border-white/20 bg-black/50 px-4 text-sm text-white outline-none transition focus:border-[#F5C02B]"
+              placeholder="Digite seu nome completo"
+              className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition placeholder:text-white/45 focus:border-[#F5C02B]"
               disabled={leadStatus === "loading"}
             />
-            <input
-              type="email"
-              value={leadForm.email}
-              onChange={(e) => handleLeadInputChange("email", e.target.value)}
-              placeholder="E-mail"
-              className="h-12 w-full rounded-xl border border-white/20 bg-black/50 px-4 text-sm text-white outline-none transition focus:border-[#F5C02B]"
-              disabled={leadStatus === "loading"}
-            />
-            <input
-              type="tel"
-              value={leadForm.phone}
-              onChange={(e) => handleLeadInputChange("phone", e.target.value)}
-              placeholder="WhatsApp"
-              className="h-12 w-full rounded-xl border border-white/20 bg-black/50 px-4 text-sm text-white outline-none transition focus:border-[#F5C02B]"
-              disabled={leadStatus === "loading"}
-            />
-            <select
-              value={leadForm.cargo}
-              onChange={(e) => handleLeadInputChange("cargo", e.target.value)}
-              className="h-12 w-full rounded-xl border border-white/20 bg-black/50 px-4 text-sm text-white outline-none transition focus:border-[#F5C02B]"
-              disabled={leadStatus === "loading"}
-            >
-              <option value="">Você é...</option>
-              {profileOptions.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
+            </label>
+            <div className="grid gap-4 md:grid-cols-2">
+              <label className="block">
+                <span className="mb-2 block font-jamjuree text-xs uppercase tracking-[0.11em] text-white/70">
+                  Contato (Whatsapp)
+                </span>
+                <input
+                  type="tel"
+                  value={leadForm.phone}
+                  onChange={(e) => handleLeadInputChange("phone", e.target.value)}
+                  placeholder="(92) 99999-9999"
+                  className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition placeholder:text-white/45 focus:border-[#F5C02B]"
+                  disabled={leadStatus === "loading"}
+                />
+              </label>
+              <label className="block">
+                <span className="mb-2 block font-jamjuree text-xs uppercase tracking-[0.11em] text-white/70">
+                  E-mail
+                </span>
+                <input
+                  type="email"
+                  value={leadForm.email}
+                  onChange={(e) => handleLeadInputChange("email", e.target.value)}
+                  placeholder="voce@empresa.com"
+                  className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition placeholder:text-white/45 focus:border-[#F5C02B]"
+                  disabled={leadStatus === "loading"}
+                />
+              </label>
+            </div>
+            <label className="block">
+              <span className="mb-2 block font-jamjuree text-xs uppercase tracking-[0.11em] text-white/70">
+                Você é:
+              </span>
+              <select
+                value={leadForm.cargo}
+                onChange={(e) => handleLeadInputChange("cargo", e.target.value)}
+                className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition focus:border-[#F5C02B]"
+                disabled={leadStatus === "loading"}
+              >
+                <option value="">Selecione</option>
+                {profileOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <div className="grid gap-4 md:grid-cols-2">
+              <input
+                type="text"
+                value={leadForm.company}
+                onChange={(e) => handleLeadInputChange("company", e.target.value)}
+                placeholder="Nome da empresa"
+                className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition placeholder:text-white/45 focus:border-[#F5C02B]"
+                disabled={leadStatus === "loading"}
+              />
+              <select
+                value={leadForm.revenue}
+                onChange={(e) => handleLeadInputChange("revenue", e.target.value)}
+                className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition focus:border-[#F5C02B]"
+                disabled={leadStatus === "loading"}
+              >
+                <option value="">Faturamento</option>
+                {revenueOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </div>
 
             {leadError ? (
               <p className="text-sm font-semibold text-red-300">{leadError}</p>
             ) : null}
+            {leadSuccessMessage ? (
+              <p className="text-sm font-semibold text-green-300">
+                {leadSuccessMessage}
+              </p>
+            ) : null}
 
-            <button
-              type="submit"
-              disabled={leadStatus === "loading"}
-              className="group relative h-12 w-full overflow-hidden rounded-xl bg-[#F5C02B] px-4 font-jamjuree text-sm font-extrabold uppercase tracking-[0.08em] text-black transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-70"
-            >
-              <span className="relative z-10">
-                {leadStatus === "loading"
-                  ? "Enviando..."
-                  : "Quero meu desconto e ir para o checkout"}
-              </span>
-              <span className="pointer-events-none absolute inset-y-0 -left-[40%] w-[32%] rotate-12 bg-white/35 blur-sm transition-transform duration-500 group-hover:translate-x-[420%]" />
-            </button>
+            <div className="mt-2 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+              <p className="font-jamjuree text-xs uppercase tracking-[0.12em] text-white/45">
+                Preenchimento rapido e seguro
+              </p>
+              <div className="flex w-full items-center gap-2 md:w-auto">
+                <FormButton
+                  titulo={leadStatus === "loading" ? "Enviando..." : "Comprar passaporte"}
+                  textColor="#000"
+                  disabled={leadStatus === "loading"}
+                  leftWidthClass="w-[255px]"
+                />
+              </div>
+            </div>
           </form>
         </div>
       </section>
