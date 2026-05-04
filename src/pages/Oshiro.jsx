@@ -72,6 +72,7 @@ const formatPhone = (value = "") => {
 const Oshiro = () => {
   const [leadStatus, setLeadStatus] = useState("idle");
   const [isMobile, setIsMobile] = useState(false);
+  const [showLeadModal, setShowLeadModal] = useState(false);
   const [leadSuccessMessage, setLeadSuccessMessage] = useState("");
   const [leadError, setLeadError] = useState("");
   const [leadForm, setLeadForm] = useState({
@@ -121,11 +122,31 @@ const Oshiro = () => {
     return () => window.removeEventListener("resize", checkIsMobile);
   }, []);
 
+  useEffect(() => {
+    if (!showLeadModal) return undefined;
+
+    const originalBodyOverflow = document.body.style.overflow;
+    const originalHtmlOverflow = document.documentElement.style.overflow;
+
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = originalBodyOverflow;
+      document.documentElement.style.overflow = originalHtmlOverflow;
+    };
+  }, [showLeadModal]);
+
   const handleBuyPassaporte = () => {
-    const formSection = document.getElementById("oshiro-form");
-    if (formSection) {
-      formSection.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
+    setLeadError("");
+    setLeadSuccessMessage("");
+    setLeadStatus("idle");
+    setShowLeadModal(true);
+  };
+
+  const handleCloseLeadModal = () => {
+    if (leadStatus === "loading") return;
+    setShowLeadModal(false);
   };
 
   const handleLeadInputChange = (field, value) => {
@@ -376,6 +397,7 @@ const Oshiro = () => {
 
       setLeadStatus("success");
       setLeadSuccessMessage("Lead enviado com sucesso. Redirecionando para o Sympla...");
+      setShowLeadModal(false);
       window.setTimeout(() => {
         window.location.href = CHECKOUT_LINK;
       }, 1200);
@@ -433,143 +455,153 @@ const Oshiro = () => {
         />
       </section>
 
-      <section className="mx-auto mt-6 w-full max-w-5xl">
-        <p className="mb-3 text-center font-jamjuree text-sm font-semibold uppercase tracking-[0.08em] text-[#F5C02B]">
-          Último passo para liberar seu desconto
-        </p>
+      {showLeadModal ? (
         <div
-          id="oshiro-form"
-          className="rounded-[28px] border border-white/20 bg-[#07090D] p-5 md:p-8"
+          className="fixed inset-0 z-[70] flex items-center justify-center bg-black/80 px-4 py-8"
+          onClick={handleCloseLeadModal}
         >
-          <div className="h-[3px] w-24 rounded-full bg-[#F5B42A]" />
-          <p className="mt-7 text-center font-anton text-[clamp(2rem,4vw,3.1rem)] uppercase leading-none text-[#F5B42A]">
-            Garanta sua vaga
-          </p>
-          <form onSubmit={handleLeadSubmit} className="mt-7 space-y-4">
-            <label className="block">
-              <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
-                Nome completo
-              </span>
-            <input
-              type="text"
-              value={leadForm.name}
-              onChange={(e) => handleLeadInputChange("name", e.target.value)}
-              placeholder="Digite seu nome completo"
-              className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition placeholder:text-white/45 focus:border-[#F5C02B]"
-              disabled={leadStatus === "loading"}
-            />
-            </label>
-            <div className="grid gap-4 md:grid-cols-2">
+          <div
+            className="relative w-full max-w-4xl rounded-[28px] border border-white/20 bg-[#07090D] p-5 md:p-8"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              type="button"
+              aria-label="Fechar formulário"
+              onClick={handleCloseLeadModal}
+              className="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full border border-[#F5B42A]/60 text-[#F5B42A] transition hover:bg-[#F5B42A]/10"
+            >
+              ×
+            </button>
+            <div className="h-[3px] w-24 rounded-full bg-[#F5B42A]" />
+            <p className="mt-7 text-center font-anton text-[clamp(2rem,4vw,3.1rem)] uppercase leading-none text-[#F5B42A]">
+              Garanta sua vaga
+            </p>
+            <form onSubmit={handleLeadSubmit} className="mt-7 space-y-4">
               <label className="block">
                 <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
-                  Contato (Whatsapp)
-                </span>
-                <input
-                  type="tel"
-                  value={leadForm.phone}
-                  onChange={(e) => handleLeadInputChange("phone", e.target.value)}
-                  placeholder="(92) 99999-9999"
-                  className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition placeholder:text-white/45 focus:border-[#F5C02B]"
-                  disabled={leadStatus === "loading"}
-                />
-              </label>
-              <label className="block">
-                <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
-                  E-mail
-                </span>
-                <input
-                  type="email"
-                  value={leadForm.email}
-                  onChange={(e) => handleLeadInputChange("email", e.target.value)}
-                  placeholder="voce@empresa.com"
-                  className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition placeholder:text-white/45 focus:border-[#F5C02B]"
-                  disabled={leadStatus === "loading"}
-                />
-              </label>
-            </div>
-            <label className="block">
-              <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
-                Você é:
-              </span>
-              <select
-                value={leadForm.cargo}
-                onChange={(e) => handleLeadInputChange("cargo", e.target.value)}
-                className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition focus:border-[#F5C02B]"
-                disabled={leadStatus === "loading"}
-              >
-                <option value="">Selecione</option>
-                {profileOptions.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <div className="grid gap-4 md:grid-cols-2">
-              <label className="block">
-                <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
-                  Empresa
+                  Nome completo
                 </span>
                 <input
                   type="text"
-                  value={leadForm.company}
-                  onChange={(e) => handleLeadInputChange("company", e.target.value)}
-                  placeholder="Nome da empresa"
+                  value={leadForm.name}
+                  onChange={(e) => handleLeadInputChange("name", e.target.value)}
+                  placeholder="Digite seu nome completo"
                   className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition placeholder:text-white/45 focus:border-[#F5C02B]"
                   disabled={leadStatus === "loading"}
                 />
               </label>
+              <div className="grid gap-4 md:grid-cols-2">
+                <label className="block">
+                  <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
+                    Contato (Whatsapp)
+                  </span>
+                  <input
+                    type="tel"
+                    value={leadForm.phone}
+                    onChange={(e) => handleLeadInputChange("phone", e.target.value)}
+                    placeholder="(92) 99999-9999"
+                    className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition placeholder:text-white/45 focus:border-[#F5C02B]"
+                    disabled={leadStatus === "loading"}
+                  />
+                </label>
+                <label className="block">
+                  <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
+                    E-mail
+                  </span>
+                  <input
+                    type="email"
+                    value={leadForm.email}
+                    onChange={(e) => handleLeadInputChange("email", e.target.value)}
+                    placeholder="voce@empresa.com"
+                    className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition placeholder:text-white/45 focus:border-[#F5C02B]"
+                    disabled={leadStatus === "loading"}
+                  />
+                </label>
+              </div>
               <label className="block">
                 <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
-                  Faturamento
+                  Você é:
                 </span>
                 <select
-                  value={leadForm.revenue}
-                  onChange={(e) => handleLeadInputChange("revenue", e.target.value)}
+                  value={leadForm.cargo}
+                  onChange={(e) => handleLeadInputChange("cargo", e.target.value)}
                   className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition focus:border-[#F5C02B]"
                   disabled={leadStatus === "loading"}
                 >
                   <option value="">Selecione</option>
-                  {revenueOptions.map((option) => (
+                  {profileOptions.map((option) => (
                     <option key={option} value={option}>
                       {option}
                     </option>
                   ))}
                 </select>
               </label>
-            </div>
-
-            {leadError ? (
-              <p className="text-sm font-semibold text-red-300">{leadError}</p>
-            ) : null}
-            {leadSuccessMessage ? (
-              <p className="text-sm font-semibold text-green-300">
-                {leadSuccessMessage}
-              </p>
-            ) : null}
-
-            <div className="mt-2 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-              <p className="font-jamjuree text-xs uppercase tracking-[0.12em] text-white/45">
-                Preenchimento rapido e seguro
-              </p>
-              <div className="flex w-full items-center gap-2 md:w-auto">
-                <FormButton
-                  titulo={leadStatus === "loading" ? "Enviando..." : "Garantir 20% OFF"}
-                  textColor="#000"
-                  disabled={leadStatus === "loading"}
-                  leftWidthClass="w-[255px]"
-                />
+              <div className="grid gap-4 md:grid-cols-2">
+                <label className="block">
+                  <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
+                    Empresa
+                  </span>
+                  <input
+                    type="text"
+                    value={leadForm.company}
+                    onChange={(e) => handleLeadInputChange("company", e.target.value)}
+                    placeholder="Nome da empresa"
+                    className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition placeholder:text-white/45 focus:border-[#F5C02B]"
+                    disabled={leadStatus === "loading"}
+                  />
+                </label>
+                <label className="block">
+                  <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
+                    Faturamento
+                  </span>
+                  <select
+                    value={leadForm.revenue}
+                    onChange={(e) => handleLeadInputChange("revenue", e.target.value)}
+                    className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition focus:border-[#F5C02B]"
+                    disabled={leadStatus === "loading"}
+                  >
+                    <option value="">Selecione</option>
+                    {revenueOptions.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                </label>
               </div>
-            </div>
-            <p className="pt-1 text-center font-jamjuree text-xs text-white/55">
-              Você será redirecionado ao Sympla após o envio.
-            </p>
-            <p className="text-center font-jamjuree text-xs text-white/40">
-              Seus dados são usados apenas para liberar sua condição especial.
-            </p>
-          </form>
+
+              {leadError ? (
+                <p className="text-sm font-semibold text-red-300">{leadError}</p>
+              ) : null}
+              {leadSuccessMessage ? (
+                <p className="text-sm font-semibold text-green-300">
+                  {leadSuccessMessage}
+                </p>
+              ) : null}
+
+              <div className="mt-2 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                <p className="font-jamjuree text-xs uppercase tracking-[0.12em] text-white/45">
+                  Preenchimento rapido e seguro
+                </p>
+                <div className="flex w-full items-center gap-2 md:w-auto">
+                  <FormButton
+                    titulo={leadStatus === "loading" ? "Enviando..." : "Garantir 20% OFF"}
+                    textColor="#000"
+                    disabled={leadStatus === "loading"}
+                    leftWidthClass="w-[255px]"
+                  />
+                </div>
+              </div>
+              <p className="pt-1 text-center font-jamjuree text-xs text-white/55">
+                Você será redirecionado ao Sympla após o envio.
+              </p>
+              <p className="text-center font-jamjuree text-xs text-white/40">
+                Seus dados são usados apenas para liberar sua condição especial.
+              </p>
+            </form>
+          </div>
         </div>
-      </section>
+      ) : null}
     </main>
   );
 };
