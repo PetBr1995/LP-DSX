@@ -1,0 +1,472 @@
+import { useEffect, useState } from "react";
+import { RD_API_URL } from "../lib/rdStation";
+import { withRdTrackingToken } from "../lib/rdStationTracking";
+import { getSupabaseClient, isSupabaseConfigured } from "../lib/supabaseClient";
+import { formatDsxFormOrigin } from "../utils/formOrigin";
+import PassaportesSection from "../components/NewVendas/sections/PassaportesSection";
+
+const CHECKOUT_LINK =
+  "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721";
+
+const profileOptions = [
+  "Empresário",
+  "Diretor ou Gestor",
+  "Profissional de marketing, vendas e operações",
+  "Estudante",
+  "Outros",
+];
+
+const onlyDigits = (value = "") => value.replace(/\D/g, "");
+const isValidEmail = (email = "") => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+const normalizeHostname = (value = "") =>
+  String(value || "")
+    .trim()
+    .toLowerCase()
+    .replace(/^www\./, "");
+
+const detectSiteOriginFromUrl = (value = "") => {
+  if (!value) return "";
+
+  try {
+    const hostname = normalizeHostname(new URL(value).hostname);
+    if (!hostname) return "";
+    if (hostname.includes("dsx.com.vc")) return "dsx";
+    if (hostname.includes("digitalhub.com.vc")) return "digitalhub";
+    if (hostname.includes("digitaleduca.com.vc")) return "digitaleduca";
+    return hostname;
+  } catch {
+    return "";
+  }
+};
+
+const isMissingColumnError = (error) => {
+  const code = String(error?.code || "").toUpperCase();
+  const message = String(error?.message || "").toLowerCase();
+  return (
+    code === "PGRST204" ||
+    message.includes("column") ||
+    message.includes("schema cache")
+  );
+};
+
+const formatPhone = (value = "") => {
+  const digits = onlyDigits(value).slice(0, 11);
+  if (digits.length <= 2) return digits;
+  if (digits.length <= 6) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+  if (digits.length <= 10) {
+    return `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`;
+  }
+  return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+};
+
+const Oshiro = () => {
+  const [leadStatus, setLeadStatus] = useState("idle");
+  const [isMobile, setIsMobile] = useState(false);
+  const [leadError, setLeadError] = useState("");
+  const [leadForm, setLeadForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    cargo: "",
+  });
+  const [sourceData, setSourceData] = useState({
+    page_url: "",
+    site_origin: "",
+    site_hostname: "",
+    utm_source: "",
+    utm_medium: "",
+    utm_campaign: "",
+    utm_term: "",
+    utm_content: "",
+  });
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentUrl = window.location.href;
+    const siteHostname = normalizeHostname(window.location.hostname);
+    const siteOrigin = detectSiteOriginFromUrl(currentUrl) || siteHostname;
+
+    setSourceData({
+      page_url: currentUrl,
+      site_origin: siteOrigin,
+      site_hostname: siteHostname,
+      utm_source: urlParams.get("utm_source") || "",
+      utm_medium: urlParams.get("utm_medium") || "",
+      utm_campaign: urlParams.get("utm_campaign") || "",
+      utm_term: urlParams.get("utm_term") || "",
+      utm_content: urlParams.get("utm_content") || "",
+    });
+  }, []);
+
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth <= 1015);
+    };
+
+    checkIsMobile();
+    window.addEventListener("resize", checkIsMobile);
+    return () => window.removeEventListener("resize", checkIsMobile);
+  }, []);
+
+  const handleBuyPassaporte = () => {
+    const formSection = document.getElementById("oshiro-form");
+    if (formSection) {
+      formSection.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
+
+  const handleLeadInputChange = (field, value) => {
+    setLeadForm((current) => ({
+      ...current,
+      [field]: field === "phone" ? formatPhone(value) : value,
+    }));
+  };
+
+  const handleLeadSubmit = async (event) => {
+    event.preventDefault();
+
+    const name = leadForm.name.trim();
+    const email = leadForm.email.trim().toLowerCase();
+    const phoneDigits = onlyDigits(leadForm.phone);
+    const phone = leadForm.phone.trim();
+    const cargo = leadForm.cargo.trim();
+
+    if (!name) {
+      setLeadError("Informe seu nome.");
+      return;
+    }
+    if (!isValidEmail(email)) {
+      setLeadError("Informe um e-mail válido.");
+      return;
+    }
+    if (!(phoneDigits.length === 10 || phoneDigits.length === 11)) {
+      setLeadError("Informe um telefone com DDD.");
+      return;
+    }
+    if (!cargo) {
+      setLeadError("Selecione o campo 'Você é...'.");
+      return;
+    }
+
+    setLeadStatus("loading");
+    setLeadError("");
+
+    try {
+      const lpIdentifier = "LP DSX - Oshiro";
+      const resolvedFormOrigin = "Oshiro";
+      const payload = {
+        event_type: "CONVERSION",
+        event_family: "CDP",
+        payload: {
+          conversion_identifier: `LP - DSX 2026 - Formulario ${resolvedFormOrigin}`,
+          name,
+          email,
+          personal_phone: phone,
+          voce_e: cargo,
+          cf_voce_e: cargo,
+          cf_cargo: cargo,
+          traffic_source: sourceData.utm_source,
+          traffic_campaign: sourceData.utm_campaign,
+          traffic_medium: sourceData.utm_medium,
+          traffic_value: sourceData.utm_term,
+          cf_utm_campaign: sourceData.utm_campaign,
+          cf_utm_medium: sourceData.utm_medium,
+          cf_utm_term: sourceData.utm_term,
+          cf_utm_content: sourceData.utm_content,
+          cf_utm_source: sourceData.utm_source,
+          cf_url_de_conversao: sourceData.page_url,
+          cf_origem_formulario: formatDsxFormOrigin(
+            resolvedFormOrigin,
+            "Home Principal",
+          ),
+        },
+        tags: ["dsx-oshiro", "lp"],
+        source: "landing-oshiro",
+      };
+
+      const rdResult = await fetch(RD_API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(withRdTrackingToken(payload)),
+      });
+
+      const rdData = await rdResult.json().catch(() => ({}));
+      if (!rdResult.ok || rdData?.ok === false) {
+        const rdMessage =
+          rdData?.errors?.[0]?.error_message ||
+          rdData?.message ||
+          "Falha ao enviar lead";
+        throw new Error(rdMessage);
+      }
+
+      const trackerState = window.DSXTracker?.getState?.() || {};
+      const sessionId =
+        trackerState.sessionId ||
+        (window.crypto?.randomUUID?.() || `session-${Date.now()}`);
+      const nowIso = new Date().toISOString();
+
+      const profilePayload = {
+        lead_email: email,
+        lead_name: name,
+        lead_phone: phone,
+        lead_cargo: cargo,
+        site_origin: sourceData.site_origin || null,
+        site_hostname: sourceData.site_hostname || window.location.hostname || null,
+        lp_identifier: lpIdentifier,
+        first_converted_at: nowIso,
+        last_seen_at: nowIso,
+        has_sympla_redirected: true,
+        last_sympla_redirected_at: nowIso,
+      };
+
+      if (isSupabaseConfigured) {
+        try {
+          const supabase = await getSupabaseClient();
+
+          if (supabase) {
+            let { error: profileError } = await supabase
+              .from("tracking_lead_profiles")
+              .upsert([profilePayload], { onConflict: "lead_email" });
+
+            if (profileError && isMissingColumnError(profileError)) {
+              const fallbackProfilePayload = { ...profilePayload };
+              delete fallbackProfilePayload.site_origin;
+              delete fallbackProfilePayload.site_hostname;
+              let retry = await supabase
+                .from("tracking_lead_profiles")
+                .upsert([fallbackProfilePayload], { onConflict: "lead_email" });
+              profileError = retry.error;
+
+              if (profileError && isMissingColumnError(profileError)) {
+                const fallbackProfileWithoutLp = { ...fallbackProfilePayload };
+                delete fallbackProfileWithoutLp.lp_identifier;
+                retry = await supabase
+                  .from("tracking_lead_profiles")
+                  .upsert([fallbackProfileWithoutLp], { onConflict: "lead_email" });
+                profileError = retry.error;
+              }
+            }
+
+            if (!profileError) {
+              const sessionPayload = {
+                session_id: sessionId,
+                lead_name: name,
+                lead_email: email,
+                lead_phone: phone,
+                lead_cargo: cargo,
+                site_origin: sourceData.site_origin || null,
+                site_hostname:
+                  sourceData.site_hostname || window.location.hostname || null,
+                lp_identifier: lpIdentifier,
+                page:
+                  sourceData.page_url ||
+                  window.location.pathname + window.location.search,
+                referrer: document.referrer || null,
+                utm_source: sourceData.utm_source || sourceData.site_origin || null,
+                utm_medium: sourceData.utm_medium || null,
+                utm_campaign: sourceData.utm_campaign || null,
+                utm_content: sourceData.utm_content || null,
+                utm_term: sourceData.utm_term || null,
+                converted_at: nowIso,
+                has_sympla_redirected: true,
+                sympla_redirected_at: nowIso,
+              };
+
+              let { error: sessionError } = await supabase
+                .from("tracking_lead_sessions")
+                .upsert([sessionPayload], { onConflict: "session_id" });
+
+              if (sessionError && isMissingColumnError(sessionError)) {
+                const fallbackSessionPayload = { ...sessionPayload };
+                delete fallbackSessionPayload.site_origin;
+                delete fallbackSessionPayload.site_hostname;
+                let retry = await supabase
+                  .from("tracking_lead_sessions")
+                  .upsert([fallbackSessionPayload], { onConflict: "session_id" });
+                sessionError = retry.error;
+
+                if (sessionError && isMissingColumnError(sessionError)) {
+                  const fallbackSessionWithoutLp = { ...fallbackSessionPayload };
+                  delete fallbackSessionWithoutLp.lp_identifier;
+                  retry = await supabase
+                    .from("tracking_lead_sessions")
+                    .upsert([fallbackSessionWithoutLp], { onConflict: "session_id" });
+                  sessionError = retry.error;
+                }
+              }
+
+              if (!sessionError) {
+                const eventRows = [
+                  {
+                    session_id: sessionId,
+                    lead_email: email,
+                    event_name: "lead_form_submit",
+                    section: "__form_submit__",
+                    occurred_at: nowIso,
+                    page: window.location.pathname + window.location.search,
+                    payload: {
+                      form_origin: "Oshiro",
+                      lp_identifier: lpIdentifier,
+                      site_origin: sourceData.site_origin || null,
+                      site_hostname:
+                        sourceData.site_hostname || window.location.hostname || null,
+                      page_url: sourceData.page_url || window.location.href,
+                      profile: cargo,
+                    },
+                  },
+                  {
+                    session_id: sessionId,
+                    lead_email: email,
+                    event_name: "sympla_redirected",
+                    section: "__sympla_redirected__",
+                    occurred_at: nowIso,
+                    page: window.location.pathname + window.location.search,
+                    payload: {
+                      target_link: CHECKOUT_LINK,
+                      site_origin: sourceData.site_origin || null,
+                      site_hostname:
+                        sourceData.site_hostname || window.location.hostname || null,
+                      page_url: sourceData.page_url || window.location.href,
+                    },
+                  },
+                ];
+
+                await supabase
+                  .from("tracking_lead_section_events")
+                  .upsert(eventRows, { onConflict: "session_id,event_name,section" });
+              }
+            }
+          }
+        } catch (supabaseError) {
+          console.error("[Oshiro] erro inesperado no tracking Supabase", supabaseError);
+        }
+      }
+
+      setLeadStatus("success");
+      window.location.href = CHECKOUT_LINK;
+    } catch (_error) {
+      setLeadStatus("error");
+      console.error("[Oshiro] erro no envio do lead", _error);
+      setLeadError(
+        _error?.message || "Não foi possível enviar agora. Tente novamente.",
+      );
+    }
+  };
+
+  return (
+    <main className="min-h-screen bg-black px-4 pb-12 pt-8 text-white md:px-8 md:pt-12">
+      <section className="relative mx-auto w-full max-w-5xl overflow-hidden rounded-[28px] border border-white/10 bg-[#0B0B0B]">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-35"
+          style={{
+            background:
+              "radial-gradient(circle at 12% 14%, rgba(245,192,43,0.24), transparent 42%), radial-gradient(circle at 88% 10%, rgba(0,158,64,0.22), transparent 38%)",
+          }}
+          aria-hidden="true"
+        />
+
+        <div className="relative grid gap-8 px-5 py-8 md:px-10 md:py-12">
+          <div className="flex flex-col items-center justify-center text-center">
+            <img
+              src="/logo-dsx-vertical.svg"
+              alt="DSX 2026"
+              className="h-14 w-auto object-contain"
+              loading="eager"
+              decoding="async"
+            />
+            <h1 className="mt-5 font-anton text-[clamp(2rem,5vw,2.8rem)] uppercase leading-[1.08]">
+              Oferta Especial Oshiro
+            </h1>
+            <h2 className="mt-3 font-jamjuree text-[1.05rem] font-semibold uppercase tracking-[0.04em] text-[#F5C02B]">
+              Condição exclusiva para sua compra
+            </h2>
+            <p className="mt-5 max-w-md font-jamjuree text-[1rem] leading-relaxed text-white/85">
+              20% de desconto em todos os passaportes.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <section className="mx-auto mt-8 w-full max-w-5xl">
+        <PassaportesSection
+          isMobile={isMobile}
+          onBuyPassaporte={handleBuyPassaporte}
+        />
+      </section>
+
+      <section className="mx-auto mt-8 w-full max-w-5xl">
+        <div
+          id="oshiro-form"
+          className="rounded-2xl border border-white/15 bg-black/55 p-4 md:p-6"
+        >
+          <p className="text-center font-jamjuree text-sm font-semibold uppercase tracking-[0.08em] text-[#F5C02B]">
+            Preencha e garanta seu desconto
+          </p>
+          <form onSubmit={handleLeadSubmit} className="mt-4 space-y-3">
+            <input
+              type="text"
+              value={leadForm.name}
+              onChange={(e) => handleLeadInputChange("name", e.target.value)}
+              placeholder="Nome completo"
+              className="h-12 w-full rounded-xl border border-white/20 bg-black/50 px-4 text-sm text-white outline-none transition focus:border-[#F5C02B]"
+              disabled={leadStatus === "loading"}
+            />
+            <input
+              type="email"
+              value={leadForm.email}
+              onChange={(e) => handleLeadInputChange("email", e.target.value)}
+              placeholder="E-mail"
+              className="h-12 w-full rounded-xl border border-white/20 bg-black/50 px-4 text-sm text-white outline-none transition focus:border-[#F5C02B]"
+              disabled={leadStatus === "loading"}
+            />
+            <input
+              type="tel"
+              value={leadForm.phone}
+              onChange={(e) => handleLeadInputChange("phone", e.target.value)}
+              placeholder="WhatsApp"
+              className="h-12 w-full rounded-xl border border-white/20 bg-black/50 px-4 text-sm text-white outline-none transition focus:border-[#F5C02B]"
+              disabled={leadStatus === "loading"}
+            />
+            <select
+              value={leadForm.cargo}
+              onChange={(e) => handleLeadInputChange("cargo", e.target.value)}
+              className="h-12 w-full rounded-xl border border-white/20 bg-black/50 px-4 text-sm text-white outline-none transition focus:border-[#F5C02B]"
+              disabled={leadStatus === "loading"}
+            >
+              <option value="">Você é...</option>
+              {profileOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+
+            {leadError ? (
+              <p className="text-sm font-semibold text-red-300">{leadError}</p>
+            ) : null}
+
+            <button
+              type="submit"
+              disabled={leadStatus === "loading"}
+              className="group relative h-12 w-full overflow-hidden rounded-xl bg-[#F5C02B] px-4 font-jamjuree text-sm font-extrabold uppercase tracking-[0.08em] text-black transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-70"
+            >
+              <span className="relative z-10">
+                {leadStatus === "loading"
+                  ? "Enviando..."
+                  : "Quero meu desconto e ir para o checkout"}
+              </span>
+              <span className="pointer-events-none absolute inset-y-0 -left-[40%] w-[32%] rotate-12 bg-white/35 blur-sm transition-transform duration-500 group-hover:translate-x-[420%]" />
+            </button>
+          </form>
+        </div>
+      </section>
+    </main>
+  );
+};
+
+export default Oshiro;

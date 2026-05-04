@@ -13,6 +13,7 @@ const TesteAnimation = lazy(() => import("./pages/testeAnimation"));
 const Checkout = lazy(() => import("./pages/Checkout"));
 const NewVendasCopy = lazy(() => import("./pages/NewVendasCopy"));
 const PreCheckout = lazy(() => import("./pages/PreCheckout"));
+const Oshiro = lazy(() => import("./pages/Oshiro"));
 const Vendas = lazy(() => import("./pages/Vendas"));
 const LPAyla = lazy(() => import("./pages/LPAyla"));
 const LPAyla2 = lazy(() => import("./pages/LPAyla2"));
@@ -52,29 +53,14 @@ const App = () => {
         <Suspense fallback={<div className="min-h-screen bg-black" />}>
           <Routes>
             <Route path="/" element={<NewVendas />} />
-            <Route path="/agradecimento" element={<Agradecimento />} />
-            <Route path="/patrocinador" element={<Patrocinadores />} />
-            <Route path="/whatsapp" element={<WhatsappPage />} />
-            <Route path="/testeanimation" element={<TesteAnimation />} />
-            <Route path="/checkout" element={<Checkout />} />
             <Route path="/precheckout" element={<PreCheckout />} />
-            <Route
-              path="/checkoutvendas"
-              element={<Navigate to="/precheckout" replace />}
-            />
-            <Route
-              path="/checkoutVendas"
-              element={<Navigate to="/precheckout" replace />}
-            />
-            <Route path="/vendas-leads" element={<NewVendasCopy />} />
+            <Route path="/oshiro" element={<Oshiro />} />
+
             <Route path="/lpayla" element={<LPAyla />} />
             <Route path="/lpayla2" element={<LPAyla2 />} />
             <Route path="/calendario" element={<CalendarioPage />} />
-            <Route path="/lp/segmento/:slug" element={<SpeakerLandingPage />} />
             <Route path="/lp/:slug" element={<SpeakerLandingPage />} />
             <Route path="/sobre" element={<HomeTeste />} />
-            <Route path="/teste" element={<Vendas />} />
-            <Route path="/patrocinadores" element={<Patrocinadores />} />
           </Routes>
         </Suspense>
       </div>
