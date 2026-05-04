@@ -472,9 +472,7 @@ const Oshiro = () => {
       </section>
 
       <section className="mx-auto mt-6 w-full max-w-5xl">
-        <p className="mb-3 text-center font-jamjuree text-sm font-semibold uppercase tracking-[0.08em] text-[#F5C02B]">
-          O desconto de 20% vale para todos os passaportes abaixo
-        </p>
+       
         <PassaportesSection
           isMobile={isMobile}
           onBuyPassaporte={handleBuyPassaporte}
