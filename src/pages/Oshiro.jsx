@@ -7,7 +7,7 @@ import PassaportesSection from "../components/NewVendas/sections/PassaportesSect
 import { FormButton } from "../components/FormSection";
 
 const CHECKOUT_LINK =
-  "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721";
+  "https://www.sympla.com.br/evento/dsx-2026---digital-summit-experience/3339721?d=OSHIRO20";
 
 const profileOptions = [
   "Empresário",
@@ -161,7 +161,7 @@ const Oshiro = () => {
   }, [showLeadModal]);
 
   const handleBuyPassaporte = (targetLink, formOrigin) => {
-    setPendingSymplaUrl(targetLink || CHECKOUT_LINK);
+    setPendingSymplaUrl(CHECKOUT_LINK);
     setSelectedPassOrigin(formOrigin || "Oshiro");
     setLeadError("");
     setLeadSuccessMessage("");
