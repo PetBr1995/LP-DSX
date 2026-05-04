@@ -389,7 +389,7 @@ const Oshiro = () => {
   };
 
   return (
-    <main className="min-h-screen bg-black px-4 pb-12 pt-8 text-white md:px-8 md:pt-12">
+    <main className="min-h-screen bg-black px-4 pb-12 pt-6 text-white md:px-8 md:pt-9">
       <section className="relative mx-auto w-full max-w-5xl overflow-hidden rounded-[28px] border border-white/10 bg-[#0B0B0B]">
         <div
           className="pointer-events-none absolute inset-0 opacity-35"
@@ -400,7 +400,7 @@ const Oshiro = () => {
           aria-hidden="true"
         />
 
-        <div className="relative grid gap-8 px-5 py-8 md:px-10 md:py-12">
+        <div className="relative grid gap-6 px-5 py-7 md:px-10 md:py-9">
           <div className="flex flex-col items-center justify-center text-center">
             <img
               src="/logo-dsx-vertical.svg"
@@ -410,30 +410,36 @@ const Oshiro = () => {
               decoding="async"
             />
             <h1 className="mt-5 font-anton text-[clamp(2rem,5vw,2.8rem)] uppercase leading-[1.08]">
-              Oferta Especial Oshiro
+              Convite exclusivo: 20% OFF no DSX 2026
             </h1>
-            <h2 className="mt-3 font-jamjuree text-[1.05rem] font-semibold uppercase tracking-[0.04em] text-[#F5C02B]">
-              Condição exclusiva para sua compra
+            <h2 className="mt-3 font-jamjuree text-[1.05rem] font-semibold uppercase tracking-[0.04em] text-[#FFD36D]">
+              Benefício para empresários, C-levels e líderes corporativos
             </h2>
             <p className="mt-5 max-w-md font-jamjuree text-[1rem] leading-relaxed text-white/85">
-              20% de desconto em todos os passaportes.
+              20% de desconto em todos os passaportes por tempo limitado.
             </p>
           </div>
 
         </div>
       </section>
 
-      <section className="mx-auto mt-8 w-full max-w-5xl">
+      <section className="mx-auto mt-6 w-full max-w-5xl">
+        <p className="mb-3 text-center font-jamjuree text-sm font-semibold uppercase tracking-[0.08em] text-[#F5C02B]">
+          O desconto de 20% vale para todos os passaportes abaixo
+        </p>
         <PassaportesSection
           isMobile={isMobile}
           onBuyPassaporte={handleBuyPassaporte}
         />
       </section>
 
-      <section className="mx-auto mt-8 w-full max-w-5xl">
+      <section className="mx-auto mt-6 w-full max-w-5xl">
+        <p className="mb-3 text-center font-jamjuree text-sm font-semibold uppercase tracking-[0.08em] text-[#F5C02B]">
+          Último passo para liberar seu desconto
+        </p>
         <div
           id="oshiro-form"
-          className="rounded-[28px] border border-white/20 bg-[#07090D] p-5 md:p-9"
+          className="rounded-[28px] border border-white/20 bg-[#07090D] p-5 md:p-8"
         >
           <div className="h-[3px] w-24 rounded-full bg-[#F5B42A]" />
           <p className="mt-7 text-center font-anton text-[clamp(2rem,4vw,3.1rem)] uppercase leading-none text-[#F5B42A]">
@@ -441,7 +447,7 @@ const Oshiro = () => {
           </p>
           <form onSubmit={handleLeadSubmit} className="mt-7 space-y-4">
             <label className="block">
-              <span className="mb-2 block font-jamjuree text-xs uppercase tracking-[0.11em] text-white/70">
+              <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
                 Nome completo
               </span>
             <input
@@ -455,7 +461,7 @@ const Oshiro = () => {
             </label>
             <div className="grid gap-4 md:grid-cols-2">
               <label className="block">
-                <span className="mb-2 block font-jamjuree text-xs uppercase tracking-[0.11em] text-white/70">
+                <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
                   Contato (Whatsapp)
                 </span>
                 <input
@@ -468,7 +474,7 @@ const Oshiro = () => {
                 />
               </label>
               <label className="block">
-                <span className="mb-2 block font-jamjuree text-xs uppercase tracking-[0.11em] text-white/70">
+                <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
                   E-mail
                 </span>
                 <input
@@ -482,7 +488,7 @@ const Oshiro = () => {
               </label>
             </div>
             <label className="block">
-              <span className="mb-2 block font-jamjuree text-xs uppercase tracking-[0.11em] text-white/70">
+              <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
                 Você é:
               </span>
               <select
@@ -500,27 +506,37 @@ const Oshiro = () => {
               </select>
             </label>
             <div className="grid gap-4 md:grid-cols-2">
-              <input
-                type="text"
-                value={leadForm.company}
-                onChange={(e) => handleLeadInputChange("company", e.target.value)}
-                placeholder="Nome da empresa"
-                className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition placeholder:text-white/45 focus:border-[#F5C02B]"
-                disabled={leadStatus === "loading"}
-              />
-              <select
-                value={leadForm.revenue}
-                onChange={(e) => handleLeadInputChange("revenue", e.target.value)}
-                className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition focus:border-[#F5C02B]"
-                disabled={leadStatus === "loading"}
-              >
-                <option value="">Faturamento</option>
-                {revenueOptions.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
+              <label className="block">
+                <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
+                  Empresa
+                </span>
+                <input
+                  type="text"
+                  value={leadForm.company}
+                  onChange={(e) => handleLeadInputChange("company", e.target.value)}
+                  placeholder="Nome da empresa"
+                  className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition placeholder:text-white/45 focus:border-[#F5C02B]"
+                  disabled={leadStatus === "loading"}
+                />
+              </label>
+              <label className="block">
+                <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
+                  Faturamento
+                </span>
+                <select
+                  value={leadForm.revenue}
+                  onChange={(e) => handleLeadInputChange("revenue", e.target.value)}
+                  className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition focus:border-[#F5C02B]"
+                  disabled={leadStatus === "loading"}
+                >
+                  <option value="">Selecione</option>
+                  {revenueOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </label>
             </div>
 
             {leadError ? (
@@ -538,13 +554,19 @@ const Oshiro = () => {
               </p>
               <div className="flex w-full items-center gap-2 md:w-auto">
                 <FormButton
-                  titulo={leadStatus === "loading" ? "Enviando..." : "Comprar passaporte"}
+                  titulo={leadStatus === "loading" ? "Enviando..." : "Garantir 20% OFF"}
                   textColor="#000"
                   disabled={leadStatus === "loading"}
                   leftWidthClass="w-[255px]"
                 />
               </div>
             </div>
+            <p className="pt-1 text-center font-jamjuree text-xs text-white/55">
+              Você será redirecionado ao Sympla após o envio.
+            </p>
+            <p className="text-center font-jamjuree text-xs text-white/40">
+              Seus dados são usados apenas para liberar sua condição especial.
+            </p>
           </form>
         </div>
       </section>
