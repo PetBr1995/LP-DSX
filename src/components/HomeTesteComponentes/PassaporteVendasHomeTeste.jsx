@@ -52,15 +52,11 @@ const SquishyPlanCard = ({ card, onBuyPassaporte, hideBuyButton = false }) => (
         </p>
       ) : null}
 
-      <p className="mt-3 text-xs font-semibold text-white/90">
-        PASSAPORTE
-      </p>
-      <div className="mt-2 min-h-[34px]">
+      <div className="mt-3 min-h-[34px]">
         {card.lote ? (
-          <div className="inline-flex w-fit items-center gap-2 rounded-md border border-[#F5D247]/65 bg-gradient-to-r from-[#2D220A] via-[#4B3911] to-[#2D220A] px-3 py-1.5 shadow-[0_0_0_1px_rgba(245,210,71,0.2),0_8px_18px_rgba(0,0,0,0.35)]">
-            <span className="h-2 w-2 rounded-full bg-[#F5D247]" />
-            <span className="text-[11px] font-black uppercase tracking-[0.12em] text-[#FFE27A]">
-              {card.lote}
+          <div className="inline-flex w-fit items-center rounded-full border border-[#F5D247]/70 bg-black/35 px-3 py-1.5">
+            <span className="text-[11px] font-black uppercase tracking-[0.1em] text-[#F5D247]">
+              {card.lote.toUpperCase()}
             </span>
           </div>
         ) : null}

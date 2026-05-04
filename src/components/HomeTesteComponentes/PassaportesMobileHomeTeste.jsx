@@ -70,13 +70,10 @@ const PassaportesMobileHomeTeste = ({
                   <div className="h-[30px]" />
                 )}
 
-                <p className="mt-3 text-xs font-semibold text-white/90">
-                  PASSAPORTE
-                </p>
-                <div className="mt-1 min-h-[26px]">
+                <div className="mt-3 min-h-[26px]">
                   {card.lote ? (
-                    <p className="inline-flex rounded-full border border-[#F5D247]/30 bg-black/30 px-2 py-1 text-[10px] font-black uppercase tracking-[0.08em] text-[#F5D247]">
-                      {card.lote}
+                    <p className="inline-flex rounded-full border border-[#F5D247]/70 bg-black/35 px-3 py-1 text-[10px] font-black uppercase tracking-[0.1em] text-[#F5D247]">
+                      {card.lote.toUpperCase()}
                     </p>
                   ) : null}
                 </div>
