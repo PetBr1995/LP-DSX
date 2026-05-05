@@ -3,7 +3,7 @@ import NewVendasBigNumbersSection from "./NewVendasBigNumbersSection";
 import { Calendar, MapPin } from "lucide-react";
 
 const NewVendasHero = ({
-  ctaLink = "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721",
+  ctaLink = "#passaportes",
   onPrimaryCtaClick,
 }) => {
   const ctaTarget = ctaLink.startsWith("#") ? "_self" : "_blank";

@@ -18,8 +18,8 @@ const FAQVendas = () => {
       numero: 3,
       pergunta: "Já existe programação e palestrantes confirmados?",
       resposta:
-        "A curadoria está em construção. Para acompanhar os anúncios oficiais, entre no grupo de WhatsApp DSX Conexões. Acesse o link para entrar:",
-      link: "https://chat.whatsapp.com/B9hsyLb6Ksp979K4W8eh5S",
+        "A curadoria está em construção. Enquanto isso, você já pode garantir seu acesso ao evento:",
+      link: "#passaportes",
     },
   ];
 
@@ -106,12 +106,10 @@ const FAQVendas = () => {
                         <div className="mt-4">
                           <a
                             href={item.link}
-                            target="_blank"
-                            rel="noreferrer"
+                            target="_self"
                             className="inline-flex items-center gap-2 rounded-md border border-[#F5D247] px-4 py-2 text-sm font-semibold text-[#F5D247] transition hover:bg-[#F5D247] hover:text-black"
                           >
-                            Entrar no grupo do WhatsApp
-                            <span aria-hidden>↗</span>
+                            Ver passaportes
                           </a>
                         </div>
                       )}
@@ -128,3 +126,5 @@ const FAQVendas = () => {
 };
 
 export default FAQVendas;
+
+

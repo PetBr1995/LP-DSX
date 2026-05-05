@@ -65,7 +65,12 @@ const CallToActionVendas = () => {
         </p>
 
         <div className="mt-6 sm:mt-8">
-          <HeaderMask link="/patrocinador" textColor="#ffffff" titulo="Seja patrocinador" font="bolder" />
+          <HeaderMask
+            link="#passaportes"
+            textColor="#ffffff"
+            titulo="Garanta seu passaporte"
+            font="bolder"
+          />
         </div>
       </div>
     </section>

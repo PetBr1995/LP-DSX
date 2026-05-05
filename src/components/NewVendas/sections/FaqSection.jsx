@@ -9,6 +9,7 @@ const FaqSection = ({ items, openFaqIndex, onToggleFaq }) => {
           {items.map((item, index) => {
             const isOpen = openFaqIndex === index;
             const answerId = `faq-answer-${index}`;
+            const isAnchorLink = String(item.link || "").startsWith("#");
 
             return (
               <article key={item.pergunta} className="border-b border-[#3A3222] py-5 last:border-b-0">
@@ -48,12 +49,12 @@ const FaqSection = ({ items, openFaqIndex, onToggleFaq }) => {
                       <div className="mt-3">
                         <a
                           href={item.link}
-                          target="_blank"
-                          rel="noreferrer"
+                          target={isAnchorLink ? "_self" : "_blank"}
+                          rel={isAnchorLink ? undefined : "noreferrer"}
                           className="inline-flex items-center gap-2 rounded-md border border-[#C9A84C] px-3 py-2 text-sm font-semibold text-[#F5C02B] transition hover:bg-[#C9A84C] hover:text-black"
                         >
-                          Entrar no grupo do WhatsApp
-                          <span aria-hidden>↗</span>
+                          {isAnchorLink ? "Ver passaportes" : "Entrar no grupo do WhatsApp"}
+                          {isAnchorLink ? null : <span aria-hidden>?</span>}
                         </a>
                       </div>
                     ) : null}

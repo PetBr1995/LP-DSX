@@ -5,7 +5,7 @@ import { rememberDsxFormOrigin } from "../../utils/formOrigin";
 const cards = [
   {
     nome: "VIP",
-    lote: "Lote 4",
+    lote: "",
     originalPrice: "1.297,00",
     price: "1.297,00",
     discountedPrice: "1.037,60",
@@ -174,14 +174,16 @@ const PassaporteVendasHomeTeste = ({
   return (
     <section className="relative overflow-hidden pb-10 pt-0 md:pb-14 md:pt-0">
       <div className="mx-auto max-w-6xl px-4">
-        <h2 className="text-center font-anton text-2xl uppercase leading-tight text-white sm:text-3xl md:text-4xl">
-          {showOshiroDiscount
-            ? "O desconto vale para todos os passaportes abaixo"
-            : "GARANTA O SEU PASSAPORTE PARA 2 DIAS DE EVENTO"}
-        </h2>
-        <p className="mx-auto mt-3 max-w-2xl text-center text-base font-black uppercase tracking-[0.04em] text-[#F5C02B] sm:text-lg">
-          VAGAS LIMITADAS
-        </p>
+        {!showOshiroDiscount ? (
+          <>
+            <h2 className="text-center font-anton text-2xl uppercase leading-tight text-white sm:text-3xl md:text-4xl">
+              GARANTA O SEU PASSAPORTE PARA 2 DIAS DE EVENTO
+            </h2>
+            <p className="mx-auto mt-3 max-w-2xl text-center text-base font-black uppercase tracking-[0.04em] text-[#F5C02B] sm:text-lg">
+              VAGAS LIMITADAS
+            </p>
+          </>
+        ) : null}
 
         <div className="mt-8 mx-auto flex w-full max-w-[940px] flex-wrap items-stretch justify-center gap-3 lg:gap-4">
           {cards.map((card) => (
