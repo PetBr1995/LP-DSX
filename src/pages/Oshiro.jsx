@@ -8,6 +8,7 @@ import { FormButton } from "../components/FormSection";
 
 const CHECKOUT_LINK =
   "https://www.sympla.com.br/evento/dsx-2026---digital-summit-experience/3339721?d=OSHIRO20";
+const OSHIRO_LEAD_UNLOCK_KEY = "dsx_oshiro_lead_unlocked_v1";
 
 const profileOptions = [
   "Empresário",
@@ -90,12 +91,23 @@ const formatPhone = (value = "") => {
   return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
 };
 
+const leadSteps = [
+  { key: "name", label: "Nome completo" },
+  { key: "phone", label: "Contato (Whatsapp)" },
+  { key: "email", label: "E-mail" },
+  { key: "cargo", label: "Voce e:" },
+  { key: "company", label: "Empresa" },
+  { key: "revenue", label: "Faturamento" },
+];
+
 const Oshiro = () => {
   const [leadStatus, setLeadStatus] = useState("idle");
   const [isMobile, setIsMobile] = useState(false);
-  const [showLeadModal, setShowLeadModal] = useState(false);
-  const [pendingSymplaUrl, setPendingSymplaUrl] = useState(CHECKOUT_LINK);
+  const [showLeadModal, setShowLeadModal] = useState(true);
+  const [pendingSymplaUrl, setPendingSymplaUrl] = useState("");
   const [selectedPassOrigin, setSelectedPassOrigin] = useState("Oshiro");
+  const [isLeadUnlocked, setIsLeadUnlocked] = useState(false);
+  const [activeLeadStep, setActiveLeadStep] = useState(0);
   const [leadSuccessMessage, setLeadSuccessMessage] = useState("");
   const [leadError, setLeadError] = useState("");
   const [leadForm, setLeadForm] = useState({
@@ -116,6 +128,17 @@ const Oshiro = () => {
     utm_term: "",
     utm_content: "",
   });
+
+  useEffect(() => {
+    const alreadyUnlocked =
+      typeof window !== "undefined" &&
+      window.localStorage.getItem(OSHIRO_LEAD_UNLOCK_KEY) === "true";
+
+    if (alreadyUnlocked) {
+      setIsLeadUnlocked(true);
+      setShowLeadModal(false);
+    }
+  }, []);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -161,16 +184,22 @@ const Oshiro = () => {
   }, [showLeadModal]);
 
   const handleBuyPassaporte = (targetLink, formOrigin) => {
+    if (isLeadUnlocked) {
+      window.location.href = CHECKOUT_LINK;
+      return;
+    }
+
     setPendingSymplaUrl(CHECKOUT_LINK);
     setSelectedPassOrigin(formOrigin || "Oshiro");
     setLeadError("");
     setLeadSuccessMessage("");
     setLeadStatus("idle");
+    setActiveLeadStep(0);
     setShowLeadModal(true);
   };
 
   const handleCloseLeadModal = () => {
-    if (leadStatus === "loading") return;
+    if (leadStatus === "loading" || !isLeadUnlocked) return;
     setShowLeadModal(false);
   };
 
@@ -179,6 +208,48 @@ const Oshiro = () => {
       ...current,
       [field]: field === "phone" ? formatPhone(value) : value,
     }));
+  };
+
+  const getStepError = (stepKey) => {
+    const name = leadForm.name.trim();
+    const email = leadForm.email.trim().toLowerCase();
+    const phoneDigits = onlyDigits(leadForm.phone);
+    const cargo = leadForm.cargo.trim();
+    const company = leadForm.company.trim();
+    const revenue = leadForm.revenue.trim();
+
+    if (stepKey === "name" && !name) return "Informe seu nome.";
+    if (stepKey === "email" && !isValidEmail(email)) return "Informe um e-mail valido.";
+    if (stepKey === "phone" && !(phoneDigits.length === 10 || phoneDigits.length === 11)) {
+      return "Informe um telefone com DDD.";
+    }
+    if (stepKey === "cargo" && !cargo) return "Selecione o campo 'Voce e...'.";
+    if (stepKey === "company" && !company) return "Informe o nome da empresa.";
+    if (stepKey === "revenue" && !revenue) return "Selecione o faturamento.";
+    return "";
+  };
+
+  const handleLeadStepNext = () => {
+    const currentStepKey = leadSteps[activeLeadStep]?.key;
+    if (!currentStepKey) return;
+
+    const currentStepError = getStepError(currentStepKey);
+    if (currentStepError) {
+      setLeadError(currentStepError);
+      return;
+    }
+
+    setLeadError("");
+    if (activeLeadStep < leadSteps.length - 1) {
+      setActiveLeadStep((current) => current + 1);
+    }
+  };
+
+  const handleLeadStepBack = () => {
+    setLeadError("");
+    if (activeLeadStep > 0) {
+      setActiveLeadStep((current) => current - 1);
+    }
   };
 
   const handleLeadSubmit = async (event) => {
@@ -423,11 +494,18 @@ const Oshiro = () => {
       }
 
       setLeadStatus("success");
-      setLeadSuccessMessage("Lead enviado com sucesso. Redirecionando para o Sympla...");
+      setLeadSuccessMessage("Lead enviado com sucesso. Acesso liberado.");
+      setIsLeadUnlocked(true);
       setShowLeadModal(false);
-      window.setTimeout(() => {
-        window.location.href = pendingSymplaUrl || CHECKOUT_LINK;
-      }, 1200);
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem(OSHIRO_LEAD_UNLOCK_KEY, "true");
+      }
+
+      if (pendingSymplaUrl) {
+        window.setTimeout(() => {
+          window.location.href = pendingSymplaUrl || CHECKOUT_LINK;
+        }, 1200);
+      }
     } catch (_error) {
       setLeadStatus("error");
       console.error("[Oshiro] erro no envio do lead", _error);
@@ -481,118 +559,82 @@ const Oshiro = () => {
 
       {showLeadModal ? (
         <div
-          className="fixed inset-0 z-[70] overflow-y-auto bg-black/80 px-4 py-6 md:py-8"
-          onClick={handleCloseLeadModal}
+          className="fixed inset-0 z-[70] overflow-y-auto bg-black px-4 py-6 md:py-8"
+          onClick={isLeadUnlocked ? handleCloseLeadModal : undefined}
         >
           <div
             className="relative mx-auto my-auto w-full max-w-4xl rounded-[28px] border border-white/20 bg-[#07090D] p-5 md:p-8"
             onClick={(event) => event.stopPropagation()}
           >
-            <button
-              type="button"
-              aria-label="Fechar formulário"
-              onClick={handleCloseLeadModal}
-              className="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full border border-[#F5B42A]/60 text-[#F5B42A] transition hover:bg-[#F5B42A]/10"
-            >
-              ×
-            </button>
+            {!isLeadUnlocked ? null : (
+              <button
+                type="button"
+                aria-label="Fechar formulario"
+                onClick={handleCloseLeadModal}
+                className="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full border border-[#F5B42A]/60 text-[#F5B42A] transition hover:bg-[#F5B42A]/10"
+              >
+                x
+              </button>
+            )}
             <div className="h-[3px] w-24 rounded-full bg-[#F5B42A]" />
             <p className="mt-7 text-center font-anton text-[clamp(2rem,4vw,3.1rem)] uppercase leading-none text-[#F5B42A]">
               Garanta sua vaga
             </p>
+            {!isLeadUnlocked ? (
+              <p className="mt-2 text-center font-jamjuree text-xs uppercase tracking-[0.11em] text-white/60">
+                Preencha o formulario para liberar o acesso a pagina
+              </p>
+            ) : null}
             <form onSubmit={handleLeadSubmit} className="mt-7 space-y-4">
-              <label className="block">
-                <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
-                  Nome completo
-                </span>
-                <input
-                  type="text"
-                  value={leadForm.name}
-                  onChange={(e) => handleLeadInputChange("name", e.target.value)}
-                  placeholder="Digite seu nome completo"
-                  className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition placeholder:text-white/45 focus:border-[#F5C02B]"
-                  disabled={leadStatus === "loading"}
-                />
-              </label>
-              <div className="grid gap-4 md:grid-cols-2">
+              <p className="font-jamjuree text-xs uppercase tracking-[0.11em] text-white/55">
+                Etapa {activeLeadStep + 1} de {leadSteps.length}
+              </p>
+              {leadSteps[activeLeadStep]?.key === "name" ? (
                 <label className="block">
-                  <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
-                    Contato (Whatsapp)
-                  </span>
-                  <input
-                    type="tel"
-                    value={leadForm.phone}
-                    onChange={(e) => handleLeadInputChange("phone", e.target.value)}
-                    placeholder="(92) 99999-9999"
-                    className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition placeholder:text-white/45 focus:border-[#F5C02B]"
-                    disabled={leadStatus === "loading"}
-                  />
+                  <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">Nome completo</span>
+                  <input type="text" value={leadForm.name} onChange={(e) => handleLeadInputChange("name", e.target.value)} placeholder="Digite seu nome completo" className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition placeholder:text-white/45 focus:border-[#F5C02B]" disabled={leadStatus === "loading"} />
                 </label>
+              ) : null}
+              {leadSteps[activeLeadStep]?.key === "phone" ? (
                 <label className="block">
-                  <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
-                    E-mail
-                  </span>
-                  <input
-                    type="email"
-                    value={leadForm.email}
-                    onChange={(e) => handleLeadInputChange("email", e.target.value)}
-                    placeholder="voce@empresa.com"
-                    className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition placeholder:text-white/45 focus:border-[#F5C02B]"
-                    disabled={leadStatus === "loading"}
-                  />
+                  <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">Contato (Whatsapp)</span>
+                  <input type="tel" value={leadForm.phone} onChange={(e) => handleLeadInputChange("phone", e.target.value)} placeholder="(92) 99999-9999" className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition placeholder:text-white/45 focus:border-[#F5C02B]" disabled={leadStatus === "loading"} />
                 </label>
-              </div>
-              <label className="block">
-                <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
-                  Você é:
-                </span>
-                <select
-                  value={leadForm.cargo}
-                  onChange={(e) => handleLeadInputChange("cargo", e.target.value)}
-                  className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition focus:border-[#F5C02B]"
-                  disabled={leadStatus === "loading"}
-                >
-                  <option value="">Selecione</option>
-                  {profileOptions.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <div className="grid gap-4 md:grid-cols-2">
+              ) : null}
+              {leadSteps[activeLeadStep]?.key === "email" ? (
                 <label className="block">
-                  <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
-                    Empresa
-                  </span>
-                  <input
-                    type="text"
-                    value={leadForm.company}
-                    onChange={(e) => handleLeadInputChange("company", e.target.value)}
-                    placeholder="Nome da empresa"
-                    className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition placeholder:text-white/45 focus:border-[#F5C02B]"
-                    disabled={leadStatus === "loading"}
-                  />
+                  <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">E-mail</span>
+                  <input type="email" value={leadForm.email} onChange={(e) => handleLeadInputChange("email", e.target.value)} placeholder="voce@empresa.com" className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition placeholder:text-white/45 focus:border-[#F5C02B]" disabled={leadStatus === "loading"} />
                 </label>
+              ) : null}
+              {leadSteps[activeLeadStep]?.key === "cargo" ? (
                 <label className="block">
-                  <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
-                    Faturamento
-                  </span>
-                  <select
-                    value={leadForm.revenue}
-                    onChange={(e) => handleLeadInputChange("revenue", e.target.value)}
-                    className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition focus:border-[#F5C02B]"
-                    disabled={leadStatus === "loading"}
-                  >
+                  <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">Voce e:</span>
+                  <select value={leadForm.cargo} onChange={(e) => handleLeadInputChange("cargo", e.target.value)} className="w-full rounded-lg border border-white/20 bg-[#1a1a1a] p-3 text-sm text-white outline-none transition focus:border-[#F5A205] focus:bg-[#222] sm:text-base" disabled={leadStatus === "loading"}>
                     <option value="">Selecione</option>
-                    {revenueOptions.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
+                    {profileOptions.map((option) => (
+                      <option key={option} value={option}>{option}</option>
                     ))}
                   </select>
                 </label>
-              </div>
+              ) : null}
+              {leadSteps[activeLeadStep]?.key === "company" ? (
+                <label className="block">
+                  <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">Empresa</span>
+                  <input type="text" value={leadForm.company} onChange={(e) => handleLeadInputChange("company", e.target.value)} placeholder="Nome da empresa" className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition placeholder:text-white/45 focus:border-[#F5C02B]" disabled={leadStatus === "loading"} />
+                </label>
+              ) : null}
+              {leadSteps[activeLeadStep]?.key === "revenue" ? (
+                <label className="block">
+                  <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">Faturamento</span>
+                  <select value={leadForm.revenue} onChange={(e) => handleLeadInputChange("revenue", e.target.value)} className="w-full rounded-lg border border-white/20 bg-[#1a1a1a] p-3 text-sm text-white outline-none transition focus:border-[#F5A205] focus:bg-[#222] sm:text-base" disabled={leadStatus === "loading"}>
+                    <option value="">Selecione</option>
+                    {revenueOptions.map((option) => (
+                      <option key={option} value={option}>{option}</option>
+                    ))}
+                  </select>
+                </label>
+              ) : null}
 
               {leadError ? (
                 <p className="text-sm font-semibold text-red-300">{leadError}</p>
@@ -608,16 +650,39 @@ const Oshiro = () => {
                   Preenchimento rapido e seguro
                 </p>
                 <div className="flex w-full items-center gap-2 md:w-auto">
-                  <FormButton
-                    titulo={leadStatus === "loading" ? "Enviando..." : "Garantir 20% OFF"}
-                    textColor="#000"
-                    disabled={leadStatus === "loading"}
-                    leftWidthClass="w-[170px] sm:w-[255px]"
-                  />
+                  {activeLeadStep > 0 ? (
+                    <button
+                      type="button"
+                      onClick={handleLeadStepBack}
+                      className="h-[58px] rounded-xl border border-white/25 px-5 font-jamjuree text-xs uppercase tracking-[0.1em] text-white/80 transition hover:bg-white/10"
+                      disabled={leadStatus === "loading"}
+                    >
+                      Voltar
+                    </button>
+                  ) : null}
+                  {activeLeadStep < leadSteps.length - 1 ? (
+                    <button
+                      type="button"
+                      onClick={handleLeadStepNext}
+                      className="h-[58px] min-w-[170px] rounded-xl bg-[#F5B42A] px-6 font-jamjuree text-xs font-bold uppercase tracking-[0.1em] text-black transition hover:brightness-105 disabled:opacity-70"
+                      disabled={leadStatus === "loading"}
+                    >
+                      Continuar
+                    </button>
+                  ) : (
+                    <FormButton
+                      titulo={leadStatus === "loading" ? "Enviando..." : "Garantir 20% OFF"}
+                      textColor="#000"
+                      disabled={leadStatus === "loading"}
+                      leftWidthClass="w-[170px] sm:w-[255px]"
+                    />
+                  )}
                 </div>
               </div>
               <p className="pt-1 text-center font-jamjuree text-xs text-white/55">
-                Você será redirecionado ao Sympla após o envio.
+                {pendingSymplaUrl
+                  ? "Voce sera redirecionado ao Sympla apos o envio."
+                  : "Apos o envio, sua navegacao na pagina sera liberada."}
               </p>
               <p className="text-center font-jamjuree text-xs text-white/40">
                 Seus dados são usados apenas para liberar sua condição especial.
