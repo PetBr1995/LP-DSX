@@ -1,0 +1,191 @@
+﻿const mainSpeakers = [
+  {
+    name: "João Branco",
+    image: "/novas-palestrantes/foto-joao-branco.png",
+    bio: "O CMO que transformou o McDonald's em Méqui. Foram quase 10 anos na linha de frente, batendo absolutamente todos os recordes da história da marca no Brasil.",
+  },
+  {
+    name: "João Kepler",
+    image: "/novas-palestrantes/Joao-Kepler.png",
+    bio: 'Autor de "O Poder do Equity" e "O Ponto Cego Empresarial". Ele não fala sobre crescimento isolado; ele desenha estratégias e amplia a visão de dezenas de grandes empresários. Você vai descobrir os problemas que o seu negócio tem e você não está enxergando.',
+  },
+  {
+    name: "Netão Bom Beef",
+    image: "/novas-palestrantes/foto-netao-bom-beef.PNG",
+    bio: "A verdadeira aula de escala física. Ele começou com um açougue de bairro. Hoje, fatura R$ 1 MILHÃO por dia. A trajetória real que vai virar aprendizado puro para quem quer construir um império.",
+  },
+  {
+    name: "Fernando Miranda",
+    image: "/novas-palestrantes/Fernando-Miranda.png",
+    bio: "CEO da Staage e host do maior podcast de marketing do Brasil. Fernando liderou um crescimento de 40 vezes na unidade de educação da EXAME e traz a bagagem de gigantes como Banco do Brasil, XP e InfoMoney.",
+  },
+  {
+    name: "Nicolas Charão",
+    image: "/novas-palestrantes/Nicolas-Charao.png",
+    bio: "O destravador de crescimento. Já ajudou mais de 50 negócios a cruzarem a barreira do primeiro milhão. Ele vai te provar que ter mais receita sem ter mais liberdade não é sucesso, é cilada.",
+  },
+  {
+    name: "Giullya Becker",
+    image: "/novas-palestrantes/GIULLYA-BECKER.png",
+    bio: "Giullya Becker é publicitária e criadora do Método dos Conteúdos Magnéticos. Pioneira em oficinas práticas de criação, já formou milhares de alunos e se consolidou como referência em conteúdos que geram conexão e vendas com presença no digital.",
+  },
+  {
+    name: "Carolina Lima",
+    image: "/novas-palestrantes/foto-carolina-lima.png",
+    bio: "17 anos construindo estratégia de conteúdo para marcas de sucesso. Você vai entender de uma vez por todas a mecânica da atração.",
+  },
+  {
+    name: "Roberto Reis",
+    image: "/novas-palestrantes/Roberto-Reis.png",
+    bio: "Estrategista eleitoral com 27 anos de atuação. Em 2026 tem eleição. E política move mercado, capital e negócio. Você vai entender quais regras vão mudar no seu setor.",
+  },
+  {
+    name: "Afrânio Soares",
+    image: "/palestrantes/AfranioSoares.png",
+    bio: "Doutor em Administração e fundador da Action Pesquisas, é a maior referência em inteligência de mercado da região Norte há mais de 25 anos.",
+  },
+  {
+    name: "Breno Maciel",
+    image: "/novas-palestrantes/foto-breno-maciel.png",
+    bio: "CEO da Vanguarda Martech, maior agência de marketing do Norte, gerencia mais de R$ 60 milhões em verbas de marketing e é palestrante do RD Summit pelo terceiro ano consecutivo.",
+  },
+  {
+    name: "Carlos Oshiro",
+    image: "/novas-palestrantes/foto-carlos-oshiro.png",
+    bio: "Fundador da Targo Educação Empresarial, colunista na CBN e referência no ecossistema empresarial de Manaus há mais de 25 anos.",
+  },
+  {
+    name: "Chay Santos",
+    image: "/novas-palestrantes/foto-chay-santos.png",
+    bio: "CEO da Agência A Mangarataia e autora de Empreender Nunca Foi Sorte, especialista em branding estratégico e posicionamento de marcas.",
+  },
+  {
+    name: "Flávia Sausmikat",
+    image: "/novas-palestrantes/Flavia-Sausmikat.png",
+    bio: "Diretora-geral do Instituto Action de Pesquisas, atua há mais de duas décadas na análise de comportamentos sociais, eleitorais e de consumo em todo o Brasil.",
+  },
+  {
+    name: "Fabricio Alva",
+    image: "/novas-palestrantes/Fabricio_alva.PNG",
+    bio: "Especialista em gestão empresarial com foco em estruturação de operações e processos que preparam empresas para escalar.",
+  },
+  {
+    name: "Rafael Liporace",
+    image: "/novas-palestrantes/Rafael_liporace.PNG",
+    bio: "Cofundador e CEO da Tardezinha, estrategista por trás da maior turnê da história do entretenimento brasileiro. Especialista em escala exponencial e gestão de grandes operações, lidera empresas premiadas nacionalmente por sua cultura de performance e excelência operacional.",
+  },
+  {
+    name: "Carol Guerra",
+    image: "/novas-palestrantes/CAROL_GUERRA.PNG",
+    bio: "Carol Guerra é especialista em branding e gestão de marcas de luxo no Norte do Brasil. Fundadora da CG Branding, soma mais de 5 mil projetos e atuação internacional.",
+  },
+  {
+    name: "Fernan Bravo",
+    image: "/novas-palestrantes/FERNAN_BRAVO.PNG",
+    bio: "Fernan Bravo é consultor de posicionamento, apresentador de TV, host do PodRolar, maior podcast do Norte do Brasil, e Head de Comunicação do Grupo Digital Comunicação. Criador do Método Bravo, ajuda profissionais a converter autoridade em audiência.",
+  },
+  {
+    name: "Gisele Oshiro",
+    image: "/novas-palestrantes/foto-giselle-oshiro.png",
+    bio: "Empresária, especialista em inteligência emocional e apresentadora do podcast Mulheres que Inspiram na CBN.",
+  },
+  {
+    name: "Magno Rodrigues",
+    image: "/palestrantes/MagnoRodrigues.png",
+    bio: "Educador financeiro e fundador da Pega Bizu, criador de uma metodologia própria que já ajudou centenas de negócios a construírem uma gestão financeira eficiente.",
+  },
+  {
+    name: "Suelen Scop",
+    image: "/palestrantes/SuellenScop.png",
+    bio: "Psicóloga, diretora operacional da Singulari e especialista na aplicação prática de inteligência artificial em contextos reais de negócio.",
+  },
+  {
+    name: "Roberta Veras",
+    image: "/novas-palestrantes/Roberta_veras.png",
+    bio: "Educadora financeira, consultora empresarial e especialista em vendas. Possui uma trajetória construída no varejo e no empreendedorismo como gestora de franquias e performance comercial com destaque nacional.",
+  },
+  {
+    name: "Thales Schincariol",
+    image: "/foto-thales.png",
+    bio: "Médico e CEO da TS Clinic, especialista em Medicina Integrativa, Nutrologia e Ciências do Envelhecimento. Une 12 anos de experiência clínica à visão estratégica de negócios como chave da longevidade e alta performance para líderes de negócio.",
+  },
+  {
+    name: "Guto Galamba",
+    image: "/foto_guto_galamba.png",
+    bio: "Criador dos movimentos Anti-Obesity e Make Brazil Healthy Again, forma profissionais para o digital. Cofundador do Grupo GH e sócio da Higia Farmacêutica e Mythos Health Center, já impactou mais de 150 mil pessoas e foi reconhecido pela ONU com o Prêmio Martin Luther King.",
+  },
+];
+
+const SlidePalestrantesComponent = () => {
+  const mid = Math.ceil(mainSpeakers.length / 2);
+  const row1 = mainSpeakers.slice(0, mid);
+  const row2 = mainSpeakers.slice(mid);
+
+  const doubled = (list) => [...list, ...list];
+
+  return (
+    <section className="mx-auto mt-8 w-full overflow-hidden">
+      <h3 className="text-center font-anton text-[clamp(1.3rem,4.2vw,2.8rem)] uppercase leading-[1.08] tracking-[0.03em] text-[#F5C02B]">
+        Os principais nomes do mercado nos palcos do DSX 2026
+      </h3>
+
+      <div className="mt-6 flex flex-col gap-4">
+        <div
+          className="faixa-wrapper overflow-hidden"
+          style={{
+            WebkitMask:
+              "linear-gradient(90deg, transparent, black 8%, black 92%, transparent)",
+            mask: "linear-gradient(90deg, transparent, black 8%, black 92%, transparent)",
+          }}
+        >
+          <div
+            className="faixa-track flex w-max gap-3"
+            style={{ animation: "scroll-left 60s linear infinite" }}
+          >
+            {doubled(row1).map((speaker, i) => (
+              <SpeakerCard key={`r1-${speaker.name}-${i}`} speaker={speaker} />
+            ))}
+          </div>
+        </div>
+
+        <div
+          className="faixa-wrapper overflow-hidden"
+          style={{
+            WebkitMask:
+              "linear-gradient(90deg, transparent, black 8%, black 92%, transparent)",
+            mask: "linear-gradient(90deg, transparent, black 8%, black 92%, transparent)",
+          }}
+        >
+          <div
+            className="faixa-track-rev flex w-max gap-3"
+            style={{ animation: "scroll-right 60s linear infinite" }}
+          >
+            {doubled(row2).map((speaker, i) => (
+              <SpeakerCard key={`r2-${speaker.name}-${i}`} speaker={speaker} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const SpeakerCard = ({ speaker }) => (
+  <article className="w-[160px] shrink-0 overflow-hidden rounded-xl border border-[#5A4718]/35 bg-black/80">
+    <div className="h-[200px] w-full overflow-hidden bg-black">
+      <img
+        src={speaker.image}
+        alt={speaker.name}
+        className="h-full w-full object-cover object-top"
+        loading="lazy"
+        draggable={false}
+      />
+    </div>
+    <p className="px-2 py-2 text-center text-xs font-medium text-[#F5C02B]">
+      {speaker.name}
+    </p>
+  </article>
+);
+
+export default SlidePalestrantesComponent;
+

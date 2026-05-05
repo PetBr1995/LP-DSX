@@ -5,7 +5,7 @@ import { getSupabaseClient, isSupabaseConfigured } from "../lib/supabaseClient";
 import { formatDsxFormOrigin } from "../utils/formOrigin";
 import PassaportesSection from "../components/NewVendas/sections/PassaportesSection";
 import { FormButton } from "../components/FormSection";
-
+import SlidePalestrantesComponent from "../components/pageOshiroComponents/slidePalestrantesComponent";
 const CHECKOUT_LINK =
   "https://www.sympla.com.br/evento/dsx-2026---digital-summit-experience/3339721?d=OSHIRO20";
 const OSHIRO_LEAD_UNLOCK_KEY = "dsx_oshiro_lead_unlocked_v1";
@@ -93,7 +93,7 @@ const formatPhone = (value = "") => {
 
 const leadSteps = [
   { key: "name", label: "Nome completo" },
-  { key: "phone", label: "Contato (Whatsapp)" },
+  { key: "phone", label: "Contato (WhatsApp)" },
   { key: "email", label: "E-mail" },
   { key: "cargo", label: "Você é:" },
   { key: "company", label: "Empresa" },
@@ -572,6 +572,21 @@ const Oshiro = () => {
         </div>
       </section>
 
+      <section className="mx-auto mt-6 w-full max-w-5xl overflow-hidden rounded-[28px] border border-white/10 bg-black">
+        <div className="relative w-full pb-[56.25%]">
+          <iframe
+            src="https://player.vimeo.com/video/1146735494?autoplay=1&muted=1&loop=1&controls=0&title=0&byline=0&portrait=0&autopause=0&playsinline=1"
+            className="absolute inset-0 h-full w-full"
+            allow="autoplay; fullscreen; picture-in-picture"
+            title="DSX Oshiro Video"
+          />
+        </div>
+      </section>
+
+      <section className="bg-black px-0 pb-2 pt-8 md:pt-10">
+        <SlidePalestrantesComponent />
+      </section>
+
       <section className="mx-auto mt-6 w-full max-w-5xl">
         <PassaportesSection
           isMobile={isMobile}
@@ -602,7 +617,7 @@ const Oshiro = () => {
             <img
               src="/logo-dsx-vertical.svg"
               alt="DSX 2026"
-              className="mx-auto mt-5 h-25 w-auto object-contain"
+              className="mx-auto mt-5 h-24 w-auto object-contain"
               loading="eager"
               decoding="async"
             />
@@ -638,7 +653,7 @@ const Oshiro = () => {
               {leadSteps[activeLeadStep]?.key === "phone" ? (
                 <label className="block">
                   <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
-                    Contato (Whatsapp)
+                    Contato (WhatsApp)
                   </span>
                   <input
                     type="tel"
@@ -797,4 +812,8 @@ const Oshiro = () => {
 };
 
 export default Oshiro;
+
+
+
+
 
