@@ -9,6 +9,8 @@ import SlidePalestrantesComponent from "../components/pageOshiroComponents/slide
 import NewVendasHeaderMask from "../components/NewVendas/NewVendasHeaderMask";
 import { Calendar, MapPin } from "lucide-react";
 const OSHIRO_LEAD_UNLOCK_KEY = "dsx_oshiro_lead_unlocked_v1";
+const OSHIRO_SYMPLA_LINK =
+  "https://www.sympla.com.br/evento/dsx-2026---digital-summit-experience/3339721?d=OSHIRO20";
 const ALLOWED_SYMPLA_UTM_KEYS = ["utm_source", "utm_medium"];
 const OSHIRO_DISCOUNT_PARAM_KEY = "d";
 const OSHIRO_DISCOUNT_PARAM_VALUE = "OSHIRO20";
@@ -196,10 +198,8 @@ const Oshiro = () => {
   }, [showLeadModal]);
 
   const handleBuyPassaporte = (targetLink, formOrigin) => {
-    if (!targetLink) return;
-
     const symplaUrl = buildSymplaCheckoutUrl(
-      targetLink,
+      OSHIRO_SYMPLA_LINK,
       typeof window !== "undefined" ? window.location.search : "",
     );
 
