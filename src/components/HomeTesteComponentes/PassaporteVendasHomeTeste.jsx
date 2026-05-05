@@ -6,9 +6,9 @@ const cards = [
   {
     nome: "VIP",
     lote: "Lote 4",
-    price: "1.297,00",
-    installment: "12x de R$ 134,14",
-    cash: "ou R$ 1.297,00 à vista",
+    originalPrice: "1.297,00",
+    discountedPrice: "1.037,60",
+    installment: "em até 12x",
     badge: "MAIS VENDIDO",
     link: "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721?_gl=1*2h3vo2*_gcl_au*MTEwOTMyNDE4MC4xNzczNzg0OTQ3*_ga*MTA3ODc3NDQ3NS4xNzczNzg0OTQ4*_ga_KXH10SQTZF*czE3NzUwMjA3ODckbzgkZzEkdDE3NzUwMjE0MjYkajYwJGwwJGgxMjMxOTk1NDE3",
     benefits: [
@@ -25,9 +25,9 @@ const cards = [
   {
     nome: "STANDARD",
     lote: "Lote 4",
-    price: "697,00",
-    installment: "12x de R$ 59,52",
-    cash: "ou R$ 697,00 à vista",
+    originalPrice: "697,00",
+    discountedPrice: "557,60",
+    installment: "em até 12x",
     link: "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721?_gl=1*2h3vo2*_gcl_au*MTEwOTMyNDE4MC4xNzczNzg0OTQ3*_ga*MTA3ODc3NDQ3NS4xNzczNzg0OTQ4*_ga_KXH10SQTZF*czE3NzUwMjA3ODckbzgkZzEkdDE3NzUwMjE0MjYkajYwJGwwJGgxMjMxOTk1NDE3",
     benefits: [
       { label: "Lounge VIP exclusivo", included: false },
@@ -120,11 +120,14 @@ const SquishyPlanCard = ({ card, onBuyPassaporte, hideBuyButton = false }) => (
       </div>
 
       <div className="mt-auto pt-4">
-        <p className="bg-gradient-to-r from-[#F5D247] to-[#E7A040] bg-clip-text text-xl font-black leading-[1] text-transparent whitespace-nowrap lg:text-2xl">
-          {`R$ ${card.price} à vista`}
+        <p className="text-xl font-black leading-[1] whitespace-nowrap lg:text-2xl">
+          <span className="text-white/75 line-through">{`R$ ${card.originalPrice}`}</span>{" "}
+          <span className="bg-gradient-to-r from-[#F5D247] to-[#E7A040] bg-clip-text text-transparent">
+            {`R$ ${card.discountedPrice}`}
+          </span>
         </p>
         <p className="mt-2 text-xs font-semibold text-white/90">
-          {`ou em ${card.installment}`}
+          {card.installment}
         </p>
 
         {!hideBuyButton ? (

@@ -6,18 +6,18 @@ const groupPassports = [
   {
     lote: "Lote 4",
     qtdPessoas: "5 pessoas",
-    valor: "662,15",
-    installment: "12x de R$ 56,57",
-    cash: "ou R$ 662,15 à vista (valor por participante)",
+    originalValue: "662,15",
+    discountedValue: "529,72",
+    installment: "em até 12x",
     desconto: "5% OFF",
     link: "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721?_gl=1*2h3vo2*_gcl_au*MTEwOTMyNDE4MC4xNzczNzg0OTQ3*_ga*MTA3ODc3NDQ3NS4xNzczNzg0OTQ4*_ga_KXH10SQTZF*czE3NzUwMjA3ODckbzgkZzEkdDE3NzUwMjE0MjYkajYwJGwwJGgxMjMxOTk1NDE3",
   },
   {
     lote: "Lote 4",
     qtdPessoas: "10 pessoas",
-    valor: "627,30",
-    installment: "12x de R$ 53,59",
-    cash: "ou R$ 627,30 à vista (valor por participante)",
+    originalValue: "627,30",
+    discountedValue: "501,84",
+    installment: "em até 12x",
     desconto: "10% OFF",
     link: "https://www.sympla.com.br/evento/dsx-2026-digital-summit-experience/3339721?_gl=1*2h3vo2*_gcl_au*MTEwOTMyNDE4MC4xNzczNzg0OTQ3*_ga*MTA3ODc3NDQ3NS4xNzczNzg0OTQ4*_ga_KXH10SQTZF*czE3NzUwMjA3ODckbzgkZzEkdDE3NzUwMjE0MjYkajYwJGwwJGgxMjMxOTk1NDE3",
   },
@@ -70,11 +70,14 @@ const PassaporteGrupoHomeTeste = ({
                   EM GRUPO {item.desconto}
                 </h4>
                 <div className="mt-5">
-                  <p className="bg-gradient-to-r from-[#F5D247] to-[#E7A040] bg-clip-text text-lg font-black leading-[1] text-transparent sm:text-xl">
-                    {`R$ ${item.valor} à vista (por pessoa)`}
+                  <p className="text-lg font-black leading-[1] sm:text-xl">
+                    <span className="text-white/75 line-through">{`R$ ${item.originalValue}`}</span>{" "}
+                    <span className="bg-gradient-to-r from-[#F5D247] to-[#E7A040] bg-clip-text text-transparent">
+                      {`R$ ${item.discountedValue}`}
+                    </span>
                   </p>
                   <p className="mt-2 text-[11px] font-semibold text-white/90 sm:text-xs">
-                    {`ou em ${item.installment}`}
+                    {item.installment}
                   </p>
 
                   {!hideBuyButton ? (

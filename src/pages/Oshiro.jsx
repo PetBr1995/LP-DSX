@@ -6,6 +6,8 @@ import { formatDsxFormOrigin } from "../utils/formOrigin";
 import PassaportesSection from "../components/NewVendas/sections/PassaportesSection";
 import { FormButton } from "../components/FormSection";
 import SlidePalestrantesComponent from "../components/pageOshiroComponents/slidePalestrantesComponent";
+import NewVendasHeaderMask from "../components/NewVendas/NewVendasHeaderMask";
+import { Calendar, MapPin } from "lucide-react";
 const CHECKOUT_LINK =
   "https://www.sympla.com.br/evento/dsx-2026---digital-summit-experience/3339721?d=OSHIRO20";
 const OSHIRO_LEAD_UNLOCK_KEY = "dsx_oshiro_lead_unlocked_v1";
@@ -92,12 +94,16 @@ const formatPhone = (value = "") => {
 };
 
 const leadSteps = [
-  { key: "name", label: "Nome completo" },
-  { key: "phone", label: "Contato (WhatsApp)" },
-  { key: "email", label: "E-mail" },
-  { key: "cargo", label: "Você é:" },
-  { key: "company", label: "Empresa" },
-  { key: "revenue", label: "Faturamento" },
+  {
+    key: "personal",
+    label: "Dados pessoais",
+    fields: ["name", "phone", "email"],
+  },
+  {
+    key: "business",
+    label: "Dados da empresa",
+    fields: ["cargo", "company", "revenue"],
+  },
 ];
 
 const Oshiro = () => {
@@ -234,13 +240,15 @@ const Oshiro = () => {
   };
 
   const handleLeadStepNext = () => {
-    const currentStepKey = leadSteps[activeLeadStep]?.key;
-    if (!currentStepKey) return;
+    const currentStepFields = leadSteps[activeLeadStep]?.fields || [];
+    if (!currentStepFields.length) return;
 
-    const currentStepError = getStepError(currentStepKey);
-    if (currentStepError) {
-      setLeadError(currentStepError);
-      return;
+    for (const field of currentStepFields) {
+      const currentStepError = getStepError(field);
+      if (currentStepError) {
+        setLeadError(currentStepError);
+        return;
+      }
     }
 
     setLeadError("");
@@ -542,32 +550,70 @@ const Oshiro = () => {
 
   return (
     <main className="min-h-screen bg-black px-4 pb-12 pt-6 text-white md:px-8 md:pt-9">
-      <section className="relative mx-auto w-full max-w-5xl overflow-hidden rounded-[28px] border border-white/10 bg-[#0B0B0B]">
+      <section className="relative overflow-hidden px-4 py-10 md:px-8 md:py-14">
         <div
-          className="pointer-events-none absolute inset-0 opacity-35"
-          style={{
-            background:
-              "radial-gradient(circle at 12% 14%, rgba(245,192,43,0.24), transparent 42%), radial-gradient(circle at 88% 10%, rgba(0,158,64,0.22), transparent 38%)",
-          }}
+          className="pointer-events-none absolute inset-0"
           aria-hidden="true"
         />
+        <div className="pointer-events-none absolute inset-0" />
 
-        <div className="relative grid gap-6 px-5 py-7 md:px-10 md:py-9">
-          <div className="flex flex-col items-center justify-center text-center">
-            <img
-              src="/logo-dsx-vertical.svg"
-              alt="DSX 2026"
-              className="h-14 w-auto object-contain"
-              loading="eager"
-              decoding="async"
+        <div className="relative mx-auto flex w-full max-w-7xl flex-col items-center text-center">
+          <img
+            src="/logo-dsx-horizontal-2.svg"
+            alt="DSX 2026"
+            className="h-14 w-auto object-contain md:h-16"
+            loading="eager"
+            decoding="async"
+          />
+
+          <h1 className="mt-6 w-full max-w-[360px] font-anton text-[clamp(1.6rem,5.6vw,4.1rem)] uppercase leading-[1.15] text-white md:max-w-6xl md:leading-[1.25]">
+            <span className="block text-[#F5C02B]">O maior evento</span>
+            <span className="block md:hidden">
+              de negócios, marketing, vendas e
+            </span>
+            <span className="block md:hidden">inovação</span>
+            <span className="block text-[#F5C02B]">do Norte</span>
+          </h1>
+          <h2></h2>
+
+          <p className="mt-6 max-w-3xl font-jamjuree text-[clamp(1rem,2.3vw,1.8rem)] leading-relaxed text-white/90">
+            Dois dias de conteúdo estratégico e conexões de alto nível.
+          </p>
+
+          <p className="mt-5 max-w-3xl font-anton text-[clamp(1.3rem,3.3vw,2.4rem)] uppercase leading-[1.08] text-white">
+            Onde os maiores especialistas do país se encontram.
+          </p>
+
+          <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
+            <div className="flex items-center justify-center gap-2">
+              <span>
+                <Calendar color="#F5C02B" />
+              </span>
+              <p className="text-center text-[clamp(.95rem,2.8vw,1rem)] leading-[1.2] text-white/90">
+                23 e 24 de Julho
+              </p>
+            </div>
+            <div className="flex items-center justify-center gap-3">
+              <span>
+                <MapPin color="#F5C02B" />
+              </span>
+              <div>
+                <p>Centro de Convenções</p>
+                <p>Vasco Vasques, Manaus/AM</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-7 w-full max-w-[420px]">
+            <NewVendasHeaderMask
+              titulo="COMPRAR PASSAPORTE"
+              link="#passaportes"
+              target="_self"
+              textColor="#FFFFFF"
+              backgroundColor="#1E1A12"
+              font="700"
+              size="lg"
             />
-            <h1 className="mt-5 font-anton text-[clamp(2rem,5vw,2.8rem)] uppercase leading-[1.08]">
-              Você recebeu um acesso exclusivo ao DSX 2026
-            </h1>
-            <h2 className="mt-3 font-jamjuree text-[1.05rem] font-semibold uppercase tracking-[0.04em] text-[#FFD36D]">
-              Garanta 20% OFF no seu passaporte para estar no maior evento de
-              negócios do Norte
-            </h2>
           </div>
         </div>
       </section>
@@ -633,7 +679,7 @@ const Oshiro = () => {
               <p className="font-jamjuree text-xs uppercase tracking-[0.11em] text-white/55">
                 Etapa {activeLeadStep + 1} de {leadSteps.length}
               </p>
-              {leadSteps[activeLeadStep]?.key === "name" ? (
+              {leadSteps[activeLeadStep]?.fields?.includes("name") ? (
                 <label className="block">
                   <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
                     Nome completo
@@ -650,7 +696,7 @@ const Oshiro = () => {
                   />
                 </label>
               ) : null}
-              {leadSteps[activeLeadStep]?.key === "phone" ? (
+              {leadSteps[activeLeadStep]?.fields?.includes("phone") ? (
                 <label className="block">
                   <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
                     Contato (WhatsApp)
@@ -667,7 +713,7 @@ const Oshiro = () => {
                   />
                 </label>
               ) : null}
-              {leadSteps[activeLeadStep]?.key === "email" ? (
+              {leadSteps[activeLeadStep]?.fields?.includes("email") ? (
                 <label className="block">
                   <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
                     E-mail
@@ -684,7 +730,7 @@ const Oshiro = () => {
                   />
                 </label>
               ) : null}
-              {leadSteps[activeLeadStep]?.key === "cargo" ? (
+              {leadSteps[activeLeadStep]?.fields?.includes("cargo") ? (
                 <label className="block">
                   <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
                     Você é:
@@ -706,7 +752,7 @@ const Oshiro = () => {
                   </select>
                 </label>
               ) : null}
-              {leadSteps[activeLeadStep]?.key === "company" ? (
+              {leadSteps[activeLeadStep]?.fields?.includes("company") ? (
                 <label className="block">
                   <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
                     Empresa
@@ -723,7 +769,7 @@ const Oshiro = () => {
                   />
                 </label>
               ) : null}
-              {leadSteps[activeLeadStep]?.key === "revenue" ? (
+              {leadSteps[activeLeadStep]?.fields?.includes("revenue") ? (
                 <label className="block">
                   <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
                     Faturamento
@@ -812,8 +858,3 @@ const Oshiro = () => {
 };
 
 export default Oshiro;
-
-
-
-
-
