@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 import { RD_API_URL } from "../lib/rdStation";
 import { withRdTrackingToken } from "../lib/rdStationTracking";
 import { getSupabaseClient, isSupabaseConfigured } from "../lib/supabaseClient";
@@ -95,7 +95,7 @@ const leadSteps = [
   { key: "name", label: "Nome completo" },
   { key: "phone", label: "Contato (Whatsapp)" },
   { key: "email", label: "E-mail" },
-  { key: "cargo", label: "Voce e:" },
+  { key: "cargo", label: "Você é:" },
   { key: "company", label: "Empresa" },
   { key: "revenue", label: "Faturamento" },
 ];
@@ -219,11 +219,15 @@ const Oshiro = () => {
     const revenue = leadForm.revenue.trim();
 
     if (stepKey === "name" && !name) return "Informe seu nome.";
-    if (stepKey === "email" && !isValidEmail(email)) return "Informe um e-mail valido.";
-    if (stepKey === "phone" && !(phoneDigits.length === 10 || phoneDigits.length === 11)) {
+    if (stepKey === "email" && !isValidEmail(email))
+      return "Informe um e-mail válido.";
+    if (
+      stepKey === "phone" &&
+      !(phoneDigits.length === 10 || phoneDigits.length === 11)
+    ) {
       return "Informe um telefone com DDD.";
     }
-    if (stepKey === "cargo" && !cargo) return "Selecione o campo 'Voce e...'.";
+    if (stepKey === "cargo" && !cargo) return "Selecione o campo 'Você é...'.";
     if (stepKey === "company" && !company) return "Informe o nome da empresa.";
     if (stepKey === "revenue" && !revenue) return "Selecione o faturamento.";
     return "";
@@ -299,7 +303,8 @@ const Oshiro = () => {
         event_type: "CONVERSION",
         event_family: "CDP",
         payload: {
-          conversion_identifier: resolveRdConversionIdentifier(resolvedFormOrigin),
+          conversion_identifier:
+            resolveRdConversionIdentifier(resolvedFormOrigin),
           name,
           email,
           personal_phone: phone,
@@ -349,7 +354,8 @@ const Oshiro = () => {
       const trackerState = window.DSXTracker?.getState?.() || {};
       const sessionId =
         trackerState.sessionId ||
-        (window.crypto?.randomUUID?.() || `session-${Date.now()}`);
+        window.crypto?.randomUUID?.() ||
+        `session-${Date.now()}`;
       const nowIso = new Date().toISOString();
 
       const profilePayload = {
@@ -358,7 +364,8 @@ const Oshiro = () => {
         lead_phone: phone,
         lead_cargo: cargo,
         site_origin: sourceData.site_origin || null,
-        site_hostname: sourceData.site_hostname || window.location.hostname || null,
+        site_hostname:
+          sourceData.site_hostname || window.location.hostname || null,
         lp_identifier: lpIdentifier,
         first_converted_at: nowIso,
         last_seen_at: nowIso,
@@ -389,7 +396,9 @@ const Oshiro = () => {
                 delete fallbackProfileWithoutLp.lp_identifier;
                 retry = await supabase
                   .from("tracking_lead_profiles")
-                  .upsert([fallbackProfileWithoutLp], { onConflict: "lead_email" });
+                  .upsert([fallbackProfileWithoutLp], {
+                    onConflict: "lead_email",
+                  });
                 profileError = retry.error;
               }
             }
@@ -409,7 +418,8 @@ const Oshiro = () => {
                   sourceData.page_url ||
                   window.location.pathname + window.location.search,
                 referrer: document.referrer || null,
-                utm_source: sourceData.utm_source || sourceData.site_origin || null,
+                utm_source:
+                  sourceData.utm_source || sourceData.site_origin || null,
                 utm_medium: sourceData.utm_medium || null,
                 utm_campaign: sourceData.utm_campaign || null,
                 utm_content: sourceData.utm_content || null,
@@ -429,15 +439,21 @@ const Oshiro = () => {
                 delete fallbackSessionPayload.site_hostname;
                 let retry = await supabase
                   .from("tracking_lead_sessions")
-                  .upsert([fallbackSessionPayload], { onConflict: "session_id" });
+                  .upsert([fallbackSessionPayload], {
+                    onConflict: "session_id",
+                  });
                 sessionError = retry.error;
 
                 if (sessionError && isMissingColumnError(sessionError)) {
-                  const fallbackSessionWithoutLp = { ...fallbackSessionPayload };
+                  const fallbackSessionWithoutLp = {
+                    ...fallbackSessionPayload,
+                  };
                   delete fallbackSessionWithoutLp.lp_identifier;
                   retry = await supabase
                     .from("tracking_lead_sessions")
-                    .upsert([fallbackSessionWithoutLp], { onConflict: "session_id" });
+                    .upsert([fallbackSessionWithoutLp], {
+                      onConflict: "session_id",
+                    });
                   sessionError = retry.error;
                 }
               }
@@ -457,7 +473,9 @@ const Oshiro = () => {
                       lp_identifier: lpIdentifier,
                       site_origin: sourceData.site_origin || null,
                       site_hostname:
-                        sourceData.site_hostname || window.location.hostname || null,
+                        sourceData.site_hostname ||
+                        window.location.hostname ||
+                        null,
                       page_url: sourceData.page_url || window.location.href,
                       profile: cargo,
                       company_name: company,
@@ -476,7 +494,9 @@ const Oshiro = () => {
                       passaporte_origem: resolvedFormOrigin,
                       site_origin: sourceData.site_origin || null,
                       site_hostname:
-                        sourceData.site_hostname || window.location.hostname || null,
+                        sourceData.site_hostname ||
+                        window.location.hostname ||
+                        null,
                       page_url: sourceData.page_url || window.location.href,
                     },
                   },
@@ -484,12 +504,17 @@ const Oshiro = () => {
 
                 await supabase
                   .from("tracking_lead_section_events")
-                  .upsert(eventRows, { onConflict: "session_id,event_name,section" });
+                  .upsert(eventRows, {
+                    onConflict: "session_id,event_name,section",
+                  });
               }
             }
           }
         } catch (supabaseError) {
-          console.error("[Oshiro] erro inesperado no tracking Supabase", supabaseError);
+          console.error(
+            "[Oshiro] erro inesperado no tracking Supabase",
+            supabaseError,
+          );
         }
       }
 
@@ -543,14 +568,11 @@ const Oshiro = () => {
               Garanta 20% OFF no seu passaporte para estar no maior evento de
               negócios do Norte
             </h2>
-
           </div>
-
         </div>
       </section>
 
       <section className="mx-auto mt-6 w-full max-w-5xl">
-       
         <PassaportesSection
           isMobile={isMobile}
           onBuyPassaporte={handleBuyPassaporte}
@@ -569,7 +591,7 @@ const Oshiro = () => {
             {!isLeadUnlocked ? null : (
               <button
                 type="button"
-                aria-label="Fechar formulario"
+                aria-label="Fechar formulário"
                 onClick={handleCloseLeadModal}
                 className="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full border border-[#F5B42A]/60 text-[#F5B42A] transition hover:bg-[#F5B42A]/10"
               >
@@ -577,12 +599,19 @@ const Oshiro = () => {
               </button>
             )}
             <div className="h-[3px] w-24 rounded-full bg-[#F5B42A]" />
+            <img
+              src="/logo-dsx-vertical.svg"
+              alt="DSX 2026"
+              className="mx-auto mt-5 h-25 w-auto object-contain"
+              loading="eager"
+              decoding="async"
+            />
             <p className="mt-7 text-center font-anton text-[clamp(2rem,4vw,3.1rem)] uppercase leading-none text-[#F5B42A]">
               Garanta sua vaga
             </p>
             {!isLeadUnlocked ? (
               <p className="mt-2 text-center font-jamjuree text-xs uppercase tracking-[0.11em] text-white/60">
-                Preencha o formulario para liberar o acesso a pagina
+                Preencha o formulário para liberar o acesso a página
               </p>
             ) : null}
             <form onSubmit={handleLeadSubmit} className="mt-7 space-y-4">
@@ -591,53 +620,121 @@ const Oshiro = () => {
               </p>
               {leadSteps[activeLeadStep]?.key === "name" ? (
                 <label className="block">
-                  <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">Nome completo</span>
-                  <input type="text" value={leadForm.name} onChange={(e) => handleLeadInputChange("name", e.target.value)} placeholder="Digite seu nome completo" className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition placeholder:text-white/45 focus:border-[#F5C02B]" disabled={leadStatus === "loading"} />
+                  <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
+                    Nome completo
+                  </span>
+                  <input
+                    type="text"
+                    value={leadForm.name}
+                    onChange={(e) =>
+                      handleLeadInputChange("name", e.target.value)
+                    }
+                    placeholder="Digite seu nome completo"
+                    className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition placeholder:text-white/45 focus:border-[#F5C02B]"
+                    disabled={leadStatus === "loading"}
+                  />
                 </label>
               ) : null}
               {leadSteps[activeLeadStep]?.key === "phone" ? (
                 <label className="block">
-                  <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">Contato (Whatsapp)</span>
-                  <input type="tel" value={leadForm.phone} onChange={(e) => handleLeadInputChange("phone", e.target.value)} placeholder="(92) 99999-9999" className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition placeholder:text-white/45 focus:border-[#F5C02B]" disabled={leadStatus === "loading"} />
+                  <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
+                    Contato (Whatsapp)
+                  </span>
+                  <input
+                    type="tel"
+                    value={leadForm.phone}
+                    onChange={(e) =>
+                      handleLeadInputChange("phone", e.target.value)
+                    }
+                    placeholder="(92) 99999-9999"
+                    className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition placeholder:text-white/45 focus:border-[#F5C02B]"
+                    disabled={leadStatus === "loading"}
+                  />
                 </label>
               ) : null}
               {leadSteps[activeLeadStep]?.key === "email" ? (
                 <label className="block">
-                  <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">E-mail</span>
-                  <input type="email" value={leadForm.email} onChange={(e) => handleLeadInputChange("email", e.target.value)} placeholder="voce@empresa.com" className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition placeholder:text-white/45 focus:border-[#F5C02B]" disabled={leadStatus === "loading"} />
+                  <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
+                    E-mail
+                  </span>
+                  <input
+                    type="email"
+                    value={leadForm.email}
+                    onChange={(e) =>
+                      handleLeadInputChange("email", e.target.value)
+                    }
+                    placeholder="você@empresa.com"
+                    className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition placeholder:text-white/45 focus:border-[#F5C02B]"
+                    disabled={leadStatus === "loading"}
+                  />
                 </label>
               ) : null}
               {leadSteps[activeLeadStep]?.key === "cargo" ? (
                 <label className="block">
-                  <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">Voce e:</span>
-                  <select value={leadForm.cargo} onChange={(e) => handleLeadInputChange("cargo", e.target.value)} className="w-full rounded-lg border border-white/20 bg-[#1a1a1a] p-3 text-sm text-white outline-none transition focus:border-[#F5A205] focus:bg-[#222] sm:text-base" disabled={leadStatus === "loading"}>
+                  <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
+                    Você é:
+                  </span>
+                  <select
+                    value={leadForm.cargo}
+                    onChange={(e) =>
+                      handleLeadInputChange("cargo", e.target.value)
+                    }
+                    className="w-full rounded-lg border border-white/20 bg-[#1a1a1a] p-3 text-sm text-white outline-none transition focus:border-[#F5A205] focus:bg-[#222] sm:text-base"
+                    disabled={leadStatus === "loading"}
+                  >
                     <option value="">Selecione</option>
                     {profileOptions.map((option) => (
-                      <option key={option} value={option}>{option}</option>
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
                     ))}
                   </select>
                 </label>
               ) : null}
               {leadSteps[activeLeadStep]?.key === "company" ? (
                 <label className="block">
-                  <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">Empresa</span>
-                  <input type="text" value={leadForm.company} onChange={(e) => handleLeadInputChange("company", e.target.value)} placeholder="Nome da empresa" className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition placeholder:text-white/45 focus:border-[#F5C02B]" disabled={leadStatus === "loading"} />
+                  <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
+                    Empresa
+                  </span>
+                  <input
+                    type="text"
+                    value={leadForm.company}
+                    onChange={(e) =>
+                      handleLeadInputChange("company", e.target.value)
+                    }
+                    placeholder="Nome da empresa"
+                    className="h-14 w-full rounded-xl border border-white/30 bg-white/[0.03] px-4 font-jamjuree text-[1.05rem] text-white outline-none transition placeholder:text-white/45 focus:border-[#F5C02B]"
+                    disabled={leadStatus === "loading"}
+                  />
                 </label>
               ) : null}
               {leadSteps[activeLeadStep]?.key === "revenue" ? (
                 <label className="block">
-                  <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">Faturamento</span>
-                  <select value={leadForm.revenue} onChange={(e) => handleLeadInputChange("revenue", e.target.value)} className="w-full rounded-lg border border-white/20 bg-[#1a1a1a] p-3 text-sm text-white outline-none transition focus:border-[#F5A205] focus:bg-[#222] sm:text-base" disabled={leadStatus === "loading"}>
+                  <span className="mb-2 block font-jamjuree text-[13px] uppercase tracking-[0.11em] text-white/70">
+                    Faturamento
+                  </span>
+                  <select
+                    value={leadForm.revenue}
+                    onChange={(e) =>
+                      handleLeadInputChange("revenue", e.target.value)
+                    }
+                    className="w-full rounded-lg border border-white/20 bg-[#1a1a1a] p-3 text-sm text-white outline-none transition focus:border-[#F5A205] focus:bg-[#222] sm:text-base"
+                    disabled={leadStatus === "loading"}
+                  >
                     <option value="">Selecione</option>
                     {revenueOptions.map((option) => (
-                      <option key={option} value={option}>{option}</option>
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
                     ))}
                   </select>
                 </label>
               ) : null}
 
               {leadError ? (
-                <p className="text-sm font-semibold text-red-300">{leadError}</p>
+                <p className="text-sm font-semibold text-red-300">
+                  {leadError}
+                </p>
               ) : null}
               {leadSuccessMessage ? (
                 <p className="text-sm font-semibold text-green-300">
@@ -647,7 +744,7 @@ const Oshiro = () => {
 
               <div className="mt-2 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
                 <p className="font-jamjuree text-xs uppercase tracking-[0.12em] text-white/45">
-                  Preenchimento rapido e seguro
+                  Preenchimento rápido e seguro
                 </p>
                 <div className="flex w-full items-center gap-2 md:w-auto">
                   {activeLeadStep > 0 ? (
@@ -671,7 +768,11 @@ const Oshiro = () => {
                     </button>
                   ) : (
                     <FormButton
-                      titulo={leadStatus === "loading" ? "Enviando..." : "Garantir 20% OFF"}
+                      titulo={
+                        leadStatus === "loading"
+                          ? "Enviando..."
+                          : "Garantir 20% OFF"
+                      }
                       textColor="#000"
                       disabled={leadStatus === "loading"}
                       leftWidthClass="w-[170px] sm:w-[255px]"
@@ -681,8 +782,8 @@ const Oshiro = () => {
               </div>
               <p className="pt-1 text-center font-jamjuree text-xs text-white/55">
                 {pendingSymplaUrl
-                  ? "Voce sera redirecionado ao Sympla apos o envio."
-                  : "Apos o envio, sua navegacao na pagina sera liberada."}
+                  ? "Você será redirecionado ao Sympla após o envio."
+                  : "Após o envio, sua navegação na página será liberada."}
               </p>
               <p className="text-center font-jamjuree text-xs text-white/40">
                 Seus dados são usados apenas para liberar sua condição especial.
@@ -696,3 +797,4 @@ const Oshiro = () => {
 };
 
 export default Oshiro;
+
