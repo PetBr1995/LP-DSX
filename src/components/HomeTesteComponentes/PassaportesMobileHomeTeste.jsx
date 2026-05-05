@@ -5,6 +5,7 @@ import { rememberDsxFormOrigin } from "../../utils/formOrigin";
 const cards = [
   {
     nome: "VIP",
+    lote: "Lote 4",
     price: "1.297,00",
     installment: "12x de R$ 134,14",
     cash: "ou R$ 1.297,00 à vista",
@@ -72,7 +73,8 @@ const PassaportesMobileHomeTeste = ({
 
                 <div className="mt-3 min-h-[26px]">
                   {card.lote ? (
-                    <p className="inline-flex rounded-full border border-[#F5D247]/70 bg-black/35 px-3 py-1 text-[10px] font-black uppercase tracking-[0.1em] text-[#F5D247]">
+                    <p className="inline-flex items-center gap-2 rounded-[10px] border border-[#F5D247]/70 bg-black/35 px-3 py-1 text-[10px] font-black uppercase tracking-[0.1em] text-[#F5D247]">
+                      <span className="h-2 w-2 rounded-full bg-[#F5D247]" />
                       {card.lote.toUpperCase()}
                     </p>
                   ) : null}

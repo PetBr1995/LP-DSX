@@ -5,6 +5,7 @@ import { rememberDsxFormOrigin } from "../../utils/formOrigin";
 const cards = [
   {
     nome: "VIP",
+    lote: "Lote 4",
     price: "1.297,00",
     installment: "12x de R$ 134,14",
     cash: "ou R$ 1.297,00 à vista",
@@ -54,7 +55,8 @@ const SquishyPlanCard = ({ card, onBuyPassaporte, hideBuyButton = false }) => (
 
       <div className="mt-3 min-h-[34px]">
         {card.lote ? (
-          <div className="inline-flex w-fit items-center rounded-full border border-[#F5D247]/70 bg-black/35 px-3 py-1.5">
+          <div className="inline-flex w-fit items-center gap-2 rounded-[10px] border border-[#F5D247]/70 bg-black/35 px-3 py-1.5">
+            <span className="h-2.5 w-2.5 rounded-full bg-[#F5D247]" />
             <span className="text-[11px] font-black uppercase tracking-[0.1em] text-[#F5D247]">
               {card.lote.toUpperCase()}
             </span>
