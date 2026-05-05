@@ -6,6 +6,7 @@ const PassaportesSection = ({
   isMobile,
   onBuyPassaporte,
   hidePassaporteButtons = false,
+  showOshiroDiscount = false,
 }) => {
   return (
     <div
@@ -16,16 +17,19 @@ const PassaportesSection = ({
         <PassaportesMobileHomeTeste
           onBuyPassaporte={onBuyPassaporte}
           hideBuyButton={hidePassaporteButtons}
+          showOshiroDiscount={showOshiroDiscount}
         />
       ) : (
         <PassaporteVendasHomeTeste
           onBuyPassaporte={onBuyPassaporte}
           hideBuyButton={hidePassaporteButtons}
+          showOshiroDiscount={showOshiroDiscount}
         />
       )}
       <PassaporteGrupoHomeTeste
         onBuyPassaporte={onBuyPassaporte}
         hideBuyButton={hidePassaporteButtons}
+        showOshiroDiscount={showOshiroDiscount}
       />
     </div>
   );

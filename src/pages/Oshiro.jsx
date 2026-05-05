@@ -8,9 +8,10 @@ import { FormButton } from "../components/FormSection";
 import SlidePalestrantesComponent from "../components/pageOshiroComponents/slidePalestrantesComponent";
 import NewVendasHeaderMask from "../components/NewVendas/NewVendasHeaderMask";
 import { Calendar, MapPin } from "lucide-react";
-const CHECKOUT_LINK =
-  "https://www.sympla.com.br/evento/dsx-2026---digital-summit-experience/3339721?d=OSHIRO20";
 const OSHIRO_LEAD_UNLOCK_KEY = "dsx_oshiro_lead_unlocked_v1";
+const ALLOWED_SYMPLA_UTM_KEYS = ["utm_source", "utm_medium"];
+const OSHIRO_DISCOUNT_PARAM_KEY = "d";
+const OSHIRO_DISCOUNT_PARAM_VALUE = "OSHIRO20";
 
 const profileOptions = [
   "Empresário",
@@ -93,6 +94,22 @@ const formatPhone = (value = "") => {
   return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
 };
 
+const buildSymplaCheckoutUrl = (baseUrl, search = "") => {
+  const url = new URL(baseUrl);
+  const params = new URLSearchParams(search || "");
+
+  url.searchParams.set(OSHIRO_DISCOUNT_PARAM_KEY, OSHIRO_DISCOUNT_PARAM_VALUE);
+
+  ALLOWED_SYMPLA_UTM_KEYS.forEach((key) => {
+    const value = params.get(key);
+    if (value) {
+      url.searchParams.set(key, value);
+    }
+  });
+
+  return url.toString();
+};
+
 const leadSteps = [
   {
     key: "personal",
@@ -128,11 +145,6 @@ const Oshiro = () => {
     page_url: "",
     site_origin: "",
     site_hostname: "",
-    utm_source: "",
-    utm_medium: "",
-    utm_campaign: "",
-    utm_term: "",
-    utm_content: "",
   });
 
   useEffect(() => {
@@ -147,7 +159,6 @@ const Oshiro = () => {
   }, []);
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
     const currentUrl = window.location.href;
     const siteHostname = normalizeHostname(window.location.hostname);
     const siteOrigin = detectSiteOriginFromUrl(currentUrl) || siteHostname;
@@ -156,11 +167,6 @@ const Oshiro = () => {
       page_url: currentUrl,
       site_origin: siteOrigin,
       site_hostname: siteHostname,
-      utm_source: urlParams.get("utm_source") || "",
-      utm_medium: urlParams.get("utm_medium") || "",
-      utm_campaign: urlParams.get("utm_campaign") || "",
-      utm_term: urlParams.get("utm_term") || "",
-      utm_content: urlParams.get("utm_content") || "",
     });
   }, []);
 
@@ -190,12 +196,19 @@ const Oshiro = () => {
   }, [showLeadModal]);
 
   const handleBuyPassaporte = (targetLink, formOrigin) => {
+    if (!targetLink) return;
+
+    const symplaUrl = buildSymplaCheckoutUrl(
+      targetLink,
+      typeof window !== "undefined" ? window.location.search : "",
+    );
+
     if (isLeadUnlocked) {
-      window.location.href = CHECKOUT_LINK;
+      window.location.href = symplaUrl;
       return;
     }
 
-    setPendingSymplaUrl(CHECKOUT_LINK);
+    setPendingSymplaUrl(symplaUrl);
     setSelectedPassOrigin(formOrigin || "Oshiro");
     setLeadError("");
     setLeadSuccessMessage("");
@@ -322,15 +335,6 @@ const Oshiro = () => {
           cf_faturamento: revenue,
           cf_voce_e: cargo,
           cf_cargo: cargo,
-          traffic_source: sourceData.utm_source,
-          traffic_campaign: sourceData.utm_campaign,
-          traffic_medium: sourceData.utm_medium,
-          traffic_value: sourceData.utm_term,
-          cf_utm_campaign: sourceData.utm_campaign,
-          cf_utm_medium: sourceData.utm_medium,
-          cf_utm_term: sourceData.utm_term,
-          cf_utm_content: sourceData.utm_content,
-          cf_utm_source: sourceData.utm_source,
           cf_url_de_conversao: sourceData.page_url,
           cf_origem_formulario: formatDsxFormOrigin(
             resolvedFormOrigin,
@@ -426,12 +430,6 @@ const Oshiro = () => {
                   sourceData.page_url ||
                   window.location.pathname + window.location.search,
                 referrer: document.referrer || null,
-                utm_source:
-                  sourceData.utm_source || sourceData.site_origin || null,
-                utm_medium: sourceData.utm_medium || null,
-                utm_campaign: sourceData.utm_campaign || null,
-                utm_content: sourceData.utm_content || null,
-                utm_term: sourceData.utm_term || null,
                 converted_at: nowIso,
                 has_sympla_redirected: true,
                 sympla_redirected_at: nowIso,
@@ -498,7 +496,7 @@ const Oshiro = () => {
                     occurred_at: nowIso,
                     page: window.location.pathname + window.location.search,
                     payload: {
-                      target_link: pendingSymplaUrl || CHECKOUT_LINK,
+                      target_link: pendingSymplaUrl || null,
                       passaporte_origem: resolvedFormOrigin,
                       site_origin: sourceData.site_origin || null,
                       site_hostname:
@@ -536,7 +534,7 @@ const Oshiro = () => {
 
       if (pendingSymplaUrl) {
         window.setTimeout(() => {
-          window.location.href = pendingSymplaUrl || CHECKOUT_LINK;
+          window.location.href = pendingSymplaUrl;
         }, 1200);
       }
     } catch (_error) {
@@ -603,18 +601,6 @@ const Oshiro = () => {
               </div>
             </div>
           </div>
-
-          <div className="mt-7 w-full max-w-[420px]">
-            <NewVendasHeaderMask
-              titulo="COMPRAR PASSAPORTE"
-              link="#passaportes"
-              target="_self"
-              textColor="#FFFFFF"
-              backgroundColor="#1E1A12"
-              font="700"
-              size="lg"
-            />
-          </div>
         </div>
       </section>
 
@@ -637,6 +623,7 @@ const Oshiro = () => {
         <PassaportesSection
           isMobile={isMobile}
           onBuyPassaporte={handleBuyPassaporte}
+          showOshiroDiscount
         />
       </section>
 
