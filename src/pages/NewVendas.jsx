@@ -128,7 +128,7 @@ const NewVendas = () => {
   const canSubmitLead = !loading;
 
   useEffect(() => {
-    const pageTitle = "Ingressos DSX 2026 | 3º Lote Aberto";
+    const pageTitle = "Ingressos DSX 2026 | 4º Lote Aberto";
     const pageDescription =
       "Garanta seu passaporte para o DSX 2026: o maior evento de negócios, marketing, vendas e inovação do Norte. Dias 23 e 24 de julho em Manaus.";
     const pageUrl = "https://dsx.com.vc/newvendas";
