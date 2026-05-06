@@ -44,7 +44,7 @@ const faqData = [
     id: 5,
     question: "O que está incluso no passaporte?",
     answer:
-      "2 dias de imersão em Inteligência Artificial, cultura digital, liderança, inovação aplicada a negócios ✔ Acesso aos 3 palcos simultâneos com conteúdos estratégicos ✔ +40 palestras com líderes e especialistas nacionais ✔ Feira de negócios com marcas e soluções que estão moldando o mercado",
+      "2 dias de imersão em Inteligência Artificial, cultura digital, liderança, inovação aplicada a negócios ✔ Acesso aos 4 palcos simultâneos com conteúdos estratégicos ✔ +40 palestras com líderes e especialistas nacionais ✔ Feira de negócios com marcas e soluções que estão moldando o mercado",
   },
   {
     id: 6,
@@ -455,7 +455,7 @@ export default function Home() {
           <AnimatedTop>
             <div className="relative text-center">
               <Image src={"/frame-img.svg"} alt="Amazon IA" width={80} height={80} className="mb-5 z-1 relative mx-auto"/>
-              <p className="text-white z-1 relative font-bold fontspace uppercase text-lg md:text-2xl leading-[1.2]">3 palcos<br/>simultâneos</p>
+              <p className="text-white z-1 relative font-bold fontspace uppercase text-lg md:text-2xl leading-[1.2]">4 palcos<br/>simultâneos</p>
             </div>
           </AnimatedTop>
           <AnimatedTop>

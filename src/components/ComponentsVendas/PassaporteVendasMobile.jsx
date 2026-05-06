@@ -38,7 +38,7 @@ const PassaporteVendasMobile = () => {
       vip: true,
       standard: true,
       titulo: "+40 PALESTRAS",
-      desc: "ACESSO INTEGRAL AO CONTEÚDO DOS 3 PALCOS",
+      desc: "ACESSO INTEGRAL AO CONTEÚDO DOS 4 PALCOS",
     },
     {
       vip: true,

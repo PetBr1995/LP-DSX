@@ -36,7 +36,7 @@ const PassaporteVendas = () => {
     {
       title: "+40 PALESTRAS",
       icon: "/checkPassport.svg",
-      desc: "ACESSO INTEGRAL AO CONTEÚDO DOS 3 PALCOS",
+      desc: "ACESSO INTEGRAL AO CONTEÚDO DOS 4 PALCOS",
     },
     {
       title: "Certificado de participação",

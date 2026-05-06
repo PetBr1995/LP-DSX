@@ -8,9 +8,9 @@ import {
 
 const experienceItems = [
   {
-    title: "3 Palcos Simultâneos",
+    title: "4 Palcos Simultâneos",
     description:
-      "Conteúdo acontecendo ao mesmo tempo em três frentes. Você escolhe a trilha que faz mais sentido para o seu momento de negócio.",
+      "Conteúdo acontecendo ao mesmo tempo em quatro frentes. Você escolhe a trilha que faz mais sentido para o seu momento de negócio.",
     Icon: Building2,
   },
   {

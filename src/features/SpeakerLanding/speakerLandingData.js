@@ -109,7 +109,7 @@ const segmentLandingList = [
     immersionBullets: [
       "2 dias dias de conteúdos estratégicos com os maiores nomes do mercado",
       "de 40 palestras",
-      "3 palcos simultâneos",
+      "4 palcos simultâneos",
       "Feira de Negócios",
       "Local: Centro de Convenções Vasco Vasques",
     ],
@@ -223,7 +223,7 @@ const segmentLandingList = [
     immersionBullets: [
       "2 dias dias de conteúdos estratégicos com os maiores nomes do mercado",
       "de 40 palestras",
-      "3 palcos simultâneos",
+      "4 palcos simultâneos",
       "Feira de Negócios",
       "Local: Centro de Convenções Vasco Vasques",
     ],
@@ -352,7 +352,7 @@ const segmentLandingList = [
     immersionBullets: [
       "2 dias de imersão estratégica com quem domina o mercado.",
       "+40 palestras técnicas.",
-      "3 palcos simultâneos: Escolha o conteúdo que sua empresa precisa agora.",
+      "4 palcos simultâneos: Escolha o conteúdo que sua empresa precisa agora.",
       "Feira de Negócios: Networking direto com decisores e parceiros estratégicos.",
       "Local: Centro de Convenções Vasco Vasques",
     ],
@@ -514,7 +514,7 @@ const segmentLandingList = [
     immersionBullets: [
       "2 dias dias de conteúdos estratégicos com os maiores nomes do mercado",
       "de 40 palestras",
-      "3 palcos simultâneos",
+      "4 palcos simultâneos",
       "Feira de Negócios",
       "Local: Centro de Convenções Vasco Vasques",
     ],

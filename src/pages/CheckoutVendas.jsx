@@ -111,7 +111,7 @@ const metrics = [
   },
 ];
 const experienceHighlights = [
-  { value: "3 PALCOS", label: "simultâneos" },
+  { value: "4 PALCOS", label: "simultâneos" },
   { value: "FEIRA", label: "de negócios" },
 ];
 

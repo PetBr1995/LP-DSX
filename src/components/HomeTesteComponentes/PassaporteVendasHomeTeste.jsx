@@ -101,7 +101,7 @@ const SquishyPlanCard = ({
             </p>
             <p className="font-jamjuree text-[11px] leading-relaxed text-white/90">
               Dois dias completos de imersão. Acesso a mais de 40 palestras em
-              três palcos simultâneos, feira de negócios e conteúdo que você
+              quatro palcos simultâneos, feira de negócios e conteúdo que você
               realmente aplica.
             </p>
           </div>

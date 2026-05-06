@@ -23,7 +23,7 @@ const metrics = [
 ];
 
 const experienceHighlights = [
-  { value: "3 PALCOS", label: "simultâneos" },
+  { value: "4 PALCOS", label: "simultâneos" },
   { value: "VIP", label: "área exclusiva" },
   { value: "FEIRA", label: "de negócios" },
   { value: "PRAÇA", label: "de alimentação" },

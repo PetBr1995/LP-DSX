@@ -736,7 +736,7 @@ const SpeakerLandingTemplate = ({ speaker }) => {
     const immersionHighlights = [
       { value: "+2mil", label: "Participantes" },
       { value: "+40", label: "palestras" },
-      { value: "3 PALCOS", label: "simultâneos" },
+      { value: "4 PALCOS", label: "simultâneos" },
       { value: "FEIRA", label: "de Negócios" },
     ];
 
