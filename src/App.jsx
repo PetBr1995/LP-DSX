@@ -18,6 +18,7 @@ const Vendas = lazy(() => import("./pages/Vendas"));
 const LPAyla = lazy(() => import("./pages/LPAyla"));
 const LPAyla2 = lazy(() => import("./pages/LPAyla2"));
 const CalendarioPage = lazy(() => import("./pages/Calendario"));
+const DesignSystem = lazy(() => import("./pages/DesignSystem"));
 const SpeakerLandingPage = lazy(
   () => import("./features/SpeakerLanding/SpeakerLandingPage"),
 );
@@ -61,6 +62,7 @@ const App = () => {
             <Route path="/lpayla" element={<LPAyla />} />
             <Route path="/lpayla2" element={<LPAyla2 />} />
             <Route path="/calendario" element={<CalendarioPage />} />
+            <Route path="/design-system" element={<DesignSystem />} />
             <Route path="/lp/:slug" element={<SpeakerLandingPage />} />
             <Route path="/sobre" element={<HomeTeste />} />
           </Routes>

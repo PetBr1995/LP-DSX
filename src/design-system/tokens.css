@@ -1,0 +1,33 @@
+:root {
+  --ds-color-bg: #050505;
+  --ds-color-surface: #101010;
+  --ds-color-surface-2: #171717;
+  --ds-color-text: #f5f5f5;
+  --ds-color-text-muted: #b4b4b4;
+  --ds-color-brand: #f5c02b;
+  --ds-color-brand-strong: #e5a800;
+  --ds-color-border: #2b2b2b;
+  --ds-color-success: #2cb67d;
+  --ds-color-danger: #ef4444;
+
+  --ds-font-display: "Anton", "Bebas Neue", sans-serif;
+  --ds-font-body: "Bai Jamjuree", "Roboto", sans-serif;
+
+  --ds-space-1: 0.25rem;
+  --ds-space-2: 0.5rem;
+  --ds-space-3: 0.75rem;
+  --ds-space-4: 1rem;
+  --ds-space-5: 1.25rem;
+  --ds-space-6: 1.5rem;
+  --ds-space-8: 2rem;
+  --ds-space-10: 2.5rem;
+
+  --ds-radius-sm: 0.5rem;
+  --ds-radius-md: 0.75rem;
+  --ds-radius-lg: 1rem;
+  --ds-radius-xl: 1.25rem;
+  --ds-radius-pill: 9999px;
+
+  --ds-shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.2);
+  --ds-shadow-md: 0 8px 28px rgba(0, 0, 0, 0.3);
+}

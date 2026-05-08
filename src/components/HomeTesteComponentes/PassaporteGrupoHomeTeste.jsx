@@ -124,7 +124,7 @@ const PassaporteGrupoHomeTeste = ({
                 condição para o seu time.
               </p>
               <a
-                href="https://wa.me/5592985723838"
+                href="https://wa.me/5592984358915"
                 target="_blank"
                 rel="noreferrer"
                 className="mt-4 inline-flex items-center gap-2 font-jamjuree text-sm font-bold text-white md:text-base"
@@ -137,7 +137,7 @@ const PassaporteGrupoHomeTeste = ({
                   loading="lazy"
                   decoding="async"
                 />
-                (92) 98572-3838
+                +55 92 98435-8915
               </a>
             </div>
           </article>
