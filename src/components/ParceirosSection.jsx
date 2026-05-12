@@ -88,6 +88,11 @@ const partnerGroups = [
         src: "/logo-totvs.png",
         alt: "TOTVS",
       },
+      {
+        src: "/logo_fenix.jpeg",
+        alt: "Fenix",
+        sizeClass: "max-h-25 sm:max-h-30",
+      },
     ],
   },
   {
