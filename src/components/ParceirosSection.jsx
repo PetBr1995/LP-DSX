@@ -93,6 +93,11 @@ const partnerGroups = [
         alt: "Fenix",
         sizeClass: "max-h-25 sm:max-h-30",
       },
+      {
+        src: "/logo-jg-universe.png",
+        alt: "Universo JG",
+        sizeClass: "max-h-28 sm:max-h-32",
+      },
     ],
   },
   {
