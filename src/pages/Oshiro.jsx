@@ -433,7 +433,7 @@ const Oshiro = () => {
             decoding="async"
           />
 
-          <p className="mt-8 font-anton text-xs uppercase tracking-[0.35em] text-[#F5C02B]">
+          <p className="mt-8 font-anton text-sm uppercase tracking-[0.28em] text-[#FFD24A] drop-shadow-[0_0_10px_rgba(245,192,43,0.35)] sm:text-base">
             Oferta exclusiva
           </p>
           <h1 className="mt-4 w-full max-w-6xl font-anton text-[clamp(2rem,6.2vw,5rem)] uppercase leading-[1] text-white">

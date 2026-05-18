@@ -98,6 +98,11 @@ const partnerGroups = [
         alt: "Universo JG",
         sizeClass: "max-h-28 sm:max-h-32",
       },
+      {
+        src: "/logo_JF_Alimentos.png",
+        alt: "JF Alimentacao",
+        sizeClass: "max-h-20 sm:max-h-24",
+      },
     ],
   },
   {
