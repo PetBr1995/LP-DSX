@@ -103,6 +103,11 @@ const partnerGroups = [
         alt: "JF Alimentacao",
         sizeClass: "max-h-20 sm:max-h-24",
       },
+      {
+        src: "/LOGO_BRANCA_CNT.png",
+        alt: "CNT",
+        sizeClass: "max-h-14 sm:max-h-16",
+      },
     ],
   },
   {
