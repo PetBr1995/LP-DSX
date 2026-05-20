@@ -99,7 +99,7 @@ const partnerGroups = [
         sizeClass: "max-h-28 sm:max-h-50",
       },
       {
-        src: "/logo_JF_Alimentos.png",
+        src: "/logo_jf.png",
         alt: "JF Alimentacao",
         sizeClass: "max-h-20 sm:max-h-24",
       },
