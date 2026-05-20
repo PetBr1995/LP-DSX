@@ -96,7 +96,7 @@ const partnerGroups = [
       {
         src: "/logo-jg-universe.png",
         alt: "Universo JG",
-        sizeClass: "max-h-28 sm:max-h-32",
+        sizeClass: "max-h-28 sm:max-h-50",
       },
       {
         src: "/logo_JF_Alimentos.png",
