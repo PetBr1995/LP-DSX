@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { motion } from "framer-motion";
 import { Check, X } from "lucide-react";
 import { RD_API_URL } from "../lib/rdStation";
 import { withRdTrackingToken } from "../lib/rdStationTracking";
@@ -358,15 +359,24 @@ const GrupoVip = () => {
               maior evento de negócios do Norte.
             </h2>
 
-            <img
-              src="/Mockup-Celular-DSX.png"
+            <motion.img
+              src="/DSX-Phone-Mockup.png"
               alt="Prévia do grupo VIP DSX no celular"
               className="mt-7 h-auto w-full max-w-[260px] object-contain sm:max-w-[320px] md:max-w-[360px]"
               loading="eager"
               decoding="async"
+              animate={{
+                x: [0, 4, -3, 2, 0],
+                y: [0, -9, -14, -6, 0],
+                rotate: [0, 0.35, -0.25, 0.18, 0],
+              }}
+              transition={{
+                duration: 5.8,
+                ease: [0.45, 0, 0.25, 1],
+                times: [0, 0.22, 0.47, 0.76, 1],
+                repeat: Infinity,
+              }}
             />
-
-            <div className="mt-8 w-full">{benefitsList}</div>
 
             <div className="mt-7 flex justify-center">
               <GrupoVipCTA
@@ -378,6 +388,8 @@ const GrupoVip = () => {
                 }}
               />
             </div>
+
+            <div className="mt-8 w-full">{benefitsList}</div>
           </div>
         </div>
       </section>
