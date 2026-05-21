@@ -9,6 +9,7 @@ const Palestrantes = lazy(() => import("./pages/Palestrantes"));
 const Agradecimento = lazy(() => import("./pages/Agradecimento"));
 const Patrocinadores = lazy(() => import("./pages/Patrocinadores"));
 const WhatsappPage = lazy(() => import("./pages/WhatsappPage"));
+const GrupoVip = lazy(() => import("./pages/GrupoVip"));
 const TesteAnimation = lazy(() => import("./pages/testeAnimation"));
 const Checkout = lazy(() => import("./pages/Checkout"));
 const NewVendasCopy = lazy(() => import("./pages/NewVendasCopy"));
@@ -62,6 +63,7 @@ const App = () => {
             <Route path="/lpayla" element={<LPAyla />} />
             <Route path="/lpayla2" element={<LPAyla2 />} />
             <Route path="/calendario" element={<CalendarioPage />} />
+            <Route path="/grupo-vip" element={<GrupoVip />} />
             <Route path="/design-system" element={<DesignSystem />} />
             <Route path="/lp/:slug" element={<SpeakerLandingPage />} />
             <Route path="/sobre" element={<HomeTeste />} />
