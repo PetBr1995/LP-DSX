@@ -346,11 +346,7 @@ const GrupoVip = () => {
               decoding="async"
             />
 
-            <p className="font-jamjuree text-xs font-black uppercase tracking-[0.35em] text-[#F3CB46]">
-              Grupo VIP
-            </p>
-
-            <h1 className="mt-4 max-w-3xl font-anton text-[38px] font-normal uppercase leading-[1.25] text-white sm:text-[56px] lg:text-[68px]">
+            <h1 className="max-w-3xl font-anton text-[38px] font-normal uppercase leading-[1.25] text-white sm:text-[56px] lg:text-[68px]">
               Grupo VIP de Networking
             </h1>
 

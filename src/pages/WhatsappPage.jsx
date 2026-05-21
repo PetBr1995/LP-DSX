@@ -15,7 +15,7 @@ const WhatsappPage = () => {
                 <HeroWhatsAppPage />
                 <SecondSectionWhatsAppPage />
                 <div className="py-10 flex flex-col justify-center items-center">
-                    <h2 className=" text-white font-jamjuree text-2xl mb-5">GRUPO VIP LIBERADO!</h2>    
+                    <h2 className=" text-white font-jamjuree text-2xl mb-5">LIBERADO!</h2>    
                    <WhatsAppButton titulo="Entre para o grupo VIP" link="https://chat.whatsapp.com/GXEsJXjFNBi1a3LLAiG90R"/>
                 </div>
             </section>
