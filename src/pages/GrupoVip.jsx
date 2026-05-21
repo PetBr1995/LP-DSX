@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Check } from "lucide-react";
+import { Check, X } from "lucide-react";
 import { RD_API_URL } from "../lib/rdStation";
 import { withRdTrackingToken } from "../lib/rdStationTracking";
 import { formatDsxFormOrigin } from "../utils/formOrigin";
@@ -59,15 +59,18 @@ const initialForm = {
 const GrupoVipCTA = ({
   titulo = "Entrar no Grupo VIP",
   disabled = false,
+  type = "submit",
+  onClick,
 }) => {
   return (
     <button
-      type="submit"
+      type={type}
       disabled={disabled}
+      onClick={onClick}
       className="group disabled:cursor-not-allowed"
     >
       <span
-        className={`relative inline-flex h-11 w-full min-w-[250px] items-center justify-center rounded-2xl bg-linear-to-r from-[#F3CB46] to-[#E7A040] px-8 font-jamjuree text-[14px] font-bold uppercase text-black transition group-hover:brightness-110 sm:w-auto ${
+        className={`relative inline-flex h-12 w-full min-w-[250px] items-center justify-center bg-linear-to-r from-[#F3CB46] to-[#E7A040] px-8 font-jamjuree text-[14px] font-black uppercase text-black transition group-hover:brightness-110 sm:w-auto ${
           disabled ? "opacity-60" : ""
         }`}
       >
@@ -81,6 +84,7 @@ const GrupoVip = () => {
   const [form, setForm] = useState(initialForm);
   const [status, setStatus] = useState("idle");
   const [message, setMessage] = useState("");
+  const [isFormModalOpen, setIsFormModalOpen] = useState(false);
   const [sourceData, setSourceData] = useState({
     page_url: "",
     utm_source: "",
@@ -102,6 +106,24 @@ const GrupoVip = () => {
       utm_content: params.get("utm_content") || "",
     });
   }, []);
+
+  useEffect(() => {
+    if (!isFormModalOpen) return undefined;
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setIsFormModalOpen(false);
+      }
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isFormModalOpen]);
 
   const errors = useMemo(() => {
     const nextErrors = {};
@@ -188,19 +210,19 @@ const GrupoVip = () => {
   const fieldClass = (field) => {
     const hasError = status === "error" && errors[field];
     return [
-      "h-12 w-full rounded-md border bg-black/20 px-4 font-jamjuree text-white",
-      "placeholder-white/60 outline-none transition",
-      "focus:border-[#F5A205] focus:bg-black/30 focus:ring-2 focus:ring-[#F5A205]/20",
-      hasError ? "border-red-400" : "border-white/75",
+      "h-12 w-full border bg-[#0c1938] px-4 font-jamjuree text-white",
+      "placeholder-white/45 outline-none transition",
+      "focus:border-[#F5A205] focus:ring-2 focus:ring-[#F5A205]/20",
+      hasError ? "border-red-400" : "border-white/20",
     ].join(" ");
   };
 
   const benefitsList = (
-    <ul className="grid max-w-2xl grid-cols-1 gap-3 font-jamjuree text-white sm:grid-cols-3">
+    <ul className="mx-auto grid w-full max-w-2xl grid-cols-1 gap-3 font-jamjuree text-white sm:grid-cols-3">
       {benefits.map((benefit) => (
         <li
           key={`${benefit.text_1}-${benefit.text_2}`}
-          className="flex min-h-20 items-center justify-between gap-4 rounded-md border border-white/18 bg-white/[0.04] p-4 backdrop-blur-sm sm:min-h-28 sm:flex-col sm:items-center sm:justify-center sm:gap-2"
+          className="flex min-h-20 items-center justify-between gap-4 border border-white/16 bg-[#0c1938] p-4 sm:min-h-28 sm:flex-col sm:items-center sm:justify-center sm:gap-2"
         >
           <p className="whitespace-nowrap font-jamjuree text-xl font-bold leading-[1.1] text-white sm:text-[clamp(1rem,1.55vw,1.5rem)]">
             {benefit.text_1}
@@ -213,11 +235,108 @@ const GrupoVip = () => {
     </ul>
   );
 
+  const formContent = (
+    <>
+      <div className="mb-6 border-b border-white/16 pb-5 text-left">
+        <p className="font-jamjuree text-xs font-black uppercase tracking-[0.35em] text-[#F3CB46]">
+          Grupo VIP
+        </p>
+        <h2
+          id="grupo-vip-modal-title"
+          className="mt-3 font-anton text-4xl font-normal uppercase leading-[1.05] text-white sm:text-5xl"
+        >
+          Entrar no grupo
+        </h2>
+      </div>
+
+      <form
+        onSubmit={handleSubmit}
+        className="grid grid-cols-1 gap-4 sm:grid-cols-2"
+        noValidate
+      >
+        <label className="grid gap-1.5 text-left font-jamjuree text-sm font-bold text-white/80">
+          Nome
+          <input
+            className={fieldClass("name")}
+            type="text"
+            value={form.name}
+            onChange={(event) =>
+              setForm((current) => ({ ...current, name: event.target.value }))
+            }
+            placeholder="Seu nome"
+            aria-label="Seu nome"
+            autoComplete="name"
+          />
+        </label>
+
+        <label className="grid gap-1.5 text-left font-jamjuree text-sm font-bold text-white/80">
+          E-mail
+          <input
+            className={fieldClass("email")}
+            type="email"
+            value={form.email}
+            onChange={(event) =>
+              setForm((current) => ({ ...current, email: event.target.value }))
+            }
+            placeholder="seu@email.com"
+            aria-label="Seu e-mail"
+            autoComplete="email"
+          />
+        </label>
+
+        <label className="grid gap-1.5 text-left font-jamjuree text-sm font-bold text-white/80">
+          WhatsApp
+          <input
+            className={fieldClass("phone")}
+            type="tel"
+            value={form.phone}
+            onChange={(event) =>
+              setForm((current) => ({
+                ...current,
+                phone: formatPhoneMask(event.target.value),
+              }))
+            }
+            placeholder="(92) 99999-9999"
+            aria-label="Seu telefone"
+            inputMode="tel"
+            autoComplete="tel"
+          />
+        </label>
+
+        {message ? (
+          <p
+            className={`sm:col-span-2 rounded-md border px-3 py-2 text-center font-jamjuree text-sm ${
+              status === "success"
+                ? "border-green-300/30 bg-green-300/10 text-green-300"
+                : "border-red-300/30 bg-red-300/10 text-red-300"
+            }`}
+          >
+            {message}
+          </p>
+        ) : null}
+
+        <div className="pt-2 sm:col-span-2">
+          <button
+            type="submit"
+            disabled={!canSubmit}
+            className="h-12 w-full bg-linear-to-r from-[#F3CB46] to-[#E7A040] px-6 font-jamjuree text-sm font-black uppercase text-black transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {status === "loading" ? "Enviando..." : "Entrar no Grupo VIP"}
+          </button>
+        </div>
+      </form>
+      <p className="mt-5 font-jamjuree text-xs leading-relaxed text-white/52">
+        Cadastro gratuito. Após o envio, você será direcionado para o grupo
+        oficial do DSX.
+      </p>
+    </>
+  );
+
   return (
-    <main className="min-h-screen bg-black text-white">
-      <section className="relative flex min-h-screen items-center overflow-hidden bg-black">
-        <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-8 px-5 py-9 sm:px-8 md:grid-cols-[0.98fr_0.9fr] md:gap-12 md:py-14 lg:px-12">
-          <div className="text-left">
+    <main className="min-h-screen bg-[#050b18] text-white">
+      <section className="relative flex min-h-screen items-center overflow-hidden bg-[#050b18]">
+        <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center px-5 py-9 text-center sm:px-8 md:py-14 lg:px-12">
+          <div className="flex w-full flex-col items-center">
             <img
               src="/logo-dsx-horizontal-2.svg"
               alt="DSX"
@@ -226,105 +345,73 @@ const GrupoVip = () => {
               decoding="async"
             />
 
-            <h1 className="max-w-3xl bg-linear-to-r from-[#F3CB46] to-[#E7A040] bg-clip-text font-anton text-[38px] font-normal uppercase leading-[1.25] text-transparent sm:text-[56px] lg:text-[68px]">
+            <p className="font-jamjuree text-xs font-black uppercase tracking-[0.35em] text-[#F3CB46]">
+              Grupo VIP
+            </p>
+
+            <h1 className="mt-4 max-w-3xl font-anton text-[38px] font-normal uppercase leading-[1.25] text-white sm:text-[56px] lg:text-[68px]">
               Grupo VIP de Networking
             </h1>
 
-            <h2 className="mt-5 max-w-xl font-jamjuree text-lg font-medium leading-[1.25] text-white/88 sm:text-2xl">
+            <h2 className="mt-5 max-w-2xl border-t border-white/16 pt-5 font-jamjuree text-lg font-medium leading-[1.25] text-white/72 sm:text-2xl">
               Receba em primeira mão novidades, bastidores e oportunidades do
               maior evento de negócios do Norte.
             </h2>
 
-            <div className="mt-8 hidden md:block">{benefitsList}</div>
-          </div>
+            <img
+              src="/Mockup-Celular-DSX.png"
+              alt="Prévia do grupo VIP DSX no celular"
+              className="mt-7 h-auto w-full max-w-[260px] object-contain sm:max-w-[320px] md:max-w-[360px]"
+              loading="eager"
+              decoding="async"
+            />
 
-          <div className="w-full border-t border-white/15 pt-8 md:border-l md:border-t-0 md:pl-10 md:pt-0 lg:pl-12">
-            <div className="mb-6 text-left">
-              <h2 className="font-jamjuree text-2xl font-black uppercase leading-[1.25] text-white sm:text-2xl">
-                Entre para o grupo oficial
-              </h2>
-              <p className="mt-2 font-jamjuree text-sm leading-[1.45] text-white/64">
-                Informe seus dados para receber o acesso direto no WhatsApp.
-              </p>
+            <div className="mt-8 w-full">{benefitsList}</div>
+
+            <div className="mt-7 flex justify-center">
+              <GrupoVipCTA
+                type="button"
+                titulo="Entrar para grupo VIP"
+                onClick={() => {
+                  setMessage("");
+                  setIsFormModalOpen(true);
+                }}
+              />
             </div>
-
-            <form
-              onSubmit={handleSubmit}
-              className="grid grid-cols-1 gap-4"
-              noValidate
-            >
-              <div>
-                <input
-                  className={fieldClass("name")}
-                  type="text"
-                  value={form.name}
-                  onChange={(event) =>
-                    setForm((current) => ({ ...current, name: event.target.value }))
-                  }
-                  placeholder="Seu nome"
-                  aria-label="Seu nome"
-                  autoComplete="name"
-                />
-              </div>
-
-              <div>
-                <input
-                  className={fieldClass("email")}
-                  type="email"
-                  value={form.email}
-                  onChange={(event) =>
-                    setForm((current) => ({ ...current, email: event.target.value }))
-                  }
-                  placeholder="seu@email.com"
-                  aria-label="Seu e-mail"
-                  autoComplete="email"
-                />
-              </div>
-
-              <div>
-                <input
-                  className={fieldClass("phone")}
-                  type="tel"
-                  value={form.phone}
-                  onChange={(event) =>
-                    setForm((current) => ({
-                      ...current,
-                      phone: formatPhoneMask(event.target.value),
-                    }))
-                  }
-                  placeholder="(92) 99999-9999"
-                  aria-label="Seu telefone"
-                  inputMode="tel"
-                  autoComplete="tel"
-                />
-              </div>
-
-              {message ? (
-                <p
-                  className={`rounded-md border px-3 py-2 text-center font-jamjuree text-sm ${status === "success"
-                      ? "border-green-300/30 bg-green-300/10 text-green-300"
-                      : "border-red-300/30 bg-red-300/10 text-red-300"
-                    }`}
-                >
-                  {message}
-                </p>
-              ) : null}
-
-              <div className="flex justify-center pt-3">
-                <GrupoVipCTA
-                  titulo={status === "loading" ? "Enviando..." : "Entrar no Grupo VIP"}
-                  disabled={!canSubmit}
-                />
-              </div>
-            </form>
-            <p className="mt-5 max-w-sm font-jamjuree text-xs leading-relaxed text-white/52">
-              Cadastro gratuito. Após o envio, você será direcionado para o grupo oficial do DSX.
-            </p>
-
-            <div className="mt-8 md:hidden">{benefitsList}</div>
           </div>
         </div>
       </section>
+
+      {isFormModalOpen ? (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[#020817]/86 px-4 py-6 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="grupo-vip-modal-title"
+        >
+          <button
+            type="button"
+            className="absolute inset-0 cursor-default"
+            aria-label="Fechar formulário"
+            onClick={() => setIsFormModalOpen(false)}
+          />
+
+          <div className="relative z-10 w-full max-w-2xl border border-white/16 bg-[#07142d] p-5 shadow-2xl sm:p-7">
+            <button
+              type="button"
+              className="absolute right-5 top-5 flex size-9 items-center justify-center text-white/78 transition hover:text-[#F5A205]"
+              aria-label="Fechar formulário"
+              onClick={() => setIsFormModalOpen(false)}
+            >
+              <X size={24} />
+            </button>
+
+            <div className="pr-0">
+              {formContent}
+            </div>
+          </div>
+        </div>
+      ) : null}
     </main>
   );
 };
