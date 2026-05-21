@@ -108,6 +108,11 @@ const partnerGroups = [
         alt: "CNT",
         sizeClass: "max-h-14 sm:max-h-16",
       },
+      {
+        src: "/logo_maxinutri.webp",
+        alt: "Max Nutri",
+        sizeClass: "max-h-20 sm:max-h-24",
+      },
     ],
   },
   {
