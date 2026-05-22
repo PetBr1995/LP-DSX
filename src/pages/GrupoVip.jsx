@@ -68,12 +68,11 @@ const GrupoVipCTA = ({
       type={type}
       disabled={disabled}
       onClick={onClick}
-      className="group disabled:cursor-not-allowed"
+      className="group w-full disabled:cursor-not-allowed"
     >
       <span
-        className={`relative inline-flex h-12 w-full min-w-[250px] items-center justify-center bg-linear-to-r from-[#F3CB46] to-[#E7A040] px-8 font-jamjuree text-[14px] font-black uppercase text-black transition group-hover:brightness-110 sm:w-auto ${
-          disabled ? "opacity-60" : ""
-        }`}
+        className={`relative inline-flex h-12 w-full items-center justify-center bg-linear-to-r from-[#F3CB46] to-[#E7A040] px-8 font-jamjuree text-[14px] font-black uppercase text-black transition group-hover:brightness-110 ${disabled ? "opacity-60" : ""
+          }`}
       >
         {titulo}
       </span>
@@ -140,6 +139,11 @@ const GrupoVip = () => {
   }, [form]);
 
   const canSubmit = status !== "loading";
+
+  const handleInvalidForm = () => {
+    setStatus("error");
+    setMessage("Revise os campos destacados para entrar no grupo.");
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -219,16 +223,16 @@ const GrupoVip = () => {
   };
 
   const benefitsList = (
-    <ul className="mx-auto grid w-full max-w-2xl grid-cols-1 gap-3 font-jamjuree text-white sm:grid-cols-3">
+    <ul className="mx-auto grid w-full max-w-2xl grid-cols-1 gap-3 font-jamjuree text-white">
       {benefits.map((benefit) => (
         <li
           key={`${benefit.text_1}-${benefit.text_2}`}
-          className="flex min-h-20 items-center justify-between gap-4 border border-white/16 bg-[#0c1938] p-4 sm:min-h-28 sm:flex-col sm:items-center sm:justify-center sm:gap-2"
+          className="flex min-h-10 items-center justify-center gap-4 border border-white/16 bg-[#0c1938] p-4 sm:min-h-10 sm:items-center sm:justify-center sm:gap-2"
         >
-          <p className="whitespace-nowrap font-jamjuree text-xl font-bold leading-[1.1] text-white sm:text-[clamp(1rem,1.55vw,1.5rem)]">
+          <p className="whitespace-nowrap font-jamjuree text-md sm:text-xl font-normal leading-[1.1] text-white">
             {benefit.text_1}
           </p>
-          <p className="max-w-[15rem] text-right font-jamjuree text-sm font-semibold leading-[1.2] text-white/78 sm:max-w-none sm:text-center sm:text-[clamp(0.72rem,1vw,0.9rem)]">
+          <p className="max-w-[15rem] text-right font-jamjuree text-md sm:text-xl font-normal leading-[1.2] text-white/78 sm:max-w-none sm:text-center">
             {benefit.text_2}
           </p>
         </li>
@@ -252,13 +256,15 @@ const GrupoVip = () => {
 
       <form
         onSubmit={handleSubmit}
+        onInvalidCapture={handleInvalidForm}
         className="grid grid-cols-1 gap-4 sm:grid-cols-2"
-        noValidate
+        data-lead-form="grupo-vip"
       >
         <label className="grid gap-1.5 text-left font-jamjuree text-sm font-bold text-white/80">
           Nome
           <input
             className={fieldClass("name")}
+            name="name"
             type="text"
             value={form.name}
             onChange={(event) =>
@@ -267,6 +273,7 @@ const GrupoVip = () => {
             placeholder="Seu nome"
             aria-label="Seu nome"
             autoComplete="name"
+            required
           />
         </label>
 
@@ -274,6 +281,7 @@ const GrupoVip = () => {
           E-mail
           <input
             className={fieldClass("email")}
+            name="email"
             type="email"
             value={form.email}
             onChange={(event) =>
@@ -282,6 +290,7 @@ const GrupoVip = () => {
             placeholder="seu@email.com"
             aria-label="Seu e-mail"
             autoComplete="email"
+            required
           />
         </label>
 
@@ -289,6 +298,7 @@ const GrupoVip = () => {
           WhatsApp
           <input
             className={fieldClass("phone")}
+            name="phone"
             type="tel"
             value={form.phone}
             onChange={(event) =>
@@ -301,16 +311,18 @@ const GrupoVip = () => {
             aria-label="Seu telefone"
             inputMode="tel"
             autoComplete="tel"
+            pattern="\(?\d{2}\)?\s?\d{4,5}-?\d{4}"
+            title="Informe um WhatsApp com DDD."
+            required
           />
         </label>
 
         {message ? (
           <p
-            className={`sm:col-span-2 rounded-md border px-3 py-2 text-center font-jamjuree text-sm ${
-              status === "success"
-                ? "border-green-300/30 bg-green-300/10 text-green-300"
-                : "border-red-300/30 bg-red-300/10 text-red-300"
-            }`}
+            className={`sm:col-span-2 rounded-md border px-3 py-2 text-center font-jamjuree text-sm ${status === "success"
+              ? "border-green-300/30 bg-green-300/10 text-green-300"
+              : "border-red-300/30 bg-red-300/10 text-red-300"
+              }`}
           >
             {message}
           </p>
@@ -354,38 +366,53 @@ const GrupoVip = () => {
               Receba em primeira mão novidades, bastidores e oportunidades do
               maior evento de negócios do Norte.
             </h2>
+            <div className="grid w-full grid-cols-1 items-center gap-4 md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] md:gap-8">
+              <div className="order-1 mt-7 flex w-full justify-center md:hidden">
+                <GrupoVipCTA
+                  type="button"
+                  titulo="Entrar para grupo VIP"
+                  onClick={() => {
+                    setMessage("");
+                    setIsFormModalOpen(true);
+                  }}
+                />
+              </div>
 
-            <motion.img
-              src="/DSX-Phone-Mockup.png"
-              alt="Prévia do grupo VIP DSX no celular"
-              className="mt-7 h-auto w-full max-w-[260px] object-contain sm:max-w-[320px] md:max-w-[360px]"
-              loading="eager"
-              decoding="async"
-              animate={{
-                x: [0, 4, -3, 2, 0],
-                y: [0, -9, -14, -6, 0],
-                rotate: [0, 0.35, -0.25, 0.18, 0],
-              }}
-              transition={{
-                duration: 5.8,
-                ease: [0.45, 0, 0.25, 1],
-                times: [0, 0.22, 0.47, 0.76, 1],
-                repeat: Infinity,
-              }}
-            />
-
-            <div className="mt-7 flex justify-center">
-              <GrupoVipCTA
-                type="button"
-                titulo="Entrar para grupo VIP"
-                onClick={() => {
-                  setMessage("");
-                  setIsFormModalOpen(true);
+              <motion.img
+                src="/DSX-Phone-Mockup.png"
+                alt="Prévia do grupo VIP DSX no celular"
+                className="order-2 mx-auto mt-7 h-auto w-[min(100%,390px)] object-contain sm:w-[min(100%,480px)] md:order-1 md:w-full md:max-w-[540px]"
+                loading="eager"
+                decoding="async"
+                animate={{
+                  x: [0, 4, -3, 2, 0],
+                  y: [0, -9, -14, -6, 0],
+                  rotate: [0, 0.35, -0.25, 0.18, 0],
+                }}
+                transition={{
+                  duration: 5.8,
+                  ease: [0.45, 0, 0.25, 1],
+                  times: [0, 0.22, 0.47, 0.76, 1],
+                  repeat: Infinity,
                 }}
               />
+              <div className="order-3 w-full md:order-2">
+                <div className="mt-8 w-full">{benefitsList}</div>
+
+
+                <div className="mt-7 hidden w-full justify-center md:flex">
+                  <GrupoVipCTA
+                    type="button"
+                    titulo="Entrar para grupo VIP"
+                    onClick={() => {
+                      setMessage("");
+                      setIsFormModalOpen(true);
+                    }}
+                  />
+                </div>
+              </div>
             </div>
 
-            <div className="mt-8 w-full">{benefitsList}</div>
           </div>
         </div>
       </section>
@@ -407,7 +434,7 @@ const GrupoVip = () => {
           <div className="relative z-10 w-full max-w-2xl border border-white/16 bg-[#07142d] p-5 shadow-2xl sm:p-7">
             <button
               type="button"
-              className="absolute right-5 top-5 flex size-9 items-center justify-center text-white/78 transition hover:text-[#F5A205]"
+              className=" absolute right-5 top-5 flex size-9 items-center justify-center text-white/78 transition hover:text-[#F5A205]"
               aria-label="Fechar formulário"
               onClick={() => setIsFormModalOpen(false)}
             >
