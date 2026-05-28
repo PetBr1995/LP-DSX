@@ -13,6 +13,7 @@ const GrupoVip = lazy(() => import("./pages/GrupoVip"));
 const TesteAnimation = lazy(() => import("./pages/testeAnimation"));
 const Checkout = lazy(() => import("./pages/Checkout"));
 const NewVendasCopy = lazy(() => import("./pages/NewVendasCopy"));
+const SintoniaDeMulher = lazy(() => import("./pages/SintoniaDeMulher"));
 const PreCheckout = lazy(() => import("./pages/PreCheckout"));
 const Oshiro = lazy(() => import("./pages/Oshiro"));
 const Vendas = lazy(() => import("./pages/Vendas"));
@@ -55,6 +56,7 @@ const App = () => {
         <Suspense fallback={<div className="min-h-screen bg-black" />}>
           <Routes>
             <Route path="/" element={<NewVendas />} />
+            <Route path="/sintonia-de-mulher" element={<SintoniaDeMulher />} />
             <Route path="/precheckout" element={<PreCheckout />} />
             {/*
             <Route path="/oshiro" element={<Oshiro />} />

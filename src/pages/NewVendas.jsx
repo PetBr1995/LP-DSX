@@ -75,10 +75,10 @@ function resolveRdConversionIdentifier(origin = "") {
   return "DSX 2026 - Formulário Standard";
 }
 
-const NewVendas = () => {
+const NewVendas = ({ symplaUrl = NEW_VENDAS_SYMPLA_URL }) => {
   const [showLeadModal, setShowLeadModal] = useState(false);
   const [pendingSymplaUrl, setPendingSymplaUrl] = useState(
-    NEW_VENDAS_SYMPLA_URL,
+    symplaUrl,
   );
   const [selectedPassOrigin, setSelectedPassOrigin] = useState("Standard");
   const [leadForm, setLeadForm] = useState({
@@ -315,7 +315,7 @@ const NewVendas = () => {
   const openLeadGateForSympla = (targetLink, formOrigin) => {
     if (loading) return;
 
-    setPendingSymplaUrl(targetLink || NEW_VENDAS_SYMPLA_URL);
+    setPendingSymplaUrl(symplaUrl || targetLink || NEW_VENDAS_SYMPLA_URL);
     setSelectedPassOrigin(formOrigin || "Standard");
     setLeadStatus("idle");
     setMensagem("Para continuar com a compra, preencha e envie o formulário.");
@@ -526,7 +526,7 @@ const NewVendas = () => {
       event.target.reset();
 
       window.setTimeout(() => {
-        const targetUrl = pendingSymplaUrl || NEW_VENDAS_SYMPLA_URL;
+        const targetUrl = pendingSymplaUrl || symplaUrl || NEW_VENDAS_SYMPLA_URL;
         const redirectUrl = withHublaUtm(targetUrl);
         setShowLeadModal(false);
         window.location.href = redirectUrl;
