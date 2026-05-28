@@ -56,7 +56,7 @@ const App = () => {
         <Suspense fallback={<div className="min-h-screen bg-black" />}>
           <Routes>
             <Route path="/" element={<NewVendas />} />
-            <Route path="/sintonia-de-mulher" element={<SintoniaDeMulher />} />
+            <Route path="/sintoniademulher" element={<SintoniaDeMulher />} />
             <Route path="/precheckout" element={<PreCheckout />} />
             {/*
             <Route path="/oshiro" element={<Oshiro />} />

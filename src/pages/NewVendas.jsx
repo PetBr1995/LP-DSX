@@ -75,7 +75,10 @@ function resolveRdConversionIdentifier(origin = "") {
   return "DSX 2026 - Formulário Standard";
 }
 
-const NewVendas = ({ symplaUrl = NEW_VENDAS_SYMPLA_URL }) => {
+const NewVendas = ({
+  symplaUrl = NEW_VENDAS_SYMPLA_URL,
+  showDiscountedPrices = false,
+}) => {
   const [showLeadModal, setShowLeadModal] = useState(false);
   const [pendingSymplaUrl, setPendingSymplaUrl] = useState(
     symplaUrl,
@@ -572,7 +575,10 @@ const NewVendas = ({ symplaUrl = NEW_VENDAS_SYMPLA_URL }) => {
         <NewVendasHero ctaLink="#passaportes" />
         {shouldRenderContent ? (
           <Suspense fallback={<div className="min-h-[120px]" />}>
-            <NewVendasContent onBuyPassaporte={openLeadGateForSympla} />
+            <NewVendasContent
+              onBuyPassaporte={openLeadGateForSympla}
+              showDiscountedPrices={showDiscountedPrices}
+            />
           </Suspense>
         ) : (
           <div className="min-h-[120px]" aria-hidden="true" />

@@ -16,6 +16,7 @@ import {
 const NewVendasContent = ({
   hidePassaporteButtons = false,
   onBuyPassaporte: onBuyPassaporteProp,
+  showDiscountedPrices = false,
 }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
@@ -56,6 +57,7 @@ const NewVendasContent = ({
         isMobile={isMobile}
         onBuyPassaporte={handleBuyPassaporte}
         hidePassaporteButtons={hidePassaporteButtons}
+        showOshiroDiscount={showDiscountedPrices}
       />
       <BusinessExperienceSection />
       <TracksSection items={tracks} />
